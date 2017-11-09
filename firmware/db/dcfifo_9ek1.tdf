@@ -1,0 +1,186 @@
+--dcfifo_mixed_widths CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48 DEVICE_FAMILY="Cyclone 10 LP" IGNORE_CARRY_BUFFERS="OFF" LPM_NUMWORDS=256 LPM_SHOWAHEAD="OFF" LPM_WIDTH=8 LPM_WIDTH_R=8 LPM_WIDTHU=8 LPM_WIDTHU_R=8 OVERFLOW_CHECKING="OFF" RDSYNC_DELAYPIPE=5 READ_ACLR_SYNCH="OFF" UNDERFLOW_CHECKING="OFF" USE_EAB="ON" WRITE_ACLR_SYNCH="OFF" WRSYNC_DELAYPIPE=5 aclr data q rdclk rdempty rdreq wrclk wrempty wrreq CYCLONEII_M4K_COMPATIBILITY="ON" INTENDED_DEVICE_FAMILY="Cyclone 10 LP" LOW_POWER_MODE="AUTO" ALTERA_INTERNAL_OPTIONS=AUTO_SHIFT_REGISTER_RECOGNITION=OFF
+--VERSION_BEGIN 17.0 cbx_a_gray2bin 2017:04:25:18:06:29:SJ cbx_a_graycounter 2017:04:25:18:06:29:SJ cbx_altdpram 2017:04:25:18:06:29:SJ cbx_altera_counter 2017:04:25:18:06:29:SJ cbx_altera_gray_counter 2017:04:25:18:06:29:SJ cbx_altera_syncram 2017:04:25:18:06:29:SJ cbx_altera_syncram_nd_impl 2017:04:25:18:06:29:SJ cbx_altsyncram 2017:04:25:18:06:29:SJ cbx_cycloneii 2017:04:25:18:06:29:SJ cbx_dcfifo 2017:04:25:18:06:29:SJ cbx_fifo_common 2017:04:25:18:06:29:SJ cbx_lpm_add_sub 2017:04:25:18:06:29:SJ cbx_lpm_compare 2017:04:25:18:06:29:SJ cbx_lpm_counter 2017:04:25:18:06:29:SJ cbx_lpm_decode 2017:04:25:18:06:29:SJ cbx_lpm_mux 2017:04:25:18:06:30:SJ cbx_mgl 2017:04:25:18:09:28:SJ cbx_nadder 2017:04:25:18:06:30:SJ cbx_scfifo 2017:04:25:18:06:30:SJ cbx_stratix 2017:04:25:18:06:30:SJ cbx_stratixii 2017:04:25:18:06:30:SJ cbx_stratixiii 2017:04:25:18:06:30:SJ cbx_stratixv 2017:04:25:18:06:30:SJ cbx_util_mgl 2017:04:25:18:06:30:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+FUNCTION a_graycounter_m57 (aclr, clock, cnt_en)
+RETURNS ( q[8..0]);
+FUNCTION a_graycounter_ijc (aclr, clock, cnt_en)
+RETURNS ( q[8..0]);
+FUNCTION altsyncram_hs61 (aclr1, address_a[7..0], address_b[7..0], addressstall_b, clock0, clock1, clocken1, data_a[7..0], wren_a)
+RETURNS ( q_b[7..0]);
+FUNCTION alt_synch_pipe_0ol (clock, clrn, d[8..0])
+RETURNS ( q[8..0]);
+FUNCTION cmpr_466 (dataa[4..0], datab[4..0])
+RETURNS ( aeb);
+FUNCTION cmpr_366 (dataa[3..0], datab[3..0])
+RETURNS ( aeb);
+FUNCTION cmpr_866 (dataa[8..0], datab[8..0])
+RETURNS ( aeb);
+FUNCTION mux_c28 (data[1..0], sel[0..0])
+RETURNS ( result[0..0]);
+
+--synthesis_resources = M9K 1 reg 111 
+OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF;REMOVE_DUPLICATE_REGISTERS=OFF;SYNCHRONIZER_IDENTIFICATION=OFF;SYNCHRONIZATION_REGISTER_CHAIN_LENGTH = 3;suppress_da_rule_internal=d101;suppress_da_rule_internal=d102;suppress_da_rule_internal=d103;{-to rdemp_eq_comp_lsb_aeb} SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;{-to rdemp_eq_comp_lsb_aeb} PRESERVE_REGISTER=ON;{-to rdemp_eq_comp_lsb_aeb} POWER_UP_LEVEL=HIGH;{-to rdemp_eq_comp_msb_aeb} SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;{-to rdemp_eq_comp_msb_aeb} PRESERVE_REGISTER=ON;{-to rdemp_eq_comp_msb_aeb} POWER_UP_LEVEL=HIGH;{-to rs_dgwp_reg} SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;{-to rs_dgwp_reg} PRESERVE_REGISTER=ON;{-to wrfull_eq_comp_lsb_mux_reg} SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;{-to wrfull_eq_comp_lsb_mux_reg} PRESERVE_REGISTER=ON;{-to wrfull_eq_comp_msb_mux_reg} SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;{-to wrfull_eq_comp_msb_mux_reg} PRESERVE_REGISTER=ON;{-to wrptr_g} suppress_da_rule_internal=S102;{-to wrptr_g} POWER_UP_LEVEL=LOW;{-to ws_dgrp_reg} SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;{-to ws_dgrp_reg} PRESERVE_REGISTER=ON;-name CUT ON -from delayed_wrptr_g -to rs_dgwp|dffpipe_hd9:dffpipe10|dffe11a;-name SDC_STATEMENT ""set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_hd9:dffpipe10|dffe11a* """;
+
+SUBDESIGN dcfifo_9ek1
+( 
+	aclr	:	input;
+	data[7..0]	:	input;
+	q[7..0]	:	output;
+	rdclk	:	input;
+	rdempty	:	output;
+	rdreq	:	input;
+	wrclk	:	input;
+	wrempty	:	output;
+	wrreq	:	input;
+) 
+VARIABLE 
+	rdptr_g1p : a_graycounter_m57;
+	wrptr_g1p : a_graycounter_ijc;
+	fifo_ram : altsyncram_hs61;
+	delayed_wrptr_g[8..0] : dffe;
+	rdemp_eq_comp_lsb_aeb : dffe
+		WITH (
+			power_up = "high"
+		);
+	rdemp_eq_comp_msb_aeb : dffe
+		WITH (
+			power_up = "high"
+		);
+	rdptr_g[8..0] : dffe;
+	rs_dgwp_reg[8..0] : dffe;
+	wrfull_eq_comp_lsb_mux_reg : dffe;
+	wrfull_eq_comp_msb_mux_reg : dffe;
+	wrptr_g[8..0] : dffe
+		WITH (
+			power_up = "low"
+		);
+	ws_dgrp_reg[8..0] : dffe;
+	rs_dgwp : alt_synch_pipe_0ol;
+	ws_dgrp : alt_synch_pipe_0ol;
+	rdempty_eq_comp1_lsb : cmpr_466;
+	rdempty_eq_comp1_msb : cmpr_366;
+	rdempty_eq_comp_lsb : cmpr_466;
+	rdempty_eq_comp_msb : cmpr_366;
+	wrempty_eq_comp : cmpr_866;
+	wrfull_eq_comp1_lsb : cmpr_466;
+	wrfull_eq_comp1_msb : cmpr_366;
+	wrfull_eq_comp_lsb : cmpr_466;
+	wrfull_eq_comp_msb : cmpr_366;
+	rdemp_eq_comp_lsb_mux : mux_c28;
+	rdemp_eq_comp_msb_mux : mux_c28;
+	wrfull_eq_comp_lsb_mux : mux_c28;
+	wrfull_eq_comp_msb_mux : mux_c28;
+	int_rdempty	: WIRE;
+	ram_address_a[7..0]	: WIRE;
+	ram_address_b[7..0]	: WIRE;
+	valid_rdreq	: WIRE;
+	valid_wrreq	: WIRE;
+	wrptr_g1s[8..0]	: WIRE;
+	wrptr_gs[8..0]	: WIRE;
+
+BEGIN 
+	rdptr_g1p.aclr = aclr;
+	rdptr_g1p.clock = rdclk;
+	rdptr_g1p.cnt_en = valid_rdreq;
+	wrptr_g1p.aclr = aclr;
+	wrptr_g1p.clock = wrclk;
+	wrptr_g1p.cnt_en = valid_wrreq;
+	fifo_ram.aclr1 = aclr;
+	fifo_ram.address_a[] = ram_address_a[];
+	fifo_ram.address_b[] = ram_address_b[];
+	fifo_ram.addressstall_b = (! valid_rdreq);
+	fifo_ram.clock0 = wrclk;
+	fifo_ram.clock1 = rdclk;
+	fifo_ram.clocken1 = valid_rdreq;
+	fifo_ram.data_a[] = data[];
+	fifo_ram.wren_a = valid_wrreq;
+	delayed_wrptr_g[].clk = wrclk;
+	delayed_wrptr_g[].clrn = (! aclr);
+	delayed_wrptr_g[].d = wrptr_g[].q;
+	rdemp_eq_comp_lsb_aeb.clk = rdclk;
+	rdemp_eq_comp_lsb_aeb.d = rdemp_eq_comp_lsb_mux.result[];
+	rdemp_eq_comp_lsb_aeb.prn = (! aclr);
+	rdemp_eq_comp_msb_aeb.clk = rdclk;
+	rdemp_eq_comp_msb_aeb.d = rdemp_eq_comp_msb_mux.result[];
+	rdemp_eq_comp_msb_aeb.prn = (! aclr);
+	rdptr_g[].clk = rdclk;
+	rdptr_g[].clrn = (! aclr);
+	rdptr_g[].d = rdptr_g1p.q[];
+	rdptr_g[].ena = valid_rdreq;
+	rs_dgwp_reg[].clk = rdclk;
+	rs_dgwp_reg[].clrn = (! aclr);
+	rs_dgwp_reg[].d = rs_dgwp.q[];
+	wrfull_eq_comp_lsb_mux_reg.clk = wrclk;
+	wrfull_eq_comp_lsb_mux_reg.clrn = (! aclr);
+	wrfull_eq_comp_lsb_mux_reg.d = wrfull_eq_comp_lsb_mux.result[];
+	wrfull_eq_comp_msb_mux_reg.clk = wrclk;
+	wrfull_eq_comp_msb_mux_reg.clrn = (! aclr);
+	wrfull_eq_comp_msb_mux_reg.d = wrfull_eq_comp_msb_mux.result[];
+	wrptr_g[].clk = wrclk;
+	wrptr_g[].clrn = (! aclr);
+	wrptr_g[].d = wrptr_g1p.q[];
+	wrptr_g[].ena = valid_wrreq;
+	ws_dgrp_reg[].clk = wrclk;
+	ws_dgrp_reg[].clrn = (! aclr);
+	ws_dgrp_reg[].d = ws_dgrp.q[];
+	rs_dgwp.clock = rdclk;
+	rs_dgwp.clrn = (! aclr);
+	rs_dgwp.d[] = delayed_wrptr_g[].q;
+	ws_dgrp.clock = wrclk;
+	ws_dgrp.clrn = (! aclr);
+	ws_dgrp.d[] = rdptr_g[].q;
+	rdempty_eq_comp1_lsb.dataa[4..0] = rs_dgwp.q[4..0];
+	rdempty_eq_comp1_lsb.datab[4..0] = rdptr_g1p.q[4..0];
+	rdempty_eq_comp1_msb.dataa[3..0] = rs_dgwp.q[8..5];
+	rdempty_eq_comp1_msb.datab[3..0] = rdptr_g1p.q[8..5];
+	rdempty_eq_comp_lsb.dataa[4..0] = rs_dgwp.q[4..0];
+	rdempty_eq_comp_lsb.datab[4..0] = rdptr_g[4..0].q;
+	rdempty_eq_comp_msb.dataa[3..0] = rs_dgwp.q[8..5];
+	rdempty_eq_comp_msb.datab[3..0] = rdptr_g[8..5].q;
+	wrempty_eq_comp.dataa[] = ws_dgrp_reg[].q;
+	wrempty_eq_comp.datab[] = wrptr_g[].q;
+	wrfull_eq_comp1_lsb.dataa[4..0] = ws_dgrp.q[4..0];
+	wrfull_eq_comp1_lsb.datab[4..0] = wrptr_g1s[4..0];
+	wrfull_eq_comp1_msb.dataa[3..0] = ws_dgrp.q[8..5];
+	wrfull_eq_comp1_msb.datab[3..0] = wrptr_g1s[8..5];
+	wrfull_eq_comp_lsb.dataa[4..0] = ws_dgrp.q[4..0];
+	wrfull_eq_comp_lsb.datab[4..0] = wrptr_gs[4..0];
+	wrfull_eq_comp_msb.dataa[3..0] = ws_dgrp.q[8..5];
+	wrfull_eq_comp_msb.datab[3..0] = wrptr_gs[8..5];
+	rdemp_eq_comp_lsb_mux.data[] = ( rdempty_eq_comp1_lsb.aeb, rdempty_eq_comp_lsb.aeb);
+	rdemp_eq_comp_lsb_mux.sel[] = valid_rdreq;
+	rdemp_eq_comp_msb_mux.data[] = ( rdempty_eq_comp1_msb.aeb, rdempty_eq_comp_msb.aeb);
+	rdemp_eq_comp_msb_mux.sel[] = valid_rdreq;
+	wrfull_eq_comp_lsb_mux.data[] = ( wrfull_eq_comp1_lsb.aeb, wrfull_eq_comp_lsb.aeb);
+	wrfull_eq_comp_lsb_mux.sel[] = valid_wrreq;
+	wrfull_eq_comp_msb_mux.data[] = ( wrfull_eq_comp1_msb.aeb, wrfull_eq_comp_msb.aeb);
+	wrfull_eq_comp_msb_mux.sel[] = valid_wrreq;
+	int_rdempty = (rdemp_eq_comp_lsb_aeb.q & rdemp_eq_comp_msb_aeb.q);
+	q[] = fifo_ram.q_b[];
+	ram_address_a[] = ( (wrptr_g[8..8].q $ wrptr_g[7..7].q), wrptr_g[6..0].q);
+	ram_address_b[] = ( (rdptr_g1p.q[8..8] $ rdptr_g1p.q[7..7]), rdptr_g1p.q[6..0]);
+	rdempty = int_rdempty;
+	valid_rdreq = rdreq;
+	valid_wrreq = wrreq;
+	wrempty = wrempty_eq_comp.aeb;
+	wrptr_g1s[] = ( (! wrptr_g1p.q[8..8]), (! wrptr_g1p.q[7..7]), wrptr_g1p.q[6..0]);
+	wrptr_gs[] = ( (! wrptr_g[8..8].q), (! wrptr_g[7..7].q), wrptr_g[6..0].q);
+END;
+--VALID FILE

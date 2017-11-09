@@ -1,0 +1,40 @@
+--lpm_mux DEVICE_FAMILY="Cyclone 10 LP" LPM_SIZE=2 LPM_WIDTH=1 LPM_WIDTHS=1 data result sel
+--VERSION_BEGIN 17.0 cbx_lpm_mux 2017:04:25:18:06:30:SJ cbx_mgl 2017:04:25:18:09:28:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+
+--synthesis_resources = lut 1 
+SUBDESIGN mux_c28
+( 
+	data[1..0]	:	input;
+	result[0..0]	:	output;
+	sel[0..0]	:	input;
+) 
+VARIABLE 
+	result_node[0..0]	: WIRE;
+	sel_node[0..0]	: WIRE;
+	w_data377w[1..0]	: WIRE;
+
+BEGIN 
+	result[] = result_node[];
+	result_node[] = ( ((sel_node[] & w_data377w[1..1]) # ((! sel_node[]) & w_data377w[0..0])));
+	sel_node[] = ( sel[0..0]);
+	w_data377w[] = ( data[1..0]);
+END;
+--VALID FILE

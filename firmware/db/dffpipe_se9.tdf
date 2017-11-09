@@ -1,0 +1,55 @@
+--dffpipe DELAY=2 WIDTH=12 clock clrn d q ALTERA_INTERNAL_OPTIONS=AUTO_SHIFT_REGISTER_RECOGNITION=OFF
+--VERSION_BEGIN 17.0 cbx_mgl 2017:04:25:18:09:28:SJ cbx_stratixii 2017:04:25:18:06:30:SJ cbx_util_mgl 2017:04:25:18:06:30:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+
+--synthesis_resources = reg 24 
+OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF";
+
+SUBDESIGN dffpipe_se9
+( 
+	clock	:	input;
+	clrn	:	input;
+	d[11..0]	:	input;
+	q[11..0]	:	output;
+) 
+VARIABLE 
+	dffe4a[11..0] : dffe;
+	dffe5a[11..0] : dffe;
+	ena	: NODE;
+	prn	: NODE;
+	sclr	: NODE;
+
+BEGIN 
+	dffe4a[].clk = clock;
+	dffe4a[].clrn = clrn;
+	dffe4a[].d = (d[] & (! sclr));
+	dffe4a[].ena = ena;
+	dffe4a[].prn = prn;
+	dffe5a[].clk = clock;
+	dffe5a[].clrn = clrn;
+	dffe5a[].d = (dffe4a[].q & (! sclr));
+	dffe5a[].ena = ena;
+	dffe5a[].prn = prn;
+	ena = VCC;
+	prn = VCC;
+	q[] = dffe5a[].q;
+	sclr = GND;
+END;
+--VALID FILE

@@ -1,0 +1,10 @@
+(module m2p0 (layer F.Cu) (tedit 581ABA7C)
+  (fp_text reference MH (at -4.1 -2) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  )
+  (fp_text value VAL** (at -4.5 1.6) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  )
+  (pad 1 thru_hole circle (at 0 0) (size 4.3 4.3) (drill 2.3) (layers *.Cu *.Mask)
+    (zone_connect 2))
+)

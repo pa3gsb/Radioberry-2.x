@@ -1,0 +1,9 @@
+(module m1d1 (layer F.Cu) (tedit 593F7CF1)
+  (fp_text reference MH6 (at -4.1 -2) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  )
+  (fp_text value DNI (at -4.5 1.6) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  )
+  (pad 1 thru_hole circle (at 0 0) (size 1.85 1.85) (drill 1) (layers *.Cu *.Mask))
+)

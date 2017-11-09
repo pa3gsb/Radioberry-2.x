@@ -1,0 +1,34 @@
+
+\documentclass{article} 
+\usepackage[english]{babel}
+\usepackage[bookmarks=false]{hyperref}
+\usepackage{pdflscape}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage[T1]{fontenc}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage[letterpaper, landscape, left=1.3cm, right=1.3cm, top=2cm, bottom=2.5cm]{geometry}
+
+\begin{document}
+
+\input{bompre.dat}
+
+\begin{center}
+    \begin{longtable}{| r | p{4.7cm} | l | l | p{3.8cm} | l | r | r |}
+    \hline
+	\multicolumn{1}{|l|}{\textbf{Part ID}} & \multicolumn{1}{l|}{\textbf{Description}} & \multicolumn{1}{l|}{\textbf{Part Number}} & \multicolumn{1}{l|}{\textbf{Sub OK}} & \multicolumn{1}{l|}{\textbf{Designators}} & \multicolumn{1}{l|}{\textbf{Footprint}} & \multicolumn{1}{r|}{\textbf{Pins}} & \multicolumn{1}{r|}{\textbf{Quantity}} \\ \hline	 
+	\endhead
+	\input{bom.dat}
+    \end{longtable}
+\end{center}
+
+\input{bompost.dat}
+
+\end{document}
+
+

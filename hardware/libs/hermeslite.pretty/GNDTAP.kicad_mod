@@ -1,0 +1,10 @@
+(module GNDTAP (layer F.Cu) (tedit 5818060C)
+  (fp_text reference REF** (at 0 2.2) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value GNDTAP (at 0 -1.4) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad 1 thru_hole circle (at 0 0) (size 0.8 0.8) (drill 0.5) (layers *.Cu *.Mask)
+    (zone_connect 2))
+)
