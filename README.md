@@ -12,10 +12,10 @@ RadioBerry V2.0 - Ham radio cape for Raspberry PI
 - Radio extension board (cape)
 	- using AD9866 (12 bit)  for RX and TX modes.
 
-	![Radioberry-2.x](docs/Gallery/front.JPG)
-	![Radioberry-2.x](docs/Gallery/back.JPG)
-	![Radioberry-2.x](docs/Gallery/rb+rpi-front.JPG)
-	![Radioberry-2.x](docs/Gallery/rb+rpi-side.JPG)
+	![Radioberry-2.x](docs/gallery/front.JPG)
+	![Radioberry-2.x](docs/gallery/back.JPG)
+	![Radioberry-2.x](docs/gallery/rb+rpi-front.JPG)
+	![Radioberry-2.x](docs/gallery/rb+rpi-side.JPG)
 	
 
 ## Radioberry Configurations:
