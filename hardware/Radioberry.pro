@@ -1,4 +1,4 @@
-update=6-10-2017 16:15:13
+update=28-11-2017 19:39:51
 version=1
 last_client=kicad
 [pcbnew]
@@ -31,6 +31,7 @@ LibDir=
 [eeschema/libraries]
 LibName1=Radioberry
 LibName2=libs/hermeslite
+LibName3=power
 [schematic_editor]
 version=1
 PageLayoutDescrFile=

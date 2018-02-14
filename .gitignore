@@ -1,0 +1,7 @@
+# no backup files
+*.bak
+
+/Firmware/db/**/
+/Firmware/output_files/**/
+/Firmware/greybox_tmp/**/
+/Firmware/incremental_db/**/

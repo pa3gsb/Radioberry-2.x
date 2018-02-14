@@ -10,7 +10,7 @@ optionset = set(['NOSWCLK','REGPA','PA','LVDS25','ETH25','ETH','VERSA','VBIAS','
 
 bom = BOM.BOM("../radioberry.xml",optionset=optionset)
 
-pre = """\\section*{Radioberry 2.0 beta1 BOM}
+pre = """\\section*{Radioberry 2.0 beta2 BOM}
 Assembly Build - \\today"""
 
 bom.LaTeXAssemblyPrint(pre,['Mouser','Digi-Key'])

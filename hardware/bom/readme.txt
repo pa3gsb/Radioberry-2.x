@@ -33,9 +33,3 @@ generateds dat files..
 C:\Python27\python mkstandardbom.py
 
 upload bom.tex and the dat files -> compile -> nice price bom pdf.
- 10CL016YE144C8G
-10CL016YE144I7G
-
-5-1814400-1   50ohm sma
-
-56 x 65 

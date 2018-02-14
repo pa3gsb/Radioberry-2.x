@@ -9,7 +9,7 @@
 14236 & 10uF 1206$\geq$X5R$\geq$25V$\leq$20\% & \href{http://www.octopart.com/search?q=CL31A106KAHNNNE}{CL31A106KAHNNNE} & Y & C408 & 1206 & 2 & 1 \\ \hline
   & 8.2pF 0805NP0$\geq$25V$\leq$5\% & \href{http://www.octopart.com/search?q=CL21C8R2DBANNNC}{CL21C8R2DBANNNC} & Y & C413 & 0805 & 2 & 1 \\ \hline
 16531 & 1uF 0603$\geq$X5R$\geq$6.3V$\leq$20\% & \href{http://www.octopart.com/search?q=GRM188R61E105KA12D}{GRM188R61E105KA12D} & Y & C429,C430,C431,C432 & 0603 & 2 & 4 \\ \hline
-  & GPIO Header for Raspberry Pi 3 - 2x20 Female Header & \href{http://www.octopart.com/search?q=ada product id 2222}{ada product id 2222} & Y & CN302 & 2x20 & 40 & 1 \\ \hline
+  & GPIO Header for Raspberry Pi 3 - 2x20 Female Header & \href{http://www.octopart.com/search?q=ADA product id 2222}{ADA product id 2222} & Y & CN302 & 2x20 & 40 & 1 \\ \hline
   & TVS Diode & \href{http://www.octopart.com/search?q=CDSOD323-T05LC}{CDSOD323-T05LC} & N & D401 & SC-76, SOD-323 & 2 & 1 \\ \hline
   & FILTER LC(PI) 305NH/84PF SMD & \href{http://www.octopart.com/search?q=NFL21SP506X1C3D}{NFL21SP506X1C3D} & Y & F401,F402 & Custom & 4 & 2 \\ \hline
   & FB 0603 $\geq$600R@100MHz $\leq$200mOhm@DC 1A $\leq$25\% & \href{http://www.octopart.com/search?q=MPZ1608S601ATA00}{MPZ1608S601ATA00} & Y & FB201,FB202,FB203, FB204,FB205,FB206, FB207,FB208,FB401, FB402,FB403,FB404, FB405,FB406 & 0603 & 2 & 14 \\ \hline

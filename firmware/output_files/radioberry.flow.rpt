@@ -1,6 +1,6 @@
 Flow report for radioberry
-Fri Sep 15 19:05:46 2017
-Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+Wed Feb 14 20:01:30 2018
+Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
 ---------------------
@@ -41,21 +41,21 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Fri Sep 15 19:05:37 2017       ;
-; Quartus Prime Version              ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
+; Flow Status                        ; Successful - Wed Feb 14 20:01:10 2018       ;
+; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
-; Device                             ; 10CL016YE144C8G                             ;
+; Device                             ; 10CL025YE144C8G                             ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 9,034 / 15,408 ( 59 % )                     ;
-;     Total combinational functions  ; 7,591 / 15,408 ( 49 % )                     ;
-;     Dedicated logic registers      ; 6,661 / 15,408 ( 43 % )                     ;
-; Total registers                    ; 6661                                        ;
-; Total pins                         ; 45 / 79 ( 57 % )                            ;
+; Total logic elements               ; 13,628 / 24,624 ( 55 % )                    ;
+;     Total combinational functions  ; 10,507 / 24,624 ( 43 % )                    ;
+;     Dedicated logic registers      ; 10,799 / 24,624 ( 44 % )                    ;
+; Total registers                    ; 10799                                       ;
+; Total pins                         ; 43 / 77 ( 56 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 240,128 / 516,096 ( 47 % )                  ;
-; Embedded Multiplier 9-bit elements ; 60 / 112 ( 54 % )                           ;
+; Total memory bits                  ; 358,912 / 608,256 ( 59 % )                  ;
+; Embedded Multiplier 9-bit elements ; 92 / 132 ( 70 % )                           ;
 ; Total PLLs                         ; 0 / 4 ( 0 % )                               ;
 +------------------------------------+---------------------------------------------+
 
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/15/2017 19:01:54 ;
+; Start date & time ; 02/14/2018 19:54:14 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -76,19 +76,18 @@ agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 220295161909995.150549491408724        ; --            ; --          ; --         ;
+; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On            ; --          ; --         ;
+; ALLOW_REGISTER_MERGING              ; Off                                    ; On            ; --          ; --         ;
+; ALLOW_REGISTER_RETIMING             ; Off                                    ; On            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 220295161909995.151863445408684        ; --            ; --          ; --         ;
+; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firromH.bsf          ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firromH_inst.v       ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firromH_bb.v         ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firromH.inc          ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firromH.cmp          ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firromI_1024_bb.v    ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firram36_bb.v        ; --            ; --          ; --         ;
-; MISC_FILE                           ; rtl/Polyphase_FIR/firram36I_1024_bb.v  ; --            ; --          ; --         ;
+; MISC_FILE                           ; Polyphase_FIR/firromI_1024_bb.v        ; --            ; --          ; --         ;
+; MISC_FILE                           ; Polyphase_FIR/firram36I_1024_bb.v      ; --            ; --          ; --         ;
 ; MISC_FILE                           ; cyclone_ip/txFIFO_bb.v                 ; --            ; --          ; --         ;
 ; MISC_FILE                           ; cyclone_ip/rxFIFO_bb.v                 ; --            ; --          ; --         ;
+; OPTIMIZATION_MODE                   ; High Performance Effort                ; Balanced      ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                             ; --            ; --          ; --         ;
@@ -96,9 +95,14 @@ agreement for further details.
 ; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; --          ; Top        ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; --          ; Top        ;
 ; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; --          ; Top        ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC      ; On                                     ; Off           ; --          ; --         ;
+; PLACEMENT_EFFORT_MULTIPLIER         ; 4.0                                    ; 1.0           ; --          ; --         ;
 ; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --          ; --         ;
 ; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --          ; --         ;
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --          ; --         ;
+; REMOVE_DUPLICATE_REGISTERS          ; Off                                    ; On            ; --          ; --         ;
+; ROUTER_REGISTER_DUPLICATION         ; Off                                    ; Auto          ; --          ; --         ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL    ; MAXIMUM                                ; Normal        ; --          ; --         ;
 ; VERILOG_INPUT_VERSION               ; SystemVerilog_2005                     ; Verilog_2001  ; --          ; --         ;
 ; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                    ; --            ; --          ; --         ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
@@ -109,11 +113,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:37     ; 1.0                     ; 792 MB              ; 00:00:57                           ;
-; Fitter                    ; 00:01:10     ; 1.2                     ; 1365 MB             ; 00:01:44                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 596 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:07     ; 1.2                     ; 731 MB              ; 00:00:09                           ;
-; Total                     ; 00:01:56     ; --                      ; --                  ; 00:02:52                           ;
+; Analysis & Synthesis      ; 00:01:10     ; 1.0                     ; 941 MB              ; 00:01:32                           ;
+; Fitter                    ; 00:05:28     ; 1.1                     ; 1486 MB             ; 00:08:52                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 649 MB              ; 00:00:04                           ;
+; TimeQuest Timing Analyzer ; 00:00:18     ; 1.3                     ; 851 MB              ; 00:00:20                           ;
+; Total                     ; 00:07:00     ; --                      ; --                  ; 00:10:48                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

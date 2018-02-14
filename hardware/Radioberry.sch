@@ -1,15 +1,16 @@
 EESchema Schematic File Version 2
 LIBS:Radioberry
 LIBS:hermeslite
+LIBS:power
 LIBS:Radioberry-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 4
-Title "RadioBerry.sch"
-Date "2017-09-16"
-Rev "rev 2.0-beta1"
+Title "RadioBerry V2.0"
+Date "2017-11-29"
+Rev "beta2"
 Comp "AppMind"
 Comment1 "PA3GSB"
 Comment2 ""

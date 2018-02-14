@@ -27,24 +27,27 @@ module ad9866 (
     input sdo,
     output reg sen_n,
     output [7:0] dataout,
-    input extrqst,
-    input [5:0] gain
+    input ext_rx_rqst,
+    input [5:0] rx_gain,
+	input ext_tx_rqst,
+    input [5:0] tx_gain
 );
 
 
 parameter bit [0:19][8:0] initarray = {
     // First bit is 1'b1 for write enable to that address
+    // First bit is 1'b1 for write enable to that address
     {1'b1,8'h80}, // Address 0x00, enable 4 wire SPI
     {1'b0,8'h00}, // Address 0x01,
     {1'b0,8'h00}, // Address 0x02, 
     {1'b0,8'h00}, // Address 0x03, 
-    {1'b0,8'h00}, // Address 0x04, 
+    {1'b1,8'h06}, // Address 0x04, 
     {1'b0,8'h00}, // Address 0x05, 
-    {1'b0,8'h04}, // Address 0x06,
+    {1'b1,8'h14}, // Address 0x06,
     {1'b1,8'h21}, // Address 0x07, Initiate DC offset calibration and RX filter on
     {1'b1,8'h4b}, // Address 0x08, RX filter f-3db at ~34 MHz after scaling
-    {1'b0,8'h00}, // Address 0x09, 
-    {1'b0,8'h00}, // Address 0x0a, 
+    {1'b1,8'h7F}, // Address 0x09, 
+    {1'b1,8'h7F}, // Address 0x0a, 
     {1'b1,8'h20}, // Address 0x0b, RX gain only on PGA
     {1'b1,8'h41}, // Address 0x0c, TX twos complement and interpolation factor 
     {1'b1,8'h01}, // Address 0x0d, RT twos complement 
@@ -53,7 +56,7 @@ parameter bit [0:19][8:0] initarray = {
     {1'b0,8'h84}, // Address 0x10, Select TX gain
     {1'b1,8'h00}, // Address 0x11, Select TX gain
     {1'b0,8'h00}, // Address 0x12, 
-    {1'b0,8'h00}  // Address 0x13,     
+    {1'b0,8'h00}  // Address 0x13
 };
 
 reg [15:0] datain;
@@ -81,9 +84,16 @@ always @(posedge clk, posedge reset) begin: AD9866_DUT1_FSM
     end
 end
 
-always @(sen_n, dut1_pc, gain, extrqst) begin: AD9866_DUT1_COMB
-    initarrayv = {2'b01,gain};
-    datain = {8'h0a,initarrayv[7:0]};   
+//(sen_n, dut1_pc, rx_gain, ext_rx_rqst,  tx_gain, ext_tx_rqst)
+always @(sen_n, dut1_pc, rx_gain, ext_rx_rqst,  tx_gain, ext_tx_rqst) begin: AD9866_DUT1_COMB
+    if (ext_rx_rqst) begin
+		initarrayv = {2'b01,rx_gain};
+		datain = {8'h09,initarrayv[7:0]};  
+	end
+	if (ext_tx_rqst) begin
+		initarrayv = {2'b01,tx_gain};
+		datain = {8'h0a,initarrayv[7:0]};  
+	end
     start = 1'b0;
     if (sen_n) begin
         if (dut1_pc[5:1] <= 6'h13) begin
@@ -93,8 +103,8 @@ always @(sen_n, dut1_pc, gain, extrqst) begin: AD9866_DUT1_COMB
                 start = initarrayv[8];
             end
         end else begin
-            // Send gain code
-            start = extrqst;
+            // Send rx_gain code or tx_gain code
+            start = ext_rx_rqst || ext_tx_rqst;
         end
     end
 end

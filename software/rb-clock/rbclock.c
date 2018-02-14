@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	
-	gpioSetMode(6, PI_ALT0);
+	gpioSetMode(4, PI_ALT0);
 	
-	int result = gpioHardwareClock(6, 10000000);
+	int result = gpioHardwareClock(4, 10000000);
 	
 	printf("result = %d\n", result);
 
