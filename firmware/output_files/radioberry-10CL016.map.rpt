@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry-10CL016
-Tue Feb 13 21:59:44 2018
+Sun Feb 18 12:08:54 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -321,7 +321,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Feb 13 21:59:44 2018       ;
+; Analysis & Synthesis Status        ; Successful - Sun Feb 18 12:08:53 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry-10CL016                          ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -438,7 +438,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.7%      ;
+;     Processor 2            ;   3.2%      ;
 +----------------------------+-------------+
 
 
@@ -481,22 +481,14 @@ agreement for further details.
 ; altram.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altram.inc            ;         ;
 ; altdpram.inc                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altdpram.inc          ;         ;
 ; db/altsyncram_ca91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_ca91.tdf                    ;         ;
-; Polyphase_FIR/coefL8A.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8A.mif                 ;         ;
 ; db/altsyncram_pin1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_pin1.tdf                    ;         ;
 ; db/altsyncram_da91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_da91.tdf                    ;         ;
-; Polyphase_FIR/coefL8B.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8B.mif                 ;         ;
 ; db/altsyncram_ea91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_ea91.tdf                    ;         ;
-; Polyphase_FIR/coefL8C.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8C.mif                 ;         ;
 ; db/altsyncram_fa91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_fa91.tdf                    ;         ;
-; Polyphase_FIR/coefL8D.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8D.mif                 ;         ;
 ; db/altsyncram_ga91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_ga91.tdf                    ;         ;
-; Polyphase_FIR/coefL8E.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8E.mif                 ;         ;
 ; db/altsyncram_ha91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_ha91.tdf                    ;         ;
-; Polyphase_FIR/coefL8F.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8F.mif                 ;         ;
 ; db/altsyncram_ia91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_ia91.tdf                    ;         ;
-; Polyphase_FIR/coefL8G.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8G.mif                 ;         ;
 ; db/altsyncram_ja91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_ja91.tdf                    ;         ;
-; Polyphase_FIR/coefL8H.mif        ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefL8H.mif                 ;         ;
 ; dcfifo.tdf                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/dcfifo.tdf            ;         ;
 ; lpm_counter.inc                  ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_counter.inc       ;         ;
 ; lpm_add_sub.inc                  ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_add_sub.inc       ;         ;
@@ -524,7 +516,7 @@ agreement for further details.
 ; db/dffpipe_re9.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/dffpipe_re9.tdf                        ;         ;
 ; db/cmpr_i76.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/cmpr_i76.tdf                           ;         ;
 ; db/altsyncram_23b1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_23b1.tdf                    ;         ;
-; ./Polyphase_FIR/coefI8_1024.mif  ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/coefI8_1024.mif             ;         ;
+; polyphase_fir/coefi8_1024.mif    ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/git/Radioberry-2.x/firmware/polyphase_fir/coefi8_1024.mif             ;         ;
 ; db/altsyncram_jin1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/git/Radioberry-2.x/firmware/db/altsyncram_jin1.tdf                    ;         ;
 ; lpm_mult.tdf                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_mult.tdf          ;         ;
 ; multcore.inc                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/multcore.inc          ;         ;
@@ -7927,7 +7919,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:32     ;
+; Top            ; 00:00:31     ;
 +----------------+--------------+
 
 
@@ -7937,7 +7929,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Tue Feb 13 21:58:44 2018
+    Info: Processing started: Sun Feb 18 12:08:00 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry-10CL016
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -8494,13 +8486,7 @@ Info (332164): Evaluating HDL-embedded SDC commands
         Info (332166): set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_re9:dffpipe10|dffe11a* 
 Info (332104): Reading SDC File: 'rtl/radioberry.sdc'
 Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
-Warning (332174): Ignored filter at radioberry.sdc(78): rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_9ek1:auto_generated|wrptr_g[*] could not be matched with a clock or keeper or register or port or pin or cell or partition File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 78
-Warning (332049): Ignored set_max_delay at radioberry.sdc(78): Argument <from> is not an object ID File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 78
-    Info (332050): set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_9ek1:auto_generated|wrptr_g[*] -to rx2_FIFOEmpty 17 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 78
-Warning (332174): Ignored filter at radioberry.sdc(79): rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_9ek1:auto_generated|ws_dgrp_reg[*] could not be matched with a clock or keeper or register or port or pin or cell or partition File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 79
-Warning (332049): Ignored set_max_delay at radioberry.sdc(79): Argument <from> is not an object ID File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 79
-    Info (332050): set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_9ek1:auto_generated|ws_dgrp_reg[*]    -to rx2_FIFOEmpty 17 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 79
-Warning (332174): Ignored filter at radioberry.sdc(90): ad9866_pga[*] could not be matched with a clock or keeper File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 90
+Warning (332174): Ignored filter at radioberry.sdc(98): ad9866_pga[*] could not be matched with a clock or keeper File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 98
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Warning (332061): Virtual clock virt_ad9866_txclk is never referenced in any input or output delay assignment.
 Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
@@ -8522,7 +8508,7 @@ Info (332111): Found 13 clocks
     Info (332111):   13.020 virt_ad9866_txclk
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:05
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:03
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry-10CL016.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -8533,11 +8519,11 @@ Info (21057): Implemented 15947 device resources after synthesis - the final res
     Info (21061): Implemented 14766 logic cells
     Info (21064): Implemented 1046 RAM segments
     Info (21062): Implemented 92 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 52 warnings
-    Info: Peak virtual memory: 919 megabytes
-    Info: Processing ended: Tue Feb 13 21:59:44 2018
-    Info: Elapsed time: 00:01:00
-    Info: Total CPU time (on all processors): 00:01:20
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 48 warnings
+    Info: Peak virtual memory: 917 megabytes
+    Info: Processing ended: Sun Feb 18 12:08:54 2018
+    Info: Elapsed time: 00:00:54
+    Info: Total CPU time (on all processors): 00:01:14
 
 
 +------------------------------------------+

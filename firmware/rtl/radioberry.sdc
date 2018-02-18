@@ -45,7 +45,7 @@ set_input_delay -add_delay -min -clock virt_ad9866_clk 0.500 [get_ports {ad9866_
 #*************************************************************************************************************
 # set output delay
 #*************************************************************************************************************
-set_output_delay 1.000 -clock ad9866_clk {spi_miso rx1_FIFOEmpty rx2_FIFOEmpty txFIFOFull ad9866_rxclk ad9866_txclk ad9866_sclk ad9866_sdio}
+set_output_delay 0.500 -clock ad9866_clk {spi_miso rx1_FIFOEmpty rx2_FIFOEmpty txFIFOFull ad9866_rxclk ad9866_txclk ad9866_sclk ad9866_sdio}
 set_output_delay  -add_delay -max -clock virt_ad9866_rxclk  5.000 {ad9866_adio[*]}
 set_output_delay  -add_delay -min -clock virt_ad9866_rxclk  0.500 {ad9866_adio[*]}
 
@@ -70,14 +70,21 @@ set_min_delay -from spi_ce[0]	-to spi_slave:spi_slave_rx_inst|rreg[*] -3
 set_max_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|treg[*] 3
 set_min_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|rreg[*] -3
 
+
+
+set_max_delay -from rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|altsyncram_rv61:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
+set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|altsyncram_rv61:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx2_inst|treg[*] 4
+
 set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a20~porta_datain_reg0 4
 set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a24~porta_datain_reg0 4
 set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a28~porta_datain_reg0 4
 set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a16~porta_datain_reg0 4
+set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a4~porta_datain_reg0 4
 
 							
-set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|wrptr_g[*] -to rx2_FIFOEmpty 15
-set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|ws_dgrp_reg[*]	-to rx2_FIFOEmpty 15
+					     
+set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|wrptr_g[*] -to rx2_FIFOEmpty 16
+set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|ws_dgrp_reg[*]	-to rx2_FIFOEmpty 16
 set_max_delay -from spi_mosi	-to spi_slave:spi_slave_rx_inst|rdata[0] 8
 set_max_delay -from spi_mosi 	-to spi_slave:spi_slave_rx2_inst|rdata[0] 8
 set_max_delay -from spi_mosi 	-to spi_slave:spi_slave_rx_inst|rreg[0] 8
