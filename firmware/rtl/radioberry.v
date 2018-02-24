@@ -4,7 +4,7 @@
 //
 // Target Devices	: Cyclone 10LP
 //
-// Tool 		 		: Quartus Prime Lite Edition v17
+// Tool 		 		: Quartus Prime Lite Edition v17.0.2
 //
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Description: 
@@ -13,7 +13,7 @@
 //
 // Johan Maas PA3GSB 
 //
-// Date:    3 December 2017
+// Date:    20 Februari 2018
 //	
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +28,8 @@ rx1_FIFOEmpty, rx2_FIFOEmpty,
 txFIFOFull,
 ptt_in,
 ptt_out,
-filter);
+filter,
+KEY_DOT, KEY_DASH, key_dot_rpi, key_dash_rpi, cw_ptt);
 
 input wire clk_10mhz;			
 input wire ad9866_clk;
@@ -61,6 +62,12 @@ output  wire  rb_info_2;  // radioberry info-2;  checks ad9866 clock (in tx flas
 input wire ptt_in;
 output wire ptt_out;
 output [6:0] filter; 
+
+input  wire KEY_DOT;  		//dot input from external input
+input  wire KEY_DASH;      //dash input from external input
+output wire key_dot_rpi;
+output wire key_dash_rpi;
+output wire cw_ptt;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         AD9866 Control
@@ -96,6 +103,38 @@ assign ad9866_tx_rqst = tx_gain != prev_tx_gain;
 
 ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.ext_tx_rqst(ad9866_tx_rqst),.tx_gain(tx_gain),.ext_rx_rqst(ad9866_rx_rqst),.rx_gain(rx_gain));
 
+
+//--------------------------------------------------------------------------------------------
+//  	Iambic CW Keyer
+//--------------------------------------------------------------------------------------------
+// passing the keying actions (dot and dash) to the RPI for setting the sidetone.
+assign key_dot_rpi = KEY_DOT;
+assign key_dash_rpi = KEY_DASH;
+
+wire clk_192K;
+wire clk_30K;
+PLL_IAMBIC PLL_IAMBIC_inst (.inclk0(clk_10mhz), .c0(clk_192K), .c1(clk_30K), .c2(),  .c3(), .locked());
+
+reg [5:0] 	cw_speed; 			// CW keyer speed 0-60 WPM
+reg [1:0] 	iambic_mode;		// 00 = straight/bug, 01 = Mode A, 10 = Mode B
+reg [6:0] 	keyer_weight;		// keyer weight 33-66
+reg			keyer_revers;		// reverse keyer
+wire			keyout;
+
+iambic #(30) iambic_inst (	.clock(clk_30K), .cw_speed(cw_speed),  .iambic_mode(iambic_mode), .weight({1'b0, keyer_weight}), 
+							.letter_space(1'b0), .dot_key(!KEY_DOT), .dash_key(!KEY_DASH),
+							.CWX(1'b0), .paddle_swap(keyer_revers), .keyer_out(keyout));
+								  							  
+//--------------------------------------------------------------------------------------------
+//  	Calculate  Raised Cosine profile for sidetone and CW envelope when internal CW selected 
+//--------------------------------------------------------------------------------------------
+wire [15:0] CW_RF;
+//wire   [7:0] delay;				// 0 - 255, sets delay in mS from CW Key activation to RF out
+//wire   [9:0] hang;				// 0 - 1000, sets delay in mS from release of CW Key to dropping of PTT
+
+profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8'd20), .hang(10'd300), .PTT(cw_ptt));	
+		
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         SPI Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,6 +169,10 @@ begin
 		rx2_freq <= spi_rx2_recv[31:0];
 		rx2_speed <= spi_rx2_recv[41:40];
 	end else begin
+		iambic_mode <= spi_rx2_recv[47:46];
+		cw_speed <= spi_rx2_recv[45:40];
+		keyer_revers <= spi_rx2_recv[39:39];
+		keyer_weight <= spi_rx2_recv[38:32];
 		tx_freq <= spi_rx2_recv[31:0];
 	end	
 end 
@@ -249,40 +292,11 @@ reset_handler reset_handler_inst(.clock(clk_10mhz), .reset(reset));
 //------------------------------------------------------------------------------
 //                           Pipeline for adc fanout
 //------------------------------------------------------------------------------
-
-reg [11:0]	adc;
-
-reg [3:0] incnt;
-always @ (posedge ad9866_clk)
-  begin
-			// Test sine wave
-        case (incnt)
-            4'h0 : adc <= 12'h000;
-            4'h1 : adc <= 12'hfcb;
-            4'h2 : adc <= 12'hf9f;
-            4'h3 : adc <= 12'hf81;
-            4'h4 : adc <= 12'hf76;
-            4'h5 : adc <= 12'hf81;
-            4'h6 : adc <= 12'hf9f;
-            4'h7 : adc <= 12'hfcb;
-            4'h8 : adc <= 12'h000;
-            4'h9 : adc <= 12'h035;
-            4'ha : adc <= 12'h061;
-            4'hb : adc <= 12'h07f;
-            4'hc : adc <= 12'h08a;
-            4'hd : adc <= 12'h07f;
-            4'he : adc <= 12'h061;
-            4'hf : adc <= 12'h035;
-        endcase
-		  incnt <= incnt + 4'h1; 
-	end
-
 reg [11:0] adcpipe [0:1];
+
 always @ (posedge ad9866_clk) begin
     adcpipe[0] <= ad9866_adio;
     adcpipe[1] <= ad9866_adio;
-	 //adcpipe[0] <= adc;
-    //adcpipe[1] <= adc;
 end
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -295,7 +309,7 @@ wire	rx_strobe;
 localparam CICRATE = 6'd05;
 
 receiver #(.CICRATE(CICRATE)) 
-		receiver_inst(	.clock(ad9866_clk),
+		receiver_rx_inst(	.clock(ad9866_clk),
 						.rate(rx1_rate), 
 						.frequency(sync_phase_word),
 						.out_strobe(rx_strobe),
@@ -329,7 +343,7 @@ reg [47:0] rxDataFromFIFO;
 
 wire rx1req = ptt_in ? 1'b0 : 1'b1;
 
-rxFIFO rxFIFO_inst(	.aclr(reset),
+rxFIFO rx1_FIFO_inst(	.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 
@@ -362,8 +376,8 @@ wire txFIFOEmpty;
 wire txFIFOReadStrobe;
 
 transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
-							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe),
-							.out_data(DAC), .PTT(ptt_in), .LED(rb_info_2));	
+							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
+							.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(DEBUG_LED4));
 
 wire [13:0] DAC;
 	

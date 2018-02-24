@@ -15,7 +15,8 @@ create_clock -name virt_ad9866_clk -period 76.800MHz
 create_clock -name virt_ad9866_rxclk -period 76.800MHz
 create_clock -name virt_ad9866_txclk -period 76.800MHz
 create_clock -name {ad9866:ad9866_inst|dut1_pc[0]} -period 10.000 [get_registers {ad9866:ad9866_inst|dut1_pc[0]}]
-
+create_clock -name {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]} -period 0.19MHz
+create_clock -name {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]} -period 0.03MHz
 
 derive_pll_clocks
 
@@ -28,7 +29,9 @@ set_clock_groups -asynchronous \
 						-group {	spi_ce1 } \
 						-group {	spi_slave:spi_slave_rx_inst|done } \
 						-group {	spi_slave:spi_slave_rx2_inst|done } \
-						-group { ad9866:ad9866_inst|dut1_pc[0]}
+						-group { ad9866:ad9866_inst|dut1_pc[0]} \
+						-group { PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]} \
+						-group { PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]}
 					
 				
 #*************************************************************************************************************
@@ -70,9 +73,8 @@ set_min_delay -from spi_ce[0]	-to spi_slave:spi_slave_rx_inst|rreg[*] -3
 set_max_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|treg[*] 3
 set_min_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|rreg[*] -3
 
-
-
-set_max_delay -from rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|altsyncram_rv61:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
+						  
+set_max_delay -from rxFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|altsyncram_rv61:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
 set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|altsyncram_rv61:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx2_inst|treg[*] 4
 
 set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a20~porta_datain_reg0 4
@@ -83,8 +85,8 @@ set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|
 
 							
 					     
-set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|wrptr_g[*] -to rx2_FIFOEmpty 16
-set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|ws_dgrp_reg[*]	-to rx2_FIFOEmpty 16
+set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|wrptr_g[*] -to rx2_FIFOEmpty 17
+set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|ws_dgrp_reg[*]	-to rx2_FIFOEmpty 17
 set_max_delay -from spi_mosi	-to spi_slave:spi_slave_rx_inst|rdata[0] 8
 set_max_delay -from spi_mosi 	-to spi_slave:spi_slave_rx2_inst|rdata[0] 8
 set_max_delay -from spi_mosi 	-to spi_slave:spi_slave_rx_inst|rreg[0] 8
@@ -95,11 +97,10 @@ set_max_delay -from spi_mosi 	-to spi_slave:spi_slave_rx2_inst|rreg[0] 8
 # Set False Path
 #*************************************************************************************************************
 # don't need fast paths to the LEDs and adhoc outputs so set false paths so Timing will be ignored
-set_false_path -from * -to { rb_info_1 rb_info_2 ptt_out filter[*]  ad9866_mode ad9866_pga[*] ad9866_rst_n ad9866_sen_n }
+set_false_path -from * -to { key_dot_rpi key_dash_rpi cw_ptt rb_info_1 rb_info_2 ptt_out filter[*]  ad9866_mode ad9866_pga[*] ad9866_rst_n ad9866_sen_n }
 
 #don't need fast paths from the following inputs
-set_false_path -from {ptt_in} -to *
+set_false_path -from {ptt_in KEY_DOT KEY_DASH} -to *
 
 set_false_path -from reset_handler:reset_handler_inst|reset -to *
-
 
