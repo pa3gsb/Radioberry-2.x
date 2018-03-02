@@ -28,7 +28,7 @@
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
  --                  Bank 1:       3.3V
- --                  Bank 2:       2.5V
+ --                  Bank 2:       3.3V
  --                  Bank 3:       3.3V
  --                  Bank 4:       3.3V
  --                  Bank 5:       3.3V
@@ -94,25 +94,25 @@ GND+                         : 22        :        :                   :         
 GND+                         : 23        :        :                   :         : 1         :                
 GND+                         : 24        :        :                   :         : 2         :                
 GND+                         : 25        :        :                   :         : 2         :                
-VCCIO2                       : 26        : power  :                   : 2.5V    : 2         :                
+VCCIO2                       : 26        : power  :                   : 3.3V    : 2         :                
 GND                          : 27        : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 28        :        :                   :         : 2         :                
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 GND                          : 30        : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 31        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 33        :        :                   :         : 2         :                
+key_dot_rpi                  : 33        : output : 3.3-V LVCMOS      :         : 2         : Y              
 VCCINT                       : 34        : power  :                   : 1.2V    :           :                
 VCCA1                        : 35        : power  :                   : 2.5V    :           :                
 GNDA1                        : 36        : gnd    :                   :         :           :                
 VCCD_PLL1                    : 37        : power  :                   : 1.2V    :           :                
 VCCINT                       : 38        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 39        :        :                   :         : 3         :                
+rb_info_2                    : 39        : output : 3.3-V LVCMOS      :         : 3         : Y              
 VCCIO3                       : 40        : power  :                   : 3.3V    : 3         :                
 GND                          : 41        : gnd    :                   :         :           :                
 ptt_in                       : 42        : input  : 3.3-V LVCMOS      :         : 3         : Y              
 txFIFOFull                   : 43        : output : 3.3-V LVCMOS      :         : 3         : Y              
-rb_info_2                    : 44        : output : 3.3-V LVCMOS      :         : 3         : Y              
+key_dash_rpi                 : 44        : output : 3.3-V LVCMOS      :         : 3         : Y              
 VCCINT                       : 45        : power  :                   : 1.2V    :           :                
 rx2_FIFOEmpty                : 46        : output : 3.3-V LVCMOS      :         : 3         : Y              
 VCCIO3                       : 47        : power  :                   : 3.3V    : 3         :                
@@ -181,15 +181,15 @@ VCCD_PLL2                    : 109       : power  :                   : 1.2V    
 GND                          : 110       : gnd    :                   :         :           :                
 ad9866_mode                  : 111       : output : 3.3-V LVCMOS      :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 112       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 113       :        :                   :         : 7         :                
+cw_ptt                       : 113       : output : 3.3-V LVCMOS      :         : 7         : Y              
 ad9866_rst_n                 : 114       : output : 3.3-V LVCMOS      :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 115       :        :                   :         : 7         :                
 VCCINT                       : 116       : power  :                   : 1.2V    :           :                
 VCCIO7                       : 117       : power  :                   : 3.3V    : 7         :                
 GND                          : 118       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 119       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 120       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 121       :        :                   :         : 7         :                
+KEY_DOT                      : 120       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+KEY_DASH                     : 121       : input  : 3.3-V LVCMOS      :         : 7         : Y              
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
 VCCINT                       : 124       : power  :                   : 1.2V    :           :                
