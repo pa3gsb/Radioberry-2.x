@@ -377,7 +377,7 @@ wire txFIFOReadStrobe;
 
 transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
 							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
-							.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(DEBUG_LED4));
+							.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(rb_info_2));
 
 wire [13:0] DAC;
 	

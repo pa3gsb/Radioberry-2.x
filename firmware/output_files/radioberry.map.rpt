@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Fri Mar 02 16:00:53 2018
+Sat Mar 03 13:14:25 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -334,15 +334,15 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Mar 02 16:00:53 2018       ;
+; Analysis & Synthesis Status        ; Successful - Sat Mar 03 13:14:24 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
-; Total logic elements               ; 15,517                                      ;
-;     Total combinational functions  ; 11,268                                      ;
-;     Dedicated logic registers      ; 11,875                                      ;
-; Total registers                    ; 11875                                       ;
+; Total logic elements               ; 15,550                                      ;
+;     Total combinational functions  ; 11,301                                      ;
+;     Dedicated logic registers      ; 11,902                                      ;
+; Total registers                    ; 11902                                       ;
 ; Total pins                         ; 48                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 374,912                                     ;
@@ -451,7 +451,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.0%      ;
+;     Processor 2            ;   3.3%      ;
 +----------------------------+-------------+
 
 
@@ -567,20 +567,20 @@ agreement for further details.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
-; Estimated Total logic elements              ; 15,517           ;
+; Estimated Total logic elements              ; 15,550           ;
 ;                                             ;                  ;
-; Total combinational functions               ; 11268            ;
+; Total combinational functions               ; 11301            ;
 ; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 1188             ;
-;     -- 3 input functions                    ; 7017             ;
-;     -- <=2 input functions                  ; 3063             ;
+;     -- 4 input functions                    ; 1189             ;
+;     -- 3 input functions                    ; 7026             ;
+;     -- <=2 input functions                  ; 3086             ;
 ;                                             ;                  ;
 ; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 3100             ;
-;     -- arithmetic mode                      ; 8168             ;
+;     -- normal mode                          ; 3108             ;
+;     -- arithmetic mode                      ; 8193             ;
 ;                                             ;                  ;
-; Total registers                             ; 11875            ;
-;     -- Dedicated logic registers            ; 11875            ;
+; Total registers                             ; 11902            ;
+;     -- Dedicated logic registers            ; 11902            ;
 ;     -- I/O registers                        ; 0                ;
 ;                                             ;                  ;
 ; I/O pins                                    ; 48               ;
@@ -592,8 +592,8 @@ agreement for further details.
 ;     -- PLLs                                 ; 1                ;
 ;                                             ;                  ;
 ; Maximum fan-out node                        ; ad9866_clk~input ;
-; Maximum fan-out                             ; 12237            ;
-; Total fan-out                               ; 87184            ;
+; Maximum fan-out                             ; 12264            ;
+; Total fan-out                               ; 87314            ;
 ; Average fan-out                             ; 3.57             ;
 +---------------------------------------------+------------------+
 
@@ -603,12 +603,12 @@ agreement for further details.
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                                  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                           ; Entity Name         ; Library Name ;
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |radioberry                                                 ; 11268 (138)         ; 11875 (188)               ; 374912      ; 94           ; 0       ; 47        ; 48   ; 0            ; |radioberry                                                                                                                                   ; radioberry          ; work         ;
+; |radioberry                                                 ; 11301 (138)         ; 11902 (188)               ; 374912      ; 94           ; 0       ; 47        ; 48   ; 0            ; |radioberry                                                                                                                                   ; radioberry          ; work         ;
 ;    |PLL_IAMBIC:PLL_IAMBIC_inst|                             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|PLL_IAMBIC:PLL_IAMBIC_inst                                                                                                        ; PLL_IAMBIC          ; work         ;
 ;       |altpll:altpll_component|                             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|PLL_IAMBIC:PLL_IAMBIC_inst|altpll:altpll_component                                                                                ; altpll              ; work         ;
 ;          |PLL_IAMBIC_altpll:auto_generated|                 ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|PLL_IAMBIC:PLL_IAMBIC_inst|altpll:altpll_component|PLL_IAMBIC_altpll:auto_generated                                               ; PLL_IAMBIC_altpll   ; work         ;
 ;    |ad9866:ad9866_inst|                                     ; 92 (92)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                                ; ad9866              ; work         ;
-;    |filter:filter_inst|                                     ; 59 (59)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|filter:filter_inst                                                                                                                ; filter              ; work         ;
+;    |filter:filter_inst|                                     ; 58 (58)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|filter:filter_inst                                                                                                                ; filter              ; work         ;
 ;    |iambic:iambic_inst|                                     ; 654 (95)            ; 30 (30)                   ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|iambic:iambic_inst                                                                                                                ; iambic              ; work         ;
 ;       |lpm_divide:Div0|                                     ; 191 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|iambic:iambic_inst|lpm_divide:Div0                                                                                                ; lpm_divide          ; work         ;
 ;          |lpm_divide_tim:auto_generated|                    ; 191 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|iambic:iambic_inst|lpm_divide:Div0|lpm_divide_tim:auto_generated                                                                  ; lpm_divide_tim      ; work         ;
@@ -630,7 +630,7 @@ agreement for further details.
 ;       |profile_ROM:profile_ROM_inst|                        ; 0 (0)               ; 0 (0)                     ; 16000       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|profile:profile_CW|profile_ROM:profile_ROM_inst                                                                                   ; profile_ROM         ; work         ;
 ;          |altsyncram:altsyncram_component|                  ; 0 (0)               ; 0 (0)                     ; 16000       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|profile:profile_CW|profile_ROM:profile_ROM_inst|altsyncram:altsyncram_component                                                   ; altsyncram          ; work         ;
 ;             |altsyncram_6f91:auto_generated|                ; 0 (0)               ; 0 (0)                     ; 16000       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|profile:profile_CW|profile_ROM:profile_ROM_inst|altsyncram:altsyncram_component|altsyncram_6f91:auto_generated                    ; altsyncram_6f91     ; work         ;
-;    |receiver:receiver_rx2_inst|                             ; 3352 (0)            ; 3960 (0)                  ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst                                                                                                        ; receiver            ; work         ;
+;    |receiver:receiver_rx2_inst|                             ; 3354 (0)            ; 3960 (0)                  ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst                                                                                                        ; receiver            ; work         ;
 ;       |cic:cic_inst_I2|                                     ; 189 (39)            ; 234 (17)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|cic:cic_inst_I2                                                                                        ; cic                 ; work         ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|             ; 25 (25)             ; 50 (50)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst                                                   ; cic_comb            ; work         ;
 ;          |cic_comb:cic_stages[1].cic_comb_inst|             ; 25 (25)             ; 50 (50)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst                                                   ; cic_comb            ; work         ;
@@ -646,7 +646,7 @@ agreement for further details.
 ;          |cic_integrator:cic_stages[1].cic_integrator_inst| ; 25 (25)             ; 25 (25)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst                                       ; cic_integrator      ; work         ;
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 25 (25)             ; 25 (25)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst                                       ; cic_integrator      ; work         ;
 ;       |cordic:cordic_inst|                                  ; 1037 (1037)         ; 681 (681)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|cordic:cordic_inst                                                                                     ; cordic              ; work         ;
-;       |firX8R8:fir2|                                        ; 928 (272)           ; 1477 (61)                 ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2                                                                                           ; firX8R8             ; work         ;
+;       |firX8R8:fir2|                                        ; 930 (274)           ; 1477 (61)                 ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2                                                                                           ; firX8R8             ; work         ;
 ;          |fir256:A|                                         ; 82 (82)             ; 177 (177)                 ; 13824       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A                                                                                  ; fir256              ; work         ;
 ;             |firram36:ram|                                  ; 0 (0)               ; 0 (0)                     ; 9216        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|firram36:ram                                                                     ; firram36            ; work         ;
 ;                |altsyncram:altsyncram_component|            ; 0 (0)               ; 0 (0)                     ; 9216        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component                                     ; altsyncram          ; work         ;
@@ -757,7 +757,7 @@ agreement for further details.
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 43 (43)             ; 43 (43)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst                                 ; cic_integrator      ; work         ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst| ; 43 (43)             ; 43 (43)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                                 ; cic_integrator      ; work         ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst| ; 43 (43)             ; 43 (43)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx2_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                                 ; cic_integrator      ; work         ;
-;    |receiver:receiver_rx_inst|                              ; 3352 (0)            ; 3960 (0)                  ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst                                                                                                         ; receiver            ; work         ;
+;    |receiver:receiver_rx_inst|                              ; 3356 (0)            ; 3960 (0)                  ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst                                                                                                         ; receiver            ; work         ;
 ;       |cic:cic_inst_I2|                                     ; 189 (39)            ; 234 (17)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|cic:cic_inst_I2                                                                                         ; cic                 ; work         ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|             ; 25 (25)             ; 50 (50)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst                                                    ; cic_comb            ; work         ;
 ;          |cic_comb:cic_stages[1].cic_comb_inst|             ; 25 (25)             ; 50 (50)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst                                                    ; cic_comb            ; work         ;
@@ -773,7 +773,7 @@ agreement for further details.
 ;          |cic_integrator:cic_stages[1].cic_integrator_inst| ; 25 (25)             ; 25 (25)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst                                        ; cic_integrator      ; work         ;
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 25 (25)             ; 25 (25)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst                                        ; cic_integrator      ; work         ;
 ;       |cordic:cordic_inst|                                  ; 1037 (1037)         ; 681 (681)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|cordic:cordic_inst                                                                                      ; cordic              ; work         ;
-;       |firX8R8:fir2|                                        ; 928 (272)           ; 1477 (61)                 ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2                                                                                            ; firX8R8             ; work         ;
+;       |firX8R8:fir2|                                        ; 932 (276)           ; 1477 (61)                 ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2                                                                                            ; firX8R8             ; work         ;
 ;          |fir256:A|                                         ; 82 (82)             ; 177 (177)                 ; 13824       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A                                                                                   ; fir256              ; work         ;
 ;             |firram36:ram|                                  ; 0 (0)               ; 0 (0)                     ; 9216        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|firram36:ram                                                                      ; firram36            ; work         ;
 ;                |altsyncram:altsyncram_component|            ; 0 (0)               ; 0 (0)                     ; 9216        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component                                      ; altsyncram          ; work         ;
@@ -905,7 +905,7 @@ agreement for further details.
 ;             |cmpr_g76:wrempty_eq_comp|                      ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|cmpr_g76:wrempty_eq_comp                                  ; cmpr_g76            ; work         ;
 ;    |spi_slave:spi_slave_rx2_inst|                           ; 63 (63)             ; 151 (151)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx2_inst                                                                                                      ; spi_slave           ; work         ;
 ;    |spi_slave:spi_slave_rx_inst|                            ; 65 (65)             ; 137 (137)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx_inst                                                                                                       ; spi_slave           ; work         ;
-;    |transmitter:transmitter_inst|                           ; 2981 (46)           ; 2965 (76)                 ; 23040       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst                                                                                                      ; transmitter         ; work         ;
+;    |transmitter:transmitter_inst|                           ; 3009 (74)           ; 2992 (103)                ; 23040       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst                                                                                                      ; transmitter         ; work         ;
 ;       |CicInterpM5:in2|                                     ; 1078 (1078)         ; 1610 (1610)               ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|CicInterpM5:in2                                                                                      ; CicInterpM5         ; work         ;
 ;       |FirInterp8_1024:fi|                                  ; 131 (131)           ; 227 (227)                 ; 23040       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi                                                                                   ; FirInterp8_1024     ; work         ;
 ;          |firram36I_1024:ram|                               ; 0 (0)               ; 0 (0)                     ; 4608        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|firram36I_1024:ram                                                                ; firram36I_1024      ; work         ;
@@ -1558,7 +1558,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 11875 ;
+; Total registers                              ; 11902 ;
 ; Number of registers using Synchronous Clear  ; 2031  ;
 ; Number of registers using Synchronous Load   ; 861   ;
 ; Number of registers using Asynchronous Clear ; 685   ;
@@ -1612,85 +1612,85 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[13]                             ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[11]                             ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|tx_IQ_data[7]                   ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][14] ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][20] ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|cordic:cordic_inst|X[0][16]        ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|cordic:cordic_inst|X[0][15]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|Rmult[30]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:B|Rmult[35]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:C|Rmult[35]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:D|Rmult[35]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:E|Rmult[33]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:F|Raccum[13]   ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:G|Iaccum[0]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:H|Iaccum[3]    ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|Imult[26]   ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|Iaccum[20]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|Imult[30]   ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|Rmult[20]   ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:E|Iaccum[20]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:F|Iaccum[21]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:G|Imult[33]   ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:H|Iaccum[18]  ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|caddr[5]     ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|raddr[7]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:B|counter[3]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:B|raddr[6]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:C|caddr[3]     ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:C|raddr[7]     ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[15]                             ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[6]                              ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|tx_IQ_data[0]                   ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][21] ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][16] ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|cordic:cordic_inst|X[0][11]        ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|cordic:cordic_inst|X[0][14]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|Raccum[20]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:B|Rmult[30]    ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:C|Imult[13]    ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:D|Raccum[10]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:E|Iaccum[22]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:F|Imult[21]    ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:G|Iaccum[23]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:H|Rmult[28]    ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|Raccum[12]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|Iaccum[19]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|Imult[24]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|Rmult[27]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:E|Raccum[22]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:F|Iaccum[10]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:G|Imult[14]   ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:H|Iaccum[19]  ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|counter[8]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:A|raddr[4]     ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:B|counter[7]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:B|raddr[7]     ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:C|counter[7]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:C|raddr[4]     ;
 ; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:D|counter[6]   ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:D|raddr[6]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:E|counter[7]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:E|raddr[4]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:F|counter[0]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:F|raddr[6]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:G|counter[7]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:G|raddr[1]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:H|counter[0]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:H|raddr[2]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|caddr[3]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:E|counter[1]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:E|raddr[7]     ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:F|caddr[7]     ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:F|raddr[7]     ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:G|caddr[2]     ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:G|raddr[0]     ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:H|caddr[2]     ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|fir256:H|raddr[1]     ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|counter[1]  ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|raddr[3]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|caddr[2]    ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|raddr[6]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|caddr[6]    ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|raddr[1]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|counter[1]  ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|raddr[2]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:E|caddr[1]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|counter[8]  ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|raddr[1]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|caddr[2]    ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|raddr[2]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|caddr[5]    ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|raddr[4]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:E|counter[3]  ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:E|raddr[2]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:F|counter[7]  ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:F|raddr[1]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:G|counter[6]  ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:G|raddr[3]    ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:H|counter[0]  ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:H|raddr[0]    ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_bitcount[2]                          ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|wstate[1]             ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|wstate[0]            ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut1_pc[5]                                ;
-; 4:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |radioberry|profile:profile_CW|hang_timer[9]                             ;
-; 4:1                ; 108 bits  ; 216 LEs       ; 108 LEs              ; 108 LEs                ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|Rmult[23]    ;
-; 4:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |radioberry|profile:profile_CW|timer[12]                                 ;
-; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|Iacc[13]              ;
-; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|Racc[21]             ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |radioberry|filter:filter_inst|selected_filter[5]                        ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|caddr[4]     ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|raddr[2]     ;
-; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |radioberry|profile:profile_CW|profile_count[5]                          ;
-; 7:1                ; 18 bits   ; 72 LEs        ; 18 LEs               ; 54 LEs                 ; Yes        ; |radioberry|iambic:iambic_inst|delay[16]                                 ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:F|caddr[5]    ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:F|raddr[6]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:G|counter[2]  ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:G|raddr[2]    ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:H|counter[5]  ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:H|raddr[6]    ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_bitcount[1]                          ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|wstate[4]             ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|wstate[4]            ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut1_pc[0]                                ;
+; 4:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |radioberry|profile:profile_CW|hang_timer[10]                            ;
+; 4:1                ; 108 bits  ; 216 LEs       ; 108 LEs              ; 108 LEs                ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|Rmult[15]    ;
+; 4:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |radioberry|profile:profile_CW|timer[3]                                  ;
+; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|Racc[10]              ;
+; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|Racc[22]             ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |radioberry|filter:filter_inst|selected_filter[1]                        ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|caddr[9]     ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|raddr[1]     ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |radioberry|profile:profile_CW|profile_count[4]                          ;
+; 7:1                ; 18 bits   ; 72 LEs        ; 18 LEs               ; 54 LEs                 ; Yes        ; |radioberry|iambic:iambic_inst|delay[7]                                  ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|datain[8]                                 ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|datain[7]                                 ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|datain[1]                                 ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|datain[12]                                ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|datain[4]                                 ;
 ; 7:1                ; 48 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; No         ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|Add2                  ;
 ; 7:1                ; 48 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; No         ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|Add3                 ;
 ; 12:1               ; 34 bits   ; 272 LEs       ; 68 LEs               ; 204 LEs                ; No         ; |radioberry|receiver:receiver_rx_inst|varcic:varcic_inst_I1|Selector0    ;
 ; 12:1               ; 34 bits   ; 272 LEs       ; 68 LEs               ; 204 LEs                ; No         ; |radioberry|receiver:receiver_rx2_inst|varcic:varcic_inst_I1|Selector13  ;
 ; 8:1                ; 3 bits    ; 15 LEs        ; 9 LEs                ; 6 LEs                  ; No         ; |radioberry|profile:profile_CW|Selector30                                ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |radioberry|profile:profile_CW|Selector33                                ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 0 LEs                ; 96 LEs                 ; No         ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|Add3                  ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |radioberry|profile:profile_CW|Selector31                                ;
+; 3:1                ; 48 bits   ; 96 LEs        ; 0 LEs                ; 96 LEs                 ; No         ; |radioberry|receiver:receiver_rx_inst|firX8R8:fir2|Add2                  ;
 ; 3:1                ; 48 bits   ; 96 LEs        ; 0 LEs                ; 96 LEs                 ; No         ; |radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|Add2                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 
@@ -8473,7 +8473,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Port           ; Type   ; Severity ; Details                                                                             ;
 +----------------+--------+----------+-------------------------------------------------------------------------------------+
 ; out_data[1..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LED            ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +----------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -8602,7 +8601,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 48                          ;
-; cycloneiii_ff         ; 11875                       ;
+; cycloneiii_ff         ; 11902                       ;
 ;     CLR               ; 277                         ;
 ;     ENA               ; 5314                        ;
 ;     ENA CLR           ; 402                         ;
@@ -8611,26 +8610,26 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA SLD           ; 385                         ;
 ;     SCLR              ; 124                         ;
 ;     SLD               ; 470                         ;
-;     plain             ; 2990                        ;
+;     plain             ; 3017                        ;
 ; cycloneiii_io_obuf    ; 13                          ;
-; cycloneiii_lcell_comb ; 11272                       ;
-;     arith             ; 8168                        ;
+; cycloneiii_lcell_comb ; 11305                       ;
+;     arith             ; 8193                        ;
 ;         1 data inputs ; 1                           ;
-;         2 data inputs ; 1405                        ;
-;         3 data inputs ; 6762                        ;
-;     normal            ; 3104                        ;
+;         2 data inputs ; 1429                        ;
+;         3 data inputs ; 6763                        ;
+;     normal            ; 3112                        ;
 ;         0 data inputs ; 39                          ;
-;         1 data inputs ; 186                         ;
-;         2 data inputs ; 1436                        ;
-;         3 data inputs ; 255                         ;
-;         4 data inputs ; 1188                        ;
+;         1 data inputs ; 188                         ;
+;         2 data inputs ; 1433                        ;
+;         3 data inputs ; 263                         ;
+;         4 data inputs ; 1189                        ;
 ; cycloneiii_mac_mult   ; 47                          ;
 ; cycloneiii_mac_out    ; 47                          ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 1062                        ;
 ;                       ;                             ;
 ; Max LUT depth         ; 54.00                       ;
-; Average LUT depth     ; 3.97                        ;
+; Average LUT depth     ; 3.96                        ;
 +-----------------------+-----------------------------+
 
 
@@ -8639,7 +8638,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:36     ;
+; Top            ; 00:00:50     ;
 +----------------+--------------+
 
 
@@ -8649,7 +8648,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Fri Mar 02 15:59:53 2018
+    Info: Processing started: Sat Mar 03 13:13:08 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -8714,9 +8713,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file cyclone
     Info (12023): Found entity 1: txFIFO File: C:/dev/git/Radioberry-2.x/firmware/cyclone_ip/txFIFO.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file cyclone_ip/rxfifo.v
     Info (12023): Found entity 1: rxFIFO File: C:/dev/git/Radioberry-2.x/firmware/cyclone_ip/rxFIFO.v Line: 40
-Warning (10236): Verilog HDL Implicit Net warning at radioberry.v(380): created implicit net for "DEBUG_LED4" File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 380
 Info (12127): Elaborating entity "radioberry" for the top level hierarchy
-Warning (10034): Output port "rb_info_2" at radioberry.v(59) has no driver File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 59
 Info (12128): Elaborating entity "ad9866" for hierarchy "ad9866:ad9866_inst" File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 104
 Warning (10240): Verilog HDL Always Construct warning at ad9866.v(88): inferring latch(es) for variable "initarrayv", which holds its previous value in one or more paths through the always construct File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 88
 Warning (10240): Verilog HDL Always Construct warning at ad9866.v(88): inferring latch(es) for variable "datain", which holds its previous value in one or more paths through the always construct File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 88
@@ -9345,7 +9342,6 @@ Info (13000): Registers with preset signals will power-up high File: C:/dev/git/
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "ad9866_mode" is stuck at GND File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 46
-    Warning (13410): Pin "rb_info_2" is stuck at GND File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 59
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 39 registers lost all their fanouts during netlist optimizations.
 Info (17016): Found the following redundant logic cells in design
@@ -9389,23 +9385,23 @@ Info (332111): Found 15 clocks
     Info (332111):   13.020 virt_ad9866_txclk
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:05
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:08
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 16768 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 16801 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 10 input pins
     Info (21059): Implemented 26 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 15563 logic cells
+    Info (21061): Implemented 15596 logic cells
     Info (21064): Implemented 1062 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 94 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 59 warnings
-    Info: Peak virtual memory: 957 megabytes
-    Info: Processing ended: Fri Mar 02 16:00:53 2018
-    Info: Elapsed time: 00:01:00
-    Info: Total CPU time (on all processors): 00:01:19
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 56 warnings
+    Info: Peak virtual memory: 958 megabytes
+    Info: Processing ended: Sat Mar 03 13:14:25 2018
+    Info: Elapsed time: 00:01:17
+    Info: Total CPU time (on all processors): 00:01:35
 
 
 +------------------------------------------+
