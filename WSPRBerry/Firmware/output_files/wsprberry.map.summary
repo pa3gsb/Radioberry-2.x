@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sun Mar 04 09:53:55 2018
+Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition
+Revision Name : wsprberry
+Top-level Entity Name : radioberry
+Family : Cyclone 10 LP
+Total logic elements : 19,045
+    Total combinational functions : 13,125
+    Dedicated logic registers : 15,864
+Total registers : 15864
+Total pins : 32
+Total virtual pins : 0
+Total memory bits : 368,640
+Embedded Multiplier 9-bit elements : 120
+Total PLLs : 0

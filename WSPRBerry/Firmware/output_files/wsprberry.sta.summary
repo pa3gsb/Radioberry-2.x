@@ -1,0 +1,317 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'ad9866_clk'
+Slack : -14.003
+TNS   : -57458.040
+
+Type  : Slow 1200mV 85C Model Setup 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : -6.749
+TNS   : -64.466
+
+Type  : Slow 1200mV 85C Model Setup 'spi_sck'
+Slack : -5.100
+TNS   : -396.416
+
+Type  : Slow 1200mV 85C Model Setup 'clk_10mhz'
+Slack : -5.035
+TNS   : -236.759
+
+Type  : Slow 1200mV 85C Model Setup 'spi_ce[0]'
+Slack : -3.863
+TNS   : -733.292
+
+Type  : Slow 1200mV 85C Model Setup 'spi_slave:spi_slave_rx_inst|done'
+Slack : -3.235
+TNS   : -583.462
+
+Type  : Slow 1200mV 85C Model Hold 'ad9866_clk'
+Slack : -0.034
+TNS   : -0.086
+
+Type  : Slow 1200mV 85C Model Hold 'spi_sck'
+Slack : 0.275
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk_10mhz'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'spi_ce[0]'
+Slack : 0.473
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'spi_slave:spi_slave_rx_inst|done'
+Slack : 1.114
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : 1.158
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'spi_ce[0]'
+Slack : -3.391
+TNS   : -654.159
+
+Type  : Slow 1200mV 85C Model Recovery 'clk_10mhz'
+Slack : -2.586
+TNS   : -73.434
+
+Type  : Slow 1200mV 85C Model Recovery 'spi_sck'
+Slack : -2.521
+TNS   : -299.952
+
+Type  : Slow 1200mV 85C Model Recovery 'ad9866_clk'
+Slack : -1.036
+TNS   : -294.316
+
+Type  : Slow 1200mV 85C Model Removal 'ad9866_clk'
+Slack : 1.073
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'spi_sck'
+Slack : 1.963
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'clk_10mhz'
+Slack : 2.484
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'spi_ce[0]'
+Slack : 2.666
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866_clk'
+Slack : -14.686
+TNS   : -33047.497
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_ce[0]'
+Slack : -14.686
+TNS   : -595.978
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_slave:spi_slave_rx_inst|done'
+Slack : -4.000
+TNS   : -821.094
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_sck'
+Slack : -3.000
+TNS   : -209.693
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk_10mhz'
+Slack : -3.000
+TNS   : -127.908
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : 0.196
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'ad9866_clk'
+Slack : -12.461
+TNS   : -52167.648
+
+Type  : Slow 1200mV 0C Model Setup 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : -6.513
+TNS   : -61.519
+
+Type  : Slow 1200mV 0C Model Setup 'spi_sck'
+Slack : -4.744
+TNS   : -363.570
+
+Type  : Slow 1200mV 0C Model Setup 'clk_10mhz'
+Slack : -4.646
+TNS   : -214.955
+
+Type  : Slow 1200mV 0C Model Setup 'spi_ce[0]'
+Slack : -3.588
+TNS   : -679.523
+
+Type  : Slow 1200mV 0C Model Setup 'spi_slave:spi_slave_rx_inst|done'
+Slack : -3.129
+TNS   : -561.432
+
+Type  : Slow 1200mV 0C Model Hold 'ad9866_clk'
+Slack : -0.171
+TNS   : -1.315
+
+Type  : Slow 1200mV 0C Model Hold 'spi_sck'
+Slack : 0.220
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk_10mhz'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'spi_ce[0]'
+Slack : 0.423
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : 1.117
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'spi_slave:spi_slave_rx_inst|done'
+Slack : 1.263
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'spi_ce[0]'
+Slack : -3.021
+TNS   : -585.204
+
+Type  : Slow 1200mV 0C Model Recovery 'clk_10mhz'
+Slack : -2.271
+TNS   : -64.345
+
+Type  : Slow 1200mV 0C Model Recovery 'spi_sck'
+Slack : -2.255
+TNS   : -251.431
+
+Type  : Slow 1200mV 0C Model Recovery 'ad9866_clk'
+Slack : -0.697
+TNS   : -190.741
+
+Type  : Slow 1200mV 0C Model Removal 'ad9866_clk'
+Slack : 0.758
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'spi_sck'
+Slack : 1.568
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'clk_10mhz'
+Slack : 2.196
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'spi_ce[0]'
+Slack : 2.432
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866_clk'
+Slack : -14.686
+TNS   : -32926.447
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_ce[0]'
+Slack : -14.686
+TNS   : -596.356
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_slave:spi_slave_rx_inst|done'
+Slack : -4.000
+TNS   : -831.716
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_sck'
+Slack : -3.000
+TNS   : -209.693
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk_10mhz'
+Slack : -3.000
+TNS   : -128.052
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : 0.217
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'ad9866_clk'
+Slack : -6.090
+TNS   : -16085.935
+
+Type  : Fast 1200mV 0C Model Setup 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : -2.763
+TNS   : -24.992
+
+Type  : Fast 1200mV 0C Model Setup 'clk_10mhz'
+Slack : -1.687
+TNS   : -60.296
+
+Type  : Fast 1200mV 0C Model Setup 'spi_sck'
+Slack : -1.600
+TNS   : -120.318
+
+Type  : Fast 1200mV 0C Model Setup 'spi_slave:spi_slave_rx_inst|done'
+Slack : -1.113
+TNS   : -182.229
+
+Type  : Fast 1200mV 0C Model Setup 'spi_ce[0]'
+Slack : -0.958
+TNS   : -153.880
+
+Type  : Fast 1200mV 0C Model Hold 'spi_sck'
+Slack : 0.058
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ad9866_clk'
+Slack : 0.064
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk_10mhz'
+Slack : 0.098
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'spi_ce[0]'
+Slack : 0.175
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : 0.408
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'spi_slave:spi_slave_rx_inst|done'
+Slack : 0.435
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'spi_ce[0]'
+Slack : -0.729
+TNS   : -124.470
+
+Type  : Fast 1200mV 0C Model Recovery 'clk_10mhz'
+Slack : -0.669
+TNS   : -18.460
+
+Type  : Fast 1200mV 0C Model Recovery 'spi_sck'
+Slack : -0.528
+TNS   : -57.691
+
+Type  : Fast 1200mV 0C Model Recovery 'ad9866_clk'
+Slack : -0.082
+TNS   : -3.381
+
+Type  : Fast 1200mV 0C Model Removal 'ad9866_clk'
+Slack : 0.559
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'spi_sck'
+Slack : 0.830
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'spi_ce[0]'
+Slack : 0.888
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'clk_10mhz'
+Slack : 1.137
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866_clk'
+Slack : -9.457
+TNS   : -29866.746
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_ce[0]'
+Slack : -9.457
+TNS   : -332.309
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_sck'
+Slack : -3.000
+TNS   : -241.119
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk_10mhz'
+Slack : -3.000
+TNS   : -114.764
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_slave:spi_slave_rx_inst|done'
+Slack : -1.000
+TNS   : -200.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866:ad9866_inst|dut1_pc[0]'
+Slack : 0.351
+TNS   : 0.000
+
+------------------------------------------------------------
