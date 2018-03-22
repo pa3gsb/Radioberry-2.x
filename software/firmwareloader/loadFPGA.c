@@ -17,31 +17,53 @@
 #define oPinDCLK 			5	
 
 
-int main (void)
+int main (int argc, char **argv)
 {
-	  printf ("Raspberry Pi - RadioBerry Firmware Loader\n") ;
-	  printf ("==============================\n") ;
-	  printf ("\n") ;
+	printf ("\n\n");
+	printf ("=======================================================\n") ;
+	printf ("===    Raspberry Pi - RadioBerry Firmware Loader    ===\n") ;
+	printf ("=======================================================\n") ;
+	printf ("\n\n");
 
-	  int file_id;
+	if (argc != 2)
+	{
+      printf("Can not execute, valid command line arguments are 'CL016' or 'CL025'\n\n");
+      return -1;   
+	}
 	  
-	  wiringPiSetup () ;
 	  
-	  pinMode (iPinCONF_DONE, INPUT);
-	  pinMode (iPinNSTATUS, INPUT);
+	char filename[30];
+
+	if (strcmp(argv[1], "CL016")==0) {
+		strcpy(filename, "radioberry-10CL016.rbf");
+	} else if (strcmp(argv[1], "CL025")==0) {
+		strcpy(filename, "radioberry.rbf");
+	} else {
+      printf("Can not execute!. \nCommand line argument expected by program must be 'CL016' or 'CL025'\n\n");
+	  return -1;
+	}
+	
+	printf("%s  will be loaded.\n\n\n", filename);
+
+	int file_id;
+
+	wiringPiSetup () ;
 	  
-	  pinMode (oPinNCONFIG, OUTPUT);
-	  pinMode (oPinDATA, OUTPUT);
-	  pinMode (oPinDCLK, OUTPUT);
+	pinMode (iPinCONF_DONE, INPUT);
+	pinMode (iPinNSTATUS, INPUT);
+
+	pinMode (oPinNCONFIG, OUTPUT);
+	pinMode (oPinDATA, OUTPUT);
+	pinMode (oPinDCLK, OUTPUT);
 
 	/* Open programming file as READ and in BINARY */
-	file_id = fopen_rbf( "radioberry.rbf", "rb" );
+	file_id = fopen_rbf( filename, "rb" );
 
 	if ( file_id )
-		fprintf( stdout, "Info: Programming file: \"%s\" opened...\n", "radioberry.rbf" );
+		fprintf( stdout, "Info: Programming file: \"%s\" opened...\n", filename );
 	else
 	{
-		fprintf( stderr, "Error: Could not open programming file: \"%s\"\n", "radioberry.rbf" );
+		fprintf( stderr, "Error: Could not open programming file: \"%s\"\n", filename );
 		return -1;
 	}
 

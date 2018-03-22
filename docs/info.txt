@@ -1,0 +1,8 @@
+https://cloud.altera.com/devstore/platform/?acds_version=17.0&family=cyclone-10-lp
+
+
+https://software.intel.com/en-us
+
+
+nios - how to convert elf -> hex and loading in bitstream.
+https://www.youtube.com/watch?v=joFaxLY-rUE

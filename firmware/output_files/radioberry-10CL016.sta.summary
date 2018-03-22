@@ -3,63 +3,55 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'spi_sck'
-Slack : 0.080
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Setup 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 0.384
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Setup 'virt_ad9866_rxclk'
-Slack : 0.442
+Slack : 0.042
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'spi_ce0'
-Slack : 0.515
+Slack : 0.134
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'ad9866_clk'
-Slack : 0.550
+Slack : 0.329
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'spi_slave:spi_slave_rx2_inst|done'
+Slack : 0.744
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'spi_slave:spi_slave_rx_inst|done'
-Slack : 1.349
+Slack : 0.792
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'virt_ad9866_rxclk'
+Slack : 1.249
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 1.418
+Slack : 1.325
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'clk_10mhz'
-Slack : 92.640
+Slack : 92.024
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'spi_ce1'
-Slack : 2494.853
+Slack : 2495.840
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 2598.989
+Slack : 2598.848
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 33325.302
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Hold 'spi_ce1'
-Slack : 0.370
+Slack : 33325.579
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'ad9866_clk'
-Slack : 0.385
+Slack : 0.256
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'spi_ce0'
-Slack : 0.426
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Hold 'spi_sck'
-Slack : 0.447
+Type  : Slow 1200mV 85C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.454
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'
@@ -70,24 +62,32 @@ Type  : Slow 1200mV 85C Model Hold 'clk_10mhz'
 Slack : 0.454
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.455
+Type  : Slow 1200mV 85C Model Hold 'spi_sck'
+Slack : 0.467
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'spi_slave:spi_slave_rx_inst|done'
-Slack : 0.709
+Type  : Slow 1200mV 85C Model Hold 'spi_ce1'
+Slack : 0.475
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'spi_ce0'
+Slack : 0.476
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 1.524
+Slack : 0.981
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'spi_slave:spi_slave_rx_inst|done'
+Slack : 1.261
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 1.759
+Slack : 1.431
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'virt_ad9866_rxclk'
-Slack : 15.143
+Slack : 14.767
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866_rxclk'
@@ -99,15 +99,15 @@ Slack : -2.666
 TNS   : -2.666
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 4.642
+Slack : 4.604
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866_clk'
-Slack : 5.747
+Slack : 5.725
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_sck'
-Slack : 31.573
+Slack : 31.494
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk_10mhz'
@@ -115,79 +115,79 @@ Slack : 49.555
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_ce0'
-Slack : 1248.954
+Slack : 1248.874
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_ce1'
-Slack : 1249.077
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 1249.371
+Slack : 1249.027
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_slave:spi_slave_rx_inst|done'
-Slack : 1249.378
+Slack : 1249.342
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_slave:spi_slave_rx2_inst|done'
+Slack : 1249.389
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 2603.370
+Slack : 2603.374
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 16665.870
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Setup 'spi_sck'
-Slack : 0.293
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Setup 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 0.422
+Slack : 16665.873
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'spi_ce0'
-Slack : 0.437
+Slack : 0.066
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Setup 'ad9866_clk'
-Slack : 1.088
+Type  : Slow 1200mV 0C Model Setup 'spi_sck'
+Slack : 0.351
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'spi_slave:spi_slave_rx2_inst|done'
+Slack : 0.795
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'spi_slave:spi_slave_rx_inst|done'
-Slack : 1.441
+Slack : 0.807
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'ad9866_clk'
+Slack : 1.209
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 1.644
+Slack : 1.661
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'virt_ad9866_rxclk'
-Slack : 1.915
+Slack : 2.676
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'clk_10mhz'
-Slack : 93.046
+Slack : 92.480
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'spi_ce1'
-Slack : 2495.085
+Slack : 2496.132
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 2599.239
+Slack : 2599.111
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 33325.618
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Hold 'spi_ce1'
-Slack : 0.341
+Slack : 33325.919
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'ad9866_clk'
-Slack : 0.387
+Slack : 0.232
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.403
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'
@@ -198,32 +198,32 @@ Type  : Slow 1200mV 0C Model Hold 'clk_10mhz'
 Slack : 0.403
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
+Type  : Slow 1200mV 0C Model Hold 'spi_sck'
 Slack : 0.404
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'spi_ce0'
-Slack : 0.407
+Slack : 0.424
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Hold 'spi_sck'
-Slack : 0.410
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Hold 'spi_slave:spi_slave_rx_inst|done'
-Slack : 0.703
+Type  : Slow 1200mV 0C Model Hold 'spi_ce1'
+Slack : 0.425
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 1.541
+Slack : 0.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'spi_slave:spi_slave_rx_inst|done'
+Slack : 1.251
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 1.754
+Slack : 1.477
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'virt_ad9866_rxclk'
-Slack : 14.280
+Slack : 13.952
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866_rxclk'
@@ -235,35 +235,35 @@ Slack : -2.666
 TNS   : -2.666
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 4.550
+Slack : 4.547
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866_clk'
-Slack : 5.706
+Slack : 5.746
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_sck'
-Slack : 31.477
+Slack : 31.331
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk_10mhz'
-Slack : 49.459
+Slack : 49.448
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_ce0'
-Slack : 1249.091
+Slack : 1249.019
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_ce1'
-Slack : 1249.208
+Slack : 1249.231
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_slave:spi_slave_rx_inst|done'
-Slack : 1249.297
+Slack : 1249.357
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 1249.412
+Slack : 1249.406
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
@@ -275,70 +275,62 @@ Slack : 16665.935
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'spi_sck'
-Slack : 0.564
+Slack : 0.351
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'ad9866_clk'
-Slack : 1.346
+Slack : 1.404
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'spi_ce0'
-Slack : 1.890
+Slack : 1.755
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 2.443
+Slack : 2.644
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'spi_slave:spi_slave_rx_inst|done'
-Slack : 2.815
+Slack : 2.682
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 3.213
+Slack : 3.179
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'virt_ad9866_rxclk'
-Slack : 5.586
+Slack : 6.024
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'clk_10mhz'
-Slack : 96.870
+Slack : 96.476
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'spi_ce1'
-Slack : 2497.734
+Slack : 2498.083
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 2601.894
+Slack : 2601.808
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 33329.832
+Slack : 33330.067
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'ad9866_clk'
-Slack : 0.066
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'spi_ce1'
-Slack : 0.120
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'spi_ce0'
-Slack : 0.146
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'spi_slave:spi_slave_rx_inst|done'
-Slack : 0.173
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.185
+Slack : 0.028
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'spi_sck'
+Slack : 0.170
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'spi_ce0'
+Slack : 0.178
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
 Slack : 0.185
 TNS   : 0.000
 
@@ -350,16 +342,24 @@ Type  : Fast 1200mV 0C Model Hold 'clk_10mhz'
 Slack : 0.188
 TNS   : 0.000
 
+Type  : Fast 1200mV 0C Model Hold 'spi_ce1'
+Slack : 0.194
+TNS   : 0.000
+
 Type  : Fast 1200mV 0C Model Hold 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 0.484
+Slack : 0.242
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'spi_slave:spi_slave_rx_inst|done'
+Slack : 0.358
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 0.632
+Slack : 0.426
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'virt_ad9866_rxclk'
-Slack : 11.456
+Slack : 11.297
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866_rxclk'
@@ -371,39 +371,39 @@ Slack : 2.563
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866:ad9866_inst|dut1_pc[0]'
-Slack : 4.809
+Slack : 4.846
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866_clk'
-Slack : 5.465
+Slack : 5.463
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_sck'
-Slack : 31.017
+Slack : 31.016
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk_10mhz'
-Slack : 49.225
+Slack : 49.191
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_ce0'
-Slack : 1248.810
+Slack : 1248.803
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_ce1'
-Slack : 1248.907
+Slack : 1248.814
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_slave:spi_slave_rx_inst|done'
-Slack : 1249.596
+Slack : 1249.565
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_slave:spi_slave_rx2_inst|done'
-Slack : 1249.675
+Slack : 1249.656
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 2603.671
+Slack : 2603.674
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]'

@@ -120,11 +120,11 @@ float timedifference_msec(struct timeval t0, struct timeval t1)
 
 int main(int argc, char **argv)
 {
-	sem_init(&empty, 0, MAX / 4); 
+	sem_init(&empty, 0, MAX / 6); 
     sem_init(&full, 0, 0); 
 	sem_init(&mutex, 0, 1);	//mutal exlusion
 
-	sem_init(&tx_empty, 0, TX_MAX / 4); 
+	sem_init(&tx_empty, 0, TX_MAX / 6); 
     sem_init(&tx_full, 0, 0);    	
 	
 	if (gpioInitialise() < 0) {

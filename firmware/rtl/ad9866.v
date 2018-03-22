@@ -41,7 +41,7 @@ parameter bit [0:19][8:0] initarray = {
     {1'b0,8'h00}, // Address 0x01,
     {1'b0,8'h00}, // Address 0x02, 
     {1'b0,8'h00}, // Address 0x03, 
-    {1'b1,8'h06}, // Address 0x04, 
+    {1'b1,8'h02}, // Address 0x04, 
     {1'b0,8'h00}, // Address 0x05, 
     {1'b1,8'h14}, // Address 0x06,
     {1'b1,8'h21}, // Address 0x07, Initiate DC offset calibration and RX filter on
