@@ -149,7 +149,7 @@ begin
 		rx1_speed <= spi_recv[41:40];
 		rx_gain <= ~spi_recv[37:32];
 	end else begin
-		tx_gain <= ~spi_recv[37:32];
+		tx_gain <= spi_recv[37:32];
 	end
 end 
 
