@@ -120,7 +120,7 @@ float timedifference_msec(struct timeval t0, struct timeval t1)
 
 int main(int argc, char **argv)
 {
-	sem_init(&empty, 0, MAX / 6); 
+	sem_init(&empty, 0, MAX / 12); 
     sem_init(&full, 0, 0); 
 	sem_init(&mutex, 0, 1);	//mutal exlusion
 
