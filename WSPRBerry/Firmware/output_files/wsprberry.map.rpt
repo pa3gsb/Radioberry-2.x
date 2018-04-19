@@ -1,5 +1,5 @@
 Analysis & Synthesis report for wsprberry
-Thu Mar 22 19:31:27 2018
+Thu Apr 19 19:38:50 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -481,13 +481,13 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Mar 22 19:31:26 2018       ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 19 19:38:49 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; wsprberry                                   ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
-; Total logic elements               ; 19,043                                      ;
-;     Total combinational functions  ; 13,123                                      ;
+; Total logic elements               ; 19,041                                      ;
+;     Total combinational functions  ; 13,121                                      ;
 ;     Dedicated logic registers      ; 15,864                                      ;
 ; Total registers                    ; 15864                                       ;
 ; Total pins                         ; 32                                          ;
@@ -593,12 +593,12 @@ agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.04        ;
+; Average used               ; 1.03        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.7%      ;
+;     Processor 2            ;   3.5%      ;
 +----------------------------+-------------+
 
 
@@ -674,16 +674,16 @@ agreement for further details.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
-; Estimated Total logic elements              ; 19,043           ;
+; Estimated Total logic elements              ; 19,041           ;
 ;                                             ;                  ;
-; Total combinational functions               ; 13123            ;
+; Total combinational functions               ; 13121            ;
 ; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 922              ;
-;     -- 3 input functions                    ; 9133             ;
-;     -- <=2 input functions                  ; 3068             ;
+;     -- 4 input functions                    ; 924              ;
+;     -- 3 input functions                    ; 9130             ;
+;     -- <=2 input functions                  ; 3067             ;
 ;                                             ;                  ;
 ; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 2669             ;
+;     -- normal mode                          ; 2667             ;
 ;     -- arithmetic mode                      ; 10454            ;
 ;                                             ;                  ;
 ; Total registers                             ; 15864            ;
@@ -697,7 +697,7 @@ agreement for further details.
 ;                                             ;                  ;
 ; Maximum fan-out node                        ; ad9866_clk~input ;
 ; Maximum fan-out                             ; 16913            ;
-; Total fan-out                               ; 111862           ;
+; Total fan-out                               ; 111859           ;
 ; Average fan-out                             ; 3.65             ;
 +---------------------------------------------+------------------+
 
@@ -707,8 +707,8 @@ agreement for further details.
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                                  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                         ; Entity Name        ; Library Name ;
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |radioberry                                                 ; 13123 (138)         ; 15864 (170)               ; 368640      ; 120          ; 0       ; 60        ; 32   ; 0            ; |radioberry                                                                                                                                 ; radioberry         ; work         ;
-;    |ad9866:ad9866_inst|                                     ; 79 (79)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                              ; ad9866             ; work         ;
+; |radioberry                                                 ; 13121 (137)         ; 15864 (170)               ; 368640      ; 120          ; 0       ; 60        ; 32   ; 0            ; |radioberry                                                                                                                                 ; radioberry         ; work         ;
+;    |ad9866:ad9866_inst|                                     ; 77 (77)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                              ; ad9866             ; work         ;
 ;    |lpm_mult:Mult0|                                         ; 72 (0)              ; 0 (0)                     ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0                                                                                                                  ; lpm_mult           ; work         ;
 ;       |mult_igt:auto_generated|                             ; 72 (72)             ; 0 (0)                     ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0|mult_igt:auto_generated                                                                                          ; mult_igt           ; work         ;
 ;    |lpm_mult:Mult1|                                         ; 72 (0)              ; 0 (0)                     ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult1                                                                                                                  ; lpm_mult           ; work         ;
@@ -1190,7 +1190,7 @@ agreement for further details.
 ;                |dffpipe_nd9:dffpipe8|                       ; 0 (0)               ; 72 (72)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:NRX[2].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|alt_synch_pipe_6ol:ws_dgrp|dffpipe_nd9:dffpipe8    ; dffpipe_nd9        ; work         ;
 ;             |altsyncram_pv61:fifo_ram|                      ; 0 (0)               ; 0 (0)                     ; 12288       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:NRX[2].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|altsyncram_pv61:fifo_ram                           ; altsyncram_pv61    ; work         ;
 ;             |cmpr_866:wrempty_eq_comp|                      ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:NRX[2].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_866:wrempty_eq_comp                           ; cmpr_866           ; work         ;
-;    |spi_slave:spi_slave_rx_inst|                            ; 153 (153)           ; 139 (139)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx_inst                                                                                                     ; spi_slave          ; work         ;
+;    |spi_slave:spi_slave_rx_inst|                            ; 154 (154)           ; 139 (139)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx_inst                                                                                                     ; spi_slave          ; work         ;
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -1805,12 +1805,10 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; Node                                                                                                                                  ; Action   ; Reason              ;
 +---------------------------------------------------------------------------------------------------------------------------------------+----------+---------------------+
 ; ad9866:ad9866_inst|datain[1]~2                                                                                                        ; Modified ; Timing optimization ;
-; ad9866:ad9866_inst|datain[4]~12                                                                                                       ; Modified ; Timing optimization ;
 ; ad9866:ad9866_inst|dut2_data~1                                                                                                        ; Modified ; Timing optimization ;
 ; ad9866:ad9866_inst|dut2_data~1_RESYN448_BDD449                                                                                        ; Created  ; Timing optimization ;
 ; ad9866:ad9866_inst|dut2_data~1_RESYN450_BDD451                                                                                        ; Created  ; Timing optimization ;
 ; ad9866:ad9866_inst|dut2_data~4                                                                                                        ; Modified ; Timing optimization ;
-; ad9866:ad9866_inst|dut2_data~12                                                                                                       ; Modified ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|cordic:cordic_inst|Add11~1                                                                              ; Modified ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|cordic:cordic_inst|Add22~1                                                                              ; Modified ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|cordic:cordic_inst|Add44~1                                                                              ; Modified ; Timing optimization ;
@@ -3172,7 +3170,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+----------------------------------------------------------------------------------+--------------+
 ; Parameter Name ; Value                                                                            ; Type         ;
 +----------------+----------------------------------------------------------------------------------+--------------+
-; initarray      ; (110000000,000000000,000000000,000000000,100000010,000000000,100010100,100100001 ; Array/Record ;
+; initarray      ; (110000000,000000000,000000000,000000000,100000001,000000000,100010000,100100001 ; Array/Record ;
 ; initarray      ; ,101001011,101111111,101111111,100100000,101000001,100000001,000000001,000000000 ;              ;
 ;                ; ,010000100,100000000,000000000,000000000)                                        ;              ;
 +----------------+----------------------------------------------------------------------------------+--------------+
@@ -11738,16 +11736,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     SLD               ; 426                         ;
 ;     plain             ; 2470                        ;
 ; cycloneiii_io_obuf    ; 13                          ;
-; cycloneiii_lcell_comb ; 13125                       ;
+; cycloneiii_lcell_comb ; 13123                       ;
 ;     arith             ; 10454                       ;
 ;         2 data inputs ; 1672                        ;
 ;         3 data inputs ; 8782                        ;
-;     normal            ; 2671                        ;
+;     normal            ; 2669                        ;
 ;         0 data inputs ; 5                           ;
 ;         1 data inputs ; 217                         ;
-;         2 data inputs ; 1176                        ;
-;         3 data inputs ; 351                         ;
-;         4 data inputs ; 922                         ;
+;         2 data inputs ; 1175                        ;
+;         3 data inputs ; 348                         ;
+;         4 data inputs ; 924                         ;
 ; cycloneiii_mac_mult   ; 60                          ;
 ; cycloneiii_mac_out    ; 60                          ;
 ; cycloneiii_ram_block  ; 1440                        ;
@@ -11762,7 +11760,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:43     ;
+; Top            ; 00:00:51     ;
 +----------------+--------------+
 
 
@@ -11772,7 +11770,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Thu Mar 22 19:30:20 2018
+    Info: Processing started: Thu Apr 19 19:37:30 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WSPRBerry -c wsprberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -12250,24 +12248,24 @@ Info (332111): Found 6 clocks
     Info (332111):    1.000 spi_slave:spi_slave_rx_inst|done
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 214 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:09
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:11
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "spi_ce[1]" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 46
-Info (21057): Implemented 20685 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 20683 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 7 input pins
     Info (21059): Implemented 13 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 19093 logic cells
+    Info (21061): Implemented 19091 logic cells
     Info (21064): Implemented 1440 RAM segments
     Info (21062): Implemented 120 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 48 warnings
-    Info: Peak virtual memory: 977 megabytes
-    Info: Processing ended: Thu Mar 22 19:31:27 2018
-    Info: Elapsed time: 00:01:07
-    Info: Total CPU time (on all processors): 00:01:28
+    Info: Peak virtual memory: 990 megabytes
+    Info: Processing ended: Thu Apr 19 19:38:50 2018
+    Info: Elapsed time: 00:01:20
+    Info: Total CPU time (on all processors): 00:01:37
 
 
 +------------------------------------------+

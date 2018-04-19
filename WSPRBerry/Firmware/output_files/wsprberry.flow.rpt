@@ -1,5 +1,5 @@
 Flow report for wsprberry
-Thu Mar 22 19:37:01 2018
+Thu Apr 19 19:46:56 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -41,15 +41,15 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu Mar 22 19:36:45 2018       ;
+; Flow Status                        ; Successful - Thu Apr 19 19:46:30 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; wsprberry                                   ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
 ; Device                             ; 10CL025YE144C8G                             ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 17,327 / 24,624 ( 70 % )                    ;
-;     Total combinational functions  ; 13,123 / 24,624 ( 53 % )                    ;
+; Total logic elements               ; 17,291 / 24,624 ( 70 % )                    ;
+;     Total combinational functions  ; 13,121 / 24,624 ( 53 % )                    ;
 ;     Dedicated logic registers      ; 14,472 / 24,624 ( 59 % )                    ;
 ; Total registers                    ; 14472                                       ;
 ; Total pins                         ; 32 / 77 ( 42 % )                            ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/22/2018 19:30:21 ;
+; Start date & time ; 04/19/2018 19:37:31 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; wsprberry           ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ agreement for further details.
 ; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_MERGING              ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_RETIMING             ; Off                                    ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 220295161909995.152174342110748        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 220295161909995.152415945106628        ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
@@ -113,11 +113,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:03     ; 1.0                     ; 977 MB              ; 00:01:24                           ;
-; Fitter                    ; 00:05:09     ; 1.1                     ; 1498 MB             ; 00:08:19                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 674 MB              ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:14     ; 1.3                     ; 913 MB              ; 00:00:17                           ;
-; Total                     ; 00:06:29     ; --                      ; --                  ; 00:10:03                           ;
+; Analysis & Synthesis      ; 00:01:14     ; 1.0                     ; 990 MB              ; 00:01:31                           ;
+; Fitter                    ; 00:07:21     ; 1.1                     ; 1568 MB             ; 00:10:30                           ;
+; Assembler                 ; 00:00:07     ; 1.0                     ; 673 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:24     ; 1.3                     ; 912 MB              ; 00:00:26                           ;
+; Total                     ; 00:09:06     ; --                      ; --                  ; 00:12:32                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

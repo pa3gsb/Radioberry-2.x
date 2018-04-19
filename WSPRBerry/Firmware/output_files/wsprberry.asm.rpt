@@ -1,5 +1,5 @@
 Assembler report for wsprberry
-Thu Mar 22 19:36:45 2018
+Thu Apr 19 19:46:30 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Mar 22 19:36:45 2018 ;
+; Assembler Status      ; Successful - Thu Apr 19 19:46:30 2018 ;
 ; Revision Name         ; wsprberry                             ;
 ; Top-level Entity Name ; radioberry                            ;
 ; Family                ; Cyclone 10 LP                         ;
@@ -69,8 +69,8 @@ agreement for further details.
 +----------------+----------------------------------------------------------------------------------+
 ; Option         ; Setting                                                                          ;
 +----------------+----------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x00BF5EAD                                                                       ;
-; Checksum       ; 0x00BF5EAD                                                                       ;
+; JTAG usercode  ; 0x00BF56AA                                                                       ;
+; Checksum       ; 0x00BF56AA                                                                       ;
 +----------------+----------------------------------------------------------------------------------+
 
 
@@ -90,15 +90,15 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Thu Mar 22 19:36:42 2018
+    Info: Processing started: Thu Apr 19 19:46:23 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off WSPRBerry -c wsprberry
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 674 megabytes
-    Info: Processing ended: Thu Mar 22 19:36:45 2018
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Peak virtual memory: 673 megabytes
+    Info: Processing ended: Thu Apr 19 19:46:30 2018
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:05
 
 
