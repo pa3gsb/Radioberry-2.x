@@ -1,0 +1,24 @@
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\obj\x86\Debug\CSharp_NoiseFloor.Form1.resources
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\obj\x86\Debug\CSharp_NoiseFloor.Properties.Resources.resources
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.csproj.GenerateResource.Cache
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\bin\Debug\CSharp-NoiseFloor.exe
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\bin\Debug\CSharp-NoiseFloor.pdb
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.exe
+C:\Users\PA3GSB\AppData\Local\Temporary Projects\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.pdb
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.exe
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.pdb
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\bin\Debug\CSharp-NoiseFloor.exe
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\bin\Debug\CSharp-NoiseFloor.pdb
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp_NoiseFloor.Form1.resources
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp_NoiseFloor.Properties.Resources.resources
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.csproj.GenerateResource.Cache
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.csprojResolveAssemblyReference.cache
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\bin\Debug\CSharp-NoiseFloor.exe
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\bin\Debug\CSharp-NoiseFloor.pdb
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.csprojResolveAssemblyReference.cache
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp_NoiseFloor.Form1.resources
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp_NoiseFloor.Properties.Resources.resources
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.csproj.GenerateResource.cache
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.csproj.CoreCompileInputs.cache
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.exe
+C:\dev\git\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Debug\CSharp-NoiseFloor.pdb

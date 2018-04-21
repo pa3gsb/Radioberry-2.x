@@ -1,0 +1,16 @@
+# Using gnuplot; use command > load 'noise_plot_def.txt' to 
+# definition file for plotting noise floor
+set grid
+set datafile separator ";"
+set title 'Radioberry 2.0 beta 2 Clock Noise Measurement, LNA-gain = 0dB' 
+set xlabel 'Frequency [MHz]'
+set xrange [0:30e6]
+set format x "%.1s%c"
+set ylabel 'Power [dBm]'
+set yrange [-200:-90] noreverse
+set style line 1 lt 1 lw 4 pt 7
+plot "noise_measure.txt" u 1:2 w lp smooth bezier t 'power'
+#plot "noise_measure.txt" u 1:2 w lp pt 7 ps 0.5 t 'power'
+#plot "noise_measure.txt" u 1:2
+
+

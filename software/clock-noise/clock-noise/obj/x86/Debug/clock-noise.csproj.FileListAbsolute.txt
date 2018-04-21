@@ -1,0 +1,9 @@
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\bin\Debug\CSharp-NoiseFloor.exe
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\bin\Debug\CSharp-NoiseFloor.pdb
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\clock-noise.csprojResolveAssemblyReference.cache
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\CSharp_NoiseFloor.Properties.Resources.resources
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\clock-noise.csproj.GenerateResource.cache
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\clock-noise.csproj.CoreCompileInputs.cache
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\CSharp-NoiseFloor.exe
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\CSharp-NoiseFloor.pdb
+C:\dev\git\Radioberry-2.x\software\clock-noise\clock-noise\obj\x86\Debug\ClockNoise.Form1.resources

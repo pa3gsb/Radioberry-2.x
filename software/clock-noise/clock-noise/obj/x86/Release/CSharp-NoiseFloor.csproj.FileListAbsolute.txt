@@ -1,0 +1,8 @@
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\bin\Release\CSharp-NoiseFloor.exe
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\bin\Release\CSharp-NoiseFloor.pdb
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Release\CSharp-NoiseFloor.csprojResolveAssemblyReference.cache
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Release\CSharp_NoiseFloor.Form1.resources
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Release\CSharp_NoiseFloor.Properties.Resources.resources
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Release\CSharp-NoiseFloor.csproj.GenerateResource.Cache
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Release\CSharp-NoiseFloor.exe
+C:\dev\RadioBerry\CSharp-NoiseFloor\CSharp-NoiseFloor\obj\x86\Release\CSharp-NoiseFloor.pdb
