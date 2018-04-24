@@ -1,5 +1,5 @@
 Analysis & Synthesis report for wsprberry_CL016
-Sun Mar 04 15:06:10 2018
+Tue Apr 24 16:37:50 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -344,13 +344,13 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 04 15:06:09 2018       ;
+; Analysis & Synthesis Status        ; Successful - Tue Apr 24 16:37:50 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; wsprberry_CL016                             ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
-; Total logic elements               ; 12,750                                      ;
-;     Total combinational functions  ; 8,773                                       ;
+; Total logic elements               ; 12,746                                      ;
+;     Total combinational functions  ; 8,769                                       ;
 ;     Dedicated logic registers      ; 10,653                                      ;
 ; Total registers                    ; 10653                                       ;
 ; Total pins                         ; 32                                          ;
@@ -461,7 +461,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.1%      ;
+;     Processor 2            ;   2.9%      ;
 +----------------------------+-------------+
 
 
@@ -470,21 +470,21 @@ agreement for further details.
 +----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                 ; Library ;
 +----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
-; Polyphase_FIR/firromH.v          ; yes             ; User Wizard-Generated File   ; C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v                        ;         ;
-; Polyphase_FIR/firram36.v         ; yes             ; User Wizard-Generated File   ; C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firram36.v                       ;         ;
-; Polyphase_FIR/firfilt.v          ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v                        ;         ;
-; rtl/ad9866.v                     ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v                                   ;         ;
-; rtl/varcic.v                     ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/varcic.v                                   ;         ;
-; rtl/spi_slave.v                  ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/spi_slave.v                                ;         ;
-; rtl/reset_handler.v              ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/reset_handler.v                            ;         ;
-; rtl/cic_integrator.v             ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/cic_integrator.v                           ;         ;
-; rtl/cic_comb.v                   ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/cic_comb.v                                 ;         ;
-; rtl/cic.v                        ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/cic.v                                      ;         ;
-; rtl/receiver.v                   ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/receiver.v                                 ;         ;
-; rtl/cordic.v                     ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/cordic.v                                   ;         ;
-; rtl/timescale.v                  ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/timescale.v                                ;         ;
-; rtl/radioberry.v                 ; yes             ; User Verilog HDL File        ; C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v                               ;         ;
-; cyclone_ip/rxFIFO.v              ; yes             ; User Wizard-Generated File   ; C:/dev/git/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v                            ;         ;
+; Polyphase_FIR/firromH.v          ; yes             ; User Wizard-Generated File   ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v         ;         ;
+; Polyphase_FIR/firram36.v         ; yes             ; User Wizard-Generated File   ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firram36.v        ;         ;
+; Polyphase_FIR/firfilt.v          ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v         ;         ;
+; rtl/ad9866.v                     ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v                    ;         ;
+; rtl/varcic.v                     ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/varcic.v                    ;         ;
+; rtl/spi_slave.v                  ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/spi_slave.v                 ;         ;
+; rtl/reset_handler.v              ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/reset_handler.v             ;         ;
+; rtl/cic_integrator.v             ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic_integrator.v            ;         ;
+; rtl/cic_comb.v                   ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic_comb.v                  ;         ;
+; rtl/cic.v                        ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic.v                       ;         ;
+; rtl/receiver.v                   ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/receiver.v                  ;         ;
+; rtl/cordic.v                     ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cordic.v                    ;         ;
+; rtl/timescale.v                  ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/timescale.v                 ;         ;
+; rtl/radioberry.v                 ; yes             ; User Verilog HDL File        ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v                ;         ;
+; cyclone_ip/rxFIFO.v              ; yes             ; User Wizard-Generated File   ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v             ;         ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
 ; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
@@ -494,15 +494,15 @@ agreement for further details.
 ; altrom.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altrom.inc            ;         ;
 ; altram.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altram.inc            ;         ;
 ; altdpram.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_ca91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ca91.tdf                         ;         ;
-; db/altsyncram_pin1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_pin1.tdf                         ;         ;
-; db/altsyncram_da91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_da91.tdf                         ;         ;
-; db/altsyncram_ea91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ea91.tdf                         ;         ;
-; db/altsyncram_fa91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_fa91.tdf                         ;         ;
-; db/altsyncram_ga91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ga91.tdf                         ;         ;
-; db/altsyncram_ha91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ha91.tdf                         ;         ;
-; db/altsyncram_ia91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ia91.tdf                         ;         ;
-; db/altsyncram_ja91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ja91.tdf                         ;         ;
+; db/altsyncram_ca91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ca91.tdf          ;         ;
+; db/altsyncram_pin1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_pin1.tdf          ;         ;
+; db/altsyncram_da91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_da91.tdf          ;         ;
+; db/altsyncram_ea91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ea91.tdf          ;         ;
+; db/altsyncram_fa91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_fa91.tdf          ;         ;
+; db/altsyncram_ga91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ga91.tdf          ;         ;
+; db/altsyncram_ha91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ha91.tdf          ;         ;
+; db/altsyncram_ia91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ia91.tdf          ;         ;
+; db/altsyncram_ja91.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ja91.tdf          ;         ;
 ; dcfifo.tdf                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/dcfifo.tdf            ;         ;
 ; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_counter.inc       ;         ;
 ; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_add_sub.inc       ;         ;
@@ -513,22 +513,22 @@ agreement for further details.
 ; alt_sync_fifo.inc                ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/alt_sync_fifo.inc     ;         ;
 ; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_compare.inc       ;         ;
 ; altsyncram_fifo.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram_fifo.inc   ;         ;
-; db/dcfifo_6rj1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf                             ;         ;
-; db/a_graycounter_m57.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/a_graycounter_m57.tdf                       ;         ;
-; db/a_graycounter_ijc.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/a_graycounter_ijc.tdf                       ;         ;
-; db/altsyncram_pv61.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/altsyncram_pv61.tdf                         ;         ;
-; db/alt_synch_pipe_6ol.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/alt_synch_pipe_6ol.tdf                      ;         ;
-; db/dffpipe_nd9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/dffpipe_nd9.tdf                             ;         ;
-; db/cmpr_466.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/cmpr_466.tdf                                ;         ;
-; db/cmpr_366.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/cmpr_366.tdf                                ;         ;
-; db/cmpr_866.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/cmpr_866.tdf                                ;         ;
-; db/mux_c28.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/mux_c28.tdf                                 ;         ;
+; db/dcfifo_6rj1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf              ;         ;
+; db/a_graycounter_m57.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/a_graycounter_m57.tdf        ;         ;
+; db/a_graycounter_ijc.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/a_graycounter_ijc.tdf        ;         ;
+; db/altsyncram_pv61.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_pv61.tdf          ;         ;
+; db/alt_synch_pipe_6ol.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/alt_synch_pipe_6ol.tdf       ;         ;
+; db/dffpipe_nd9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dffpipe_nd9.tdf              ;         ;
+; db/cmpr_466.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/cmpr_466.tdf                 ;         ;
+; db/cmpr_366.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/cmpr_366.tdf                 ;         ;
+; db/cmpr_866.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/cmpr_866.tdf                 ;         ;
+; db/mux_c28.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/mux_c28.tdf                  ;         ;
 ; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_mult.tdf          ;         ;
 ; multcore.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/multcore.inc          ;         ;
 ; bypassff.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/bypassff.inc          ;         ;
 ; altshift.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altshift.inc          ;         ;
-; db/mult_56t.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/mult_56t.tdf                                ;         ;
-; db/mult_igt.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/WSPRBerry/Firmware/db/mult_igt.tdf                                ;         ;
+; db/mult_56t.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/mult_56t.tdf                 ;         ;
+; db/mult_igt.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/mult_igt.tdf                 ;         ;
 +----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
 
 
@@ -537,16 +537,16 @@ agreement for further details.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
-; Estimated Total logic elements              ; 12,750           ;
+; Estimated Total logic elements              ; 12,746           ;
 ;                                             ;                  ;
-; Total combinational functions               ; 8773             ;
+; Total combinational functions               ; 8769             ;
 ; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 568              ;
-;     -- 3 input functions                    ; 6160             ;
-;     -- <=2 input functions                  ; 2045             ;
+;     -- 4 input functions                    ; 567              ;
+;     -- 3 input functions                    ; 6159             ;
+;     -- <=2 input functions                  ; 2043             ;
 ;                                             ;                  ;
 ; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 1785             ;
+;     -- normal mode                          ; 1781             ;
 ;     -- arithmetic mode                      ; 6988             ;
 ;                                             ;                  ;
 ; Total registers                             ; 10653            ;
@@ -560,7 +560,7 @@ agreement for further details.
 ;                                             ;                  ;
 ; Maximum fan-out node                        ; ad9866_clk~input ;
 ; Maximum fan-out                             ; 11276            ;
-; Total fan-out                               ; 74993            ;
+; Total fan-out                               ; 74982            ;
 ; Average fan-out                             ; 3.65             ;
 +---------------------------------------------+------------------+
 
@@ -570,8 +570,8 @@ agreement for further details.
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                                  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                         ; Entity Name        ; Library Name ;
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |radioberry                                                 ; 8773 (102)          ; 10653 (126)               ; 245760      ; 80           ; 0       ; 40        ; 32   ; 0            ; |radioberry                                                                                                                                 ; radioberry         ; work         ;
-;    |ad9866:ad9866_inst|                                     ; 81 (81)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                              ; ad9866             ; work         ;
+; |radioberry                                                 ; 8769 (102)          ; 10653 (126)               ; 245760      ; 80           ; 0       ; 40        ; 32   ; 0            ; |radioberry                                                                                                                                 ; radioberry         ; work         ;
+;    |ad9866:ad9866_inst|                                     ; 77 (77)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                              ; ad9866             ; work         ;
 ;    |lpm_mult:Mult0|                                         ; 72 (0)              ; 0 (0)                     ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0                                                                                                                  ; lpm_mult           ; work         ;
 ;       |mult_igt:auto_generated|                             ; 72 (72)             ; 0 (0)                     ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0|mult_igt:auto_generated                                                                                          ; mult_igt           ; work         ;
 ;    |lpm_mult:Mult1|                                         ; 72 (0)              ; 0 (0)                     ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult1                                                                                                                  ; lpm_mult           ; work         ;
@@ -1350,16 +1350,10 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +---------------------------------------------------------------------------------------------------------------------------------------+----------+---------------------+
 ; Node                                                                                                                                  ; Action   ; Reason              ;
 +---------------------------------------------------------------------------------------------------------------------------------------+----------+---------------------+
-; ad9866:ad9866_inst|WideOr5~0                                                                                                          ; Deleted  ; Timing optimization ;
 ; ad9866:ad9866_inst|datain[1]~2                                                                                                        ; Modified ; Timing optimization ;
-; ad9866:ad9866_inst|datain[2]~14                                                                                                       ; Deleted  ; Timing optimization ;
-; ad9866:ad9866_inst|datain[2]~15                                                                                                       ; Modified ; Timing optimization ;
-; ad9866:ad9866_inst|datain[2]~15_RESYN178_BDD179                                                                                       ; Created  ; Timing optimization ;
-; ad9866:ad9866_inst|datain[2]~15_RESYN180_BDD181                                                                                       ; Created  ; Timing optimization ;
-; ad9866:ad9866_inst|datain[2]~15_RESYN182_BDD183                                                                                       ; Created  ; Timing optimization ;
 ; ad9866:ad9866_inst|dut2_data~1                                                                                                        ; Modified ; Timing optimization ;
-; ad9866:ad9866_inst|dut2_data~1_RESYN316_BDD317                                                                                        ; Created  ; Timing optimization ;
-; ad9866:ad9866_inst|dut2_data~1_RESYN318_BDD319                                                                                        ; Created  ; Timing optimization ;
+; ad9866:ad9866_inst|dut2_data~1_RESYN310_BDD311                                                                                        ; Created  ; Timing optimization ;
+; ad9866:ad9866_inst|dut2_data~1_RESYN312_BDD313                                                                                        ; Created  ; Timing optimization ;
 ; ad9866:ad9866_inst|dut2_data~4                                                                                                        ; Modified ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|cordic:cordic_inst|Add11~1                                                                              ; Modified ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|cordic:cordic_inst|Add22~1                                                                              ; Modified ; Timing optimization ;
@@ -1428,7 +1422,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~87_RESYN58_BDD59                                                                      ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~87_RESYN60_BDD61                                                                      ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~88                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~88_RESYN322_BDD323                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~88_RESYN316_BDD317                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~90                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~91                                                                                    ; Modified ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~91_RESYN62_BDD63                                                                      ; Created  ; Timing optimization ;
@@ -1441,72 +1435,72 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add2~96_RESYN70_BDD71                                                                      ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~24                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~25                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~25_RESYN184_BDD185                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~25_RESYN186_BDD187                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~25_RESYN178_BDD179                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~25_RESYN180_BDD181                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~32                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~33                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~33_RESYN188_BDD189                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~33_RESYN190_BDD191                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~33_RESYN182_BDD183                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~33_RESYN184_BDD185                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~40                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~41                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~41_RESYN192_BDD193                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~41_RESYN194_BDD195                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~41_RESYN186_BDD187                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~41_RESYN188_BDD189                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~44                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~45                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~45_RESYN196_BDD197                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~45_RESYN198_BDD199                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~45_RESYN190_BDD191                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~45_RESYN192_BDD193                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~48                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~49                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~49_RESYN200_BDD201                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~49_RESYN202_BDD203                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~49_RESYN194_BDD195                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~49_RESYN196_BDD197                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~52                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~53                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~53_RESYN204_BDD205                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~53_RESYN206_BDD207                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~53_RESYN198_BDD199                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~53_RESYN200_BDD201                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~56                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~57                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~57_RESYN208_BDD209                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~57_RESYN210_BDD211                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~57_RESYN202_BDD203                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~57_RESYN204_BDD205                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~60                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~61                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~61_RESYN212_BDD213                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~61_RESYN214_BDD215                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~61_RESYN206_BDD207                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~61_RESYN208_BDD209                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~64                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~65                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~65_RESYN216_BDD217                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~65_RESYN218_BDD219                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~65_RESYN210_BDD211                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~65_RESYN212_BDD213                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~68                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~69                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~69_RESYN220_BDD221                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~69_RESYN222_BDD223                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~69_RESYN214_BDD215                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~69_RESYN216_BDD217                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~72                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~73                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~73_RESYN224_BDD225                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~73_RESYN226_BDD227                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~73_RESYN218_BDD219                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~73_RESYN220_BDD221                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~76                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~77                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~77_RESYN228_BDD229                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~77_RESYN230_BDD231                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~77_RESYN222_BDD223                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~77_RESYN224_BDD225                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~80                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~81                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~81_RESYN232_BDD233                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~81_RESYN234_BDD235                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~81_RESYN226_BDD227                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~81_RESYN228_BDD229                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~84                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~85                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~85_RESYN236_BDD237                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~85_RESYN238_BDD239                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~85_RESYN230_BDD231                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~85_RESYN232_BDD233                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~86                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~86_RESYN330_BDD331                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~86_RESYN324_BDD325                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~88                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~89                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~89_RESYN240_BDD241                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~89_RESYN242_BDD243                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~89_RESYN234_BDD235                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~89_RESYN236_BDD237                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~92                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~93                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~93_RESYN244_BDD245                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~93_RESYN246_BDD247                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~93_RESYN238_BDD239                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~93_RESYN240_BDD241                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~94                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~94_RESYN248_BDD249                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[0].receiver_inst|firX8R8:fir2|Add3~94_RESYN242_BDD243                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|cordic:cordic_inst|Add11~1                                                                              ; Modified ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|cordic:cordic_inst|Add22~1                                                                              ; Modified ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|cordic:cordic_inst|Add44~1                                                                              ; Modified ; Timing optimization ;
@@ -1574,7 +1568,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~87_RESYN142_BDD143                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~87_RESYN144_BDD145                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~88                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~88_RESYN326_BDD327                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~88_RESYN320_BDD321                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~90                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~91                                                                                    ; Modified ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~91_RESYN146_BDD147                                                                    ; Created  ; Timing optimization ;
@@ -1587,81 +1581,81 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add2~96_RESYN154_BDD155                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~24                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~25                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~25_RESYN250_BDD251                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~25_RESYN252_BDD253                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~25_RESYN244_BDD245                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~25_RESYN246_BDD247                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~32                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~33                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~33_RESYN254_BDD255                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~33_RESYN256_BDD257                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~33_RESYN248_BDD249                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~33_RESYN250_BDD251                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~40                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~41                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~41_RESYN258_BDD259                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~41_RESYN260_BDD261                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~41_RESYN252_BDD253                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~41_RESYN254_BDD255                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~44                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~45                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~45_RESYN262_BDD263                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~45_RESYN264_BDD265                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~45_RESYN256_BDD257                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~45_RESYN258_BDD259                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~48                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~49                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~49_RESYN266_BDD267                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~49_RESYN268_BDD269                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~49_RESYN260_BDD261                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~49_RESYN262_BDD263                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~52                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~53                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~53_RESYN270_BDD271                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~53_RESYN272_BDD273                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~53_RESYN264_BDD265                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~53_RESYN266_BDD267                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~56                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~57                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~57_RESYN274_BDD275                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~57_RESYN276_BDD277                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~57_RESYN268_BDD269                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~57_RESYN270_BDD271                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~60                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~61                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~61_RESYN278_BDD279                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~61_RESYN280_BDD281                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~61_RESYN272_BDD273                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~61_RESYN274_BDD275                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~64                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~65                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~65_RESYN282_BDD283                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~65_RESYN284_BDD285                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~65_RESYN276_BDD277                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~65_RESYN278_BDD279                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~68                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~69                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~69_RESYN286_BDD287                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~69_RESYN288_BDD289                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~69_RESYN280_BDD281                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~69_RESYN282_BDD283                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~72                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~73                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~73_RESYN290_BDD291                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~73_RESYN292_BDD293                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~73_RESYN284_BDD285                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~73_RESYN286_BDD287                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~76                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~77                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~77_RESYN294_BDD295                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~77_RESYN296_BDD297                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~77_RESYN288_BDD289                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~77_RESYN290_BDD291                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~80                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~81                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~81_RESYN298_BDD299                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~81_RESYN300_BDD301                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~81_RESYN292_BDD293                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~81_RESYN294_BDD295                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~84                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~85                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~85_RESYN302_BDD303                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~85_RESYN304_BDD305                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~85_RESYN296_BDD297                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~85_RESYN298_BDD299                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~86                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~86_RESYN332_BDD333                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~86_RESYN326_BDD327                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~88                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~89                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~89_RESYN306_BDD307                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~89_RESYN308_BDD309                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~89_RESYN300_BDD301                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~89_RESYN302_BDD303                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~92                                                                                    ; Deleted  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~93                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~93_RESYN310_BDD311                                                                    ; Created  ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~93_RESYN312_BDD313                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~93_RESYN304_BDD305                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~93_RESYN306_BDD307                                                                    ; Created  ; Timing optimization ;
 ; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~94                                                                                    ; Modified ; Timing optimization ;
-; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~94_RESYN314_BDD315                                                                    ; Created  ; Timing optimization ;
+; receiver:NRX[1].receiver_inst|firX8R8:fir2|Add3~94_RESYN308_BDD309                                                                    ; Created  ; Timing optimization ;
 ; reset_handler:reset_handler_inst|LessThan0~7                                                                                          ; Modified ; Timing optimization ;
-; reset_handler:reset_handler_inst|LessThan0~7_RESYN320_BDD321                                                                          ; Created  ; Timing optimization ;
+; reset_handler:reset_handler_inst|LessThan0~7_RESYN314_BDD315                                                                          ; Created  ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|_~2                          ; Deleted  ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a2~0                 ; Modified ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a2~0_RESYN72_BDD73   ; Created  ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a3~0                 ; Modified ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a3~0_RESYN74_BDD75   ; Created  ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a4~0                 ; Modified ; Timing optimization ;
-; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a4~0_RESYN324_BDD325 ; Created  ; Timing optimization ;
+; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a4~0_RESYN318_BDD319 ; Created  ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a6~0                 ; Deleted  ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a6~1                 ; Modified ; Timing optimization ;
 ; rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a6~1_RESYN78_BDD79   ; Created  ; Timing optimization ;
@@ -1681,7 +1675,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a3~0                 ; Modified ; Timing optimization ;
 ; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a3~0_RESYN158_BDD159 ; Created  ; Timing optimization ;
 ; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a4~0                 ; Modified ; Timing optimization ;
-; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a4~0_RESYN328_BDD329 ; Created  ; Timing optimization ;
+; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a4~0_RESYN322_BDD323 ; Created  ; Timing optimization ;
 ; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a5~0                 ; Deleted  ; Timing optimization ;
 ; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a5~1                 ; Modified ; Timing optimization ;
 ; rxFIFO:NRX[1].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p|counter1a5~1_RESYN162_BDD163 ; Created  ; Timing optimization ;
@@ -2289,7 +2283,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+----------------------------------------------------------------------------------+--------------+
 ; Parameter Name ; Value                                                                            ; Type         ;
 +----------------+----------------------------------------------------------------------------------+--------------+
-; initarray      ; (110000000,000000000,000000000,000000000,100000110,000000000,100010100,100100001 ; Array/Record ;
+; initarray      ; (110000000,000000000,000000000,000000000,100110001,000000000,100010000,100100001 ; Array/Record ;
 ; initarray      ; ,101001011,101111111,101111111,100100000,101000001,100000001,000000001,000000000 ;              ;
 ;                ; ,010000100,100000000,000000000,000000000)                                        ;              ;
 +----------------+----------------------------------------------------------------------------------+--------------+
@@ -8056,16 +8050,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     SLD               ; 284                         ;
 ;     plain             ; 1652                        ;
 ; cycloneiii_io_obuf    ; 13                          ;
-; cycloneiii_lcell_comb ; 8775                        ;
+; cycloneiii_lcell_comb ; 8771                        ;
 ;     arith             ; 6988                        ;
 ;         2 data inputs ; 1133                        ;
 ;         3 data inputs ; 5855                        ;
-;     normal            ; 1787                        ;
+;     normal            ; 1783                        ;
 ;         0 data inputs ; 4                           ;
 ;         1 data inputs ; 150                         ;
-;         2 data inputs ; 760                         ;
-;         3 data inputs ; 305                         ;
-;         4 data inputs ; 568                         ;
+;         2 data inputs ; 758                         ;
+;         3 data inputs ; 304                         ;
+;         4 data inputs ; 567                         ;
 ; cycloneiii_mac_mult   ; 40                          ;
 ; cycloneiii_mac_out    ; 40                          ;
 ; cycloneiii_ram_block  ; 960                         ;
@@ -8090,100 +8084,100 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Sun Mar 04 15:05:17 2018
+    Info: Processing started: Tue Apr 24 16:36:57 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WSPRBerry -c wsprberry_CL016
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/firromi_1024.v
-    Info (12023): Found entity 1: firromI_1024 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromI_1024.v Line: 40
+    Info (12023): Found entity 1: firromI_1024 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromI_1024.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/firromh.v
-    Info (12023): Found entity 1: firromH File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 40
+    Info (12023): Found entity 1: firromH File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/firram36i_1024.v
-    Info (12023): Found entity 1: firram36I_1024 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firram36I_1024.v Line: 40
+    Info (12023): Found entity 1: firram36I_1024 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firram36I_1024.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/firram36.v
-    Info (12023): Found entity 1: firram36 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 40
+    Info (12023): Found entity 1: firram36 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/firinterp8_1024.v
-    Info (12023): Found entity 1: FirInterp8_1024 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/FirInterp8_1024.v Line: 98
+    Info (12023): Found entity 1: FirInterp8_1024 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/FirInterp8_1024.v Line: 98
 Info (12021): Found 2 design units, including 2 entities, in source file polyphase_fir/firfilt.v
-    Info (12023): Found entity 1: firX8R8 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 51
-    Info (12023): Found entity 2: fir256 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 171
+    Info (12023): Found entity 1: firX8R8 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 51
+    Info (12023): Found entity 2: fir256 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 171
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/cicinterpm5.v
-    Info (12023): Found entity 1: CicInterpM5 File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/CicInterpM5.v Line: 27
+    Info (12023): Found entity 1: CicInterpM5 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/CicInterpM5.v Line: 27
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/ad9866.v
-    Info (12023): Found entity 1: ad9866 File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 22
+    Info (12023): Found entity 1: ad9866 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/cpl_cordic.v
-    Info (12023): Found entity 1: cpl_cordic File: C:/dev/git/WSPRBerry/Firmware/rtl/cpl_cordic.v Line: 25
+    Info (12023): Found entity 1: cpl_cordic File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cpl_cordic.v Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/varcic.v
-    Info (12023): Found entity 1: varcic File: C:/dev/git/WSPRBerry/Firmware/rtl/varcic.v Line: 25
+    Info (12023): Found entity 1: varcic File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/varcic.v Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/spi_slave.v
-    Info (12023): Found entity 1: spi_slave File: C:/dev/git/WSPRBerry/Firmware/rtl/spi_slave.v Line: 15
+    Info (12023): Found entity 1: spi_slave File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/spi_slave.v Line: 15
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/reset_handler.v
-    Info (12023): Found entity 1: reset_handler File: C:/dev/git/WSPRBerry/Firmware/rtl/reset_handler.v Line: 12
+    Info (12023): Found entity 1: reset_handler File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/reset_handler.v Line: 12
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/pulsegen.v
-    Info (12023): Found entity 1: pulsegen File: C:/dev/git/WSPRBerry/Firmware/rtl/pulsegen.v Line: 4
+    Info (12023): Found entity 1: pulsegen File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/pulsegen.v Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/filter.v
-    Info (12023): Found entity 1: filter File: C:/dev/git/WSPRBerry/Firmware/rtl/filter.v Line: 35
+    Info (12023): Found entity 1: filter File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/filter.v Line: 35
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/debounce.v
-    Info (12023): Found entity 1: debounce File: C:/dev/git/WSPRBerry/Firmware/rtl/debounce.v Line: 36
+    Info (12023): Found entity 1: debounce File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/debounce.v Line: 36
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/cicint.v
-    Info (12023): Found entity 1: cicint File: C:/dev/git/WSPRBerry/Firmware/rtl/cicint.v Line: 55
+    Info (12023): Found entity 1: cicint File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cicint.v Line: 55
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/cic_integrator.v
-    Info (12023): Found entity 1: cic_integrator File: C:/dev/git/WSPRBerry/Firmware/rtl/cic_integrator.v Line: 25
+    Info (12023): Found entity 1: cic_integrator File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic_integrator.v Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/cic_comb.v
-    Info (12023): Found entity 1: cic_comb File: C:/dev/git/WSPRBerry/Firmware/rtl/cic_comb.v Line: 25
+    Info (12023): Found entity 1: cic_comb File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic_comb.v Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/cic.v
-    Info (12023): Found entity 1: cic File: C:/dev/git/WSPRBerry/Firmware/rtl/cic.v Line: 25
+    Info (12023): Found entity 1: cic File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic.v Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/receiver.v
-    Info (12023): Found entity 1: receiver File: C:/dev/git/WSPRBerry/Firmware/rtl/receiver.v Line: 32
+    Info (12023): Found entity 1: receiver File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/receiver.v Line: 32
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/cordic.v
-    Info (12023): Found entity 1: cordic File: C:/dev/git/WSPRBerry/Firmware/rtl/cordic.v Line: 27
+    Info (12023): Found entity 1: cordic File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cordic.v Line: 27
 Info (12021): Found 0 design units, including 0 entities, in source file rtl/timescale.v
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/radioberry.v
-    Info (12023): Found entity 1: radioberry File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 21
+    Info (12023): Found entity 1: radioberry File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 21
 Info (12021): Found 1 design units, including 1 entities, in source file cyclone_ip/rxfifo.v
-    Info (12023): Found entity 1: rxFIFO File: C:/dev/git/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 40
+    Info (12023): Found entity 1: rxFIFO File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 40
 Info (12127): Elaborating entity "radioberry" for the top level hierarchy
-Info (12128): Elaborating entity "ad9866" for hierarchy "ad9866:ad9866_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 82
-Warning (10240): Verilog HDL Always Construct warning at ad9866.v(88): inferring latch(es) for variable "initarrayv", which holds its previous value in one or more paths through the always construct File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 88
-Warning (10240): Verilog HDL Always Construct warning at ad9866.v(88): inferring latch(es) for variable "datain", which holds its previous value in one or more paths through the always construct File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 88
-Warning (10230): Verilog HDL assignment warning at ad9866.v(144): truncated value with size 32 to match size of target (4) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 144
-Info (10041): Inferred latch for "datain[0]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[1]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[2]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[3]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[4]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[5]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[6]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[7]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[8]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[9]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[10]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[11]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[12]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[13]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[14]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (10041): Inferred latch for "datain[15]" at ad9866.v(98) File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-Info (12128): Elaborating entity "spi_slave" for hierarchy "spi_slave:spi_slave_rx_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 103
-Warning (10230): Verilog HDL assignment warning at spi_slave.v(44): truncated value with size 32 to match size of target (7) File: C:/dev/git/WSPRBerry/Firmware/rtl/spi_slave.v Line: 44
-Info (12128): Elaborating entity "reset_handler" for hierarchy "reset_handler:reset_handler_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 135
-Warning (10230): Verilog HDL assignment warning at reset_handler.v(27): truncated value with size 32 to match size of target (24) File: C:/dev/git/WSPRBerry/Firmware/rtl/reset_handler.v Line: 27
-Info (10648): Verilog HDL Display System Task info at reset_handler.v(38): Reset handler initialization done File: C:/dev/git/WSPRBerry/Firmware/rtl/reset_handler.v Line: 38
-Info (12128): Elaborating entity "receiver" for hierarchy "receiver:NRX[0].receiver_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 172
-Info (12128): Elaborating entity "cordic" for hierarchy "receiver:NRX[0].receiver_inst|cordic:cordic_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/receiver.v Line: 65
-Info (12128): Elaborating entity "cic" for hierarchy "receiver:NRX[0].receiver_inst|cic:cic_inst_I2" File: C:/dev/git/WSPRBerry/Firmware/rtl/receiver.v Line: 87
-Info (12128): Elaborating entity "cic_integrator" for hierarchy "receiver:NRX[0].receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[0].cic_integrator_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/cic.v Line: 95
-Info (12128): Elaborating entity "cic_comb" for hierarchy "receiver:NRX[0].receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/cic.v Line: 103
-Info (12128): Elaborating entity "varcic" for hierarchy "receiver:NRX[0].receiver_inst|varcic:varcic_inst_I1" File: C:/dev/git/WSPRBerry/Firmware/rtl/receiver.v Line: 110
-Info (12128): Elaborating entity "cic_integrator" for hierarchy "receiver:NRX[0].receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/varcic.v Line: 89
-Info (12128): Elaborating entity "cic_comb" for hierarchy "receiver:NRX[0].receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/varcic.v Line: 97
-Info (12128): Elaborating entity "firX8R8" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2" File: C:/dev/git/WSPRBerry/Firmware/rtl/receiver.v Line: 147
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 152
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "ad9866" for hierarchy "ad9866:ad9866_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 82
+Warning (10240): Verilog HDL Always Construct warning at ad9866.v(88): inferring latch(es) for variable "initarrayv", which holds its previous value in one or more paths through the always construct File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 88
+Warning (10240): Verilog HDL Always Construct warning at ad9866.v(88): inferring latch(es) for variable "datain", which holds its previous value in one or more paths through the always construct File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 88
+Warning (10230): Verilog HDL assignment warning at ad9866.v(144): truncated value with size 32 to match size of target (4) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 144
+Info (10041): Inferred latch for "datain[0]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[1]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[2]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[3]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[4]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[5]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[6]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[7]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[8]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[9]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[10]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[11]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[12]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[13]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[14]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (10041): Inferred latch for "datain[15]" at ad9866.v(98) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+Info (12128): Elaborating entity "spi_slave" for hierarchy "spi_slave:spi_slave_rx_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 103
+Warning (10230): Verilog HDL assignment warning at spi_slave.v(44): truncated value with size 32 to match size of target (7) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/spi_slave.v Line: 44
+Info (12128): Elaborating entity "reset_handler" for hierarchy "reset_handler:reset_handler_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 135
+Warning (10230): Verilog HDL assignment warning at reset_handler.v(27): truncated value with size 32 to match size of target (24) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/reset_handler.v Line: 27
+Info (10648): Verilog HDL Display System Task info at reset_handler.v(38): Reset handler initialization done File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/reset_handler.v Line: 38
+Info (12128): Elaborating entity "receiver" for hierarchy "receiver:NRX[0].receiver_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 176
+Info (12128): Elaborating entity "cordic" for hierarchy "receiver:NRX[0].receiver_inst|cordic:cordic_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/receiver.v Line: 65
+Info (12128): Elaborating entity "cic" for hierarchy "receiver:NRX[0].receiver_inst|cic:cic_inst_I2" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/receiver.v Line: 87
+Info (12128): Elaborating entity "cic_integrator" for hierarchy "receiver:NRX[0].receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[0].cic_integrator_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic.v Line: 95
+Info (12128): Elaborating entity "cic_comb" for hierarchy "receiver:NRX[0].receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/cic.v Line: 103
+Info (12128): Elaborating entity "varcic" for hierarchy "receiver:NRX[0].receiver_inst|varcic:varcic_inst_I1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/receiver.v Line: 110
+Info (12128): Elaborating entity "cic_integrator" for hierarchy "receiver:NRX[0].receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/varcic.v Line: 89
+Info (12128): Elaborating entity "cic_comb" for hierarchy "receiver:NRX[0].receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/varcic.v Line: 97
+Info (12128): Elaborating entity "firX8R8" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/receiver.v Line: 147
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 152
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8199,12 +8193,12 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ca91.tdf
-    Info (12023): Found entity 1: altsyncram_ca91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ca91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_ca91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ca91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ca91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component|altsyncram_ca91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "firram36" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 205
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 89
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 89
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 89
+Info (12128): Elaborating entity "firram36" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 205
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 89
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 89
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firram36.v Line: 89
     Info (12134): Parameter "address_aclr_b" = "NONE"
     Info (12134): Parameter "address_reg_b" = "CLOCK0"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
@@ -8225,14 +8219,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_b" = "36"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_pin1.tdf
-    Info (12023): Found entity 1: altsyncram_pin1 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_pin1.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_pin1 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_pin1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_pin1" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component|altsyncram_pin1:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 153
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 153
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8248,14 +8242,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_da91.tdf
-    Info (12023): Found entity 1: altsyncram_da91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_da91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_da91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_da91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_da91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component|altsyncram_da91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 154
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 154
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8271,14 +8265,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ea91.tdf
-    Info (12023): Found entity 1: altsyncram_ea91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ea91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_ea91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ea91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ea91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component|altsyncram_ea91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 155
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 155
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8294,14 +8288,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_fa91.tdf
-    Info (12023): Found entity 1: altsyncram_fa91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_fa91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_fa91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_fa91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_fa91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component|altsyncram_fa91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 156
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 156
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8317,14 +8311,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ga91.tdf
-    Info (12023): Found entity 1: altsyncram_ga91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ga91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_ga91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ga91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ga91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component|altsyncram_ga91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 157
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 157
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8340,14 +8334,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ha91.tdf
-    Info (12023): Found entity 1: altsyncram_ha91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ha91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_ha91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ha91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ha91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component|altsyncram_ha91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 158
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 158
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8363,14 +8357,14 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ia91.tdf
-    Info (12023): Found entity 1: altsyncram_ia91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ia91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_ia91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ia91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ia91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component|altsyncram_ia91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 159
-Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
-Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
-Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12128): Elaborating entity "fir256" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 159
+Warning (10230): Verilog HDL assignment warning at firfilt.v(211): truncated value with size 32 to match size of target (9) File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 211
+Info (12128): Elaborating entity "firromH" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firromH.v Line: 84
     Info (12134): Parameter "address_aclr_a" = "NONE"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
@@ -8386,12 +8380,12 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "width_a" = "18"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ja91.tdf
-    Info (12023): Found entity 1: altsyncram_ja91 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_ja91.tdf Line: 28
+    Info (12023): Found entity 1: altsyncram_ja91 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_ja91.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ja91" for hierarchy "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component|altsyncram_ja91:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "rxFIFO" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 176
-Info (12128): Elaborating entity "dcfifo" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component" File: C:/dev/git/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 85
-Info (12130): Elaborated megafunction instantiation "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component" File: C:/dev/git/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 85
-Info (12133): Instantiated megafunction "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 85
+Info (12128): Elaborating entity "rxFIFO" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 180
+Info (12128): Elaborating entity "dcfifo" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 85
+Info (12130): Elaborated megafunction instantiation "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 85
+Info (12133): Instantiated megafunction "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/cyclone_ip/rxFIFO.v Line: 85
     Info (12134): Parameter "intended_device_family" = "Cyclone 10 LP"
     Info (12134): Parameter "lpm_numwords" = "256"
     Info (12134): Parameter "lpm_showahead" = "OFF"
@@ -8406,72 +8400,72 @@ Info (12133): Instantiated megafunction "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo
     Info (12134): Parameter "write_aclr_synch" = "OFF"
     Info (12134): Parameter "wrsync_delaypipe" = "11"
 Info (12021): Found 1 design units, including 1 entities, in source file db/dcfifo_6rj1.tdf
-    Info (12023): Found entity 1: dcfifo_6rj1 File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 41
+    Info (12023): Found entity 1: dcfifo_6rj1 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 41
 Info (12128): Elaborating entity "dcfifo_6rj1" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/dcfifo.tdf Line: 191
 Info (12021): Found 1 design units, including 1 entities, in source file db/a_graycounter_m57.tdf
-    Info (12023): Found entity 1: a_graycounter_m57 File: C:/dev/git/WSPRBerry/Firmware/db/a_graycounter_m57.tdf Line: 25
-Info (12128): Elaborating entity "a_graycounter_m57" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 53
+    Info (12023): Found entity 1: a_graycounter_m57 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/a_graycounter_m57.tdf Line: 25
+Info (12128): Elaborating entity "a_graycounter_m57" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_m57:rdptr_g1p" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 53
 Info (12021): Found 1 design units, including 1 entities, in source file db/a_graycounter_ijc.tdf
-    Info (12023): Found entity 1: a_graycounter_ijc File: C:/dev/git/WSPRBerry/Firmware/db/a_graycounter_ijc.tdf Line: 25
-Info (12128): Elaborating entity "a_graycounter_ijc" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_ijc:wrptr_g1p" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 54
+    Info (12023): Found entity 1: a_graycounter_ijc File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/a_graycounter_ijc.tdf Line: 25
+Info (12128): Elaborating entity "a_graycounter_ijc" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|a_graycounter_ijc:wrptr_g1p" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 54
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_pv61.tdf
-    Info (12023): Found entity 1: altsyncram_pv61 File: C:/dev/git/WSPRBerry/Firmware/db/altsyncram_pv61.tdf Line: 28
-Info (12128): Elaborating entity "altsyncram_pv61" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|altsyncram_pv61:fifo_ram" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 55
+    Info (12023): Found entity 1: altsyncram_pv61 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/altsyncram_pv61.tdf Line: 28
+Info (12128): Elaborating entity "altsyncram_pv61" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|altsyncram_pv61:fifo_ram" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 55
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_6ol.tdf
-    Info (12023): Found entity 1: alt_synch_pipe_6ol File: C:/dev/git/WSPRBerry/Firmware/db/alt_synch_pipe_6ol.tdf Line: 27
-Info (12128): Elaborating entity "alt_synch_pipe_6ol" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|alt_synch_pipe_6ol:rs_dgwp" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 74
+    Info (12023): Found entity 1: alt_synch_pipe_6ol File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/alt_synch_pipe_6ol.tdf Line: 27
+Info (12128): Elaborating entity "alt_synch_pipe_6ol" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|alt_synch_pipe_6ol:rs_dgwp" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 74
 Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_nd9.tdf
-    Info (12023): Found entity 1: dffpipe_nd9 File: C:/dev/git/WSPRBerry/Firmware/db/dffpipe_nd9.tdf Line: 25
-Info (12128): Elaborating entity "dffpipe_nd9" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|alt_synch_pipe_6ol:rs_dgwp|dffpipe_nd9:dffpipe8" File: C:/dev/git/WSPRBerry/Firmware/db/alt_synch_pipe_6ol.tdf Line: 35
+    Info (12023): Found entity 1: dffpipe_nd9 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dffpipe_nd9.tdf Line: 25
+Info (12128): Elaborating entity "dffpipe_nd9" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|alt_synch_pipe_6ol:rs_dgwp|dffpipe_nd9:dffpipe8" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/alt_synch_pipe_6ol.tdf Line: 35
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_466.tdf
-    Info (12023): Found entity 1: cmpr_466 File: C:/dev/git/WSPRBerry/Firmware/db/cmpr_466.tdf Line: 23
-Info (12128): Elaborating entity "cmpr_466" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_466:rdempty_eq_comp1_lsb" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 76
+    Info (12023): Found entity 1: cmpr_466 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/cmpr_466.tdf Line: 23
+Info (12128): Elaborating entity "cmpr_466" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_466:rdempty_eq_comp1_lsb" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 76
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_366.tdf
-    Info (12023): Found entity 1: cmpr_366 File: C:/dev/git/WSPRBerry/Firmware/db/cmpr_366.tdf Line: 23
-Info (12128): Elaborating entity "cmpr_366" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_366:rdempty_eq_comp1_msb" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 77
+    Info (12023): Found entity 1: cmpr_366 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/cmpr_366.tdf Line: 23
+Info (12128): Elaborating entity "cmpr_366" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_366:rdempty_eq_comp1_msb" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 77
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_866.tdf
-    Info (12023): Found entity 1: cmpr_866 File: C:/dev/git/WSPRBerry/Firmware/db/cmpr_866.tdf Line: 23
-Info (12128): Elaborating entity "cmpr_866" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_866:wrempty_eq_comp" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 80
+    Info (12023): Found entity 1: cmpr_866 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/cmpr_866.tdf Line: 23
+Info (12128): Elaborating entity "cmpr_866" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|cmpr_866:wrempty_eq_comp" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 80
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_c28.tdf
-    Info (12023): Found entity 1: mux_c28 File: C:/dev/git/WSPRBerry/Firmware/db/mux_c28.tdf Line: 23
-Info (12128): Elaborating entity "mux_c28" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|mux_c28:rdemp_eq_comp_lsb_mux" File: C:/dev/git/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 85
+    Info (12023): Found entity 1: mux_c28 File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/mux_c28.tdf Line: 23
+Info (12128): Elaborating entity "mux_c28" for hierarchy "rxFIFO:NRX[0].rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_6rj1:auto_generated|mux_c28:rdemp_eq_comp_lsb_mux" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/dcfifo_6rj1.tdf Line: 85
 Info (278001): Inferred 34 megafunctions from design logic
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:C|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:F|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:G|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:E|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:H|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:B|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:D|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:A|Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:C|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:F|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:G|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:E|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:H|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:B|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:D|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:A|Mult1" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult1" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
-Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult0" File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
-Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult0" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:C|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:F|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:G|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:E|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:H|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:B|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:D|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:A|Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:F|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:G|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:E|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:H|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:B|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:D|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:A|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:C|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:F|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:G|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:E|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:H|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:B|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:D|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "receiver:NRX[1].receiver_inst|firX8R8:fir2|fir256:A|Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult1" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
+Info (12130): Elaborated megafunction instantiation "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
+Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult0" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/Polyphase_FIR/firfilt.v Line: 226
     Info (12134): Parameter "LPM_WIDTHA" = "18"
     Info (12134): Parameter "LPM_WIDTHB" = "18"
     Info (12134): Parameter "LPM_WIDTHP" = "36"
@@ -8482,9 +8476,9 @@ Info (12133): Instantiated megafunction "receiver:NRX[0].receiver_inst|firX8R8:f
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_56t.tdf
-    Info (12023): Found entity 1: mult_56t File: C:/dev/git/WSPRBerry/Firmware/db/mult_56t.tdf Line: 29
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
-Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following parameter: File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
+    Info (12023): Found entity 1: mult_56t File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/mult_56t.tdf Line: 29
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
+Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following parameter: File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 126
     Info (12134): Parameter "LPM_WIDTHA" = "32"
     Info (12134): Parameter "LPM_WIDTHB" = "31"
     Info (12134): Parameter "LPM_WIDTHP" = "63"
@@ -8495,41 +8489,41 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following para
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_igt.tdf
-    Info (12023): Found entity 1: mult_igt File: C:/dev/git/WSPRBerry/Firmware/db/mult_igt.tdf Line: 31
+    Info (12023): Found entity 1: mult_igt File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/db/mult_igt.tdf Line: 31
 Info (13014): Ignored 402 buffer(s)
     Info (13019): Ignored 402 SOFT buffer(s)
-Warning (13012): Latch ad9866:ad9866_inst|datain[12] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[5] File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
-Warning (13012): Latch ad9866:ad9866_inst|datain[11] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[4] File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
-Warning (13012): Latch ad9866:ad9866_inst|datain[10] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[3] File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
-Warning (13012): Latch ad9866:ad9866_inst|datain[9] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
-Warning (13012): Latch ad9866:ad9866_inst|datain[8] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
-Warning (13012): Latch ad9866:ad9866_inst|datain[7] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[3] File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
-Warning (13012): Latch ad9866:ad9866_inst|datain[6] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
-Warning (13012): Latch ad9866:ad9866_inst|datain[5] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[5] File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
-Warning (13012): Latch ad9866:ad9866_inst|datain[4] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[4] File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
-Warning (13012): Latch ad9866:ad9866_inst|datain[3] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[3] File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
-Warning (13012): Latch ad9866:ad9866_inst|datain[2] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[2] File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
-Warning (13012): Latch ad9866:ad9866_inst|datain[1] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[1] File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
-Warning (13012): Latch ad9866:ad9866_inst|datain[0] has unsafe behavior File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[0] File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
-Info (13000): Registers with preset signals will power-up high File: C:/dev/git/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
+Warning (13012): Latch ad9866:ad9866_inst|datain[12] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[5] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
+Warning (13012): Latch ad9866:ad9866_inst|datain[11] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[4] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
+Warning (13012): Latch ad9866:ad9866_inst|datain[10] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[3] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
+Warning (13012): Latch ad9866:ad9866_inst|datain[9] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
+Warning (13012): Latch ad9866:ad9866_inst|datain[8] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
+Warning (13012): Latch ad9866:ad9866_inst|datain[7] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[3] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 77
+Warning (13012): Latch ad9866:ad9866_inst|datain[6] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
+Warning (13012): Latch ad9866:ad9866_inst|datain[5] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[5] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
+Warning (13012): Latch ad9866:ad9866_inst|datain[4] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[4] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
+Warning (13012): Latch ad9866:ad9866_inst|datain[3] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[3] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
+Warning (13012): Latch ad9866:ad9866_inst|datain[2] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[2] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
+Warning (13012): Latch ad9866:ad9866_inst|datain[1] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[1] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
+Warning (13012): Latch ad9866:ad9866_inst|datain[0] has unsafe behavior File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 98
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal rx_gain[0] File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 92
+Info (13000): Registers with preset signals will power-up high File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/ad9866.v Line: 28
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "ad9866_rxen" is stuck at VCC File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 31
-    Warning (13410): Pin "ad9866_txen" is stuck at GND File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 33
-    Warning (13410): Pin "ad9866_mode" is stuck at GND File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 40
+    Warning (13410): Pin "ad9866_rxen" is stuck at VCC File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 31
+    Warning (13410): Pin "ad9866_txen" is stuck at GND File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 33
+    Warning (13410): Pin "ad9866_mode" is stuck at GND File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 40
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 128 registers lost all their fanouts during netlist optimizations.
 Info (128000): Starting physical synthesis optimizations for speed
@@ -8551,29 +8545,29 @@ Info (332111): Found 6 clocks
     Info (332111):    1.000 spi_slave:spi_slave_rx_inst|done
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 214 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:07
-Info (144001): Generated suppressed messages file C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.map.smsg
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:06
+Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "spi_ce[1]" File: C:/dev/git/WSPRBerry/Firmware/rtl/radioberry.v Line: 46
-Info (21057): Implemented 13857 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "spi_ce[1]" File: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/rtl/radioberry.v Line: 46
+Info (21057): Implemented 13853 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 7 input pins
     Info (21059): Implemented 13 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 12785 logic cells
+    Info (21061): Implemented 12781 logic cells
     Info (21064): Implemented 960 RAM segments
     Info (21062): Implemented 80 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 48 warnings
-    Info: Peak virtual memory: 924 megabytes
-    Info: Processing ended: Sun Mar 04 15:06:10 2018
-    Info: Elapsed time: 00:00:53
-    Info: Total CPU time (on all processors): 00:01:11
+    Info: Peak virtual memory: 918 megabytes
+    Info: Processing ended: Tue Apr 24 16:37:51 2018
+    Info: Elapsed time: 00:00:54
+    Info: Total CPU time (on all processors): 00:01:08
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.map.smsg.
+The suppressed messages can be found in C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.map.smsg.
 
 

@@ -1,5 +1,5 @@
 Assembler report for wsprberry_CL016
-Sun Mar 04 15:10:57 2018
+Tue Apr 24 16:41:43 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -10,8 +10,8 @@ Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.sof
-  6. Assembler Device Options: C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.rbf
+  5. Assembler Device Options: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.sof
+  6. Assembler Device Options: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.rbf
   7. Assembler Messages
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Mar 04 15:10:57 2018 ;
+; Assembler Status      ; Successful - Tue Apr 24 16:41:43 2018 ;
 ; Revision Name         ; wsprberry_CL016                       ;
 ; Top-level Entity Name ; radioberry                            ;
 ; Family                ; Cyclone 10 LP                         ;
@@ -54,34 +54,34 @@ agreement for further details.
 +--------+---------+---------------+
 
 
-+----------------------------------------------------------------+
-; Assembler Generated Files                                      ;
-+----------------------------------------------------------------+
-; File Name                                                      ;
-+----------------------------------------------------------------+
-; C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.sof ;
-; C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.rbf ;
-+----------------------------------------------------------------+
++-------------------------------------------------------------------------------+
+; Assembler Generated Files                                                     ;
++-------------------------------------------------------------------------------+
+; File Name                                                                     ;
++-------------------------------------------------------------------------------+
+; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.sof ;
+; C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.rbf ;
++-------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.sof ;
-+----------------+-------------------------------------------------------------------------+
-; Option         ; Setting                                                                 ;
-+----------------+-------------------------------------------------------------------------+
-; JTAG usercode  ; 0x008132BE                                                              ;
-; Checksum       ; 0x008132BE                                                              ;
-+----------------+-------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.sof ;
++----------------+----------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                ;
++----------------+----------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x0080106D                                                                             ;
+; Checksum       ; 0x0080106D                                                                             ;
++----------------+----------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/dev/git/WSPRBerry/Firmware/output_files/wsprberry_CL016.rbf ;
-+---------------------+--------------------------------------------------------------------+
-; Option              ; Setting                                                            ;
-+---------------------+--------------------------------------------------------------------+
-; Raw Binary File     ;                                                                    ;
-;  Compression Ratio  ; 2                                                                  ;
-+---------------------+--------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry_CL016.rbf ;
++---------------------+-----------------------------------------------------------------------------------+
+; Option              ; Setting                                                                           ;
++---------------------+-----------------------------------------------------------------------------------+
+; Raw Binary File     ;                                                                                   ;
+;  Compression Ratio  ; 2                                                                                 ;
++---------------------+-----------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -90,15 +90,15 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Sun Mar 04 15:10:54 2018
+    Info: Processing started: Tue Apr 24 16:41:39 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off WSPRBerry -c wsprberry_CL016
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 644 megabytes
-    Info: Processing ended: Sun Mar 04 15:10:58 2018
+    Info: Peak virtual memory: 646 megabytes
+    Info: Processing ended: Tue Apr 24 16:41:43 2018
     Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
 
 

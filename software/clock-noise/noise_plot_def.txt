@@ -7,10 +7,9 @@ set xlabel 'Frequency [MHz]'
 set xrange [0:30e6]
 set format x "%.1s%c"
 set ylabel 'Power [dBm]'
-set yrange [-200:-90] noreverse
-set style line 1 lt 1 lw 4 pt 7
-plot "noise_measure.txt" u 1:2 w lp smooth bezier t 'power'
-#plot "noise_measure.txt" u 1:2 w lp pt 7 ps 0.5 t 'power'
-#plot "noise_measure.txt" u 1:2
+set yrange [-130:-90] noreverse
+#set style line 1 lt 1 lw 4 pt 7
+#set style line 1 lc rgb 'blue' lt 2 lw 0.5 pt 0.01 ps 0.5  
+plot "noise_measure.txt" u 1:2 w lp  t 'noise power'
 
 

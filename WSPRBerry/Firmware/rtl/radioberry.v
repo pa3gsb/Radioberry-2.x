@@ -148,7 +148,11 @@ end
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        Receiver module nRx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-localparam NR = 3; // Number of Receivers 
+`ifdef wsprberry
+	localparam NR = 3; // Number of Receivers 
+`else
+	localparam NR = 2; // Number of Receivers 
+`endif
 
 wire	[23:0] rx_I [0:NR-1];
 wire	[23:0] rx_Q [0:NR-1];
@@ -177,8 +181,14 @@ generate
 														
   end
 endgenerate
+
+`ifdef wsprberry
+	assign rx_FIFOEmpty = emptyFIFO[0] || emptyFIFO[1] || emptyFIFO[2]; 
+`else
+	assign rx_FIFOEmpty = emptyFIFO[0] || emptyFIFO[1]; 
+`endif	
 	
-assign rx_FIFOEmpty = emptyFIFO[0] || emptyFIFO[1] || emptyFIFO[2];						
+						
 //------------------------------------------------------------------------------
 //                          Running...
 //------------------------------------------------------------------------------

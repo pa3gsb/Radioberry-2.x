@@ -96,7 +96,7 @@ namespace ClockNoise
                     
                     ctrlSDR.setCommand(sdrCATCommand.setFrequency(actual));
                     
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                     String value = ctrlSDR.getCommand(sdrCATCommand.getRxMeter()).Replace("ZZRM1", "").Replace("dBm;", "");
                     nf_measurement[actual] = value;
 

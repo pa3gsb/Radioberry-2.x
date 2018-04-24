@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Thu Apr 19 19:30:26 2018
+Sat Apr 21 17:13:53 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -334,13 +334,13 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 19 19:30:26 2018       ;
+; Analysis & Synthesis Status        ; Successful - Sat Apr 21 17:13:53 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
-; Total logic elements               ; 15,547                                      ;
-;     Total combinational functions  ; 11,292                                      ;
+; Total logic elements               ; 15,546                                      ;
+;     Total combinational functions  ; 11,291                                      ;
 ;     Dedicated logic registers      ; 11,902                                      ;
 ; Total registers                    ; 11902                                       ;
 ; Total pins                         ; 48                                          ;
@@ -451,7 +451,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.2%      ;
+;     Processor 2            ;   3.3%      ;
 +----------------------------+-------------+
 
 
@@ -567,16 +567,16 @@ agreement for further details.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
-; Estimated Total logic elements              ; 15,547           ;
+; Estimated Total logic elements              ; 15,546           ;
 ;                                             ;                  ;
-; Total combinational functions               ; 11292            ;
+; Total combinational functions               ; 11291            ;
 ; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 1183             ;
-;     -- 3 input functions                    ; 7026             ;
+;     -- 4 input functions                    ; 1186             ;
+;     -- 3 input functions                    ; 7022             ;
 ;     -- <=2 input functions                  ; 3083             ;
 ;                                             ;                  ;
 ; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 3099             ;
+;     -- normal mode                          ; 3098             ;
 ;     -- arithmetic mode                      ; 8193             ;
 ;                                             ;                  ;
 ; Total registers                             ; 11902            ;
@@ -603,11 +603,11 @@ agreement for further details.
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                                  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                           ; Entity Name         ; Library Name ;
 +-------------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |radioberry                                                 ; 11292 (132)         ; 11902 (188)               ; 374912      ; 94           ; 0       ; 47        ; 48   ; 0            ; |radioberry                                                                                                                                   ; radioberry          ; work         ;
+; |radioberry                                                 ; 11291 (132)         ; 11902 (188)               ; 374912      ; 94           ; 0       ; 47        ; 48   ; 0            ; |radioberry                                                                                                                                   ; radioberry          ; work         ;
 ;    |PLL_IAMBIC:PLL_IAMBIC_inst|                             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|PLL_IAMBIC:PLL_IAMBIC_inst                                                                                                        ; PLL_IAMBIC          ; work         ;
 ;       |altpll:altpll_component|                             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|PLL_IAMBIC:PLL_IAMBIC_inst|altpll:altpll_component                                                                                ; altpll              ; work         ;
 ;          |PLL_IAMBIC_altpll:auto_generated|                 ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|PLL_IAMBIC:PLL_IAMBIC_inst|altpll:altpll_component|PLL_IAMBIC_altpll:auto_generated                                               ; PLL_IAMBIC_altpll   ; work         ;
-;    |ad9866:ad9866_inst|                                     ; 92 (92)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                                ; ad9866              ; work         ;
+;    |ad9866:ad9866_inst|                                     ; 91 (91)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                                ; ad9866              ; work         ;
 ;    |filter:filter_inst|                                     ; 59 (59)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|filter:filter_inst                                                                                                                ; filter              ; work         ;
 ;    |iambic:iambic_inst|                                     ; 654 (95)            ; 30 (30)                   ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|iambic:iambic_inst                                                                                                                ; iambic              ; work         ;
 ;       |lpm_divide:Div0|                                     ; 191 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|iambic:iambic_inst|lpm_divide:Div0                                                                                                ; lpm_divide          ; work         ;
@@ -1573,7 +1573,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                                              ; Fan out ;
 +----------------------------------------------------------------------------------------------------------------+---------+
-; ad9866:ad9866_inst|sen_n                                                                                       ; 24      ;
+; ad9866:ad9866_inst|sen_n                                                                                       ; 22      ;
 ; reset_handler:reset_handler_inst|reset                                                                         ; 840     ;
 ; rxFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|a_graycounter_qkc:wrptr_g1p|counter4a0 ; 6       ;
 ; rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_3rj1:auto_generated|a_graycounter_qkc:wrptr_g1p|counter4a0 ; 6       ;
@@ -2328,7 +2328,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+----------------------------------------------------------------------------------+--------------+
 ; Parameter Name ; Value                                                                            ; Type         ;
 +----------------+----------------------------------------------------------------------------------+--------------+
-; initarray      ; (110000000,000000000,000000000,000000000,100000001,000000000,100010000,100100001 ; Array/Record ;
+; initarray      ; (110000000,000000000,000000000,000000000,100110001,000000000,100010000,100100001 ; Array/Record ;
 ; initarray      ; ,101001011,101000000,101000000,100000000,101000001,100000011,000000001,000000000 ;              ;
 ;                ; ,010000100,100000000,000000000,000000000)                                        ;              ;
 +----------------+----------------------------------------------------------------------------------+--------------+
@@ -8612,17 +8612,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     SLD               ; 470                         ;
 ;     plain             ; 3017                        ;
 ; cycloneiii_io_obuf    ; 13                          ;
-; cycloneiii_lcell_comb ; 11296                       ;
+; cycloneiii_lcell_comb ; 11295                       ;
 ;     arith             ; 8193                        ;
 ;         1 data inputs ; 1                           ;
 ;         2 data inputs ; 1429                        ;
 ;         3 data inputs ; 6763                        ;
-;     normal            ; 3103                        ;
+;     normal            ; 3102                        ;
 ;         0 data inputs ; 39                          ;
 ;         1 data inputs ; 182                         ;
 ;         2 data inputs ; 1436                        ;
-;         3 data inputs ; 263                         ;
-;         4 data inputs ; 1183                        ;
+;         3 data inputs ; 259                         ;
+;         4 data inputs ; 1186                        ;
 ; cycloneiii_mac_mult   ; 47                          ;
 ; cycloneiii_mac_out    ; 47                          ;
 ; cycloneiii_pll        ; 1                           ;
@@ -8638,7 +8638,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:47     ;
+; Top            ; 00:00:41     ;
 +----------------+--------------+
 
 
@@ -8648,7 +8648,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Thu Apr 19 19:29:09 2018
+    Info: Processing started: Sat Apr 21 17:12:43 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -9327,7 +9327,7 @@ Warning (13012): Latch ad9866:ad9866_inst|datain[7] has unsafe behavior File: C:
 Warning (13012): Latch ad9866:ad9866_inst|datain[6] has unsafe behavior File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 98
     Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|sen_n File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 28
 Warning (13012): Latch ad9866:ad9866_inst|datain[5] has unsafe behavior File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 98
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[3] File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 77
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[5] File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 77
 Warning (13012): Latch ad9866:ad9866_inst|datain[4] has unsafe behavior File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 98
     Warning (13013): Ports D and ENA on the latch are fed by the same signal ad9866:ad9866_inst|dut1_pc[3] File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 77
 Warning (13012): Latch ad9866:ad9866_inst|datain[3] has unsafe behavior File: C:/dev/git/Radioberry-2.x/firmware/rtl/ad9866.v Line: 98
@@ -9385,23 +9385,23 @@ Info (332111): Found 15 clocks
     Info (332111):   13.020 virt_ad9866_txclk
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:07
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:06
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 16798 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 16797 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 10 input pins
     Info (21059): Implemented 26 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 15593 logic cells
+    Info (21061): Implemented 15592 logic cells
     Info (21064): Implemented 1062 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 94 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 56 warnings
-    Info: Peak virtual memory: 961 megabytes
-    Info: Processing ended: Thu Apr 19 19:30:26 2018
-    Info: Elapsed time: 00:01:17
-    Info: Total CPU time (on all processors): 00:01:41
+    Info: Peak virtual memory: 956 megabytes
+    Info: Processing ended: Sat Apr 21 17:13:54 2018
+    Info: Elapsed time: 00:01:11
+    Info: Total CPU time (on all processors): 00:01:32
 
 
 +------------------------------------------+

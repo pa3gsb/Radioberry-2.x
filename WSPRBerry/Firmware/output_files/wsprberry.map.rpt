@@ -1,5 +1,5 @@
 Analysis & Synthesis report for wsprberry
-Thu Apr 19 19:38:50 2018
+Sat Apr 21 17:00:33 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -481,7 +481,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 19 19:38:49 2018       ;
+; Analysis & Synthesis Status        ; Successful - Sat Apr 21 17:00:33 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; wsprberry                                   ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -593,12 +593,12 @@ agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.03        ;
+; Average used               ; 1.04        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.5%      ;
+;     Processor 2            ;   3.7%      ;
 +----------------------------+-------------+
 
 
@@ -3170,7 +3170,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+----------------------------------------------------------------------------------+--------------+
 ; Parameter Name ; Value                                                                            ; Type         ;
 +----------------+----------------------------------------------------------------------------------+--------------+
-; initarray      ; (110000000,000000000,000000000,000000000,100000001,000000000,100010000,100100001 ; Array/Record ;
+; initarray      ; (110000000,000000000,000000000,000000000,100110001,000000000,100010000,100100001 ; Array/Record ;
 ; initarray      ; ,101001011,101111111,101111111,100100000,101000001,100000001,000000001,000000000 ;              ;
 ;                ; ,010000100,100000000,000000000,000000000)                                        ;              ;
 +----------------+----------------------------------------------------------------------------------+--------------+
@@ -11760,7 +11760,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:51     ;
+; Top            ; 00:00:49     ;
 +----------------+--------------+
 
 
@@ -11770,7 +11770,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Thu Apr 19 19:37:30 2018
+    Info: Processing started: Sat Apr 21 16:59:16 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WSPRBerry -c wsprberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -12248,7 +12248,7 @@ Info (332111): Found 6 clocks
     Info (332111):    1.000 spi_slave:spi_slave_rx_inst|done
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 214 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:11
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:10
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/WSPRBerry/Firmware/output_files/wsprberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -12262,10 +12262,10 @@ Info (21057): Implemented 20683 device resources after synthesis - the final res
     Info (21064): Implemented 1440 RAM segments
     Info (21062): Implemented 120 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 48 warnings
-    Info: Peak virtual memory: 990 megabytes
-    Info: Processing ended: Thu Apr 19 19:38:50 2018
-    Info: Elapsed time: 00:01:20
-    Info: Total CPU time (on all processors): 00:01:37
+    Info: Peak virtual memory: 992 megabytes
+    Info: Processing ended: Sat Apr 21 17:00:34 2018
+    Info: Elapsed time: 00:01:18
+    Info: Total CPU time (on all processors): 00:01:39
 
 
 +------------------------------------------+
