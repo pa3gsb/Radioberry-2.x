@@ -346,6 +346,7 @@ wire rx1req = ptt_in ? 1'b0 : 1'b1;
 rxFIFO rx1_FIFO_inst(	.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
+													
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rxFIFO Handler (IQ Samples) rx2
@@ -357,7 +358,7 @@ wire rx2req = ptt_in ? 1'b0 : 1'b1;
 rxFIFO rx2_FIFO_inst(.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
 							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));						
-				
+		
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------

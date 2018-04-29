@@ -40,6 +40,9 @@ set_clock_groups -asynchronous \
 set_input_delay -add_delay -max -clock ad9866_clk 1.000 {ad9866_sdo spi_sck spi_mosi}
 set_input_delay -add_delay -min -clock ad9866_clk -1.000 {ad9866_sdo spi_sck spi_mosi}
 
+set_input_delay -add_delay -max -clock virt_ad9866_clk 4.5 [get_ports {ad9866_rxen}]
+set_input_delay -add_delay -min -clock virt_ad9866_clk 0.0 [get_ports {ad9866_rxen}]
+
 set_input_delay -add_delay -max -clock virt_ad9866_clk 10.000 [get_ports {ad9866_adio[*]}]
 set_input_delay -add_delay -min -clock virt_ad9866_clk 0.500 [get_ports {ad9866_adio[*]}]
 

@@ -48,8 +48,8 @@ wire signed [17:0] cordic_outdata_Q;
 // Hermes-Lite gain reduced to calibrate QtRadio
 wire signed [23:0] out_data_I2;
 wire signed [23:0] out_data_Q2;
-assign out_data_I = out_data_I2; //>>> 3);
-assign out_data_Q = out_data_Q2; //>>> 3);
+assign out_data_I = (out_data_I2 >>> 3);
+assign out_data_Q = (out_data_Q2 >>> 3);
 
 
 //------------------------------------------------------------------------------

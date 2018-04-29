@@ -27,11 +27,11 @@ Boston, MA  02110-1301, USA.
 module cordic( clock, frequency, in_data, out_data_I, out_data_Q );
 
 parameter IN_WIDTH   = 12; //ADC bitwidth
-parameter EXTRA_BITS = 5;  //spur reduction 6 dB per bit
+parameter EXTRA_BITS = 6;  //spur reduction 6 dB per bit
 
 //internal params
 localparam WR =  IN_WIDTH + EXTRA_BITS + 1; //18-bit data regs
-localparam OUT_WIDTH = WR;                  //18-bit output width
+localparam OUT_WIDTH = 18;                  //18-bit output width
 localparam WZ =  IN_WIDTH + EXTRA_BITS - 1; //16-bit angle regs
 localparam STG = IN_WIDTH + EXTRA_BITS - 2; //15 stages
 localparam WO = OUT_WIDTH;
@@ -44,10 +44,6 @@ input signed [WF-1:0] frequency;
 input signed [IN_WIDTH-1:0] in_data;
 output signed [WO-1:0] out_data_I;
 output signed [WO-1:0] out_data_Q;
-
-
-
-
 
 
 //------------------------------------------------------------------------------
@@ -102,7 +98,7 @@ assign atan_table[31] = 32'b00000000000000000000000000000001; //1
 //                              registers
 //------------------------------------------------------------------------------
 //NCO
-reg [WP-1:0] phase;
+reg [WP-1:0] phase = 0;
 
 
 //stage outputs
@@ -199,17 +195,29 @@ generate
     
   else
     begin
-    reg signed [WO-1:0] rounded_I;
-    reg signed [WO-1:0] rounded_Q;
+    reg signed [WR-1:0] rounded_I = 0;
+    reg signed [WR-1:0] rounded_Q = 0;
 
     always @(posedge clock)
       begin
-      rounded_I <= X[STG-1][WR-1 : WR-WO] + X[STG-1][WR-1-WO];
-      rounded_Q <= Y[STG-1][WR-1 : WR-WO] + Y[STG-1][WR-1-WO];
+   //   rounded_I <= X[STG-1][WR-1 : WR-WO] +{{(WO-1){1'b0}},  X[STG-1][WR-1-WO]};
+   //   rounded_Q <= Y[STG-1][WR-1 : WR-WO] +{{(WO-1){1'b0}},   Y[STG-1][WR-1-WO]};
+   // rounding from http://zipcpu.com/dsp/2017/07/22/rounding.html
+     rounded_I <= X[STG-1][WR-1 :0]
+							+ {{(WO){1'b0}},
+							X[STG-1][WR-WO],
+							{(WR-WO-1){!X[STG-1][WR-WO]}}};
+ 		
+		rounded_Q <= Y[STG-1][WR-1 :0]
+							+ {{(WO){1'b0}},
+							Y[STG-1][WR-WO],
+							{(WR-WO-1){!Y[STG-1][WR-WO]}}};
+ 		
+		
       end
       
-    assign out_data_I = rounded_I;
-    assign out_data_Q = rounded_Q;
+    assign out_data_I = rounded_I[WR-1:WR-WO];
+    assign out_data_Q = rounded_Q[WR-1:WR-WO];
     end
 endgenerate
 
