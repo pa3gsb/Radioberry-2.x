@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Fri Apr 27 10:31:16 2018
+Sun Apr 29 11:52:53 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -335,7 +335,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Apr 27 10:31:15 2018       ;
+; Analysis & Synthesis Status        ; Successful - Sun Apr 29 11:52:52 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -452,7 +452,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.8%      ;
+;     Processor 2            ;   3.1%      ;
 +----------------------------+-------------+
 
 
@@ -8679,7 +8679,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Fri Apr 27 10:29:59 2018
+    Info: Processing started: Sun Apr 29 11:51:38 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -9392,7 +9392,11 @@ Info (332110): Deriving PLL clocks
     Info (332110): create_generated_clock -source {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|inclk[0]} -divide_by 625 -multiply_by 12 -duty_cycle 50.00 -name {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]} {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]}
     Info (332110): create_generated_clock -source {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|inclk[0]} -divide_by 1000 -multiply_by 3 -duty_cycle 50.00 -name {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]} {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]}
 Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
-Warning (332174): Ignored filter at radioberry.sdc(100): ad9866_pga[*] could not be matched with a clock or keeper File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 100
+Warning (332049): Ignored set_input_delay at radioberry.sdc(43): Positional argument: object_list targets with value [get_ports {ad9866_rxen}] contains no input ports File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 43
+    Info (332050): set_input_delay -add_delay -max -clock virt_ad9866_clk 4.5 [get_ports {ad9866_rxen}] File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 43
+Warning (332049): Ignored set_input_delay at radioberry.sdc(44): Positional argument: object_list targets with value [get_ports {ad9866_rxen}] contains no input ports File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 44
+    Info (332050): set_input_delay -add_delay -min -clock virt_ad9866_clk 0.0 [get_ports {ad9866_rxen}] File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 44
+Warning (332174): Ignored filter at radioberry.sdc(103): ad9866_pga[*] could not be matched with a clock or keeper File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 103
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Warning (332061): Virtual clock virt_ad9866_txclk is never referenced in any input or output delay assignment.
 Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
@@ -9416,7 +9420,7 @@ Info (332111): Found 15 clocks
     Info (332111):   13.020 virt_ad9866_txclk
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:07
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:05
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
@@ -9428,11 +9432,11 @@ Info (21057): Implemented 17075 device resources after synthesis - the final res
     Info (21064): Implemented 1062 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 94 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 56 warnings
-    Info: Peak virtual memory: 966 megabytes
-    Info: Processing ended: Fri Apr 27 10:31:16 2018
-    Info: Elapsed time: 00:01:17
-    Info: Total CPU time (on all processors): 00:01:44
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 58 warnings
+    Info: Peak virtual memory: 961 megabytes
+    Info: Processing ended: Sun Apr 29 11:52:53 2018
+    Info: Elapsed time: 00:01:15
+    Info: Total CPU time (on all processors): 00:01:30
 
 
 +------------------------------------------+

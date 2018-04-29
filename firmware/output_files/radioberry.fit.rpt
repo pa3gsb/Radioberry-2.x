@@ -1,5 +1,5 @@
 Fitter report for radioberry
-Fri Apr 27 10:35:51 2018
+Sun Apr 29 11:58:09 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -95,7 +95,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Fri Apr 27 10:35:51 2018       ;
+; Fitter Status                      ; Successful - Sun Apr 29 11:58:09 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -181,12 +181,12 @@ agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.12        ;
+; Average used               ; 1.13        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  11.6%      ;
+;     Processor 2            ;  12.8%      ;
 +----------------------------+-------------+
 
 
@@ -16224,7 +16224,11 @@ Info (332110): Deriving PLL clocks
     Info (332110): create_generated_clock -source {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|inclk[0]} -divide_by 625 -multiply_by 12 -duty_cycle 50.00 -name {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]} {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[0]}
     Info (332110): create_generated_clock -source {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|inclk[0]} -divide_by 1000 -multiply_by 3 -duty_cycle 50.00 -name {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]} {PLL_IAMBIC_inst|altpll_component|auto_generated|pll1|clk[1]}
 Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
-Warning (332174): Ignored filter at radioberry.sdc(100): ad9866_pga[*] could not be matched with a clock or keeper File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 100
+Warning (332049): Ignored set_input_delay at radioberry.sdc(43): Positional argument: object_list targets with value [get_ports {ad9866_rxen}] contains no input ports File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 43
+    Info (332050): set_input_delay -add_delay -max -clock virt_ad9866_clk 4.5 [get_ports {ad9866_rxen}] File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 43
+Warning (332049): Ignored set_input_delay at radioberry.sdc(44): Positional argument: object_list targets with value [get_ports {ad9866_rxen}] contains no input ports File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 44
+    Info (332050): set_input_delay -add_delay -min -clock virt_ad9866_clk 0.0 [get_ports {ad9866_rxen}] File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 44
+Warning (332174): Ignored filter at radioberry.sdc(103): ad9866_pga[*] could not be matched with a clock or keeper File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.sdc Line: 103
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Warning (332061): Virtual clock virt_ad9866_txclk is never referenced in any input or output delay assignment.
 Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
@@ -16302,23 +16306,23 @@ Info (176235): Finished register packing
     Extra Info (176220): Created 434 register duplicates
 Info (128000): Starting physical synthesis optimizations for speed
 Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:09
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:24
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:30
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:09
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:08
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:02:54
+Info (170192): Fitter placement operations ending: elapsed time is 00:03:03
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 18% of the available device resources
     Info (170196): Router estimated peak interconnect usage is 34% of the available device resources in the region that extends from location X32_Y11 to location X42_Y22
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:36
-Info (11888): Total time spent on timing analysis during the Fitter is 35.33 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:55
+Info (11888): Total time spent on timing analysis during the Fitter is 44.74 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:10
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:17
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Warning (169177): 23 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing Cyclone 10 LP Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
     Info (169178): Pin spi_miso uses I/O standard 3.3-V LVCMOS at 59 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 52
@@ -16345,11 +16349,11 @@ Warning (169177): 23 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 
     Info (169178): Pin spi_mosi uses I/O standard 3.3-V LVCMOS at 60 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 51
     Info (169178): Pin ad9866_sdo uses I/O standard 3.3-V LVCMOS at 67 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 43
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 1440 megabytes
-    Info: Processing ended: Fri Apr 27 10:35:55 2018
-    Info: Elapsed time: 00:04:37
-    Info: Total CPU time (on all processors): 00:07:23
+Info: Quartus Prime Fitter was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 1442 megabytes
+    Info: Processing ended: Sun Apr 29 11:58:15 2018
+    Info: Elapsed time: 00:05:21
+    Info: Total CPU time (on all processors): 00:08:21
 
 
 +----------------------------+
