@@ -151,10 +151,10 @@ int main(int argc, char **argv)
 
 	printf("init done \n");
 		
-	pthread_t pid, pid2;
+	pthread_t pid, pid2, pid3;
     pthread_create(&pid, NULL, spiReader, NULL);  
 	pthread_create(&pid2, NULL, packetreader, NULL); 
-	pthread_create(&pid, NULL, spiWriter, NULL);
+	pthread_create(&pid3, NULL, spiWriter, NULL);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -197,7 +197,7 @@ void runHermesLite() {
 		
 		if (running) {
 			sendPacket();
-		}
+		} else {usleep(20000);}
 	}
 }
 void *packetreader(void *arg) {
@@ -465,7 +465,7 @@ void fillPacketToSend() {
 						if (nrx==2) { 
 							hpsdrdata[index + i + 6] = get(); // MSB comes first!!!!
 						} else
-							get(); //remove the rx samples....reading always the data of rx2
+							get(); //remove the rx samples....reading always the data of rx2.. keeping in sync.
 					}
 					
 					sem_post(&empty); 
@@ -540,31 +540,33 @@ void *spiReader(void *arg) {
 			iqdata[5] = (freq & 0xFF);
 					
 			spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
-			//firmware: tdata(56'h00010203040506) -> 0-1-2-3-4-5-6 (element 0 contains 0; second element contains 1)
 			sem_wait(&empty);
 			
 			int i =0;
 			for (i; i< 6; i++){
-					put(iqdata[i]);
+				put(iqdata[i]);
 			}
-			
 				
-			while ( gpioRead(16) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
-		
-			iqdata[0] = (sampleSpeed & 0x03);
-			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
-			iqdata[2] = ((freq2 >> 24) & 0xFF);
-			iqdata[3] = ((freq2 >> 16) & 0xFF);
-			iqdata[4] = ((freq2 >> 8) & 0xFF);
-			iqdata[5] = (freq2 & 0xFF);
-					
-			spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
 			
-			 i =0;
+			if (nrx==2) {	
+				// only reading the actual data if there are 2 slices.
+				// psdr is always having 2 slices active also when rx2 is not selected.
+				while ( gpioRead(16) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
+			
+				iqdata[0] = (sampleSpeed & 0x03);
+				iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+				iqdata[2] = ((freq2 >> 24) & 0xFF);
+				iqdata[3] = ((freq2 >> 16) & 0xFF);
+				iqdata[4] = ((freq2 >> 8) & 0xFF);
+				iqdata[5] = (freq2 & 0xFF);
+						
+				spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
+			}
+			// always add the samples for the second rx slice. avoiding sync problems.
+			i =0;
 			for (i; i< 6; i++){
-					put(iqdata[i]);
+				put(iqdata[i]);
 			}			
-			
 					
 			sem_post(&full);
 			
@@ -634,7 +636,7 @@ void *spiWriter(void *arg) {
 			}
 			
 			sem_post(&mutex);
-		} 
+		} else if (running==0) usleep(5000000); else usleep(1000000);
 	}
 }
 
