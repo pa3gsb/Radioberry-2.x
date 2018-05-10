@@ -1,5 +1,5 @@
 Flow report for radioberry
-Thu May 10 15:33:54 2018
+Thu May 10 19:32:06 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -41,14 +41,14 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu May 10 15:33:39 2018       ;
+; Flow Status                        ; Successful - Thu May 10 19:31:52 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
 ; Device                             ; 10CL025YE144C8G                             ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 14,824 / 24,624 ( 60 % )                    ;
+; Total logic elements               ; 14,753 / 24,624 ( 60 % )                    ;
 ;     Total combinational functions  ; 11,604 / 24,624 ( 47 % )                    ;
 ;     Dedicated logic registers      ; 11,168 / 24,624 ( 45 % )                    ;
 ; Total registers                    ; 11205                                       ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/10/2018 15:29:01 ;
+; Start date & time ; 05/10/2018 19:27:26 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ agreement for further details.
 ; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_MERGING              ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_RETIMING             ; Off                                    ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 220295161909995.152595894106064        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 268883491400660.152597324606484        ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
@@ -115,11 +115,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:54     ; 1.0                     ; 938 MB              ; 00:01:15                           ;
-; Fitter                    ; 00:03:32     ; 1.1                     ; 1453 MB             ; 00:05:38                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 662 MB              ; 00:00:03                           ;
+; Analysis & Synthesis      ; 00:00:52     ; 1.0                     ; 941 MB              ; 00:01:14                           ;
+; Fitter                    ; 00:03:22     ; 1.1                     ; 1461 MB             ; 00:05:26                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 664 MB              ; 00:00:03                           ;
 ; TimeQuest Timing Analyzer ; 00:00:13     ; 1.2                     ; 867 MB              ; 00:00:15                           ;
-; Total                     ; 00:04:41     ; --                      ; --                  ; 00:07:11                           ;
+; Total                     ; 00:04:30     ; --                      ; --                  ; 00:06:58                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
