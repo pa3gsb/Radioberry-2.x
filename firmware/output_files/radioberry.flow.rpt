@@ -1,5 +1,5 @@
 Flow report for radioberry
-Sun Apr 29 11:58:43 2018
+Thu May 10 15:33:54 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -41,20 +41,20 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Apr 29 11:58:21 2018       ;
+; Flow Status                        ; Successful - Thu May 10 15:33:39 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
 ; Device                             ; 10CL025YE144C8G                             ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 14,746 / 24,624 ( 60 % )                    ;
-;     Total combinational functions  ; 11,563 / 24,624 ( 47 % )                    ;
-;     Dedicated logic registers      ; 11,143 / 24,624 ( 45 % )                    ;
-; Total registers                    ; 11143                                       ;
+; Total logic elements               ; 14,824 / 24,624 ( 60 % )                    ;
+;     Total combinational functions  ; 11,604 / 24,624 ( 47 % )                    ;
+;     Dedicated logic registers      ; 11,168 / 24,624 ( 45 % )                    ;
+; Total registers                    ; 11205                                       ;
 ; Total pins                         ; 48 / 77 ( 62 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 374,912 / 608,256 ( 62 % )                  ;
+; Total memory bits                  ; 424,064 / 608,256 ( 70 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 94 / 132 ( 71 % )                           ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
 +------------------------------------+---------------------------------------------+
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/29/2018 11:51:38 ;
+; Start date & time ; 05/10/2018 15:29:01 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ agreement for further details.
 ; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_MERGING              ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_RETIMING             ; Off                                    ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 220295161909995.152499549806996        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 220295161909995.152595894106064        ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
@@ -115,11 +115,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:09     ; 1.0                     ; 961 MB              ; 00:01:25                           ;
-; Fitter                    ; 00:05:15     ; 1.1                     ; 1442 MB             ; 00:08:15                           ;
-; Assembler                 ; 00:00:04     ; 1.0                     ; 656 MB              ; 00:00:04                           ;
-; TimeQuest Timing Analyzer ; 00:00:20     ; 1.3                     ; 864 MB              ; 00:00:23                           ;
-; Total                     ; 00:06:48     ; --                      ; --                  ; 00:10:07                           ;
+; Analysis & Synthesis      ; 00:00:54     ; 1.0                     ; 938 MB              ; 00:01:15                           ;
+; Fitter                    ; 00:03:32     ; 1.1                     ; 1453 MB             ; 00:05:38                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 662 MB              ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:13     ; 1.2                     ; 867 MB              ; 00:00:15                           ;
+; Total                     ; 00:04:41     ; --                      ; --                  ; 00:07:11                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

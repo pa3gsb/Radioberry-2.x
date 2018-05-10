@@ -24,7 +24,7 @@ clk_10mhz,
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 rb_info_1,rb_info_2,
-rx1_FIFOEmpty, rx2_FIFOEmpty,
+rx1_samples, rx2_samples,
 txFIFOFull,
 ptt_in,
 ptt_out,
@@ -51,8 +51,8 @@ input wire spi_sck;
 input wire spi_mosi; 
 output wire spi_miso; 
 input [1:0] spi_ce; 
-output wire rx1_FIFOEmpty;
-output wire rx2_FIFOEmpty;
+output wire rx1_samples;
+output wire rx2_samples;
 output wire txFIFOFull;
 
 output  wire  rb_info_1;  // radioberry info-1;  checks 10 Mhz clock 
@@ -342,9 +342,11 @@ receiver #(.CICRATE(CICRATE_RX2))
 reg [47:0] rxDataFromFIFO;
 
 wire rx1req = ptt_in ? 1'b0 : 1'b1;
+wire [9:0] rx1_wrusedw;
+assign rx1_samples = rx1_wrusedw[7];
 
 rxFIFO rx1_FIFO_inst(	.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
+							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx1_wrusedw), 
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 													
 
@@ -354,9 +356,11 @@ rxFIFO rx1_FIFO_inst(	.aclr(reset),
 reg [47:0] rx2_DataFromFIFO;
 
 wire rx2req = ptt_in ? 1'b0 : 1'b1;
+wire [9:0] rx2_wrusedw;
+assign rx2_samples = rx2_wrusedw[7];
 
 rxFIFO rx2_FIFO_inst(.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
+							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrusedw(rx2_wrusedw), 
 							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));						
 		
 //------------------------------------------------------------------------------------------------------------------------------------------------------------

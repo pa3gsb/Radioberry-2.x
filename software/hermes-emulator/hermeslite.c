@@ -1,9 +1,36 @@
-/*
-      Hermes Lite 
-	  
-	  Radioberry implementation
-	  
-	  2016 Johan PA3GSB
+/* 
+* Copyright (C)
+* 2017 - Johan Maas, PA3GSB
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* Emulator. By using this emulator you have the possibility to connect to SDR programs like:
+*	- Quisk
+*	- PowerSDR
+*	- Spark
+*
+*	Using the 'old HPSDR protocol'
+*
+*  This emulator works with the Radioberry radiocard.
+*
+*	http://www.pa3gsb.nl
+*	  
+*	2018 Johan PA3GSB
+*
 */
 
 #include <stdlib.h>
@@ -14,6 +41,8 @@
 #include <arpa/inet.h>
 #include <math.h>
 #include <semaphore.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 #include <pigpio.h>
 
@@ -25,29 +54,11 @@ void fillDiscoveryReplyMessage(void);
 int isValidFrame(char* data);
 void fillPacketToSend(void);
 void init(void);
-void generateIQ(void);
-void put(unsigned char  value);
-unsigned char get(void);
 void *spiReader(void *arg);
 void *packetreader(void *arg);
-
 void *spiWriter(void *arg);
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
-
-double timebase = 0.0;
-
-	double amplitude;
-	double noiseAmplitude;
-	int vfo = 14250000;
-
-sem_t empty;
-sem_t full;
-#define MAX 7200   
-
-unsigned char buffer[MAX];
-int fill = 0; 
-int use  = 0;
 
 #define TX_MAX 3200 
 unsigned char tx_buffer[TX_MAX];
@@ -60,21 +71,20 @@ sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
 
+void rx1_spiReader(unsigned char iqdata[]);
+void rx2_spiReader(unsigned char iqdata[]);
+
 static int rx1_spi_handler;
 static int rx2_spi_handler;
 
-static const int CHANNEL = 0;
-int fdspi;
 unsigned char iqdata[6];
 unsigned char tx_iqdata[6];
-unsigned char audiooutputbuffer[4096];
-int audiocounter = 0;
+
 
 #define SERVICE_PORT	1024
 
 int hold_nrx=0;
 int nrx = 2; // n Receivers
-
 int holdfreq = 0;
 int holdfreq2 = 0;
 int holdtxfreq = 0;
@@ -105,13 +115,10 @@ struct sockaddr_in remaddr;				/* remote address */
 socklen_t addrlen = sizeof(remaddr);	/* length of addresses */
 int recvlen;							/* # bytes received */
 
-struct timeval t0;
-struct timeval t1;
-struct timeval t10;
-struct timeval t11;
 struct timeval t20;
 struct timeval t21;
 float elapsed;
+
 
 float timedifference_msec(struct timeval t0, struct timeval t1)
 {
@@ -120,11 +127,22 @@ float timedifference_msec(struct timeval t0, struct timeval t1)
 
 int main(int argc, char **argv)
 {
-	sem_init(&empty, 0, MAX / 12); 
-    sem_init(&full, 0, 0); 
-	sem_init(&mutex, 0, 1);	//mutal exlusion
-
-	sem_init(&tx_empty, 0, TX_MAX / 6); 
+	fprintf(stderr,"\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr, "                    Emulator version 10-5-2018 \n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "====================================================================\n");
+	fprintf(stderr, "====================================================================\n");
+	
+	sem_init(&mutex, 0, 1);	
+	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0);    	
 	
 	if (gpioInitialise() < 0) {
@@ -132,8 +150,8 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	
-	gpioSetMode(13, PI_INPUT); 	//rx1_FIFOEmpty
-	gpioSetMode(16, PI_INPUT);	//rx2_FIFOEmpty
+	gpioSetMode(13, PI_INPUT); 	//rx1 samples
+	gpioSetMode(16, PI_INPUT);	//rx2 samples
 	gpioSetMode(20, PI_INPUT); 
 	gpioSetMode(21, PI_OUTPUT); 
 	
@@ -151,10 +169,9 @@ int main(int argc, char **argv)
 
 	printf("init done \n");
 		
-	pthread_t pid, pid2, pid3;
-    pthread_create(&pid, NULL, spiReader, NULL);  
-	pthread_create(&pid2, NULL, packetreader, NULL); 
-	pthread_create(&pid3, NULL, spiWriter, NULL);
+	pthread_t pid1, pid2; 
+	pthread_create(&pid1, NULL, packetreader, NULL); 
+	pthread_create(&pid2, NULL, spiWriter, NULL);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -191,8 +208,6 @@ int main(int argc, char **argv)
 void runHermesLite() {
 	printf("runHermesLite \n");
 	
-	int count = 0;
-	gettimeofday(&t10, 0);
 	for (;;) {
 		
 		if (running) {
@@ -286,9 +301,6 @@ void handlePacket(char* buffer){
 			if ((buffer[523 + 3] & 0x10) == 0x10)
 				rando = 1;
 		}
-		// Powersdr and Alans software are following a different patttern
-		// this program does not known which package is calling 
-		// by looking which value is changing... that will be the att value
 		if (prevatt11 != att11) 
 		{
 			att = att11;
@@ -371,33 +383,15 @@ void handlePacket(char* buffer){
 			printf("TX frequency %d\n", txfreq);
 		}
 		
-		//lees data en vul buffers
 		int frame = 0;
 		for (frame; frame < 2; frame++)
 		{
 			int coarse_pointer = frame * 512 + 8;
-
 			int j = 8;
 			for (j; j < 512; j += 8)
 			{
 				int k = coarse_pointer + j;
-
-				// M  (MSB first) L and R channel 2 * 16 bits
-				// send data to audio driver...beter latency......than using VAC.
-				audiooutputbuffer[audiocounter++] = buffer[k + 0];
-				audiooutputbuffer[audiocounter++] = buffer[k + 1];
-				audiooutputbuffer[audiocounter++] = buffer[k + 2];
-				audiooutputbuffer[audiocounter++] = buffer[k + 3];
-				if (audiocounter ==  1024) {
-					audiocounter = 0;
-				}
-	
-				// TX IQ
-				//MSB first according to protocol. (I and Q samples 2 * 16 bits)
 				if (MOX) {
-				
-					//while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
-					
 					sem_wait(&tx_empty);
 					int i = 0;
 					for (i; i < 4; i++){
@@ -422,7 +416,6 @@ int isValidFrame(char* data) {
 	return (data[8] == SYNC && data[9] == SYNC && data[10] == SYNC && data[520] == SYNC && data[521] == SYNC && data[522] == SYNC);
 }
 
-static int started=0;
 void fillPacketToSend() {
 		
 		hpsdrdata[0] = 0xEF;
@@ -436,7 +429,7 @@ void fillPacketToSend() {
 		last_sequence_number++;
 
 		int factor = (nrx - 1) * 6;
-		int index;
+		int index=0;
 		int frame = 0;
 		for (frame; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
@@ -449,48 +442,54 @@ void fillPacketToSend() {
 			hpsdrdata[14 + coarse_pointer] = 0x00; // c3
 			hpsdrdata[15 + coarse_pointer] = 0x1D; // c4 //v2.9
 
-			int j = 0;
-			for (j; j < (504 / (8 + factor)); j++) {
-				index = 16 + coarse_pointer + (j * (8 + factor));
-
-				if (!MOX) {
-					sem_wait(&full);            
+			if (!MOX) {
+				
+				sem_wait(&mutex); 
+				
+				gpioWrite(21, 0); 	// ptt off
+				
+				while (gpioRead(13) == 0) {}//wait for enough samples
+				
+				int i = 0;
+				for (i=0; i< (504 / (8 + factor)); i++) {
+					index = 16 + coarse_pointer + (i * (8 + factor));
+					rx1_spiReader(iqdata);
+					int j =0;
+					for (j; j< 6; j++){
+						hpsdrdata[index + j] = iqdata[j];
+					}	
+				}
+				
+				if (nrx == 2) {
 					int i =0;
-					for (i; i< 6; i++){
-						hpsdrdata[index + i] = get(); // MSB comes first!!!!
+					for (i=0; i< (504 / (8 + factor)); i++) {
+						index = 16 + coarse_pointer + (i * (8 + factor));
+						rx2_spiReader(iqdata);
+						int j =0;
+						for (j; j< 6; j++){
+							hpsdrdata[index + j + 6] = iqdata[j];
+						}	
 					}
-					//if 2 receivers; than add also data of receiver 2.
-					i =0;
-					for (i; i< 6; i++){
-						if (nrx==2) { 
-							hpsdrdata[index + i + 6] = get(); // MSB comes first!!!!
-						} else
-							get(); //remove the rx samples....reading always the data of rx2.. keeping in sync.
-					}
+				}
+				
+				sem_post(&mutex);
 					
-					sem_post(&empty); 
-					//hpsdrdata[index + 6] = 0x00;	
-					//hpsdrdata[index + 7] = 0x00;
-				} else {
-					//required to fill data ?...mic data ... maybe in future reading data from audio usb....or adding TLV codec??
-					
-					//Modulation LF
-                     //hpsdrdata[index + 7 + factor] = tx_Audio_buffer.Read();// LSB; comes first!!!!
-                     //hpsdrdata[index + 6 + factor] = tx_Audio_buffer.Read();
+			} else {
+				int j = 0;
+				for (j; j < (504 / (8 + factor)); j++) {
+					index = 16 + coarse_pointer + (j * (8 + factor));
 					int i =0;
-					for (i; i< 6; i++){
+					for (i; i< 8; i++){
 						hpsdrdata[index + i] = 0x00;
+						if (nrx == 2){
+							hpsdrdata[index + i + 6] = 0x00;
+						}
 					}
-					hpsdrdata[index + 7] = 0x00;	// LSB
-					hpsdrdata[index + 6] = 0x00;
-					
-					//usleep(1); // sleep required????
-					
 				}
 			}
 			if (MOX){
 				if (sampleSpeed ==0)
-					usleep(620);  // use pin...to indicate status...//usleep(620);
+					usleep(620);  
 				if (sampleSpeed == 1)
 					usleep(260); 
 			}
@@ -518,71 +517,28 @@ void fillDiscoveryReplyMessage() {
 									// int DEVICE_HERMES_LITE = 6;
 }
 
-void *spiReader(void *arg) {
-	
-	int count =0;
-	gettimeofday(&t0, 0);
-	while(1) {
-	
+void rx1_spiReader(unsigned char iqdata[]) {
 		
-		if (!MOX) {
-			sem_wait(&mutex); 
+	iqdata[0] = (sampleSpeed & 0x03);
+	iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+	iqdata[2] = ((freq >> 24) & 0xFF);
+	iqdata[3] = ((freq >> 16) & 0xFF);
+	iqdata[4] = ((freq >> 8) & 0xFF);
+	iqdata[5] = (freq & 0xFF);
 			
-			gpioWrite(21, 0); 	// ptt off
-			
-			while ( gpioRead(13) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
+	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
+}
+
+void rx2_spiReader(unsigned char iqdata[]) {
 		
-			iqdata[0] = (sampleSpeed & 0x03);
-			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
-			iqdata[2] = ((freq >> 24) & 0xFF);
-			iqdata[3] = ((freq >> 16) & 0xFF);
-			iqdata[4] = ((freq >> 8) & 0xFF);
-			iqdata[5] = (freq & 0xFF);
-					
-			spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
-			sem_wait(&empty);
+	iqdata[0] = (sampleSpeed & 0x03);
+	iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+	iqdata[2] = ((freq2 >> 24) & 0xFF);
+	iqdata[3] = ((freq2 >> 16) & 0xFF);
+	iqdata[4] = ((freq2 >> 8) & 0xFF);
+	iqdata[5] = (freq2 & 0xFF);
 			
-			int i =0;
-			for (i; i< 6; i++){
-				put(iqdata[i]);
-			}
-				
-			
-			if (nrx==2) {	
-				// only reading the actual data if there are 2 slices.
-				// psdr is always having 2 slices active also when rx2 is not selected.
-				while ( gpioRead(16) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
-			
-				iqdata[0] = (sampleSpeed & 0x03);
-				iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
-				iqdata[2] = ((freq2 >> 24) & 0xFF);
-				iqdata[3] = ((freq2 >> 16) & 0xFF);
-				iqdata[4] = ((freq2 >> 8) & 0xFF);
-				iqdata[5] = (freq2 & 0xFF);
-						
-				spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
-			}
-			// always add the samples for the second rx slice. avoiding sync problems.
-			i =0;
-			for (i; i< 6; i++){
-				put(iqdata[i]);
-			}			
-					
-			sem_post(&full);
-			
-			count ++;
-			if (count == 48000) {
-				count = 0;
-				gettimeofday(&t1, 0);
-				elapsed = timedifference_msec(t0, t1);
-				printf("Code rx mode spi executed in %f milliseconds.\n", elapsed);
-				gettimeofday(&t0, 0);
-			}
-			
-			sem_post(&mutex);
-		}
-	}
-	
+	spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
 }
 
 void *spiWriter(void *arg) {
@@ -651,15 +607,6 @@ unsigned char get_tx_buffer() {
     return tmp;
 }
 
-void put(unsigned char  value) {
-    buffer[fill] = value;    
-    fill = (fill + 1) % MAX; 
-}
-
-unsigned char get() {
-    int tmp = buffer[use];   
-    use = (use + 1) % MAX;   
-    return tmp;
-}
+//end of source.
 
 

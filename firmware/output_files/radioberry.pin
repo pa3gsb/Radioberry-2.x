@@ -27,7 +27,7 @@
  -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
- --                  Bank 1:       3.3V
+ --                  Bank 1:       2.5V
  --                  Bank 2:       3.3V
  --                  Bank 3:       3.3V
  --                  Bank 4:       3.3V
@@ -76,16 +76,16 @@ GND                          : 4         : gnd    :                   :         
 VCCINT                       : 5         : power  :                   : 1.2V    :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 6         :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 7         :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 8         :        :                   :         : 1         :                
+rx2_samples                  : 8         : output : 2.5 V             :         : 1         : N              
 nSTATUS                      : 9         :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 10        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 11        :        :                   :         : 1         :                
-~ALTERA_DCLK~ / RESERVED_INPUT : 12        : input  : 3.3-V LVTTL       :         : 1         : N              
-rx1_FIFOEmpty                : 13        : output : 3.3-V LVCMOS      :         : 1         : Y              
+rx1_samples                  : 11        : output : 2.5 V             :         : 1         : N              
+~ALTERA_DCLK~ / RESERVED_INPUT : 12        : input  : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 13        :        :                   :         : 1         :                
 nCONFIG                      : 14        :        :                   :         : 1         :                
 TDI                          : 15        : input  :                   :         : 1         :                
 TCK                          : 16        : input  :                   :         : 1         :                
-VCCIO1                       : 17        : power  :                   : 3.3V    : 1         :                
+VCCIO1                       : 17        : power  :                   : 2.5V    : 1         :                
 TMS                          : 18        : input  :                   :         : 1         :                
 GND                          : 19        : gnd    :                   :         :           :                
 TDO                          : 20        : output :                   :         : 1         :                
@@ -114,7 +114,7 @@ ptt_in                       : 42        : input  : 3.3-V LVCMOS      :         
 txFIFOFull                   : 43        : output : 3.3-V LVCMOS      :         : 3         : Y              
 key_dash_rpi                 : 44        : output : 3.3-V LVCMOS      :         : 3         : Y              
 VCCINT                       : 45        : power  :                   : 1.2V    :           :                
-rx2_FIFOEmpty                : 46        : output : 3.3-V LVCMOS      :         : 3         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 46        :        :                   :         : 3         :                
 VCCIO3                       : 47        : power  :                   : 3.3V    : 3         :                
 GND                          : 48        : gnd    :                   :         :           :                
 rb_info_1                    : 49        : output : 3.3-V LVCMOS      :         : 3         : Y              

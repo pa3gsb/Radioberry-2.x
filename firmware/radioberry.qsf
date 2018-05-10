@@ -160,6 +160,9 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to spi_ce[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to spi_ce
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to spi_miso
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to spi_mosi
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to *
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to *
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to *
 set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
 set_global_assignment -name ALLOW_REGISTER_MERGING OFF
 set_global_assignment -name ALLOW_REGISTER_DUPLICATION OFF
