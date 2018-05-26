@@ -24,7 +24,7 @@ clk_10mhz,
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 rb_info_1,rb_info_2,
-rx1_samples, rx2_samples,
+rx1_samples, rx2_samples, pistrobe,
 txFIFOFull,
 ptt_in,
 ptt_out,
@@ -54,6 +54,7 @@ input [1:0] spi_ce;
 output wire rx1_samples;
 output wire rx2_samples;
 output wire txFIFOFull;
+output wire pistrobe;
 
 output  wire  rb_info_1;  // radioberry info-1;  checks 10 Mhz clock 
 output  wire  rb_info_2;  // radioberry info-2;  checks ad9866 clock (in tx flashes 2 times faster)
@@ -84,22 +85,13 @@ assign ad9866_txen = (ptt_in) ? 1'b1: 1'b0;
 
 assign ptt_out = ptt_in;
 
-
 wire ad9866_rx_rqst;
 wire ad9866_tx_rqst;
 reg [5:0] rx_gain;
 reg [5:0] tx_gain;
 
-reg [5:0] prev_rx_gain;
-reg [5:0] prev_tx_gain;
-always @ (posedge clk_10mhz)
-begin
-	prev_rx_gain <= rx_gain;
-	prev_tx_gain <= tx_gain;
-end
-
-assign ad9866_rx_rqst = rx_gain != prev_rx_gain;
-assign ad9866_tx_rqst = tx_gain != prev_tx_gain;
+assign ad9866_rx_rqst = (!ptt_in && gain_update && ad9866_sen_n);
+assign ad9866_tx_rqst = (ptt_in && gain_update && ad9866_sen_n);
 
 ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.ext_tx_rqst(ad9866_tx_rqst),.tx_gain(tx_gain),.ext_rx_rqst(ad9866_rx_rqst),.rx_gain(rx_gain));
 
@@ -343,10 +335,14 @@ reg [47:0] rxDataFromFIFO;
 
 wire rx1req = ptt_in ? 1'b0 : 1'b1;
 wire [9:0] rx1_wrusedw;
-assign rx1_samples = rx1_wrusedw[7];
+assign rx1_samples = rx1_wrusedw[6];
+
+wire rx_wrfull;
+
+assign pistrobe = rx_strobe & rx_wrfull;
 
 rxFIFO rx1_FIFO_inst(	.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx1_wrusedw), 
+							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx1_wrusedw), .wrfull(rx_wrfull),  
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 													
 
@@ -357,7 +353,7 @@ reg [47:0] rx2_DataFromFIFO;
 
 wire rx2req = ptt_in ? 1'b0 : 1'b1;
 wire [9:0] rx2_wrusedw;
-assign rx2_samples = rx2_wrusedw[7];
+assign rx2_samples = rx2_wrusedw[6];
 
 rxFIFO rx2_FIFO_inst(.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrusedw(rx2_wrusedw), 
@@ -391,6 +387,7 @@ wire [13:0] DAC;
 //------------------------------------------------------------------------------
 reg [26:0]counter;
 
+
 always @(posedge clk_10mhz) 
 begin
   if (reset)
@@ -400,5 +397,7 @@ begin
 end
 
 assign rb_info_1 = counter[23];
+wire gain_update;
+assign gain_update = counter[22];
 
 endmodule

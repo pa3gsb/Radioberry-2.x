@@ -46,6 +46,7 @@ set_input_delay -add_delay -min -clock spi_sck -1.0 [get_ports {spi_ce[*]}]
 
 set_false_path -to [get_ports {rx1_samples}]
 set_false_path -to [get_ports {rx2_samples}]
+set_false_path -to [get_ports {pistrobe}]
 set_false_path -to [get_ports {txFIFOFull}]
 
 set_false_path -from * -to { key_dot_rpi key_dash_rpi cw_ptt rb_info_1 rb_info_2 ptt_out filter[*]}
@@ -82,7 +83,6 @@ set_false_path -to [get_ports {ad9866_mode}]
 
 
 ## Additional timing constraints
-
 set_max_delay -from spi_ce[*] -to spi_miso 10
 set_max_delay -from spi_ce[0]	-to spi_slave:spi_slave_rx_inst|treg[*] 5
 set_min_delay -from spi_ce[0]	-to spi_slave:spi_slave_rx_inst|rreg[*] -3
@@ -90,8 +90,13 @@ set_max_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|treg[*] 3
 set_min_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|rreg[*] -3
 
 set_max_delay -from transmitter:transmitter_inst|out_data[*]	-to ad9866_adio[*] 18
+						  
+set_max_delay -from rxFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_nkk1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
+set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_nkk1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx2_inst|treg[*] 4
 
-set_max_delay -from rxFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_ruj1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
-set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_ruj1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx2_inst|treg[*] 4
+set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a0~porta_datain_reg0 2
+set_max_delay -from  reset_handler:reset_handler_inst|reset~_Duplicate_1	-to spi_slave:spi_slave_rx_inst|rdata[*] 5
+
+set_min_delay -from spi_mosi	-to spi_slave:spi_slave_rx_inst|rdata[*] -2
 	
 ## end of constraints

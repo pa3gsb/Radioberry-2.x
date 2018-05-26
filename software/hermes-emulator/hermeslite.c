@@ -132,7 +132,7 @@ int main(int argc, char **argv)
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "                    Emulator version 10-5-2018 \n");
+	fprintf(stderr, "                    Emulator version 26-5-2018 \n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
@@ -440,7 +440,7 @@ void fillPacketToSend() {
 			hpsdrdata[12 + coarse_pointer] = 0x00; // c1
 			hpsdrdata[13 + coarse_pointer] = 0x00; // c2
 			hpsdrdata[14 + coarse_pointer] = 0x00; // c3
-			hpsdrdata[15 + coarse_pointer] = 0x1D; // c4 //v2.9
+			hpsdrdata[15 + coarse_pointer] = 0x28; // c4 //v4.0 firmware version
 
 			if (!MOX) {
 				
@@ -512,9 +512,9 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x03;
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
-	broadcastReply[i++] =  31;
-	broadcastReply[i++] =  6; //0x10; // Hermes boardtype public static final
-									// int DEVICE_HERMES_LITE = 6;
+	broadcastReply[i++] =  40;
+	broadcastReply[i++] =  6; // hermeslite
+									
 }
 
 void rx1_spiReader(unsigned char iqdata[]) {

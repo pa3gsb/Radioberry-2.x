@@ -99,7 +99,7 @@ GND                          : 27        : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : 28        :        :                   :         : 2         :                
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 GND                          : 30        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 31        :        :                   :         : 2         :                
+pistrobe                     : 31        : output : 3.3-V LVCMOS      :         : 2         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
 key_dot_rpi                  : 33        : output : 3.3-V LVCMOS      :         : 2         : Y              
 VCCINT                       : 34        : power  :                   : 1.2V    :           :                
