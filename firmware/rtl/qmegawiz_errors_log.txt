@@ -1,0 +1,82 @@
+
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:16:30>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:16:39>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:16:45>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:16:53>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:17:26>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:17:49>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:19:32>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:28:01>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.v
+
+May 26 07PM:28:32>: Error in CNX file format.
+
+Error messages are listed in file
+C:/dev/git/Radioberry-2.x/firmware/rtl/PLL_IAMBIC.cnxerr.
+
+Can't create the custom megafunction variation file(s)

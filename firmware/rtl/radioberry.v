@@ -105,7 +105,7 @@ assign key_dash_rpi = KEY_DASH;
 
 wire clk_192K;
 wire clk_30K;
-PLL_IAMBIC PLL_IAMBIC_inst (.inclk0(clk_10mhz), .c0(clk_192K), .c1(clk_30K), .c2(),  .c3(), .locked());
+PLL_IAMBIC_10 PLL_IAMBIC_inst (.inclk0(clk_10mhz), .c0(clk_192K), .c1(clk_30K), .c2(),  .c3(), .locked());
 
 reg [5:0] 	cw_speed; 			// CW keyer speed 0-60 WPM
 reg [1:0] 	iambic_mode;		// 00 = straight/bug, 01 = Mode A, 10 = Mode B
