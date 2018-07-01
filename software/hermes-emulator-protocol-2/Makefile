@@ -10,13 +10,15 @@ COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 PROGRAM=hermeslite
 
 SOURCES= \
-hermeslite.c 
+hermeslite.c \
+udp.c 
 
-HEADERS= 
+HEADERS= udp.h
 
 
 OBJS= \
-hermeslite.o 
+hermeslite.o \
+udp.o
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 
