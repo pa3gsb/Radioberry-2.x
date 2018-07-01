@@ -431,6 +431,8 @@ void create_radioberry_socket() {
 
 void tx_iq_from_host_port(unsigned char* buffer) {
 	
+	unsigned char tx_iqdata[6];
+	
 	// protocol-2 the rate is 192ksps  (radioberry uses 48K; downsampling required!)
 	// i and q (msb first using 24b/sample, radioberry uses only 16b/sample; using 2 msb bytes.) from index 4 to 1443 (240 i and q samples)
 	// under construction....
@@ -450,8 +452,8 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 	spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
 	
 	int index = 4;	
-	while (index =< 1444) {
-		gpioRead(20) == 1) {};	// wait if TX buffer is full.	
+	while (index <= 1444) {
+		if (gpioRead(20) == 1) {};	// wait if TX buffer is full.	
 
 		tx_iqdata[0] = 0;
 		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
