@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Sat May 26 20:28:55 2018
+Sun Jul 08 10:37:50 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -340,7 +340,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat May 26 20:28:54 2018       ;
+; Analysis & Synthesis Status        ; Successful - Sun Jul 08 10:37:49 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -457,7 +457,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.4%      ;
+;     Processor 2            ;   3.1%      ;
 +----------------------------+-------------+
 
 
@@ -2427,7 +2427,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; Parameter Name ; Value                                                                            ; Type         ;
 +----------------+----------------------------------------------------------------------------------+--------------+
 ; initarray      ; (110000000,000000000,000000000,000000000,100110001,000000000,100010000,100100001 ; Array/Record ;
-; initarray      ; ,101001011,101000000,101000000,100000000,101000001,100000011,000000001,000000000 ;              ;
+; initarray      ; ,101001011,101000000,101000000,100000000,100000001,100000011,000000001,000000000 ;              ;
 ;                ; ,010000100,100000000,000000000,000000000)                                        ;              ;
 +----------------+----------------------------------------------------------------------------------+--------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
@@ -8757,7 +8757,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:42     ;
+; Top            ; 00:00:38     ;
 +----------------+--------------+
 
 
@@ -8767,7 +8767,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Sat May 26 20:27:44 2018
+    Info: Processing started: Sun Jul 08 10:36:42 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -9520,7 +9520,7 @@ Info (332111): Found 15 clocks
     Info (332111):   13.020 virt_ad9866_txclk
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:05
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:04
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
@@ -9533,10 +9533,10 @@ Info (21057): Implemented 17137 device resources after synthesis - the final res
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 94 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 57 warnings
-    Info: Peak virtual memory: 5024 megabytes
-    Info: Processing ended: Sat May 26 20:28:55 2018
-    Info: Elapsed time: 00:01:11
-    Info: Total CPU time (on all processors): 00:01:31
+    Info: Peak virtual memory: 5046 megabytes
+    Info: Processing ended: Sun Jul 08 10:37:50 2018
+    Info: Elapsed time: 00:01:08
+    Info: Total CPU time (on all processors): 00:01:26
 
 
 +------------------------------------------+

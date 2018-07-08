@@ -1,5 +1,5 @@
 Flow report for radioberry
-Sat May 26 20:33:57 2018
+Sun Jul 08 10:42:33 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sat May 26 20:33:39 2018       ;
+; Flow Status                        ; Successful - Sun Jul 08 10:42:16 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/26/2018 20:27:44 ;
+; Start date & time ; 07/08/2018 10:36:43 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ agreement for further details.
 ; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_MERGING              ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_RETIMING             ; Off                                    ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 220295161909995.152735926406720        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 220295161909995.153103900314596        ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
@@ -115,11 +115,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:06     ; 1.0                     ; 5024 MB             ; 00:01:27                           ;
-; Fitter                    ; 00:04:34     ; 1.1                     ; 5514 MB             ; 00:07:09                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 4758 MB             ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:16     ; 1.2                     ; 4964 MB             ; 00:00:18                           ;
-; Total                     ; 00:05:59     ; --                      ; --                  ; 00:08:57                           ;
+; Analysis & Synthesis      ; 00:01:03     ; 1.0                     ; 5046 MB             ; 00:01:22                           ;
+; Fitter                    ; 00:04:15     ; 1.1                     ; 5553 MB             ; 00:06:45                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 4759 MB             ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:15     ; 1.2                     ; 4962 MB             ; 00:00:17                           ;
+; Total                     ; 00:05:37     ; --                      ; --                  ; 00:08:27                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

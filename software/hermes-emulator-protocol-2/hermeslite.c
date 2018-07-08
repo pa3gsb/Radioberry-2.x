@@ -60,6 +60,7 @@
 #include <netinet/ip.h>	
 #include <netinet/udp.h>		
 #include <netinet/tcp.h>
+#include <sys/time.h>
 #include "udp.h"
 #include <pigpio.h>
 
@@ -129,8 +130,15 @@ static int rxfreq2 = 1008000;
 static int txfreq  = 3630000;
 
 unsigned char drive_level;
+unsigned char prev_drive_level = -1;
 
 sem_t mutex;
+
+struct timeval t1;
+struct timeval t2;
+
+static int lcount=0;
+static int lseq=-1;
 
 int main(int argc, char **argv) {
 	
@@ -139,9 +147,10 @@ int main(int argc, char **argv) {
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "                 Emulator Protocol-2 version 30-6-2018 \n");
+	fprintf(stderr, "                 Emulator Protocol-2 version 07-08-2018 \n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr,	"                       !!!Under construction!!!\n");
+	fprintf(stderr,	"!!! Thetis TX not working, linHPSDR TX is not working!!!\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
@@ -154,14 +163,21 @@ int main(int argc, char **argv) {
 	
 	initialize_gpio();
 	
-	fprintf(stderr, "\n\nhermeslite protocol-2 emulator starts .... \n\n");
+	fprintf(stderr, "\n\nhermeslite protocol-2 emulator started \n\n");
 
 	pthread_t pid1; 
 	pthread_create(&pid1, NULL, send_rx_iq_to_sdr_program, NULL);
 	
+	gettimeofday(&t1, 0);
+	
 	handle_data_from_sdr_program();
 	
 	fprintf(stderr, "hermeslite protocol-2 emulator stopped. \n");
+}
+
+float timedifference_msec(struct timeval t0, struct timeval t1)
+{
+    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
 }
 
 int handle_data_from_sdr_program() {	
@@ -384,7 +400,7 @@ void high_priority_from_host_port(unsigned char* data) {
 	running = ((data[4] & 0x01) == 0x01)? 1:0;
 	//fprintf(stderr," running %.2X %d \n",data[4], running);
 	ptt = ((data[4] & 0x02) == 0x02) ? 1:0; 
-	//fprintf(stderr," ptt %d ",ptt);
+	//fprintf(stderr," ptt %d \n",ptt);
 	//data[5] [0] = CWX, [1] = Dot, [2] = Dash CW TODO!!
 	int rxphase1, rxphase2, txphase;
 	//rx 
@@ -399,7 +415,10 @@ void high_priority_from_host_port(unsigned char* data) {
 	txfreq =  (long) (((double) txphase * 122880000.0) / 4294967296.0);
 	//fprintf(stderr,"txfreq %d \n", txfreq);
 	drive_level = data[345] & 0xFF;
-	//fprintf(stderr,"drive_level %d \n", drive_level);
+	//if (prev_drive_level != drive_level) {
+	//	prev_drive_level = drive_level;
+	//	fprintf(stderr,"drive_level %d \n", drive_level);
+	//}
 	gain = ((int) ((signed char) data[1443])) + 12;
 	//fprintf(stderr, "ad9866 gain = %d rx-gain = %d \n", gain, (gain -12));
 }
@@ -429,14 +448,19 @@ void create_radioberry_socket() {
 	}
 }
 
+
 void tx_iq_from_host_port(unsigned char* buffer) {
 	
 	unsigned char tx_iqdata[6];
 	
 	// protocol-2 the rate is 192ksps  (radioberry uses 48K; downsampling required!)
 	// i and q (msb first using 24b/sample, radioberry uses only 16b/sample; using 2 msb bytes.) from index 4 to 1443 (240 i and q samples)
-	// under construction....
 	if (!ptt) return;
+	
+	//getting the udp packages sometimes twice...?
+	int seq = buffer[0] << 24 | buffer[1] << 16  | buffer[2]<< 8 | buffer[3] ;
+	if (lseq == seq) return;
+	lseq = seq;
 	
 	sem_wait(&mutex);
 	
@@ -453,7 +477,7 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 	
 	int index = 4;	
 	while (index <= 1444) {
-		if (gpioRead(20) == 1) {};	// wait if TX buffer is full.	
+		if (gpioRead(20) == 1) {};	//avoiding overruns
 
 		tx_iqdata[0] = 0;
 		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
@@ -462,7 +486,16 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 		tx_iqdata[4] = ((buffer[++index]) & 0xFF); 
 		tx_iqdata[5] = ((buffer[++index]) & 0xFF); 
 		spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
-		index = index + 19;
+		index = index + 20;	//decimation by 4
+		
+		lcount ++;
+		if (lcount == 48000) {
+			lcount = 0;
+			gettimeofday(&t2, 0);
+			float elapsd = timedifference_msec(t1, t2);
+			printf("Code tx mode spi executed in %f milliseconds.\n", elapsd);
+			gettimeofday(&t1, 0);
+		}
 	}
 	sem_post(&mutex); 
 }
