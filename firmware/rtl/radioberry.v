@@ -341,7 +341,7 @@ wire rx_wrfull;
 
 assign pistrobe = rx_strobe & rx_wrfull;
 
-rxFIFO rx1_FIFO_inst(	.aclr(reset),
+rxLargeFIFO rx1_FIFO_inst(	.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx1_wrusedw), .wrfull(rx_wrfull),  
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 													

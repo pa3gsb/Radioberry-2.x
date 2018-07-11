@@ -41,15 +41,15 @@ parameter bit [0:19][8:0] initarray = {
     {1'b0,8'h00}, // Address 0x01,
     {1'b0,8'h00}, // Address 0x02, 
     {1'b0,8'h00}, // Address 0x03, 
-    {1'b1,8'h31}, // Address 0x04, 
+    {1'b1,8'h36}, // Address 0x04, 
     {1'b0,8'h00}, // Address 0x05, 
-    {1'b1,8'h10}, // Address 0x06,
+    {1'b1,8'h14}, // Address 0x06,
     {1'b1,8'h21}, // Address 0x07, Initiate DC offset calibration and RX filter on
     {1'b1,8'h4b}, // Address 0x08, RX filter f-3db at ~34 MHz after scaling
     {1'b1,8'h40}, // Address 0x09, 
     {1'b1,8'h40}, // Address 0x0a, 
     {1'b1,8'h00}, // Address 0x0b, RX gain only on PGA
-    {1'b1,8'h01}, // Address 0x0c, TX twos complement and interpolation factor 
+    {1'b1,8'h41}, // Address 0x0c, TX twos complement and interpolation factor 
     {1'b1,8'h03}, // Address 0x0d, RT twos complement 
     {1'b0,8'h01}, // Address 0x0e, Enable/Disable IAMP 
     {1'b0,8'h00}, // Address 0x0f,     

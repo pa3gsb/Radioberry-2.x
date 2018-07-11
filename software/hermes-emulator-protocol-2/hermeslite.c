@@ -536,7 +536,8 @@ void fillDiscoveryReplyMessage() {
 	for (i; i < 11; i++) broadcastReply[i] = i - 5; //MAC 00-01-02-03-04-05
 	broadcastReply[4]  = 0x02;
 	broadcastReply[11] = HERMESLITE;	
-	broadcastReply[13] = FIRMWARE_VERSION;				
+	broadcastReply[13] = FIRMWARE_VERSION;	
+	broadcastReply[20] = MAX_RECEIVERS;
 }
 
 int handleDiscovery(unsigned char* buffer) {

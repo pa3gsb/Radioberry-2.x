@@ -94,8 +94,12 @@ set_max_delay -from transmitter:transmitter_inst|out_data[*]	-to ad9866_adio[*] 
 set_max_delay -from rxFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_nkk1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
 set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_nkk1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx2_inst|treg[*] 4
 
-set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a0~porta_datain_reg0 2
+set_max_delay -from rxLargeFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_0lk1:auto_generated|altsyncram_d271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
+						 
+set_max_delay -from spi_slave:spi_slave_rx_inst|rdata[*]	-to txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_ngk1:auto_generated|altsyncram_v171:fifo_ram|ram_block9a0~porta_datain_reg0 4
+						 
 set_max_delay -from  reset_handler:reset_handler_inst|reset~_Duplicate_1	-to spi_slave:spi_slave_rx_inst|rdata[*] 5
+set_max_delay -from  reset_handler:reset_handler_inst|reset~_Duplicate_1	-to spi_slave:spi_slave_rx2_inst|treg[*] 5
 
 set_min_delay -from spi_mosi	-to spi_slave:spi_slave_rx_inst|rdata[*] -2
 	
