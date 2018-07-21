@@ -69,6 +69,9 @@ input  wire KEY_DASH;      //dash input from external input
 output wire key_dot_rpi;
 output wire key_dash_rpi;
 output wire cw_ptt;
+reg cw_fpga;
+wire icw_ptt;
+assign cw_ptt = (icw_ptt && cw_fpga) ? 1'b1: 1'b0; //cw by fpga is set inform emulator
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         AD9866 Control
@@ -124,7 +127,7 @@ wire [15:0] CW_RF;
 //wire   [7:0] delay;				// 0 - 255, sets delay in mS from CW Key activation to RF out
 //wire   [9:0] hang;				// 0 - 1000, sets delay in mS from release of CW Key to dropping of PTT
 
-profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8'd20), .hang(10'd300), .PTT(cw_ptt));	
+profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8'd20), .hang(10'd300), .PTT(icw_ptt));	
 		
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,6 +143,7 @@ begin
 		rx1_freq <= spi_recv[31:0];
 		rx1_speed <= spi_recv[41:40];
 		rx_gain <= ~spi_recv[37:32];
+		cw_fpga <= spi_recv[38];
 	end else begin
 		tx_gain <= spi_recv[37:32];
 	end

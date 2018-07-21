@@ -70,6 +70,7 @@
 #define HERMESLITE  0x06	
 #define FIRMWARE_VERSION 0x28	//firmware version 4.0 (=0x28)
 #define TIMEOUT_MS 100 
+#define HANDLER_STEADY_TIME_US 5000
 
 // port definitions from host
 #define GENERAL_REGISTERS_FROM_HOST_PORT 1024
@@ -86,10 +87,12 @@
 #define WIDE_BAND_TO_HOST_PORT 1027
 #define RX_IQ_TO_HOST_PORT_0 1035
 
+void printIntroScreen();
 int handleDiscovery(unsigned char* buffer);
 int createUDPSocket(void);
 void handle_packets_from_sdr_program(unsigned char* buffer,int buflen);
-void *send_rx_iq_to_sdr_program(void *arg);
+void *send_rx_iq_to_host(void *arg);
+void *send_high_priority_status_to_host(void *arg);
 void rx1_spiReader(unsigned char iqdata[]);
 void rx2_spiReader(unsigned char iqdata[]);
 void receiver_specific_registers_from_host_port(unsigned char* buffer);
@@ -104,9 +107,13 @@ static long rx1_sequence = 0;
 static long rx2_sequence = 0;
 static char sdr_client_addr[20];
 static char radioberry_addr[20];
+static long status_sequence = 0;
 
 static struct sockaddr_in src_addr[8];
 static struct sockaddr_in dst_addr;
+
+static struct sockaddr_in high_priority_addr;
+static int high_priority_addr_length;
 
 int radioberry_socket=-1;
 int discover_socket=-1;
@@ -133,6 +140,7 @@ unsigned char drive_level;
 unsigned char prev_drive_level = -1;
 
 sem_t mutex;
+static sem_t high_priority_mutex;
 
 struct timeval t1;
 struct timeval t2;
@@ -140,39 +148,52 @@ struct timeval t2;
 static int lcount=0;
 static int lseq=-1;
 
+static int cw = 0;
+static int cw_keyer_speed = 0;
+static int cw_keyer_weight = 0;
+static int cw_iambic_mode = 0;
+static int cw_keyer_reverse = 0;
+static int cw_break_in = 0;
+static int cw_ptt = 0;
+
 int main(int argc, char **argv) {
 	
-	fprintf(stderr,"\n");
-	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr, "                 Emulator Protocol-2 version 07-08-2018 \n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"                       !!!Under construction!!!\n");
-	fprintf(stderr,	"!!! Thetis TX not working, linHPSDR TX is not working!!!\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
-	fprintf(stderr, "\n");
-	fprintf(stderr, "\n");
-	fprintf(stderr, "====================================================================\n");
-	fprintf(stderr, "====================================================================\n");
+	printIntroScreen();
 	
 	sem_init(&mutex, 0, 1);	
+	sem_init(&high_priority_mutex, 0, 0);
 	
 	initialize_gpio();
 	
 	fprintf(stderr, "\n\nhermeslite protocol-2 emulator started \n\n");
 
 	pthread_t pid1; 
-	pthread_create(&pid1, NULL, send_rx_iq_to_sdr_program, NULL);
+	pthread_create(&pid1, NULL, send_rx_iq_to_host, NULL);
+	
+	pthread_t pid2; 
+	pthread_create(&pid2, NULL, send_high_priority_status_to_host, NULL);
 	
 	gettimeofday(&t1, 0);
 	
 	handle_data_from_sdr_program();
 	
 	fprintf(stderr, "hermeslite protocol-2 emulator stopped. \n");
+}
+
+void setup_isr_handler(int pin, gpioAlertFunc_t pAlert) {
+  gpioSetMode(pin, PI_INPUT);
+  gpioSetPullUpDown(pin,PI_PUD_UP);
+  usleep(10000); // give time to settle to avoid false triggers
+  gpioSetAlertFunc(pin, pAlert);
+  gpioGlitchFilter(pin, HANDLER_STEADY_TIME_US);
+}
+
+void cw_ptt_alert(int gpio, int level, uint32_t tick) {
+	fprintf(stderr, "cw - alert; cw_break_in = %d and cw-mode = %d\n", cw_break_in, cw);
+    if (running && cw_break_in && cw){
+		cw_ptt = level;
+		sem_post(&high_priority_mutex);
+	}
 }
 
 float timedifference_msec(struct timeval t0, struct timeval t1)
@@ -227,10 +248,35 @@ int initialize_gpio() {
 		perror("radioberry_protocol: spi bus rx2 could not be initialized. \n");
 		exit(-1);
 	}
+	//setup cw interrupt service routine;
+	//keyer attached to fpga is touched=> set radioberry in tx mode. 
+	setup_isr_handler(17, cw_ptt_alert); 
+	
 	return 0;
 }
 
-void *send_rx_iq_to_sdr_program(void *arg) {
+void *send_high_priority_status_to_host(void *arg) {
+	unsigned char* status_buffer = (unsigned char *)malloc(60); 
+	memset(status_buffer,0,60);
+	
+	while(1) {
+		if (running) {
+			sem_wait(&high_priority_mutex);
+			
+			fprintf(stderr, "send high priority status to host. \n");
+			
+			status_buffer[0]=status_sequence>>24;
+			status_buffer[1]=status_sequence>>16;
+			status_buffer[2]=status_sequence>>8;
+			status_buffer[3]=status_sequence;
+			status_buffer[4]= (cw_ptt & 0x01);
+			send_udp_packet(radioberry_socket, high_priority_addr, dst_addr, status_buffer, 60);
+			status_sequence++;
+		} else {usleep(20000);}
+	}
+}
+
+void *send_rx_iq_to_host(void *arg) {
 	unsigned char* iqbuffer_rx1 = (unsigned char *)malloc(2048); 
 	memset(iqbuffer_rx1,0,2048);
 	unsigned char* iqbuffer_rx2 = (unsigned char *)malloc(2048); 
@@ -302,7 +348,7 @@ void *send_rx_iq_to_sdr_program(void *arg) {
 }
 
 void rx1_spiReader(unsigned char iqdata[]) {	
-	iqdata[0] = (sampleSpeed[0] & 0x03);
+	iqdata[0] = (sampleSpeed[0] & 0x03)| 0x40; // set cw@fpga
 	iqdata[1] = (~(gain & 0x2F));
 	iqdata[2] = ((rxfreq1 >> 24) & 0xFF);
 	iqdata[3] = ((rxfreq1 >> 16) & 0xFF);
@@ -389,8 +435,13 @@ void receiver_specific_registers_from_host_port(unsigned char* data) {
 	nrx = lnrx;
 }
 
-void transmitter_specific_registers_from_host_port(unsigned char* buffer) {
-			//1026 todo; things like cw handling...
+void transmitter_specific_registers_from_host_port(unsigned char* buffer) {		
+   cw = ((buffer[5] & 0x02) == 0x02)? 1: 0;
+   cw_iambic_mode  = ((buffer[5] & 0x28) == 0x28)? 2: ((buffer[5] & 0x08)==0x08)? 1: 0;
+   cw_keyer_reverse=  ((buffer[5] & 0x04) == 0x04)? 1:0;
+   cw_break_in = ((buffer[5] & 0x80) == 0x80)? 1:0;
+   cw_keyer_speed  = buffer[9];
+   cw_keyer_weight = buffer[10]; 	
 }
 
 void high_priority_from_host_port(unsigned char* data) {
@@ -434,6 +485,11 @@ void create_radioberry_socket() {
 		dst_addr.sin_family = PF_INET;
 		dst_addr.sin_port = htons(ntohs(remote_port));
 		inet_aton(sdr_client_addr, &dst_addr.sin_addr);	
+		
+		high_priority_addr.sin_family = PF_INET;
+		high_priority_addr.sin_port = htons(HIGH_PRIORITY_TO_HOST_PORT);
+		inet_aton(radioberry_addr, &high_priority_addr.sin_addr);
+		
 		if((radioberry_socket = socket(PF_INET, SOCK_RAW, IPPROTO_RAW)) < 0){
 			perror("socket");
 			exit(-1);
@@ -447,7 +503,6 @@ void create_radioberry_socket() {
 		}	
 	}
 }
-
 
 void tx_iq_from_host_port(unsigned char* buffer) {
 	
@@ -466,21 +521,22 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 	
 	gpioWrite(21, 1); ;	// ptt on
 	
-	//set the tx freq; we are doing this per block of data.
-	tx_iqdata[0] = 0x00;
-	tx_iqdata[1] = 0x00;
+	//set the tx freq; we are doing this per block of data.	
+	tx_iqdata[0] = cw_keyer_speed | (cw_iambic_mode<<6);
+	tx_iqdata[1] = cw_keyer_weight | (cw_keyer_reverse<<7);
 	tx_iqdata[2] = ((txfreq >> 24) & 0xFF);
 	tx_iqdata[3] = ((txfreq >> 16) & 0xFF);
 	tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
 	tx_iqdata[5] = (txfreq & 0xFF);				
 	spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
 	
+	// possible improvement; only in cw and no change in drive level; no need to inform firmware!
 	int index = 4;	
 	while (index <= 1444) {
 		if (gpioRead(20) == 1) {};	//avoiding overruns
 
 		tx_iqdata[0] = 0;
-		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
+		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 ) tx_gain <= spi_recv[37:32];
 		tx_iqdata[2] = ((buffer[index++]) & 0xFF); 
 		tx_iqdata[3] = ((buffer[index++]) & 0xFF); 
 		tx_iqdata[4] = ((buffer[++index]) & 0xFF); 
@@ -576,4 +632,24 @@ int handleDiscovery(unsigned char* buffer) {
 	close(discover_socket);
 	return 0;
 }
+
+void printIntroScreen() {
+	fprintf(stderr,"\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr, "              Emulator Protocol-2 alpha version 21-08-2018 \n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "====================================================================\n");
+	fprintf(stderr, "====================================================================\n");
+}
+
 // end of source.

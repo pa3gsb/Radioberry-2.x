@@ -1,4 +1,4 @@
 Warning (10268): Verilog HDL information at profile.v(60): always construct contains both blocking and non-blocking assignments File: C:/dev/git/Radioberry-2.x/firmware/rtl/profile.v Line: 60
 Info (10281): Verilog HDL Declaration information at FirInterp8_1024.v(115): object "rAddr" differs only in case from object "raddr" in the same scope File: C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/FirInterp8_1024.v Line: 115
 Warning (10268): Verilog HDL information at firfilt.v(207): always construct contains both blocking and non-blocking assignments File: C:/dev/git/Radioberry-2.x/firmware/Polyphase_FIR/firfilt.v Line: 207
-Warning (10273): Verilog HDL warning at radioberry.v(79): extended using "x" or "z" File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 79
+Warning (10273): Verilog HDL warning at radioberry.v(82): extended using "x" or "z" File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 82
