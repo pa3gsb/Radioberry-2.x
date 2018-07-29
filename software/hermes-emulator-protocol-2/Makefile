@@ -3,22 +3,34 @@ LINK=gcc
 
 OPTIONS=-g 
 
-LIBS=-lrt -lm -lwiringPi -lpigpio -lpthread 
+LIBS=-lrt -lm -lwiringPi -lpigpio -lpthread -lasound
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
 PROGRAM=hermeslite
 
 SOURCES= \
+udp.c \
+audio.c \
+mic.c \
+local_audio_discovery.c \
 hermeslite.c \
-udp.c 
 
-HEADERS= udp.h
+
+HEADERS= hermeslite.h \
+udp.h \
+audio.h \
+mic.h \
+local_audio_discovery.h \
+
 
 
 OBJS= \
+udp.o \
+audio.o \
+mic.o \
+local_audio_discovery.o \
 hermeslite.o \
-udp.o
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 

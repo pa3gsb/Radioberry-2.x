@@ -63,57 +63,29 @@
 #include <sys/time.h>
 #include "udp.h"
 #include <pigpio.h>
+#include <getopt.h>
 
-#define MAX_RECEIVERS 2
-#define SERVICE_PORT 1024
-#define MAX_DATA_SIZE 2048
-#define HERMESLITE  0x06	
-#define FIRMWARE_VERSION 0x28	//firmware version 4.0 (=0x28)
-#define TIMEOUT_MS 100 
-#define HANDLER_STEADY_TIME_US 5000
-
-// port definitions from host
-#define GENERAL_REGISTERS_FROM_HOST_PORT 1024
-#define RECEIVER_SPECIFIC_REGISTERS_FROM_HOST_PORT 1025
-#define TRANSMITTER_SPECIFIC_REGISTERS_FROM_HOST_PORT 1026
-#define HIGH_PRIORITY_FROM_HOST_PORT 1027
-#define AUDIO_FROM_HOST_PORT 1028
-#define TX_IQ_FROM_HOST_PORT 1029
-
-// port definitions to host
-#define COMMAND_RESPONCE_TO_HOST_PORT 1024
-#define HIGH_PRIORITY_TO_HOST_PORT 1025
-#define MIC_LINE_TO_HOST_PORT 1026
-#define WIDE_BAND_TO_HOST_PORT 1027
-#define RX_IQ_TO_HOST_PORT_0 1035
-
-void printIntroScreen();
-int handleDiscovery(unsigned char* buffer);
-int createUDPSocket(void);
-void handle_packets_from_sdr_program(unsigned char* buffer,int buflen);
-void *send_rx_iq_to_host(void *arg);
-void *send_high_priority_status_to_host(void *arg);
-void rx1_spiReader(unsigned char iqdata[]);
-void rx2_spiReader(unsigned char iqdata[]);
-void receiver_specific_registers_from_host_port(unsigned char* buffer);
-void transmitter_specific_registers_from_host_port(unsigned char* buffer);
-void high_priority_from_host_port(unsigned char* buffer);
-void tx_iq_from_host_port(unsigned char* buffer);
-int initialize_gpio();
-int handle_data_from_sdr_program();
-void create_radioberry_socket();
+#include "hermeslite.h"
+#include "local_audio_discovery.h"
+#include "audio.h"
+#include "mic.h"
 
 static long rx1_sequence = 0;
 static long rx2_sequence = 0;
 static char sdr_client_addr[20];
 static char radioberry_addr[20];
 static long status_sequence = 0;
+static long mic_sequence = 0;
+static long mic_count=4;
 
 static struct sockaddr_in src_addr[8];
 static struct sockaddr_in dst_addr;
 
 static struct sockaddr_in high_priority_addr;
 static int high_priority_addr_length;
+
+static struct sockaddr_in mic_line_addr;
+static int mic_line_addr_length; 
 
 int radioberry_socket=-1;
 int discover_socket=-1;
@@ -123,6 +95,9 @@ unsigned char broadcastReply[60];
 
 static int rx1_spi_handler;
 static int rx2_spi_handler;
+
+int use_local_audio_in = 0;
+int use_local_audio_out = 0;
 
 static int running = 0;
 static int nrx = 1; 
@@ -144,8 +119,11 @@ static sem_t high_priority_mutex;
 
 struct timeval t1;
 struct timeval t2;
+struct timeval t1a;
+struct timeval t2a;
 
 static int lcount=0;
+static int lcounta=0;
 static int lseq=-1;
 
 static int cw = 0;
@@ -156,10 +134,80 @@ static int cw_keyer_reverse = 0;
 static int cw_break_in = 0;
 static int cw_ptt = 0;
 
+#define SHORT_OPTIONS "lha:m:v"
+#define HST_SHRT_OPTS ""
+
+static struct option long_options[] =
+{
+	{"list-audio-devices",  0, 0, 'l'},
+    {"audio-out",       	1, 0, 'a'},
+	{"audio-in",        	1, 0, 'm'},
+	{"help",            	0, 0, 'h'},
+    {"version",         	0, 0, 'v'},
+    {0, 0, 0, 0}
+};
+
+const char *version = "Radioberry hermeslite emulator version 07-29-2018";
+const char *copyright =
+    "Copyright (C) 2018 Johan Maas, PA3GSB\n"
+    "This is free software; see the source for copying conditions.  There is NO\n"
+    "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
+
 int main(int argc, char **argv) {
 	
 	printIntroScreen();
+	if (argc == 1) usage();
 	
+	audio_get_cards(); 
+	
+	while (1)
+    {
+		int c;
+		int option_index = 0;
+		c = getopt_long(argc,
+						argv,
+						SHORT_OPTIONS HST_SHRT_OPTS,
+						long_options,
+						&option_index);
+		if (c == -1)
+        {
+            break;
+        }
+		
+		switch (c)
+		{
+			case 'h':
+				usage();
+				exit(0);
+			case 'v':
+				print_version();
+				exit(0);
+			case 'l':
+				discover_audio_cards();
+				exit(0);
+			case 'a':	
+				if (!optarg)
+				{
+					usage();    /* wrong arg count */
+					exit(1);
+				}
+				use_local_audio_out = 1;
+				audio_open_output(selectAudioOutputDevice(atoi(optarg)));
+				break;
+			case 'm':	
+				if (!optarg)
+				{
+					usage();    /* wrong arg count */
+					exit(1);
+				}
+				use_local_audio_in = 1;
+				audio_open_input(selectAudioInputDevice(atoi(optarg)));
+				break;
+			default:
+				break;
+		}
+	}
+
 	sem_init(&mutex, 0, 1);	
 	sem_init(&high_priority_mutex, 0, 0);
 	
@@ -173,9 +221,14 @@ int main(int argc, char **argv) {
 	pthread_t pid2; 
 	pthread_create(&pid2, NULL, send_high_priority_status_to_host, NULL);
 	
+	gettimeofday(&t1a, 0);
+	start_mic_thread();
+	
 	gettimeofday(&t1, 0);
 	
 	handle_data_from_sdr_program();
+	
+	audio_close_output();
 	
 	fprintf(stderr, "hermeslite protocol-2 emulator stopped. \n");
 }
@@ -253,6 +306,37 @@ int initialize_gpio() {
 	setup_isr_handler(17, cw_ptt_alert); 
 	
 	return 0;
+}
+
+unsigned char l_mic_buffer[132]; 
+void process_local_mic(unsigned char *mic_buffer){
+	int i=0;
+	
+	if (running) {
+		for(i=0;i<MIC_SAMPLES;i++) {
+			l_mic_buffer[mic_count++] = mic_buffer[i*2+1]; //msb
+			l_mic_buffer[mic_count++] = mic_buffer[i*2];
+			
+			/* making verbose function.....
+			lcounta ++;
+			if (lcounta == 48000) {
+				lcounta = 0;
+				gettimeofday(&t2a, 0);
+				float elapsd = timedifference_msec(t1a, t2a);
+				printf("Audio line-in executed in %f milliseconds.\n", elapsd);
+				gettimeofday(&t1a, 0);
+			}
+			*/
+			
+		}
+		l_mic_buffer[0]=mic_sequence>>24;
+		l_mic_buffer[1]=mic_sequence>>16;
+		l_mic_buffer[2]=mic_sequence>>8;
+		l_mic_buffer[3]=mic_sequence;
+		send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
+		mic_sequence++;
+		mic_count = 4;
+	}
 }
 
 void *send_high_priority_status_to_host(void *arg) {
@@ -403,7 +487,7 @@ void handle_packets_from_sdr_program(unsigned char* buffer,int buflen) {
 				high_priority_from_host_port(data);
 				break;
 			case AUDIO_FROM_HOST_PORT:
-				// no implementation
+				audio_write(data);
 				break;
 			case TX_IQ_FROM_HOST_PORT:
 				tx_iq_from_host_port(data);
@@ -489,6 +573,10 @@ void create_radioberry_socket() {
 		high_priority_addr.sin_family = PF_INET;
 		high_priority_addr.sin_port = htons(HIGH_PRIORITY_TO_HOST_PORT);
 		inet_aton(radioberry_addr, &high_priority_addr.sin_addr);
+		
+		mic_line_addr.sin_family = PF_INET;
+		mic_line_addr.sin_port = htons(MIC_LINE_TO_HOST_PORT);
+		inet_aton(radioberry_addr, &mic_line_addr.sin_addr);
 		
 		if((radioberry_socket = socket(PF_INET, SOCK_RAW, IPPROTO_RAW)) < 0){
 			perror("socket");
@@ -633,20 +721,37 @@ int handleDiscovery(unsigned char* buffer) {
 	return 0;
 }
 
+void usage(void)
+{
+    printf("Usage: hermeslite [OPTION]... [COMMAND]...\n"
+           "COMMANDs to initialize the hermeslite emulator.\n\n");
+
+    printf(
+		" -a, --audio-out=ID	select audio output device number. See model list\n"
+        " -m, --audio-in=ID		select audio input device. See model list\n"
+        " -l, --list            list all audio device and exit\n"
+        " -h, --help            display this help and exit\n"
+        " -v, --version         output version information and exit\n\n"
+    );
+
+    printf("\nReport bugs to <pa3gsb@gmail.com>.\n");
+}
+
+
+void print_version(void){
+	printf("Version information: \n%s \n\n", version);
+	printf("%s \n", copyright);
+}
+
 void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
+	fprintf(stderr, "\t\t\tRadioberry V2.0 beta 2.\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "              Emulator Protocol-2 alpha version 21-08-2018 \n");
+	fprintf(stderr, "\t\t\tEmulator Protocol-2 alpha \n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
-	fprintf(stderr, "\n");
+	fprintf(stderr, "\t\t\tHave fune Johan PA3GSB\n");
 	fprintf(stderr, "\n");
 	fprintf(stderr, "====================================================================\n");
 	fprintf(stderr, "====================================================================\n");
