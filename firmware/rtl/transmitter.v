@@ -22,7 +22,7 @@ input  wire [31:0]afTxFIFO;
 input wire afTxFIFOEmpty;
 output wire afTxFIFOReadStrobe;
 input wire [15:0] CW_RF; 
-output reg [13:0] out_data;
+output reg [11:0] out_data;
 input wire PTT;
 input wire CW_PTT;
 output wire LED;
@@ -73,17 +73,17 @@ CicInterpM5 #(.RRRR(192), .IBITS(20), .OBITS(16), .GBITS(31)) in2 ( clk, 1'd1, r
 //---------------------------------------------------------
 //    CORDIC NCO 
 //---------------------------------------------------------
-wire signed [14:0] cordic_i_out;
+wire signed [15:0] cordic_i_out;
 
 cpl_cordic #(.OUT_WIDTH(16))
  		cordic_inst (.clock(clk), .frequency(frequency), .in_data_I(CW_PTT? CW_RF: y2_i),			
 		.in_data_Q(CW_PTT? 16'd0: y2_r), .out_data_I(cordic_i_out), .out_data_Q());		
 
 
-wire signed [14:0] gated;
+wire signed [15:0] gated;
 
-assign gated = PTT ? cordic_i_out : 14'd0;
-always @ (negedge clk) out_data[13:0] <= gated[13:0]; 
+assign gated = PTT ? (cordic_i_out >>> 2) : 16'd0;
+always @ (negedge clk) out_data <= gated[11:0]; 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        Heartbeat (LED flashes twice as fast when PTT active)

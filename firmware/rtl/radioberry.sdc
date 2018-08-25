@@ -89,8 +89,9 @@ set_min_delay -from spi_ce[0]	-to spi_slave:spi_slave_rx_inst|rreg[*] -3
 set_max_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|treg[*] 3
 set_min_delay -from spi_ce[1]	-to spi_slave:spi_slave_rx2_inst|rreg[*] -3
 
+set_max_delay -from DACDp[*]	-to ad9866_adio[*] 18
 
-set_max_delay -from transmitter:transmitter_inst|out_data[*]	-to ad9866_adio[*] 18
+#set_max_delay -from transmitter:transmitter_inst|out_data[*]	-to ad9866_adio[*] 18
 						  
 set_max_delay -from rxFIFO:rx1_FIFO_inst|dcfifo:dcfifo_component|dcfifo_nkk1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx_inst|treg[*] 4
 set_max_delay -from rxFIFO:rx2_FIFO_inst|dcfifo:dcfifo_component|dcfifo_nkk1:auto_generated|altsyncram_b271:fifo_ram|q_b[*]	-to spi_slave:spi_slave_rx2_inst|treg[*] 4

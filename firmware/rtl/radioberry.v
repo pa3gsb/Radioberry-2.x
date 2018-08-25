@@ -79,7 +79,7 @@ assign cw_ptt = (icw_ptt && cw_fpga) ? 1'b1: 1'b0; //cw by fpga is set inform em
 
 assign ad9866_mode = 1'b0;				//HALFDUPLEX
 assign ad9866_rst_n = ~reset;
-assign ad9866_adio = ptt_in ? DAC[13:2] : 12'bZ;
+assign ad9866_adio = ptt_in ? DACDp : 12'bZ;
 assign ad9866_rxclk = ad9866_clk;	 
 assign ad9866_txclk = ad9866_clk;	 
 
@@ -384,7 +384,10 @@ transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_ph
 							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
 							.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(rb_info_2));
 
-wire [13:0] DAC;
+wire [11:0] DAC;
+
+reg [11:0] DACDp;
+always @ (negedge ad9866_clk) DACDp <= DAC;
 	
 //------------------------------------------------------------------------------
 //                          Running...

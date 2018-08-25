@@ -61,7 +61,7 @@ void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
 
 #define TX_MAX 3200 
-unsigned char tx_buffer[TX_MAX];
+unsigned char tx_buffer[TX_MAX * 4];
 int fill_tx = 0; 
 int use_tx  = 0;
 unsigned char drive_level;
@@ -489,7 +489,7 @@ void fillPacketToSend() {
 			}
 			if (MOX){
 				if (sampleSpeed ==0)
-					usleep(620);  
+					usleep(670);  //670
 				if (sampleSpeed == 1)
 					usleep(260); 
 			}

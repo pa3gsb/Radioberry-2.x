@@ -1,5 +1,5 @@
 Flow report for radioberry
-Sat Jul 21 16:41:40 2018
+Sat Aug 25 15:53:30 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -41,17 +41,17 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sat Jul 21 16:41:23 2018       ;
+; Flow Status                        ; Successful - Sat Aug 25 15:53:15 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
 ; Device                             ; 10CL025YE144C8G                             ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 14,795 / 24,624 ( 60 % )                    ;
-;     Total combinational functions  ; 11,610 / 24,624 ( 47 % )                    ;
-;     Dedicated logic registers      ; 11,169 / 24,624 ( 45 % )                    ;
-; Total registers                    ; 11206                                       ;
+; Total logic elements               ; 14,760 / 24,624 ( 60 % )                    ;
+;     Total combinational functions  ; 11,613 / 24,624 ( 47 % )                    ;
+;     Dedicated logic registers      ; 11,181 / 24,624 ( 45 % )                    ;
+; Total registers                    ; 11218                                       ;
 ; Total pins                         ; 49 / 77 ( 64 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 473,216 / 608,256 ( 78 % )                  ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/21/2018 16:34:57 ;
+; Start date & time ; 08/25/2018 15:47:27 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ agreement for further details.
 ; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_MERGING              ; Off                                    ; On            ; --          ; --         ;
 ; ALLOW_REGISTER_RETIMING             ; Off                                    ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 220295161909995.153218369711292        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 220295161909995.153520484712944        ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
@@ -116,11 +116,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:32     ; 1.0                     ; 5038 MB             ; 00:01:54                           ;
-; Fitter                    ; 00:04:38     ; 1.1                     ; 5556 MB             ; 00:07:23                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 4757 MB             ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:14     ; 1.2                     ; 4961 MB             ; 00:00:17                           ;
-; Total                     ; 00:06:27     ; --                      ; --                  ; 00:09:37                           ;
+; Analysis & Synthesis      ; 00:01:13     ; 1.0                     ; 5041 MB             ; 00:01:32                           ;
+; Fitter                    ; 00:04:21     ; 1.1                     ; 5558 MB             ; 00:06:11                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 4756 MB             ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:13     ; 1.2                     ; 4963 MB             ; 00:00:14                           ;
+; Total                     ; 00:05:50     ; --                      ; --                  ; 00:08:00                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
