@@ -1,9 +1,9 @@
 CC=gcc
 LINK=gcc
 
-OPTIONS=-g 
+OPTIONS=-g -Wno-deprecated-declarations -march=native -O2
 
-LIBS=-lrt -lm -lwiringPi -lpigpio -lpthread -lasound
+LIBS=-lrt -lm -lpigpio -lpthread -lasound
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 

@@ -376,6 +376,7 @@ void *send_rx_iq_to_host(void *arg) {
 	
 	while(1) {
 		if (running) {
+
 			while (ptt) {usleep(20000);}
 	
 			sem_wait(&mutex); 
