@@ -1,9 +1,9 @@
 CC=gcc
 LINK=gcc
 
-OPTIONS=-g 
+OPTIONS=-g -O3
 
-LIBS=-lrt -lm -lwiringPi -lpigpio -lpthread 
+LIBS=-lrt -lm -lpigpio -lpthread 
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 

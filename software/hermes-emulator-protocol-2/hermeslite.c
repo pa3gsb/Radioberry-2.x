@@ -147,7 +147,7 @@ static struct option long_options[] =
     {0, 0, 0, 0}
 };
 
-const char *version = "Radioberry hermeslite emulator version 07-29-2018";
+const char *version = "Radioberry hermeslite emulator version 08-28-2018";
 const char *copyright =
     "Copyright (C) 2018 Johan Maas, PA3GSB\n"
     "This is free software; see the source for copying conditions.  There is NO\n"
@@ -432,8 +432,8 @@ void *send_rx_iq_to_host(void *arg) {
 }
 
 void rx1_spiReader(unsigned char iqdata[]) {	
-	iqdata[0] = (sampleSpeed[0] & 0x03)| 0x40; // set cw@fpga
-	iqdata[1] = (~(gain & 0x2F));
+	iqdata[0] = (sampleSpeed[0] & 0x03); 
+	iqdata[1] = (~(gain & 0x2F)) | 0x40;		// set cw@fpga
 	iqdata[2] = ((rxfreq1 >> 24) & 0xFF);
 	iqdata[3] = ((rxfreq1 >> 16) & 0xFF);
 	iqdata[4] = ((rxfreq1 >> 8) & 0xFF);

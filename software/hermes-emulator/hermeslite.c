@@ -130,14 +130,13 @@ int main(int argc, char **argv)
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "                      Radioberry V2.0 beta 2.\n");
+	fprintf(stderr, "\t\t\t Radioberry V2.0 beta 2.\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "                    Emulator version 26-5-2018 \n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr, "                      Have fune Johan PA3GSB\n");
-	fprintf(stderr, "\n");
-	fprintf(stderr, "\n");
+	fprintf(stderr, "\t\t\t Emulator version 8-28-2018 \n");
+	fprintf(stderr,	"\n\n");
+	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\n\n");
+	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
 	fprintf(stderr, "====================================================================\n");
 	fprintf(stderr, "====================================================================\n");
 	
