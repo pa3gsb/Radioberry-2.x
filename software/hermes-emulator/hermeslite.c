@@ -548,13 +548,13 @@ void *spiWriter(void *arg) {
 	while(1) {
 		
 		if (MOX) {
+			
+			sem_wait(&tx_full);
 			sem_wait(&mutex);
 			
 			gpioWrite(21, 1); ;	// ptt on
 			
 			while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
-				
-			sem_wait(&tx_full); 
 			
 			//set the tx freq.
 			tx_iqdata[0] = 0x00;
@@ -578,7 +578,7 @@ void *spiWriter(void *arg) {
 			}
 			spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 			
-			
+			sem_post(&mutex);
 			sem_post(&tx_empty); 
 			
 			lcount ++;
@@ -589,8 +589,6 @@ void *spiWriter(void *arg) {
 				printf("Code tx mode spi executed in %f milliseconds.\n", elapsd);
 				gettimeofday(&t20, 0);
 			}
-			
-			sem_post(&mutex);
 		} else if (running==0) usleep(5000000); else usleep(1000000);
 	}
 }
