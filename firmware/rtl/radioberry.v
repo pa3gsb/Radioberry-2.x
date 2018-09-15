@@ -136,6 +136,7 @@ profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8
 
 wire [47:0] spi_recv;
 wire spi_done;
+reg [31:0] tx_iq;
 
 always @ (posedge spi_done)
 begin	
@@ -146,6 +147,7 @@ begin
 		cw_fpga <= spi_recv[38];
 	end else begin
 		tx_gain <= spi_recv[37:32];
+		tx_iq <= spi_recv[31:0];
 	end
 end 
 
@@ -366,23 +368,32 @@ rxFIFO rx2_FIFO_inst(.aclr(reset),
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire wtxreq = ptt_in ? 1'b1 : 1'b0;
 
-txFIFO txFIFO_inst(	.aclr(reset), 
-							.wrclk(~spi_ce[0]), .data(spi_recv[31:0]), .wrreq(wtxreq),
-							.rdclk(ad9866_clk), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty), .rdfull(txFIFOFull));
+logic [11:0]  rd_length;
+logic tx_start = 0;
+
+always @ (posedge ad9866_clk)
+begin
+	if (reset | ~ptt_in) tx_start <= 0;
+	if (rd_length > 12'd1023) tx_start <= 1;
+end
+
+txFIFO txFIFO_inst(	.aclr(reset | ~ptt_in), 
+							.wrclk(~spi_ce[0]), .data(tx_iq), .wrreq(1'b1), .wrfull (), .wrusedw (), 
+							.rdclk(ad9866_clk), .q(txDataFromFIFO), .rdreq((txFIFOReadStrobe & tx_start)),  .rdempty(), .rdfull() , .rdusedw(rd_length));
 	
-
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        Transmitter module
 //------------------------------------------------------------------------------------------------------------------------------------------------------------							
 wire [31:0] txDataFromFIFO;
-wire txFIFOEmpty;
 wire txFIFOReadStrobe;
+wire [31:0] txData;
 
-transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
-							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
-							.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(rb_info_2));
+assign txData = (tx_start) ? txDataFromFIFO: 32'b0;
+
+transmitter transmitter_inst(	.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
+								.tsiq_data(txData), .tsiq_read_strobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
+								.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(rb_info_2));
 
 wire [11:0] DAC;
 

@@ -1,6 +1,6 @@
 /* 
 * Copyright (C)
-* 2017 - Johan Maas, PA3GSB
+* 2017, 2018 - Johan Maas, PA3GSB
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ void *spiWriter(void *arg);
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
 
-#define TX_MAX 3200 
+#define TX_MAX 9600 
 unsigned char tx_buffer[TX_MAX * 4];
 int fill_tx = 0; 
 int use_tx  = 0;
@@ -79,7 +79,6 @@ static int rx2_spi_handler;
 
 unsigned char iqdata[6];
 unsigned char tx_iqdata[6];
-
 
 #define SERVICE_PORT	1024
 
@@ -119,10 +118,23 @@ struct timeval t20;
 struct timeval t21;
 float elapsed;
 
+#define MAX11613_ADDRESS	0x34
+unsigned char data[8];
+unsigned int i2c_bus = 1;
+int i2c_handler = 0;
+int vswr_active = 0;
 
 float timedifference_msec(struct timeval t0, struct timeval t1)
 {
     return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
+}
+
+void initVSWR(){
+	unsigned char config[1];
+	config[0] = 0x07;
+	if (i2cWriteDevice(i2c_handler, config, 1) == 0 ) {
+		vswr_active = 1;
+	}	
 }
 
 int main(int argc, char **argv)
@@ -132,7 +144,7 @@ int main(int argc, char **argv)
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr, "\t\t\t Radioberry V2.0 beta 2.\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t\t\t Emulator version 8-28-2018 \n");
+	fprintf(stderr, "\t\t\t Emulator version 9-15-2018 \n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");
@@ -150,9 +162,13 @@ int main(int argc, char **argv)
 	}
 	
 	gpioSetMode(13, PI_INPUT); 	//rx1 samples
-	gpioSetMode(16, PI_INPUT);	//rx2 samples
-	gpioSetMode(20, PI_INPUT); 
+	gpioSetMode(16, PI_INPUT);	//rx2 samples 
 	gpioSetMode(21, PI_OUTPUT); 
+	
+		
+	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
+	
+	if (i2c_handler >= 0)  initVSWR();
 	
 	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
 	if (rx1_spi_handler < 0) {
@@ -206,9 +222,8 @@ int main(int argc, char **argv)
 
 void runHermesLite() {
 	printf("runHermesLite \n");
-	
+
 	for (;;) {
-		
 		if (running) {
 			sendPacket();
 		} else {usleep(20000);}
@@ -394,11 +409,12 @@ void handlePacket(char* buffer){
 					sem_wait(&tx_empty);
 					int i = 0;
 					for (i; i < 4; i++){
-						put_tx_buffer(buffer[k + 4 + i]);			
+						put_tx_buffer(buffer[k + 4 + i]);	
 					}
 					sem_post(&tx_full);
 				}
 			}
+			
 		}
 	}
 }
@@ -487,8 +503,22 @@ void fillPacketToSend() {
 				}
 			}
 			if (MOX){
+				if (vswr_active) {
+					if (frame == 0) {
+						//reading once per 2 frames!
+						int result = i2cReadDevice(i2c_handler, data, 8);
+						hpsdrdata[11 + coarse_pointer] = 0x08;
+						hpsdrdata[14 + coarse_pointer] = (data[6] & 0x0F); 
+						hpsdrdata[15 + coarse_pointer] = data[7];
+					}
+					if (frame == 1) {
+						hpsdrdata[11 + coarse_pointer] = 0x10;
+						hpsdrdata[12 + coarse_pointer] = (data[0] & 0x0F); 
+						hpsdrdata[13 + coarse_pointer] = data[1];
+					}
+				}
 				if (sampleSpeed ==0)
-					usleep(670);  //670
+					usleep(670);  
 				if (sampleSpeed == 1)
 					usleep(260); 
 			}
@@ -554,18 +584,17 @@ void *spiWriter(void *arg) {
 			
 			gpioWrite(21, 1); ;	// ptt on
 			
-			while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
-			
-			//set the tx freq.
-			tx_iqdata[0] = 0x00;
-			tx_iqdata[1] = 0x00;
-			tx_iqdata[2] = ((txfreq >> 24) & 0xFF);
-			tx_iqdata[3] = ((txfreq >> 16) & 0xFF);
-			tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
-			tx_iqdata[5] = (txfreq & 0xFF);
-						
-			spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
-					
+			if (lcount % 4800 ==0) {
+				//set the tx freq.
+				tx_iqdata[0] = 0x00;
+				tx_iqdata[1] = 0x00;
+				tx_iqdata[2] = ((txfreq >> 24) & 0xFF);
+				tx_iqdata[3] = ((txfreq >> 16) & 0xFF);
+				tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
+				tx_iqdata[5] = (txfreq & 0xFF);
+							
+				spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
+			}		
 			tx_iqdata[0] = 0;
 			tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
 			if (prev_drive_level != drive_level) {
@@ -576,6 +605,7 @@ void *spiWriter(void *arg) {
 			for (i; i < 4; i++){			
 				tx_iqdata[2 + i] = get_tx_buffer(); //MSB is first in buffer..
 			}
+			
 			spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 			
 			sem_post(&mutex);
@@ -600,10 +630,8 @@ void put_tx_buffer(unsigned char  value) {
 
 unsigned char get_tx_buffer() {
     int tmp = tx_buffer[use_tx];   
-    use_tx = (use_tx + 1) % TX_MAX;   
+    use_tx = (use_tx + 1) % TX_MAX;  	
     return tmp;
 }
 
 //end of source.
-
-

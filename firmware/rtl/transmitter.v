@@ -6,9 +6,8 @@ module transmitter(
 	reset,
 	clk,                  
 	frequency,
-	afTxFIFO, 
-	afTxFIFOEmpty, 
-	afTxFIFOReadStrobe,
+	tsiq_data, 
+	tsiq_read_strobe,
 	CW_RF,
 	out_data,
 	PTT,
@@ -18,9 +17,8 @@ module transmitter(
 input wire reset;
 input wire clk;
 input [31:0] frequency;
-input  wire [31:0]afTxFIFO; 	
-input wire afTxFIFOEmpty;
-output wire afTxFIFOReadStrobe;
+input  wire [31:0]tsiq_data; 	
+output wire tsiq_read_strobe;
 input wire [15:0] CW_RF; 
 output reg [11:0] out_data;
 input wire PTT;
@@ -30,35 +28,19 @@ output wire LED;
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          Read IQ data from txFIFO
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-wire pulse;
-pulsegen pulse_inst (.sig(req1), .rst(reset), .clk(clk), .pulse(pulse)); 
-
-assign afTxFIFOReadStrobe = !afTxFIFOEmpty ? pulse : 1'b0;
-
-reg  [31:0] tx_IQ_data;
-always @(posedge clk)
-begin
-	if (reset)
-		tx_IQ_data <= 32'b0;
-
-	if (afTxFIFOReadStrobe)
-		tx_IQ_data <= afTxFIFO;
-	
-end	
-
 reg signed [15:0]fir_i;
 reg signed [15:0]fir_q;
+
+assign tsiq_read_strobe = req1;
 
 // latch I&Q data on strobe from FIR
 always @ (posedge clk)
 begin 
 	if (req1) begin 
-		fir_i = tx_IQ_data[31:16];
-		fir_q = tx_IQ_data[15:0];
+		fir_i <= tsiq_data[31:16];
+		fir_q <= tsiq_data[15:0];
 	end 
 end
-
 
 // Interpolate I/Q samples from 48 kHz to the clock frequency
 wire req1, req2;
@@ -68,7 +50,7 @@ wire [15:0] y2_r, y2_i;
 FirInterp8_1024 fi (clk, req2, req1, fir_i, fir_q, y1_r, y1_i);  // req2 enables an output sample, req1 requests next input sample.
 
 // GBITS reduced to 31
-CicInterpM5 #(.RRRR(192), .IBITS(20), .OBITS(16), .GBITS(31)) in2 ( clk, 1'd1, req2, y1_r, y1_i, y2_r, y2_i);
+CicInterpM5 #(.RRRR(200), .IBITS(20), .OBITS(16), .GBITS(31)) in2 ( clk, 1'd1, req2, y1_r, y1_i, y2_r, y2_i);
 
 //---------------------------------------------------------
 //    CORDIC NCO 
