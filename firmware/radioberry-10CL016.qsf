@@ -177,7 +177,6 @@ set_location_assignment PIN_13 -to rx1_samples
 set_location_assignment PIN_46 -to rx2_samples
 set_location_assignment PIN_31 -to pistrobe
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to pistrobe
-set_global_assignment -name QIP_FILE cyclone_ip/rxLargeFIFO.qip
 set_global_assignment -name VERILOG_FILE rtl/profile_ROM.v
 set_global_assignment -name VERILOG_FILE rtl/profile.v
 set_global_assignment -name VERILOG_FILE rtl/iambic.v

@@ -1,11 +1,7 @@
-# Get git commit version and date
-GIT_DATE := $(firstword $(shell git --no-pager show --date=short --format="%ai" --name-only))
-GIT_VERSION := $(shell git describe --abbrev=0 --tags)
-
 CC=gcc
 LINK=gcc
 
-OPTIONS=-g -O3 -D GIT_DATE='"$(GIT_DATE)"' -D GIT_VERSION='"$(GIT_VERSION)"'
+OPTIONS=-g -O3
 
 LIBS=-lrt -lm -lpigpio -lpthread 
 

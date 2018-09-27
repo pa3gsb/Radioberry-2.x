@@ -56,7 +56,7 @@ module rxLargeFIFO (
 	input	  wrreq;
 	output	[47:0]  q;
 	output	  wrfull;
-	output	[10:0]  wrusedw;
+	output	[11:0]  wrusedw;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
@@ -67,10 +67,10 @@ module rxLargeFIFO (
 
 	wire [47:0] sub_wire0;
 	wire  sub_wire1;
-	wire [10:0] sub_wire2;
+	wire [11:0] sub_wire2;
 	wire [47:0] q = sub_wire0[47:0];
 	wire  wrfull = sub_wire1;
-	wire [10:0] wrusedw = sub_wire2[10:0];
+	wire [11:0] wrusedw = sub_wire2[11:0];
 
 	dcfifo	dcfifo_component (
 				.aclr (aclr),
@@ -89,11 +89,11 @@ module rxLargeFIFO (
 				.wrempty ());
 	defparam
 		dcfifo_component.intended_device_family = "Cyclone 10 LP",
-		dcfifo_component.lpm_numwords = 2048,
+		dcfifo_component.lpm_numwords = 4096,
 		dcfifo_component.lpm_showahead = "OFF",
 		dcfifo_component.lpm_type = "dcfifo",
 		dcfifo_component.lpm_width = 48,
-		dcfifo_component.lpm_widthu = 11,
+		dcfifo_component.lpm_widthu = 12,
 		dcfifo_component.overflow_checking = "OFF",
 		dcfifo_component.rdsync_delaypipe = 11,
 		dcfifo_component.read_aclr_synch = "OFF",
@@ -114,7 +114,7 @@ endmodule
 // Retrieval info: PRIVATE: AlmostFullThr NUMERIC "-1"
 // Retrieval info: PRIVATE: CLOCKS_ARE_SYNCHRONIZED NUMERIC "0"
 // Retrieval info: PRIVATE: Clock NUMERIC "4"
-// Retrieval info: PRIVATE: Depth NUMERIC "2048"
+// Retrieval info: PRIVATE: Depth NUMERIC "4096"
 // Retrieval info: PRIVATE: Empty NUMERIC "0"
 // Retrieval info: PRIVATE: Full NUMERIC "1"
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone 10 LP"
@@ -142,11 +142,11 @@ endmodule
 // Retrieval info: PRIVATE: wsUsedW NUMERIC "1"
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone 10 LP"
-// Retrieval info: CONSTANT: LPM_NUMWORDS NUMERIC "2048"
+// Retrieval info: CONSTANT: LPM_NUMWORDS NUMERIC "4096"
 // Retrieval info: CONSTANT: LPM_SHOWAHEAD STRING "OFF"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "dcfifo"
 // Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "48"
-// Retrieval info: CONSTANT: LPM_WIDTHU NUMERIC "11"
+// Retrieval info: CONSTANT: LPM_WIDTHU NUMERIC "12"
 // Retrieval info: CONSTANT: OVERFLOW_CHECKING STRING "OFF"
 // Retrieval info: CONSTANT: RDSYNC_DELAYPIPE NUMERIC "11"
 // Retrieval info: CONSTANT: READ_ACLR_SYNCH STRING "OFF"
@@ -162,7 +162,7 @@ endmodule
 // Retrieval info: USED_PORT: wrclk 0 0 0 0 INPUT NODEFVAL "wrclk"
 // Retrieval info: USED_PORT: wrfull 0 0 0 0 OUTPUT NODEFVAL "wrfull"
 // Retrieval info: USED_PORT: wrreq 0 0 0 0 INPUT NODEFVAL "wrreq"
-// Retrieval info: USED_PORT: wrusedw 0 0 11 0 OUTPUT NODEFVAL "wrusedw[10..0]"
+// Retrieval info: USED_PORT: wrusedw 0 0 12 0 OUTPUT NODEFVAL "wrusedw[11..0]"
 // Retrieval info: CONNECT: @aclr 0 0 0 0 aclr 0 0 0 0
 // Retrieval info: CONNECT: @data 0 0 48 0 data 0 0 48 0
 // Retrieval info: CONNECT: @rdclk 0 0 0 0 rdclk 0 0 0 0
@@ -171,7 +171,7 @@ endmodule
 // Retrieval info: CONNECT: @wrreq 0 0 0 0 wrreq 0 0 0 0
 // Retrieval info: CONNECT: q 0 0 48 0 @q 0 0 48 0
 // Retrieval info: CONNECT: wrfull 0 0 0 0 @wrfull 0 0 0 0
-// Retrieval info: CONNECT: wrusedw 0 0 11 0 @wrusedw 0 0 11 0
+// Retrieval info: CONNECT: wrusedw 0 0 12 0 @wrusedw 0 0 12 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL rxLargeFIFO.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL rxLargeFIFO.inc FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL rxLargeFIFO.cmp FALSE

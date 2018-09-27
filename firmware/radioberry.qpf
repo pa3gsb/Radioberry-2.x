@@ -19,14 +19,14 @@
 #
 # Quartus Prime
 # Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-# Date created = 10:32:50  September 15, 2018
+# Date created = 11:05:20  September 27, 2018
 #
 # -------------------------------------------------------------------------- #
 
 QUARTUS_VERSION = "17.0"
-DATE = "10:32:50  September 15, 2018"
+DATE = "11:05:20  September 27, 2018"
 
 # Revisions
 
-PROJECT_REVISION = "radioberry"
 PROJECT_REVISION = "radioberry-10CL016"
+PROJECT_REVISION = "radioberry"

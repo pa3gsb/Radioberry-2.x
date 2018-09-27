@@ -56,10 +56,10 @@ module txFIFO (
 	output	[31:0]  q;
 	output	  rdempty;
 	output	  rdfull;
-	output	[10:0]  rdusedw;
+	output	[11:0]  rdusedw;
 	output	  wrempty;
 	output	  wrfull;
-	output	[10:0]  wrusedw;
+	output	[11:0]  wrusedw;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
@@ -79,18 +79,18 @@ endmodule
 // Retrieval info: PRIVATE: AlmostFullThr NUMERIC "-1"
 // Retrieval info: PRIVATE: CLOCKS_ARE_SYNCHRONIZED NUMERIC "0"
 // Retrieval info: PRIVATE: Clock NUMERIC "4"
-// Retrieval info: PRIVATE: Depth NUMERIC "2048"
+// Retrieval info: PRIVATE: Depth NUMERIC "4096"
 // Retrieval info: PRIVATE: Empty NUMERIC "1"
 // Retrieval info: PRIVATE: Full NUMERIC "1"
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone 10 LP"
 // Retrieval info: PRIVATE: LE_BasedFIFO NUMERIC "0"
 // Retrieval info: PRIVATE: LegacyRREQ NUMERIC "1"
 // Retrieval info: PRIVATE: MAX_DEPTH_BY_9 NUMERIC "0"
-// Retrieval info: PRIVATE: OVERFLOW_CHECKING NUMERIC "0"
+// Retrieval info: PRIVATE: OVERFLOW_CHECKING NUMERIC "1"
 // Retrieval info: PRIVATE: Optimize NUMERIC "2"
 // Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
-// Retrieval info: PRIVATE: UNDERFLOW_CHECKING NUMERIC "0"
+// Retrieval info: PRIVATE: UNDERFLOW_CHECKING NUMERIC "1"
 // Retrieval info: PRIVATE: UsedW NUMERIC "1"
 // Retrieval info: PRIVATE: Width NUMERIC "32"
 // Retrieval info: PRIVATE: dc_aclr NUMERIC "1"
@@ -107,15 +107,15 @@ endmodule
 // Retrieval info: PRIVATE: wsUsedW NUMERIC "1"
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone 10 LP"
-// Retrieval info: CONSTANT: LPM_NUMWORDS NUMERIC "2048"
+// Retrieval info: CONSTANT: LPM_NUMWORDS NUMERIC "4096"
 // Retrieval info: CONSTANT: LPM_SHOWAHEAD STRING "OFF"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "dcfifo"
 // Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "32"
-// Retrieval info: CONSTANT: LPM_WIDTHU NUMERIC "11"
-// Retrieval info: CONSTANT: OVERFLOW_CHECKING STRING "ON"
+// Retrieval info: CONSTANT: LPM_WIDTHU NUMERIC "12"
+// Retrieval info: CONSTANT: OVERFLOW_CHECKING STRING "OFF"
 // Retrieval info: CONSTANT: RDSYNC_DELAYPIPE NUMERIC "11"
 // Retrieval info: CONSTANT: READ_ACLR_SYNCH STRING "OFF"
-// Retrieval info: CONSTANT: UNDERFLOW_CHECKING STRING "ON"
+// Retrieval info: CONSTANT: UNDERFLOW_CHECKING STRING "OFF"
 // Retrieval info: CONSTANT: USE_EAB STRING "ON"
 // Retrieval info: CONSTANT: WRITE_ACLR_SYNCH STRING "OFF"
 // Retrieval info: CONSTANT: WRSYNC_DELAYPIPE NUMERIC "11"
@@ -126,12 +126,12 @@ endmodule
 // Retrieval info: USED_PORT: rdempty 0 0 0 0 OUTPUT NODEFVAL "rdempty"
 // Retrieval info: USED_PORT: rdfull 0 0 0 0 OUTPUT NODEFVAL "rdfull"
 // Retrieval info: USED_PORT: rdreq 0 0 0 0 INPUT NODEFVAL "rdreq"
-// Retrieval info: USED_PORT: rdusedw 0 0 11 0 OUTPUT NODEFVAL "rdusedw[10..0]"
+// Retrieval info: USED_PORT: rdusedw 0 0 12 0 OUTPUT NODEFVAL "rdusedw[11..0]"
 // Retrieval info: USED_PORT: wrclk 0 0 0 0 INPUT NODEFVAL "wrclk"
 // Retrieval info: USED_PORT: wrempty 0 0 0 0 OUTPUT NODEFVAL "wrempty"
 // Retrieval info: USED_PORT: wrfull 0 0 0 0 OUTPUT NODEFVAL "wrfull"
 // Retrieval info: USED_PORT: wrreq 0 0 0 0 INPUT NODEFVAL "wrreq"
-// Retrieval info: USED_PORT: wrusedw 0 0 11 0 OUTPUT NODEFVAL "wrusedw[10..0]"
+// Retrieval info: USED_PORT: wrusedw 0 0 12 0 OUTPUT NODEFVAL "wrusedw[11..0]"
 // Retrieval info: CONNECT: @aclr 0 0 0 0 aclr 0 0 0 0
 // Retrieval info: CONNECT: @data 0 0 32 0 data 0 0 32 0
 // Retrieval info: CONNECT: @rdclk 0 0 0 0 rdclk 0 0 0 0
@@ -141,10 +141,10 @@ endmodule
 // Retrieval info: CONNECT: q 0 0 32 0 @q 0 0 32 0
 // Retrieval info: CONNECT: rdempty 0 0 0 0 @rdempty 0 0 0 0
 // Retrieval info: CONNECT: rdfull 0 0 0 0 @rdfull 0 0 0 0
-// Retrieval info: CONNECT: rdusedw 0 0 11 0 @rdusedw 0 0 11 0
+// Retrieval info: CONNECT: rdusedw 0 0 12 0 @rdusedw 0 0 12 0
 // Retrieval info: CONNECT: wrempty 0 0 0 0 @wrempty 0 0 0 0
 // Retrieval info: CONNECT: wrfull 0 0 0 0 @wrfull 0 0 0 0
-// Retrieval info: CONNECT: wrusedw 0 0 11 0 @wrusedw 0 0 11 0
+// Retrieval info: CONNECT: wrusedw 0 0 12 0 @wrusedw 0 0 12 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL txFIFO.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL txFIFO.inc FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL txFIFO.cmp FALSE

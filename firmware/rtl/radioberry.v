@@ -164,8 +164,8 @@ wire spi_rx2_done;
 always @ (posedge spi_rx2_done)
 begin	
 	if (!ptt_in) begin
-		rx2_freq <= spi_rx2_recv[31:0];
-		rx2_speed <= spi_rx2_recv[41:40];
+		//rx2_freq <= spi_rx2_recv[31:0];
+		//rx2_speed <= spi_rx2_recv[41:40];
 	end else begin
 		iambic_mode <= spi_rx2_recv[47:46];
 		cw_speed <= spi_rx2_recv[45:40];
@@ -206,26 +206,6 @@ always @ (rx1_speed)
  end 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                         Decimation Rate Control rx2
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Decimation rates
-
-reg [1:0] rx2_speed;	// selected decimation rate in external program,
-reg [5:0] rx2_rate;
-
-always @ (rx2_speed)
- begin 
-	  case (rx2_speed)
-	  0: rx2_rate <= RATE48;     
-	  1: rx2_rate <= RATE96;     
-	  2: rx2_rate <= RATE192;     
-	  3: rx2_rate <= RATE384;           
-	  default: rx2_rate <= RATE48;        
-	  endcase
- end 
- 
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         FILTER Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -246,23 +226,6 @@ localparam M2 = 32'd1876499845; 	// B57 = 2^57.   M2 = B57/CLK_FREQ = 76800000
 localparam M3 = 32'd16777216;   	// M3 = 2^24, used to round the result
 assign ratio = rx1_freq * M2 + M3; 
 assign sync_phase_word = ratio[56:25]; 
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                         Convert frequency to phase word rx2
-//
-//		Calculates  ratio = fo/fs = frequency/73.728Mhz where frequency is in MHz
-//
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire   [31:0] sync_phase_word_rx2;
-wire  [63:0] ratio_rx2;
-
-reg[31:0] rx2_freq;
-
-localparam M4 = 32'd1876499845; 	// B57 = 2^57.   M2 = B57/CLK_FREQ = 76800000
-localparam M5 = 32'd16777216;   	// M3 = 2^24, used to round the result
-
-assign ratio_rx2 = rx2_freq * M4 + M5; 
-assign sync_phase_word_rx2 = ratio_rx2[56:25]; 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Convert frequency to phase word tx
@@ -316,71 +279,33 @@ receiver #(.CICRATE(CICRATE))
 						.out_data_Q(rx_Q));
 						
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                        Receiver module rx2
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire	[23:0] rx2_I;
-wire	[23:0] rx2_Q;
-wire	rx2_strobe;
-
-localparam CICRATE_RX2 = 6'd05;
-
-receiver #(.CICRATE(CICRATE_RX2)) 
-		receiver_rx2_inst(	
-						.clock(ad9866_clk),
-						.rate(rx2_rate), 
-						.frequency(sync_phase_word_rx2),
-						.out_strobe(rx2_strobe),
-						.in_data(adcpipe[1]),
-						.out_data_I(rx2_I),
-						.out_data_Q(rx2_Q));			
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                          rxFIFO Handler (IQ Samples) rx1
+//                          rxFIFO Handler (IQ Samples) rx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 reg [47:0] rxDataFromFIFO;
 
-wire rx1req = ptt_in ? 1'b0 : 1'b1;
-wire [9:0] rx1_wrusedw;
-assign rx1_samples = rx1_wrusedw[6];
+wire rxreq = ptt_in ? 1'b0 : 1'b1;
+wire [10:0] rx_wr_length;
+assign rx1_samples = (rx_wr_length > 11'd63) ? 1'b1: 1'b0; 
 
 wire rx_wrfull;
 
-assign pistrobe = rx_strobe & rx_wrfull;
-
-rxLargeFIFO rx1_FIFO_inst(	.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx1_wrusedw), .wrfull(rx_wrfull),  
-							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
-													
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                          rxFIFO Handler (IQ Samples) rx2
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-reg [47:0] rx2_DataFromFIFO;
-
-wire rx2req = ptt_in ? 1'b0 : 1'b1;
-wire [9:0] rx2_wrusedw;
-assign rx2_samples = rx2_wrusedw[6];
-
-rxFIFO rx2_FIFO_inst(.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrusedw(rx2_wrusedw), 
-							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));						
+rxFIFO rx_FIFO_inst(	.aclr(reset),
+							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx_wr_length), .wrfull(rx_wrfull),  
+							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rxreq));					
 		
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
+reg [11:0]  tx_rd_length;
+wire empty;
 
-logic [11:0]  rd_length;
-logic tx_start = 0;
+assign txFIFOFull = (tx_rd_length > 12'd4094) ? 1'b1: 1'b0;
 
-always @ (posedge ad9866_clk)
-begin
-	if (reset | ~ptt_in) tx_start <= 0;
-	if (rd_length > 12'd1023) tx_start <= 1;
-end
+wire txreq = ptt_in ? 1'b1 : 1'b0 ;
 
-txFIFO txFIFO_inst(	.aclr(reset | ~ptt_in), 
-							.wrclk(~spi_ce[0]), .data(tx_iq), .wrreq(1'b1), .wrfull (), .wrusedw (), 
-							.rdclk(ad9866_clk), .q(txDataFromFIFO), .rdreq((txFIFOReadStrobe & tx_start)),  .rdempty(), .rdfull() , .rdusedw(rd_length));
+txFIFO txFIFO_inst(	.aclr(reset), 
+							.wrclk(~spi_ce[0]), .data(tx_iq), .wrreq(txreq), .wrfull (), .wrusedw (), 
+							.rdclk(ad9866_clk), .q(txDataFromFIFO), .rdreq((txFIFOReadStrobe & ~empty)),  .rdempty(empty), .rdfull() , .rdusedw(tx_rd_length));
 	
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        Transmitter module
@@ -389,10 +314,8 @@ wire [31:0] txDataFromFIFO;
 wire txFIFOReadStrobe;
 wire [31:0] txData;
 
-assign txData = (tx_start) ? txDataFromFIFO: 32'b0;
-
 transmitter transmitter_inst(	.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
-								.tsiq_data(txData), .tsiq_read_strobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
+								.tsiq_data(txDataFromFIFO), .tsiq_read_strobe(txFIFOReadStrobe), .tsiq_valid(~empty), .CW_RF(CW_RF), 
 								.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(rb_info_2));
 
 wire [11:0] DAC;

@@ -1,5 +1,5 @@
 Flow report for radioberry-10CL016
-Sat Sep 15 10:32:17 2018
+Thu Sep 27 11:11:54 2018
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -41,21 +41,21 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sat Sep 15 10:32:02 2018       ;
+; Flow Status                        ; Successful - Thu Sep 27 11:11:43 2018       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry-10CL016                          ;
 ; Top-level Entity Name              ; radioberry                                  ;
 ; Family                             ; Cyclone 10 LP                               ;
 ; Device                             ; 10CL016YE144C8G                             ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 14,688 / 15,408 ( 95 % )                    ;
-;     Total combinational functions  ; 11,673 / 15,408 ( 76 % )                    ;
-;     Dedicated logic registers      ; 11,420 / 15,408 ( 74 % )                    ;
-; Total registers                    ; 11420                                       ;
+; Total logic elements               ; 10,202 / 15,408 ( 66 % )                    ;
+;     Total combinational functions  ; 7,962 / 15,408 ( 52 % )                     ;
+;     Dedicated logic registers      ; 7,523 / 15,408 ( 49 % )                     ;
+; Total registers                    ; 7523                                        ;
 ; Total pins                         ; 49 / 79 ( 62 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 473,216 / 516,096 ( 92 % )                  ;
-; Embedded Multiplier 9-bit elements ; 94 / 112 ( 84 % )                           ;
+; Total memory bits                  ; 379,008 / 516,096 ( 73 % )                  ;
+; Embedded Multiplier 9-bit elements ; 54 / 112 ( 48 % )                           ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
 +------------------------------------+---------------------------------------------+
 
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/15/2018 10:27:29 ;
+; Start date & time ; 09/27/2018 11:08:30 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry-10CL016  ;
 +-------------------+---------------------+
@@ -79,11 +79,10 @@ agreement for further details.
 ; ALLOW_REGISTER_DUPLICATION          ; Off                                    ; On                 ; --          ; --         ;
 ; ALLOW_REGISTER_MERGING              ; Off                                    ; On                 ; --          ; --         ;
 ; ALLOW_REGISTER_RETIMING             ; Off                                    ; On                 ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 271082514656211.153700004907340        ; --                 ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 271082514656211.153803930912500        ; --                 ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit           ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --                 ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --                 ; --          ; --         ;
-; MISC_FILE                           ; cyclone_ip/rxLargeFIFO_bb.v            ; --                 ; --          ; --         ;
 ; MISC_FILE                           ; Polyphase_FIR/firromI_1024_bb.v        ; --                 ; --          ; --         ;
 ; MISC_FILE                           ; Polyphase_FIR/firram36I_1024_bb.v      ; --                 ; --          ; --         ;
 ; MISC_FILE                           ; cyclone_ip/txFIFO_bb.v                 ; --                 ; --          ; --         ;
@@ -117,11 +116,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:55     ; 1.0                     ; 5037 MB             ; 00:01:15                           ;
-; Fitter                    ; 00:03:26     ; 1.1                     ; 5544 MB             ; 00:05:28                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 4754 MB             ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:13     ; 1.3                     ; 4957 MB             ; 00:00:16                           ;
-; Total                     ; 00:04:37     ; --                      ; --                  ; 00:07:02                           ;
+; Analysis & Synthesis      ; 00:00:40     ; 1.0                     ; 4956 MB             ; 00:01:00                           ;
+; Fitter                    ; 00:02:25     ; 1.1                     ; 5420 MB             ; 00:03:47                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 4729 MB             ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:10     ; 1.2                     ; 4888 MB             ; 00:00:11                           ;
+; Total                     ; 00:03:18     ; --                      ; --                  ; 00:05:00                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

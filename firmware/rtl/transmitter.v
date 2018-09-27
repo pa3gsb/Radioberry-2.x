@@ -8,6 +8,7 @@ module transmitter(
 	frequency,
 	tsiq_data, 
 	tsiq_read_strobe,
+	tsiq_valid,
 	CW_RF,
 	out_data,
 	PTT,
@@ -19,6 +20,7 @@ input wire clk;
 input [31:0] frequency;
 input  wire [31:0]tsiq_data; 	
 output wire tsiq_read_strobe;
+input wire tsiq_valid;
 input wire [15:0] CW_RF; 
 output reg [11:0] out_data;
 input wire PTT;
@@ -36,7 +38,7 @@ assign tsiq_read_strobe = req1;
 // latch I&Q data on strobe from FIR
 always @ (posedge clk)
 begin 
-	if (req1) begin 
+	if (req1 & tsiq_valid ) begin 
 		fir_i <= tsiq_data[31:16];
 		fir_q <= tsiq_data[15:0];
 	end 

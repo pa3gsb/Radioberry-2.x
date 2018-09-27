@@ -18,14 +18,12 @@
 *
 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
-* Hermeslite Emulator. By using this emulator you have the possibility to connect to SDR programs like:
-*	- pihpsdr
-*	- linhpsdr
+* Emulator. By using this emulator you have the possibility to connect to SDR programs like:
 *	- Quisk
 *	- PowerSDR
 *	- Spark
 *
-*	Using the 'old HPSDR protocol'; also called protocol-1
+*	Using the 'old HPSDR protocol'
 *
 *  This emulator works with the Radioberry radiocard.
 *
@@ -48,22 +46,21 @@
 
 #include <pigpio.h>
 
-char build_date[]=GIT_DATE;
-char build_version[]=GIT_VERSION;
-
 void runHermesLite(void);
 void sendPacket(void);
 void handlePacket(char* buffer);
+void readPackets(void);
 void fillDiscoveryReplyMessage(void);
 int isValidFrame(char* data);
 void fillPacketToSend(void);
-void printIntroScreen(void);
+void init(void);
+void *spiReader(void *arg);
 void *packetreader(void *arg);
 void *spiWriter(void *arg);
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
 
-#define TX_MAX 4800 
+#define TX_MAX 48000 
 #define TX_MAX_BUFFER (TX_MAX * 4)
 unsigned char tx_buffer[TX_MAX_BUFFER];
 int fill_tx = 0; 
@@ -71,11 +68,12 @@ int use_tx  = 0;
 unsigned char drive_level;
 unsigned char prev_drive_level;
 int MOX = 0;
+#define TX_PRE_BUFFER 9600
+int tx_pre_buffer = TX_PRE_BUFFER;
 sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
 
-int tx_count =0;
 void rx1_spiReader(unsigned char iqdata[]);
 void rx2_spiReader(unsigned char iqdata[]);
 
@@ -144,7 +142,18 @@ void initVSWR(){
 
 int main(int argc, char **argv)
 {
-	printIntroScreen();	
+	fprintf(stderr,"\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr, "\t\t\t Radioberry V2.0 beta 2.\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr, "\t\t\t Emulator version 9-15-2018 \n");
+	fprintf(stderr,	"\n\n");
+	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\n\n");
+	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
+	fprintf(stderr, "====================================================================\n");
+	fprintf(stderr, "====================================================================\n");
 	
 	sem_init(&mutex, 0, 1);	
 	sem_init(&tx_empty, 0, TX_MAX); 
@@ -159,6 +168,7 @@ int main(int argc, char **argv)
 	gpioSetMode(16, PI_INPUT);	//rx2 samples 
 	gpioSetMode(20, PI_OUTPUT); 
 	gpioSetMode(21, PI_OUTPUT); 
+	
 		
 	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
 	
@@ -224,12 +234,17 @@ void runHermesLite() {
 	}
 }
 void *packetreader(void *arg) {
+	while(1) {
+		readPackets();
+	}
+}
+
+void readPackets() {
 	unsigned char buffer[2048];
 	
-	while(1) {
-		recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
-		if (recvlen > 0) handlePacket(buffer);
-	}
+	recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
+	if (recvlen > 0) 
+		handlePacket(buffer);
 }
 
 int att11 = 0;
@@ -395,12 +410,12 @@ void handlePacket(char* buffer){
 			{
 				int k = coarse_pointer + j;
 				if (MOX) {
-					sem_wait(&tx_empty);
+					if (tx_pre_buffer != 0) sem_wait(&tx_empty);
 					int i = 0;
 					for (i; i < 4; i++){
 						put_tx_buffer(buffer[k + 4 + i]);	
 					}
-					sem_post(&tx_full);
+					if (tx_pre_buffer != 0) sem_post(&tx_full); else tx_pre_buffer--;
 				}
 			}
 			
@@ -414,6 +429,7 @@ void sendPacket() {
 	if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
 			printf("error sendto");
 }
+
 
 int isValidFrame(char* data) {
 	return (data[8] == SYNC && data[9] == SYNC && data[10] == SYNC && data[520] == SYNC && data[521] == SYNC && data[522] == SYNC);
@@ -447,8 +463,6 @@ void fillPacketToSend() {
 
 			if (!MOX) {
 				
-				tx_count = 0; 
-				
 				sem_wait(&mutex); 
 				
 				gpioWrite(21, 0); 	// ptt off
@@ -469,10 +483,10 @@ void fillPacketToSend() {
 					int i =0;
 					for (i=0; i< (504 / (8 + factor)); i++) {
 						index = 16 + coarse_pointer + (i * (8 + factor));
-						//rx2_spiReader(iqdata); //for now only 1 rx slice...
+						rx2_spiReader(iqdata);
 						int j =0;
 						for (j; j< 6; j++){
-							hpsdrdata[index + j + 6] = hpsdrdata[index + j] ; //iqdata[j];
+							hpsdrdata[index + j + 6] = iqdata[j];
 						}	
 					}
 				}
@@ -493,8 +507,6 @@ void fillPacketToSend() {
 				}
 			}
 			if (MOX){
-				gpioWrite(21, 1); ;	// ptt on
-				
 				if (vswr_active) {
 					if (frame == 0) {
 						//reading once per 2 frames!
@@ -564,50 +576,56 @@ void rx2_spiReader(unsigned char iqdata[]) {
 
 void *spiWriter(void *arg) {
 	
+	int lcount =0;
 	gettimeofday(&t20, 0);
 	
 	while(1) {
 		
-		sem_wait(&tx_full);
-		sem_wait(&mutex);
-		
-		if (tx_count % 4800 ==0) {
-			//set the tx freq.
-			tx_iqdata[0] = 0x00;
-			tx_iqdata[1] = 0x00;
-			tx_iqdata[2] = ((txfreq >> 24) & 0xFF);
-			tx_iqdata[3] = ((txfreq >> 16) & 0xFF);
-			tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
-			tx_iqdata[5] = (txfreq & 0xFF);
-						
-			if (MOX) spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
-		}		
-		tx_iqdata[0] = 0;
-		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
-		if (prev_drive_level != drive_level) {
-			printf("drive level %d - corrected drive level %d \n", drive_level, tx_iqdata[1]);
-			prev_drive_level = drive_level; 
-		}
-		int i = 0;
-		for (i; i < 4; i++){			
-			tx_iqdata[2 + i] = get_tx_buffer(); //MSB is first in buffer..
-		}
-		
-		if (MOX) spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
-		
-		sem_post(&mutex);
-		sem_post(&tx_empty); 
-		
-		if (gpioRead(20) == 1) usleep(20); // wait 1/48000 of a second.
-		
-		tx_count ++;
-		if (tx_count == 48000) {
-			tx_count = 0;
-			gettimeofday(&t21, 0);
-			float elapsd = timedifference_msec(t20, t21);
-			printf("Code tx mode spi executed in %f milliseconds.\n", elapsd);
-			gettimeofday(&t20, 0);
-		}
+		if (MOX) {
+			
+			sem_wait(&tx_full);
+			sem_wait(&mutex);
+			
+			gpioWrite(21, 1); ;	// ptt on
+			
+			if (lcount % 4800 ==0) {
+				//set the tx freq.
+				tx_iqdata[0] = 0x00;
+				tx_iqdata[1] = 0x00;
+				tx_iqdata[2] = ((txfreq >> 24) & 0xFF);
+				tx_iqdata[3] = ((txfreq >> 16) & 0xFF);
+				tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
+				tx_iqdata[5] = (txfreq & 0xFF);
+							
+				spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
+			}		
+			tx_iqdata[0] = 0;
+			tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
+			if (prev_drive_level != drive_level) {
+				printf("drive level %d - corrected drive level %d \n", drive_level, tx_iqdata[1]);
+				prev_drive_level = drive_level; 
+			}
+			int i = 0;
+			for (i; i < 4; i++){			
+				tx_iqdata[2 + i] = get_tx_buffer(); //MSB is first in buffer..
+			}
+			
+			spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
+			
+			sem_post(&mutex);
+			sem_post(&tx_empty); 
+			
+			while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
+			
+			lcount ++;
+			if (lcount == 48000) {
+				lcount = 0;
+				gettimeofday(&t21, 0);
+				float elapsd = timedifference_msec(t20, t21);
+				printf("Code tx mode spi executed in %f milliseconds.\n", elapsd);
+				gettimeofday(&t20, 0);
+			}
+		} else {tx_pre_buffer = TX_PRE_BUFFER; lcount = 0; if (running==0) usleep(5000000); else usleep(1000000);}
 	}
 }
 
@@ -620,21 +638,6 @@ unsigned char get_tx_buffer() {
     int tmp = tx_buffer[use_tx];   
     use_tx = (use_tx + 1) % TX_MAX_BUFFER;  	
     return tmp;
-}
-
-void printIntroScreen() {
-	fprintf(stderr,"\n");
-	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\t Radioberry V2.0 beta 2.\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t Emulator build date %s version %s \n", build_date ,build_version);
-	fprintf(stderr,	"\n\n");
-	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
-	fprintf(stderr, "\n\n");
-	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
-	fprintf(stderr, "====================================================================\n");
-	fprintf(stderr, "====================================================================\n");
 }
 
 //end of source.
