@@ -43,3 +43,5 @@ int initialize_gpio();
 int handle_data_from_sdr_program();
 void create_radioberry_socket();
 void process_local_mic(unsigned char *mic_buffer);
+void start_dummy_mic_thread();
+void *mic_dummy_thread(void *arg);

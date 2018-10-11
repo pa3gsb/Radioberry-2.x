@@ -129,6 +129,13 @@ unsigned int i2c_bus = 1;
 int i2c_handler = 0;
 int vswr_active = 0;
 
+#define ADDR_ALEX 			0x21 		/* PCA9555 address 1 */
+int i2c_alex_handler = 0;
+int i2c_alex = 0;
+int alex_manual = 0;
+uint16_t i2c_alex_data = 0;
+uint16_t i2c_data = 0;
+
 float timedifference_msec(struct timeval t0, struct timeval t1)
 {
     return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
@@ -140,6 +147,32 @@ void initVSWR(){
 	if (i2cWriteDevice(i2c_handler, config, 1) == 0 ) {
 		vswr_active = 1;
 	}	
+}
+
+void initALEX(){
+	
+	int result = 0;
+	
+	unsigned char data[3];
+
+	/* configure all pins as output */
+	data[0] = 0x06;
+	data[1] = 0x00;
+	data[2] = 0x00;
+	result = i2cWriteDevice(i2c_alex_handler, data, 3);
+	
+	if (result >= 0) {
+		data[0] = 0x02;
+		data[1] = 0x00;
+		data[2] = 0x00;
+		/* set all pins to low */
+		result = i2cWriteDevice(i2c_alex_handler, data, 3);
+	}
+	
+	if (result >= 0) {
+		i2c_alex = 1;
+		fprintf(stderr, "alex interface found and initialized \n");
+	} else fprintf(stderr, "no alex interface found\n");
 }
 
 int main(int argc, char **argv)
@@ -161,8 +194,11 @@ int main(int argc, char **argv)
 	gpioSetMode(21, PI_OUTPUT); 
 		
 	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
-	
 	if (i2c_handler >= 0)  initVSWR();
+	
+	i2c_alex_handler = i2cOpen(i2c_bus, ADDR_ALEX, 0);
+	if (i2c_alex_handler >= 0)  initALEX();
+	
 	
 	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
 	if (rx1_spi_handler < 0) {
@@ -365,7 +401,34 @@ void handlePacket(char* buffer){
         {
             drive_level = buffer[524];  
         }
-		
+		 //ALEX
+		if (i2c_alex & (buffer[523] & 0xFE) == 0x12) {
+			alex_manual = ((buffer[525] & 0x40) == 0x40) ? 1: 0;
+			if (alex_manual) {
+				i2c_alex_data = ((buffer[526] & 0x8F) << 8 ) | (buffer[527] & 0xFF);
+			} else {
+				//firmware does determine the filter.
+				uint16_t hpf = 0, lpf = 0;
+				
+				if(freq < 1416000) hpf = 0x20; /* bypass */
+				else if(freq < 6500000) hpf = 0x10; /* 1.5 MHz HPF */
+				else if(freq < 9500000) hpf = 0x08; /* 6.5 MHz HPF */
+				else if(freq < 13000000) hpf = 0x04; /* 9.5 MHz HPF */
+				else if(freq < 20000000) hpf = 0x01; /* 13 MHz HPF */
+				else hpf = 0x02; /* 20 MHz HPF */
+				
+				if(freq > 32000000) lpf = 0x10; /* bypass */
+				else if(freq > 22000000) lpf = 0x20; /* 12/10 meters */
+				else if(freq > 15000000) lpf = 0x40; /* 17/15 meters */
+				else if(freq > 8000000) lpf = 0x01; /* 30/20 meters */
+				else if(freq > 4500000) lpf = 0x02; /* 60/40 meters */
+				else if(freq > 2400000) lpf = 0x04; /* 80 meters */
+				else lpf = 0x08; /* 160 meters */
+				
+				i2c_alex_data = hpf << 8 | lpf;
+			}
+		}
+			
 		if ((holdatt != att) || (holddither != dither)) {
 			holdatt = att;
 			holddither = dither;
@@ -384,6 +447,20 @@ void handlePacket(char* buffer){
 		if (holdtxfreq != txfreq) {
 			holdtxfreq = txfreq;
 			printf("TX frequency %d\n", txfreq);
+		}
+		
+		if(i2c_alex)
+		{
+			if(i2c_data != i2c_alex_data)
+			{
+				fprintf(stderr, "Set Alex data to output = %x \n", i2c_alex_data);
+				i2c_data = i2c_alex_data;
+				unsigned char ldata[3];
+				ldata[0] = 0x02;
+				ldata[1] = ((i2c_alex_data >> 8) & 0xFF);
+				ldata[2] = (i2c_alex_data & 0xFF);
+				i2cWriteDevice(i2c_alex_handler, ldata, 3);
+			}
 		}
 		
 		int frame = 0;
@@ -509,10 +586,10 @@ void fillPacketToSend() {
 						hpsdrdata[13 + coarse_pointer] = data[1];
 					}
 				}
-				if (sampleSpeed ==0)
-					usleep(670);  
-				if (sampleSpeed == 1)
-					usleep(260); 
+				if (sampleSpeed ==0) usleep(670);  // 48K
+				else if (sampleSpeed == 1) usleep(260); //96K
+				else if (sampleSpeed == 2) usleep(20);	//192K
+				else if (sampleSpeed == 3) usleep(1);	//384K
 			}
 		}
 }

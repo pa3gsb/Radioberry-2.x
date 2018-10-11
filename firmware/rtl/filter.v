@@ -29,7 +29,7 @@
 //	 60/40m  	BAND2 = 7'b0000100	
 //	 30/20m  	BAND3 = 7'b0001000	
 //	 17m  		BAND4 = 7'b0010000	
-//	 15m			BAND5 = 7'b0100000	
+//	 15m		BAND5 = 7'b0100000	
 //	 12/10m		BAND6 = 7'b1000000 
 
 module filter(clock, frequency, selected_filter);
@@ -43,8 +43,8 @@ begin
 	else if (frequency > 20000000) selected_filter <= 7'b0000010;  //BAND5	  
 	else if (frequency > 16500000) selected_filter <= 7'b0000100;  //BAND4	
 	else if (frequency > 8000000)  selected_filter <= 7'b0001000;  //BAND3	
-	else if (frequency > 5000000)  selected_filter <= 7'b0010010;  //BAND2
-	else if (frequency > 2500000)  selected_filter <= 7'b0100010;  //BAND1
+	else if (frequency > 5000000)  selected_filter <= 7'b0010000;  //BAND2
+	else if (frequency > 2500000)  selected_filter <= 7'b0100000;  //BAND1
 	else 	selected_filter <= 7'b1000000 ; 	// BAND0
 end 
 endmodule

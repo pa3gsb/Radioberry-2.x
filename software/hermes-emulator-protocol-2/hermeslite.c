@@ -115,6 +115,7 @@ unsigned char drive_level;
 unsigned char prev_drive_level = -1;
 
 sem_t mutex;
+sem_t mic_sample;
 static sem_t high_priority_mutex;
 
 struct timeval t1;
@@ -209,6 +210,7 @@ int main(int argc, char **argv) {
 	}
 
 	sem_init(&mutex, 0, 1);	
+	sem_init(&mic_sample, 0, 0);
 	sem_init(&high_priority_mutex, 0, 0);
 	
 	initialize_gpio();
@@ -222,7 +224,8 @@ int main(int argc, char **argv) {
 	pthread_create(&pid2, NULL, send_high_priority_status_to_host, NULL);
 	
 	gettimeofday(&t1a, 0);
-	start_mic_thread();
+	//start_mic_thread();
+	start_dummy_mic_thread();
 	
 	gettimeofday(&t1, 0);
 	
@@ -391,6 +394,7 @@ void *send_rx_iq_to_host(void *arg) {
 					for (j; j< 6; j++){
 						iqbuffer_rx1[index_rx1++] = iqdata[j];
 					}
+					sem_post(&mic_sample); //sync mic stream
 					if (index_rx1 >= 1444) {
 						iqbuffer_rx1[0]=rx1_sequence>>24;
 						iqbuffer_rx1[1]=rx1_sequence>>16;
@@ -408,10 +412,10 @@ void *send_rx_iq_to_host(void *arg) {
 				if (gpioRead(16) == 1) {
 					int i =0;
 					for (i; i< 64; i++){
-						rx2_spiReader(iqdata);
+						//rx2_spiReader(iqdata);
 						int j =0;
 						for (j; j< 6; j++){
-							iqbuffer_rx2[index_rx2++] = iqdata[j];
+							iqbuffer_rx2[index_rx2++] = 0;//iqdata[j];
 						}
 					}
 					if (index_rx2 >= 1444) {
@@ -633,6 +637,7 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 		spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 		index = index + 20;	//decimation by 4
 		
+		
 		lcount ++;
 		if (lcount == 48000) {
 			lcount = 0;
@@ -756,6 +761,37 @@ void printIntroScreen() {
 	fprintf(stderr, "\n");
 	fprintf(stderr, "====================================================================\n");
 	fprintf(stderr, "====================================================================\n");
+}
+
+void *mic_dummy_thread(void *arg) {
+	
+	int i=0;
+	unsigned char l_mic_buffer[132];
+	
+	while(1) {
+		
+		sem_wait(&mic_sample);
+		
+		l_mic_buffer[mic_count++] = 0; //msb
+		l_mic_buffer[mic_count++] = 0;
+			
+		if (mic_count == 132) {
+			l_mic_buffer[0]=mic_sequence>>24;
+			l_mic_buffer[1]=mic_sequence>>16;
+			l_mic_buffer[2]=mic_sequence>>8;
+			l_mic_buffer[3]=mic_sequence;
+			send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
+			mic_sequence++;
+			mic_count = 4;
+		}
+	}
+	fprintf(stderr,"mic_dummy_thread: exiting\n");
+	return NULL;
+}
+
+void start_dummy_mic_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, mic_dummy_thread, NULL);
 }
 
 // end of source.
