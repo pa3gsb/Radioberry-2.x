@@ -141,3 +141,4 @@ Reference, Value, Footprint, Datasheet, Option, Key
 "F401","50Mhz","Radioberry:MURATA-FILTER_NFM21C",""
 "FB401","FB","hermeslite:SMD-0603",""
 "C414","100nF","hermeslite:SMD-0603",""
+"C438","100nF","hermeslite:SMD-0603",""

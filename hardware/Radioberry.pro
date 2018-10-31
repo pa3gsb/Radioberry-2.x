@@ -1,4 +1,4 @@
-update=28-11-2017 19:39:51
+update=31-10-2018 19:26:34
 version=1
 last_client=kicad
 [pcbnew]
@@ -35,7 +35,7 @@ LibName3=power
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=
+PlotDirectoryName=release/beta3/scheme/
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=

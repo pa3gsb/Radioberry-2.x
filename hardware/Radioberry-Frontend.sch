@@ -791,7 +791,7 @@ F 3 "" H 5400 4900 50  0001 C CNN
 $EndComp
 Text GLabel 12900 2450 2    60   Input ~ 0
 CLK
-Text GLabel 6325 3625 0    60   Input ~ 0
+Text GLabel 6050 3625 0    60   Input ~ 0
 CLK
 $Comp
 L +3V3Rpi #PWR057
@@ -1259,4 +1259,18 @@ Connection ~ 11295 7650
 Connection ~ 11325 7150
 Wire Wire Line
 	5400 3555 5400 3750
+$Comp
+L C_Small C438
+U 1 1 5BD90CBE
+P 6225 3625
+F 0 "C438" V 6075 3525 50  0000 L CNN
+F 1 "100nF" V 6350 3525 50  0000 L CNN
+F 2 "hermeslite:SMD-0603" H 6225 3625 50  0001 C CNN
+F 3 "" H 6225 3625 50  0001 C CNN
+	1    6225 3625
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6050 3625 6125 3625
+Connection ~ 6125 3625
 $EndSCHEMATC
