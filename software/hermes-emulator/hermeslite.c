@@ -41,10 +41,12 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <net/if.h>
 #include <math.h>
 #include <semaphore.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <pigpio.h>
 
@@ -62,6 +64,9 @@ void *packetreader(void *arg);
 void *spiWriter(void *arg);
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
+
+int sock_TCP_Server = -1;
+int sock_TCP_Client = -1;
 
 #define TX_MAX 4800 
 #define TX_MAX_BUFFER (TX_MAX * 4)
@@ -177,6 +182,8 @@ void initALEX(){
 
 int main(int argc, char **argv)
 {
+	int yes = 1;
+	
 	printIntroScreen();	
 	
 	sem_init(&mutex, 0, 1);	
@@ -221,7 +228,7 @@ int main(int argc, char **argv)
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
 		perror("cannot create socket\n");
-		return 0;
+		return -1;
 	}
 	struct timeval timeout;      
     timeout.tv_sec = 0;
@@ -238,14 +245,46 @@ int main(int argc, char **argv)
 
 	if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
 		perror("bind failed");
-		return 0;
+		return -1;
 	}
+	
+	if ((sock_TCP_Server = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	{
+		perror("socket tcp");
+		return -1;
+	}
+	
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (void *)&yes, sizeof(yes));
+
+	int sndbufsize = 0xffff;
+	int rcvbufsize = 0xffff;
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
+
+	if (bind(sock_TCP_Server, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0)
+	{
+		perror("bind tcp");
+		return -1;
+	}
+	
+	listen(sock_TCP_Server, 1024);
+
 	runHermesLite();
 	
 	if (rx1_spi_handler !=0)
 		spiClose(rx1_spi_handler);
 	if (rx2_spi_handler !=0)
 		spiClose(rx2_spi_handler);
+	
+	if (sock_TCP_Client >= 0)
+	{
+		close(sock_TCP_Client);
+	}
+
+	if (sock_TCP_Server >= 0)
+	{
+		close(sock_TCP_Server);
+	}
 		
 	gpioTerminate();
 }
@@ -259,12 +298,36 @@ void runHermesLite() {
 		} else {usleep(20000);}
 	}
 }
+
+
 void *packetreader(void *arg) {
+	
+	int size, bytes_read, bytes_left;
 	unsigned char buffer[2048];
+	uint32_t *code0 = (uint32_t *) buffer; 
 	
 	while(1) {
-		recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
-		if (recvlen > 0) handlePacket(buffer);
+		if (sock_TCP_Client >= 0) {
+			// handle TCP protocol.
+			bytes_read=0;
+			bytes_left=1032;
+			while (bytes_left > 0) {
+              size = recvfrom(sock_TCP_Client, buffer+bytes_read, (size_t) bytes_left, 0, NULL, 0);
+			  if (size < 0 && errno == EAGAIN) continue;
+			  if (size < 0) break;
+			  bytes_read += size;
+			  bytes_left -= size;
+			  if (bytes_read < 60 || bytes_read > 64) continue;   
+			  if (bytes_read == 63 && *code0 == 0x0002feef) break; 	//discovery
+			  if (bytes_read == 64 && *code0 == 0x0004feef) break;	//start/stop
+			}
+			handlePacket(buffer);
+		} 
+		else {
+			// handle UDP protocol.
+			recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
+			if (recvlen > 0) handlePacket(buffer);
+		}
 	}
 }
 
@@ -273,35 +336,59 @@ int prevatt11 = 0;
 int att523 = 0;
 int prevatt523 = 0;
 
+int count=0;
 void handlePacket(char* buffer){
 
 	if (buffer[2] == 2) {
-		printf("Discovery packet received \n");
-		printf("IP-address %d.%d.%d.%d  \n", 
+		fprintf(stderr, "Discovery packet received \n");
+		fprintf(stderr, "IP-address %d.%d.%d.%d  \n", 
 							remaddr.sin_addr.s_addr&0xFF,
                             (remaddr.sin_addr.s_addr>>8)&0xFF,
                             (remaddr.sin_addr.s_addr>>16)&0xFF,
                             (remaddr.sin_addr.s_addr>>24)&0xFF);
-		printf("Discovery Port %d \n", ntohs(remaddr.sin_port));
+		fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
 		
 		fillDiscoveryReplyMessage();
 		
-		if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
-			printf("error sendto");
+		if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) printf("error sendto");
+		return;
 		
-	} else if (buffer[2] == 4) {
-			if (buffer[3] == 1 || buffer[3] == 3) {
-				printf("Start Port %d \n", ntohs(remaddr.sin_port));
+	} 
+	if (buffer[2] == 4) {
+		if (buffer[3] == 1 || buffer[3] == 3) {
+			fprintf(stderr, "Start Port %d \n", ntohs(remaddr.sin_port));
+			running = 1;
+			fprintf(stderr, "SDR Program sends UDP Start command \n");
+			return;
+		} 
+		if (buffer[3] == 0x11) {
+			fprintf(stderr, "Connect the TCP client to the server\n");
+			if (sock_TCP_Client < 0)
+			{
+				if((sock_TCP_Client = accept(sock_TCP_Server, NULL, NULL)) < 0)
+				{
+					fprintf(stderr, "*** ERROR TCP accept ***\n");
+					perror("accept");
+					return;
+				}
+				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
 				running = 1;
-				printf("SDR Program sends Start command \n");
+				fprintf(stderr, "SDR Program sends TCP Start command \n");
 				return;
-			} else {
-				running = 0;
-				last_sequence_number = 0;
-				printf("SDR Program sends Stop command \n");
-				return;
-			}
+			}	
 		}
+		fprintf(stderr, "SDR Program sends Stop command \n");
+		running = 0;
+		last_sequence_number = 0;
+		if (sock_TCP_Client > -1)
+		{
+			close(sock_TCP_Client);
+			sock_TCP_Client = -1;
+			fprintf(stderr, "SDR Program sends TCP Stop command \n");
+		} else fprintf(stderr, "SDR Program sends UDP Stop command \n");
+		return;
+	}
+
 	if (isValidFrame(buffer)) {
 	
 		 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
@@ -488,8 +575,11 @@ void handlePacket(char* buffer){
 void sendPacket() {
 	fillPacketToSend();
 	
-	if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
-			printf("error sendto");
+	if (sock_TCP_Client >= 0) {
+		if (send(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0) < 0) printf("error sendto");
+	} else {
+		if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) < 0) printf("error sendto");
+	}
 }
 
 int isValidFrame(char* data) {
