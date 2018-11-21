@@ -56,6 +56,7 @@ char build_version[]=GIT_VERSION;
 void runHermesLite(void);
 void sendPacket(void);
 void handlePacket(char* buffer);
+void processPacket(char* buffer);
 void fillDiscoveryReplyMessage(void);
 int isValidFrame(char* data);
 void fillPacketToSend(void);
@@ -110,6 +111,7 @@ int sampleSpeed = 0;
 
 unsigned char SYNC = 0x7F;
 int last_sequence_number = 0;
+uint32_t last_seqnum=0xffffffff, seqnum; 
 
 unsigned char hpsdrdata[1032];
 unsigned char broadcastReply[60];
@@ -317,9 +319,6 @@ void *packetreader(void *arg) {
 			  if (size < 0) break;
 			  bytes_read += size;
 			  bytes_left -= size;
-			  if (bytes_read < 60 || bytes_read > 64) continue;   
-			  if (bytes_read == 63 && *code0 == 0x0002feef) break; 	//discovery
-			  if (bytes_read == 64 && *code0 == 0x0004feef) break;	//start/stop
 			}
 			handlePacket(buffer);
 		} 
@@ -338,30 +337,44 @@ int prevatt523 = 0;
 
 int count=0;
 void handlePacket(char* buffer){
-
-	if (buffer[2] == 2) {
-		fprintf(stderr, "Discovery packet received \n");
-		fprintf(stderr, "IP-address %d.%d.%d.%d  \n", 
+	uint32_t code;
+	memcpy(&code, buffer, 4);
+	switch (code)
+	{
+		default:
+			fprintf(stderr, "Received packages not for me! \n");
+			break;
+		case 0x0002feef:
+			fprintf(stderr, "Discovery packet received \n");
+			fprintf(stderr, "IP-address %d.%d.%d.%d  \n", 
 							remaddr.sin_addr.s_addr&0xFF,
                             (remaddr.sin_addr.s_addr>>8)&0xFF,
                             (remaddr.sin_addr.s_addr>>16)&0xFF,
                             (remaddr.sin_addr.s_addr>>24)&0xFF);
-		fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
+			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
 		
-		fillDiscoveryReplyMessage();
+			fillDiscoveryReplyMessage();
 		
-		if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) printf("error sendto");
-		return;
-		
-	} 
-	if (buffer[2] == 4) {
-		if (buffer[3] == 1 || buffer[3] == 3) {
+			if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) printf("error sendto");
+			break;
+		case 0x0004feef:
+			fprintf(stderr, "SDR Program sends Stop command \n");
+			running = 0;
+			last_sequence_number = 0;
+			if (sock_TCP_Client > -1)
+			{
+				close(sock_TCP_Client);
+				sock_TCP_Client = -1;
+				fprintf(stderr, "SDR Program sends TCP Stop command \n");
+			} else fprintf(stderr, "SDR Program sends UDP Stop command \n");	
+			break;
+		case 0x0104feef:
+		case 0x0304feef:
 			fprintf(stderr, "Start Port %d \n", ntohs(remaddr.sin_port));
 			running = 1;
 			fprintf(stderr, "SDR Program sends UDP Start command \n");
-			return;
-		} 
-		if (buffer[3] == 0x11) {
+			break;
+		case 0x1104feef: 
 			fprintf(stderr, "Connect the TCP client to the server\n");
 			if (sock_TCP_Client < 0)
 			{
@@ -374,22 +387,22 @@ void handlePacket(char* buffer){
 				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
 				running = 1;
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
-				return;
 			}	
-		}
-		fprintf(stderr, "SDR Program sends Stop command \n");
-		running = 0;
-		last_sequence_number = 0;
-		if (sock_TCP_Client > -1)
-		{
-			close(sock_TCP_Client);
-			sock_TCP_Client = -1;
-			fprintf(stderr, "SDR Program sends TCP Stop command \n");
-		} else fprintf(stderr, "SDR Program sends UDP Stop command \n");
-		return;
+			break;
+		case 0x0201feef:
+			processPacket(buffer);
+			break;		
 	}
+}	
 
-	if (isValidFrame(buffer)) {
+void processPacket(char* buffer)
+{
+	//if (isValidFrame(buffer)) {
+		seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
+		if (seqnum != last_seqnum + 1) {
+		  fprintf(stderr,"SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
+		}
+		last_seqnum = seqnum;
 	
 		 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
 	
@@ -569,7 +582,7 @@ void handlePacket(char* buffer){
 			}
 			
 		}
-	}
+	//}
 }
 
 void sendPacket() {
