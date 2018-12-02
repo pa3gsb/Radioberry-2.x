@@ -62,6 +62,7 @@ int isValidFrame(char* data);
 void fillPacketToSend(void);
 void printIntroScreen(void);
 void *packetreader(void *arg);
+void *spiReader(void *arg);
 void *spiWriter(void *arg);
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
@@ -69,6 +70,7 @@ unsigned char get_tx_buffer(void);
 int sock_TCP_Server = -1;
 int sock_TCP_Client = -1;
 
+#define RX_MAX 10
 #define TX_MAX 4800 
 #define TX_MAX_BUFFER (TX_MAX * 4)
 unsigned char tx_buffer[TX_MAX_BUFFER];
@@ -77,11 +79,18 @@ int use_tx  = 0;
 unsigned char drive_level;
 unsigned char prev_drive_level;
 int MOX = 0;
+int saveMox = -1;
+sem_t rx_empty;
+sem_t rx_full;
 sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
 
 int tx_count =0;
+
+unsigned char rx_buffer[RX_MAX][504];
+int rx_read_index = 0;
+
 void rx1_spiReader(unsigned char iqdata[]);
 void rx2_spiReader(unsigned char iqdata[]);
 
@@ -94,7 +103,7 @@ unsigned char tx_iqdata[6];
 #define SERVICE_PORT	1024
 
 int hold_nrx=0;
-int nrx = 2; // n Receivers
+int nrx = 1; // n Receivers
 int holdfreq = 0;
 int holdfreq2 = 0;
 int holdtxfreq = 0;
@@ -109,11 +118,17 @@ int dither = 0;
 int rando = 0;
 int sampleSpeed = 0;
 
-unsigned char SYNC = 0x7F;
+//unsigned char SYNC = 0x7F;
+#define SYNC 0x7F
 int last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
 
+//unsigned char FIRMWARE_VERSION = 0x28; //v4.0 firmware version
+#define FIRMWARE_VERSION 0x28
 unsigned char hpsdrdata[1032];
+uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
+uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
+	
 unsigned char broadcastReply[60];
 #define TIMEOUT_MS      100     
 
@@ -190,7 +205,9 @@ int main(int argc, char **argv)
 	
 	sem_init(&mutex, 0, 1);	
 	sem_init(&tx_empty, 0, TX_MAX); 
-    sem_init(&tx_full, 0, 0);    	
+    sem_init(&tx_full, 0, 0); 
+	sem_init(&rx_empty, 0, RX_MAX); 
+    sem_init(&rx_full, 0, 0);      	
 	
 	if (gpioInitialise() < 0) {
 		fprintf(stderr,"hpsdr_protocol (original) : gpio could not be initialized. \n");
@@ -223,9 +240,10 @@ int main(int argc, char **argv)
 
 	printf("init done \n");
 		
-	pthread_t pid1, pid2; 
+	pthread_t pid1, pid2, pid3; 
 	pthread_create(&pid1, NULL, packetreader, NULL); 
 	pthread_create(&pid2, NULL, spiWriter, NULL);
+	pthread_create(&pid3, NULL, spiReader, NULL);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -292,18 +310,16 @@ int main(int argc, char **argv)
 }
 
 void runHermesLite() {
-	printf("runHermesLite \n");
+	fprintf(stderr, "Starting the packet send loop for the radioberry. \n");
 
-	for (;;) {
+	while(1) {
 		if (running) {
 			sendPacket();
 		} else {usleep(20000);}
 	}
 }
 
-
 void *packetreader(void *arg) {
-	
 	int size, bytes_read, bytes_left;
 	unsigned char buffer[2048];
 	uint32_t *code0 = (uint32_t *) buffer; 
@@ -314,13 +330,13 @@ void *packetreader(void *arg) {
 			bytes_read=0;
 			bytes_left=1032;
 			while (bytes_left > 0) {
-              size = recvfrom(sock_TCP_Client, buffer+bytes_read, (size_t) bytes_left, 0, NULL, 0);
-			  if (size < 0 && errno == EAGAIN) continue;
-			  if (size < 0) break;
-			  bytes_read += size;
-			  bytes_left -= size;
+				size = recvfrom(sock_TCP_Client, buffer+bytes_read, (size_t) bytes_left, 0, NULL, 0);
+				if (size < 0 && errno == EAGAIN) continue;
+				if (size < 0) break;
+				bytes_read += size;
+				bytes_left -= size;
 			}
-			handlePacket(buffer);
+			if (bytes_read == 1032) handlePacket(buffer); else fprintf(stderr, "tcp packet received; wrong length %d \n", bytes_read);
 		} 
 		else {
 			// handle UDP protocol.
@@ -346,16 +362,11 @@ void handlePacket(char* buffer){
 			break;
 		case 0x0002feef:
 			fprintf(stderr, "Discovery packet received \n");
-			fprintf(stderr, "IP-address %d.%d.%d.%d  \n", 
-							remaddr.sin_addr.s_addr&0xFF,
-                            (remaddr.sin_addr.s_addr>>8)&0xFF,
-                            (remaddr.sin_addr.s_addr>>16)&0xFF,
-                            (remaddr.sin_addr.s_addr>>24)&0xFF);
+			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
-		
 			fillDiscoveryReplyMessage();
-		
-			if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) printf("error sendto");
+			if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) fprintf(stderr, "broadcast reply error");
+			
 			break;
 		case 0x0004feef:
 			fprintf(stderr, "SDR Program sends Stop command \n");
@@ -397,14 +408,13 @@ void handlePacket(char* buffer){
 
 void processPacket(char* buffer)
 {
-	//if (isValidFrame(buffer)) {
 		seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
 		if (seqnum != last_seqnum + 1) {
-		  fprintf(stderr,"SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
+		  fprintf(stderr,"Radioberry firmware SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
 		}
 		last_seqnum = seqnum;
 	
-		 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
+		MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
 	
 		if ((buffer[11] & 0xFE)  == 0x14) {
 			att = (buffer[11 + 4] & 0x1F);
@@ -580,101 +590,44 @@ void processPacket(char* buffer)
 					sem_post(&tx_full);
 				}
 			}
-			
 		}
-	//}
 }
 
 void sendPacket() {
 	fillPacketToSend();
 	
 	if (sock_TCP_Client >= 0) {
-		if (send(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0) < 0) printf("error sendto");
+		//if (sendto(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0, NULL, 0) != 1032) fprintf(stderr, "TCP send error");
+		if (send(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), MSG_DONTWAIT) != 1032) fprintf(stderr, "TCP send error");
 	} else {
-		if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) < 0) printf("error sendto");
+		if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) != 1032) fprintf(stderr, "UDP send error");
 	}
 }
 
-int isValidFrame(char* data) {
-	return (data[8] == SYNC && data[9] == SYNC && data[10] == SYNC && data[520] == SYNC && data[521] == SYNC && data[522] == SYNC);
-}
-
 void fillPacketToSend() {
-		
-		hpsdrdata[0] = 0xEF;
-		hpsdrdata[1] = 0xFE;
-		hpsdrdata[2] = 0x01;
-		hpsdrdata[3] = 0x06;
+		memset(hpsdrdata,0,1032);
+		memcpy(hpsdrdata, header_hpsdrdata, 4);
 		hpsdrdata[4] = ((last_sequence_number >> 24) & 0xFF);
 		hpsdrdata[5] = ((last_sequence_number >> 16) & 0xFF);
 		hpsdrdata[6] = ((last_sequence_number >> 8) & 0xFF);
 		hpsdrdata[7] = (last_sequence_number & 0xFF);
 		last_sequence_number++;
+		
+		memcpy(hpsdrdata + 8, sync_hpsdrdata, 8);
+		memcpy(hpsdrdata + 520, sync_hpsdrdata, 8);
 
-		int factor = (nrx - 1) * 6;
-		int index=0;
 		int frame = 0;
 		for (frame; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
-			hpsdrdata[8 + coarse_pointer] = SYNC;
-			hpsdrdata[9 + coarse_pointer] = SYNC;
-			hpsdrdata[10 + coarse_pointer] = SYNC;
-			hpsdrdata[11 + coarse_pointer] = 0x00; // c0
-			hpsdrdata[12 + coarse_pointer] = 0x00; // c1
-			hpsdrdata[13 + coarse_pointer] = 0x00; // c2
-			hpsdrdata[14 + coarse_pointer] = 0x00; // c3
-			hpsdrdata[15 + coarse_pointer] = 0x28; // c4 //v4.0 firmware version
-
+			
 			if (!MOX) {
-				
-				tx_count = 0; 
-				
-				sem_wait(&mutex); 
-				
-				gpioWrite(21, 0); 	// ptt off
-				
-				while (gpioRead(13) == 0) {}//wait for enough samples
-				
-				int i = 0;
-				for (i=0; i< (504 / (8 + factor)); i++) {
-					index = 16 + coarse_pointer + (i * (8 + factor));
-					rx1_spiReader(iqdata);
-					int j =0;
-					for (j; j< 6; j++){
-						hpsdrdata[index + j] = iqdata[j];
-					}	
-				}
-				
-				if (nrx == 2) {
-					int i =0;
-					for (i=0; i< (504 / (8 + factor)); i++) {
-						index = 16 + coarse_pointer + (i * (8 + factor));
-						//rx2_spiReader(iqdata); //for now only 1 rx slice...
-						int j =0;
-						for (j; j< 6; j++){
-							hpsdrdata[index + j + 6] = hpsdrdata[index + j] ; //iqdata[j];
-						}	
-					}
-				}
-				
-				sem_post(&mutex);
-					
-			} else {
-				int j = 0;
-				for (j; j < (504 / (8 + factor)); j++) {
-					index = 16 + coarse_pointer + (j * (8 + factor));
-					int i =0;
-					for (i; i< 8; i++){
-						hpsdrdata[index + i] = 0x00;
-						if (nrx == 2){
-							hpsdrdata[index + i + 6] = 0x00;
-						}
-					}
-				}
-			}
-			if (MOX){
-				gpioWrite(21, 1); ;	// ptt on
-				
+				sem_wait(&rx_full);
+				memcpy(hpsdrdata + coarse_pointer + 16, rx_buffer[rx_read_index], 504);
+				rx_read_index = (rx_read_index + 1) % RX_MAX; 
+				sem_post(&rx_empty);
+			} 
+			else
+			{
 				if (vswr_active) {
 					if (frame == 0) {
 						//reading once per 2 frames!
@@ -714,8 +667,7 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
 	broadcastReply[i++] =  40;
-	broadcastReply[i++] =  6; // hermeslite
-									
+	broadcastReply[i++] =  6; // hermeslite							
 }
 
 void rx1_spiReader(unsigned char iqdata[]) {
@@ -730,16 +682,51 @@ void rx1_spiReader(unsigned char iqdata[]) {
 	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
 }
 
-void rx2_spiReader(unsigned char iqdata[]) {
+void *spiReader(void *arg) {
+	
+	int pointer = 0;
+	int rx_fill_index = 0;
+	int lnrx = nrx;
+	
+	while(1) {
 		
-	iqdata[0] = (sampleSpeed & 0x03);
-	iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
-	iqdata[2] = ((freq2 >> 24) & 0xFF);
-	iqdata[3] = ((freq2 >> 16) & 0xFF);
-	iqdata[4] = ((freq2 >> 8) & 0xFF);
-	iqdata[5] = (freq2 & 0xFF);
-			
-	spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
+		sem_wait(&rx_empty);
+		sem_wait(&mutex);
+		
+		//ptt off
+		if (!MOX && saveMox!=MOX) {gpioWrite(21, 0); saveMox = MOX;}
+		
+		while (gpioRead(13) == 0) {}//wait for enough samples
+		
+		int factor = ((lnrx - 1) * 6) + 8;
+		int i = 0;
+		for (i; i < 63; i++) {
+			rx1_spiReader(iqdata);
+			switch (lnrx)
+			{	case 4:
+					memcpy(rx_buffer[rx_fill_index] + pointer + 18, iqdata, 6);
+				case 3:
+					memcpy(rx_buffer[rx_fill_index] + pointer + 12, iqdata, 6);
+				case 2:
+					memcpy(rx_buffer[rx_fill_index] + pointer + 6, iqdata, 6);
+				case 1:
+					memcpy(rx_buffer[rx_fill_index] + pointer, iqdata, 6);
+					break;
+				default:
+					fprintf(stderr, "Should not occur. \n");
+					break;
+			}
+			pointer = pointer + factor;
+			if ( pointer >= 500 || (pointer == 494 && nrx==4) )	{
+				rx_fill_index = (rx_fill_index + 1) % RX_MAX; 
+				pointer = 0;
+				lnrx = nrx;
+				sem_post(&rx_full);
+			}
+		}
+		
+		sem_post(&mutex);
+	}
 }
 
 void *spiWriter(void *arg) {
@@ -750,6 +737,9 @@ void *spiWriter(void *arg) {
 		
 		sem_wait(&tx_full);
 		sem_wait(&mutex);
+		
+		// ptt on
+		if (MOX && saveMox!=MOX) {gpioWrite(21, 1); saveMox = MOX;} else tx_count = 0;	
 		
 		if (tx_count % 4800 ==0) {
 			//set the tx freq.

@@ -5,7 +5,7 @@ GIT_VERSION := $(shell git describe --abbrev=0 --tags)
 CC=gcc
 LINK=gcc
 
-OPTIONS=-g -O3 -D GIT_DATE='"$(GIT_DATE)"' -D GIT_VERSION='"$(GIT_VERSION)"'
+OPTIONS=-g -Ofast -D GIT_DATE='"$(GIT_DATE)"' -D GIT_VERSION='"$(GIT_VERSION)"'
 
 LIBS=-lrt -lm -lpigpio -lpthread 
 
