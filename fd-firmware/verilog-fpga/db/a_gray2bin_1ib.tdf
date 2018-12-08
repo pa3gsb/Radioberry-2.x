@@ -1,0 +1,55 @@
+--a_gray2bin carry_chain="MANUAL" carry_chain_length=48 device_family="Cyclone 10 LP" ignore_carry_buffers="OFF" WIDTH=12 bin gray
+--VERSION_BEGIN 17.0 cbx_a_gray2bin 2017:07:19:18:07:03:SJ cbx_mgl 2017:07:19:18:10:29:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+
+--synthesis_resources = 
+SUBDESIGN a_gray2bin_1ib
+( 
+	bin[11..0]	:	output;
+	gray[11..0]	:	input;
+) 
+VARIABLE 
+	xor0	: WIRE;
+	xor1	: WIRE;
+	xor10	: WIRE;
+	xor2	: WIRE;
+	xor3	: WIRE;
+	xor4	: WIRE;
+	xor5	: WIRE;
+	xor6	: WIRE;
+	xor7	: WIRE;
+	xor8	: WIRE;
+	xor9	: WIRE;
+
+BEGIN 
+	bin[] = ( gray[11..11], xor10, xor9, xor8, xor7, xor6, xor5, xor4, xor3, xor2, xor1, xor0);
+	xor0 = (gray[0..0] $ xor1);
+	xor1 = (gray[1..1] $ xor2);
+	xor10 = (gray[11..11] $ gray[10..10]);
+	xor2 = (gray[2..2] $ xor3);
+	xor3 = (gray[3..3] $ xor4);
+	xor4 = (gray[4..4] $ xor5);
+	xor5 = (gray[5..5] $ xor6);
+	xor6 = (gray[6..6] $ xor7);
+	xor7 = (gray[7..7] $ xor8);
+	xor8 = (gray[8..8] $ xor9);
+	xor9 = (gray[9..9] $ xor10);
+END;
+--VALID FILE

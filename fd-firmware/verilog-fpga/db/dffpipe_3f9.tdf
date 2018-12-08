@@ -1,0 +1,91 @@
+--dffpipe DELAY=8 WIDTH=13 clock clrn d q ALTERA_INTERNAL_OPTIONS=AUTO_SHIFT_REGISTER_RECOGNITION=OFF
+--VERSION_BEGIN 17.0 cbx_mgl 2017:07:19:18:10:29:SJ cbx_stratixii 2017:07:19:18:07:03:SJ cbx_util_mgl 2017:07:19:18:07:03:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+
+--synthesis_resources = reg 104 
+OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF";
+
+SUBDESIGN dffpipe_3f9
+( 
+	clock	:	input;
+	clrn	:	input;
+	d[12..0]	:	input;
+	q[12..0]	:	output;
+) 
+VARIABLE 
+	dffe14a[12..0] : dffe;
+	dffe15a[12..0] : dffe;
+	dffe16a[12..0] : dffe;
+	dffe17a[12..0] : dffe;
+	dffe18a[12..0] : dffe;
+	dffe19a[12..0] : dffe;
+	dffe20a[12..0] : dffe;
+	dffe21a[12..0] : dffe;
+	ena	: NODE;
+	prn	: NODE;
+	sclr	: NODE;
+
+BEGIN 
+	dffe14a[].clk = clock;
+	dffe14a[].clrn = clrn;
+	dffe14a[].d = (d[] & (! sclr));
+	dffe14a[].ena = ena;
+	dffe14a[].prn = prn;
+	dffe15a[].clk = clock;
+	dffe15a[].clrn = clrn;
+	dffe15a[].d = (dffe14a[].q & (! sclr));
+	dffe15a[].ena = ena;
+	dffe15a[].prn = prn;
+	dffe16a[].clk = clock;
+	dffe16a[].clrn = clrn;
+	dffe16a[].d = (dffe15a[].q & (! sclr));
+	dffe16a[].ena = ena;
+	dffe16a[].prn = prn;
+	dffe17a[].clk = clock;
+	dffe17a[].clrn = clrn;
+	dffe17a[].d = (dffe16a[].q & (! sclr));
+	dffe17a[].ena = ena;
+	dffe17a[].prn = prn;
+	dffe18a[].clk = clock;
+	dffe18a[].clrn = clrn;
+	dffe18a[].d = (dffe17a[].q & (! sclr));
+	dffe18a[].ena = ena;
+	dffe18a[].prn = prn;
+	dffe19a[].clk = clock;
+	dffe19a[].clrn = clrn;
+	dffe19a[].d = (dffe18a[].q & (! sclr));
+	dffe19a[].ena = ena;
+	dffe19a[].prn = prn;
+	dffe20a[].clk = clock;
+	dffe20a[].clrn = clrn;
+	dffe20a[].d = (dffe19a[].q & (! sclr));
+	dffe20a[].ena = ena;
+	dffe20a[].prn = prn;
+	dffe21a[].clk = clock;
+	dffe21a[].clrn = clrn;
+	dffe21a[].d = (dffe20a[].q & (! sclr));
+	dffe21a[].ena = ena;
+	dffe21a[].prn = prn;
+	ena = VCC;
+	prn = VCC;
+	q[] = dffe21a[].q;
+	sclr = GND;
+END;
+--VALID FILE

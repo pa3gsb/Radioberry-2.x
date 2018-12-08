@@ -1,0 +1,59 @@
+--lpm_mult CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" DEVICE_FAMILY="Cyclone 10 LP" DSP_BLOCK_BALANCING="Auto" INPUT_A_IS_CONSTANT="NO" INPUT_B_IS_CONSTANT="NO" LPM_REPRESENTATION="SIGNED" LPM_WIDTHA=18 LPM_WIDTHB=18 LPM_WIDTHP=36 LPM_WIDTHS=1 MAXIMIZE_SPEED=6 dataa datab result CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
+--VERSION_BEGIN 17.0 cbx_cycloneii 2017:07:19:18:07:03:SJ cbx_lpm_add_sub 2017:07:19:18:07:03:SJ cbx_lpm_mult 2017:07:19:18:07:03:SJ cbx_mgl 2017:07:19:18:10:29:SJ cbx_nadder 2017:07:19:18:07:03:SJ cbx_padd 2017:07:19:18:07:03:SJ cbx_stratix 2017:07:19:18:07:03:SJ cbx_stratixii 2017:07:19:18:07:03:SJ cbx_util_mgl 2017:07:19:18:07:03:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+FUNCTION cyclone10lp_mac_mult (aclr, clk, dataa[dataa_width-1..0], datab[datab_width-1..0], ena, signa, signb)
+WITH ( dataa_clock, dataa_width, datab_clock, datab_width, signa_clock, signb_clock)
+RETURNS ( dataout[dataa_width+datab_width-1..0]);
+FUNCTION cyclone10lp_mac_out (aclr, clk, dataa[dataa_width-1..0], ena)
+WITH ( dataa_width = 0, output_clock)
+RETURNS ( dataout[dataa_width-1..0]);
+
+--synthesis_resources = dsp_9bit 2 
+SUBDESIGN mult_56t
+( 
+	dataa[17..0]	:	input;
+	datab[17..0]	:	input;
+	result[35..0]	:	output;
+) 
+VARIABLE 
+	mac_mult1 : cyclone10lp_mac_mult
+		WITH (
+			dataa_clock = "none",
+			dataa_width = 18,
+			datab_clock = "none",
+			datab_width = 18,
+			signa_clock = "none",
+			signb_clock = "none"
+		);
+	mac_out2 : cyclone10lp_mac_out
+		WITH (
+			dataa_width = 36,
+			output_clock = "none"
+		);
+
+BEGIN 
+	mac_mult1.dataa[] = ( dataa[]);
+	mac_mult1.datab[] = ( datab[]);
+	mac_mult1.signa = B"1";
+	mac_mult1.signb = B"1";
+	mac_out2.dataa[] = mac_mult1.dataout[];
+	result[35..0] = mac_out2.dataout[35..0];
+END;
+--VALID FILE

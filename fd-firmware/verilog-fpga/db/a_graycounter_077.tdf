@@ -1,0 +1,78 @@
+--a_graycounter DEVICE_FAMILY="Cyclone 10 LP" PVALUE=1 WIDTH=12 aclr clock cnt_en q
+--VERSION_BEGIN 17.0 cbx_a_gray2bin 2017:07:19:18:07:03:SJ cbx_a_graycounter 2017:07:19:18:07:03:SJ cbx_cycloneii 2017:07:19:18:07:03:SJ cbx_mgl 2017:07:19:18:10:29:SJ cbx_stratix 2017:07:19:18:07:03:SJ cbx_stratixii 2017:07:19:18:07:03:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+
+--synthesis_resources = reg 16 
+OPTIONS ALTERA_INTERNAL_OPTION = "{-to counter3a0} POWER_UP_LEVEL=HIGH;{-to parity4} POWER_UP_LEVEL=HIGH";
+
+SUBDESIGN a_graycounter_077
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[11..0]	:	output;
+) 
+VARIABLE 
+	counter3a0 : dffeas
+		WITH (
+			power_up = "high"
+		);
+	counter3a1 : dffeas;
+	counter3a2 : dffeas;
+	counter3a3 : dffeas;
+	counter3a4 : dffeas;
+	counter3a5 : dffeas;
+	counter3a6 : dffeas;
+	counter3a7 : dffeas;
+	counter3a8 : dffeas;
+	counter3a9 : dffeas;
+	counter3a10 : dffeas;
+	counter3a11 : dffeas;
+	parity4 : dffeas
+		WITH (
+			power_up = "high"
+		);
+	sub_parity5a[2..0] : dffeas;
+	cntr_cout[11..0]	: WIRE;
+	parity_cout	: WIRE;
+	sclr	: NODE;
+	updown	: NODE;
+
+BEGIN 
+	counter3a[11..0].clk = clock;
+	counter3a[11..1].clrn = (! aclr);
+	counter3a[11..0].d = ( (counter3a[11].q $ cntr_cout[10..10]), (counter3a[10].q $ (counter3a[9].q & cntr_cout[9..9])), (counter3a[9].q $ (counter3a[8].q & cntr_cout[8..8])), (counter3a[8].q $ (counter3a[7].q & cntr_cout[7..7])), (counter3a[7].q $ (counter3a[6].q & cntr_cout[6..6])), (counter3a[6].q $ (counter3a[5].q & cntr_cout[5..5])), (counter3a[5].q $ (counter3a[4].q & cntr_cout[4..4])), (counter3a[4].q $ (counter3a[3].q & cntr_cout[3..3])), (counter3a[3].q $ (counter3a[2].q & cntr_cout[2..2])), (counter3a[2].q $ (counter3a[1].q & cntr_cout[1..1])), (counter3a[1].q $ (counter3a[0].q & cntr_cout[0..0])), ((cnt_en & (counter3a[0].q $ (! parity_cout))) # ((! cnt_en) & counter3a[0].q)));
+	counter3a[0].prn = (! aclr);
+	counter3a[11..0].sclr = sclr;
+	parity4.clk = clock;
+	parity4.d = ((cnt_en & ((sub_parity5a[0..0].q $ sub_parity5a[1..1].q) $ sub_parity5a[2..2].q)) # ((! cnt_en) & parity4.q));
+	parity4.prn = (! aclr);
+	parity4.sclr = sclr;
+	sub_parity5a[].clk = ( clock, clock, clock);
+	sub_parity5a[].clrn = ( (! aclr), (! aclr), (! aclr));
+	sub_parity5a[].d = ( ((cnt_en & (((counter3a[8..8].q $ counter3a[9..9].q) $ counter3a[10..10].q) $ counter3a[11..11].q)) # ((! cnt_en) & sub_parity5a[2].q)), ((cnt_en & (((counter3a[4..4].q $ counter3a[5..5].q) $ counter3a[6..6].q) $ counter3a[7..7].q)) # ((! cnt_en) & sub_parity5a[1].q)), ((cnt_en & (((counter3a[0..0].q $ counter3a[1..1].q) $ counter3a[2..2].q) $ counter3a[3..3].q)) # ((! cnt_en) & sub_parity5a[0].q)));
+	sub_parity5a[].sclr = ( sclr, sclr, sclr);
+	cntr_cout[] = ( B"0", (cntr_cout[9..9] & (! counter3a[9].q)), (cntr_cout[8..8] & (! counter3a[8].q)), (cntr_cout[7..7] & (! counter3a[7].q)), (cntr_cout[6..6] & (! counter3a[6].q)), (cntr_cout[5..5] & (! counter3a[5].q)), (cntr_cout[4..4] & (! counter3a[4].q)), (cntr_cout[3..3] & (! counter3a[3].q)), (cntr_cout[2..2] & (! counter3a[2].q)), (cntr_cout[1..1] & (! counter3a[1].q)), (cntr_cout[0..0] & (! counter3a[0].q)), (cnt_en & parity_cout));
+	parity_cout = (((! parity4.q) $ updown) & cnt_en);
+	q[] = counter3a[11..0].q;
+	sclr = GND;
+	updown = VCC;
+END;
+--VALID FILE
