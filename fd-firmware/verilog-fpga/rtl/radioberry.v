@@ -26,14 +26,12 @@
 `include "timescale.v"
 
 module radioberry(
-clk_10mhz, 
 clk_76m8,
 ad9866_clk,ad9866_rx,ad9866_tx,ad9866_rxsync,ad9866_rxclk,ad9866_txsync,ad9866_txquietn,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 pi_clk, pi_clk2, rx_samples, data,
 ptt_in, EER_PWM_out);
 
-input wire clk_10mhz;
 input wire clk_76m8;			
 input wire ad9866_clk;
 
@@ -126,7 +124,7 @@ reg [5:0] tx_gain;
 assign ad9866_rx_rqst = (!ptt_in && gain_update && ad9866_sen_n);
 assign ad9866_tx_rqst = (ptt_in && gain_update && ad9866_sen_n);
 
-ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.ext_tx_rqst(ad9866_tx_rqst),.tx_gain(tx_gain),.ext_rx_rqst(ad9866_rx_rqst),.rx_gain(rx_gain));
+ad9866 ad9866_inst(.reset(reset),.clk(clk_internal),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.ext_tx_rqst(ad9866_tx_rqst),.tx_gain(tx_gain),.ext_rx_rqst(ad9866_rx_rqst),.rx_gain(rx_gain));
 
 
 wire [11:0] DAC;
@@ -147,6 +145,7 @@ wire [47:0] spi0_recv;
 wire spi_done;
 reg [47:0] spi_data;
 reg pureSignal;
+reg initDone;
 
 wire cmd_empty;
 //using (small) fifo to bring commands through SPI bus to fast clock domain.
@@ -161,12 +160,14 @@ localparam CONTROL = 4'h4;
 								
 always @ (posedge clk_ad9866)
 begin
+	if (reset) initDone <= 0; 
 	if (~reset) begin
 		 case (spi_data[47:44])
 		  RX1: 	begin
 					rx1_phase_word <= spi_data[31:0];
 					rx1_speed <= spi_data[41:40];
 					rx_gain <= ~spi_data[37:32];
+					initDone <= 1; 
 				end
 		  RX2: 	begin
 					rx2_phase_word <= spi_data[31:0];
@@ -266,7 +267,7 @@ always @ (rx2_speed)
 //                           Software Reset Handler
 //------------------------------------------------------------------------------
 wire reset;
-reset_handler reset_handler_inst(.clock(clk_10mhz), .reset(reset));
+reset_handler reset_handler_inst(.clock(clk_internal), .reset(reset));
 
 //------------------------------------------------------------------------------
 //                           Pipeline for adc fanout
@@ -338,7 +339,7 @@ rxFIFO rx1_FIFO_inst(	.aclr(reset),
 
 wire rdreq;
 wire [7:0] rx1data_mux;
-ddr_mux ddr_mux_inst1(.clk(pi_clk), .reset(reset), .rd_req(rdreq), .in_data(rxDataFromFIFO), .out_data(rx1data_mux));							
+ddr_mux ddr_mux_inst1(.clk(pi_clk), .reset(reset | ~initDone), .rd_req(rdreq), .in_data(rxDataFromFIFO), .out_data(rx1data_mux));							
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rx2FIFO Handler (IQ Samples) rx
@@ -353,7 +354,7 @@ rxFIFO rx2_FIFO_inst(	.aclr(reset),
 							
 wire rdreq2;	
 wire [7:0] rx2data_mux;						
-ddr_mux ddr_mux_inst2(.clk(pi_clk2), .reset(reset), .rd_req(rdreq2), .in_data(rx2DataFromFIFO), .out_data(rx2data_mux));
+ddr_mux ddr_mux_inst2(.clk(pi_clk2), .reset(reset | ~initDone), .rd_req(rdreq2), .in_data(rx2DataFromFIFO), .out_data(rx2data_mux));
 
 reg select;
 always @(posedge pi_clk or posedge pi_clk2)
@@ -456,15 +457,16 @@ assign EER_enable = (ramp == 10'd0 | ramp == 10'd1);
 
 assign EER_PWM_out = (ptt_in) ? PWM : 1'b0; 
 
-wire clk_envelope;																
-ad9866pll ad9866pll_inst (.inclk0(clk_76m8), .c0(clk_ad9866), .c1(clk_ad9866_2x), .c2(clk_envelope), .locked());
+wire clk_envelope;	
+wire clk_internal;															
+ad9866pll ad9866pll_inst (.inclk0(clk_76m8), .c0(clk_ad9866), .c1(clk_ad9866_2x), .c2(clk_envelope), .c3(clk_internal),  .locked());
 								
 //------------------------------------------------------------------------------
 //                          Running...
 //------------------------------------------------------------------------------
 reg [26:0]counter;
 
-always @(posedge clk_10mhz) 
+always @(posedge clk_internal) 
 begin
   if (reset)
     counter <= 26'b0;

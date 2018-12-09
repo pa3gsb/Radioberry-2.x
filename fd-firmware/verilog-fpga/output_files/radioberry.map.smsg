@@ -1,3 +1,0 @@
-Warning (10268): Verilog HDL information at firfilt.v(270): always construct contains both blocking and non-blocking assignments File: C:/dev/git/Radioberry-2.x/fd-firmware/verilog-fpga/rtl/radio_openhpsdr/firfilt.v Line: 270
-Info (10281): Verilog HDL Declaration information at FirInterp5_1025_EER.v(114): object "rAddr" differs only in case from object "raddr" in the same scope File: C:/dev/git/Radioberry-2.x/fd-firmware/verilog-fpga/rtl/radio_openhpsdr/FirInterp5_1025_EER.v Line: 114
-Info (10281): Verilog HDL Declaration information at FirInterp8_1024.v(115): object "rAddr" differs only in case from object "raddr" in the same scope File: C:/dev/git/Radioberry-2.x/fd-firmware/verilog-fpga/rtl/radio_openhpsdr/FirInterp8_1024.v Line: 115

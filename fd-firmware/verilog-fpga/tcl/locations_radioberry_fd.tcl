@@ -1,4 +1,3 @@
-set_location_assignment PIN_55 -to clk_10mhz
 set_location_assignment PIN_53 -to clk_76m8
 
 set_location_assignment PIN_42 -to ptt_in

@@ -119,9 +119,9 @@ module ad9866pll (
 		altpll_component.clk2_duty_cycle = 50,
 		altpll_component.clk2_multiply_by = 16,
 		altpll_component.clk2_phase_shift = "0",
-		altpll_component.clk3_divide_by = 10,
+		altpll_component.clk3_divide_by = 192,
 		altpll_component.clk3_duty_cycle = 50,
-		altpll_component.clk3_multiply_by = 1,
+		altpll_component.clk3_multiply_by = 25,
 		altpll_component.clk3_phase_shift = "0",
 		altpll_component.compensate_clock = "CLK0",
 		altpll_component.inclk0_input_frequency = 13020,
@@ -207,7 +207,7 @@ endmodule
 // Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "76.800003"
 // Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE1 STRING "153.600006"
 // Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE2 STRING "245.759995"
-// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE3 STRING "7.680000"
+// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE3 STRING "10.000000"
 // Retrieval info: PRIVATE: EXPLICIT_SWITCHOVER_COUNTER STRING "0"
 // Retrieval info: PRIVATE: EXT_FEEDBACK_RADIO STRING "0"
 // Retrieval info: PRIVATE: GLOCKED_COUNTER_EDIT_CHANGED STRING "1"
@@ -244,7 +244,7 @@ endmodule
 // Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "76.80000000"
 // Retrieval info: PRIVATE: OUTPUT_FREQ1 STRING "153.60000000"
 // Retrieval info: PRIVATE: OUTPUT_FREQ2 STRING "245.76000000"
-// Retrieval info: PRIVATE: OUTPUT_FREQ3 STRING "7.68000000"
+// Retrieval info: PRIVATE: OUTPUT_FREQ3 STRING "10.00000000"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE0 STRING "1"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE1 STRING "1"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE2 STRING "1"
@@ -316,9 +316,9 @@ endmodule
 // Retrieval info: CONSTANT: CLK2_DUTY_CYCLE NUMERIC "50"
 // Retrieval info: CONSTANT: CLK2_MULTIPLY_BY NUMERIC "16"
 // Retrieval info: CONSTANT: CLK2_PHASE_SHIFT STRING "0"
-// Retrieval info: CONSTANT: CLK3_DIVIDE_BY NUMERIC "10"
+// Retrieval info: CONSTANT: CLK3_DIVIDE_BY NUMERIC "192"
 // Retrieval info: CONSTANT: CLK3_DUTY_CYCLE NUMERIC "50"
-// Retrieval info: CONSTANT: CLK3_MULTIPLY_BY NUMERIC "1"
+// Retrieval info: CONSTANT: CLK3_MULTIPLY_BY NUMERIC "25"
 // Retrieval info: CONSTANT: CLK3_PHASE_SHIFT STRING "0"
 // Retrieval info: CONSTANT: COMPENSATE_CLOCK STRING "CLK0"
 // Retrieval info: CONSTANT: INCLK0_INPUT_FREQUENCY NUMERIC "13020"

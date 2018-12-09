@@ -12,6 +12,7 @@ set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/counter.v
 set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/sqroot.v
 set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/square.v
 set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/ad9866pll.v
+set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/commandFIFO.v
 
 set_global_assignment -name VERILOG_FILE rtl/radio_openhpsdr/cic.v
 set_global_assignment -name VERILOG_FILE rtl/radio_openhpsdr/CicInterpM5.v

@@ -742,7 +742,7 @@ void *spiWriter(void *arg) {
 			high++;
 		} 
 		if (txERbufferc==0) lowER++;
-		if (txERbufferc> 2044)	highER++;
+		if (txERbufferc> 2044) {	highER++;   }//5samples sleep
 		
 		
 		tx_count ++;
