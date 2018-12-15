@@ -1,6 +1,6 @@
 /* 
 * Copyright (C)
-* 2017, 2018 - Johan Maas, PA3GSB
+* 2017, 2018, 2019 - Johan Maas, PA3GSB
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -18,18 +18,13 @@
 *
 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
-*	Radioberry radiocard is a so called 'HAT' for a raspberry pi; together resulting in a HAM radio.
+*	Radioberry radiocard is a so called 'HAT' for a raspberry pi; working together resulting in a HAM radio.
 *
-*	Radioberry v2.0 SDR firmware code.
+*	Radioberry v2.0 SDR firmware code. (small hw mod required and only FPGA CL025)
 *
 *	The radioberry firmware is formed by:
-*			- a verilog radioberry.rbf (verilog) part
-*			- and this radioberry c code part, implementing the openHPSDR protocol-1, running at a rpi.
-*
-*	This setup is using a full duplex mode. Which enables the possibility for pure signal.
-*
-*	
-*	This setup is not meant to use standalone. For a standalone trx an other setup is chosen!
+*			- verilog radioberry.rbf FPGA image,
+*			- this radioberry c code part, implementing the openHPSDR protocol-1, running at a Raspberry PI.
 *
 *	http://www.pa3gsb.nl
 *	  
@@ -39,6 +34,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 #include <string.h>
 #include <netdb.h>
 #include <sys/socket.h>
@@ -47,152 +43,59 @@
 #include <semaphore.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <pigpio.h>
+#include "radioberry.h"
 
-char build_date[]=GIT_DATE;
-char build_version[]=GIT_VERSION;
-
-void runHermesLite(void);
-void sendPacket(void);
-void handlePacket(char* buffer);
-void fillDiscoveryReplyMessage(void);
-int isValidFrame(char* data);
-void fillPacketToSend(void);
-void printIntroScreen(void);
-void *packetreader(void *arg);
-void *spiWriter(void *arg);
-void spi_control_rx1_phase();
-void spi_control_rx2_phase();
-void spi_control_tx();
-void spi_send_control();
-
-void put_tx_buffer(unsigned char  value);
-unsigned char get_tx_buffer(void);
-
-#define TX_MAX 4800
-#define TX_MAX_BUFFER (TX_MAX * 8)
-unsigned char tx_buffer[TX_MAX_BUFFER];
-int fill_tx = 0; 
-int use_tx  = 0;
-unsigned char drive_level;
-unsigned char prev_drive_level = 0;
-int MOX = 0;
-sem_t tx_empty;
-sem_t tx_full;
-sem_t mutex;
-
-int tx_count =0;
-void rx_reader(unsigned char iqdata[]);
-void rx2_reader(unsigned char iqdata[]);
-
-static int rx1_spi_handler;
-static int rx2_spi_handler;
-
-unsigned char iqdata[6];
-unsigned char tx_iqdata[8];
-
-#define SERVICE_PORT	1024
-
-int hold_nrx=0;
-int nrx = 2; // n Receivers
-int holdfreq = 0;
-int holdfreq2 = 0;
-int holdtxfreq = 0;
-int freq = 4706000;
-int freq2 = 1008000;
-int txfreq = 3630000;
-
-int rx1_phase = 0;
-int rx2_phase = 0;
-int tx_phase = 0;
-
-int att = 0;
-int holdatt =128;
-int holddither=128;
-int dither = 0;
-int rando = 0;
-int sampleSpeed = 0;
-int holdsampleSpeed = 0;
-
-int pureSignal = 0;
-int holdPureSignal = 128;
-
-unsigned char SYNC = 0x7F;
-int last_sequence_number = 0;
-
-unsigned char hpsdrdata[1032];
-unsigned char broadcastReply[60];
-#define TIMEOUT_MS      100     
-
-int running = 0;
-int fd;									/* our socket */
-
-struct sockaddr_in myaddr;				/* our address */
-struct sockaddr_in remaddr;				/* remote address */
-
-socklen_t addrlen = sizeof(remaddr);	/* length of addresses */
-int recvlen;							/* # bytes received */
-
-struct timeval t20;
-struct timeval t21;
-float elapsed;
-
-#define MAX11613_ADDRESS	0x34
-unsigned char data[8];
-unsigned int i2c_bus = 1;
-int i2c_handler = 0;
-int vswr_active = 0;
-
-float timedifference_msec(struct timeval t0, struct timeval t1)
-{
-    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
-}
-
-void initVSWR(){
-	unsigned char config[1];
-	config[0] = 0x07;
-	if (i2cWriteDevice(i2c_handler, config, 1) == 0 ) {
-		vswr_active = 1;
-	}	
-}
 
 int main(int argc, char **argv)
 {
-	printIntroScreen();	
+	printIntroScreen();
 	
+	if (initRadioberry() < 0){
+		fprintf(stderr,"Radioberry; could not be initialized. \n");
+		exit(-1);
+	}
+	runRadioberry();
+	closeRadioberry();
+}
+
+int initRadioberry() {
 	sem_init(&mutex, 0, 1);	
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0);    	
 	
 	if (gpioInitialise() < 0) {
-		fprintf(stderr,"hpsdr_protocol (original) : gpio could not be initialized. \n");
+		fprintf(stderr,"Radioberry;  gpio could not be initialized. \n");
 		exit(-1);
 	}
 	
 	gpioSetMode(25, PI_INPUT); 	//rx samples
 	
-	gpioSetMode(23, PI_INPUT); //data
+	// defining the IO ports as input; required for reading bits in one cycle.
+	// rx data byte:
+	gpioSetMode(23, PI_INPUT); 
 	gpioSetMode(20, PI_INPUT);
 	gpioSetMode(19, PI_INPUT);
 	gpioSetMode(18, PI_INPUT);
 	gpioSetMode(16, PI_INPUT);
 	gpioSetMode(13, PI_INPUT);
 	gpioSetMode(12, PI_INPUT);
-	gpioSetMode(5, PI_INPUT); //data 
+	gpioSetMode(5, PI_INPUT); 
 
-	gpioSetMode(6, PI_OUTPUT);  // pi-clk
-	gpioSetMode(17, PI_OUTPUT);  // pi-clk2
-	gpioSetMode(21, PI_OUTPUT);  //ptt
-	gpioWrite(21, 0); // ptt 
+	//define control IO ports
+	gpioSetMode(6, PI_OUTPUT);  	// pi-clk rx1 slice
+	gpioSetMode(17, PI_OUTPUT); 	// pi-clk rx2 slice
+	gpioSetMode(21, PI_OUTPUT);  	// ptt
 	
+	//Initialise
+	gpioWrite(21, 0); 				// set ptt off
+	gpioWrite(6, 0); 				// init pi-clk1 
+	gpioWrite(17, 0); 				// init pi-clk2 
 	
-	gpioWrite(6, 0); // pi-clk init
-	gpioWrite(17, 0); // pi-clk2 init
-	
-		
+	// open and initialize the 
 	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
-	
 	if (i2c_handler >= 0)  initVSWR();
 	
 	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
@@ -206,8 +109,8 @@ int main(int argc, char **argv)
 		fprintf(stderr,"radioberry_protocol: spi bus rx2 could not be initialized. \n");
 		exit(-1);
 	}
-
-	printf("init done \n");
+	
+	printf("Radioberry, Initialisation succesfully executed.\n");
 		
 	pthread_t pid1, pid2; 
 	pthread_create(&pid1, NULL, packetreader, NULL); 
@@ -235,308 +138,345 @@ int main(int argc, char **argv)
 		perror("bind failed");
 		return 0;
 	}
-	runHermesLite();
 	
-	if (rx1_spi_handler !=0)
-		spiClose(rx1_spi_handler);
-	if (rx2_spi_handler !=0)
-		spiClose(rx2_spi_handler);
+	if ((sock_TCP_Server = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	{
+		perror("socket tcp");
+		return -1;
+	}
+	int yes = 1;
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (void *)&yes, sizeof(yes));
+	int sndbufsize = 0xffff;
+	int rcvbufsize = 0xffff;
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
+
+	if (bind(sock_TCP_Server, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0)
+	{
+		perror("bind tcp");
+		return -1;
+	}
+	listen(sock_TCP_Server, 1024);
+}
+
+void closeRadioberry() {
+	if (rx1_spi_handler !=0) spiClose(rx1_spi_handler);
+	if (rx2_spi_handler !=0) spiClose(rx2_spi_handler);
+	if (sock_TCP_Client >= 0) close(sock_TCP_Client);
+	if (sock_TCP_Server >= 0) close(sock_TCP_Server);
 		
 	gpioTerminate();
 }
 
-void runHermesLite() {
-	printf("runHermesLite \n");
-
-	for (;;) {
+void runRadioberry() {
+	fprintf(stderr, "Radioberry, Starting packet tx part. \n");
+	while(1) {
 		if (running) {
 			sendPacket();
 		} else {usleep(20000);}
 	}
 }
 void *packetreader(void *arg) {
+	int size, bytes_read, bytes_left;
 	unsigned char buffer[2048];
-	
+	uint32_t *code0 = (uint32_t *) buffer; 
+	fprintf(stderr, "Radioberry, Starting packet rx part. \n");
 	while(1) {
-		recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
-		if (recvlen > 0) handlePacket(buffer);
+		if (sock_TCP_Client >= 0) {
+			// handle TCP protocol.
+			bytes_read=0;
+			bytes_left=1032;
+			while (bytes_left > 0) {
+				size = recvfrom(sock_TCP_Client, buffer+bytes_read, (size_t) bytes_left, 0, NULL, 0);
+				if (size < 0 && errno == EAGAIN) continue;
+				if (size < 0) break;
+				bytes_read += size;
+				bytes_left -= size;
+			}
+			if (bytes_read == 1032) handlePacket(buffer); else fprintf(stderr, "tcp packet received; wrong length %d \n", bytes_read);
+		} 
+		else {
+			// handle UDP protocol.
+			recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
+			if (recvlen > 0) handlePacket(buffer);
+		}
 	}
 }
 
-int att11 = 0;
-int prevatt11 = 0;
-int att523 = 0;
-int prevatt523 = 0;
-int change = 1;
-int pwmin = 0; int prev_pwim = 0;
-int pwmax = 1023; int prev_pwmax = 1023;
-
 void handlePacket(char* buffer){
-
-	if (buffer[2] == 2) {
-		printf("Discovery packet received \n");
-		printf("IP-address %d.%d.%d.%d  \n", 
-							remaddr.sin_addr.s_addr&0xFF,
-                            (remaddr.sin_addr.s_addr>>8)&0xFF,
-                            (remaddr.sin_addr.s_addr>>16)&0xFF,
-                            (remaddr.sin_addr.s_addr>>24)&0xFF);
-		printf("Discovery Port %d \n", ntohs(remaddr.sin_port));
-		
-		fillDiscoveryReplyMessage();
-		
-		if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
-			printf("error sendto");
-		
-	} else if (buffer[2] == 4) {
-			if (buffer[3] == 1 || buffer[3] == 3) {
-				printf("Start Port %d \n", ntohs(remaddr.sin_port));
-				running = 1;
-				printf("SDR Program sends Start command \n");
-				return;
-			} else {
-				running = 0;
-				last_sequence_number = 0;
-				printf("SDR Program sends Stop command \n");
-				return;
-			}
-		}
-	if (isValidFrame(buffer)) {
-	
-		 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
-		 if (MOX) gpioWrite(21, 1); else gpioWrite(21, 0);	// ptt 
-	
-		if ((buffer[11] & 0xFE)  == 0x22) {
-			pwmin = ((buffer[11+1] & 0xFF) << 2) + (buffer[11 + 2] & 0x03);
-			pwmax = ((buffer[11+3] & 0xFF) << 2) + (buffer[11 + 4] & 0x03);
-		}
-	
-		if ((buffer[11] & 0xFE)  == 0x14) {
-			att = (buffer[11 + 4] & 0x1F);
-			att11 = att;
-			pureSignal = ((buffer[11+2] & 0x40) == 0x40)? 0x01 : 0x00;
-		}
-		
-		if ((buffer[523] & 0xFE)  == 0x14) {
-			att = (buffer[523 + 4] & 0x1F);
-			att523 = att;
-		}
-	
-		if ((buffer[11] & 0xFE)  == 0x00) {
-			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
+	uint32_t code;
+	memcpy(&code, buffer, 4);
+	switch (code)
+	{
+		default:
+			fprintf(stderr, "Received packages not for me! \n");
+			break;
+		case 0x0002feef:
+			fprintf(stderr, "Discovery packet received \n");
+			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
+			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
+			fillDiscoveryReplyMessage();
+			if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) fprintf(stderr, "broadcast reply error");
 			
-			sampleSpeed = (buffer[11 + 1] & 0x03);
-			if (sampleSpeed != holdsampleSpeed) {
-				printf("sample speed   %d \n", sampleSpeed);
-				holdsampleSpeed = sampleSpeed;
-				change = 2;
-			}
-			
-			dither = 0;
-			if ((buffer[11 + 3] & 0x08) == 0x08)
-				dither = 1; 
-						
-			rando = 0;
-			if ((buffer[11 + 3] & 0x10) == 0x10)
-				rando = 1;
-		}
-		
-		if ((buffer[523] & 0xFE)  == 0x00) {
-			
-			dither = 0;
-			if ((buffer[523 + 3] & 0x08) == 0x08) {
-				dither = 1; 
-				change = 1;
-			}
-					
-			rando = 0;
-			if ((buffer[523 + 3] & 0x10) == 0x10) {
-				rando = 1;
-				change = 1;
-			}
-			
-		}
-		if (prevatt11 != att11) 
-		{
-			att = att11;
-			prevatt11 = att11;
-			change = 1;
-		}
-		if (prevatt523 != att523) 
-		{
-			att = att523;
-			prevatt523 = att523;
-			change = 1;
-		}
-			
-		if ((buffer[11] & 0xFE)  == 0x00) {
-			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
-		}
-		if ((buffer[523] & 0xFE)  == 0x00) {
-			nrx = (((buffer[523 + 4] & 0x38) >> 3) + 1);
-		}
-		if (hold_nrx != nrx) {
-			hold_nrx=nrx;
-			printf("aantal rx %d \n", nrx);
-		}
-		
-		// select Command
-		if ((buffer[11] & 0xFE) == 0x02)
-        {
-            txfreq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
-                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
-					
-			tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
-        }
-        if ((buffer[523] & 0xFE) == 0x02)
-        {
-            txfreq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
-                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
-			tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
-        }
-		
-		if ((buffer[11] & 0xFE) == 0x04)
-        {
-            freq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
-                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
-			rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
-        }
-        if ((buffer[523] & 0xFE) == 0x04)
-        {
-            freq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
-                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
-			rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
-        }
-		
-		if ((buffer[11] & 0xFE) == 0x06)
-        {
-            freq2 = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
-                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
-			rx2_phase = (uint32_t)ceil(((double)freq2 * 4294967296.0 ) / 76800000);
-        }
-        if ((buffer[523] & 0xFE) == 0x06)
-        {
-            freq2 = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
-                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
-			rx2_phase = (uint32_t)ceil(((double)freq2 * 4294967296.0 ) / 76800000);
-        }
-
-        // select Command
-        if ((buffer[523] & 0xFE) == 0x12)
-        {
-            drive_level = buffer[524];  
-        }
-		
-		if ((prev_pwim != pwmin) || (prev_pwmax != pwmax) || (holdPureSignal != pureSignal)) {
-			printf("pwmin =  %d  en pwmmax = %d \n", pwmin, pwmax);
-			fprintf(stderr, "Puresignal status %d\n", pureSignal);
-			spi_send_control();
-			prev_pwim = pwmin;
-			prev_pwmax = pwmax;
-			holdPureSignal = pureSignal;
-		}
-		if ((holdatt != att) || (holddither != dither)) {
-			holdatt = att;
-			holddither = dither;
-			printf("att =  %d ", att);printf("dither =  %d ", dither);printf("rando =  %d ", rando);
-			printf("code =  %d \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
-			printf("att11 = %d and att523 = %d\n", att11, att523);
-			change = 1;
-			//spi_control_rx1_phase();
-		}
-		if (holdfreq != freq) {
-			
-			holdfreq = freq;
-			printf("frequency rx 1 %d en aantal rx %d \n", freq, nrx);
-			printf("frequency rx-phase 1 %d en aantal rx %d \n", rx1_phase, nrx);
-			
-			change = 1;
-			//spi_control_rx1_phase();
-		}
-		if (holdfreq2 != freq2) {
-			holdfreq2 = freq2;
-			printf("frequency rx 2 %d en aantal rx %d \n", freq2, nrx);
-			spi_control_rx2_phase();
-			//spi_control_rx2_phase();
-		}
-		if (holdtxfreq != txfreq) {
-			holdtxfreq = txfreq;
-			fprintf(stderr, "TX frequency %d\n", txfreq);
-			spi_control_tx();
-		}
-		
-		if (drive_level != prev_drive_level) {
-			prev_drive_level = drive_level;
-			fprintf(stderr, "Drive level %d\n", drive_level);
-		}
-		
-		if (change) {
-			spi_control_rx1_phase();
-			//spi_control_rx1_phase();
-			if (change == 2) spi_control_rx2_phase();
-			change = 0; 
-		}
-		
-		int frame = 0;
-		for (frame; frame < 2; frame++)
-		{
-			int coarse_pointer = frame * 512 + 8;
-			int j = 8;
-			for (j; j < 512; j += 8)
+			break;
+		case 0x0004feef:
+			fprintf(stderr, "SDR Program sends Stop command \n");
+			running = 0;
+			last_sequence_number = 0;
+			if (sock_TCP_Client > -1)
 			{
-				int k = coarse_pointer + j;
-				if (MOX) {
-					sem_wait(&tx_empty);
-					int i = 0;
-					for (i; i < 8; i++){
-						put_tx_buffer(buffer[k + i]);	
-					}
-					sem_post(&tx_full);
+				close(sock_TCP_Client);
+				sock_TCP_Client = -1;
+				fprintf(stderr, "SDR Program sends TCP Stop command \n");
+			} else fprintf(stderr, "SDR Program sends UDP Stop command \n");	
+			break;
+		case 0x0104feef:
+		case 0x0304feef:
+			fprintf(stderr, "Start Port %d \n", ntohs(remaddr.sin_port));
+			running = 1;
+			fprintf(stderr, "SDR Program sends UDP Start command \n");
+			break;
+		case 0x1104feef: 
+			fprintf(stderr, "Connect the TCP client to the server\n");
+			if (sock_TCP_Client < 0)
+			{
+				if((sock_TCP_Client = accept(sock_TCP_Server, NULL, NULL)) < 0)
+				{
+					fprintf(stderr, "*** ERROR TCP accept ***\n");
+					perror("accept");
+					return;
 				}
-			}
-			
+				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
+				running = 1;
+				fprintf(stderr, "SDR Program sends TCP Start command \n");
+			}	
+			break;
+		case 0x0201feef:
+			processPacket(buffer);
+			break;		
+	}
+}
+
+void processPacket(char* buffer)
+{
+	seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
+	if (seqnum != last_seqnum + 1) {
+	  fprintf(stderr,"Radioberry firmware SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
+	}
+	last_seqnum = seqnum;
+
+	 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
+	 if (MOX) gpioWrite(21, 1); else gpioWrite(21, 0);	// ptt 
+
+	if ((buffer[11] & 0xFE)  == 0x22) {
+		pwmin = ((buffer[11+1] & 0xFF) << 2) + (buffer[11 + 2] & 0x03);
+		pwmax = ((buffer[11+3] & 0xFF) << 2) + (buffer[11 + 4] & 0x03);
+	}
+	
+	if ((buffer[11] & 0xFE)  == 0x14) {
+		att = (buffer[11 + 4] & 0x1F);
+		att11 = att;
+		pureSignal = ((buffer[11+2] & 0x40) == 0x40)? 0x01 : 0x00;
+	}
+	
+	if ((buffer[523] & 0xFE)  == 0x14) {
+		att = (buffer[523 + 4] & 0x1F);
+		att523 = att;
+	}
+	
+	if ((buffer[11] & 0xFE)  == 0x00) {
+		nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
+		
+		sampleSpeed = (buffer[11 + 1] & 0x03);
+		if (sampleSpeed != holdsampleSpeed) {
+			printf("sample speed   %d \n", sampleSpeed);
+			holdsampleSpeed = sampleSpeed;
+			change = change | 0x03; // in Protocol-1 valid for rx1 and rx2
 		}
+		
+		dither = 0;
+		if ((buffer[11 + 3] & 0x08) == 0x08)
+			dither = 1; 
+					
+		rando = 0;
+		if ((buffer[11 + 3] & 0x10) == 0x10)
+			rando = 1;
+	}
+		
+	if ((buffer[523] & 0xFE)  == 0x00) {
+		dither = 0;
+		if ((buffer[523 + 3] & 0x08) == 0x08) {
+			dither = 1; 
+			change = change | 0x01;
+		}
+				
+		rando = 0;
+		if ((buffer[523 + 3] & 0x10) == 0x10) {
+			rando = 1;
+			change = change | 0x01;
+		}
+	}
+	if (prevatt11 != att11) 
+	{
+		att = att11;
+		prevatt11 = att11;
+	}
+	if (prevatt523 != att523) 
+	{
+		att = att523;
+		prevatt523 = att523;
+	}
+			
+	if ((buffer[11] & 0xFE)  == 0x00) {
+		nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
+	}
+	if ((buffer[523] & 0xFE)  == 0x00) {
+		nrx = (((buffer[523 + 4] & 0x38) >> 3) + 1);
+	}
+	if (hold_nrx != nrx) {
+		hold_nrx=nrx;
+		printf("aantal rx %d \n", nrx);
+	}
+	
+	// select Command
+	if ((buffer[11] & 0xFE) == 0x02)
+	{
+		txfreq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
+				+ ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
+				
+		tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
+	}
+	if ((buffer[523] & 0xFE) == 0x02)
+	{
+		txfreq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
+				+ ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
+		tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
+	}
+	
+	if ((buffer[11] & 0xFE) == 0x04)
+	{
+		freq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
+				+ ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
+		rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
+	}
+	if ((buffer[523] & 0xFE) == 0x04)
+	{
+		freq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
+				+ ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
+		rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
+	}
+		
+	if ((buffer[11] & 0xFE) == 0x06)
+	{
+		freq2 = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
+				+ ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
+		rx2_phase = (uint32_t)ceil(((double)freq2 * 4294967296.0 ) / 76800000);
+	}
+	if ((buffer[523] & 0xFE) == 0x06)
+	{
+		freq2 = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
+				+ ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
+		rx2_phase = (uint32_t)ceil(((double)freq2 * 4294967296.0 ) / 76800000);
+	}
+
+	// select Command
+	//if ((buffer[11] & 0xFE) == 0x12) drive_level = buffer[14]; 
+	if ((buffer[523] & 0xFE) == 0x12) drive_level = buffer[524];  
+	
+	
+	if ((prev_pwim != pwmin) || (prev_pwmax != pwmax) || (holdPureSignal != pureSignal)) {
+		printf("pwmmin =  %d  en pwmmax = %d \n", pwmin, pwmax);
+		fprintf(stderr, "Puresignal status %d\n", pureSignal);
+		change = change | 0x08;
+		prev_pwim = pwmin;
+		prev_pwmax = pwmax;
+		holdPureSignal = pureSignal;
+	}
+	if ((holdatt != att) || (holddither != dither)) {
+		holdatt = att;
+		holddither = dither;
+		printf("att =  %d ", att);printf("dither =  %d ", dither);printf("rando =  %d ", rando);
+		printf("code =  %d \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
+		printf("att11 = %d and att523 = %d\n", att11, att523);
+		change = change | 0x01;
+	}
+	if (holdfreq != freq) {
+		holdfreq = freq;
+		printf("frequency rx 1 %d en aantal rx %d \n", freq, nrx);
+		printf("frequency rx-phase 1 %d en aantal rx %d \n", rx1_phase, nrx);
+		change = change | 0x01;
+	}
+	if (holdfreq2 != freq2) {
+		holdfreq2 = freq2;
+		printf("frequency rx 2 %d en aantal rx %d \n", freq2, nrx);
+		change = change | 0x02;
+	}
+	if ((holdtxfreq != txfreq) || (drive_level != prev_drive_level)) {
+		holdtxfreq = txfreq;
+		prev_drive_level = drive_level;
+		fprintf(stderr, "TX frequency %d\n", txfreq);
+		fprintf(stderr, "Drive level %d\n", drive_level);
+		change = change | 0x04;
+	}
+	// The change must be communicated to radioberry firmware
+	// The change var filling determines which spi control must be called.
+	if (change != 0x00) {
+		if ((change & 0x01) == 0x01) spi_control_rx1_phase();
+		if ((change & 0x02) == 0x02) spi_control_rx2_phase();
+		if ((change & 0x04) == 0x04) spi_control_tx();
+		if ((change & 0x08) == 0x08) spi_send_control();
+		change = 0x00; 
+	}
+		
+	int frame = 0;
+	for (frame; frame < 2; frame++)
+	{
+		int coarse_pointer = frame * 512 + 8;
+		int j = 8;
+		for (j; j < 512; j += 8)
+		{
+			int k = coarse_pointer + j;
+			if (MOX) {
+				sem_wait(&tx_empty);
+				int i = 0;
+				for (i; i < 8; i++){
+					put_tx_buffer(buffer[k + i]);	
+				}
+				sem_post(&tx_full);
+			}
+		}
+		
 	}
 }
 
 void sendPacket() {
 	fillPacketToSend();
-	
-	if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
-			printf("error sendto");
-}
-
-int isValidFrame(char* data) {
-	return (data[8] == SYNC && data[9] == SYNC && data[10] == SYNC && data[520] == SYNC && data[521] == SYNC && data[522] == SYNC);
+	if (sock_TCP_Client >= 0) {
+		if (sendto(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0, NULL, 0) != 1032) fprintf(stderr, "TCP send error");
+	} else {
+		if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) != 1032) fprintf(stderr, "UDP send error");
+	}
 }
 
 void fillPacketToSend() {
 	
 		memset(hpsdrdata,0,1032);
-		
-		hpsdrdata[0] = 0xEF;
-		hpsdrdata[1] = 0xFE;
-		hpsdrdata[2] = 0x01;
-		hpsdrdata[3] = 0x06;
+		memcpy(hpsdrdata, header_hpsdrdata, 4);
 		hpsdrdata[4] = ((last_sequence_number >> 24) & 0xFF);
 		hpsdrdata[5] = ((last_sequence_number >> 16) & 0xFF);
 		hpsdrdata[6] = ((last_sequence_number >> 8) & 0xFF);
 		hpsdrdata[7] = (last_sequence_number & 0xFF);
 		last_sequence_number++;
+		
+		memcpy(hpsdrdata + 8, sync_hpsdrdata, 8);
+		memcpy(hpsdrdata + 520, sync_hpsdrdata, 8);
 
 		int factor = (nrx - 1) * 6;
 		int index=0;
 		int frame = 0;
 		for (frame; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
-			hpsdrdata[8 + coarse_pointer] = SYNC;
-			hpsdrdata[9 + coarse_pointer] = SYNC;
-			hpsdrdata[10 + coarse_pointer] = SYNC;
-			hpsdrdata[11 + coarse_pointer] = 0x00; // c0
-			hpsdrdata[12 + coarse_pointer] = 0x00; // c1
-			hpsdrdata[13 + coarse_pointer] = 0x00; // c2
-			hpsdrdata[14 + coarse_pointer] = 0x00; // c3
-			hpsdrdata[15 + coarse_pointer] = 0x28; // c4 //v4.0 firmware version
-	
+				
 			while (gpioRead(25) == 0) {}//wait for enough samples
 			
 			int i = 0;
@@ -641,7 +581,6 @@ void rx2_reader(unsigned char iqdata[]){
 }
 
 void spi_control_rx1_phase() {
-		
 	unsigned char iqdata[6];
 	
 	iqdata[0] = (0x10 | (sampleSpeed & 0x03));
@@ -651,15 +590,12 @@ void spi_control_rx1_phase() {
 	iqdata[4] = ((rx1_phase >> 8) & 0xFF);
 	iqdata[5] = (rx1_phase & 0xFF);
 	
-	//fprintf(stderr, "s %x\n", iqdata[0]);
-			
 	sem_wait(&mutex);			
 	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
 	sem_post(&mutex);
 }
 
 void spi_control_rx2_phase() {
-		
 	unsigned char iqdata[6];
 	
 	iqdata[0] = (0x20 | (sampleSpeed & 0x03));
@@ -675,7 +611,6 @@ void spi_control_rx2_phase() {
 }
 
 void spi_control_tx() {
-	
 	unsigned char iqdata[6];
 	
 	iqdata[0] = 0x30;
@@ -691,7 +626,6 @@ void spi_control_tx() {
 }
 
 void spi_send_control() {
-	
 	unsigned char iqdata[6];
 	
 	iqdata[0] = 0x40;
@@ -770,13 +704,33 @@ unsigned char get_tx_buffer() {
     return tmp;
 }
 
+float timedifference_msec(struct timeval t0, struct timeval t1)
+{
+    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
+}
+
+void initVSWR(){
+	unsigned char config[1];
+	config[0] = 0x07;
+	if (i2cWriteDevice(i2c_handler, config, 1) == 0 ) {
+		vswr_active = 1;
+	}	
+}
+
 void printIntroScreen() {
 	fprintf(stderr,"\n");
-	fprintf(stderr,	"======================TEST TEST TEST TEST TEST =====================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\t Radioberry V2.0 beta 2.\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr, "\tRadioberry V2.0 beta 2 and beta 3 (incl. small mod).\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t Emulator build date %s version %s \n", build_date ,build_version);
+	fprintf(stderr, "\tSupporting:\n");
+	fprintf(stderr, "\t\t - openhpsdr protocol-1.\n");
+	fprintf(stderr, "\t\t - full duplex mode.\n");
+	fprintf(stderr, "\t\t - pure signal.\n");
+	fprintf(stderr, "\t\t - EER. (Envelope Elimination and Restoration)\n");
+	fprintf(stderr, "\t\t - 2rx slices max 192K sampling rate\n");
+	fprintf(stderr, "\t\t - TCP modes in piHPSDR\n");
+	fprintf(stderr, "\t\t - VSWR monitor (https://github.com/pa3gsb/vswr)\n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");

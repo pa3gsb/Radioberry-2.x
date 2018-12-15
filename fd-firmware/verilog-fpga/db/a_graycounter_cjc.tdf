@@ -1,0 +1,64 @@
+--a_graycounter DEVICE_FAMILY="Cyclone 10 LP" PVALUE=1 WIDTH=3 aclr clock cnt_en q ALTERA_INTERNAL_OPTIONS=suppress_da_rule_internal=S102
+--VERSION_BEGIN 17.0 cbx_a_gray2bin 2017:07:19:18:07:03:SJ cbx_a_graycounter 2017:07:19:18:07:03:SJ cbx_cycloneii 2017:07:19:18:07:03:SJ cbx_mgl 2017:07:19:18:10:29:SJ cbx_stratix 2017:07:19:18:07:03:SJ cbx_stratixii 2017:07:19:18:07:03:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+
+--synthesis_resources = reg 4 
+OPTIONS ALTERA_INTERNAL_OPTION = "suppress_da_rule_internal=S102;{-to counter5a0} POWER_UP_LEVEL=HIGH;{-to parity6} POWER_UP_LEVEL=LOW";
+
+SUBDESIGN a_graycounter_cjc
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[2..0]	:	output;
+) 
+VARIABLE 
+	counter5a0 : dffeas
+		WITH (
+			power_up = "high"
+		);
+	counter5a1 : dffeas;
+	counter5a2 : dffeas;
+	parity6 : dffeas
+		WITH (
+			power_up = "low"
+		);
+	cntr_cout[2..0]	: WIRE;
+	parity_cout	: WIRE;
+	sclr	: NODE;
+	updown	: NODE;
+
+BEGIN 
+	counter5a[2..0].clk = clock;
+	counter5a[2..1].clrn = (! aclr);
+	counter5a[2..0].d = ( (counter5a[2].q $ cntr_cout[1..1]), (counter5a[1].q $ (counter5a[0].q & cntr_cout[0..0])), ((cnt_en & (counter5a[0].q $ (! parity_cout))) # ((! cnt_en) & counter5a[0].q)));
+	counter5a[0].prn = (! aclr);
+	counter5a[2..0].sclr = sclr;
+	parity6.clk = clock;
+	parity6.clrn = (! aclr);
+	parity6.d = ((cnt_en & ((counter5a[0..0].q $ counter5a[1..1].q) $ counter5a[2..2].q)) # ((! cnt_en) & parity6.q));
+	parity6.sclr = sclr;
+	cntr_cout[] = ( B"0", (cntr_cout[0..0] & (! counter5a[0].q)), (cnt_en & parity_cout));
+	parity_cout = ((parity6.q $ updown) & cnt_en);
+	q[] = counter5a[2..0].q;
+	sclr = GND;
+	updown = VCC;
+END;
+--VALID FILE

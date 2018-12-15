@@ -1,0 +1,43 @@
+--dffpipe DELAY=8 WIDTH=13 clock clrn d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF;SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;PRESERVE_REGISTER=ON;DONT_MERGE_REGISTER=ON;ADV_NETLIST_OPT_ALLOWED=NEVER_ALLOW
+--VERSION_BEGIN 17.0 cbx_a_gray2bin 2017:07:19:18:07:03:SJ cbx_a_graycounter 2017:07:19:18:07:03:SJ cbx_altdpram 2017:07:19:18:07:03:SJ cbx_altera_counter 2017:07:19:18:07:03:SJ cbx_altera_gray_counter 2017:07:19:18:07:03:SJ cbx_altera_syncram 2017:07:19:18:07:03:SJ cbx_altera_syncram_nd_impl 2017:07:19:18:07:03:SJ cbx_altsyncram 2017:07:19:18:07:03:SJ cbx_cycloneii 2017:07:19:18:07:03:SJ cbx_dcfifo 2017:07:19:18:07:03:SJ cbx_fifo_common 2017:07:19:18:07:03:SJ cbx_lpm_add_sub 2017:07:19:18:07:03:SJ cbx_lpm_compare 2017:07:19:18:07:03:SJ cbx_lpm_counter 2017:07:19:18:07:03:SJ cbx_lpm_decode 2017:07:19:18:07:03:SJ cbx_lpm_mux 2017:07:19:18:07:03:SJ cbx_mgl 2017:07:19:18:10:29:SJ cbx_nadder 2017:07:19:18:07:03:SJ cbx_scfifo 2017:07:19:18:07:03:SJ cbx_stratix 2017:07:19:18:07:03:SJ cbx_stratixii 2017:07:19:18:07:03:SJ cbx_stratixiii 2017:07:19:18:07:03:SJ cbx_stratixv 2017:07:19:18:07:03:SJ cbx_util_mgl 2017:07:19:18:07:03:SJ  VERSION_END
+
+
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel MegaCore Function License Agreement, or other 
+--  applicable license agreement, including, without limitation, 
+--  that your use is for the sole purpose of programming logic 
+--  devices manufactured by Intel and sold by Intel or its 
+--  authorized distributors.  Please refer to the applicable 
+--  agreement for further details.
+
+
+FUNCTION dffpipe_2f9 (clock, clrn, d[12..0])
+RETURNS ( q[12..0]);
+
+--synthesis_resources = reg 104 
+OPTIONS ALTERA_INTERNAL_OPTION = "X_ON_VIOLATION_OPTION=OFF;SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS;PRESERVE_REGISTER=ON;DONT_MERGE_REGISTER=ON;ADV_NETLIST_OPT_ALLOWED=NEVER_ALLOW";
+
+SUBDESIGN alt_synch_pipe_hpl
+( 
+	clock	:	input;
+	clrn	:	input;
+	d[12..0]	:	input;
+	q[12..0]	:	output;
+) 
+VARIABLE 
+	dffpipe13 : dffpipe_2f9;
+
+BEGIN 
+	dffpipe13.clock = clock;
+	dffpipe13.clrn = clrn;
+	dffpipe13.d[] = d[];
+	q[] = dffpipe13.q[];
+END;
+--VALID FILE
