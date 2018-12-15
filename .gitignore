@@ -1,12 +1,7 @@
 # no backup files
 *.bak
 
-/Firmware/db/**/
-/Firmware/output_files/**/
-/Firmware/greybox_tmp/**/
-/Firmware/incremental_db/**/
-
-/fd-firmware/verilog-fpga/db/**/
-/fd-firmware/verilog-fpga/greybox_tmp/**/
-/fd-firmware/verilog-fpga/incremental_db/**/
-/fd-firmware/verilog-fpga/output_files/**/
+db/
+greybox_tmp/
+incremental_db/
+output_files/
