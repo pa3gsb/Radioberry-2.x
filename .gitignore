@@ -6,7 +6,7 @@
 /Firmware/greybox_tmp/**/
 /Firmware/incremental_db/**/
 
-db/**/
-greybox_tmp/**/
-incremental_db/**/
-output_files/**/
+/fd-firmware/verilog-fpga/db/**/
+/fd-firmware/verilog-fpga/greybox_tmp/**/
+/fd-firmware/verilog-fpga/incremental_db/**/
+/fd-firmware/verilog-fpga/output_files/**/
