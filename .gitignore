@@ -5,3 +5,8 @@
 /Firmware/output_files/**/
 /Firmware/greybox_tmp/**/
 /Firmware/incremental_db/**/
+
+db/**/
+greybox_tmp/**/
+incremental_db/**/
+output_files/**/
