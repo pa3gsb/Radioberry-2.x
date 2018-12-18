@@ -65,6 +65,8 @@ output [7:0] data;
 
 input wire ptt_in;
 
+reg   [9:0] PWM_min;					// sets minimum width of envelope PWM pulse
+reg   [9:0] PWM_max;					// sets maximum width of envelope PWM pulse
 output wire EER_PWM_out;
 
 logic clk_ad9866;
@@ -387,6 +389,8 @@ transmitter transmitter_inst(	.reset(reset), .clk(clk_ad9866), .frequency(tx_pha
 								.out_data(DAC), .PTT(ptt_in), .CW_PTT(1'b0), .LED());
 
 
+`ifdef EER
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        EER module
 //------------------------------------------------------------------------------------------------------------------------------------------------------------															
@@ -439,8 +443,6 @@ sqroot sqroot_inst (.clk(clk_ad9866), .radical(sum[32:1]), .q(envelope));
 //--------------------------------------------------------
 reg  [9:0] ramp = 0; 
 reg PWM = 0;
-reg   [9:0] PWM_min;					// sets minimum width of envelope PWM pulse
-reg   [9:0] PWM_max;					// set maximum width of envelope PWM pulse
 
 counter counter_inst (.clock(clk_envelope), .q(ramp));  // count to 1024 [10:0] = 240kHz, 640 [9:0] for 384kHz
 
@@ -456,6 +458,9 @@ end
 assign EER_enable = (ramp == 10'd0 | ramp == 10'd1); 
 
 assign EER_PWM_out = (ptt_in) ? PWM : 1'b0; 
+
+`endif
+
 
 wire clk_envelope;	
 wire clk_internal;															

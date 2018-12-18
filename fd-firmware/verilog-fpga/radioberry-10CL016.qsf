@@ -36,13 +36,11 @@
 #
 # -------------------------------------------------------------------------- #
 
-set_global_assignment -name VERILOG_MACRO "EER=1"
-set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files_cl_025
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files_cl_016
 source ./tcl/general.tcl
-set_global_assignment -name DEVICE 10CL025YE144C8G
+set_global_assignment -name DEVICE 10CL016YE144C8G
 source ./tcl/locations_radioberry_fd.tcl
 source ./tcl/files.tcl
-
 set_global_assignment -name TOP_LEVEL_ENTITY radioberry
 set_global_assignment -name SDC_FILE sdc/radioberry.sdc
 
