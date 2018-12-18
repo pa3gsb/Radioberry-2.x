@@ -7,17 +7,17 @@ LIBS=-lrt -lm -lpigpio -lpthread -lasound
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
-PROGRAM=hermeslite
+PROGRAM=radioberry
 
 SOURCES= \
 udp.c \
 audio.c \
 mic.c \
 local_audio_discovery.c \
-hermeslite.c \
+radioberry.c \
 
 
-HEADERS= hermeslite.h \
+HEADERS= radioberry.h \
 udp.h \
 audio.h \
 mic.h \
@@ -30,7 +30,7 @@ udp.o \
 audio.o \
 mic.o \
 local_audio_discovery.o \
-hermeslite.o \
+radioberry.o \
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 

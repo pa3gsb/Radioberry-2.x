@@ -1,7 +1,7 @@
 #define MAX_RECEIVERS 2
 #define SERVICE_PORT 1024
 #define MAX_DATA_SIZE 2048
-#define HERMESLITE  0x06	
+#define HERMESLITE  0x02	
 #define FIRMWARE_VERSION 0x28	//firmware version 4.0 (=0x28)
 #define TIMEOUT_MS 100 
 #define HANDLER_STEADY_TIME_US 5000

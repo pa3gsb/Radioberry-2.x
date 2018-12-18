@@ -1,7 +1,7 @@
 
 #include <alsa/asoundlib.h>
 #include "audio.h"
-#include "hermeslite.h"
+#include "radioberry.h"
 
 static int audio_buffer_size = 256; 	// samples (both left and right)
 static int audioseq=-1;

@@ -1,7 +1,7 @@
 
 #include <alsa/asoundlib.h>
 #include "mic.h"
-#include "hermeslite.h"
+#include "radioberry.h"
 
 static int mic_buffer_size = 64;
 static snd_pcm_t *record_handle=NULL;
@@ -11,6 +11,72 @@ static unsigned char *mic_buffer=NULL;
 #define AUDIO_CHANNELS 2
 #define MIC_BUFFER_SIZE (AUDIO_SAMPLE_SIZE*AUDIO_CHANNELS*mic_buffer_size)
 
+void *mic_dummy_thread(void *arg) {
+	
+	int i=0;
+	unsigned char l_mic_buffer[132];
+	
+	while(1) {
+		
+		sem_wait(&mic_sample);
+		i++;
+		if ((i % sampleSpeed[0])==0) {
+			
+			i = 0;
+		
+			l_mic_buffer[mic_count++] = 0; //msb
+			l_mic_buffer[mic_count++] = 0;
+				
+			if (mic_count == 132) {
+				l_mic_buffer[0]=mic_sequence>>24;
+				l_mic_buffer[1]=mic_sequence>>16;
+				l_mic_buffer[2]=mic_sequence>>8;
+				l_mic_buffer[3]=mic_sequence;
+				send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
+				mic_sequence++;
+				mic_count = 4;
+			}
+		}
+	}
+	fprintf(stderr,"mic_dummy_thread: exiting\n");
+	return NULL;
+}
+
+void start_dummy_mic_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, mic_dummy_thread, NULL);
+}
+
+unsigned char l_mic_buffer[132]; 
+void process_local_mic(unsigned char *mic_buffer){
+	int i=0;
+	
+	if (running) {
+		for(i=0;i<MIC_SAMPLES;i++) {
+			l_mic_buffer[mic_count++] = mic_buffer[i*2+1]; //msb
+			l_mic_buffer[mic_count++] = mic_buffer[i*2];
+			
+			/* making verbose function.....
+			lcounta ++;
+			if (lcounta == 48000) {
+				lcounta = 0;
+				gettimeofday(&t2a, 0);
+				float elapsd = timedifference_msec(t1a, t2a);
+				printf("Audio line-in executed in %f milliseconds.\n", elapsd);
+				gettimeofday(&t1a, 0);
+			}
+			*/
+			
+		}
+		l_mic_buffer[0]=mic_sequence>>24;
+		l_mic_buffer[1]=mic_sequence>>16;
+		l_mic_buffer[2]=mic_sequence>>8;
+		l_mic_buffer[3]=mic_sequence;
+		send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
+		mic_sequence++;
+		mic_count = 4;
+	}
+}
 
 static void *mic_read_thread(void *arg) {
 	int rc;
@@ -42,9 +108,7 @@ static void *mic_read_thread(void *arg) {
 void start_mic_thread() {
 	pthread_t pid1; 
 	
-	if (use_local_audio_in==0) return;
-	
-	pthread_create(&pid1, NULL, mic_read_thread, NULL);
+	if (use_local_audio_in==0) start_dummy_mic_thread(); else pthread_create(&pid1, NULL, mic_read_thread, NULL);
 }
 
 int audio_open_input(char* selected) {

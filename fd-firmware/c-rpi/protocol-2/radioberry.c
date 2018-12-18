@@ -34,106 +34,10 @@
 *	2018 Johan PA3GSB
 *
 */
-
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/ioctl.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <net/if_arp.h>
-#include <net/if.h>
-#include <ifaddrs.h>
-#include <semaphore.h>
-#include <math.h>
-#include <malloc.h>
-#include <signal.h>
-#include <stdbool.h>
-#include <linux/if_packet.h>
-#include <netinet/in.h>		 
-#include <netinet/if_ether.h>  
-#include <netinet/ip.h>	
-#include <netinet/udp.h>		
-#include <netinet/tcp.h>
-#include <sys/time.h>
-#include "udp.h"
-#include <pigpio.h>
-#include <getopt.h>
-
-#include "hermeslite.h"
+#include "radioberry.h"
 #include "local_audio_discovery.h"
 #include "audio.h"
 #include "mic.h"
-
-static long rx1_sequence = 0;
-static long rx2_sequence = 0;
-static char sdr_client_addr[20];
-static char radioberry_addr[20];
-static long status_sequence = 0;
-static long mic_sequence = 0;
-static long mic_count=4;
-
-static struct sockaddr_in src_addr[8];
-static struct sockaddr_in dst_addr;
-
-static struct sockaddr_in high_priority_addr;
-static int high_priority_addr_length;
-
-static struct sockaddr_in mic_line_addr;
-static int mic_line_addr_length; 
-
-int radioberry_socket=-1;
-int discover_socket=-1;
-int remote_port =0;
-
-unsigned char broadcastReply[60];
-
-static int rx1_spi_handler;
-static int rx2_spi_handler;
-
-int use_local_audio_in = 0;
-int use_local_audio_out = 0;
-
-static int running = 0;
-static int nrx = 1; 
-static int sampleSpeed[MAX_RECEIVERS];
-static int ddc[MAX_RECEIVERS];
-static int ptt = 0;
-static int gain = 0;
-static int dither = 1;
-
-static int rxfreq1 = 4706000;
-static int rxfreq2 = 1008000;
-static int txfreq  = 3630000;
-
-unsigned char drive_level;
-unsigned char prev_drive_level = -1;
-
-sem_t mutex;
-sem_t mic_sample;
-static sem_t high_priority_mutex;
-
-struct timeval t1;
-struct timeval t2;
-struct timeval t1a;
-struct timeval t2a;
-
-static int lcount=0;
-static int lcounta=0;
-static int lseq=-1;
-
-static int cw = 0;
-static int cw_keyer_speed = 0;
-static int cw_keyer_weight = 0;
-static int cw_iambic_mode = 0;
-static int cw_keyer_reverse = 0;
-static int cw_break_in = 0;
-static int cw_ptt = 0;
 
 #define SHORT_OPTIONS "lha:m:v"
 #define HST_SHRT_OPTS ""
@@ -226,8 +130,8 @@ int main(int argc, char **argv) {
 	pthread_create(&pid2, NULL, send_high_priority_status_to_host, NULL);
 	
 	gettimeofday(&t1a, 0);
-	//start_mic_thread();
-	start_dummy_mic_thread();
+	start_mic_thread();
+	//start_dummy_mic_thread();
 	
 	gettimeofday(&t1, 0);
 	
@@ -326,37 +230,6 @@ int initialize_gpio() {
 	//setup_isr_handler(17, cw_ptt_alert); 
 	
 	return 0;
-}
-
-unsigned char l_mic_buffer[132]; 
-void process_local_mic(unsigned char *mic_buffer){
-	int i=0;
-	
-	if (running) {
-		for(i=0;i<MIC_SAMPLES;i++) {
-			l_mic_buffer[mic_count++] = mic_buffer[i*2+1]; //msb
-			l_mic_buffer[mic_count++] = mic_buffer[i*2];
-			
-			/* making verbose function.....
-			lcounta ++;
-			if (lcounta == 48000) {
-				lcounta = 0;
-				gettimeofday(&t2a, 0);
-				float elapsd = timedifference_msec(t1a, t2a);
-				printf("Audio line-in executed in %f milliseconds.\n", elapsd);
-				gettimeofday(&t1a, 0);
-			}
-			*/
-			
-		}
-		l_mic_buffer[0]=mic_sequence>>24;
-		l_mic_buffer[1]=mic_sequence>>16;
-		l_mic_buffer[2]=mic_sequence>>8;
-		l_mic_buffer[3]=mic_sequence;
-		send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
-		mic_sequence++;
-		mic_count = 4;
-	}
 }
 
 void *send_high_priority_status_to_host(void *arg) {
@@ -499,14 +372,15 @@ void receiver_specific_registers_from_host_port(unsigned char* data) {
 			//fprintf(stderr, "ddc no %d \n", i); 
 		}
 	} 
-	fprintf(stderr,"Numer of receivers: %d \n", lnrx);
+	fprintf(stderr,"Number of receivers: %d \n", lnrx);
 	speed = data[18+(ddc[0]*6)] << 8 | data[19+(ddc[0]*6)];	
 	sampleSpeed[0] = speed/48==1?0x00:speed/48==2?0x01:speed/48==4?0x02:speed/48==8?0x03:0x04;
+	samplespeed = speed/48;
 	fprintf(stderr,"sample speed receiver[0] =  %d \n", sampleSpeed[0]);
 	if (lnrx == 2){
 		speed = data[18+(ddc[1]*6)] << 8 | data[19+(ddc[1]*6)];
 		sampleSpeed[1] = speed/48==1?0x00:speed/48==2?0x01:speed/48==4?0x02:speed/48==8?0x03:0x04;
-		fprintf(stderr,"sample speed receiver[1] =  %d \n", sampleSpeed[1]);	
+		//fprintf(stderr,"sample speed receiver[1] =  %d \n", sampleSpeed[1]);	
 	}
 	nrx = lnrx;
 }
@@ -535,12 +409,15 @@ void high_priority_from_host_port(unsigned char* data) {
 	rxphase1 = data[9+(ddc[0]*4)] << 24 | data[10+(ddc[0]*4)] << 16  | data[11+(ddc[0]*4)] << 8 | data[12+(ddc[0]*4)] ;
 	rxphase2 = data[9+(ddc[1]*4)] << 24 | data[10+(ddc[1]*4)] << 16  | data[11+(ddc[1]*4)] << 8 | data[12+(ddc[1]*4)] ;
 	rxfreq1 =  (long) (((double) rxphase1 * 122880000.0) / 4294967296.0);
+	rx1_phase = (uint32_t)ceil(((double)rxfreq1 * 4294967296.0 ) / 76800000);
 	//fprintf(stderr,"rxfreq1 %d \n", rxfreq1);
 	rxfreq2 =  (long) (((double) rxphase2 * 122880000.0) / 4294967296.0);
+	rx2_phase = (uint32_t)ceil(((double)rxfreq2 * 4294967296.0 ) / 76800000);
 	//fprintf(stderr,"rxfreq2 %d \n", rxfreq2);
 	//tx
 	txphase = ( data[329] << 24 | data[330] << 16  | data[331] << 8 | data[332] );
 	txfreq =  (long) (((double) txphase * 122880000.0) / 4294967296.0);
+	tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
 	//fprintf(stderr,"txfreq %d \n", txfreq);
 	drive_level = data[345] & 0xFF;
 	//if (prev_drive_level != drive_level) {
@@ -551,9 +428,9 @@ void high_priority_from_host_port(unsigned char* data) {
 	//fprintf(stderr, "ad9866 gain = %d rx-gain = %d \n", gain, (gain -12));
 	
 	//TODO only sending if changed!
-	spi_rx1_writer();
-	spi_rx2_writer();
-	spi_tx_writer();
+	spi_control_rx1_phase();
+	spi_control_rx2_phase();
+	spi_control_tx();
 }
 
 void create_radioberry_socket() {
@@ -592,11 +469,11 @@ void create_radioberry_socket() {
 
 void tx_iq_from_host_port(unsigned char* buffer) {
 	
-	unsigned char tx_iqdata[6];
+	unsigned char tx_iqdata[8];
 	
 	// protocol-2 the rate is 192ksps  (radioberry uses 48K; downsampling required!)
 	// i and q (msb first using 24b/sample, radioberry uses only 16b/sample; using 2 msb bytes.) from index 4 to 1443 (240 i and q samples)
-		
+	
 	if (!ptt) return;
 	
 	//getting the udp packages sometimes twice...?
@@ -604,17 +481,22 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 	if (lseq == seq) return;
 	lseq = seq;
 	
-	int index = 4;	
-	while (index <= 1444) {
-		tx_iqdata[0] = 0;
+	int index = 4;
+	int sample = 0;
+	for (sample=0; sample < 60; sample++) {
+		tx_iqdata[0] = 0;	// todo eer support; also if eer support is on need to increase index step....
 		tx_iqdata[1] = 0;
-		tx_iqdata[2] = ((buffer[index++]) & 0xFF); 
-		tx_iqdata[3] = ((buffer[index++]) & 0xFF); 
-		tx_iqdata[4] = ((buffer[++index]) & 0xFF); 
-		tx_iqdata[5] = ((buffer[++index]) & 0xFF); 
+		tx_iqdata[2] = 0;
+		tx_iqdata[3] = 0;
+		tx_iqdata[4] = ((buffer[index++]) & 0xFF); 
+		tx_iqdata[5] = ((buffer[index++]) & 0xFF); 
+		tx_iqdata[6] = ((buffer[++index]) & 0xFF); 
+		tx_iqdata[7] = ((buffer[++index]) & 0xFF); 
 		sem_wait(&mutex);
-		spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6); //possible to return the fifo filled level....keep in sync! required?????
+		spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 8); //possible to return the fifo filled level....keep in sync! required?????
 		sem_post(&mutex);
+		int txbufferc = ((tx_iqdata[6] & 0x07) << 8) + (tx_iqdata[7] & 0xFF); 
+		if (txbufferc > 2044)  usleep(100); 
 		index = index + 20;	//decimation by 4
 		
 		lcount ++;
@@ -666,6 +548,8 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[11] = HERMESLITE;	
 	broadcastReply[13] = FIRMWARE_VERSION;	
 	broadcastReply[20] = MAX_RECEIVERS;
+	broadcastReply[36] = NR_ADC;
+	broadcastReply[39] = MAX_RECEIVERS;
 }
 
 int handleDiscovery(unsigned char* buffer) {
@@ -707,20 +591,19 @@ int handleDiscovery(unsigned char* buffer) {
 
 void usage(void)
 {
-    printf("Usage: hermeslite [OPTION]... [COMMAND]...\n"
-           "COMMANDs to initialize the hermeslite emulator.\n\n");
+    printf("Usage: radioberry [OPTION]... [COMMAND]...\n"
+           "COMMANDs to initialize the radioberry firmware.\n\n");
 
     printf(
 		" -a, --audio-out=ID	select audio output device number. See model list\n"
         " -m, --audio-in=ID		select audio input device. See model list\n"
-        " -l, --list            list all audio device and exit\n"
+        " -l, --list			list all audio device and exit\n"
         " -h, --help            display this help and exit\n"
         " -v, --version         output version information and exit\n\n"
     );
 
     printf("\nReport bugs to <pa3gsb@gmail.com>.\n");
 }
-
 
 void print_version(void){
 	printf("Version information: \n%s \n\n", version);
@@ -731,7 +614,7 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\tRadioberry V2.0 beta 2.\n");
+	fprintf(stderr, "\t\t\tRadioberry V2.0 beta 2 and beta 3 .\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr, "\t\t\tEmulator Protocol-2 alpha \n");
 	fprintf(stderr,	"\n");
@@ -741,79 +624,48 @@ void printIntroScreen() {
 	fprintf(stderr, "====================================================================\n");
 }
 
-void *mic_dummy_thread(void *arg) {
-	
-	int i=0;
-	unsigned char l_mic_buffer[132];
-	
-	while(1) {
-		
-		sem_wait(&mic_sample);
-		
-		l_mic_buffer[mic_count++] = 0; //msb
-		l_mic_buffer[mic_count++] = 0;
-			
-		if (mic_count == 132) {
-			l_mic_buffer[0]=mic_sequence>>24;
-			l_mic_buffer[1]=mic_sequence>>16;
-			l_mic_buffer[2]=mic_sequence>>8;
-			l_mic_buffer[3]=mic_sequence;
-			send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
-			mic_sequence++;
-			mic_count = 4;
-		}
-	}
-	fprintf(stderr,"mic_dummy_thread: exiting\n");
-	return NULL;
-}
-
-void start_dummy_mic_thread() {
-	pthread_t pid1; 
-	pthread_create(&pid1, NULL, mic_dummy_thread, NULL);
-}
-
-void spi_rx1_writer() {
+void spi_control_rx1_phase() {
 		
 	unsigned char iqdata[6];
 	
-	iqdata[0] = (0x40 | (sampleSpeed[0] & 0x03));
+	iqdata[0] = (0x10 | (sampleSpeed[0] & 0x03));
 	iqdata[1] = (~(gain & 0x2F));
-	iqdata[2] = ((rxfreq1 >> 24) & 0xFF);
-	iqdata[3] = ((rxfreq1 >> 16) & 0xFF);
-	iqdata[4] = ((rxfreq1 >> 8) & 0xFF);
-	iqdata[5] = (rxfreq1 & 0xFF);
+	iqdata[2] = ((rx1_phase >> 24) & 0xFF);
+	iqdata[3] = ((rx1_phase >> 16) & 0xFF);
+	iqdata[4] = ((rx1_phase >> 8) & 0xFF);
+	iqdata[5] = (rx1_phase & 0xFF);
 			
 	sem_wait(&mutex);			
 	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
 	sem_post(&mutex);
 }
 
-void spi_rx2_writer() {
+void spi_control_rx2_phase() {
 		
 	unsigned char iqdata[6];
 	
-	iqdata[0] = (0x80 | (sampleSpeed[1] & 0x03));
+	iqdata[0] = (0x20 | (sampleSpeed[1] & 0x03));
 	iqdata[1] = (~(gain & 0x2F));
-	iqdata[2] = ((rxfreq2 >> 24) & 0xFF);
-	iqdata[3] = ((rxfreq2 >> 16) & 0xFF);
-	iqdata[4] = ((rxfreq2 >> 8) & 0xFF);
-	iqdata[5] = (rxfreq2 & 0xFF);
+	iqdata[2] = ((rx2_phase >> 24) & 0xFF);
+	iqdata[3] = ((rx2_phase >> 16) & 0xFF);
+	iqdata[4] = ((rx2_phase >> 8) & 0xFF);
+	iqdata[5] = (rx2_phase & 0xFF);
 			
 	sem_wait(&mutex);			
 	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
 	sem_post(&mutex);
 }
 
-void spi_tx_writer() {
+void spi_control_tx() {
 	
 	unsigned char iqdata[6];
 	
-	iqdata[0] = 0xC0;
+	iqdata[0] = 0x30;
 	iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
-	iqdata[2] = ((txfreq >> 24) & 0xFF);
-	iqdata[3] = ((txfreq >> 16) & 0xFF);
-	iqdata[4] = ((txfreq >> 8) & 0xFF);
-	iqdata[5] = (txfreq & 0xFF);
+	iqdata[2] = ((tx_phase >> 24) & 0xFF);
+	iqdata[3] = ((tx_phase >> 16) & 0xFF);
+	iqdata[4] = ((tx_phase >> 8) & 0xFF);
+	iqdata[5] = (tx_phase & 0xFF);
 		
 	sem_wait(&mutex);		
 	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);

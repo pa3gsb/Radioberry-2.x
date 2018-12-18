@@ -1,7 +1,7 @@
 CC=gcc
 LINK=gcc
 
-OPTIONS=-g -Wno-deprecated-declarations -march=native -O2
+OPTIONS=-g -Wno-deprecated-declarations -march=native 
 
 LIBS=-lrt -lm -lpigpio -lpthread -lasound
 

@@ -1,6 +1,6 @@
 #include <alsa/asoundlib.h>
 #include "audio.h"
-#include "hermeslite.h"
+#include "radioberry.h"
 
 char *input_devices[32];
 int n_input_devices=0;
