@@ -727,9 +727,9 @@ void printIntroScreen() {
 	fprintf(stderr, "\t\t - openhpsdr protocol-1.\n");
 	fprintf(stderr, "\t\t - full duplex mode.\n");
 	fprintf(stderr, "\t\t - pure signal.\n");
-	fprintf(stderr, "\t\t - EER. (Envelope Elimination and Restoration)\n");
+	fprintf(stderr, "\t\t - EER. (Envelope Elimination and Restoration) (only CL025) \n");
 	fprintf(stderr, "\t\t - 2rx slices max 192K sampling rate\n");
-	fprintf(stderr, "\t\t - TCP modes in piHPSDR\n");
+	fprintf(stderr, "\t\t - TCP mode in piHPSDR\n");
 	fprintf(stderr, "\t\t - VSWR monitor (https://github.com/pa3gsb/vswr)\n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");

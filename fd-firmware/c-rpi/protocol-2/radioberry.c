@@ -42,6 +42,9 @@
 #define SHORT_OPTIONS "lha:m:v"
 #define HST_SHRT_OPTS ""
 
+int use_local_audio_in = 0;
+int use_local_audio_out = 0;
+
 static struct option long_options[] =
 {
 	{"list-audio-devices",  0, 0, 'l'},
@@ -121,8 +124,6 @@ int main(int argc, char **argv) {
 	
 	fprintf(stderr, "\n\nhermeslite protocol-2 emulator started \n\n");
 
-	//pthread_t pid1; 
-	//pthread_create(&pid1, NULL, send_rx_iq_to_host, NULL);
 	pthread_t pid1; 
 	pthread_create(&pid1, NULL, handle_data_from_sdr_program, NULL);
 	
@@ -130,12 +131,10 @@ int main(int argc, char **argv) {
 	pthread_create(&pid2, NULL, send_high_priority_status_to_host, NULL);
 	
 	gettimeofday(&t1a, 0);
-	start_mic_thread();
-	//start_dummy_mic_thread();
+	if (use_local_audio_in==0) start_dummy_mic_thread(); else start_mic_thread();
 	
 	gettimeofday(&t1, 0);
 	
-	//handle_data_from_sdr_program();
 	send_rx_iq_to_host();
 	
 	audio_close_output();
@@ -510,6 +509,74 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 	}
 }
 
+unsigned char l_mic_buffer[132]; 
+void process_local_mic(unsigned char *mic_buffer){
+	int i=0;
+	
+	if (running) {
+		for(i=0;i<MIC_SAMPLES;i++) {
+			l_mic_buffer[mic_count++] = mic_buffer[i*2+1]; //msb
+			l_mic_buffer[mic_count++] = mic_buffer[i*2];
+			
+			/* making verbose function.....
+			lcounta ++;
+			if (lcounta == 48000) {
+				lcounta = 0;
+				gettimeofday(&t2a, 0);
+				float elapsd = timedifference_msec(t1a, t2a);
+				printf("Audio line-in executed in %f milliseconds.\n", elapsd);
+				gettimeofday(&t1a, 0);
+			}
+			*/
+			
+		}
+		l_mic_buffer[0]=mic_sequence>>24;
+		l_mic_buffer[1]=mic_sequence>>16;
+		l_mic_buffer[2]=mic_sequence>>8;
+		l_mic_buffer[3]=mic_sequence;
+		send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
+		mic_sequence++;
+		mic_count = 4;
+	}
+}
+
+void *mic_dummy_thread(void *arg) {
+	
+	int i=0;
+	unsigned char l_mic_buffer[132];
+	
+	while(1) {
+		
+		sem_wait(&mic_sample);
+		i++;
+		if ((i % samplespeed)==0) {
+			
+			i = 0;
+		
+			l_mic_buffer[mic_count++] = 0; //msb
+			l_mic_buffer[mic_count++] = 0;
+				
+			if (mic_count == 132) {
+				l_mic_buffer[0]=mic_sequence>>24;
+				l_mic_buffer[1]=mic_sequence>>16;
+				l_mic_buffer[2]=mic_sequence>>8;
+				l_mic_buffer[3]=mic_sequence;
+				send_udp_packet(radioberry_socket, mic_line_addr, dst_addr, l_mic_buffer, 132);
+				mic_sequence++;
+				mic_count = 4;
+			}
+		}
+	}
+	fprintf(stderr,"mic_dummy_thread: exiting\n");
+	return NULL;
+}
+
+void start_dummy_mic_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, mic_dummy_thread, NULL);
+}
+
+
 int createUDPSocket() {
 	struct sockaddr_in myaddr;
 	if ((discover_socket = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
@@ -595,11 +662,11 @@ void usage(void)
            "COMMANDs to initialize the radioberry firmware.\n\n");
 
     printf(
-		" -a, --audio-out=ID	select audio output device number. See model list\n"
-        " -m, --audio-in=ID		select audio input device. See model list\n"
-        " -l, --list			list all audio device and exit\n"
-        " -h, --help            display this help and exit\n"
-        " -v, --version         output version information and exit\n\n"
+		" -a, --audio-out=ID\t select audio output device number. See model list\n"
+        " -m, --audio-in=ID\t select audio input device. See model list\n"
+        " -l, --list \t\t list all audio device and exit\n"
+        " -h, --help \t\t display this help and exit\n"
+        " -v, --version \t\t output version information and exit\n\n"
     );
 
     printf("\nReport bugs to <pa3gsb@gmail.com>.\n");
@@ -614,12 +681,16 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\tRadioberry V2.0 beta 2 and beta 3 .\n");
+	fprintf(stderr, "\tRadioberry V2.0 beta 2 and beta 3 (incl. small mod).\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t\t\tEmulator Protocol-2 alpha \n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t\t\tHave fune Johan PA3GSB\n");
-	fprintf(stderr, "\n");
+	fprintf(stderr, "\tSupporting:\n");
+	fprintf(stderr, "\t\t - openhpsdr protocol-2.\n");
+	fprintf(stderr, "\t\t - full duplex mode.\n");
+	fprintf(stderr, "\t\t - 2rx slices max 192K sampling rate\n");
+	fprintf(stderr,	"\n\n");
+	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\n\n");
+	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
 	fprintf(stderr, "====================================================================\n");
 	fprintf(stderr, "====================================================================\n");
 }

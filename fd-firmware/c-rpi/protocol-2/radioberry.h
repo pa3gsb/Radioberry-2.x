@@ -102,8 +102,6 @@ static long status_sequence = 0;
 static long mic_sequence = 0;
 static long mic_count=4;
 
-
-
 static struct sockaddr_in src_addr[8];
 static struct sockaddr_in dst_addr;
 
@@ -122,8 +120,8 @@ unsigned char broadcastReply[60];
 static int rx1_spi_handler;
 static int rx2_spi_handler;
 
-static int use_local_audio_in = 0;
-static int use_local_audio_out = 0;
+//static int use_local_audio_in;
+//static int use_local_audio_out;
 
 static int running = 0;
 static int nrx = 1; 
