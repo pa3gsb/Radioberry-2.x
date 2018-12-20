@@ -224,8 +224,7 @@ int main(int argc, char **argv) {
 	pthread_create(&pid2, NULL, send_high_priority_status_to_host, NULL);
 	
 	gettimeofday(&t1a, 0);
-	//start_mic_thread();
-	start_dummy_mic_thread();
+	if (use_local_audio_in==0) start_dummy_mic_thread(); else start_mic_thread();
 	
 	gettimeofday(&t1, 0);
 	
@@ -625,7 +624,8 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 	
 	// possible improvement; only in cw and no change in drive level; no need to inform firmware!
 	int index = 4;	
-	while (index <= 1444) {
+	int sample = 0;
+	for (sample=0; sample < 60; sample++) {
 		if (gpioRead(20) == 1) {};	//avoiding overruns
 
 		tx_iqdata[0] = 0;
@@ -636,7 +636,6 @@ void tx_iq_from_host_port(unsigned char* buffer) {
 		tx_iqdata[5] = ((buffer[++index]) & 0xFF); 
 		spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 		index = index + 20;	//decimation by 4
-		
 		
 		lcount ++;
 		if (lcount == 48000) {
@@ -729,15 +728,15 @@ int handleDiscovery(unsigned char* buffer) {
 
 void usage(void)
 {
-    printf("Usage: hermeslite [OPTION]... [COMMAND]...\n"
-           "COMMANDs to initialize the hermeslite emulator.\n\n");
+    printf("Usage: radioberry [OPTION]... [COMMAND]...\n"
+           "COMMANDs to initialize the radioberry firmware.\n\n");
 
     printf(
-		" -a, --audio-out=ID	select audio output device number. See model list\n"
-        " -m, --audio-in=ID		select audio input device. See model list\n"
-        " -l, --list            list all audio device and exit\n"
-        " -h, --help            display this help and exit\n"
-        " -v, --version         output version information and exit\n\n"
+		" -a, --audio-out=ID\t select audio output device number. See model list\n"
+        " -m, --audio-in=ID\t select audio input device. See model list\n"
+        " -l, --list \t\t list all audio device and exit\n"
+        " -h, --help \t\t display this help and exit\n"
+        " -v, --version \t\t output version information and exit\n\n"
     );
 
     printf("\nReport bugs to <pa3gsb@gmail.com>.\n");
@@ -755,7 +754,7 @@ void printIntroScreen() {
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr, "\t\t\tRadioberry V2.0 beta 2.\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t\t\tEmulator Protocol-2 alpha \n");
+	fprintf(stderr, "\t\t\tEmulator Protocol-2 \n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr, "\t\t\tHave fune Johan PA3GSB\n");
 	fprintf(stderr, "\n");
