@@ -15,7 +15,7 @@
 #include <unistd.h>
 
 
-#define NRX 3			// number of wspr channels.
+#define NRX 5			// number of wspr channels.
 #define GAIN 2500		// Digital gain for input signals.
 
 // UTC timing.... important for wspr mode! Starting at even minutes!
@@ -24,6 +24,8 @@ struct tm *info;
 
 //wsprnet.org
 //Band 	Dial freq (MHz) 	Tx freq (MHz)				Radioberry frequency (+ 1500)
+//		0.136 												0.137500
+//		0.4742						 						0.475700
 //160m 	1.836600 			1.838000 - 1.838200			 	1.838100
 //80m 	3.592600 			3.594000 - 3.594200			 	3.594100
 //60m 	5.287200 			5.288600 - 5.288800				5.288700
@@ -35,7 +37,7 @@ struct tm *info;
 //12m 	24.924600			24.926000 - 24.926200			24.926100
 //10m 	28.124600			28.126000 - 28.126200			28.126100
 
-int freqArray[4] = {7040100 , 3594100, 10140200 , 14097100 };
+int freqArray[5] = {1838100, 3594100, 7040100 , 10140200 , 14097100 };
 
 void record_WSPR_Channels(void);
 static int spi_handler;
@@ -117,7 +119,7 @@ void record_WSPR_Channels(void) {
 				if (nnrx % NRX == 0)	{nnrx = 0;}			
 				int freq = freqArray[nnrx];
 				
-				iqdata[0] = (((nnrx << 2) & 0x0C)  | (sampleSpeed & 0x03));
+				iqdata[0] = (((nnrx << 2) & 0x1C)  | (sampleSpeed & 0x03));
 				iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 				iqdata[2] = ((freq >> 24) & 0xFF);
 				iqdata[3] = ((freq >> 16) & 0xFF);
