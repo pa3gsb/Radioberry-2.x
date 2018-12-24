@@ -66,7 +66,7 @@ cpl_cordic #(.OUT_WIDTH(16))
 
 wire signed [15:0] gated;
 
-assign gated = PTT ? (cordic_i_out >>> 4) : 16'd0;
+assign gated = PTT ? (cordic_i_out >>> 3) : 16'd0;
 always @ (negedge clk) out_data <= gated[11:0]; 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------

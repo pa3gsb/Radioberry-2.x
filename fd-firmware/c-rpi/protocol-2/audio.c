@@ -3,6 +3,8 @@
 #include "audio.h"
 #include "radioberry.h"
 
+extern int use_local_audio_out;
+
 static int audio_buffer_size = 256; 	// samples (both left and right)
 static int audioseq=-1;
 
