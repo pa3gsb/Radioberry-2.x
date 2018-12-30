@@ -82,8 +82,9 @@ set_false_path -to [get_ports {EER_PWM_out}]
 
 
 ## Additional timing constraints
-				
-set_max_delay -from ad9866_tx[4]~reg0	-to ad9866_tx[4]	10	
+					
+set_max_delay -from ad9866_tx[*]~reg0	-to ad9866_tx[*]	10	
+set_max_delay -from ad9866_txsync~reg0	-to ad9866_txsync	10
 
 set_max_delay -from counter:counter_inst|lpm_counter:LPM_COUNTER_component|cntr_69j:auto_generated|counter_reg_bit[*]	-to counter:counter_inst|lpm_counter:LPM_COUNTER_component|cntr_69j:auto_generated|counter_reg_bit[*] 6
 				

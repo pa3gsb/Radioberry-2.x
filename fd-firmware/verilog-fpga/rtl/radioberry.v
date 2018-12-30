@@ -149,10 +149,13 @@ reg [47:0] spi_data;
 reg pureSignal;
 reg initDone;
 
+reg [47:0] cmnd;
+always @ (posedge spi_done) cmnd <= spi0_recv;
+
 wire cmd_empty;
 //using (small) fifo to bring commands through SPI bus to fast clock domain.
 commandFIFO commandFIFO_inst (	.aclr(reset), 
-								.wrclk(spi_done), .wrreq(1'b1), .data(spi0_recv),	
+								.wrclk(clk_internal), .wrreq(1'b1), .data(cmnd),	
 								.rdclk(clk_ad9866), .rdreq(~cmd_empty),	.q(spi_data), .rdempty(cmd_empty));
 
 localparam RX1 = 4'h1;
