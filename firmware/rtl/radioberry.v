@@ -291,7 +291,7 @@ wire rx_wrfull;
 
 rxFIFO rx_FIFO_inst(	.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx_wr_length), .wrfull(rx_wrfull),  
-							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rxreq));					
+							.rdclk(spi_done),.q(rxDataFromFIFO),.rdreq(rxreq));					
 		
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)

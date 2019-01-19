@@ -97,7 +97,7 @@ void rx2_spiReader(unsigned char iqdata[]);
 static int rx1_spi_handler;
 static int rx2_spi_handler;
 
-unsigned char iqdata[6];
+unsigned char iqdata[6 * 64];
 unsigned char tx_iqdata[6];
 
 #define SERVICE_PORT	1024
@@ -678,8 +678,8 @@ void rx1_spiReader(unsigned char iqdata[]) {
 	iqdata[3] = ((freq >> 16) & 0xFF);
 	iqdata[4] = ((freq >> 8) & 0xFF);
 	iqdata[5] = (freq & 0xFF);
-			
-	spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
+	for (int pointer = 6; pointer < 64 * 6; pointer+=6) memcpy(iqdata + pointer, iqdata, 6);	
+	spiXfer(rx1_spi_handler, iqdata, iqdata, 6 * 64);
 }
 
 void *spiReader(void *arg) {
@@ -697,20 +697,22 @@ void *spiReader(void *arg) {
 		if (!MOX && saveMox!=MOX) {gpioWrite(21, 0); saveMox = MOX;}
 		
 		while (gpioRead(13) == 0) {}//wait for enough samples
-		
+				
 		int factor = ((lnrx - 1) * 6) + 8;
+		// read 64 IQ samples.
+		rx1_spiReader(iqdata);
 		int i = 0;
-		for (i; i < 63; i++) {
-			rx1_spiReader(iqdata);
+		for (i; i < 64; i++) {
+			char *offset = iqdata + i * 6;
 			switch (lnrx)
 			{	case 4:
-					memcpy(rx_buffer[rx_fill_index] + pointer + 18, iqdata, 6);
+					memcpy(rx_buffer[rx_fill_index] + pointer + 18, offset, 6);
 				case 3:
-					memcpy(rx_buffer[rx_fill_index] + pointer + 12, iqdata, 6);
+					memcpy(rx_buffer[rx_fill_index] + pointer + 12, offset, 6);
 				case 2:
-					memcpy(rx_buffer[rx_fill_index] + pointer + 6, iqdata, 6);
+					memcpy(rx_buffer[rx_fill_index] + pointer + 6, offset, 6);
 				case 1:
-					memcpy(rx_buffer[rx_fill_index] + pointer, iqdata, 6);
+					memcpy(rx_buffer[rx_fill_index] + pointer, offset , 6);
 					break;
 				default:
 					fprintf(stderr, "Should not occur. \n");
