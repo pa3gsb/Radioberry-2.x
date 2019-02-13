@@ -2,6 +2,7 @@ set_location_assignment PIN_53 -to clk_76m8
 
 set_location_assignment PIN_42 -to ptt_in
 set_location_assignment PIN_115 -to EER_PWM_out
+set_location_assignment PIN_144 -to ptt_out
 
 set_location_assignment PIN_50 -to spi_ce[1]
 set_location_assignment PIN_51 -to spi_ce[0]

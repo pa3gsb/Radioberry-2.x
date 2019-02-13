@@ -30,7 +30,7 @@ clk_76m8,
 ad9866_clk,ad9866_rx,ad9866_tx,ad9866_rxsync,ad9866_rxclk,ad9866_txsync,ad9866_txquietn,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 pi_clk, pi_clk2, rx_samples, data,
-ptt_in, EER_PWM_out);
+ptt_in, ptt_out, EER_PWM_out);
 
 input wire clk_76m8;			
 input wire ad9866_clk;
@@ -64,6 +64,7 @@ output wire rx_samples;
 output [7:0] data; 
 
 input wire ptt_in;
+output wire ptt_out;
 
 reg   [9:0] PWM_min;					// sets minimum width of envelope PWM pulse
 reg   [9:0] PWM_max;					// sets maximum width of envelope PWM pulse
@@ -78,6 +79,7 @@ logic clk_ad9866_2x;
 
 assign ad9866_mode = 1'b1;				//FULLDUPLEX
 assign ad9866_rst_n = ~reset;
+assign ptt_out = ptt_in;
 	 
 // RX Path
 logic   [11:0]    rx_data_assemble;

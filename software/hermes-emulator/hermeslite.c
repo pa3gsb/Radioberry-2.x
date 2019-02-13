@@ -47,6 +47,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <errno.h>
+#define __USE_GNU
 
 #include <pigpio.h>
 
@@ -158,6 +159,7 @@ int alex_manual = 0;
 uint16_t i2c_alex_data = 0;
 uint16_t i2c_data = 0;
 
+
 float timedifference_msec(struct timeval t0, struct timeval t1)
 {
     return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
@@ -240,10 +242,34 @@ int main(int argc, char **argv)
 
 	printf("init done \n");
 		
-	pthread_t pid1, pid2, pid3; 
-	pthread_create(&pid1, NULL, packetreader, NULL); 
-	pthread_create(&pid2, NULL, spiWriter, NULL);
-	pthread_create(&pid3, NULL, spiReader, NULL);
+	pthread_t pid1, pid2, pid3, pid4; 
+	pthread_create(&pid2, NULL, packetreader, NULL); 
+	pthread_create(&pid3, NULL, spiWriter, NULL);
+	pthread_create(&pid4, NULL, spiReader, NULL);
+	
+	
+	// cpu_set_t: This data set is a bitset where each bit represents a CPU.
+	cpu_set_t cpuset0;
+	cpu_set_t cpuset1;
+	cpu_set_t cpuset2;
+	cpu_set_t cpuset3;
+	// CPU_ZERO: This macro initializes the CPU set set to be the empty set.
+	CPU_ZERO(&cpuset0);
+	CPU_ZERO(&cpuset1);
+	CPU_ZERO(&cpuset2);
+	CPU_ZERO(&cpuset3);
+	// CPU_SET: This macro adds cpu to the CPU set set.
+	CPU_SET(0, &cpuset0);
+	CPU_SET(1, &cpuset1); 
+	CPU_SET(2, &cpuset2);
+	CPU_SET(3, &cpuset3);
+	
+	//pthread_setaffinity_np
+	//sched_setaffinity(pid2, sizeof(cpu_set_t), &cpuset0);
+	pthread_setaffinity_np(pid2, sizeof(cpu_set_t), &cpuset0);
+
+	//sched_setaffinity(pid4, sizeof(cpu_set_t), &cpuset1);
+	pthread_setaffinity_np(pid4, sizeof(cpu_set_t), &cpuset1);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
