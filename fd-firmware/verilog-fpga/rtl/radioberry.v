@@ -99,7 +99,7 @@ logic             tx_sync;
 logic             tx_en_d1;
 
 always @(posedge clk_ad9866_2x) begin
-  tx_en_d1 <= ptt_in;
+  tx_en_d1 <= (ptt_in || vna_mode);
   tx_sync <= ~tx_sync;
   if (tx_en_d1) begin
     if (tx_sync) begin 
@@ -124,6 +124,7 @@ wire ad9866_rx_rqst;
 wire ad9866_tx_rqst;
 reg [5:0] rx_gain;
 reg [5:0] tx_gain;
+reg vna_mode;
 
 assign ad9866_rx_rqst = (!ptt_in && gain_update && ad9866_sen_n);
 assign ad9866_tx_rqst = (ptt_in && gain_update && ad9866_sen_n);
@@ -174,6 +175,7 @@ begin
 					rx1_phase_word <= spi_data[31:0];
 					rx1_speed <= spi_data[41:40];
 					rx_gain <= ~spi_data[37:32];
+					vna_mode <= spi_data[39];
 					initDone <= 1; 
 				end
 		  RX2: 	begin
@@ -192,6 +194,7 @@ begin
 				end
 		  default: 
 				begin
+					vna_mode <= 1'b1;
 					rx1_phase_word <= 32'd0;
 					rx1_speed <= 2'd0;
 					rx_gain <= 6'd0;
@@ -389,9 +392,9 @@ wire [31:0] txDataFromFIFO;
 wire txFIFOReadStrobe;
 wire [31:0] txData;
 
-transmitter transmitter_inst(	.reset(reset), .clk(clk_ad9866), .frequency(tx_phase_word), 
+transmitter transmitter_inst(	.reset(reset), .clk(clk_ad9866), .frequency(vna_mode ? rx1_phase_word : tx_phase_word), 
 								.tsiq_data(txDataFromFIFO), .tsiq_read_strobe(txFIFOReadStrobe), .tsiq_valid(~empty), .CW_RF(CW_RF), 
-								.out_data(DAC), .PTT(ptt_in), .CW_PTT(1'b0), .LED());
+								.out_data(DAC), .PTT(ptt_in), .CW_PTT(1'b0), .vna_mode(vna_mode),  .LED());
 
 
 `ifdef EER

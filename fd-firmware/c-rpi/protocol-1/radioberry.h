@@ -72,6 +72,11 @@ int holdsampleSpeed = 0;
 int pureSignal = 0;
 int holdPureSignal = 128;
 
+int vna = 0;
+int holdvna = 1;
+int vna_att_20dB = 0;
+int holdvna_att_20dB = 1;
+
 #define SYNC 0x7F
 uint32_t last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 

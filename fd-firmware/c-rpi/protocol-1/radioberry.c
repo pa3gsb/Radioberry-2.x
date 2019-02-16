@@ -259,11 +259,14 @@ void handlePacket(char* buffer){
 
 void processPacket(char* buffer)
 {
-	seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
-	if (seqnum != last_seqnum + 1) {
-	  fprintf(stderr,"Radioberry firmware SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
+	if (!vna) {
+		//bug in hermes vna seq nummer is always 0. In VNA mode seq number is not that important!
+		seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
+		if (seqnum != last_seqnum + 1) {
+		  fprintf(stderr,"Radioberry firmware SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
+		}
+		last_seqnum = seqnum;
 	}
-	last_seqnum = seqnum;
 
 	 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
 	 if (MOX) gpioWrite(21, 1); else gpioWrite(21, 0);	// ptt 
@@ -293,28 +296,20 @@ void processPacket(char* buffer)
 			holdsampleSpeed = sampleSpeed;
 			change = change | 0x03; // in Protocol-1 valid for rx1 and rx2
 		}
-		
 		dither = 0;
-		if ((buffer[11 + 3] & 0x08) == 0x08)
-			dither = 1; 
-					
+		if ((buffer[11 + 3] & 0x08) == 0x08) dither = 1; 		
 		rando = 0;
-		if ((buffer[11 + 3] & 0x10) == 0x10)
-			rando = 1;
+		if ((buffer[11 + 3] & 0x10) == 0x10) rando = 1;
+		vna_att_20dB = 0;
+		if ((buffer[11 + 3] & 0x03) == 0x02) vna_att_20dB = 1;
+		
 	}
 		
 	if ((buffer[523] & 0xFE)  == 0x00) {
 		dither = 0;
-		if ((buffer[523 + 3] & 0x08) == 0x08) {
-			dither = 1; 
-			change = change | 0x01;
-		}
-				
+		if ((buffer[523 + 3] & 0x08) == 0x08) dither = 1; 	
 		rando = 0;
-		if ((buffer[523 + 3] & 0x10) == 0x10) {
-			rando = 1;
-			change = change | 0x01;
-		}
+		if ((buffer[523 + 3] & 0x10) == 0x10) rando = 1;
 	}
 	if (prevatt11 != att11) 
 	{
@@ -345,12 +340,23 @@ void processPacket(char* buffer)
 				+ ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
 				
 		tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
+		
+		if (vna) {
+			freq = txfreq;
+			rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
+		}
+		
 	}
 	if ((buffer[523] & 0xFE) == 0x02)
 	{
 		txfreq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
 				+ ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
 		tx_phase = (uint32_t)ceil(((double)txfreq * 4294967296.0 ) / 76800000);
+		
+		if (vna) {
+			freq = txfreq;
+			rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
+		}
 	}
 	
 	if ((buffer[11] & 0xFE) == 0x04)
@@ -380,6 +386,9 @@ void processPacket(char* buffer)
 	}
 
 	// select Command
+	if ((buffer[11] & 0xFE) == 0x12) {
+		vna = (buffer[13] & 0x80) == 0x80 ? 1: 0;
+	}
 	//if ((buffer[11] & 0xFE) == 0x12) drive_level = buffer[14]; 
 	if ((buffer[523] & 0xFE) == 0x12) drive_level = buffer[524];  
 	
@@ -392,7 +401,7 @@ void processPacket(char* buffer)
 		prev_pwmax = pwmax;
 		holdPureSignal = pureSignal;
 	}
-	if ((holdatt != att) || (holddither != dither)) {
+	if (!vna && (holdatt != att) || (holddither != dither)) {
 		holdatt = att;
 		holddither = dither;
 		printf("att =  %d ", att);printf("dither =  %d ", dither);printf("rando =  %d ", rando);
@@ -409,15 +418,31 @@ void processPacket(char* buffer)
 	if (holdfreq2 != freq2) {
 		holdfreq2 = freq2;
 		printf("frequency rx 2 %d en aantal rx %d \n", freq2, nrx);
+		printf("frequency rx-phase 2 %d en aantal rx %d \n", rx2_phase, nrx);
 		change = change | 0x02;
 	}
-	if ((holdtxfreq != txfreq) || (drive_level != prev_drive_level)) {
+	if (!vna && (holdtxfreq != txfreq) || (drive_level != prev_drive_level)) {
 		holdtxfreq = txfreq;
 		prev_drive_level = drive_level;
 		fprintf(stderr, "TX frequency %d\n", txfreq);
 		fprintf(stderr, "Drive level %d\n", drive_level);
 		change = change | 0x04;
 	}
+	
+	if ((holdvna != vna) || (holdvna_att_20dB != vna_att_20dB)) {
+		fprintf(stderr, "VNA Mode %d\n", vna);
+		if (vna) {
+			if (vna_att_20dB) att = 57; else att = 45;
+			dither = 1; 
+			rando = 0;
+			//drive_level=137;
+			change = change | 0x04;
+		}
+		change = change | 0x01;
+		holdvna = vna;
+		holdvna_att_20dB = vna_att_20dB;
+	}
+	
 	// The change must be communicated to radioberry firmware
 	// The change var filling determines which spi control must be called.
 	if (change != 0x00) {
@@ -436,7 +461,7 @@ void processPacket(char* buffer)
 		for (j; j < 512; j += 8)
 		{
 			int k = coarse_pointer + j;
-			if (MOX) {
+			if (MOX && !vna) {
 				sem_wait(&tx_empty);
 				int i = 0;
 				for (i; i < 8; i++){
@@ -584,7 +609,7 @@ void spi_control_rx1_phase() {
 	unsigned char iqdata[6];
 	
 	iqdata[0] = (0x10 | (sampleSpeed & 0x03));
-	iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+	iqdata[1] = (((vna << 7) & 0x80) | ((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 	iqdata[2] = ((rx1_phase >> 24) & 0xFF);
 	iqdata[3] = ((rx1_phase >> 16) & 0xFF);
 	iqdata[4] = ((rx1_phase >> 8) & 0xFF);
@@ -726,6 +751,7 @@ void printIntroScreen() {
 	fprintf(stderr, "\tSupporting:\n");
 	fprintf(stderr, "\t\t - openhpsdr protocol-1.\n");
 	fprintf(stderr, "\t\t - full duplex mode.\n");
+	fprintf(stderr, "\t\t - VNA mode (supports Hermes VNA).\n");
 	fprintf(stderr, "\t\t - pure signal.\n");
 	fprintf(stderr, "\t\t - EER. (Envelope Elimination and Restoration) (only CL025) \n");
 	fprintf(stderr, "\t\t - 2rx slices max 192K sampling rate\n");

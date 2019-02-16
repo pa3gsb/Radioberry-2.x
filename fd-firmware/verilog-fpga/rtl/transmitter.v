@@ -13,6 +13,7 @@ module transmitter(
 	out_data,
 	PTT,
 	CW_PTT,
+	vna_mode,
 	LED);
 
 input wire reset;
@@ -25,6 +26,7 @@ input wire [15:0] CW_RF;
 output reg [11:0] out_data;
 input wire PTT;
 input wire CW_PTT;
+input wire vna_mode;
 output wire LED;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,20 +62,20 @@ CicInterpM5 #(.RRRR(200), .IBITS(20), .OBITS(16), .GBITS(31)) in2 ( clk, 1'd1, r
 wire signed [15:0] cordic_i_out;
 
 cpl_cordic #(.OUT_WIDTH(16))
- 		cordic_inst (.clock(clk), .frequency(frequency), .in_data_I(CW_PTT? CW_RF: y2_i),			
-		.in_data_Q(CW_PTT? 16'd0: y2_r), .out_data_I(cordic_i_out), .out_data_Q());		
+ 		cordic_inst (.clock(clk), .frequency(frequency), .in_data_I(vna_mode ? 16'd19274 : (CW_PTT? CW_RF: y2_i) ),			
+		.in_data_Q((vna_mode || CW_PTT)? 16'd0: y2_r), .out_data_I(cordic_i_out), .out_data_Q());		
 
 
 wire signed [15:0] gated;
 
-assign gated = PTT ? (cordic_i_out >>> 3) : 16'd0;
+assign gated = (vna_mode || PTT)  ? (cordic_i_out >>> 3) : 16'd0;
 always @ (negedge clk) out_data <= gated[11:0]; 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                        Heartbeat (LED flashes twice as fast when PTT active)
+//                        Heartbeat (LED flashes twice as fast when PTT active or in VNA mode)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 reg[26:0]counter;
 always @(posedge clk) counter = counter + 1'b1;
-assign LED = PTT ? counter[24] : counter[26];  
+assign LED = (vna_mode || PTT) ? counter[24] : counter[26];  
  
 endmodule
