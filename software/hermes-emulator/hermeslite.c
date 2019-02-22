@@ -266,10 +266,10 @@ int main(int argc, char **argv)
 	
 	//pthread_setaffinity_np
 	//sched_setaffinity(pid2, sizeof(cpu_set_t), &cpuset0);
-	pthread_setaffinity_np(pid2, sizeof(cpu_set_t), &cpuset0);
+	//pthread_setaffinity_np(pid2, sizeof(cpu_set_t), &cpuset0);
 
 	//sched_setaffinity(pid4, sizeof(cpu_set_t), &cpuset1);
-	pthread_setaffinity_np(pid4, sizeof(cpu_set_t), &cpuset1);
+	//pthread_setaffinity_np(pid4, sizeof(cpu_set_t), &cpuset3);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
