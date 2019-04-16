@@ -46,8 +46,12 @@
 #include <semaphore.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <errno.h>
 #define __USE_GNU
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
 
 #include <pigpio.h>
 
@@ -70,6 +74,9 @@ unsigned char get_tx_buffer(void);
 
 int sock_TCP_Server = -1;
 int sock_TCP_Client = -1;
+
+int udp_retries=0;
+int active = 0;
 
 #define RX_MAX 10
 #define TX_MAX 4800 
@@ -119,19 +126,17 @@ int dither = 0;
 int rando = 0;
 int sampleSpeed = 0;
 
-//unsigned char SYNC = 0x7F;
 #define SYNC 0x7F
 int last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
 
-//unsigned char FIRMWARE_VERSION = 0x28; //v4.0 firmware version
 #define FIRMWARE_VERSION 0x28
 unsigned char hpsdrdata[1032];
 uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
 uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
 	
 unsigned char broadcastReply[60];
-#define TIMEOUT_MS      100     
+#define TIMEOUT_MS      1000     
 
 int running = 0;
 int fd;									/* our socket */
@@ -246,30 +251,6 @@ int main(int argc, char **argv)
 	pthread_create(&pid2, NULL, packetreader, NULL); 
 	pthread_create(&pid3, NULL, spiWriter, NULL);
 	pthread_create(&pid4, NULL, spiReader, NULL);
-	
-	
-	// cpu_set_t: This data set is a bitset where each bit represents a CPU.
-	cpu_set_t cpuset0;
-	cpu_set_t cpuset1;
-	cpu_set_t cpuset2;
-	cpu_set_t cpuset3;
-	// CPU_ZERO: This macro initializes the CPU set set to be the empty set.
-	CPU_ZERO(&cpuset0);
-	CPU_ZERO(&cpuset1);
-	CPU_ZERO(&cpuset2);
-	CPU_ZERO(&cpuset3);
-	// CPU_SET: This macro adds cpu to the CPU set set.
-	CPU_SET(0, &cpuset0);
-	CPU_SET(1, &cpuset1); 
-	CPU_SET(2, &cpuset2);
-	CPU_SET(3, &cpuset3);
-	
-	//pthread_setaffinity_np
-	//sched_setaffinity(pid2, sizeof(cpu_set_t), &cpuset0);
-	//pthread_setaffinity_np(pid2, sizeof(cpu_set_t), &cpuset0);
-
-	//sched_setaffinity(pid4, sizeof(cpu_set_t), &cpuset1);
-	//pthread_setaffinity_np(pid4, sizeof(cpu_set_t), &cpuset3);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -302,10 +283,14 @@ int main(int argc, char **argv)
 	
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (void *)&yes, sizeof(yes));
 
-	int sndbufsize = 0xffff;
-	int rcvbufsize = 0xffff;
+	int tcpmaxseg = 1032;
+	setsockopt(sock_TCP_Server, IPPROTO_TCP, TCP_MAXSEG, (const char *)&tcpmaxseg, sizeof(int));
+
+	int sndbufsize = 65535;
+	int rcvbufsize = 65535;
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (void *)&timeout, sizeof(timeout)); //added
 
 	if (bind(sock_TCP_Server, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0)
 	{
@@ -314,6 +299,9 @@ int main(int argc, char **argv)
 	}
 	
 	listen(sock_TCP_Server, 1024);
+	
+	int flags = fcntl(sock_TCP_Server, F_GETFL, 0);
+    fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
 
 	runHermesLite();
 	
@@ -337,12 +325,7 @@ int main(int argc, char **argv)
 
 void runHermesLite() {
 	fprintf(stderr, "Starting the packet send loop for the radioberry. \n");
-
-	while(1) {
-		if (running) {
-			sendPacket();
-		} else {usleep(20000);}
-	}
+	while(1) {if (running) {active = 1; sendPacket();} else {active = 0; usleep(20000);}}
 }
 
 void *packetreader(void *arg) {
@@ -351,6 +334,7 @@ void *packetreader(void *arg) {
 	uint32_t *code0 = (uint32_t *) buffer; 
 	
 	while(1) {
+		
 		if (sock_TCP_Client >= 0) {
 			// handle TCP protocol.
 			bytes_read=0;
@@ -367,7 +351,16 @@ void *packetreader(void *arg) {
 		else {
 			// handle UDP protocol.
 			recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
-			if (recvlen > 0) handlePacket(buffer);
+			if (recvlen > 0) {udp_retries=0; handlePacket(buffer);} else udp_retries++;
+			// If nothing has arrived via UDP for some time (defined by socket timeout * 10) , try to open TCP connection.
+			if (sock_TCP_Client < 0 && udp_retries > 10)
+			{
+				if((sock_TCP_Client = accept(sock_TCP_Server, NULL, NULL)) > -1)
+				{
+						fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
+				}
+				udp_retries=0;
+			}
 		}
 	}
 }
@@ -391,40 +384,34 @@ void handlePacket(char* buffer){
 			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
 			fillDiscoveryReplyMessage();
-			if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) fprintf(stderr, "broadcast reply error");
-			
+			if (sock_TCP_Client > -1) {
+				send(sock_TCP_Client, broadcastReply, 60, 0);
+				close(sock_TCP_Client);
+				sock_TCP_Client = -1;
+				}
+			else if (sendto(fd, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) fprintf(stderr, "broadcast reply error");
 			break;
 		case 0x0004feef:
 			fprintf(stderr, "SDR Program sends Stop command \n");
 			running = 0;
+			while (active) usleep(1000);
 			last_sequence_number = 0;
 			if (sock_TCP_Client > -1)
 			{
 				close(sock_TCP_Client);
 				sock_TCP_Client = -1;
 				fprintf(stderr, "SDR Program sends TCP Stop command \n");
-			} else fprintf(stderr, "SDR Program sends UDP Stop command \n");	
+			} else fprintf(stderr, "SDR Program sends UDP Stop command \n"); 
 			break;
 		case 0x0104feef:
+		case 0x0204feef:
 		case 0x0304feef:
-			fprintf(stderr, "Start Port %d \n", ntohs(remaddr.sin_port));
-			running = 1;
-			fprintf(stderr, "SDR Program sends UDP Start command \n");
-			break;
 		case 0x1104feef: 
-			fprintf(stderr, "Connect the TCP client to the server\n");
-			if (sock_TCP_Client < 0)
-			{
-				if((sock_TCP_Client = accept(sock_TCP_Server, NULL, NULL)) < 0)
-				{
-					fprintf(stderr, "*** ERROR TCP accept ***\n");
-					perror("accept");
-					return;
-				}
-				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
-				running = 1;
+			running = 1;
+			if (sock_TCP_Client > -1)
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
-			}	
+			else
+				fprintf(stderr, "SDR Program sends UDP Start command \n");
 			break;
 		case 0x0201feef:
 			processPacket(buffer);
@@ -621,12 +608,10 @@ void processPacket(char* buffer)
 
 void sendPacket() {
 	fillPacketToSend();
-	
-	if (sock_TCP_Client >= 0) {
-		//if (sendto(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0, NULL, 0) != 1032) fprintf(stderr, "TCP send error");
-		if (send(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), MSG_DONTWAIT) != 1032) fprintf(stderr, "TCP send error");
+	if (sock_TCP_Client > -1) {
+		if (send(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0) != 1032) fprintf(stderr, "TCP send error\n");
 	} else {
-		if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) != 1032) fprintf(stderr, "UDP send error");
+		if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) != 1032) fprintf(stderr, "UDP send error\n");
 	}
 }
 
@@ -693,7 +678,10 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
 	broadcastReply[i++] =  40;
-	broadcastReply[i++] =  6; // hermeslite							
+	broadcastReply[i++] =  6; // hermeslite	
+	broadcastReply[i++] = 'T'; // adding TCP in response... not used yet!
+	broadcastReply[i++] = 'C';
+	broadcastReply[i++] = 'P';	
 }
 
 void rx1_spiReader(unsigned char iqdata[]) {
