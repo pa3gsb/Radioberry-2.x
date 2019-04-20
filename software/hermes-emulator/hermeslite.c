@@ -1,6 +1,6 @@
 /* 
 * Copyright (C)
-* 2017, 2018 - Johan Maas, PA3GSB
+* 2017, 2018, 2019 - Johan Maas, PA3GSB
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -58,11 +58,9 @@
 char build_date[]=GIT_DATE;
 char build_version[]=GIT_VERSION;
 
-void runHermesLite(void);
 void sendPacket(void);
 void handlePacket(char* buffer);
 void processPacket(char* buffer);
-void fillDiscoveryReplyMessage(void);
 int isValidFrame(char* data);
 void fillPacketToSend(void);
 void printIntroScreen(void);
@@ -110,18 +108,13 @@ unsigned char tx_iqdata[6];
 
 #define SERVICE_PORT	1024
 
-int hold_nrx=0;
 int nrx = 1; // n Receivers
-int holdfreq = 0;
-int holdfreq2 = 0;
-int holdtxfreq = 0;
+
 int freq = 4706000;
 int freq2 = 1008000;
 int txfreq = 3630000;
 
 int att = 0;
-int holdatt =128;
-int holddither=128;
 int dither = 0;
 int rando = 0;
 int sampleSpeed = 0;
@@ -179,9 +172,7 @@ void initVSWR(){
 }
 
 void initALEX(){
-	
 	int result = 0;
-	
 	unsigned char data[3];
 
 	/* configure all pins as output */
@@ -220,7 +211,6 @@ int main(int argc, char **argv)
 		fprintf(stderr,"hpsdr_protocol (original) : gpio could not be initialized. \n");
 		exit(-1);
 	}
-	
 	gpioSetMode(13, PI_INPUT); 	//rx1 samples
 	gpioSetMode(16, PI_INPUT);	//rx2 samples 
 	gpioSetMode(20, PI_OUTPUT); 
@@ -228,25 +218,18 @@ int main(int argc, char **argv)
 		
 	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
 	if (i2c_handler >= 0)  initVSWR();
-	
 	i2c_alex_handler = i2cOpen(i2c_bus, ADDR_ALEX, 0);
 	if (i2c_alex_handler >= 0)  initALEX();
-	
-	
 	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
 	if (rx1_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx1 could not be initialized. \n");
 		exit(-1);
 	}
-	
 	rx2_spi_handler = spiOpen(1, 15625000, 49155); 	//channel 1
 	if (rx2_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx2 could not be initialized. \n");
 		exit(-1);
-	}
-
-	printf("init done \n");
-		
+	}	
 	pthread_t pid1, pid2, pid3, pid4; 
 	pthread_create(&pid2, NULL, packetreader, NULL); 
 	pthread_create(&pid3, NULL, spiWriter, NULL);
@@ -274,18 +257,15 @@ int main(int argc, char **argv)
 		perror("bind failed");
 		return -1;
 	}
-	
 	if ((sock_TCP_Server = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
 		perror("socket tcp");
 		return -1;
 	}
-	
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (void *)&yes, sizeof(yes));
 
 	int tcpmaxseg = 1032;
 	setsockopt(sock_TCP_Server, IPPROTO_TCP, TCP_MAXSEG, (const char *)&tcpmaxseg, sizeof(int));
-
 	int sndbufsize = 65535;
 	int rcvbufsize = 65535;
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
@@ -297,13 +277,11 @@ int main(int argc, char **argv)
 		perror("bind tcp");
 		return -1;
 	}
-	
 	listen(sock_TCP_Server, 1024);
-	
 	int flags = fcntl(sock_TCP_Server, F_GETFL, 0);
     fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
 
-	runHermesLite();
+	while(1) {if (running) {active = 1; sendPacket();} else {active = 0; usleep(20000);}}
 	
 	if (rx1_spi_handler !=0)
 		spiClose(rx1_spi_handler);
@@ -321,11 +299,6 @@ int main(int argc, char **argv)
 	}
 		
 	gpioTerminate();
-}
-
-void runHermesLite() {
-	fprintf(stderr, "Starting the packet send loop for the radioberry. \n");
-	while(1) {if (running) {active = 1; sendPacket();} else {active = 0; usleep(20000);}}
 }
 
 void *packetreader(void *arg) {
@@ -351,7 +324,7 @@ void *packetreader(void *arg) {
 		else {
 			// handle UDP protocol.
 			recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
-			if (recvlen > 0) {udp_retries=0; handlePacket(buffer);} else udp_retries++;
+			if (recvlen > 0) { udp_retries = 0; handlePacket(buffer); } else udp_retries++;
 			// If nothing has arrived via UDP for some time (defined by socket timeout * 10) , try to open TCP connection.
 			if (sock_TCP_Client < 0 && udp_retries > 10)
 			{
@@ -365,12 +338,6 @@ void *packetreader(void *arg) {
 	}
 }
 
-int att11 = 0;
-int prevatt11 = 0;
-int att523 = 0;
-int prevatt523 = 0;
-
-int count=0;
 void handlePacket(char* buffer){
 	uint32_t code;
 	memcpy(&code, buffer, 4);
@@ -383,7 +350,9 @@ void handlePacket(char* buffer){
 			fprintf(stderr, "Discovery packet received \n");
 			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
-			fillDiscoveryReplyMessage();
+			memset(broadcastReply, 0, 60);
+			unsigned char reply[14] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 40, 6, 'T', 'C', 'P' };
+			memcpy(broadcastReply, reply, 14);
 			if (sock_TCP_Client > -1) {
 				send(sock_TCP_Client, broadcastReply, 60, 0);
 				close(sock_TCP_Client);
@@ -419,191 +388,108 @@ void handlePacket(char* buffer){
 	}
 }	
 
+void handleALEX(char* buffer)
+{
+	if (i2c_alex & (buffer[523] & 0xFE) == 0x12) {
+		alex_manual = ((buffer[525] & 0x40) == 0x40) ? 1: 0;
+		if (alex_manual) {
+			i2c_alex_data = ((buffer[526] & 0x8F) << 8 ) | (buffer[527] & 0xFF);
+		} else {
+			//firmware does determine the filter.
+			uint16_t hpf = 0, lpf = 0;
+			
+			if(freq < 1416000) hpf = 0x20; /* bypass */
+			else if(freq < 6500000) hpf = 0x10; /* 1.5 MHz HPF */
+			else if(freq < 9500000) hpf = 0x08; /* 6.5 MHz HPF */
+			else if(freq < 13000000) hpf = 0x04; /* 9.5 MHz HPF */
+			else if(freq < 20000000) hpf = 0x01; /* 13 MHz HPF */
+			else hpf = 0x02; /* 20 MHz HPF */
+			
+			if(freq > 32000000) lpf = 0x10; /* bypass */
+			else if(freq > 22000000) lpf = 0x20; /* 12/10 meters */
+			else if(freq > 15000000) lpf = 0x40; /* 17/15 meters */
+			else if(freq > 8000000) lpf = 0x01; /* 30/20 meters */
+			else if(freq > 4500000) lpf = 0x02; /* 60/40 meters */
+			else if(freq > 2400000) lpf = 0x04; /* 80 meters */
+			else lpf = 0x08; /* 160 meters */
+			
+			i2c_alex_data = hpf << 8 | lpf;
+		}
+	}
+	if(i2c_alex)
+	{
+		if(i2c_data != i2c_alex_data)
+		{
+			fprintf(stderr, "Set Alex data to output = %x \n", i2c_alex_data);
+			i2c_data = i2c_alex_data;
+			unsigned char ldata[3];
+			ldata[0] = 0x02;
+			ldata[1] = ((i2c_alex_data >> 8) & 0xFF);
+			ldata[2] = (i2c_alex_data & 0xFF);
+			i2cWriteDevice(i2c_alex_handler, ldata, 3);
+		}
+	}
+}
+
+
+#define assign_change(a,b,c) if ((a) != b) { b = (a); printf("%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
+
+int determine_freq(int base_index, char* buffer) {
+	return ( ((buffer[ base_index + 1] & 0xFF) << 24) + ((buffer[ base_index + 2] & 0xFF) << 16) + ((buffer[base_index + 3] & 0xFF) << 8) + (buffer[base_index + 4] & 0xFF) );
+}
+
 void processPacket(char* buffer)
 {
-		seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
-		if (seqnum != last_seqnum + 1) {
-		  fprintf(stderr,"Radioberry firmware SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
-		}
-		last_seqnum = seqnum;
+	seqnum=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
+	if (seqnum != last_seqnum + 1) {
+	  fprintf(stderr,"Radioberry firmware SEQ ERROR: last %ld, recvd %ld\n", (long) last_seqnum, (long) seqnum);
+	}
+	last_seqnum = seqnum;
+	MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
+	if ((buffer[ 11] & 0xFE) == 0x14) assign_change((buffer[ 15] & 0x1F), att, "Attenuator");
+	if ((buffer[523] & 0xFE) == 0x14) assign_change((buffer[527] & 0x1F), att, "Attenuator");
 	
-		MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
+	if ((buffer[ 11] & 0xFE) == 0x00) {
+		assign_change((((buffer[ 15] & 0x38) >> 3) + 1), nrx, "Receivers");
+		assign_change((buffer[12] & 0x03), sampleSpeed, "SampleRate"); 
+		if ((buffer[14] & 0x08) == 0x08) {assign_change(1, dither, "Dither");} else assign_change(0, dither, "Dither");
+		if ((buffer[14] & 0x10) == 0x10) {assign_change(1, rando,  "Random");} else assign_change(0, rando,  "Random");
+	}
 	
-		if ((buffer[11] & 0xFE)  == 0x14) {
-			att = (buffer[11 + 4] & 0x1F);
-			att11 = att;
-		}
-		
-		if ((buffer[523] & 0xFE)  == 0x14) {
-			att = (buffer[523 + 4] & 0x1F);
-			att523 = att;
-		}
+	if ((buffer[523] & 0xFE)  == 0x00) {
+		assign_change((((buffer[527] & 0x38) >> 3) + 1), nrx, "Receivers");
+		if ((buffer[526] & 0x08) == 0x08) {assign_change(1, dither, "Dither");} else assign_change(0, dither, "Dither");
+		if ((buffer[526] & 0x10) == 0x10) {assign_change(1, rando,  "Random");} else assign_change(0, rando,  "Random");
+	}
+	if ((buffer[ 11] & 0xFE) == 0x02) assign_change(determine_freq( 11, buffer), txfreq, "TX FREQ");
+	if ((buffer[523] & 0xFE) == 0x02) assign_change(determine_freq(523, buffer), txfreq, "TX FREQ");
+	if ((buffer[ 11] & 0xFE) == 0x04) assign_change(determine_freq( 11, buffer),   freq, "RX-1 FREQ");
+	if ((buffer[523] & 0xFE) == 0x04) assign_change(determine_freq(523, buffer),   freq, "RX-1 FREQ");
+	if ((buffer[ 11] & 0xFE) == 0x06) assign_change(determine_freq( 11, buffer),  freq2, "RX-2 FREQ");
+	if ((buffer[523] & 0xFE) == 0x06) assign_change(determine_freq(523, buffer),  freq2, "RX-2 FREQ");
 	
-		if ((buffer[11] & 0xFE)  == 0x00) {
-			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
-			
-			sampleSpeed = (buffer[11 + 1] & 0x03);
-			
-			dither = 0;
-			if ((buffer[11 + 3] & 0x08) == 0x08)
-				dither = 1; 
-						
-			rando = 0;
-			if ((buffer[11 + 3] & 0x10) == 0x10)
-				rando = 1;
-		}
-		
-		if ((buffer[523] & 0xFE)  == 0x00) {
-			
-			dither = 0;
-			if ((buffer[523 + 3] & 0x08) == 0x08)
-				dither = 1; 
-					
-			rando = 0;
-			if ((buffer[523 + 3] & 0x10) == 0x10)
-				rando = 1;
-		}
-		if (prevatt11 != att11) 
+	if ((buffer[523] & 0xFE) == 0x12) assign_change(buffer[524], drive_level, "Drive Level"); 
+	
+	handleALEX(buffer);
+ 
+	int frame = 0;
+	for (frame; frame < 2; frame++)
+	{
+		int coarse_pointer = frame * 512 + 8;
+		int j = 8;
+		for (j; j < 512; j += 8)
 		{
-			att = att11;
-			prevatt11 = att11;
-		}
-		if (prevatt523 != att523) 
-		{
-			att = att523;
-			prevatt523 = att523;
-		}
-			
-		if ((buffer[11] & 0xFE)  == 0x00) {
-			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
-		}
-		if ((buffer[523] & 0xFE)  == 0x00) {
-			nrx = (((buffer[523 + 4] & 0x38) >> 3) + 1);
-		}
-		if (hold_nrx != nrx) {
-			hold_nrx=nrx;
-			printf("aantal rx %d \n", nrx);
-		}
-		
-		// select Command
-		if ((buffer[11] & 0xFE) == 0x02)
-        {
-            txfreq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
-                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
-        }
-        if ((buffer[523] & 0xFE) == 0x02)
-        {
-            txfreq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
-                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
-        }
-		
-		if ((buffer[11] & 0xFE) == 0x04)
-        {
-            freq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
-                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
-        }
-        if ((buffer[523] & 0xFE) == 0x04)
-        {
-            freq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
-                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
-        }
-		
-		if ((buffer[11] & 0xFE) == 0x06)
-        {
-            freq2 = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
-                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
-        }
-        if ((buffer[523] & 0xFE) == 0x06)
-        {
-            freq2 = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
-                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
-        }
-
-        // select Command
-        if ((buffer[523] & 0xFE) == 0x12)
-        {
-            drive_level = buffer[524];  
-        }
-		 //ALEX
-		if (i2c_alex & (buffer[523] & 0xFE) == 0x12) {
-			alex_manual = ((buffer[525] & 0x40) == 0x40) ? 1: 0;
-			if (alex_manual) {
-				i2c_alex_data = ((buffer[526] & 0x8F) << 8 ) | (buffer[527] & 0xFF);
-			} else {
-				//firmware does determine the filter.
-				uint16_t hpf = 0, lpf = 0;
-				
-				if(freq < 1416000) hpf = 0x20; /* bypass */
-				else if(freq < 6500000) hpf = 0x10; /* 1.5 MHz HPF */
-				else if(freq < 9500000) hpf = 0x08; /* 6.5 MHz HPF */
-				else if(freq < 13000000) hpf = 0x04; /* 9.5 MHz HPF */
-				else if(freq < 20000000) hpf = 0x01; /* 13 MHz HPF */
-				else hpf = 0x02; /* 20 MHz HPF */
-				
-				if(freq > 32000000) lpf = 0x10; /* bypass */
-				else if(freq > 22000000) lpf = 0x20; /* 12/10 meters */
-				else if(freq > 15000000) lpf = 0x40; /* 17/15 meters */
-				else if(freq > 8000000) lpf = 0x01; /* 30/20 meters */
-				else if(freq > 4500000) lpf = 0x02; /* 60/40 meters */
-				else if(freq > 2400000) lpf = 0x04; /* 80 meters */
-				else lpf = 0x08; /* 160 meters */
-				
-				i2c_alex_data = hpf << 8 | lpf;
-			}
-		}
-			
-		if ((holdatt != att) || (holddither != dither)) {
-			holdatt = att;
-			holddither = dither;
-			printf("att =  %d ", att);printf("dither =  %d ", dither);printf("rando =  %d ", rando);
-			printf("code =  %d \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
-			printf("att11 = %d and att523 = %d\n", att11, att523);
-		}
-		if (holdfreq != freq) {
-			holdfreq = freq;
-			printf("frequency %d en aantal rx %d \n", freq, nrx);
-		}
-		if (holdfreq2 != freq2) {
-			holdfreq2 = freq2;
-			printf("frequency %d en aantal rx %d \n", freq2, nrx);
-		}
-		if (holdtxfreq != txfreq) {
-			holdtxfreq = txfreq;
-			printf("TX frequency %d\n", txfreq);
-		}
-		
-		if(i2c_alex)
-		{
-			if(i2c_data != i2c_alex_data)
-			{
-				fprintf(stderr, "Set Alex data to output = %x \n", i2c_alex_data);
-				i2c_data = i2c_alex_data;
-				unsigned char ldata[3];
-				ldata[0] = 0x02;
-				ldata[1] = ((i2c_alex_data >> 8) & 0xFF);
-				ldata[2] = (i2c_alex_data & 0xFF);
-				i2cWriteDevice(i2c_alex_handler, ldata, 3);
-			}
-		}
-		
-		int frame = 0;
-		for (frame; frame < 2; frame++)
-		{
-			int coarse_pointer = frame * 512 + 8;
-			int j = 8;
-			for (j; j < 512; j += 8)
-			{
-				int k = coarse_pointer + j;
-				if (MOX) {
-					sem_wait(&tx_empty);
-					int i = 0;
-					for (i; i < 4; i++){
-						put_tx_buffer(buffer[k + 4 + i]);	
-					}
-					sem_post(&tx_full);
+			int k = coarse_pointer + j;
+			if (MOX) {
+				sem_wait(&tx_empty);
+				int i = 0;
+				for (i; i < 4; i++){
+					put_tx_buffer(buffer[k + 4 + i]);	
 				}
+				sem_post(&tx_full);
 			}
 		}
+	}
 }
 
 void sendPacket() {
@@ -659,29 +545,6 @@ void fillPacketToSend() {
 				else if (sampleSpeed == 3) usleep(1);	//384K
 			}
 		}
-}
-
-void fillDiscoveryReplyMessage() {
-	int i = 0;
-	for (i; i < 60; i++) {
-		broadcastReply[i] = 0x00;
-	}
-	i = 0;
-	broadcastReply[i++] = 0xEF;
-	broadcastReply[i++] = 0xFE;
-	broadcastReply[i++] = 0x02;
-
-	broadcastReply[i++] =  0x00; // MAC
-	broadcastReply[i++] =  0x01;
-	broadcastReply[i++] =  0x02;
-	broadcastReply[i++] =  0x03;
-	broadcastReply[i++] =  0x04;
-	broadcastReply[i++] =  0x05;
-	broadcastReply[i++] =  40;
-	broadcastReply[i++] =  6; // hermeslite	
-	broadcastReply[i++] = 'T'; // adding TCP in response... not used yet!
-	broadcastReply[i++] = 'C';
-	broadcastReply[i++] = 'P';	
 }
 
 void rx1_spiReader(unsigned char iqdata[]) {
@@ -771,7 +634,7 @@ void *spiWriter(void *arg) {
 		tx_iqdata[0] = 0;
 		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
 		if (prev_drive_level != drive_level) {
-			printf("drive level %d - corrected drive level %d \n", drive_level, tx_iqdata[1]);
+			fprintf(stderr, "drive level %d - corrected drive level %d \n", drive_level, tx_iqdata[1]);
 			prev_drive_level = drive_level; 
 		}
 		int i = 0;
@@ -791,7 +654,7 @@ void *spiWriter(void *arg) {
 			tx_count = 0;
 			gettimeofday(&t21, 0);
 			float elapsd = timedifference_msec(t20, t21);
-			printf("Code tx mode spi executed in %f milliseconds.\n", elapsd);
+			fprintf(stderr, "Code tx mode spi executed in %f milliseconds.\n", elapsd);
 			gettimeofday(&t20, 0);
 		}
 	}
@@ -812,9 +675,16 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\t Radioberry V2.0 beta 2.\n");
+	fprintf(stderr, "\tRadioberry V2.0 beta 2. \n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr, "\t Emulator build date %s version %s \n", build_date ,build_version);
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\t\t Standalone version. Using SPI interface.\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr, "\tSupporting:\n");
+	fprintf(stderr, "\t\t - openhpsdr protocol-1.\n");
+	fprintf(stderr, "\t\t - UDP & TCP support for pihpsdr.\n");
+	fprintf(stderr, "\t\t - 1 rx receiver.\n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");
