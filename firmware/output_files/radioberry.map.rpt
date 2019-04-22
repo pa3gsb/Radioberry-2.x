@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Fri Jan 18 16:13:51 2019
+Mon Apr 22 14:19:56 2019
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -226,7 +226,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jan 18 16:13:51 2019       ;
+; Analysis & Synthesis Status        ; Successful - Mon Apr 22 14:19:55 2019       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry                                  ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -5600,7 +5600,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:22     ;
+; Top            ; 00:00:36     ;
 +----------------+--------------+
 
 
@@ -5610,7 +5610,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Fri Jan 18 16:13:06 2019
+    Info: Processing started: Mon Apr 22 14:18:49 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -6372,7 +6372,7 @@ Info (332111): Found 15 clocks
     Info (332111):   13.020 virt_ad9866_txclk
 Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:02
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:04
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
@@ -6385,10 +6385,10 @@ Info (21057): Implemented 11506 device resources after synthesis - the final res
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 54 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 69 warnings
-    Info: Peak virtual memory: 4957 megabytes
-    Info: Processing ended: Fri Jan 18 16:13:51 2019
-    Info: Elapsed time: 00:00:45
-    Info: Total CPU time (on all processors): 00:01:06
+    Info: Peak virtual memory: 4968 megabytes
+    Info: Processing ended: Mon Apr 22 14:19:56 2019
+    Info: Elapsed time: 00:01:07
+    Info: Total CPU time (on all processors): 00:01:30
 
 
 +------------------------------------------+

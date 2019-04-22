@@ -1,5 +1,5 @@
 Assembler report for radioberry
-Fri Jan 18 16:16:25 2019
+Mon Apr 22 14:23:50 2019
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Jan 18 16:16:25 2019 ;
+; Assembler Status      ; Successful - Mon Apr 22 14:23:50 2019 ;
 ; Revision Name         ; radioberry                            ;
 ; Top-level Entity Name ; radioberry                            ;
 ; Family                ; Cyclone 10 LP                         ;
@@ -90,15 +90,15 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Fri Jan 18 16:16:22 2019
+    Info: Processing started: Mon Apr 22 14:23:46 2019
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off radioberry -c radioberry
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4736 megabytes
-    Info: Processing ended: Fri Jan 18 16:16:25 2019
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Peak virtual memory: 4737 megabytes
+    Info: Processing ended: Mon Apr 22 14:23:51 2019
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:04
 
 
