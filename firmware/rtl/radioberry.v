@@ -24,7 +24,7 @@ clk_10mhz,
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 rb_info_1,rb_info_2,
-rx1_samples, rx2_samples, pistrobe,
+rx1_samples, 
 txFIFOFull,
 ptt_in,
 ptt_out,
@@ -52,14 +52,11 @@ input wire spi_mosi;
 output wire spi_miso; 
 input [1:0] spi_ce; 
 output wire rx1_samples;
-output wire rx2_samples;
 output wire txFIFOFull;
-output wire pistrobe;
 
 output  wire  rb_info_1;  // radioberry info-1;  checks 10 Mhz clock 
 output  wire  rb_info_2;  // radioberry info-2;  checks ad9866 clock (in tx flashes 2 times faster)
  
-
 input wire ptt_in;
 output wire ptt_out;
 output [6:0] filter; 

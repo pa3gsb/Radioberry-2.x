@@ -1,4 +1,4 @@
-Analysis & Synthesis Status : Successful - Mon Apr 22 14:19:55 2019
+Analysis & Synthesis Status : Successful - Sat May 04 15:48:56 2019
 Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 Revision Name : radioberry
 Top-level Entity Name : radioberry
@@ -7,7 +7,7 @@ Total logic elements : 10,777
     Total combinational functions : 7,957
     Dedicated logic registers : 8,048
 Total registers : 8048
-Total pins : 49
+Total pins : 47
 Total virtual pins : 0
 Total memory bits : 379,008
 Embedded Multiplier 9-bit elements : 54

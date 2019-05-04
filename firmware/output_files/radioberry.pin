@@ -99,7 +99,7 @@ GND                          : 27        : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : 28        :        :                   :         : 2         :                
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 GND                          : 30        : gnd    :                   :         :           :                
-pistrobe                     : 31        : output : 3.3-V LVCMOS      :         : 2         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 31        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
 key_dot_rpi                  : 33        : output : 3.3-V LVCMOS      :         : 2         : Y              
 VCCINT                       : 34        : power  :                   : 1.2V    :           :                
@@ -114,7 +114,7 @@ ptt_in                       : 42        : input  : 3.3-V LVCMOS      :         
 txFIFOFull                   : 43        : output : 3.3-V LVCMOS      :         : 3         : Y              
 key_dash_rpi                 : 44        : output : 3.3-V LVCMOS      :         : 3         : Y              
 VCCINT                       : 45        : power  :                   : 1.2V    :           :                
-rx2_samples                  : 46        : output : 3.3-V LVCMOS      :         : 3         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 46        :        :                   :         : 3         :                
 VCCIO3                       : 47        : power  :                   : 3.3V    : 3         :                
 GND                          : 48        : gnd    :                   :         :           :                
 rb_info_1                    : 49        : output : 3.3-V LVCMOS      :         : 3         : Y              
