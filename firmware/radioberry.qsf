@@ -175,11 +175,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to key_dot_rpi
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to KEY_DASH
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to KEY_DOT
 set_location_assignment PIN_13 -to rx1_samples
-set_location_assignment PIN_46 -to rx2_samples
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to rx1_samples
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to rx2_samples
-set_location_assignment PIN_31 -to pistrobe
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to pistrobe
 set_global_assignment -name VERILOG_FILE rtl/iambic.v
 set_global_assignment -name QIP_FILE cyclone_ip/PLL_IAMBIC_10.qip
 set_global_assignment -name VERILOG_FILE rtl/profile_ROM.v

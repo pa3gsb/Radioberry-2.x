@@ -212,8 +212,7 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	gpioSetMode(13, PI_INPUT); 	//rx1 samples
-	gpioSetMode(16, PI_INPUT);	//rx2 samples 
-	gpioSetMode(20, PI_OUTPUT); 
+	gpioSetMode(20, PI_INPUT); 
 	gpioSetMode(21, PI_OUTPUT); 
 		
 	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
@@ -432,7 +431,7 @@ void handleALEX(char* buffer)
 }
 
 
-#define assign_change(a,b,c) if ((a) != b) { b = (a); printf("%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
+#define assign_change(a,b,c) if ((a) != b) { b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
 
 int determine_freq(int base_index, char* buffer) {
 	return ( ((buffer[ base_index + 1] & 0xFF) << 24) + ((buffer[ base_index + 2] & 0xFF) << 16) + ((buffer[base_index + 3] & 0xFF) << 8) + (buffer[base_index + 4] & 0xFF) );
@@ -592,7 +591,7 @@ void *spiReader(void *arg) {
 					memcpy(rx_buffer[rx_fill_index] + pointer, offset , 6);
 					break;
 				default:
-					fprintf(stderr, "Should not occur. \n");
+					fprintf(stderr, "Should not occur. Number of receivers %d \n", lnrx);
 					break;
 			}
 			pointer = pointer + factor;

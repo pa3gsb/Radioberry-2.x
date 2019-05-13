@@ -1,5 +1,5 @@
 Fitter report for radioberry-10CL016
-Sat May 04 15:47:07 2019
+Thu May 09 16:27:13 2019
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -87,7 +87,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Sat May 04 15:47:06 2019       ;
+; Fitter Status                      ; Successful - Thu May 09 16:27:13 2019       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry-10CL016                          ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -1236,12 +1236,8 @@ agreement for further details.
 +--------------+----------------+--------------+-------------+---------------+----------------+
 ; Name         ; Ignored Entity ; Ignored From ; Ignored To  ; Ignored Value ; Ignored Source ;
 +--------------+----------------+--------------+-------------+---------------+----------------+
-; Location     ;                ;              ; pistrobe    ; PIN_31        ; QSF Assignment ;
-; Location     ;                ;              ; rx2_samples ; PIN_46        ; QSF Assignment ;
 ; I/O Standard ; radioberry     ;              ; ad9866_adio ; 3.3-V LVCMOS  ; QSF Assignment ;
 ; I/O Standard ; radioberry     ;              ; filter      ; 3.3-V LVCMOS  ; QSF Assignment ;
-; I/O Standard ; radioberry     ;              ; pistrobe    ; 3.3-V LVCMOS  ; QSF Assignment ;
-; I/O Standard ; radioberry     ;              ; rx2_samples ; 3.3-V LVCMOS  ; QSF Assignment ;
 ; I/O Standard ; radioberry     ;              ; spi_ce      ; 3.3-V LVCMOS  ; QSF Assignment ;
 +--------------+----------------+--------------+-------------+---------------+----------------+
 
@@ -11254,21 +11250,18 @@ Info (176235): Finished register packing
     Extra Info (176220): Created 258 register duplicates
 Info (128000): Starting physical synthesis optimizations for speed
 Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:04
-Warning (15705): Ignored locations or region assignments to the following nodes
-    Warning (15706): Node "pistrobe" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "rx2_samples" is assigned to location or region, but does not exist in design
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:13
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:14
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:05
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:06
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:01:19
+Info (170192): Fitter placement operations ending: elapsed time is 00:01:31
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 19% of the available device resources
     Info (170196): Router estimated peak interconnect usage is 38% of the available device resources in the region that extends from location X10_Y0 to location X20_Y9
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:23
-Info (11888): Total time spent on timing analysis during the Fitter is 18.27 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:25
+Info (11888): Total time spent on timing analysis during the Fitter is 20.42 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -11300,11 +11293,11 @@ Warning (169177): 23 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 
     Info (169178): Pin spi_mosi uses I/O standard 3.3-V LVCMOS at 60 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 51
     Info (169178): Pin ad9866_sdo uses I/O standard 3.3-V LVCMOS at 67 File: C:/dev/git/Radioberry-2.x/firmware/rtl/radioberry.v Line: 43
 Info (144001): Generated suppressed messages file C:/dev/git/Radioberry-2.x/firmware/output_files/radioberry-10CL016.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 25 warnings
-    Info: Peak virtual memory: 5432 megabytes
-    Info: Processing ended: Sat May 04 15:47:09 2019
-    Info: Elapsed time: 00:02:23
-    Info: Total CPU time (on all processors): 00:03:41
+Info: Quartus Prime Fitter was successful. 0 errors, 22 warnings
+    Info: Peak virtual memory: 5434 megabytes
+    Info: Processing ended: Thu May 09 16:27:15 2019
+    Info: Elapsed time: 00:02:40
+    Info: Total CPU time (on all processors): 00:04:12
 
 
 +----------------------------+

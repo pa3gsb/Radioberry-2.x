@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry-10CL016
-Sat May 04 15:44:44 2019
+Thu May 09 16:24:33 2019
 Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
 
 
@@ -226,7 +226,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat May 04 15:44:44 2019       ;
+; Analysis & Synthesis Status        ; Successful - Thu May 09 16:24:33 2019       ;
 ; Quartus Prime Version              ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
 ; Revision Name                      ; radioberry-10CL016                          ;
 ; Top-level Entity Name              ; radioberry                                  ;
@@ -343,7 +343,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.5%      ;
+;     Processor 2            ;   2.7%      ;
 +----------------------------+-------------+
 
 
@@ -5610,7 +5610,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-    Info: Processing started: Sat May 04 15:43:55 2019
+    Info: Processing started: Thu May 09 16:23:41 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off radioberry -c radioberry-10CL016
 Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -6387,10 +6387,10 @@ Info (21057): Implemented 11504 device resources after synthesis - the final res
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 54 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 69 warnings
-    Info: Peak virtual memory: 4957 megabytes
-    Info: Processing ended: Sat May 04 15:44:44 2019
-    Info: Elapsed time: 00:00:49
-    Info: Total CPU time (on all processors): 00:01:07
+    Info: Peak virtual memory: 4958 megabytes
+    Info: Processing ended: Thu May 09 16:24:34 2019
+    Info: Elapsed time: 00:00:53
+    Info: Total CPU time (on all processors): 00:01:10
 
 
 +------------------------------------------+
