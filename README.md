@@ -6,6 +6,8 @@ RadioBerry V2.0 - Ham radio cape for Raspberry PI
 - Building a HAM Radio
 - Learning (from noob to guru)
 
+WIKI FOR MORE DETAILS:  https://github.com/pa3gsb/Radioberry-2.x/wiki
+
 ## Radioberry:
 
 - Raspberry PI 3 Model B
