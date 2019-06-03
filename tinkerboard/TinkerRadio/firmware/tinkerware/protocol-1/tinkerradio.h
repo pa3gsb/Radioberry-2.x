@@ -47,7 +47,7 @@ uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
 uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
 
 unsigned char broadcastReply[60];
-#define TIMEOUT_MS      100     
+#define TIMEOUT_MS      1500     
 
 int running = 0;
 int fd;									/* our socket */
