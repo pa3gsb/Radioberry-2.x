@@ -88,6 +88,7 @@ int main(int argc, char **argv)
 	}
 		
 	tinkerboard_set_gpio_mode(RX1_SAMPLES_PIN, INPUT);  
+	tinkerboard_set_gpio_pud(RX1_SAMPLES_PIN, PULLUP);
 	tinkerboard_set_gpio_mode(PTT_PIN, OUTPUT); 
 	
 	tinkerboard_spi_init(SPI2, config_spi);
