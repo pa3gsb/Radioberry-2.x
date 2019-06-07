@@ -1,6 +1,8 @@
 # no backup files
 *.bak
 
+*.qws
+
 db/
 greybox_tmp/
 incremental_db/

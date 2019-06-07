@@ -117,9 +117,6 @@ end
 
 assign ad9866_txquietn = tx_en_d1; 	
 
-
-assign ptt_out = ptt_in;
-
 wire ad9866_rx_rqst;
 wire ad9866_tx_rqst;
 reg [5:0] rx_gain;
