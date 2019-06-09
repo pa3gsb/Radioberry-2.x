@@ -373,7 +373,7 @@ void *spiReader(void *arg) {
 		//ptt off
 		if (!MOX && saveMox!=MOX) {tinkerboard_set_gpio_state(PTT_PIN, LOW); saveMox = MOX;}
 		
-		while (tinkerboard_get_gpio_state(RX1_SAMPLES_PIN) == LOW) {} //wait for enough samples
+		while (tinkerboard_get_gpio_state(RX1_SAMPLES_PIN) == LOW) {usleep(3000);} //wait for enough samples
 				
 		int factor = ((lnrx - 1) * 6) + 8;
 		// read 64 IQ samples.

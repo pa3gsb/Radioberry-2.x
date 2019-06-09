@@ -572,7 +572,7 @@ void *spiReader(void *arg) {
 		//ptt off
 		if (!MOX && saveMox!=MOX) {gpioWrite(21, 0); saveMox = MOX;}
 		
-		while (gpioRead(13) == 0) {usleep(1000);}//wait for enough samples
+		while (gpioRead(13) == 0) {usleep(3000);}//wait for enough samples
 				
 		int factor = ((lnrx - 1) * 6) + 8;
 		// read 64 IQ samples.

@@ -502,7 +502,7 @@ void fillPacketToSend() {
 		for (frame; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 				
-			while (gpioRead(25) == 0) {}//wait for enough samples
+			while (gpioRead(25) == 0) {usleep(3000);}//wait for enough samples
 			
 			int i = 0;
 			for (i=0; i< (504 / (8 + factor)); i++) {
