@@ -28,7 +28,7 @@
 *
 *	http://www.pa3gsb.nl
 *	  
-*	2018 Johan PA3GSB
+*	Johan PA3GSB
 *
 */
 

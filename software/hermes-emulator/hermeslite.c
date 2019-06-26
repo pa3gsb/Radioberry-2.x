@@ -18,12 +18,11 @@
 *
 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
-* Hermeslite Emulator. By using this emulator you have the possibility to connect to SDR programs like:
+* This programs is the c part of the firmware for the standalone configuration for the RadioBerry. 
+*
+* By using this program you have the possibility to connect to SDR programs like:
 *	- pihpsdr
-*	- linhpsdr
 *	- Quisk
-*	- PowerSDR
-*	- Spark
 *
 *	Using the 'old HPSDR protocol'; also called protocol-1
 *
@@ -31,7 +30,7 @@
 *
 *	http://www.pa3gsb.nl
 *	  
-*	2018 Johan PA3GSB
+*	Johan PA3GSB
 *
 */
 
@@ -55,13 +54,9 @@
 
 #include <pigpio.h>
 
-char build_date[]=GIT_DATE;
-char build_version[]=GIT_VERSION;
-
 void sendPacket(void);
 void handlePacket(char* buffer);
 void processPacket(char* buffer);
-int isValidFrame(char* data);
 void fillPacketToSend(void);
 void printIntroScreen(void);
 void *packetreader(void *arg);
@@ -123,7 +118,7 @@ int sampleSpeed = 0;
 int last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
 
-#define FIRMWARE_VERSION 0x28
+#define FIRMWARE_VERSION 0x29
 unsigned char hpsdrdata[1032];
 uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
 uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
@@ -156,6 +151,8 @@ int i2c_alex = 0;
 int alex_manual = 0;
 uint16_t i2c_alex_data = 0;
 uint16_t i2c_data = 0;
+
+void signal_shutdown(int signum);
 
 
 float timedifference_msec(struct timeval t0, struct timeval t1)
@@ -198,7 +195,7 @@ void initALEX(){
 int main(int argc, char **argv)
 {
 	int yes = 1;
-	
+
 	printIntroScreen();	
 	
 	sem_init(&mutex, 0, 1);	
@@ -674,16 +671,16 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\tRadioberry V2.0 beta 2. \n");
+	fprintf(stderr, "\tRadioberry V2.0 beta 3. \n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\t\t Standalone version. Using SPI interface.\n");
+	fprintf(stderr,	"\t\t Standalone version.\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr, "\tSupporting:\n");
 	fprintf(stderr, "\t\t - openhpsdr protocol-1.\n");
 	fprintf(stderr, "\t\t - UDP & TCP support for pihpsdr.\n");
-	fprintf(stderr, "\t\t - 1 rx receiver.\n");
+	fprintf(stderr, "\t\t - 1 rx receiver. and 1 tx transmitter (half duplex)\n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");
