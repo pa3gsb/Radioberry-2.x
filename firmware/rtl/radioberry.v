@@ -4,7 +4,7 @@
 //
 // Target Devices	: Cyclone 10LP
 //
-// Tool 		 		: Quartus Prime Lite Edition v17.0.2
+// Tool 		 		: Quartus Prime Lite Edition v18.1.0
 //
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Description: 

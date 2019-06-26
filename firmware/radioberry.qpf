@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------- #
 #
-# Copyright (C) 2017  Intel Corporation. All rights reserved.
+# Copyright (C) 2018  Intel Corporation. All rights reserved.
 # Your use of Intel Corporation's design tools, logic functions 
 # and other software and tools, and its AMPP partner logic 
 # functions, and any output files from any of the foregoing 
@@ -8,25 +8,24 @@
 # associated documentation or information are expressly subject 
 # to the terms and conditions of the Intel Program License 
 # Subscription Agreement, the Intel Quartus Prime License Agreement,
-# the Intel MegaCore Function License Agreement, or other 
-# applicable license agreement, including, without limitation, 
-# that your use is for the sole purpose of programming logic 
-# devices manufactured by Intel and sold by Intel or its 
-# authorized distributors.  Please refer to the applicable 
-# agreement for further details.
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details.
 #
 # -------------------------------------------------------------------------- #
 #
 # Quartus Prime
-# Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
-# Date created = 16:56:36  May 09, 2019
+# Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+# Date created = 12:04:32  June 26, 2019
 #
 # -------------------------------------------------------------------------- #
 
-QUARTUS_VERSION = "17.0"
-DATE = "16:56:36  May 09, 2019"
+QUARTUS_VERSION = "18.1"
+DATE = "12:04:32  June 26, 2019"
 
 # Revisions
 
-PROJECT_REVISION = "radioberry"
 PROJECT_REVISION = "radioberry-10CL016"
+PROJECT_REVISION = "radioberry"
