@@ -202,7 +202,11 @@ int main(int argc, char **argv)
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0); 
 	sem_init(&rx_empty, 0, RX_MAX); 
-    sem_init(&rx_full, 0, 0);      	
+    sem_init(&rx_full, 0, 0);   
+
+	unsigned int rev = gpioHardwareRevision();  
+	//A03111 hex
+	int rpi4 = (rev >= 10498321) ? 1 : 0;
 	
 	if (gpioInitialise() < 0) {
 		fprintf(stderr,"hpsdr_protocol (original) : gpio could not be initialized. \n");
@@ -216,12 +220,20 @@ int main(int argc, char **argv)
 	if (i2c_handler >= 0)  initVSWR();
 	i2c_alex_handler = i2cOpen(i2c_bus, ADDR_ALEX, 0);
 	if (i2c_alex_handler >= 0)  initALEX();
-	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
+	if (rpi4) 
+		rx1_spi_handler = spiOpen(0, 9000000, 49155);  //channel 0
+	else 
+		rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
+	
 	if (rx1_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx1 could not be initialized. \n");
 		exit(-1);
 	}
-	rx2_spi_handler = spiOpen(1, 15625000, 49155); 	//channel 1
+	if (rpi4) 
+		rx2_spi_handler = spiOpen(1, 9000000, 49155); 	//channel 1 
+	else
+		rx2_spi_handler = spiOpen(1, 15625000, 49155); 	//channel 1 
+		
 	if (rx2_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx2 could not be initialized. \n");
 		exit(-1);

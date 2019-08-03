@@ -16,6 +16,8 @@
 #define oPinDATA 			23	
 #define oPinDCLK 			5	
 
+int rpi4;
+
 
 int main (int argc, char **argv)
 {
@@ -46,9 +48,26 @@ int main (int argc, char **argv)
 	printf("%s  will be loaded.\n\n\n", filename);
 
 	int file_id;
+	
+	int model, rev, mem, maker, overVolted ;
+	piBoardId (&model, &rev, &mem, &maker, &overVolted) ;
+	printf ("Radioberry running on a Raspberry Pi:\n") ;
+	printf ("  Type: %s, Revision: %s, Memory: %dMB, Maker: %s\n", 
+    piModelNames [model], piRevisionNames [rev], piMemorySize [mem], piMakerNames [maker]) ; 
+	rpi4 = (model == 0x11) ? 1: 0;
+	fprintf(stderr, "\nFlag rpi4 is set to :  %d\n\n", rpi4);
+	
+	int vMaj, vMin ;
+
+	wiringPiVersion (&vMaj, &vMin) ;
+	printf ("wiring pi version: %d.%d\n\n", vMaj, vMin) ;
+	
+	if (rpi4) {
+		if (vMaj != 2 || vMin < 52) printf("!!!!SETUP PROBLEM!!!! \nwiring pi version must be at least 2.52\n\n");
+	}
 
 	wiringPiSetup () ;
-	  
+	
 	pinMode (iPinCONF_DONE, INPUT);
 	pinMode (iPinNSTATUS, INPUT);
 
@@ -77,6 +96,10 @@ int main (int argc, char **argv)
   
   
   return 0;
+}
+
+void wait_some_nops() {
+	for (int i =0 ; i < 300 ; i++) asm("nop");
 }
 
 void processFileInput( int finputid )
@@ -121,9 +144,13 @@ void processFileInput( int finputid )
 	}
 		
 	/* Initialize device */
+	if (rpi4) wait_some_nops();
 	digitalWrite (oPinDCLK, 1);
+	if (rpi4) wait_some_nops();
 	digitalWrite (oPinDCLK, 0);
+	if (rpi4) wait_some_nops();
 	digitalWrite (oPinDCLK, 1);
+	if (rpi4) wait_some_nops();
 	digitalWrite (oPinDCLK, 0);
 	
 	fprintf( stdout, "Info: programming succeeded\n" );
@@ -141,8 +168,11 @@ void programByte( int one_byte )
 		bit = bit & 0x1;
 		
 		digitalWrite (oPinDATA, bit);
+		if (rpi4) wait_some_nops();
 		digitalWrite (oPinDCLK, 1);
+		if (rpi4) wait_some_nops();
 		digitalWrite (oPinDCLK, 0);
+		if (rpi4) wait_some_nops();
 	}
 }
 
