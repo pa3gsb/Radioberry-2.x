@@ -69,11 +69,16 @@ int main (int argc, char **argv)
 	wiringPiSetup () ;
 	
 	pinMode (iPinCONF_DONE, INPUT);
+	pullUpDnControl (iPinCONF_DONE, PUD_UP) ;
 	pinMode (iPinNSTATUS, INPUT);
+	pullUpDnControl (iPinNSTATUS, PUD_UP) ;
 
 	pinMode (oPinNCONFIG, OUTPUT);
+	pullUpDnControl (oPinNCONFIG, PUD_UP) ;
 	pinMode (oPinDATA, OUTPUT);
+	pullUpDnControl (oPinDATA, PUD_UP) ;
 	pinMode (oPinDCLK, OUTPUT);
+	pullUpDnControl (oPinDCLK, PUD_UP) ;
 
 	/* Open programming file as READ and in BINARY */
 	file_id = fopen_rbf( filename, "rb" );
@@ -99,7 +104,7 @@ int main (int argc, char **argv)
 }
 
 void wait_some_nops() {
-	for (int i =0 ; i < 300 ; i++) asm("nop");
+	for (int i =0 ; i < 600 ; i++) asm("nop");
 }
 
 void processFileInput( int finputid )

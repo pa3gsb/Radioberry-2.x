@@ -311,7 +311,7 @@ void send_rx_iq_to_host() {
 						}
 					}
 				}
-			}
+			} else usleep(3000);
 			
 		} else {usleep(20000);}
 	}
@@ -371,11 +371,11 @@ void receiver_specific_registers_from_host_port(unsigned char* data) {
 			//fprintf(stderr, "ddc no %d \n", i); 
 		}
 	} 
-	fprintf(stderr,"Number of receivers: %d \n", lnrx);
+	//fprintf(stderr,"Number of receivers: %d \n", lnrx);
 	speed = data[18+(ddc[0]*6)] << 8 | data[19+(ddc[0]*6)];	
 	sampleSpeed[0] = speed/48==1?0x00:speed/48==2?0x01:speed/48==4?0x02:speed/48==8?0x03:0x04;
 	samplespeed = speed/48;
-	fprintf(stderr,"sample speed receiver[0] =  %d \n", sampleSpeed[0]);
+	//printf(stderr,"sample speed receiver[0] =  %d \n", sampleSpeed[0]);
 	if (lnrx == 2){
 		speed = data[18+(ddc[1]*6)] << 8 | data[19+(ddc[1]*6)];
 		sampleSpeed[1] = speed/48==1?0x00:speed/48==2?0x01:speed/48==4?0x02:speed/48==8?0x03:0x04;

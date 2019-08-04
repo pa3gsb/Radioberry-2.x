@@ -42,8 +42,8 @@
 //6: board = “Hermes Lite”						Not found by SDR Console
 // In the discovery reply some board info can be set according to protocol
 // seems not always be handled accordingly.
-#define HERMESLITE  0x02	
-#define FIRMWARE_VERSION 0x29	//firmware version 4.1 (=0x29)
+#define HERMESLITE  0x02 //0x02	
+#define FIRMWARE_VERSION 103	//thetis 2.6.7 needs this version!
 #define TIMEOUT_MS 100 
 #define HANDLER_STEADY_TIME_US 5000
 
