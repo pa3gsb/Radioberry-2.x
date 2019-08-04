@@ -214,12 +214,12 @@ int initialize_gpio() {
 	gpioWrite(6, 0); 			// init rx1-pi-clk
 	gpioWrite(17, 0); 			// init rx2-pi-clk
 	
-	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
-	if (rx1_spi_handler < 0) {
+	rx1_spi_handler = spiOpen(0, 8500000, 49155);  //channel 0  15625000
+	if (rx1_spi_handler < 0) { 
 		perror("radioberry_protocol: spi bus rx1 could not be initialized. \n");
 		exit(-1);
 	}
-	rx2_spi_handler = spiOpen(1, 15625000, 49155); 	//channel 1
+	rx2_spi_handler = spiOpen(1, 8500000, 49155); 	//channel 1
 	if (rx2_spi_handler < 0) {
 		perror("radioberry_protocol: spi bus rx2 could not be initialized. \n");
 		exit(-1);
@@ -331,9 +331,13 @@ void handle_packets_from_sdr_program(unsigned char* buffer,int buflen) {
 			case GENERAL_REGISTERS_FROM_HOST_PORT:
 				if (radioberry_socket == -1) {
 					struct sockaddr_in remaddr;	
+					struct sockaddr_in sdr_addr;
+					memset((char *)&sdr_addr, 0, sizeof(sdr_addr));
+					sdr_addr.sin_addr.s_addr = ip->saddr;  
 					memset((char *)&remaddr, 0, sizeof(remaddr));
 					remaddr.sin_addr.s_addr = ip->daddr;  
 					strcpy(radioberry_addr, inet_ntoa(remaddr.sin_addr));
+					strcpy(sdr_client_addr, inet_ntoa(sdr_addr.sin_addr));
 					remote_port = udp->source;
 				}
 				if (data[4] == 2) { 
@@ -443,6 +447,9 @@ void create_radioberry_socket() {
 		dst_addr.sin_family = PF_INET;
 		dst_addr.sin_port = htons(ntohs(remote_port));
 		inet_aton(sdr_client_addr, &dst_addr.sin_addr);	
+		
+		//fprintf(stderr,"Destination IP-address %s  \n", inet_ntoa(dst_addr.sin_addr)); 
+		//fprintf(stderr,"Destination Port %d \n", ntohs(dst_addr.sin_port));
 		
 		high_priority_addr.sin_family = PF_INET;
 		high_priority_addr.sin_port = htons(HIGH_PRIORITY_TO_HOST_PORT);
@@ -645,7 +652,7 @@ int handleDiscovery(unsigned char* buffer) {
 	fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 	fprintf(stderr,"Discovery Port %d \n", ntohs(remaddr.sin_port));
 
-	strcpy(sdr_client_addr, inet_ntoa(remaddr.sin_addr));	
+	//strcpy(sdr_client_addr, inet_ntoa(remaddr.sin_addr));	
 	fillDiscoveryReplyMessage();
 	createUDPSocket();			
 	if (sendto(discover_socket, broadcastReply, sizeof(broadcastReply), 0, (struct sockaddr *)&remaddr, addrlen) < 0) {
