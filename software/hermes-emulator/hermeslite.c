@@ -118,7 +118,7 @@ int sampleSpeed = 0;
 int last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
 
-#define FIRMWARE_VERSION 0x29
+#define FIRMWARE_VERSION 0x2A
 unsigned char hpsdrdata[1032];
 uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
 uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
@@ -207,6 +207,7 @@ int main(int argc, char **argv)
 	unsigned int rev = gpioHardwareRevision();  
 	//A03111 hex
 	int rpi4 = (rev >= 10498321) ? 1 : 0;
+	if (rpi4) fprintf(stderr, "radioberry running at rpi-4\n");
 	
 	if (gpioInitialise() < 0) {
 		fprintf(stderr,"hpsdr_protocol (original) : gpio could not be initialized. \n");
@@ -359,7 +360,7 @@ void handlePacket(char* buffer){
 			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
 			memset(broadcastReply, 0, 60);
-			unsigned char reply[14] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 40, 6, 'T', 'C', 'P' };
+			unsigned char reply[14] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, FIRMWARE_VERSION, 6, 'T', 'C', 'P' };
 			memcpy(broadcastReply, reply, 14);
 			if (sock_TCP_Client > -1) {
 				send(sock_TCP_Client, broadcastReply, 60, 0);

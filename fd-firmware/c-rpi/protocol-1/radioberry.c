@@ -558,7 +558,7 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x03;
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
-	broadcastReply[i++] =  40;
+	broadcastReply[i++] =  FIRMWARE_VERSION;
 	broadcastReply[i++] =  6; // hermeslite
 									
 }
