@@ -92,8 +92,8 @@ always @(posedge clock)
     case (state)
       READING:
         begin
-        speed <= rd_data[3:2];
-        duplex <= rd_data[4];
+        speed <= rd_data[3:2];  //reg 31
+        duplex <= rd_data[4]; 
         
         if (init_required)
           begin

@@ -51,18 +51,13 @@ output ad9866_rst_n,
 output ad9866_mode,	 
 input ptt_in, 
 output ptt_out, 
-output  [1:0]   phy_tx,
-output          phy_tx_en,
-input   [1:0]   phy_rx,
-input           phy_rx_dv,
+(* useioff = 1 *) output  [1:0]   phy_tx,
+(* useioff = 1 *) output          phy_tx_en,
+(* useioff = 1 *) input   [1:0]   phy_rx,
+(* useioff = 1 *) input           phy_rx_dv,
 input           phy_clk,
 inout           phy_mdio,
-output          phy_mdc,
-
-output 	debug1,
-output 	debug2,
-output 	debug3,
-output 	debug4
+output          phy_mdc
 
 );
 
@@ -71,9 +66,9 @@ output 	debug4
 //     Parameters
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //169.254.45.200
-localparam       IP = {8'd169,8'd254,8'd45,8'd222};
-//localparam       IP = {8'd0,8'd0,8'd0,8'd0};
-localparam       MAC = {8'h00,8'h1c,8'hc0,8'ha2,8'h2d,8'hde};
+//localparam       IP = {8'd169,8'd254,8'd45,8'd222};
+localparam       IP = {8'd0,8'd0,8'd0,8'd0};
+localparam       MAC = {8'h00,8'h1c,8'hc0,8'ha2,8'd45,8'd222};
 
 
 logic clk_ad9866;
@@ -119,11 +114,6 @@ logic [ 7:0]    udp_rx_data;
 logic           dst_unreachable;
 
 
-//assign debug1 = reset_counter[15];
-//assign debug2 = ~network_state_fixedip;
-assign debug3 = ~network_state_fixedip;
-assign debug4 = phy_rx_dv;
-
 network network_inst(
  // dhcp and mdio clock
   .clock_2_5MHz(clk_ctrl),
@@ -131,40 +121,26 @@ network network_inst(
   
 // rxstream (rx-iq)
   .tx_clock(phy_clk_div4),
-  .udp_tx_request(1'b0),
-  .udp_tx_length(16'h0000),
-  .udp_tx_data(8'h00),
-  .udp_tx_enable(),
-  .run(1'b0),
+  .udp_tx_request(udp_tx_request),
+  .udp_tx_length({5'h00,udp_tx_length}),
+  .udp_tx_data(udp_tx_data),
+  .udp_tx_enable(udp_tx_enable),
+  .run(1'd1),		//start / stop of radio!!!
   .port_id(8'h00),
-  
-  //.udp_tx_request(udp_tx_request),
-  //.udp_tx_length({5'h00,udp_tx_length}),
-  //.udp_tx_data(udp_tx_data),
-  //.udp_tx_enable(udp_tx_enable),
-  //.run(1'b0),		//start / stop of radio!!!
- // .port_id(8'h00),
   
  // txstream (tx-iq)
   .rx_clock(phy_clk_div4),
-  
-    .to_port(),
-  .udp_rx_data(),
-  .udp_rx_active(),
-  .broadcast(),
-  .dst_unreachable(),
-  
-//  .to_port(to_port),
-// .udp_rx_data(udp_rx_data),
- // .udp_rx_active(udp_rx_active),
- // .broadcast(broadcast),
-//  .dst_unreachable(dst_unreachable), 
+  .to_port(to_port),
+  .udp_rx_data(udp_rx_data),
+  .udp_rx_active(udp_rx_active),
+  .broadcast(broadcast),
+  .dst_unreachable(dst_unreachable),
   
  // status and control
   .static_ip(IP),
   .local_mac(MAC),
   .network_state_dhcp(network_state_dhcp),
-  .network_state_fixedip(network_state_fixedip), 
+  .network_state_fixedip(network_state_fixedip),
   .network_speed(),					
   
  // phy
@@ -176,10 +152,7 @@ network network_inst(
   .PHY_MDIO(phy_mdio),
   .PHY_MDC(phy_mdc),
 
-  .debug1(debug1),
-  .debug2(debug2),
-  .debug4()
-  
+  .debug()
 );
 
 rmii_send rmii_send_i (

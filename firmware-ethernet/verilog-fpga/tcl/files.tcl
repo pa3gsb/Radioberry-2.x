@@ -5,6 +5,7 @@ set_global_assignment -name VERILOG_FILE rtl/reset_handler.v
 set_global_assignment -name VERILOG_FILE rtl/spi_slave.v
 set_global_assignment -name VERILOG_FILE rtl/timescale.v
 set_global_assignment -name VERILOG_FILE rtl/transmitter.v
+set_global_assignment -name VERILOG_FILE rtl/rxstream.v
 
 set_global_assignment -name VERILOG_FILE rtl/ethernet/arp.v
 set_global_assignment -name VERILOG_FILE rtl/ethernet/crc32.v
@@ -26,6 +27,7 @@ set_global_assignment -name VERILOG_FILE rtl/ethernet/rmii_send.v
 set_global_assignment -name VERILOG_FILE rtl/ethernet/udp_recv.v
 set_global_assignment -name VERILOG_FILE rtl/ethernet/udp_send.v
 
+set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/rx_iq_fifo.v
 set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/rxFIFO.v
 set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/txFIFO.v
 set_global_assignment -name VERILOG_FILE rtl/cyclone_ip/counter.v

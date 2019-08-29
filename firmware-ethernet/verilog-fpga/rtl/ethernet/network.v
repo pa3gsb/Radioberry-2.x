@@ -64,7 +64,9 @@ module network (
   inout         PHY_MDIO,
   output        PHY_MDC,
 
-  output        debug
+  output        debug1,
+  output 		debug2,
+  output 		debug4
 );
 
 wire udp_tx_active;
@@ -90,7 +92,8 @@ wire [31:0] udp_destination_ip;
 //IP addresses
 reg  [31:0] local_ip;
 //wire [31:0] apipa_ip = {8'd192, 8'd168, 8'd22, 8'd248};
-wire [31:0] apipa_ip = {8'd169, 8'd254, local_mac[15:0]};
+//wire [31:0] apipa_ip = {8'd169, 8'd254, local_mac[15:0]};
+wire [31:0] apipa_ip = {8'd169, 8'd254, , 8'd45, 8'd222};
 //wire [31:0] ip_to_write;
 assign static_ip_assigned = (static_ip != 32'hFFFFFFFF) && (static_ip != 32'd0);
 
@@ -543,8 +546,14 @@ arp arp_inst(
   .local_mac(local_mac),
   .local_ip(local_ip),
   .tx_request(arp_tx_request),
-  .remote_mac(remote_mac)
+  .remote_mac(remote_mac),
+  .debug()
 );
+ 
+assign debug1 = phy_duplex;
+assign debug2 = phy_speed[0];
+assign debug4 = rgmii_rx_active;
+//assign debug4 = (local_ip == {8'd169,8'd254,8'd45,8'd222} ? 1'b1 : 1'b0);
 
 icmp icmp_inst (
   //in
@@ -690,6 +699,6 @@ phy_send phy_send_inst (
 //-----------------------------------------------------------------------------
 assign network_speed = phy_speed;
 
-assign debug = phy_rx_valid;
+//assign debug = phy_rx_valid;
 
 endmodule

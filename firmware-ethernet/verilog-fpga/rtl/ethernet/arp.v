@@ -39,10 +39,14 @@ module arp (
   output [7:0] tx_data,
   output reg [47:0] destination_mac,  
   output tx_request,   
-  output tx_active
+  output tx_active,
+  output debug
 );
 
 
+reg inarp;
+
+assign debug = inarp; //(remote_ip == {8'd169,8'd254,8'd45,8'd198} ? 1'b1 : 1'b0);
 
 
 
@@ -77,6 +81,7 @@ always @(posedge rx_clock)
       if (!rx_enable) state <= ST_IDLE;      
       else
         begin
+		inarp <= 1'b1;
         case (byte_no)
           //arp operation, h0001 = request
           21: if (rx_data != 8'h00) state <= ST_ERR;
