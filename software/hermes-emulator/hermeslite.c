@@ -80,12 +80,13 @@ int use_tx  = 0;
 unsigned char drive_level;
 unsigned char prev_drive_level;
 int MOX = 0;
-int saveMox = -1;
+int rbMOX = -1;
 sem_t rx_empty;
 sem_t rx_full;
 sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
+sem_t radiosync;
 
 int tx_count =0;
 
@@ -203,6 +204,7 @@ int main(int argc, char **argv)
     sem_init(&tx_full, 0, 0); 
 	sem_init(&rx_empty, 0, RX_MAX); 
     sem_init(&rx_full, 0, 0);   
+    sem_init(&radiosync, 0, 0);   
 
 	unsigned int rev = gpioHardwareRevision();  
 	//A03111 hex
@@ -489,13 +491,15 @@ void processPacket(char* buffer)
 		for (j; j < 512; j += 8)
 		{
 			int k = coarse_pointer + j;
-			if (MOX) {
+			if (rbMOX) {
 				sem_wait(&tx_empty);
 				int i = 0;
 				for (i; i < 4; i++){
 					put_tx_buffer(buffer[k + 4 + i]);	
 				}
 				sem_post(&tx_full);
+				
+				sem_post(&radiosync);
 			}
 		}
 	}
@@ -526,7 +530,7 @@ void fillPacketToSend() {
 		for (frame; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 			
-			if (!MOX) {
+			if (!rbMOX) {
 				sem_wait(&rx_full);
 				memcpy(hpsdrdata + coarse_pointer + 16, rx_buffer[rx_read_index], 504);
 				rx_read_index = (rx_read_index + 1) % RX_MAX; 
@@ -548,10 +552,8 @@ void fillPacketToSend() {
 						hpsdrdata[13 + coarse_pointer] = data[1];
 					}
 				}
-				if (sampleSpeed ==0) usleep(670);  // 48K
-				else if (sampleSpeed == 1) usleep(260); //96K
-				else if (sampleSpeed == 2) usleep(20);	//192K
-				else if (sampleSpeed == 3) usleep(1);	//384K
+
+				sem_wait(&radiosync);
 			}
 		}
 }
@@ -580,7 +582,7 @@ void *spiReader(void *arg) {
 		sem_wait(&mutex);
 		
 		//ptt off
-		if (!MOX && saveMox!=MOX) {gpioWrite(21, 0); saveMox = MOX;}
+		if (!MOX && rbMOX!=MOX) {gpioWrite(21, 0); rbMOX = MOX;}
 		
 		while (gpioRead(13) == 0) {usleep(3000);}//wait for enough samples
 				
@@ -627,7 +629,7 @@ void *spiWriter(void *arg) {
 		sem_wait(&mutex);
 		
 		// ptt on
-		if (MOX && saveMox!=MOX) {gpioWrite(21, 1); saveMox = MOX;} else tx_count = 0;	
+		if (MOX && rbMOX!=MOX) {gpioWrite(21, 1); rbMOX = MOX;} else tx_count = 0;	
 		
 		if (tx_count % 4800 ==0) {
 			//set the tx freq.
@@ -638,7 +640,7 @@ void *spiWriter(void *arg) {
 			tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
 			tx_iqdata[5] = (txfreq & 0xFF);
 						
-			if (MOX) spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
+			if (rbMOX) spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
 		}		
 		tx_iqdata[0] = 0;
 		tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
@@ -651,7 +653,7 @@ void *spiWriter(void *arg) {
 			tx_iqdata[2 + i] = get_tx_buffer(); //MSB is first in buffer..
 		}
 		
-		if (MOX) spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
+		if (rbMOX) spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 		
 		sem_post(&mutex);
 		sem_post(&tx_empty); 
