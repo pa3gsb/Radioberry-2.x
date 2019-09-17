@@ -17,7 +17,7 @@
 //
 //
 //	This firmware puts the radioberry into full duplex. 
-//	The radioberry firmware is formed by this radioberry.rbf (verilog) gatewre and radioberry (c-language) executable running at a rpi.
+//	The radioberry firmware is formed by this radioberry.rbf (verilog) gateware and radioberry (c-language) executable running at a rpi.
 //	
 // 	The c-language part makes it possible to implement different SDR programs used protocols like openhpsdr p-1 or p-2.
 //
@@ -37,44 +37,35 @@
 module radioberry(
 
 input clk_76m8,
-input [5:0]  ad9866_rx,
-output [5:0] ad9866_tx,
-input ad9866_rxsync,
-input ad9866_rxclk,
-output ad9866_txsync,
-output ad9866_txquietn,
-output ad9866_sclk,
-output ad9866_sdio,
-input ad9866_sdo,
-output ad9866_sen_n,
-output ad9866_rst_n,
-output ad9866_mode,	 
-input ptt_in, 
-output ptt_out, 
-output  [1:0]   phy_tx,
-output          phy_tx_en,
-input   [1:0]   phy_rx,
-input           phy_rx_dv,
+
+input [5:0]  ad9866_rx, output [5:0] ad9866_tx, input ad9866_rxsync, input ad9866_rxclk, output ad9866_txsync, output ad9866_txquietn, 
+
+output ad9866_sclk, output ad9866_sdio, input ad9866_sdo, output ad9866_sen_n, output ad9866_rst_n, output ad9866_mode,	
+
+input spi_sck, input spi_mosi, output spi_miso, input [1:0] spi_ce,
+ 
+input ptt_in, output ptt_out, 
+
+  // Ethernet PHY
+  (* useioff = 1 *) output  [1:0]   phy_tx,
+  (* useioff = 1 *) output          phy_tx_en,
+  (* useioff = 1 *) input   [1:0]   phy_rx,
+  (* useioff = 1 *) input           phy_rx_dv,
+
 input           phy_clk,
 inout           phy_mdio,
-output          phy_mdc,
-
-output 	debug1,
-output 	debug2,
-output 	debug3,
-output 	debug4
-
+output          phy_mdc
 );
-
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //     Parameters
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-//169.254.45.200
-localparam       IP = {8'd169,8'd254,8'd45,8'd222};
-//localparam       IP = {8'd0,8'd0,8'd0,8'd0};
+//localparam       IP = {8'd169,8'd254,8'd45,8'd222};
+localparam       IP = {8'd0,8'd0,8'd0,8'd0};
 localparam       MAC = {8'h00,8'h1c,8'hc0,8'ha2,8'h2d,8'hde};
 
+logic [31:0] 	radioberry_ip;
+logic 	run_radio;
 
 logic clk_ad9866;
 logic clk_ad9866_2x;
@@ -107,7 +98,6 @@ always @(posedge clk_ctrl) begin
   if (~reset_counter[15]) reset_counter <= reset_counter + 16'h01;
 end
 
-
 logic           udp_tx_request;
 logic [ 7:0]    udp_tx_data;
 logic [10:0]    udp_tx_length;
@@ -118,67 +108,46 @@ logic           udp_rx_active;
 logic [ 7:0]    udp_rx_data;
 logic           dst_unreachable;
 
-
-//assign debug1 = reset_counter[15];
-//assign debug2 = ~network_state_fixedip;
-assign debug3 = ~network_state_fixedip;
-assign debug4 = phy_rx_dv;
-
 network network_inst(
  // dhcp and mdio clock
-  .clock_2_5MHz(clk_ctrl),
-  .delay_start(~reset_counter[15]),
+	.clock_2_5MHz(clk_ctrl),
+	.delay_start(~reset_counter[15]),
   
 // rxstream (rx-iq)
-  .tx_clock(phy_clk_div4),
-  .udp_tx_request(1'b0),
-  .udp_tx_length(16'h0000),
-  .udp_tx_data(8'h00),
-  .udp_tx_enable(),
-  .run(1'b0),
-  .port_id(8'h00),
+	.tx_clock(phy_clk_div4),
+	.udp_tx_request(udp_tx_request),
+	.udp_tx_length({5'h00,udp_tx_length}),
+	.udp_tx_data(udp_tx_data),
+	.udp_tx_enable(udp_tx_enable),
+	.run(run_radio),		
+	.port_id(8'h00),
   
-  //.udp_tx_request(udp_tx_request),
-  //.udp_tx_length({5'h00,udp_tx_length}),
-  //.udp_tx_data(udp_tx_data),
-  //.udp_tx_enable(udp_tx_enable),
-  //.run(1'b0),		//start / stop of radio!!!
- // .port_id(8'h00),
+// txstream (tx-iq)
+	.rx_clock(phy_clk_div4),
+	.to_port(to_port),
+	.udp_rx_data(udp_rx_data),
+	.udp_rx_active(udp_rx_active),
+	.broadcast(broadcast),
+	.dst_unreachable(dst_unreachable), 
   
- // txstream (tx-iq)
-  .rx_clock(phy_clk_div4),
-  
-    .to_port(),
-  .udp_rx_data(),
-  .udp_rx_active(),
-  .broadcast(),
-  .dst_unreachable(),
-  
-//  .to_port(to_port),
-// .udp_rx_data(udp_rx_data),
- // .udp_rx_active(udp_rx_active),
- // .broadcast(broadcast),
-//  .dst_unreachable(dst_unreachable), 
-  
- // status and control
-  .static_ip(IP),
-  .local_mac(MAC),
-  .network_state_dhcp(network_state_dhcp),
-  .network_state_fixedip(network_state_fixedip), 
-  .network_speed(),					
-  
- // phy
-  .phy_tx_data(phy_tx_data),
-  .phy_tx_valid(phy_tx_valid),
-  .phy_rx_data(phy_rx_data),
-  .phy_rx_valid(phy_rx_valid),
-    
-  .PHY_MDIO(phy_mdio),
-  .PHY_MDC(phy_mdc),
+// status and control
+	.radioberry_ip(radioberry_ip),
+	.static_ip(IP),
+	.local_mac(MAC),
+	.network_state_dhcp(network_state_dhcp),
+	.network_state_fixedip(network_state_fixedip), 
+	.network_speed(),					
 
-  .debug1(debug1),
-  .debug2(debug2),
-  .debug4()
+// phy
+	.phy_tx_data(phy_tx_data),
+	.phy_tx_valid(phy_tx_valid),
+	.phy_rx_data(phy_rx_data),
+	.phy_rx_valid(phy_rx_valid),
+
+	.PHY_MDIO(phy_mdio),
+	.PHY_MDC(phy_mdc),
+
+	.debug()
   
 );
 
@@ -188,7 +157,7 @@ rmii_send rmii_send_i (
     .phy_tx_data(phy_tx_data),
     .phy_tx_valid(phy_tx_valid),
     .phy_tx(phy_tx),
-    .phy_tx_en(phy_tx_en)
+    .phy_tx_en(phy_tx_en) 
 );
 
 rmii_recv rmii_recv_i (
@@ -200,18 +169,87 @@ rmii_recv rmii_recv_i (
     .phy_dv(phy_rx_dv)
 );
 
-
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         RX stream handler; get rx iq samples from fifo and add to udp packet.
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-rxstream rxstream_rx1(.clk(phy_clk), .udp_tx_enable(udp_tx_enable), .udp_tx_request(udp_tx_request), .udp_tx_data(udp_tx_data), .udp_tx_length(udp_tx_length), .rx_data(fifo_rx_data), .rx_request(rx_request), .rx_length(fifo_rx_length));
+rxstream rxstream_rx1(
+						.clk(phy_clk_div4), 
+						.run(run_radio),
+						.have_ip(~(network_state_dhcp & network_state_fixedip)),
+						.udp_tx_enable(udp_tx_enable), 
+						.udp_tx_request(udp_tx_request), 
+						.udp_tx_data(udp_tx_data), 
+						.udp_tx_length(udp_tx_length),
+						.rx_data(fifo_rx_data),
+						.rx_request(rx_request),
+						.rx_length(fifo_rx_length));
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                         SPI Control dev 0
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//spi dev 0 ; used for settings.... rx/tx freq/gain/sample speed
+reg[31:0] rx1_phase_word;
+reg[31:0] rx2_phase_word;
+reg[31:0] tx_phase_word;
+
+wire [47:0] spi0_recv;
+wire spi_done;
+reg [47:0] spi_data;
+
+reg [47:0] cmnd;
+always @ (posedge spi_done) cmnd <= spi0_recv;
+
+wire cmd_empty;
+//using (small) fifo to bring commands through SPI bus to fast clock domain.
+commandFIFO commandFIFO_inst (	.aclr(reset), 
+								.wrclk(clk_internal), .wrreq(1'b1), .data(cmnd),	
+								.rdclk(clk_ad9866), .rdreq(~cmd_empty),	.q(spi_data), .rdempty(cmd_empty));
+
+localparam RX1 = 4'h1;
+localparam RX2 = 4'h2;
+localparam TX  = 4'h3;
+localparam CONTROL = 4'h4;
+								
+always @ (posedge clk_ad9866)
+begin
+	 case (spi_data[47:44])
+	  RX1: 	begin
+				rx1_phase_word <= spi_data[31:0];
+				rx1_speed <= spi_data[41:40];
+				rx_gain <= ~spi_data[37:32];
+			end
+	  RX2: 	begin
+				rx2_phase_word <= spi_data[31:0];
+				rx2_speed <= spi_data[41:40];  
+			end
+	  TX: 	begin
+				tx_phase_word <= spi_data[31:0];
+				tx_gain <= spi_data[37:32];  
+			end
+	  CONTROL: 
+			begin
+				run_radio <= spi_data[0:0];
+			end
+	  default: 
+			begin
+				rx1_phase_word <= 32'd0;
+				rx1_speed <= 2'd0;
+				rx_gain <= 6'd0;
+				rx2_phase_word <= 32'd0;
+				rx2_speed <= 2'd0;  
+				tx_phase_word <= 32'd0;
+				tx_gain <= 6'd0;
+				run_radio <= 1'b0;
+			end
+	endcase
+end
+
+spi_slave spi_slave_rx_inst(.rstb(!reset),.ten(1'b1),.tdata({16'b0, radioberry_ip}),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi0_recv));
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         AD9866 Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 assign ad9866_mode = 1'b1;				//FULLDUPLEX
 assign ad9866_rst_n = ~reset;
 assign ptt_out = ptt_in;
@@ -284,21 +322,20 @@ localparam RATE384 =  RATE192 >> 1;
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Decimation rates
 
-//reg [1:0] rx1_speed;	// selected decimation rate in external program,
-logic [1:0] rx1_speed = 2'b00;	// selected decimation rate in external program,
-logic [5:0] rx1_rate = RATE48;
-//reg [5:0] rx1_rate;
+logic [1:0] rx1_speed;
+logic [1:0] rx2_speed;	
+logic [5:0] rx1_rate;
 
-//always @ (rx1_speed)
-// begin 
-//	  case (rx1_speed)
-//	  0: rx1_rate <= RATE48;     
-//	  1: rx1_rate <= RATE96;     
-//	  2: rx1_rate <= RATE192;     
-//	  3: rx1_rate <= RATE384;           
-//	  default: rx1_rate <= RATE48;        
-//	  endcase
-// end 
+always @ (rx1_speed)
+begin 
+	  case (rx1_speed)
+	  0: rx1_rate <= RATE48;     
+	  1: rx1_rate <= RATE96;     
+	  2: rx1_rate <= RATE192;     
+	  3: rx1_rate <= RATE384;           
+	  default: rx1_rate <= RATE48;        
+	  endcase
+ end 
 
 //------------------------------------------------------------------------------
 //                           Software Reset Handler
@@ -316,7 +353,6 @@ always @ (posedge clk_ad9866) begin
     adcpipe[1] <= rx_data_assemble;
 end
 
-
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        Receiver module rx1 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,8 +361,6 @@ wire	[23:0] rx_Q;
 wire	rx_strobe;
 
 localparam CICRATE = 6'd05;
-
-logic [31:0] rx1_phase_word = 32'd78014055; //1395Khz
 
 receiver #(.CICRATE(CICRATE)) 
 		receiver_rx_inst(	
@@ -343,21 +377,20 @@ receiver #(.CICRATE(CICRATE))
 //                          rxFIFO Handler (IQ Samples) rx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------		
 logic [10:0] fifo_rx_length;	
-logic [23:0] fifo_rx_data;
+logic [47:0] fifo_rx_data;
 logic rx_request;
 
-//I and Q seperate...		{rx_I, rx_Q}	
-rx_iq_fifo rx_iq_fifo_inst (.aclr(reset), 
-							.data(rx_Q),  .wrclk(clk_ad9866), .wrreq(rx_strobe), .wrempty(), .wrfull(),	.wrusedw(fifo_rx_length),
-							.q(fifo_rx_data), .rdempty(), .rdclk(phy_clk), .rdreq(rx_request), .rdfull(),	.rdusedw()	);
-
+rxFIFO rx_FIFO_inst(	.aclr(reset),
+							.wrclk(clk_ad9866),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(fifo_rx_length), .wrfull(),  
+							.rdclk(phy_clk_div4),.q(fifo_rx_data),.rdreq(rx_request));	
+		
 wire clk_envelope;	
 wire clk_internal;															
 ad9866pll ad9866pll_inst (.inclk0(clk_76m8), .c0(clk_ad9866), .c1(clk_ad9866_2x), .c2(clk_envelope), .c3(clk_internal),  .locked());
 								
-//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          Running...
-//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------	
 reg [26:0]counter;
 
 always @(posedge clk_internal) 
