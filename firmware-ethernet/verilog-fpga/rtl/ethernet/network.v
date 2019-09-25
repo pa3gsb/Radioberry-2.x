@@ -419,10 +419,11 @@ wire [15:0]local_port                   = tx_is_dhcp ? 16'd68                  :
 
 // Hold destination port once run is set
 always @(posedge tx_clock)
-  if (!run) begin
-    run_destination_port <= udp_destination_port;
-    run_destination_ip <= udp_destination_ip;
-    run_destination_mac <= udp_destination_mac;
+  //if (!run) begin
+  begin
+    run_destination_port <= {16'd1038} ; //udp_destination_port;
+    run_destination_ip <= {8'd169, 8'd254, 8'd45, 8'd200} ; //udp_destination_ip;
+    run_destination_mac <= {8'hdc, 8'ha6, 8'h32, 8'h0f, 8'h65, 8'h20} ;// //udp_destination_mac;
   end
 
 wire [15:0]dhcp_udp_destination_port = tx_is_dhcp ? dhcp_destination_port : run_destination_port; //udp_destination_port;

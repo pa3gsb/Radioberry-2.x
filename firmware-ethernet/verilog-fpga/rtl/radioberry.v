@@ -228,7 +228,7 @@ begin
 			end
 	  CONTROL: 
 			begin
-				run_radio <= spi_data[0:0];
+				run_radio <= spi_data[40:40];
 			end
 	  default: 
 			begin
@@ -244,7 +244,10 @@ begin
 	endcase
 end
 
-spi_slave spi_slave_rx_inst(.rstb(!reset),.ten(1'b1),.tdata({16'b0, radioberry_ip}),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi0_recv));
+logic radioberry_ready;
+assign radioberry_ready = ~(network_state_dhcp & network_state_fixedip);
+
+spi_slave spi_slave_rx_inst(.rstb(!reset),.ten(1'b1),.tdata({radioberry_ready, run_radio, 14'b0, radioberry_ip}),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi0_recv));
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
