@@ -55,13 +55,14 @@ input ptt_in, output ptt_out,
 input           phy_clk,
 inout           phy_mdio,
 output          phy_mdc
+
 );
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //     Parameters
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-//localparam       IP = {8'd169,8'd254,8'd45,8'd222};
-localparam       IP = {8'd0,8'd0,8'd0,8'd0};
+localparam       IP = {8'd169,8'd254,8'd45,8'd222};
+//localparam       IP = {8'd0,8'd0,8'd0,8'd0};
 localparam       MAC = {8'h00,8'h1c,8'hc0,8'ha2,8'h2d,8'hde};
 
 logic [31:0] 	radioberry_ip;
@@ -97,6 +98,9 @@ logic [15:0]    reset_counter = 16'h0000;
 always @(posedge clk_ctrl) begin
   if (~reset_counter[15]) reset_counter <= reset_counter + 16'h01;
 end
+
+logic reset;
+assign reset = ~reset_counter[15];
 
 logic           udp_tx_request;
 logic [ 7:0]    udp_tx_data;
@@ -181,7 +185,7 @@ rxstream rxstream_rx1(
 						.udp_tx_data(udp_tx_data), 
 						.udp_tx_length(udp_tx_length),
 						.rx_data(fifo_rx_data),
-						.rx_request(rx_request),
+						.rx_request(fifo_read_request),
 						.rx_length(fifo_rx_length));
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -275,7 +279,7 @@ logic             tx_sync;
 logic             tx_en_d1;
 
 always @(posedge clk_ad9866_2x) begin
-  tx_en_d1 <= (ptt_in || vna_mode);
+  tx_en_d1 <= ptt_in;
   tx_sync <= ~tx_sync;
   if (tx_en_d1) begin
     if (tx_sync) begin 
@@ -297,7 +301,6 @@ wire ad9866_rx_rqst;
 wire ad9866_tx_rqst;
 reg [5:0] rx_gain;
 reg [5:0] tx_gain;
-reg vna_mode;
 
 assign ad9866_rx_rqst = (!ptt_in && gain_update && ad9866_sen_n);
 assign ad9866_tx_rqst = (ptt_in && gain_update && ad9866_sen_n);
@@ -340,11 +343,7 @@ begin
 	  endcase
  end 
 
-//------------------------------------------------------------------------------
-//                           Software Reset Handler
-//------------------------------------------------------------------------------
-wire reset;
-reset_handler reset_handler_inst(.clock(clk_internal), .reset(reset));
+
 
 //------------------------------------------------------------------------------
 //                           Pipeline for adc fanout
@@ -379,13 +378,13 @@ receiver #(.CICRATE(CICRATE))
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rxFIFO Handler (IQ Samples) rx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------		
-logic [10:0] fifo_rx_length;	
+logic [9:0] fifo_rx_length;
 logic [47:0] fifo_rx_data;
-logic rx_request;
+logic fifo_read_request;
 
-rxFIFO rx_FIFO_inst(	.aclr(reset),
-							.wrclk(clk_ad9866),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(fifo_rx_length), .wrfull(),  
-							.rdclk(phy_clk_div4),.q(fifo_rx_data),.rdreq(rx_request));	
+rxFIFO rx_FIFO_inst(	.aclr(~run_radio),
+							.wrclk(clk_ad9866),.data({rx_I, rx_Q}),.wrreq(rx_strobe),  
+							.rdclk(phy_clk_div4),.q(fifo_rx_data),.rdreq(fifo_read_request), .rdusedw(fifo_rx_length));	
 		
 wire clk_envelope;	
 wire clk_internal;															

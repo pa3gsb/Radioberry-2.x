@@ -13,10 +13,10 @@ set_location_assignment PIN_137 -to phy_clk
 set_location_assignment PIN_142 -to phy_mdio
 set_location_assignment PIN_141 -to phy_mdc
 
-#set_location_assignment PIN_43 -to debug1
-#set_location_assignment PIN_46 -to debug2
-#set_location_assignment PIN_44 -to debug3
-#set_location_assignment PIN_49 -to debug4
+set_location_assignment PIN_43 -to debug1
+set_location_assignment PIN_46 -to debug2
+set_location_assignment PIN_44 -to debug3
+set_location_assignment PIN_49 -to debug4
 
 set_location_assignment PIN_50 -to spi_ce[1]
 set_location_assignment PIN_51 -to spi_ce[0]

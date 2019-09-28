@@ -337,7 +337,7 @@ receiver #(.CICRATE(CICRATE))
 //                          rx1FIFO Handler (IQ Samples) rx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 reg [47:0] rxDataFromFIFO;
-wire [10:0] rx_wr_length;
+wire [9:0] rx_wr_length;
 assign rx_samples = (rx_wr_length > 11'd63) ? 1'b1: 1'b0; 
 
 rxFIFO rx1_FIFO_inst(	.aclr(reset),

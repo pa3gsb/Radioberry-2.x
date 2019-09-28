@@ -1,5 +1,4 @@
 set_global_assignment -name VERILOG_FILE rtl/ad9866.v
-set_global_assignment -name VERILOG_FILE rtl/ddr_mux.v
 set_global_assignment -name VERILOG_FILE rtl/radioberry.v
 set_global_assignment -name VERILOG_FILE rtl/reset_handler.v
 set_global_assignment -name VERILOG_FILE rtl/spi_slave.v

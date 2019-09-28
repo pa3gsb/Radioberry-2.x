@@ -24,6 +24,7 @@ udp_tx_length,
 rx_data,
 rx_request,
 rx_length
+
 );
 
 input               clk;
@@ -39,7 +40,7 @@ output logic [10:0] udp_tx_length = 11'd1030;
 
 input [47:0]        rx_data;
 output  logic       rx_request;
-input [10:0]        rx_length;
+input [9:0]        	rx_length;
 
 
 
@@ -83,21 +84,23 @@ always @* begin
   rx_request = 1'b0;
   
   udp_tx_data = 8'd42;  //answer to...
-
   
+   
 	case (state)
 		INIT: begin
+			
 			byte_no_next = 11'h406;
-			if (rx_length > 11'd171 & have_ip & run) state_next = START;
+			if ((rx_length  > 10'd171) & have_ip & run) begin state_next = START; end 
 		end
 		
 		START: begin
 			udp_tx_request = 1'b1;
+			
 			if (udp_tx_enable) begin  
 				byte_no_next = byte_no - 11'd1; 
 				rx_request = 1'b1; 
 				state_next = SEQ_NR; 
-			end 
+			end  
 		end
 		
 		SEQ_NR: begin
@@ -154,7 +157,7 @@ always @* begin
 		  byte_no_next = byte_no - 11'd1;
 		  udp_tx_data = rx_data[7:0];
 		  
-		  if (|byte_no) begin rx_request = 1'b1; state_next = I_RXDATA2; end else begin state_next = INIT; end
+		  if (|byte_no) begin  rx_request = 1'b1; state_next = I_RXDATA2; end else begin state_next = INIT; end
 		end 		
 	
 		default: state_next = INIT;

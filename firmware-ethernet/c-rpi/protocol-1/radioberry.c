@@ -78,9 +78,12 @@ void *spiWriter(void *arg);
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
 void getRadioberryInformation(void);
+void getRunningRadioberryInformation(void);
 void startRadioberryRadio(void);
+void stopRadioberryRadio(void);
 int createRadioberrySocket(void);
 void  receiveudp(void);
+void spi_control_rx1_phase(void);
 
 							
 int sock_Radioberry = -1;
@@ -277,8 +280,11 @@ int main(int argc, char **argv)
 	
 	createRadioberrySocket();
 	
+	spi_control_rx1_phase();
+	
 	startRadioberryRadio();
 	
+	/*
 	receiveudp();
 	
 	if (rx1_spi_handler !=0)
@@ -291,7 +297,7 @@ int main(int argc, char **argv)
 	gpioTerminate();
 	
 	return 0;
-	
+	*/
 	
 	pthread_t pid1, pid2, pid3, pid4; 
 	pthread_create(&pid2, NULL, packetreader, NULL); 
@@ -427,6 +433,7 @@ void handlePacket(char* buffer){
 			fprintf(stderr, "SDR Program sends Stop command \n");
 			running = 0;
 			while (active) usleep(1000);
+			stopRadioberryRadio();
 			last_sequence_number = 0;
 			if (sock_TCP_Client > -1)
 			{
@@ -439,6 +446,8 @@ void handlePacket(char* buffer){
 		case 0x0204feef:
 		case 0x0304feef:
 		case 0x1104feef: 
+			startRadioberryRadio();
+			usleep(1000);
 			running = 1;
 			if (sock_TCP_Client > -1)
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
@@ -494,8 +503,8 @@ void handleALEX(char* buffer)
 	}
 }
 
-
-#define assign_change(a,b,c) if ((a) != b) { b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
+int change = 0;
+#define assign_change(a,b,c) if ((a) != b) { change = 1; b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
 
 int determine_freq(int base_index, char* buffer) {
 	return ( ((buffer[ base_index + 1] & 0xFF) << 24) + ((buffer[ base_index + 2] & 0xFF) << 16) + ((buffer[base_index + 3] & 0xFF) << 8) + (buffer[base_index + 4] & 0xFF) );
@@ -534,6 +543,9 @@ void processPacket(char* buffer)
 	if ((buffer[523] & 0xFE) == 0x12) assign_change(buffer[524], drive_level, "Drive Level"); 
 	
 	handleALEX(buffer);
+	
+	if (change) spi_control_rx1_phase();
+	change = 0;
  
 	int frame = 0;
 	for (frame; frame < 2; frame++)
@@ -625,35 +637,49 @@ void *spiReader(void *arg) {
 		//ptt off
 		if (!MOX && rbMOX!=MOX) {gpioWrite(21, 0); rbMOX = MOX;}
 		
+		unsigned char buffer[2048];
+		struct sockaddr_in remaddr;	
+		int recvlen = recvfrom(sock_Radioberry, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
+		
+		if (recvlen == 1030) {
+			rb_seqnum=((buffer[0]&0xFF)<<24)+((buffer[1]&0xFF)<<16)+((buffer[2]&0xFF)<<8)+(buffer[3]&0xFF);
+			
+			if (rb_seqnum != rb_last_seqnum + 1) {
+				fprintf(stderr,"Radioberry internal udp IQ data SEQ ERROR: last %ld, recvd %ld\n", (long) rb_last_seqnum, (long) rb_seqnum);					
+			} 
+			rb_last_seqnum = rb_seqnum;
+		
 		
 				
-		int factor = ((lnrx - 1) * 6) + 8;
-		
-		int i = 0;
-		for (i; i < 64; i++) {
-			char *offset = iqdata + i * 6;
-			switch (lnrx)
-			{	case 4:
-					memcpy(rx_buffer[rx_fill_index] + pointer + 18, offset, 6);
-				case 3:
-					memcpy(rx_buffer[rx_fill_index] + pointer + 12, offset, 6);
-				case 2:
-					memcpy(rx_buffer[rx_fill_index] + pointer + 6, offset, 6);
-				case 1:
-					memcpy(rx_buffer[rx_fill_index] + pointer, offset , 6);
-					break;
-				default:
-					fprintf(stderr, "Should not occur. Number of receivers %d \n", lnrx);
-					break;
-			}
-			pointer = pointer + factor;
-			if ( pointer >= 500 || (pointer == 494 && nrx==4) )	{
-				rx_fill_index = (rx_fill_index + 1) % RX_MAX; 
-				pointer = 0;
-				lnrx = nrx;
-				sem_post(&rx_full);
+			int factor = ((lnrx - 1) * 6) + 8;
+			
+			int i = 0;
+			for (i; i < 171; i++) {
+				char *offset = buffer + 4 + (i * 6);
+				switch (lnrx)
+				{	case 4:
+						memcpy(rx_buffer[rx_fill_index] + pointer + 18, offset, 6);
+					case 3:
+						memcpy(rx_buffer[rx_fill_index] + pointer + 12, offset, 6);
+					case 2:
+						memcpy(rx_buffer[rx_fill_index] + pointer + 6, offset, 6);
+					case 1:
+						memcpy(rx_buffer[rx_fill_index] + pointer, offset , 6);
+						break;
+					default:
+						fprintf(stderr, "Should not occur. Number of receivers %d \n", lnrx);
+						break;
+				}
+				pointer = pointer + factor;
+				if ( pointer >= 500 || (pointer == 494 && nrx==4) )	{
+					rx_fill_index = (rx_fill_index + 1) % RX_MAX; 
+					pointer = 0;
+					lnrx = nrx;
+					sem_post(&rx_full);
+				}
 			}
 		}
+		
 	}
 }
 
@@ -687,8 +713,11 @@ void *spiWriter(void *arg) {
 void spi_control_rx1_phase() {
 	unsigned char iqdata[6];
 	
+	
+	rx1_phase = (uint32_t)ceil(((double)freq * 4294967296.0 ) / 76800000);
+	
 	iqdata[0] = (0x10 | (sampleSpeed & 0x03));
-	iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+	iqdata[1] = ((dither <<5) & 0x20) |  (att & 0x1F);
 	iqdata[2] = ((rx1_phase >> 24) & 0xFF);
 	iqdata[3] = ((rx1_phase >> 16) & 0xFF);
 	iqdata[4] = ((rx1_phase >> 8) & 0xFF);
@@ -701,6 +730,8 @@ void spi_control_rx1_phase() {
 
 void spi_control_rx2_phase() {
 	unsigned char iqdata[6];
+	
+	rx2_phase = (uint32_t)ceil(((double)freq2 * 4294967296.0 ) / 76800000);
 	
 	iqdata[0] = (0x20 | (sampleSpeed & 0x03));
 	iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
@@ -728,6 +759,34 @@ void getRadioberryInformation() {
 		sprintf(radioberry_addr, "%ld.%ld.%ld.%ld", data[2], data[3], data[4], data[5]);
 	}
 	
+	sem_post(&mutex);
+}
+
+void getRunningRadioberryInformation() {
+	unsigned char data[6];
+	memset(data, 0, 6);	
+	data[0] = 0x41;
+	sem_wait(&mutex);		
+	spiXfer(rx1_spi_handler, data, data, 6);
+	radioberry_initialized = ((data[0] & 0x80) == 0x80) ? 1: 0;
+	if (radioberry_initialized) {
+		fprintf(stderr, "init = %d", radioberry_initialized);
+		fprintf(stderr, "# and run = %d", ((data[0] & 0x40) == 0x40) ? 1: 0);
+		fprintf(stderr, "# and full fifo = %d", ((data[0] & 0x20) == 0x20) ? 1: 0);
+		fprintf(stderr, "# and half full fifo = %d\n", ((data[0] & 0x10) == 0x10) ? 1: 0);
+	}
+	
+	sem_post(&mutex);
+}
+
+
+void stopRadioberryRadio() {
+	unsigned char data[6];
+	memset(data, 0, 6);	
+	data[0] = 0x40;
+	sem_wait(&mutex);		
+	spiXfer(rx1_spi_handler, data, data, 6);
+	fprintf(stderr, "\nStop Radioberry Radio \n");
 	sem_post(&mutex);
 }
 
@@ -877,14 +936,23 @@ void  receiveudp() {
 			} 
 			rb_last_seqnum = rb_seqnum;
 			
-			if (aantal % 100 == 0) fprintf(stderr, "."); 
+			if (aantal % 280 == 0) {
+				fprintf(stderr, ".");
+			//	fprintf(stderr, "Good packet: \n"); 
+			//	getRunningRadioberryInformation();
+			//	fprintf(stderr, "\n"); 
+				//stopRadioberryRadio();
+				//sleep(3);
+				//startRadioberryRadio();
+			}
 			
 			//unsigned char txiqdata[1030];
 			//memset(txiqdata,0,1030);
 			//int bytes = sendto(sock_Radioberry, txiqdata, sizeof(txiqdata), 0, (struct sockaddr *)&rbaddr,  sizeof(rbaddr));
 			//if (bytes != 1030) fprintf(stderr, "NOT OKverzonden %d\n", bytes);
 		
-	} else { fprintf(stderr, "Aantal ontvangen fout %d\n", recvlen); break;}
+	} else { fprintf(stderr, "Bad packet: \n"); getRunningRadioberryInformation();   sleep(3);}
+	//fprintf(stderr, "Aantal verwerkt %d ontvangen fout packet length %d\n", aantal, recvlen);
 	}
 }
 
