@@ -1,0 +1,1 @@
+../rtl/nco/sin_fine.txt

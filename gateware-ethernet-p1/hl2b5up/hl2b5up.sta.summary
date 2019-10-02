@@ -1,0 +1,557 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'clock_txoutputfast'
+Slack : -0.257
+TNS   : -0.257
+
+Type  : Slow 1200mV 85C Model Setup 'clock_153p6_mhz'
+Slack : -0.080
+TNS   : -0.080
+
+Type  : Slow 1200mV 85C Model Setup 'virt_ad9866_rxclk_tx'
+Slack : 0.219
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_ethtxintfast'
+Slack : 0.426
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_ethrxintfast'
+Slack : 0.484
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_ethrxintslow'
+Slack : 0.856
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_76p8MHz'
+Slack : 1.932
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_2_5MHz'
+Slack : 1.995
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_125MHz'
+Slack : 3.918
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'phy_rx_clk'
+Slack : 7.114
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_txoutputslow'
+Slack : 7.830
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clock_ethtxintslow'
+Slack : 26.272
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_ethrxintfast'
+Slack : 0.329
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_ethrxintslow'
+Slack : 0.329
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_76p8MHz'
+Slack : 0.404
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_2_5MHz'
+Slack : 0.434
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_ethtxintfast'
+Slack : 0.435
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_ethtxintslow'
+Slack : 0.435
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_153p6_mhz'
+Slack : 0.439
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_125MHz'
+Slack : 0.455
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'phy_rx_clk'
+Slack : 0.497
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_txoutputfast'
+Slack : 0.754
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'virt_ad9866_rxclk_tx'
+Slack : 2.530
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_txoutputslow'
+Slack : 8.994
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'clock_ethrxintfast'
+Slack : 4.165
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'clock_ethrxintslow'
+Slack : 76.165
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'clock_ethrxintfast'
+Slack : 2.134
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'clock_ethrxintslow'
+Slack : 2.134
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_153p6_mhz'
+Slack : 1.510
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_ethtxextfast'
+Slack : 3.556
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_txoutputfast'
+Slack : 3.556
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_ethrxintfast'
+Slack : 3.619
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_ethtxintfast'
+Slack : 3.666
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_125MHz'
+Slack : 3.690
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'phy_rx_clk'
+Slack : 3.729
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'phy_clk125'
+Slack : 3.932
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_90_125MHz'
+Slack : 3.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_76p8MHz'
+Slack : 6.070
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'rffe_ad9866_clk76p8'
+Slack : 6.368
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_ethtxextslow'
+Slack : 19.858
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_25MHz'
+Slack : 19.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_txoutputslow'
+Slack : 35.556
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_ethrxintslow'
+Slack : 39.619
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_ethtxintslow'
+Slack : 39.666
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_12p5MHz'
+Slack : 39.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_2_5MHz'
+Slack : 189.639
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_txoutputfast'
+Slack : 0.022
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_153p6_mhz'
+Slack : 0.430
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'virt_ad9866_rxclk_tx'
+Slack : 0.700
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_ethrxintfast'
+Slack : 0.756
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_ethrxintslow'
+Slack : 0.833
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_ethtxintfast'
+Slack : 0.945
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_2_5MHz'
+Slack : 2.385
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_76p8MHz'
+Slack : 2.597
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_125MHz'
+Slack : 4.212
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'phy_rx_clk'
+Slack : 7.208
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_txoutputslow'
+Slack : 8.131
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clock_ethtxintslow'
+Slack : 27.486
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_ethrxintfast'
+Slack : 0.305
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_ethrxintslow'
+Slack : 0.305
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_76p8MHz'
+Slack : 0.383
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_ethtxintfast'
+Slack : 0.384
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_ethtxintslow'
+Slack : 0.384
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_2_5MHz'
+Slack : 0.386
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_153p6_mhz'
+Slack : 0.388
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_125MHz'
+Slack : 0.403
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'phy_rx_clk'
+Slack : 0.445
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_txoutputfast'
+Slack : 0.627
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'virt_ad9866_rxclk_tx'
+Slack : 2.188
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_txoutputslow'
+Slack : 8.875
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'clock_ethrxintfast'
+Slack : 4.336
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'clock_ethrxintslow'
+Slack : 76.336
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'clock_ethrxintfast'
+Slack : 1.876
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'clock_ethrxintslow'
+Slack : 1.876
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_153p6_mhz'
+Slack : 1.510
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_ethrxintfast'
+Slack : 3.517
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_ethtxextfast'
+Slack : 3.556
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_txoutputfast'
+Slack : 3.556
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_ethtxintfast'
+Slack : 3.640
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_125MHz'
+Slack : 3.691
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'phy_rx_clk'
+Slack : 3.716
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'phy_clk125'
+Slack : 3.944
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_90_125MHz'
+Slack : 3.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_76p8MHz'
+Slack : 6.100
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'rffe_ad9866_clk76p8'
+Slack : 6.365
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_ethtxextslow'
+Slack : 19.842
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_25MHz'
+Slack : 19.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_txoutputslow'
+Slack : 35.556
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_ethrxintslow'
+Slack : 39.517
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_ethtxintslow'
+Slack : 39.640
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_12p5MHz'
+Slack : 39.964
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_2_5MHz'
+Slack : 189.823
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_txoutputfast'
+Slack : 0.570
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_ethrxintfast'
+Slack : 0.574
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_ethrxintslow'
+Slack : 0.574
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_153p6_mhz'
+Slack : 0.750
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'virt_ad9866_rxclk_tx'
+Slack : 2.722
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_ethtxintfast'
+Slack : 4.777
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_2_5MHz'
+Slack : 5.337
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_125MHz'
+Slack : 6.173
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'phy_rx_clk'
+Slack : 7.626
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_76p8MHz'
+Slack : 8.383
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_txoutputslow'
+Slack : 8.590
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_ethtxintslow'
+Slack : 33.942
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_ethrxintfast'
+Slack : 0.094
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_ethrxintslow'
+Slack : 0.094
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_76p8MHz'
+Slack : 0.136
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_2_5MHz'
+Slack : 0.153
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_153p6_mhz'
+Slack : 0.155
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_ethtxintfast'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_ethtxintslow'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_125MHz'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'phy_rx_clk'
+Slack : 0.208
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_txoutputfast'
+Slack : 0.483
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'virt_ad9866_rxclk_tx'
+Slack : 0.513
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_txoutputslow'
+Slack : 8.513
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'clock_ethrxintfast'
+Slack : 6.299
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'clock_ethrxintslow'
+Slack : 78.299
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'clock_ethrxintfast'
+Slack : 0.885
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'clock_ethrxintslow'
+Slack : 0.885
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_153p6_mhz'
+Slack : 3.004
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_ethrxintfast'
+Slack : 3.298
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'phy_rx_clk'
+Slack : 3.459
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'phy_clk125'
+Slack : 3.588
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_ethtxintfast'
+Slack : 3.752
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_125MHz'
+Slack : 3.783
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_ethtxextfast'
+Slack : 3.971
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_90_125MHz'
+Slack : 3.995
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_txoutputfast'
+Slack : 4.000
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'rffe_ad9866_clk76p8'
+Slack : 5.927
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_76p8MHz'
+Slack : 6.259
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_ethtxextslow'
+Slack : 19.971
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_25MHz'
+Slack : 19.995
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_txoutputslow'
+Slack : 36.000
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_ethrxintslow'
+Slack : 39.298
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_ethtxintslow'
+Slack : 39.752
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_12p5MHz'
+Slack : 39.995
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_2_5MHz'
+Slack : 189.875
+TNS   : 0.000
+
+------------------------------------------------------------

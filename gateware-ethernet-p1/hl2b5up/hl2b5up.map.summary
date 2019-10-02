@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Oct 01 18:46:39 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : hl2b5up
+Top-level Entity Name : hermeslite
+Family : Cyclone IV E
+Total logic elements : 21,827
+    Total combinational functions : 15,168
+    Dedicated logic registers : 16,740
+Total registers : 16750
+Total pins : 80
+Total virtual pins : 0
+Total memory bits : 342,544
+Embedded Multiplier 9-bit elements : 92
+Total PLLs : 2

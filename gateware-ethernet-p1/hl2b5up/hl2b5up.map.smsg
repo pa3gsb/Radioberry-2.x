@@ -1,0 +1,4 @@
+Info (10281): Verilog HDL Declaration information at radio.v(50): object "VNA" differs only in case from object "vna" in the same scope File: C:/dev/git/Radioberry-2.x/gateware-ethernet-p1/rtl/radio_openhpsdr1/radio.v Line: 50
+Info (10281): Verilog HDL Declaration information at FirInterp5_1025_EER.v(114): object "rAddr" differs only in case from object "raddr" in the same scope File: C:/dev/git/Radioberry-2.x/gateware-ethernet-p1/rtl/radio_openhpsdr1/FirInterp5_1025_EER.v Line: 114
+Info (10281): Verilog HDL Declaration information at FirInterp8_1024.v(115): object "rAddr" differs only in case from object "raddr" in the same scope File: C:/dev/git/Radioberry-2.x/gateware-ethernet-p1/rtl/radio_openhpsdr1/FirInterp8_1024.v Line: 115
+Info (10281): Verilog HDL Declaration information at remote_update_fac.v(15): object "write" differs only in case from object "WRITE" in the same scope File: C:/dev/git/Radioberry-2.x/gateware-ethernet-p1/rtl/remote_update_fac.v Line: 15

@@ -1,0 +1,113 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'virt_ad9866_rxclk_tx'
+Slack : -1.584
+TNS   : -1.584
+
+Type  : Slow 1200mV 85C Model Setup 'clock_153p6_mhz'
+Slack : -0.543
+TNS   : -3.707
+
+Type  : Slow 1200mV 85C Model Setup 'clock_76p8MHz'
+Slack : 2.351
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_76p8MHz'
+Slack : 0.438
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_153p6_mhz'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'virt_ad9866_rxclk_tx'
+Slack : 2.525
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_153p6_mhz'
+Slack : 1.510
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_76p8MHz'
+Slack : 6.000
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'rffe_ad9866_clk76p8'
+Slack : 6.367
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'virt_ad9866_rxclk_tx'
+Slack : -0.783
+TNS   : -0.783
+
+Type  : Slow 1200mV 0C Model Setup 'clock_153p6_mhz'
+Slack : -0.008
+TNS   : -0.008
+
+Type  : Slow 1200mV 0C Model Setup 'clock_76p8MHz'
+Slack : 2.761
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_153p6_mhz'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_76p8MHz'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'virt_ad9866_rxclk_tx'
+Slack : 2.178
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_153p6_mhz'
+Slack : 1.510
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_76p8MHz'
+Slack : 6.017
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'rffe_ad9866_clk76p8'
+Slack : 6.365
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_153p6_mhz'
+Slack : 0.713
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'virt_ad9866_rxclk_tx'
+Slack : 1.223
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clock_76p8MHz'
+Slack : 8.284
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_76p8MHz'
+Slack : 0.160
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_153p6_mhz'
+Slack : 0.185
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'virt_ad9866_rxclk_tx'
+Slack : 0.507
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_153p6_mhz'
+Slack : 2.978
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'rffe_ad9866_clk76p8'
+Slack : 5.927
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_76p8MHz'
+Slack : 6.233
+TNS   : 0.000
+
+------------------------------------------------------------

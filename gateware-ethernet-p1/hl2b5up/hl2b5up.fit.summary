@@ -1,0 +1,16 @@
+Fitter Status : Successful - Tue Oct 01 18:53:36 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : hl2b5up
+Top-level Entity Name : hermeslite
+Family : Cyclone IV E
+Device : EP4CE22E22C8
+Timing Models : Final
+Total logic elements : 20,085 / 22,320 ( 90 % )
+    Total combinational functions : 15,170 / 22,320 ( 68 % )
+    Dedicated logic registers : 15,933 / 22,320 ( 71 % )
+Total registers : 15971
+Total pins : 80 / 80 ( 100 % )
+Total virtual pins : 0
+Total memory bits : 342,544 / 608,256 ( 56 % )
+Embedded Multiplier 9-bit elements : 92 / 132 ( 70 % )
+Total PLLs : 2 / 4 ( 50 % )

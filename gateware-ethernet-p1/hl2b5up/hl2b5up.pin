@@ -1,0 +1,215 @@
+ -- Copyright (C) 2018  Intel Corporation. All rights reserved.
+ -- Your use of Intel Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files from any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Intel Program License 
+ -- Subscription Agreement, the Intel Quartus Prime License Agreement,
+ -- the Intel FPGA IP License Agreement, or other applicable license
+ -- agreement, including, without limitation, that your use is for
+ -- the sole purpose of programming logic devices manufactured by
+ -- Intel and sold by Intel or its authorized distributors.  Please
+ -- refer to the applicable agreement for further details.
+ -- 
+ -- This is a Quartus Prime output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus Prime input file. This file cannot be used
+ -- to make Quartus Prime pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus Prime help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --                  Bank 1:       3.3V
+ --                  Bank 2:       3.3V
+ --                  Bank 3:       2.5V
+ --                  Bank 4:       2.5V
+ --                  Bank 5:       2.5V
+ --                  Bank 6:       3.3V
+ --                  Bank 7:       3.3V
+ --                  Bank 8:       3.3V
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --                  It can also be used to report unused dedicated pins. The connection
+ --                  on the board for unused dedicated pins depends on whether this will
+ --                  be used in a future design. One example is device migration. When
+ --                  using device migration, refer to the device pin-tables. If it is a
+ --                  GND pin in the pin table or if it will not be used in a future design
+ --                  for another purpose the it MUST be connected to GND. If it is an unused
+ --                  dedicated pin, then it can be connected to a valid signal on the board
+ --                  (low, high, or toggling) if that signal is required for a different
+ --                  revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --                  This pin should be connected to GND. It may also be connected  to a
+ --                  valid signal  on the board  (low, high, or toggling)  if that signal
+ --                  is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin. Connect each pin marked GND* directly to GND
+ --                  or leave it unconnected.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- Pin directions (input, output or bidir) are based on device operating in user mode.
+ ---------------------------------------------------------------------------------
+
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+CHIP  "hl2b5up"  ASSIGNED TO AN: EP4CE22E22C8
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+VCCD_PLL3                    : 1         : power  :                   : 1.2V    :           :                
+GNDA3                        : 2         : gnd    :                   :         :           :                
+VCCA3                        : 3         : power  :                   : 2.5V    :           :                
+GND                          : 4         : gnd    :                   :         :           :                
+VCCINT                       : 5         : power  :                   : 1.2V    :           :                
+asmi_interface:asmi_interface_i|asmi_asmi_parallel_0:asmi_inst|sd2~ALTERA_SDO : 6         : output : 3.3-V LVCMOS      :         : 1         : N              
+pa_inttr                     : 7         : output : 3.3-V LVCMOS      :         : 1         : Y              
+asmi_interface:asmi_interface_i|asmi_asmi_parallel_0:asmi_inst|sd2~ALTERA_SCE : 8         : output : 3.3-V LVCMOS      :         : 1         : N              
+nSTATUS                      : 9         :        :                   :         : 1         :                
+rffe_ad9866_tx[5]            : 10        : output : 3.3-V LVCMOS      :         : 1         : Y              
+rffe_rfsw_sel                : 11        : output : 3.3-V LVCMOS      :         : 1         : Y              
+asmi_interface:asmi_interface_i|asmi_asmi_parallel_0:asmi_inst|sd2~ALTERA_DCLK : 12        : output : 3.3-V LVCMOS      :         : 1         : N              
+asmi_interface:asmi_interface_i|asmi_asmi_parallel_0:asmi_inst|sd2~ALTERA_DATA0 : 13        : input  : 3.3-V LVCMOS      :         : 1         : N              
+nCONFIG                      : 14        :        :                   :         : 1         :                
+TDI                          : 15        : input  :                   :         : 1         :                
+TCK                          : 16        : input  :                   :         : 1         :                
+VCCIO1                       : 17        : power  :                   : 3.3V    : 1         :                
+TMS                          : 18        : input  :                   :         : 1         :                
+GND                          : 19        : gnd    :                   :         :           :                
+TDO                          : 20        : output :                   :         : 1         :                
+nCE                          : 21        :        :                   :         : 1         :                
+GND                          : 22        : gnd    :                   :         :           :                
+io_cn10                      : 23        : input  : 3.3-V LVCMOS      :         : 1         : Y              
+io_cn9                       : 24        : input  : 3.3-V LVCMOS      :         : 2         : Y              
+io_cn8                       : 25        : input  : 3.3-V LVCMOS      :         : 2         : Y              
+VCCIO2                       : 26        : power  :                   : 3.3V    : 2         :                
+GND                          : 27        : gnd    :                   :         :           :                
+pa_exttr                     : 28        : output : 3.3-V LVCMOS      :         : 2         : Y              
+VCCINT                       : 29        : power  :                   : 1.2V    :           :                
+io_sda2                      : 30        : bidir  : 3.3-V LVCMOS      :         : 2         : Y              
+io_scl2                      : 31        : bidir  : 3.3-V LVCMOS      :         : 2         : Y              
+io_adc_sda                   : 32        : bidir  : 3.3-V LVCMOS      :         : 2         : Y              
+io_adc_scl                   : 33        : bidir  : 3.3-V LVCMOS      :         : 2         : Y              
+VCCINT                       : 34        : power  :                   : 1.2V    :           :                
+VCCA1                        : 35        : power  :                   : 2.5V    :           :                
+GNDA1                        : 36        : gnd    :                   :         :           :                
+VCCD_PLL1                    : 37        : power  :                   : 1.2V    :           :                
+VCCINT                       : 38        : power  :                   : 1.2V    :           :                
+pwr_envbias                  : 39        : output : 2.5 V             :         : 3         : Y              
+VCCIO3                       : 40        : power  :                   : 2.5V    : 3         :                
+GND                          : 41        : gnd    :                   :         :           :                
+pwr_envop                    : 42        : output : 2.5 V             :         : 3         : Y              
+pwr_envpa                    : 43        : output : 2.5 V             :         : 3         : Y              
+pwr_clk3p3                   : 44        : output : 2.5 V             :         : 3         : Y              
+VCCINT                       : 45        : power  :                   : 1.2V    :           :                
+pwr_clk1p2                   : 46        : output : 2.5 V             :         : 3         : Y              
+VCCIO3                       : 47        : power  :                   : 2.5V    : 3         :                
+GND                          : 48        : gnd    :                   :         :           :                
+phy_rst_n                    : 49        : input  : 2.5 V             :         : 3         : Y              
+phy_mdio                     : 50        : bidir  : 2.5 V             :         : 3         : Y              
+phy_mdc                      : 51        : output : 2.5 V             :         : 3         : Y              
+phy_clk125                   : 52        : input  : 2.5 V             :         : 3         : Y              
+phy_rx_clk                   : 53        : input  : 2.5 V             :         : 3         : Y              
+phy_rx_dv                    : 54        : input  : 2.5 V             :         : 4         : Y              
+io_tp2                       : 55        : input  : 2.5 V             :         : 4         : Y              
+VCCIO4                       : 56        : power  :                   : 2.5V    : 4         :                
+GND                          : 57        : gnd    :                   :         :           :                
+phy_rx[0]                    : 58        : input  : 2.5 V             :         : 4         : Y              
+phy_rx[1]                    : 59        : input  : 2.5 V             :         : 4         : Y              
+phy_rx[2]                    : 60        : input  : 2.5 V             :         : 4         : Y              
+VCCINT                       : 61        : power  :                   : 1.2V    :           :                
+VCCIO4                       : 62        : power  :                   : 2.5V    : 4         :                
+GND                          : 63        : gnd    :                   :         :           :                
+phy_rx[3]                    : 64        : input  : 2.5 V             :         : 4         : Y              
+phy_tx_en                    : 65        : output : 2.5 V             :         : 4         : Y              
+phy_tx_clk                   : 66        : output : 2.5 V             :         : 4         : Y              
+phy_tx[3]                    : 67        : output : 2.5 V             :         : 4         : Y              
+phy_tx[2]                    : 68        : output : 2.5 V             :         : 4         : Y              
+phy_tx[1]                    : 69        : output : 2.5 V             :         : 4         : Y              
+VCCINT                       : 70        : power  :                   : 1.2V    :           :                
+phy_tx[0]                    : 71        : output : 2.5 V             :         : 4         : Y              
+clk_recovered                : 72        : output : 2.5 V             :         : 4         : Y              
+VCCD_PLL4                    : 73        : power  :                   : 1.2V    :           :                
+GNDA4                        : 74        : gnd    :                   :         :           :                
+VCCA4                        : 75        : power  :                   : 2.5V    :           :                
+io_db1_2                     : 76        : input  : 2.5 V             :         : 5         : Y              
+io_db1_3                     : 77        : input  : 2.5 V             :         : 5         : Y              
+VCCINT                       : 78        : power  :                   : 1.2V    :           :                
+GND                          : 79        : gnd    :                   :         :           :                
+io_db1_4                     : 80        : input  : 2.5 V             :         : 5         : Y              
+VCCIO5                       : 81        : power  :                   : 2.5V    : 5         :                
+GND                          : 82        : gnd    :                   :         :           :                
+io_db1_5                     : 83        : output : 2.5 V             :         : 5         : Y              
+VCCINT                       : 84        : power  :                   : 1.2V    :           :                
+io_db1_6                     : 85        : input  : 2.5 V             :         : 5         : Y              
+io_lvds_txn                  : 86        : output : 2.5 V             :         : 5         : Y              
+io_lvds_txp                  : 87        : output : 2.5 V             :         : 5         : Y              
+io_lvds_rxp                  : 88        : input  : 2.5 V             :         : 5         : Y              
+io_lvds_rxn                  : 89        : input  : 2.5 V             :         : 5         : Y              
+io_phone_ring                : 90        : input  : 3.3-V LVCMOS      :         : 6         : Y              
+io_phone_tip                 : 91        : input  : 3.3-V LVCMOS      :         : 6         : Y              
+CONF_DONE                    : 92        :        :                   :         : 6         :                
+VCCIO6                       : 93        : power  :                   : 3.3V    : 6         :                
+MSEL0                        : 94        :        :                   :         : 6         :                
+GND                          : 95        : gnd    :                   :         :           :                
+MSEL1                        : 96        :        :                   :         : 6         :                
+MSEL2                        : 97        :        :                   :         : 6         :                
+io_led_d2                    : 98        : output : 3.3-V LVCMOS      :         : 6         : Y              
+io_led_d3                    : 99        : output : 3.3-V LVCMOS      :         : 6         : Y              
+io_led_d4                    : 100       : output : 3.3-V LVCMOS      :         : 6         : Y              
+io_led_d5                    : 101       : output : 3.3-V LVCMOS      :         : 6         : Y              
+VCCINT                       : 102       : power  :                   : 1.2V    :           :                
+clk_scl1                     : 103       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+clk_sda1                     : 104       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+rffe_ad9866_pga5             : 105       : output : 3.3-V LVCMOS      :         : 6         : Y              
+rffe_ad9866_sen_n            : 106       : output : 3.3-V LVCMOS      :         : 6         : Y              
+VCCA2                        : 107       : power  :                   : 2.5V    :           :                
+GNDA2                        : 108       : gnd    :                   :         :           :                
+VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
+rffe_ad9866_sclk             : 110       : output : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_sdio             : 111       : output : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_rxclk            : 112       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_txquiet_n        : 113       : output : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_txsync           : 114       : output : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_rxsync           : 115       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+VCCINT                       : 116       : power  :                   : 1.2V    :           :                
+VCCIO7                       : 117       : power  :                   : 3.3V    : 7         :                
+GND                          : 118       : gnd    :                   :         :           :                
+rffe_ad9866_rst_n            : 119       : output : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_rx[0]            : 120       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_rx[1]            : 121       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
+GND                          : 123       : gnd    :                   :         :           :                
+VCCINT                       : 124       : power  :                   : 1.2V    :           :                
+rffe_ad9866_rx[2]            : 125       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+rffe_ad9866_clk76p8          : 126       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+io_tp9                       : 127       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+io_tp8                       : 128       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+io_tp7                       : 129       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+VCCIO8                       : 130       : power  :                   : 3.3V    : 8         :                
+GND                          : 131       : gnd    :                   :         :           :                
+rffe_ad9866_rx[3]            : 132       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+rffe_ad9866_rx[4]            : 133       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+VCCINT                       : 134       : power  :                   : 1.2V    :           :                
+rffe_ad9866_rx[5]            : 135       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+rffe_ad9866_mode             : 136       : output : 3.3-V LVCMOS      :         : 8         : Y              
+rffe_ad9866_tx[0]            : 137       : output : 3.3-V LVCMOS      :         : 8         : Y              
+VCCINT                       : 138       : power  :                   : 1.2V    :           :                
+VCCIO8                       : 139       : power  :                   : 3.3V    : 8         :                
+GND                          : 140       : gnd    :                   :         :           :                
+rffe_ad9866_tx[1]            : 141       : output : 3.3-V LVCMOS      :         : 8         : Y              
+rffe_ad9866_tx[2]            : 142       : output : 3.3-V LVCMOS      :         : 8         : Y              
+rffe_ad9866_tx[3]            : 143       : output : 3.3-V LVCMOS      :         : 8         : Y              
+rffe_ad9866_tx[4]            : 144       : output : 3.3-V LVCMOS      :         : 8         : Y              
+GND                          : EPAD      :        :                   :         :           :                

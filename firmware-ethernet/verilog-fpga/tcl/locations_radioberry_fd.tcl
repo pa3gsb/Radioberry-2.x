@@ -31,7 +31,7 @@ set_location_assignment PIN_66 -to ad9866_sclk
 set_location_assignment PIN_68 -to ad9866_sdio
 set_location_assignment PIN_67 -to ad9866_sdo
 
-set_location_assignment PIN_71 -to ad9866_rxclk
+
 set_location_assignment PIN_69 -to ad9866_clk
 set_location_assignment PIN_80 -to ad9866_rx[0]
 set_location_assignment PIN_83 -to ad9866_rx[1]
