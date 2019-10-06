@@ -47,10 +47,18 @@ output          phy_mdc,
   output          rffe_ad9866_sen_n,
   input           rffe_ad9866_clk76p8,
 
-  output          rffe_ad9866_mode
+  output          rffe_ad9866_mode,
+  
+  output 		  debug1,
+  output 		  debug2,
+  output 		  debug3,
+  output 		  debug4
 
 );
 
+
+assign debug1 = tx_on;
+assign debug2 = tx_on_ad9866sync;
 
 // PARAMETERS
 parameter       NR = 6; // Recievers
@@ -395,7 +403,7 @@ usopenhpsdr1 #(.NR(NR), .HERMES_SERIALNO(HERMES_SERIALNO)) usopenhpsdr1_i (
   .have_ip(~(network_state_dhcp & network_state_fixedip)), // network_state is on sync 2.5 MHz domain
   .run(run_sync),
   .wide_spectrum(wide_spectrum_sync),
-  .idhermeslite(),
+  .idhermeslite(1'b1),  // 1=> hl 06 ; 0  => hermes (possible to control from rpi.
   .mac(local_mac),
   .discovery(discovery_reply_sync),
 
@@ -689,8 +697,8 @@ control #(.HERMES_SERIALNO(HERMES_SERIALNO)) control_i (
   .io_led_d5(),
   .io_lvds_rxn(),
   .io_lvds_rxp(),
-  .io_cn8(),
-  .io_cn9(),
+  .io_cn8(1'b1),
+  .io_cn9(1'b1), 
   .io_cn10(),
 
   .io_db1_2(),     
@@ -698,8 +706,8 @@ control #(.HERMES_SERIALNO(HERMES_SERIALNO)) control_i (
   .io_db1_4(),     
   .io_db1_5(),     
   .io_db1_6(),       
-  .io_phone_tip(), 
-  .io_phone_ring(),
+  .io_phone_tip(1'b1), 
+  .io_phone_ring(1'b1),
   .io_tp2(),
   
   .io_tp7(),

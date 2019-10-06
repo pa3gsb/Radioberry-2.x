@@ -445,7 +445,7 @@ debounce de_phone_ring(.clean_pb(ext_ptt), .pb(~io_phone_ring), .clk(clk));
 debounce de_txinhibit(.clean_pb(ext_txinhibit), .pb(~io_cn8), .clk(clk));
 
 
-assign tx_on = 1'b0; //(int_ptt | cw_keydown | ext_ptt | tx_hang) & ~ext_txinhibit & run;
+assign tx_on = (int_ptt | cw_keydown | ext_ptt | tx_hang) & ~ext_txinhibit & run;
 
 // Gererate two slow pulses for timing.  millisec_pulse occurs every one millisecond.
 // led_saturate occurs every 64 milliseconds.
@@ -513,7 +513,7 @@ cw_support cw_support_i(
 // Include CW and hang times in ptt response
 always @(posedge clk) begin
   if (cw_keydown | ext_ptt) begin
-    ptt_resp <= 1'b0; // ptt_resp <= 1'b1; pa3gsb
+    ptt_resp <= 1'b1; 
   end else if (~tx_hang) begin
     ptt_resp <= 1'b0;
   end
@@ -540,10 +540,6 @@ assign pwr_envpa = tx_power_on & ~vna & pa_enable;
 
 assign rffe_rfsw_sel = ~vna & pa_enable;
 
-`ifdef BETA2
-assign pwr_clkvpa = 1'b0;
-`endif
-
 assign clk_recovered = 1'b0;
 
 
@@ -556,11 +552,7 @@ ad9866ctrl ad9866ctrl_i (
   .rffe_ad9866_sclk(rffe_ad9866_sclk),
   .rffe_ad9866_sen_n(rffe_ad9866_sen_n),
 
-`ifdef BETA2
-  .rffe_ad9866_pga(rffe_ad9866_pga),
-`else
   .rffe_ad9866_pga5(rffe_ad9866_pga5),
-`endif
 
   .cmd_addr(cmd_addr),
   .cmd_data(cmd_data),
@@ -652,33 +644,5 @@ end
 
 assign resp = iresp;
 
-// sync clock
-always @(posedge clk_125) begin
-  if (pwrcnt == 6'h00) begin
-    //case(pwrphase)
-    //  3'b000: pwrcnt <= 6'd59;
-    //  3'b001: pwrcnt <= 6'd57;
-    //  3'b010: pwrcnt <= 6'd58;
-    //  3'b011: pwrcnt <= 6'd55;
-    //  3'b100: pwrcnt <= 6'd58;
-    //  3'b101: pwrcnt <= 6'd59;
-    //  3'b110: pwrcnt <= 6'd56;
-    //  3'b111: pwrcnt <= 6'd59;
-    //endcase 
-    //if (pwrphase == 3'b000) pwrphase <= 3'b110;
-    //else pwrphase <= pwrphase - 3'b001;
-    pwrcnt <= 6'd58;
-  end else begin
-    pwrcnt <= pwrcnt - 6'h01;
-  end
-
-  if (disable_syncfreq) begin
-    pwr_clk3p3 <= 1'b0;
-    pwr_clk1p2 <= 1'b0;
-  end else begin
-    if (pwrcnt == 6'h00) pwr_clk3p3 <= ~pwr_clk3p3;
-    if (pwrcnt == 6'h11) pwr_clk1p2 <= ~pwr_clk1p2;
-  end
-end
 
 endmodule // ioblock

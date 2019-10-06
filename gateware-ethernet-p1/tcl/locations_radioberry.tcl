@@ -3,6 +3,12 @@
 
 #hermeslite....
 
+
+set_location_assignment PIN_43 -to debug1
+set_location_assignment PIN_46 -to debug2
+set_location_assignment PIN_44 -to debug3
+set_location_assignment PIN_49 -to debug4
+
 set_location_assignment PIN_142 -to phy_mdio
 set_location_assignment PIN_141 -to phy_mdc
 
