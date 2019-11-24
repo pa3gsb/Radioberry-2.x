@@ -67,7 +67,7 @@ int holddither=128;
 int dither = 0;
 int rando = 0;
 int sampleSpeed = 0;
-int holdsampleSpeed = -1;
+int holdsampleSpeed = 0;
 
 int pureSignal = 0;
 int holdPureSignal = 128;

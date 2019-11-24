@@ -45,8 +45,77 @@
 #include <unistd.h>
 #include <errno.h>
 
+#include <assert.h>
+#include <fcntl.h>
+#include <stdint.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include <pigpio.h>
 #include "radioberry.h"
+
+// ---- GPIO specific defines
+#define GPIO_REGISTER_BASE 0x200000
+#define GPIO_SET_OFFSET 0x1C
+#define GPIO_CLR_OFFSET 0x28
+#define GPIO_LEV0_OFFSET 0x34
+#define PHYSICAL_GPIO_BUS (0x7E000000 + GPIO_REGISTER_BASE)
+
+#define PAGE_SIZE 4096
+#define BCM2708_PI1_PERI_BASE  0x20000000
+#define BCM2709_PI2_PERI_BASE  0x3F000000
+#define BCM2711_PI4_PERI_BASE  0xFE000000
+
+#define PERI_BASE BCM2711_PI4_PERI_BASE
+
+#define REQ_RX_BYTE_SAMPLE_PIN 6 
+#define REQ_RX2_BYTE_SAMPLE_PIN 17
+
+volatile uint32_t *egpio_port=NULL; 
+volatile uint32_t *eset_reg=NULL; 
+volatile uint32_t *eclr_reg=NULL;
+volatile uint32_t *eread_reg=NULL; 
+
+int rb_sleep = 0;
+
+// Return a pointer to a periphery subsystem register.
+static void *mmap_bcm_register(off_t register_offset) {
+  const off_t base = PERI_BASE;
+
+  int mem_fd;
+  if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+    perror("can't open /dev/mem: ");
+    fprintf(stderr, "You need to run this as root!\n");
+    return NULL;
+  }
+
+  uint32_t *result =
+    (uint32_t*) mmap(NULL,                  // Any adddress in our space will do
+                     PAGE_SIZE,
+                     PROT_READ|PROT_WRITE,  // Enable r/w on GPIO registers.
+                     MAP_SHARED,
+                     mem_fd,                // File to map
+                     base + register_offset // Offset to bcm register
+                     );
+  close(mem_fd);
+
+  if (result == MAP_FAILED) {
+    fprintf(stderr, "mmap error %p\n", result);
+    return NULL;
+  }
+  fprintf(stderr, "mmap %p\n", result);
+  return result;
+}
+
+void initialize_gpio_for_output(volatile uint32_t *gpio_registerset, int bit) {
+  *(gpio_registerset+(bit/10)) &= ~(7<<((bit%10)*3));  // prepare: set as input
+  *(gpio_registerset+(bit/10)) |=  (1<<((bit%10)*3));  // set as output.
+}
+
+void initialize_gpio_for_input(volatile uint32_t *gpio_registerset, int bit) {
+  *(gpio_registerset+(bit/10)) &= ~(7<<((bit%10)*3));  // prepare: set as input
+}
 
 
 int main(int argc, char **argv)
@@ -69,48 +138,77 @@ int initRadioberry() {
 	if (gpioInitialise() < 0) {
 		fprintf(stderr,"Radioberry;  gpio could not be initialized. \n");
 		exit(-1);
-	}
-	
-	gpioSetMode(25, PI_INPUT); 	//rx samples
-	
-	// defining the IO ports as input; required for reading bits in one cycle.
-	// rx data byte:
-	gpioSetMode(23, PI_INPUT); 
-	gpioSetMode(20, PI_INPUT);
-	gpioSetMode(19, PI_INPUT);
-	gpioSetMode(18, PI_INPUT);
-	gpioSetMode(16, PI_INPUT);
-	gpioSetMode(13, PI_INPUT);
-	gpioSetMode(12, PI_INPUT);
-	gpioSetMode(5, PI_INPUT); 
+	} 
 
+/*	
+	fprintf(stderr, "before prepare gpio.\n");
+	
+// Prepare GPIO
+	volatile uint32_t *gpio_port = mmap_bcm_register(GPIO_REGISTER_BASE);
+	egpio_port = &gpio_port;
+	fprintf(stderr, "Address stored in gpio_port variable: %x\n", gpio_port );
+	fprintf(stderr, "mmap gpio.\n");
+	initialize_gpio_for_output(gpio_port, REQ_RX_BYTE_SAMPLE_PIN);
+	volatile uint32_t *set_reg = gpio_port + (GPIO_SET_OFFSET / sizeof(uint32_t));
+	eset_reg = &set_reg;
+	volatile uint32_t *clr_reg = gpio_port + (GPIO_CLR_OFFSET / sizeof(uint32_t));
+	eclr_reg = &clr_reg;
+	volatile uint32_t *read_reg = gpio_port + (GPIO_LEV0_OFFSET / sizeof(uint32_t));
+	eread_reg = &read_reg;
+	
+	*clr_reg = (1<<REQ_RX_BYTE_SAMPLE_PIN); // init pi-clk1 
+	
+	fprintf(stderr, "prepare gpio.\n");
+	
+	initialize_gpio_for_input(gpio_port, 23);
+	initialize_gpio_for_input(gpio_port, 20);
+	initialize_gpio_for_input(gpio_port, 19);
+	initialize_gpio_for_input(gpio_port, 18);
+	initialize_gpio_for_input(gpio_port, 16);
+	initialize_gpio_for_input(gpio_port, 13);
+	initialize_gpio_for_input(gpio_port, 12);
+	initialize_gpio_for_input(gpio_port, 5);
+	
+	//gpioSetMode(25, PI_INPUT); 	//rx samples
+	initialize_gpio_for_input(gpio_port, 25);
+	
 	//define control IO ports
-	gpioSetMode(6, PI_OUTPUT);  	// pi-clk rx1 slice
-	gpioSetMode(17, PI_OUTPUT); 	// pi-clk rx2 slice
-	gpioSetMode(21, PI_OUTPUT);  	// ptt
+	//gpioSetMode(6, PI_OUTPUT);  	// pi-clk rx1 slice
+	//gpioSetMode(17, PI_OUTPUT); 	// pi-clk rx2 slice
+	initialize_gpio_for_output(gpio_port, 17); 
+	//gpioSetMode(21, PI_OUTPUT);  	// ptt
+	initialize_gpio_for_output(gpio_port, 21);
 	
 	//Initialise
-	gpioWrite(21, 0); 				// set ptt off
-	gpioWrite(6, 0); 				// init pi-clk1 
-	gpioWrite(17, 0); 				// init pi-clk2 
+	//gpioWrite(21, 0); 				// set ptt off
+	*clr_reg = (1<<21); // init pi-clk1
+	
+	//gpioWrite(6, 0); 				// init pi-clk1 
+	// gpioWrite(17, 0); 				// init pi-clk2 
+	*clr_reg = (1<<17);
+	
+	fprintf(stderr, "prepare gpio init done .\n");
+	*/
 	
 	// open and initialize the 
 	i2c_handler = i2cOpen(i2c_bus, MAX11613_ADDRESS, 0);
 	if (i2c_handler >= 0)  initVSWR();
 	
-	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
+	rx1_spi_handler = spiOpen(0, 9000000, 49155);  //channel 0
 	if (rx1_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx1 could not be initialized. \n");
 		exit(-1);
 	}
 	
-	rx2_spi_handler = spiOpen(1, 15625000, 49155); 	//channel 1
+	rx2_spi_handler = spiOpen(1, 9000000, 49155); 	//channel 1
 	if (rx2_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx2 could not be initialized. \n");
 		exit(-1);
 	}
+
+
 	
-	printf("Radioberry, Initialisation succesfully executed.\n");
+	fprintf(stderr, "Radioberry, Initialisation succesfully executed.\n");
 		
 	pthread_t pid1, pid2; 
 	pthread_create(&pid1, NULL, packetreader, NULL); 
@@ -177,9 +275,58 @@ void runRadioberry() {
 	}
 }
 void *packetreader(void *arg) {
+	
+	
+	// Prepare GPIO
+	volatile uint32_t *gpio_port = mmap_bcm_register(GPIO_REGISTER_BASE);
+	egpio_port = gpio_port;
+	fprintf(stderr, "Address stored in gpio_port variable: %x\n", gpio_port );
+	fprintf(stderr, "mmap gpio.\n");
+	initialize_gpio_for_output(gpio_port, REQ_RX_BYTE_SAMPLE_PIN);
+	volatile uint32_t *set_reg = gpio_port + (GPIO_SET_OFFSET / sizeof(uint32_t));
+	eset_reg = set_reg;
+	volatile uint32_t *clr_reg = gpio_port + (GPIO_CLR_OFFSET / sizeof(uint32_t));
+	eclr_reg = clr_reg;
+	volatile uint32_t *read_reg = gpio_port + (GPIO_LEV0_OFFSET / sizeof(uint32_t));
+	eread_reg = read_reg;
+	
+	*clr_reg = (1<<REQ_RX_BYTE_SAMPLE_PIN); // init pi-clk1 
+	
+	fprintf(stderr, "prepare gpio.\n");
+	
+	initialize_gpio_for_input(gpio_port, 23);
+	initialize_gpio_for_input(gpio_port, 20);
+	initialize_gpio_for_input(gpio_port, 19);
+	initialize_gpio_for_input(gpio_port, 18);
+	initialize_gpio_for_input(gpio_port, 16);
+	initialize_gpio_for_input(gpio_port, 13);
+	initialize_gpio_for_input(gpio_port, 12);
+	initialize_gpio_for_input(gpio_port, 5);
+	
+	//gpioSetMode(25, PI_INPUT); 	//rx samples
+	initialize_gpio_for_input(gpio_port, 25);
+	
+	//define control IO ports
+	//gpioSetMode(6, PI_OUTPUT);  	// pi-clk rx1 slice
+	//gpioSetMode(17, PI_OUTPUT); 	// pi-clk rx2 slice
+	initialize_gpio_for_output(gpio_port, 17); 
+	//gpioSetMode(21, PI_OUTPUT);  	// ptt
+	initialize_gpio_for_output(gpio_port, 21);
+	
+	//Initialise
+	//gpioWrite(21, 0); 				// set ptt off
+	*clr_reg = (1<<21); // init pi-clk1
+	
+	//gpioWrite(6, 0); 				// init pi-clk1 
+	// gpioWrite(17, 0); 				// init pi-clk2 
+	*clr_reg = (1<<17);
+	
+	fprintf(stderr, "prepare gpio init done .\n");
+	
+	
 	int size, bytes_read, bytes_left;
 	unsigned char buffer[2048];
-	uint32_t *code0 = (uint32_t *) buffer; 
+	//uint32_t *code0 = (uint32_t *) buffer; 
 	fprintf(stderr, "Radioberry, Starting packet rx part. \n");
 	while(1) {
 		if (sock_TCP_Client >= 0) {
@@ -269,7 +416,9 @@ void processPacket(char* buffer)
 	}
 
 	 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
-	 if (MOX) gpioWrite(21, 1); else gpioWrite(21, 0);	// ptt 
+	 //if (MOX) gpioWrite(21, 1); else gpioWrite(21, 0);	// ptt 
+	 //fprintf(stderr, "MOX zetten \n");
+	 if (MOX) *eset_reg  = (1<<21); else *eclr_reg = (1<<21);	// ptt 
 
 	if ((buffer[11] & 0xFE)  == 0x22) {
 		pwmin = ((buffer[11+1] & 0xFF) << 2) + (buffer[11 + 2] & 0x03);
@@ -292,6 +441,7 @@ void processPacket(char* buffer)
 		
 		sampleSpeed = (buffer[11 + 1] & 0x03);
 		if (sampleSpeed != holdsampleSpeed) {
+			if (sampleSpeed == 1) rb_sleep = 1500; else if (sampleSpeed >= 2) rb_sleep = 0; else rb_sleep = 3000; 
 			printf("sample speed   %d \n", sampleSpeed);
 			holdsampleSpeed = sampleSpeed;
 			change = change | 0x03; // in Protocol-1 valid for rx1 and rx2
@@ -443,14 +593,17 @@ void processPacket(char* buffer)
 		holdvna_att_20dB = vna_att_20dB;
 	}
 	
+	
 	// The change must be communicated to radioberry firmware
 	// The change var filling determines which spi control must be called.
 	if (change != 0x00) {
+		fprintf(stderr, "change before exec\n");
 		if ((change & 0x01) == 0x01) spi_control_rx1_phase();
 		if ((change & 0x02) == 0x02) spi_control_rx2_phase();
 		if ((change & 0x04) == 0x04) spi_control_tx();
 		if ((change & 0x08) == 0x08) spi_send_control();
 		change = 0x00; 
+		fprintf(stderr, "change after exec\n");
 	}
 		
 	int frame = 0;
@@ -502,12 +655,15 @@ void fillPacketToSend() {
 		for (frame; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 				
-			while (gpioRead(25) == 0) {usleep(3000);}//wait for enough samples
+			//while (gpioRead(25) == 0) {usleep(3000);}//wait for enough samples(((value >> 5) & 1))uint32_t value = *read_reg;
+			while ((((*eread_reg) >> 25) & 1) == 0) {usleep(rb_sleep);}//wait for enough samples //rb_sleep
+			//fprintf(stderr, "%d", (*eread_reg) >> 25 & 1);
 			
 			int i = 0;
 			for (i=0; i< (504 / (8 + factor)); i++) {
 				index = 16 + coarse_pointer + (i * (8 + factor));
 				rx_reader(iqdata);
+				//fprintf(stderr,"Radioberry: recvd %X %X %X %X %X %X\n",  iqdata[0], iqdata[1], iqdata[2], iqdata[3], iqdata[4], iqdata[5]);
 				int j =0;
 				for (j; j< 6; j++){
 					hpsdrdata[index + j] = iqdata[j];							//rx1
@@ -568,10 +724,15 @@ void rx_reader(unsigned char iqdata[]){
 	int i = 0;
 	for (i; i < 6 ; i++) {
 		level = !level;
-		gpioWrite(6, level);
+		//fprintf(stderr, ".");
+		if (level) 	*eset_reg = (1<<REQ_RX_BYTE_SAMPLE_PIN); else *eclr_reg = (1<<REQ_RX_BYTE_SAMPLE_PIN);
+		uint32_t value = *eread_reg;
+		//value = *eread_reg;
 		
-		uint32_t value = gpioRead_Bits_0_31();
-		value = gpioRead_Bits_0_31();
+		//gpioWrite(6, level);
+		
+		//uint32_t value = gpioRead_Bits_0_31();
+		//value = gpioRead_Bits_0_31();
 		
 		iqdata[i]  =  (((value >> 23) & 1) << 7);
 		iqdata[i] |=  (((value >> 20) & 1) << 6);
@@ -589,10 +750,14 @@ void rx2_reader(unsigned char iqdata[]){
 	int i = 0;
 	for (i; i < 6 ; i++) {
 		level2 = !level2;
-		gpioWrite(17, level2);
+		//gpioWrite(17, level2);
 		
-		uint32_t value = gpioRead_Bits_0_31();
-		value = gpioRead_Bits_0_31();
+		//uint32_t value = gpioRead_Bits_0_31();
+		//value = gpioRead_Bits_0_31();
+		
+		if (level2) 	*eset_reg = (1<<REQ_RX2_BYTE_SAMPLE_PIN); else *eclr_reg = (1<<REQ_RX2_BYTE_SAMPLE_PIN);
+		uint32_t value = *eread_reg;
+		//value = *eread_reg;
 		
 		iqdata[i]  =  (((value >> 23) & 1) << 7);
 		iqdata[i] |=  (((value >> 20) & 1) << 6);
@@ -746,7 +911,10 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\tRadioberry V2.0 beta 2 and beta 3 (incl. small mod).\n");
+	fprintf(stderr, "\tRadioberry V2.0\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"*** EXPERIMENTAL VERSION USING LOW LEVEL CALLS TO GPIO ****\n");
+	fprintf(stderr,	"*** !!! This version runs at RPI-4 only!!!! ****\n");
 	fprintf(stderr,	"\n");
 	fprintf(stderr, "\tSupporting:\n");
 	fprintf(stderr, "\t\t - openhpsdr protocol-1.\n");
@@ -754,7 +922,7 @@ void printIntroScreen() {
 	fprintf(stderr, "\t\t - VNA mode (supports Hermes VNA).\n");
 	fprintf(stderr, "\t\t - pure signal.\n");
 	fprintf(stderr, "\t\t - EER. (Envelope Elimination and Restoration) (only CL025) \n");
-	fprintf(stderr, "\t\t - 2rx slices max 192K sampling rate\n");
+	fprintf(stderr, "\t\t - 2rx slices max 384K sampling rate\n");
 	fprintf(stderr, "\t\t - TCP mode in piHPSDR\n");
 	fprintf(stderr, "\t\t - VSWR monitor (https://github.com/pa3gsb/vswr)\n");
 	fprintf(stderr,	"\n\n");

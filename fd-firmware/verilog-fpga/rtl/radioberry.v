@@ -336,17 +336,32 @@ receiver #(.CICRATE(CICRATE))
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rx1FIFO Handler (IQ Samples) rx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+wire strobe;
+wire [23:0] rx_IQ;
+
+always @ (posedge clk_ad9866) begin
+	if (reset) rx_IQ <= 24'b0;
+	else begin 
+		if (~rx_samples) begin
+			rx_IQ <= rx_IQ + 24'h1;
+			strobe <= 1'b1;
+		end else strobe <= 1'b0;
+	end
+end
+
+
 reg [47:0] rxDataFromFIFO;
 wire [9:0] rx_wr_length;
 assign rx_samples = (rx_wr_length > 11'd63) ? 1'b1: 1'b0; 
 
 rxFIFO rx1_FIFO_inst(	.aclr(reset),
-							.wrclk(clk_ad9866),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx_wr_length), .wrfull(),  
+							.wrclk(clk_ad9866),.data({rx_IQ, rx_IQ}),.wrreq(strobe), .wrusedw(rx_wr_length), .wrfull(),  
 							.rdclk(rdreq),.q(rxDataFromFIFO ),.rdreq(1'b1));	
 
 wire rdreq;
 wire [7:0] rx1data_mux;
-ddr_mux ddr_mux_inst1(.clk(pi_clk), .reset(reset | ~initDone), .rd_req(rdreq), .in_data(rxDataFromFIFO), .out_data(rx1data_mux));							
+ddr_mux ddr_mux_inst1(.clk(pi_clk), .reset(reset | ~initDone ), .rd_req(rdreq), .in_data({48'hf0e1d2c3b4a5}), .out_data(rx1data_mux));							
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rx2FIFO Handler (IQ Samples) rx
