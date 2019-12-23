@@ -1,6 +1,10 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <pigpio.h>
 #include <time.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
 
 #include "loadFPGA.h"
 
@@ -95,10 +99,6 @@ int main (int argc, char **argv)
 	return 0;
 }
 
-void wait_some_nops() {
-	for (int i =0 ; i < 300 ; i++) asm("nop");
-}
-
 void processFileInput( int finputid )
 {
 	int			seek_position = 0;			/* file pointer position */
@@ -141,13 +141,9 @@ void processFileInput( int finputid )
 	}
 		
 	/* Initialize device */
-	if (rpi4) wait_some_nops();
 	gpioWrite(oPinDCLK, 1);
-	if (rpi4) wait_some_nops();
 	gpioWrite(oPinDCLK, 0);
-	if (rpi4) wait_some_nops();
 	gpioWrite(oPinDCLK, 1);
-	if (rpi4) wait_some_nops();
 	gpioWrite(oPinDCLK, 0);
 	
 	fprintf( stdout, "Info: programming succeeded\n" );
@@ -165,11 +161,8 @@ void programByte( int one_byte )
 		bit = bit & 0x1;
 		
 		gpioWrite(oPinDATA, bit);
-		//if (rpi4) wait_some_nops();
 		gpioWrite(oPinDCLK, 1);
-		//if (rpi4) wait_some_nops();
 		gpioWrite(oPinDCLK, 0);
-		//if (rpi4) wait_some_nops();
 	}
 }
 
