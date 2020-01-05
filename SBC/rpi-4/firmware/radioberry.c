@@ -38,8 +38,18 @@
 *	Johan PA3GSB
 *
 */
+
+
+// NOTE: this information will be retrieved from the gateware... in the (near) future.
+#define NR 0x04
+#define HERMESLITE  0x06
+#define FIRMWARE_VERSION 0x44		//68P4  //pihpsdr HL2
+//#define FIRMWARE_VERSION 0x27		//39P4	//pihpsdr HL1
+#define MINOR_VERSION 0x04
+
 #include "radioberry.h"
 #include "radioberry-rpi.h"
+
 
 int main(int argc, char **argv)
 {
@@ -58,7 +68,11 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	gettimeofday(&t20, 0);
+	
+	signal(SIGINT, handle_sigint);
+	
 	runRadioberry();
+	
 	closeRadioberry();
 }
 
@@ -115,12 +129,14 @@ int initRadioberry() {
 		return -1;
 	}
 	int tcpmaxseg = 1032;
+	int yes = 1;
 	setsockopt(sock_TCP_Server, IPPROTO_TCP, TCP_MAXSEG, (const char *)&tcpmaxseg, sizeof(int));
 	int sndbufsize = 65535;
 	int rcvbufsize = 65535;
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (void *)&timeout, sizeof(timeout)); //added
+	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (void *)&yes, sizeof(yes));
 
 	if (bind(sock_TCP_Server, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0)
 	{
@@ -132,19 +148,20 @@ int initRadioberry() {
     fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
 }
 
-void closeRadioberry() {
+int closeRadioberry() {
 	if (rx1_spi_handler !=0) spiClose(rx1_spi_handler);
 	if (rx2_spi_handler !=0) spiClose(rx2_spi_handler);
 	if (sock_TCP_Client >= 0) close(sock_TCP_Client);
 	if (sock_TCP_Server >= 0) close(sock_TCP_Server);
 	
-		
 	gpioTerminate();
+	
+	return 0;
 }
 
 void runRadioberry() {
 	fprintf(stderr, "Radioberry, Starting packet tx part. \n");
-	while(1) {
+	while(!(running==0 && closerb == 1)) {
 		if (running) {
 			active = 1;
 			sendPacket();
@@ -191,7 +208,6 @@ void *packetreader(void *arg) {
 		}
 	}
 }
-
 
 void handlePacket(char* buffer){
 	uint32_t code;
@@ -261,14 +277,6 @@ void handlePacket(char* buffer){
 #define assign_change(a,b,c) if ((a) != b) { b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
 void processPacket(char* buffer)
 {	
-	//nrx for internal use required.
-	if ((buffer[ 11] & 0xFE) == 0x00) {
-		assign_change((((buffer[ 15] & 0x38) >> 3) + 1), nrx, "Receivers");
-	}
-	if ((buffer[523] & 0xFE)  == 0x00) {
-		assign_change((((buffer[527] & 0x38) >> 3) + 1), nrx, "Receivers");
-	}
-	
 	MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
 	
 	command = buffer[ 11];
@@ -303,6 +311,14 @@ void processPacket(char* buffer)
 			}
 		}
 	}
+	
+	//nrx for internal use required.
+	if ((buffer[ 11] & 0xFE) == 0x00) {
+		assign_change((((buffer[ 15] & 0x38) >> 3) + 1), nrx, "Receivers");
+	}
+	if ((buffer[523] & 0xFE)  == 0x00) {
+		assign_change((((buffer[527] & 0x38) >> 3) + 1), nrx, "Receivers");
+	}
 }
 
 void sendPacket() {
@@ -325,15 +341,18 @@ void fillPacketToSend() {
 		
 		memcpy(hpsdrdata + 8, sync_hpsdrdata, 8);
 		memcpy(hpsdrdata + 520, sync_hpsdrdata, 8);
+		
+		lnrx = nrx;
 
 		while ((((*rpi_read_io) >> 25) & 1) == 0) { usleep(rb_sleep); }//wait for enough samples 
-		int factor = (nrx - 1) * 6;
+		int factor = (lnrx - 1) * 6;
 		iqs =0; 
 		for (int frame = 0; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
-				for (int r=0; r < nrx; r++) {	
+				//NR must be read from gateware.
+				for (int r=0; r < MIN(lnrx, NR); r++) {	
 						rx_reader(iqdata);
 						memcpy(hpsdrdata + index + (r * 6), iqdata, 6);
 				}
@@ -350,6 +369,7 @@ void rx_reader(unsigned char iqdata[]){
 	for (int i = 0; i < 6 ; i++) {
 		*rpi_set_io_high = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
+		value = *rpi_read_io;
 		iqdata[i] =  (((value >> 16) & 1) << 7);
 		iqdata[i] |=  (((value >> 19) & 1) << 6);
 		iqdata[i] |=  (((value >> 20) & 1) << 5);
@@ -357,6 +377,7 @@ void rx_reader(unsigned char iqdata[]){
 		
 		
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
 		value = *rpi_read_io;
 		iqdata[i] |=  (((value >> 16) & 1) << 3);
 		iqdata[i] |=  (((value >> 19) & 1) << 2);
@@ -376,9 +397,10 @@ void rx_reader(unsigned char iqdata[]){
 	// the given sequence must be kept!! But after a start or restart the sequence from the gateware is not quaranteed.
 	// in the gateware i need to sync the reading... reading always a block of samples for all rx slices..
 	// if gateware is taking the control... one gpio/fpga pin comes free!
-	if ( (iqs % nrx== 0) && (lastid !=0x07)  ) {
+	if ( (iqs % lnrx== 0) && (lastid !=0x07)  ) {
 		*rpi_set_io_high = (1<<RPI_RX_CLK); 
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
+		//fprintf(stderr, ".");
 	}
 }
 
@@ -388,7 +410,7 @@ void spi_send_control(unsigned char command) {
 	uint32_t command_data = commands[command];
 	
 	
-	if (command & 0x80) fprintf(stderr, "ack = 1 \n");
+	//if (command & 0x80) fprintf(stderr, "ack = 1 \n");
 	data[0] = (run & 0xFF);		//MSB
 	data[1] = (command & 0xFF);
 	data[2] = ((command_data >> 24) & 0xFF);

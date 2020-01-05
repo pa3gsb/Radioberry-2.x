@@ -26,6 +26,8 @@
 #define RPI_RX_CLK 6
 #define RPI_TX_CLK 4
 
+#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+
 
 void printIntroScreen() {
 	fprintf(stderr,"\n");
@@ -33,10 +35,10 @@ void printIntroScreen() {
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr, "\tRadioberry V2.0\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr,	"*** EXPERIMENTAL VERSION USING LOW LEVEL CALLS TO GPIO ****\n");
+	fprintf(stderr,	"*** EXPERIMENTAL VERSION running with HL2 gateware. ****\n");
 	fprintf(stderr,	"*** !!! This version runs at RPI-4 only!!!! ****\n");
 	fprintf(stderr,	"\n\n");
-	fprintf(stderr,	"Supports max 4 receivers and 1 transmitter. \n");
+	fprintf(stderr,	"Supports max N receivers and 1 transmitter. \n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");
@@ -49,13 +51,14 @@ unsigned char command = 0;
 uint32_t command_data = 0;
 uint32_t commands[256];
 unsigned char run = 0;
+int closerb = 0;
 
-int rb_sleep = 0;
+int rb_sleep = 100;
 int iqs =0 ;		//iq-sample count
 
 int initRadioberry();
 void runRadioberry(void);
-void closeRadioberry();
+int closeRadioberry();
 
 void sendPacket(void);
 void handlePacket(char* buffer);
@@ -108,6 +111,7 @@ unsigned char tx_iqdata[8];
 
 
 int nrx = 1; // n Receivers
+int lnrx = 1;
 
 
 
@@ -115,10 +119,7 @@ int nrx = 1; // n Receivers
 uint32_t last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
 
-#define NR 0x04
-#define HERMESLITE  0x06
-#define FIRMWARE_VERSION 0x44		//68P4
-#define MINOR_VERSION 0x04		
+		
 unsigned char hpsdrdata[1032];
 uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
 uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
@@ -142,4 +143,10 @@ float elapsed;
 float timedifference_msec(struct timeval t0, struct timeval t1)
 {
     return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
+}
+
+void handle_sigint(int sig) 
+{ 
+	if (running) fprintf(stderr, "SDR program is still running; please stop SDR first.");
+	closerb = 1;
 }
