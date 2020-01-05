@@ -369,7 +369,7 @@ void rx_reader(unsigned char iqdata[]){
 	for (int i = 0; i < 6 ; i++) {
 		*rpi_set_io_high = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
-		value = *rpi_read_io;
+
 		iqdata[i] =  (((value >> 16) & 1) << 7);
 		iqdata[i] |=  (((value >> 19) & 1) << 6);
 		iqdata[i] |=  (((value >> 20) & 1) << 5);
@@ -378,7 +378,7 @@ void rx_reader(unsigned char iqdata[]){
 		
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
-		value = *rpi_read_io;
+	
 		iqdata[i] |=  (((value >> 16) & 1) << 3);
 		iqdata[i] |=  (((value >> 19) & 1) << 2);
 		iqdata[i] |=  (((value >> 20) & 1) << 1);
