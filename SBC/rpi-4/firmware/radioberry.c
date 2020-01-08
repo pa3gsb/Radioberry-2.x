@@ -20,7 +20,9 @@
 *
 * This programs is the c part of the firmware for the RadioBerry. 
 *
-*	****  RUNNING 'ONLY' AT  RPI-4.  ****
+* The belonging gateware can be found at: https://github.com/softerhardware/Hermes-Lite2
+*
+*	****  RPI-4 ONLY VERSION.  ****
 *
 * By using this program you have the possibility to connect to SDR programs (using UDP) like:
 *	- pihpsdr (including TCP)
@@ -31,14 +33,12 @@
 *
 *	Using the 'old HPSDR protocol'; also called protocol-1
 *
-*  This emulator works with the Radioberry radiocard.
 *
 *	http://www.pa3gsb.nl
 *	  
 *	Johan PA3GSB
 *
 */
-
 
 // NOTE: this information will be retrieved from the gateware... in the (near) future.
 #define NR 0x04
@@ -47,9 +47,9 @@
 //#define FIRMWARE_VERSION 0x27		//39P4	//pihpsdr HL1
 #define MINOR_VERSION 0x04
 
+
 #include "radioberry.h"
 #include "radioberry-rpi.h"
-
 
 int main(int argc, char **argv)
 {
@@ -81,7 +81,7 @@ int initRadioberry() {
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0);   
 
-	memset(commands,0,256); // initialise the commands from SDR program.	
+	memset(commands,0,256); // initialise the commands.	
 	
 	if (gpioInitialise() < 0) {
 		fprintf(stderr,"Radioberry;  gpio could not be initialized. \n");
@@ -275,23 +275,26 @@ void handlePacket(char* buffer){
 
 
 #define assign_change(a,b,c) if ((a) != b) { b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
+
+void handleCommand(int base_index, char* buffer) {
+	command = buffer[base_index];
+	command_data=((buffer[base_index+1]&0xFF)<<24)+((buffer[base_index+2]&0xFF)<<16)+((buffer[base_index+3]&0xFF)<<8)+(buffer[base_index+4]&0xFF);
+	if (commands[command] != command_data) {
+		commands[command] = command_data;
+		spi_send_control(command);
+	}
+}
+
+void handleCommands(char* buffer) {
+	handleCommand(11, buffer);
+	handleCommand(523, buffer);
+}
+
 void processPacket(char* buffer)
 {	
 	MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
 	
-	command = buffer[ 11];
-	command_data=((buffer[12]&0xFF)<<24)+((buffer[13]&0xFF)<<16)+((buffer[14]&0xFF)<<8)+(buffer[15]&0xFF);
-	if (commands[command] != command_data) {
-		commands[command] = command_data;
-		spi_send_control(command);
-	}
-	command = buffer[ 523];
-	command_data =((buffer[524]&0xFF)<<24)+((buffer[525]&0xFF)<<16)+((buffer[526]&0xFF)<<8)+(buffer[527]&0xFF);
-	if (commands[command] != command_data) {
-		// make logging options for reading the command data...
-		commands[command] = command_data;
-		spi_send_control(command);
-	}
+	handleCommands(buffer);
 		
 	int frame = 0;
 	for (frame; frame < 2; frame++)
@@ -353,8 +356,8 @@ void fillPacketToSend() {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
 				//NR must be read from gateware.
 				for (int r=0; r < MIN(lnrx, NR); r++) {	
-						rx_reader(iqdata);
-						memcpy(hpsdrdata + index + (r * 6), iqdata, 6);
+					rx_reader(iqdata);
+					memcpy(hpsdrdata + index + (r * 6), iqdata, 6);
 				}
 			}
 		}
@@ -367,6 +370,7 @@ void rx_reader(unsigned char iqdata[]){
 	uint32_t lastid  =0;
 		
 	for (int i = 0; i < 6 ; i++) {
+		
 		*rpi_set_io_high = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
 
@@ -375,6 +379,7 @@ void rx_reader(unsigned char iqdata[]){
 		iqdata[i] |=  (((value >> 20) & 1) << 5);
 		iqdata[i] |=  (((value >> 21) & 1) << 4);
 		
+		lastid |= (((value >> 23) & 1) << (5-i));
 		
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
@@ -382,26 +387,23 @@ void rx_reader(unsigned char iqdata[]){
 		iqdata[i] |=  (((value >> 16) & 1) << 3);
 		iqdata[i] |=  (((value >> 19) & 1) << 2);
 		iqdata[i] |=  (((value >> 20) & 1) << 1);
-		iqdata[i] |=  (((value >> 21) & 1));
-
-		lastid |= (((value >> 23) & 1) << (i));
-					
+		iqdata[i] |=  (((value >> 21) & 1));			
 	}		
-
-	//fprintf(stderr, "samples %x-%x-%x-%x-%x-%x lastid %x \n", iqdata[0] , iqdata[1] ,iqdata[2] ,iqdata[3] ,iqdata[4] ,iqdata[5], lastid );
-	
 	// sync with iq samples from gateware... 
 	
-	// needs improvement. after start or stop/start seq the iq samples seems not in the right order.
-	// the gateware provides in a last indicator. Assuming sequence I0Q0I1Q1 the Q1 is containing this last indicator.
+	// After start or stop/start sequence the iq samples seems not in the right order.
+	// The gateware provides in a last indicator. 
+	// Assuming sequence I0Q0I1Q1 the Q1 is containing this last indicator.
 	// the given sequence must be kept!! But after a start or restart the sequence from the gateware is not quaranteed.
-	// in the gateware i need to sync the reading... reading always a block of samples for all rx slices..
+	// in the gateware i need to sync the reading...
 	// if gateware is taking the control... one gpio/fpga pin comes free!
+	
 	if ( (iqs % lnrx== 0) && (lastid !=0x07)  ) {
 		*rpi_set_io_high = (1<<RPI_RX_CLK); 
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
 		//fprintf(stderr, ".");
-	}
+	} 
+	
 }
 
 void spi_send_control(unsigned char command) {
@@ -409,8 +411,6 @@ void spi_send_control(unsigned char command) {
 	unsigned char data[6];
 	uint32_t command_data = commands[command];
 	
-	
-	//if (command & 0x80) fprintf(stderr, "ack = 1 \n");
 	data[0] = (run & 0xFF);		//MSB
 	data[1] = (command & 0xFF);
 	data[2] = ((command_data >> 24) & 0xFF);
@@ -424,7 +424,6 @@ void spi_send_control(unsigned char command) {
 	
 	//int fifolength = ((data[4] & 0x03) << 8) + (data[5] & 0xFF);
 	//fprintf(stderr, "Fifo length %d.\n", fifolength);
-	//fprintf(stderr, "response address %x data %x-%x-%x-%x \n", data[1], data[2], data[3], data[4], data[5]);
 }
 
 void *spiWriter(void *arg) {
