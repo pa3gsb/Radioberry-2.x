@@ -273,13 +273,12 @@ void handlePacket(char* buffer){
 	}
 }
 
-
 #define assign_change(a,b,c) if ((a) != b) { b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
 
 void handleCommand(int base_index, char* buffer) {
 	command = buffer[base_index];
 	command_data=((buffer[base_index+1]&0xFF)<<24)+((buffer[base_index+2]&0xFF)<<16)+((buffer[base_index+3]&0xFF)<<8)+(buffer[base_index+4]&0xFF);
-	if (commands[command] != command_data) {
+	if ((commands[command] != command_data) | (save_mox != MOX)) {
 		commands[command] = command_data;
 		spi_send_control(command);
 	}
@@ -288,6 +287,7 @@ void handleCommand(int base_index, char* buffer) {
 void handleCommands(char* buffer) {
 	handleCommand(11, buffer);
 	handleCommand(523, buffer);
+	save_mox = MOX;
 }
 
 void processPacket(char* buffer)
@@ -401,7 +401,7 @@ void rx_reader(unsigned char iqdata[]){
 	if ( (iqs % lnrx== 0) && (lastid !=0x07)  ) {
 		*rpi_set_io_high = (1<<RPI_RX_CLK); 
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
-		//fprintf(stderr, ".");
+		fprintf(stderr, ".");
 	} 
 	
 }
@@ -442,16 +442,16 @@ void *spiWriter(void *arg) {
 		if (MOX) {
 			for (int i = 4; i < 8 ; i++) {
 				
-				if ( (tx_iqdata[i] & 0x80) == 0x80) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
-				if ( (tx_iqdata[i] & 0x40) == 0x40) *rpi_set_io_high = (1<<5); else *rpi_set_io_low = (1<<5);
-				if ( (tx_iqdata[i] & 0x20) == 0x20) *rpi_set_io_high = (1<<18); else *rpi_set_io_low = (1<<18);
-				if ( (tx_iqdata[i] & 0x10) == 0x10) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
+				if (tx_iqdata[i] & 0x80) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
+				if (tx_iqdata[i] & 0x40) *rpi_set_io_high = (1<<5);  else *rpi_set_io_low = (1<<5);
+				if (tx_iqdata[i] & 0x20) *rpi_set_io_high = (1<<18); else *rpi_set_io_low = (1<<18);
+				if (tx_iqdata[i] & 0x10) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
 				*rpi_set_io_high = (1<<RPI_TX_CLK);
 				
-				if ( (tx_iqdata[i] & 0x08) == 0x08) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
-				if ( (tx_iqdata[i] & 0x04) == 0x04) *rpi_set_io_high = (1<<5); else *rpi_set_io_low = (1<<5);
-				if ( (tx_iqdata[i] & 0x02) == 0x02) *rpi_set_io_high = (1<<18); else *rpi_set_io_low = (1<<18);
-				if ( (tx_iqdata[i] & 0x01) == 0x01) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
+				if (tx_iqdata[i] & 0x08) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
+				if (tx_iqdata[i] & 0x04) *rpi_set_io_high = (1<<5);  else *rpi_set_io_low = (1<<5);
+				if (tx_iqdata[i] & 0x02) *rpi_set_io_high = (1<<18); else *rpi_set_io_low = (1<<18);
+				if (tx_iqdata[i] & 0x01) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
 				*rpi_set_io_low = (1<<RPI_TX_CLK);
 			}
 		}	

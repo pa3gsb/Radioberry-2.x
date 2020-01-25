@@ -93,6 +93,7 @@ int fill_tx = 0;
 int use_tx  = 0;
 
 int MOX = 0;
+int save_mox = -1;
 sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
