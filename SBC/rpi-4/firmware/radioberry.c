@@ -401,7 +401,7 @@ void rx_reader(unsigned char iqdata[]){
 	if ( (iqs % lnrx== 0) && (lastid !=0x07)  ) {
 		*rpi_set_io_high = (1<<RPI_RX_CLK); 
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
-		fprintf(stderr, ".");
+		//fprintf(stderr, ".");
 	} 
 	
 }

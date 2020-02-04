@@ -33,14 +33,14 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\tRadioberry V2.0\n");
+	fprintf(stderr, "\t\t\tRadioberry V2.0\n");
 	fprintf(stderr,	"\n");
-	fprintf(stderr,	"*** EXPERIMENTAL VERSION running with HL2 gateware. ****\n");
-	fprintf(stderr,	"*** !!! This version runs at RPI-4 only!!!! ****\n");
+	fprintf(stderr,	"\t*** EXPERIMENTAL VERSION running with HL2 gateware. ****\n");
+	fprintf(stderr,	"\t*** !!! This version runs at RPI-4 only!!!! ****\n");
 	fprintf(stderr,	"\n\n");
-	fprintf(stderr,	"Supports max N receivers and 1 transmitter. \n");
+	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter. \n");
 	fprintf(stderr,	"\n\n");
-	fprintf(stderr, "\t\t\t Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");
 	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
 	fprintf(stderr, "====================================================================\n");
@@ -63,17 +63,13 @@ int closeRadioberry();
 void sendPacket(void);
 void handlePacket(char* buffer);
 void processPacket(char* buffer);
-//void fillDiscoveryReplyMessage(void);
 void fillPacketToSend(void);
 
 void *packetreader(void *arg);
 void *spiWriter(void *arg);
-//void spi_control_rx1_phase();
-//void spi_control_rx2_phase();
-//void spi_control_tx();
+
 void spi_send_control(unsigned char command);
 float timedifference_msec(struct timeval t0, struct timeval t1);
-//void initVSWR();
 
 void put_tx_buffer(unsigned char  value);
 unsigned char get_tx_buffer(void);
@@ -110,11 +106,8 @@ unsigned char tx_iqdata[8];
 
 #define SERVICE_PORT	1024
 
-
 int nrx = 1; // n Receivers
 int lnrx = 1;
-
-
 
 #define SYNC 0x7F
 uint32_t last_sequence_number = 0;
@@ -148,6 +141,6 @@ float timedifference_msec(struct timeval t0, struct timeval t1)
 
 void handle_sigint(int sig) 
 { 
-	if (running) fprintf(stderr, "SDR program is still running; please stop SDR first.");
+	if (running) fprintf(stderr, "  SDR program is still running; please stop SDR first.\n");
 	closerb = 1;
 }
