@@ -50,6 +50,7 @@
 
 #include "radioberry.h"
 #include "radioberry-rpi.h"
+#include "filters.h"
 
 int main(int argc, char **argv)
 {
@@ -70,7 +71,11 @@ int main(int argc, char **argv)
 	gettimeofday(&t20, 0);
 	
 	signal(SIGINT, handle_sigint);
-	
+	//***********************************************
+	//       Filters switching initialization
+	//***********************************************
+	initFilters();
+	//***********************************************
 	runRadioberry();
 	
 	closeRadioberry();
@@ -322,6 +327,11 @@ void processPacket(char* buffer)
 	if ((buffer[523] & 0xFE)  == 0x00) {
 		assign_change((((buffer[527] & 0x38) >> 3) + 1), nrx, "Receivers");
 	}
+	//**************************************************
+	//         Handling filter change
+	//**************************************************
+	handleFilters(buffer);
+	//**************************************************
 }
 
 void sendPacket() {
