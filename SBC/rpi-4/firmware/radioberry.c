@@ -68,14 +68,11 @@ int main(int argc, char **argv)
 		fprintf(stderr,"Radioberry; could not be initialized. \n");
 		exit(-1);
 	}
+	
 	gettimeofday(&t20, 0);
 	
 	signal(SIGINT, handle_sigint);
-	//***********************************************
-	//       Filters switching initialization
-	//***********************************************
-	initFilters();
-	//***********************************************
+
 	runRadioberry();
 	
 	closeRadioberry();
@@ -92,7 +89,6 @@ int initRadioberry() {
 		fprintf(stderr,"Radioberry;  gpio could not be initialized. \n");
 		exit(-1);
 	} 
-	
 	rx1_spi_handler = spiOpen(0, 9000000, 49155);  //channel 0
 	if (rx1_spi_handler < 0) {
 		fprintf(stderr,"radioberry_protocol: spi bus rx1 could not be initialized. \n");
@@ -100,7 +96,13 @@ int initRadioberry() {
 	}
 
 	fprintf(stderr, "Radioberry, Initialisation succesfully executed.\n");
-		
+
+	//***********************************************
+	//       Filters switching initialization
+	//***********************************************
+	initFilters();
+	//***********************************************	
+
 	pthread_t pid1, pid2; 
 	pthread_create(&pid1, NULL, packetreader, NULL); 
 	pthread_create(&pid2, NULL, spiWriter, NULL);

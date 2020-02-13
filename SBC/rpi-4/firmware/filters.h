@@ -6,7 +6,7 @@
 //
 //*************************************************************************
 #define ADDR_ALEX 			0x21 		/* PCA9555 address 1 for Alex Interface Board*/
-#define ADDR_FILTERS 			0x22 	/* Arduino filter board interface switcher address for VA2SAJ Filter Switching Board*/
+#define ADDR_FILTERS 		0x20 	/* Arduino filter board interface switcher address for VA2SAJ Generic Filter Switching Board*/
 int i2c_alex_handler = 0;
 int i2c_filters_board_handler = 0;
 int i2c_alex = 0;
@@ -17,33 +17,7 @@ uint16_t i2c_data = 0;
 unsigned int i2c_bus = 1;
 int currentfreq = 4706000;
 int previousfreq = 0;
-//********************************************************************
-//  Determine which filters interface is connected to the radioberry
-//********************************************************************
-void initFilters() {
 
-	i2c_alex_handler = i2cOpen(i2c_bus, ADDR_ALEX, 0);
-	if (i2c_alex_handler >= 0) { 
-		initALEX();
-	}
-	else {
-		i2c_filters_board_handler = i2cOpen(i2c_bus, ADDR_FILTERS, 0);
-		if (i2c_filters_board_handler >= 0) {
-			initFiltersBoard();
-		}
-	};
-
-	if (i2c_alex) {
-		fprintf(stderr, "alex interface found and initialized \n");
-	}
-	else if (i2c_filters_board) {
-		fprintf(stderr, "Generic filters board interface found and initialized \n");
-	}
-	else {
-		fprintf(stderr, "no alex or generic filters interface board found\n");
-	}
-
-}
 //****************************************
 //   Initializing Alex Interface
 //****************************************
@@ -72,20 +46,20 @@ void initALEX() {
 //*********************************************
 //   Initializing Generic filters Interface
 //*********************************************
-void initFiltersBoard() {
+void initGenericFilters() {
 	int result = 0;
 	unsigned char data[3];
 
 	/* configure all pins as output */
-	data[0] = 0x06;
-	data[1] = 0x00;
-	data[2] = 0x00;
+	data[0] = 0x02;
+	data[1] = 0x02;
+	data[2] = 0x01;
 	result = i2cWriteDevice(i2c_filters_board_handler, data, 3);
 
 	if (result >= 0) {
 		data[0] = 0x02;
-		data[1] = 0x00;
-		data[2] = 0x00;
+		data[1] = 0x02;
+		data[2] = 0x03;
 		/* set all pins to low */
 		result = i2cWriteDevice(i2c_filters_board_handler, data, 3);
 	}
@@ -94,25 +68,7 @@ void initFiltersBoard() {
 		i2c_filters_board = 1;
 	}
 }
-//**********************************************************
-//  Determine which board to forward data - Alex or Generic
-//**********************************************************
-void handleFilters(char* buffer) {
-	
-	if ((buffer[11] & 0xFE) == 0x04) {
-		currentfreq = determine_freq(11, buffer);
-	};
-	if ((buffer[523] & 0xFE) == 0x04) {
-		currentfreq = determine_freq(523, buffer);
-	};
-	if (i2c_alex) {
-		handleALEX(char* buffer);
-	}
-	else if (i2c_filters_board) {
-		handleFilters();
-	}
 
-}
 //*******************************************
 //   Handle data to Alex Interface Board
 //*******************************************
@@ -152,7 +108,7 @@ void handleALEX(char* buffer)
 
 		if (i2c_data != i2c_alex_data)
 		{
-			fprintf(stderr, "Set Alex data to output = %x \n", i2c_alex_data);
+			fprintf(stderr, "Set Alex data to output = %d \n", i2c_alex_data);
 			i2c_data = i2c_alex_data;
 			unsigned char ldata[3];
 			ldata[0] = 0x02;
@@ -171,22 +127,30 @@ void handleALEX(char* buffer)
 //    This allow easier integration for different lpf, bpf filter interface that didn't match Alex interface filters groups.
 //    This also allow easier integration for different countries band plan because the band plan is defined in the arduino firmware.
 //************************************************************************************************************************************
-void handleFilters()
+void handleFiltersBoard(char* buffer)
 {
 	
-	if (i2c_filters_board)
+	if (i2c_filters_board & (buffer[523] & 0xFE) == 0x12)
 	{
 
 		if (currentfreq != previousfreq)
 		{
-			fprintf(stderr, "Set Filters frequency to = %x \n", currentfreq);
+			fprintf(stderr, "Set Filters frequency to = %d \n", currentfreq);
 			previousfreq = currentfreq;
-			unsigned char ldata[2];
-			ldata[0] = 0x02;
-			ldata[1] = currentfreq;
-			fprintf(stderr, "Set Filters data 0 = %x \n", ldata[0]);
-			fprintf(stderr, "Set Filters data 1 = %x \n", ldata[1]);
-			i2cWriteDevice(i2c_filters_board_handler, ldata, 2);
+			unsigned tempFreq = currentfreq;	
+			unsigned char ldata[8];
+
+			ldata[0] = (tempFreq / 10000000U) % 10;
+			ldata[1] = (tempFreq / 1000000U) % 10;
+			ldata[2] = (tempFreq / 100000U) % 10;
+			ldata[3] = (tempFreq / 10000U) % 10;
+			ldata[4] = (tempFreq / 1000U) % 10;
+			ldata[5] = (tempFreq / 100U) % 10;
+			ldata[6] = (tempFreq / 10U) % 10;
+			ldata[7] = (tempFreq / 1U) % 10;
+
+			i2cWriteDevice(i2c_filters_board_handler, ldata, 8);
+
 		}
 	}
 }
@@ -195,5 +159,49 @@ void handleFilters()
 //*******************************************
 int determine_freq(int base_index, char* buffer) {
 	return (((buffer[base_index + 1] & 0xFF) << 24) + ((buffer[base_index + 2] & 0xFF) << 16) + ((buffer[base_index + 3] & 0xFF) << 8) + (buffer[base_index + 4] & 0xFF));
+}
+//**********************************************************
+//  Determine which board to forward data - Alex or Generic
+//**********************************************************
+void handleFilters(char* buffer) {
+
+	if ((buffer[11] & 0xFE) == 0x04) {
+		currentfreq = determine_freq(11, buffer);
+	};
+	if ((buffer[523] & 0xFE) == 0x04) {
+		currentfreq = determine_freq(523, buffer);
+	};
+	if (i2c_alex) {
+		handleALEX(buffer);
+	}
+	else if (i2c_filters_board) {
+		handleFiltersBoard(buffer);
+	}
+
+}
+//********************************************************************
+//  Determine which filters interface is connected to the radioberry
+//********************************************************************
+void initFilters() {
+
+	i2c_alex_handler = i2cOpen(i2c_bus, ADDR_ALEX, 0);
+	if (i2c_alex_handler >= 0) {
+		initALEX();
+	}
+	i2c_filters_board_handler = i2cOpen(i2c_bus, ADDR_FILTERS, 0);
+	if (i2c_filters_board_handler >= 0) {	
+		initGenericFilters();
+	};
+
+	if (i2c_alex) {
+		fprintf(stderr, "alex interface found and initialized \n");
+	}
+	else if (i2c_filters_board) {
+		fprintf(stderr, "Generic filters board interface found and initialized \n");
+	}
+	else {
+		fprintf(stderr, "no alex or generic filters interface board found\n");
+	}
+
 }
 
