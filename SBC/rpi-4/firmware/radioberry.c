@@ -40,13 +40,9 @@
 *
 */
 
-// NOTE: this information will be retrieved from the gateware... in the (near) future.
+
 #define NR 0x04
 #define HERMESLITE  0x06
-#define FIRMWARE_VERSION 0x44		//68P4  //pihpsdr HL2
-//#define FIRMWARE_VERSION 0x27		//39P4	//pihpsdr HL1
-#define MINOR_VERSION 0x04
-
 
 #include "radioberry.h"
 #include "radioberry-rpi.h"
@@ -94,8 +90,13 @@ int initRadioberry() {
 		fprintf(stderr,"radioberry_protocol: spi bus rx1 could not be initialized. \n");
 		exit(-1);
 	}
+	
+	//required to retrieve gateware information.
+	spi_send_control(0);
+	
+	fprintf(stderr, "Radioberry gateware version %d-%d.\n", gateware_major_version, gateware_minor_version);
 
-	fprintf(stderr, "Radioberry, Initialisation succesfully executed.\n");
+	fprintf(stderr, "Radioberry firmware initialisation succesfully executed.\n");
 
 	//***********************************************
 	//       Filters switching initialization
@@ -229,7 +230,7 @@ void handlePacket(char* buffer){
 			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
 			memset(broadcastReply, 0, 60);
-			unsigned char reply[22] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, FIRMWARE_VERSION, HERMESLITE, 0, 0, 0, 0, 0, 0, 0, 0, NR, 0, MINOR_VERSION };
+			unsigned char reply[22] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, gateware_major_version, HERMESLITE, 0, 0, 0, 0, 0, 0, 0, 0, NR, 0, gateware_minor_version };
 			memcpy(broadcastReply, reply, 22);
 			if (sock_TCP_Client > -1) {
 				send(sock_TCP_Client, broadcastReply, 60, 0);
@@ -288,6 +289,8 @@ void handleCommand(int base_index, char* buffer) {
 	if ((commands[command] != command_data) | (save_mox != MOX)) {
 		commands[command] = command_data;
 		spi_send_control(command);
+		
+		if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 1:0;
 	}
 }
 
@@ -311,7 +314,7 @@ void processPacket(char* buffer)
 		for (j; j < 512; j += 8)
 		{
 			int k = coarse_pointer + j;
-			if (MOX) {
+			if (MOX || CWX) {
 				sem_wait(&tx_empty);
 				int i = 0;
 				for (i; i < 8; i++){
@@ -423,7 +426,7 @@ void spi_send_control(unsigned char command) {
 	unsigned char data[6];
 	uint32_t command_data = commands[command];
 	
-	data[0] = (run & 0xFF);		//MSB
+	data[0] = ((CWX << 1) & 0x02) | (running & 0x01); //MSB  
 	data[1] = (command & 0xFF);
 	data[2] = ((command_data >> 24) & 0xFF);
 	data[3] = ((command_data >> 16) & 0xFF);
@@ -433,6 +436,9 @@ void spi_send_control(unsigned char command) {
 	sem_wait(&mutex);		
 	spiXfer(rx1_spi_handler, data, data, 6);
 	sem_post(&mutex);
+	
+	gateware_major_version = data[4];
+	gateware_minor_version = data[5];
 	
 	//int fifolength = ((data[4] & 0x03) << 8) + (data[5] & 0xFF);
 	//fprintf(stderr, "Fifo length %d.\n", fifolength);
@@ -450,8 +456,9 @@ void *spiWriter(void *arg) {
 		for (i; i < 8; i++){			
 			tx_iqdata[i] = get_tx_buffer(); //EER first 4 bytes followed by 4 bytes TX IQ.
 		}
+		
 		//first setup without EER
-		if (MOX) {
+		if (MOX || CWX) {
 			for (int i = 4; i < 8 ; i++) {
 				
 				if (tx_iqdata[i] & 0x80) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
@@ -467,15 +474,16 @@ void *spiWriter(void *arg) {
 				*rpi_set_io_low = (1<<RPI_TX_CLK);
 			}
 		}	
-
+		
 		sem_post(&tx_empty); 
 		
 		tx_count ++;
 		if (tx_count == 48000) {
 			tx_count = 0;
 			gettimeofday(&t21, 0);
-			float elapsd = timedifference_msec(t20, t21);
-			fprintf(stderr, "Code tx mode spi executed in %f milliseconds.\n", elapsd);
+			float elapsed = timedifference_msec(t20, t21);
+			fprintf(stderr, "Code tx mode spi executed in %f milliseconds.\n", elapsed);
+			//fprintf(stderr, "tx_iqdata = %02X - %02X - %02X - %02X\n", tx_iqdata[4], tx_iqdata[5], tx_iqdata[6], tx_iqdata[7]);
 			gettimeofday(&t20, 0);
 		}
 	}

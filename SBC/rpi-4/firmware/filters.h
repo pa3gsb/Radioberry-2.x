@@ -200,7 +200,7 @@ void initFilters() {
 		fprintf(stderr, "Generic filters board interface found and initialized \n");
 	}
 	else {
-		fprintf(stderr, "no alex or generic filters interface board found\n");
+		fprintf(stderr, "No alex or generic filters interface board connected to radioberry\n");
 	}
 
 }

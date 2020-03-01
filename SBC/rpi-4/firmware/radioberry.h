@@ -88,6 +88,10 @@ unsigned char tx_buffer[TX_MAX_BUFFER];
 int fill_tx = 0; 
 int use_tx  = 0;
 
+int gateware_major_version = 0;
+int gateware_minor_version = 0;
+
+int CWX = 0;
 int MOX = 0;
 int save_mox = -1;
 sem_t tx_empty;
@@ -113,6 +117,7 @@ int lnrx = 1;
 uint32_t last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
 
+#define FIRMWARE_VERSION 0x45
 		
 unsigned char hpsdrdata[1032];
 uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
