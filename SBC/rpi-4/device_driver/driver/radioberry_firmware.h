@@ -38,7 +38,7 @@
 #define SPI_DC   5
 
 static int initialize_firmware(void);
-int rxStream(unsigned char stream[]);
+int rxStream(int nrx, unsigned char stream[]);
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]);
 int spiXfer(char *txBuf, char *rxBuf, unsigned cnt);
 void write_iq_sample(unsigned char tx_iqdata[]);
@@ -130,19 +130,21 @@ int spiXfer(char *txBuf, char *rxBuf, unsigned cnt){
    spiReg[SPI_CS] = spiDefaults; /* stop */
 }
 
-int rxStream(unsigned char stream[]){
+int rxStream(int nrx, unsigned char stream[]){
 	unsigned char iqdata[6];
 	int iqs = 1;
 
 	while ((((*rpi_read_io) >> 25) & 1) == 0) {return 0;}//wait for enough samples 
 	
+	int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
+	
 	int s = 0;
-	for (s = 0; s < 63; s++) {	
-		read_iq_sample(1, iqs, iqdata);
+	for (s = 0; s < nr_samples; s++) {	
+		read_iq_sample(nrx, iqs, iqdata);
 		memcpy(stream + (s * 6), iqdata, 6);
 		iqs++;
 	}
-	return 378;
+	return nr_samples * 6;
 }
 
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){

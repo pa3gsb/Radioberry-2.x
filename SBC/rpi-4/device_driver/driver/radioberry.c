@@ -56,12 +56,14 @@ For more information, please refer to <http://unlicense.org/>
 
 #define DEVNAME_RADIOBERRY "radioberry"
 #define NUM_DEV_RB 1
-#define SAMPLE_BYTES 378
+#define SAMPLE_BYTES 512
 
 #define DEV_MAJOR 0
 #define DEV_MINOR 0
 static int _major_radioberry = DEV_MAJOR;
 static int _minor_radioberry = DEV_MINOR;
+
+static int _nrx = 1;
 
 static struct cdev *cdev_array = NULL;
 static struct class *class_rb = NULL;
@@ -104,7 +106,7 @@ static void loading_radioberry_gateware(struct device *dev) {
 ssize_t radioberry_read(struct file *flip, char *buf, size_t count, loff_t *pos) {
 	
 	unsigned char rx_stream[SAMPLE_BYTES];		 
-	count = rxStream(rx_stream);
+	count = rxStream(_nrx, rx_stream);
 	
 	if (count) {if (copy_to_user((char *)buf, &rx_stream, count)) return -EFAULT;}
 
@@ -143,6 +145,7 @@ static int radioberry_release(struct inode *inode, struct file *filep) {
 static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
 
 	unsigned char data[6];
+	int lnrx = _nrx;
 	
 	int rc;
 	struct rb_info_arg_t *rb_info= kmalloc(sizeof(struct rb_info_arg_t), GFP_DMA);
@@ -163,8 +166,13 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			
 			//printk(KERN_INFO "Command kernel %2X - %2X - %2X - %2X - %2X - %2X \n", data[0], data[1], data[2], data[3], data[4], data[5]);
 	
+			if ((data[1] & 0xFE)  == 0x00) lnrx = ((data[5] & 0x38) >> 3) + 1;
+			printk(KERN_INFO "Aantal nrx %d \n", lnrx);
+	
 			// tell the gateware the command.
 			spiXfer(data, data, 6);
+			
+			_nrx = lnrx;
 			
 			// give feedback to firmware.
 			rb_info_ret.major = data[4];

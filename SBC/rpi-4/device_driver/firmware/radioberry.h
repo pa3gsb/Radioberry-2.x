@@ -46,7 +46,7 @@ void printIntroScreen() {
 
 int fd_rb;
 struct rb_info_arg_t rb_info;
-char rx_buffer[378];
+char rx_buffer[512];
 int rb_sample = 0;
 
 unsigned char command = 0;
