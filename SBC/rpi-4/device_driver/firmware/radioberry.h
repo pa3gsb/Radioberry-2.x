@@ -1,0 +1,148 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <signal.h>
+#include <string.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <math.h>
+#include <semaphore.h>
+#include <sys/time.h>
+#include <unistd.h>
+#include <errno.h>
+
+#include <assert.h>
+#include <fcntl.h>
+#include <stdint.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+
+
+#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+
+
+void printIntroScreen() {
+	fprintf(stderr,"\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr,	"====================================================================\n");
+	fprintf(stderr, "\t\t\tRadioberry V2.0\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\n");
+	fprintf(stderr,	"\t*** ==> !!!Device driver version!!!! <== ****\n");
+	fprintf(stderr,	"\t*** !!! Radioberry device driver available for RPI-4!!!! ****\n");
+	fprintf(stderr,	"\n\n");
+	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter. \n");
+	fprintf(stderr,	"\n\n");
+	fprintf(stderr, "\t\t Have fune Johan PA3GSB\n");
+	fprintf(stderr, "\n\n");
+	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
+	fprintf(stderr, "====================================================================\n");
+	fprintf(stderr, "====================================================================\n");
+}
+
+int fd_rb;
+struct rb_info_arg_t rb_info;
+char rx_buffer[378];
+int rb_sample = 0;
+
+unsigned char command = 0;
+uint32_t command_data = 0;
+uint32_t commands[256];
+unsigned char run = 0;
+int closerb = 0;
+
+int rb_sleep = 100;
+
+int initRadioberry();
+void runRadioberry(void);
+int closeRadioberry();
+
+void sendPacket(void);
+void handlePacket(char* buffer);
+void processPacket(char* buffer);
+void fillPacketToSend(void);
+
+void *packetreader(void *arg);
+void *txWriter(void *arg);
+
+void send_control(unsigned char command);
+float timedifference_msec(struct timeval t0, struct timeval t1);
+
+void put_tx_buffer(unsigned char  value);
+unsigned char get_tx_buffer(void);
+
+int sock_TCP_Server = -1;
+int sock_TCP_Client = -1;
+
+int udp_retries=0;
+int active = 0;
+
+static volatile int keepRunning = 1;
+
+#define TX_MAX 4800
+#define TX_MAX_BUFFER (TX_MAX * 8)
+unsigned char tx_buffer[TX_MAX_BUFFER];
+int fill_tx = 0; 
+int use_tx  = 0;
+
+int gateware_major_version = 0;
+int gateware_minor_version = 0;
+
+int CWX = 0;
+int MOX = 0;
+int save_mox = -1;
+sem_t tx_empty;
+sem_t tx_full;
+sem_t mutex;
+
+int tx_count =0;
+void rx_reader(unsigned char iqdata[]);
+
+unsigned char iqdata[6];
+unsigned char tx_iqdata[4];
+
+#define SERVICE_PORT	1024
+
+int nrx = 1; // n Receivers
+int lnrx = 1;
+
+#define SYNC 0x7F
+uint32_t last_sequence_number = 0;
+uint32_t last_seqnum=0xffffffff, seqnum; 
+
+#define FIRMWARE_VERSION 0x45
+		
+unsigned char hpsdrdata[1032];
+uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
+uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
+
+unsigned char broadcastReply[60];
+#define TIMEOUT_MS      100     
+
+int running = 0;
+int fd;									/* our socket */
+
+struct sockaddr_in myaddr;				/* our address */
+struct sockaddr_in remaddr;				/* remote address */
+
+socklen_t addrlen = sizeof(remaddr);	/* length of addresses */
+
+struct timeval t20;
+struct timeval t21;
+float elapsed;
+
+
+float timedifference_msec(struct timeval t0, struct timeval t1)
+{
+    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
+}
+
+void handle_sigint(int sig) 
+{ 
+	if (running) fprintf(stderr, "  SDR program is still running; please stop SDR first.\n");
+	closerb = 1;
+}
