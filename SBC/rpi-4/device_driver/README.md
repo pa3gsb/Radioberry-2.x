@@ -61,8 +61,11 @@ If you like to load the device driver during boot, execute the following:
 add the device driver in this file, see content example:
 
 \# /etc/modules: kernel modules to load at boot time.
+
 \# 
+
 \# This file contains the names of kernel modules that should be loaded
+
 \# at boot time, one per line. Lines beginning with "#" are ignored.
 
 i2c-dev
