@@ -54,7 +54,7 @@ For more information, please refer to <http://unlicense.org/>
 
 #include "radioberry_ioctl.h"
 #include "radioberry.h"
-//#include "filters.h"	/// thinking how to interact with device driver....
+#include "filters.h"
 
 int main(int argc, char **argv)
 {	
@@ -96,7 +96,7 @@ int initRadioberry() {
 	//***********************************************
 	//       Filters switching initialization
 	//***********************************************
-	//initFilters();
+	initFilters();
 	//***********************************************	
 
 	pthread_t pid1, pid2; 
@@ -325,7 +325,7 @@ void processPacket(char* buffer)
 	//**************************************************
 	//         Handling filter change
 	//**************************************************
-	//handleFilters(buffer);
+	handleFilters(buffer);
 	//**************************************************
 }
 

@@ -1,3 +1,6 @@
+#ifndef __RADIOBERRY_FILTERS_H__
+#define __RADIOBERRY_FILTERS_H__
+
 //*************************************************************************
 //		         Filters Board interface
 //
@@ -5,6 +8,14 @@
 //		   Protocols: Alex Board && VA2SAJ Generic Filters Interface 
 //
 //*************************************************************************
+// Johan, PA3GSB modified using a i2c device; making it less platform dependent.
+
+
+#include <linux/i2c-dev.h>
+
+int fd_i2c_alex;
+int fd_i2c_filter;
+ 
 #define ADDR_ALEX 			0x21 		/* PCA9555 address 1 for Alex Interface Board*/
 #define ADDR_FILTERS 		0x20 	/* Arduino filter board interface switcher address for VA2SAJ Generic Filter Switching Board*/
 int i2c_alex_handler = 0;
@@ -29,14 +40,14 @@ void initALEX() {
 	data[0] = 0x06;
 	data[1] = 0x00;
 	data[2] = 0x00;
-	result = i2cWriteDevice(i2c_alex_handler, data, 3);
+	result = write(fd_i2c_alex, data, 3);
 
 	if (result >= 0) {
 		data[0] = 0x02;
 		data[1] = 0x00;
 		data[2] = 0x00;
 		/* set all pins to low */
-		result = i2cWriteDevice(i2c_alex_handler, data, 3);
+		result = write(fd_i2c_alex, data, 3);
 	}
 
 	if (result >= 0) {
@@ -54,14 +65,14 @@ void initGenericFilters() {
 	data[0] = 0x02;
 	data[1] = 0x02;
 	data[2] = 0x01;
-	result = i2cWriteDevice(i2c_filters_board_handler, data, 3);
+	result =  write(fd_i2c_filter, data, 3);
 
 	if (result >= 0) {
 		data[0] = 0x02;
 		data[1] = 0x02;
 		data[2] = 0x03;
 		/* set all pins to low */
-		result = i2cWriteDevice(i2c_filters_board_handler, data, 3);
+		result =  write(fd_i2c_filter, data, 3);
 	}
 
 	if (result >= 0) {
@@ -117,7 +128,7 @@ void handleALEX(char* buffer)
 			fprintf(stderr, "Set Alex data 0 = %x \n", ldata[0]);
 			fprintf(stderr, "Set Alex data 1 = %x \n", ldata[1]);
 			fprintf(stderr, "Set Alex data 2 = %x \n", ldata[2]);
-			i2cWriteDevice(i2c_alex_handler, ldata, 3);
+			write(fd_i2c_alex, ldata, 3);
 		}
 	}
 }
@@ -149,8 +160,7 @@ void handleFiltersBoard(char* buffer)
 			ldata[6] = (tempFreq / 10U) % 10;
 			ldata[7] = (tempFreq / 1U) % 10;
 
-			i2cWriteDevice(i2c_filters_board_handler, ldata, 8);
-
+			write(fd_i2c_filter, ldata, 8);
 		}
 	}
 }
@@ -183,15 +193,25 @@ void handleFilters(char* buffer) {
 //  Determine which filters interface is connected to the radioberry
 //********************************************************************
 void initFilters() {
-
-	i2c_alex_handler = i2cOpen(i2c_bus, ADDR_ALEX, 0);
+	
+	fd_i2c_alex = open("/dev/i2c-1", O_RDWR);
+	fd_i2c_filter = open("/dev/i2c-1", O_RDWR);
+	
+	if (fd_i2c_alex < 0 || fd_i2c_filter < 0) {
+		fprintf(stderr, "Your SBC device is missing the following driver: '/dev/i2c-1' \n");
+		fprintf(stderr, "To make use of an i2c speaking filterboard please load the driver first. \n");
+		return;
+	}
+	
+	i2c_alex_handler = ioctl(fd_i2c_alex, I2C_SLAVE, ADDR_ALEX);
 	if (i2c_alex_handler >= 0) {
 		initALEX();
-	}
-	i2c_filters_board_handler = i2cOpen(i2c_bus, ADDR_FILTERS, 0);
+	} else close(fd_i2c_alex);
+	
+	i2c_filters_board_handler = ioctl(fd_i2c_filter, I2C_SLAVE, ADDR_FILTERS);
 	if (i2c_filters_board_handler >= 0) {	
 		initGenericFilters();
-	};
+	} else close(fd_i2c_filter);
 
 	if (i2c_alex) {
 		fprintf(stderr, "alex interface found and initialized \n");
@@ -204,4 +224,7 @@ void initFilters() {
 	}
 
 }
+
+
+#endif
 
