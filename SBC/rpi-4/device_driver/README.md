@@ -69,9 +69,14 @@ add the device driver in this file, see content example:
 \# at boot time, one per line. Lines beginning with "#" are ignored.
 
 i2c-dev
+
 snd-mixer-oss
+
 snd-pcm-oss
+
 radioberry
+
+
 
 
 
