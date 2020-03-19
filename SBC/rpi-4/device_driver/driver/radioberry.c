@@ -167,7 +167,7 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			//printk(KERN_INFO "Command kernel %2X - %2X - %2X - %2X - %2X - %2X \n", data[0], data[1], data[2], data[3], data[4], data[5]);
 	
 			if ((data[1] & 0xFE)  == 0x00) lnrx = ((data[5] & 0x38) >> 3) + 1;
-			printk(KERN_INFO "Aantal nrx %d \n", lnrx);
+			//printk(KERN_INFO "Aantal nrx %d \n", lnrx);
 	
 			// tell the gateware the command.
 			spiXfer(data, data, 6);
@@ -289,5 +289,5 @@ module_exit(radioberry_exit);
 MODULE_AUTHOR("Johan Maas - pa3gsb@gmail.com");
 MODULE_DESCRIPTION("Radioberry SDR device driver. (rpi-4)");
 MODULE_SUPPORTED_DEVICE("Radioberry SDR");
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("UNLICENSE");
 MODULE_VERSION("0.1");

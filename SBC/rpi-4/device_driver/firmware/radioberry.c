@@ -59,25 +59,21 @@ For more information, please refer to <http://unlicense.org/>
 int main(int argc, char **argv)
 {	
 	printIntroScreen();
-	
 	if (initRadioberry() < 0){
 		fprintf(stderr,"Radioberry; could not be initialized. \n");
 		exit(-1);
 	}
-	
-	gettimeofday(&t20, 0);
-	
 	signal(SIGINT, handle_sigint);
-
 	runRadioberry();
-	
 	closeRadioberry();
 }
 
 int initRadioberry() {
 	sem_init(&mutex, 0, 1);	
 	sem_init(&tx_empty, 0, TX_MAX); 
-    sem_init(&tx_full, 0, 0);   
+    sem_init(&tx_full, 0, 0); 
+
+	gettimeofday(&t20, 0);	
 
 	memset(commands,0,256); // initialise the commands.	
 	
@@ -91,7 +87,8 @@ int initRadioberry() {
 		fprintf(stderr, "RADIOBERRY_IOC_COMMAND Error.");
 		exit(-1);		
 	} 
-	
+	gateware_major_version = rb_info.major;
+	gateware_minor_version = rb_info.minor;
 	fprintf(stderr, "Radioberry gateware version %d-%d.\n", rb_info.major, rb_info.minor);
 
 	fprintf(stderr, "Radioberry firmware initialisation succesfully executed.\n");
