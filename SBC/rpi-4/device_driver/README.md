@@ -3,8 +3,32 @@
 
 This device driver is special made for the RPI-4.
 
+Iam a newbie in the world of device drivers, but as so much in making the radioberry, do and learn!
 
-Hereby a step by step setup.
+I have learned in the last hours that making a device driver on your local rpi is something
+different than deploying on the different rpi's running different kernel versions.
+
+
+This means, for now, that you need to build the driver yourself. Which is not that complex.
+
+I will look to get the driver in the raspberrypi-kernel, also a new adventure for me!
+
+
+Build step:
+
+First get the linux headers:
+
+sudo apt-get install raspberrypi-kernel-headers
+
+Second you need to start the build process:
+
+use in a command window, in the folder driver (which contains the Makefile) : make
+
+This will results in a radioberry.ko file.
+
+
+
+Hereby a step by step setup:
 
 
 Step -1-
@@ -25,6 +49,7 @@ Step -2-
 Make a module folder in the driver area of your running kernel, and install the driver called radioberry.ko in this folder.
 
 cd /lib/modules/$(uname -r)/kernel/drivers
+
 sudo mkdir sdr
 
 copy the radioberry.ko to /lib/modules/$(uname -r)/kernel/drivers/sdr
