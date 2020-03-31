@@ -379,6 +379,8 @@ void send_control(unsigned char command) {
 	rb_info.command = command;
 	rb_info.command_data = command_data;
 	
+	fprintf(stderr, "Command = %02X  command_data = %08X\n", command, command_data);
+	
 	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
 		fprintf(stderr, "Could not sent commando to radioberry device.");
 	}
