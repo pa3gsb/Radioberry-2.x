@@ -40,7 +40,7 @@ For more information, please refer to <http://unlicense.org/>
 *	- SPARK
 *	- SDRConsole
 *
-*	Using the 'old HPSDR UDP protocol'; also called protocol-1
+*	Using the 'HPSDR UDP protocol'; also called protocol-1
 *
 *
 *	http://www.pa3gsb.nl
@@ -73,6 +73,7 @@ int initRadioberry() {
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0); 
 
+	gettimeofday(&t10, 0);	
 	gettimeofday(&t20, 0);	
 
 	memset(commands,0,256); // initialise the commands.	
@@ -82,6 +83,9 @@ int initRadioberry() {
 		exit(-1);
 	}
 	
+	//rb_info.rb_command = 0x01; 
+	rb_info.command_data = 0x0;
+	
 	//required to retrieve gateware information.
 	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
 		fprintf(stderr, "RADIOBERRY_IOC_COMMAND Error.");
@@ -90,6 +94,7 @@ int initRadioberry() {
 	gateware_major_version = rb_info.major;
 	gateware_minor_version = rb_info.minor;
 	fprintf(stderr, "Radioberry gateware version %d-%d.\n", rb_info.major, rb_info.minor);
+	
 
 	fprintf(stderr, "Radioberry firmware initialisation succesfully executed.\n");
 
@@ -262,6 +267,7 @@ void handlePacket(char* buffer){
 				}
 				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
 				running = 1;
+				send_control(0);
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
 			}	
 			break;
@@ -278,9 +284,10 @@ void handleCommand(int base_index, char* buffer) {
 	command_data=((buffer[base_index+1]&0xFF)<<24)+((buffer[base_index+2]&0xFF)<<16)+((buffer[base_index+3]&0xFF)<<8)+(buffer[base_index+4]&0xFF);
 	if ((commands[command] != command_data) | (save_mox != MOX)) {
 		commands[command] = command_data;
-		send_control(command);
 		
 		if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 1:0;
+		
+		send_control(command);
 	}
 }
 
@@ -356,15 +363,15 @@ void fillPacketToSend() {
 		for (int frame = 0; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 			
-			while (read(fd_rb , rx_buffer , sizeof(rx_buffer))==0) {usleep(rb_sleep);}
+			int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
+			read(fd_rb , rx_buffer , nr_samples);
 			rb_sample = 0;
-			
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
 				//NR must be read from gateware.
 				for (int r=0; r < MIN(lnrx, NR); r++) {	
 					memcpy(hpsdrdata + index + (r * 6), rx_buffer + rb_sample, 6);
-					rb_sample+=6;	
+					rb_sample+=6;						
 				}
 			}
 		}
@@ -379,7 +386,7 @@ void send_control(unsigned char command) {
 	rb_info.command = command;
 	rb_info.command_data = command_data;
 	
-	fprintf(stderr, "Command = %02X  command_data = %08X\n", command, command_data);
+	fprintf(stderr, "RB-Command = %02X Command = %02X  command_data = %08X\n", rb_info.rb_command, command, command_data);
 	
 	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
 		fprintf(stderr, "Could not sent commando to radioberry device.");

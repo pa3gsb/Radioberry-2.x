@@ -52,8 +52,8 @@ static int prepare_gateware_loading() {
 	int count = 0;
 	while ((((*rpi_read_io) >> iPinNSTATUS) & 1) == 0) {
 		count++;
-		msleep(10000);
-		if (count >= 255) {
+		msleep(1000);
+		if (count >= 2) {
 			printk(KERN_INFO "Error: prepareLoading failed\n");
 			return -1;
 		}

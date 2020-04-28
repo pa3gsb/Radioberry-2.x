@@ -134,7 +134,9 @@ int rxStream(int nrx, unsigned char stream[]){
 	unsigned char iqdata[6];
 	int iqs = 1;
 
-	while ((((*rpi_read_io) >> 25) & 1) == 0) {return 0;}//wait for enough samples 
+	// using irq in driver
+	// no need to poll... calling 76 samples and place in circulair buffer.
+	//while ((((*rpi_read_io) >> 25) & 1) == 0) {return 0;}//wait for enough samples 
 	
 	int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
 	
