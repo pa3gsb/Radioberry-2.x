@@ -99,7 +99,7 @@ int SoapyRadioberry::readStream(
 	float *target_buffer = (float *) buff_base;
 	
 	char rx_buffer[512];
-	while ((nr_samples = read(fd_rb , rx_buffer , sizeof(rx_buffer)))==0) {usleep(1); return -1;}
+	nr_samples = read(fd_rb , rx_buffer , sizeof(rx_buffer));
 	
 	for(i=0; i< nr_samples ; i+=6) {
 		left_sample   = (int)((signed char) rx_buffer[i])<<16;
