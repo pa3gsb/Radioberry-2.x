@@ -6,12 +6,16 @@
 
 #define RADIOBERRY_MAGIC	('x')
 
-#define RADIOBERRY_IOC_START_STREAM		_IOW(RADIOBERRY_MAGIC, 1, __u8)
-#define RADIOBERRY_IOC_STOP_STREAM		_IOW(RADIOBERRY_MAGIC, 2, __u8)
-#define RADIOBERRY_IOC_COMMAND_WRITE	_IOW(RADIOBERRY_MAGIC, 3, __u8)
-#define RADIOBERRY_IOC_COMMAND_READ		_IOW(RADIOBERRY_MAGIC, 4, __u8)
-#define RADIOBERRY_IOC_FREQ2			_IOW(RADIOBERRY_MAGIC, 5, __u8)
-#define RADIOBERRY_IOC_FREQ3			_IOW(RADIOBERRY_MAGIC, 6, __u8)
-#define RADIOBERRY_IOC_FREQ4			_IOW(RADIOBERRY_MAGIC, 7, __u8)
+#define RADIOBERRY_IOC_COMMAND			_IOW(RADIOBERRY_MAGIC, 1, __u8)
+
+struct rb_info_arg_t
+{
+    int major, minor;
+	
+	int rb_command;
+	int command;
+	int command_data;
+	
+} ;
 
 #endif
