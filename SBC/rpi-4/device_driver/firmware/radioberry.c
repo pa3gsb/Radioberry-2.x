@@ -73,7 +73,6 @@ int initRadioberry() {
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0); 
 
-	gettimeofday(&t10, 0);	
 	gettimeofday(&t20, 0);	
 
 	memset(commands,0,256); // initialise the commands.	
