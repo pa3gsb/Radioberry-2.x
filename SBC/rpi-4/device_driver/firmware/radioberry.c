@@ -881,5 +881,4 @@ unsigned char get_tx_buffer() {
     return tmp;
 }
 
->>>>>>> upstream/master
 //end of source.
