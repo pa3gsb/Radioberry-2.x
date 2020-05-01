@@ -331,7 +331,7 @@ void processPacket(char* buffer)
 	//**************************************************
 	//         Handling filter change
 	//**************************************************
-	handleFilters(buffer);
+	handleFilters(buffer, CWX);
 	//**************************************************
 }
 
