@@ -1,17 +1,12 @@
 ## Radioberry Device Driver
 
 
-This device driver is special made for the RPI-4.
+This device driver is a special for the RPI-4.
 
-Iam a newbie in the world of device drivers, but as so much in making the radioberry, do and learn!
-
-I have learned in the last hours that making a device driver on your local rpi is something
+I have learned that making a device driver on your local rpi is something
 different than deploying on the different rpi's running different kernel versions.
 
-
 This means, for now, that you need to build the driver yourself. Which is not that complex.
-
-I will look to get the driver in the raspberrypi-kernel, also a new adventure for me!
 
 
 Build step:
@@ -79,6 +74,21 @@ Step -5-
 
 Optional step.
 
+Execute: dtc -@ -I dts -O dtb -o radioberry.dtbo radioberry.dts
+
+This results in an overlay fiel radioberry.dtbo
+
+cp this radioberry.dtbo into /boot/overlays
+
+add the following line in config.txt:
+
+dtoverlay=radioberry
+
+This loads the kernel module during boot.
+
+
+Alternative step:
+
 If you like to load the device driver during boot, execute the following:
 
 /etc/modules-load.d/modules.conf
@@ -103,8 +113,6 @@ radioberry
 
 
 
-
-
 Step -6-
 
 Optional step.
@@ -112,7 +120,6 @@ Optional step.
 sudo chmod 666 /dev/radioberry
 
 Makes it possible to run the radioberry firmware version for the device driver, running as the logged in user:
-
 
 
 

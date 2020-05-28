@@ -1,0 +1,16 @@
+[Unit]
+Description=Radioberry SDR
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=forking
+User=pi
+Group=pi
+ExecStart=/etc/init.d/radioberryd start
+ExecStop=/etc/init.d/radioberryd stop
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

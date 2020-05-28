@@ -7,8 +7,9 @@ radioberry.ko:
 
 clean:      
 	@$(MAKE) -C $(KERNEL_HEADERS) M=$(PWD) clean
-	
+
 install: radioberry.ko
+	cp radioberry_ioctl.h /usr/local/include
 	sudo insmod radioberry.ko
 	sudo chmod 666 /dev/radioberry
 

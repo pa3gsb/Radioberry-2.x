@@ -34,4 +34,7 @@ $(PROGRAM): $(OBJS)
 clean:
 	-rm -f *.o
 	-rm -f $(PROGRAM)
+	
+install: $(PROGRAM)
+	cp $(PROGRAM) /usr/local/bin
 
