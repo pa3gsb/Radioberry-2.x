@@ -72,6 +72,7 @@ int initRadioberry() {
 	sem_init(&mutex, 0, 1);	
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0); 
+	sem_init(&spi_msg, 0, 0);
 
 	gettimeofday(&t20, 0);	
 
@@ -106,6 +107,8 @@ int initRadioberry() {
 	pthread_t pid1, pid2; 
 	pthread_create(&pid1, NULL, packetreader, NULL); 
 	pthread_create(&pid2, NULL, txWriter, NULL);
+	
+	start_rb_control_thread();
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -159,11 +162,12 @@ int closeRadioberry() {
 	if (fd_rb != 0) close(fd_rb);
 	if (sock_TCP_Client >= 0) close(sock_TCP_Client);
 	if (sock_TCP_Server >= 0) close(sock_TCP_Server);
-	
 	return 0;
 }
 
 void runRadioberry() {
+	fprintf(stderr, "Radioberry, Starting packet control part. \n");
+	start_timer_thread();
 	fprintf(stderr, "Radioberry, Starting packet tx part. \n");
 	while(!(running==0 && closerb == 1)) {
 		if (running) {
@@ -266,7 +270,7 @@ void handlePacket(char* buffer){
 				}
 				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
 				running = 1;
-				send_control(0);
+				//send_control(0);
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
 			}	
 			break;
@@ -281,24 +285,24 @@ void handlePacket(char* buffer){
 void handleCommand(int base_index, char* buffer) {
 	command = buffer[base_index];
 	command_data=((buffer[base_index+1]&0xFF)<<24)+((buffer[base_index+2]&0xFF)<<16)+((buffer[base_index+3]&0xFF)<<8)+(buffer[base_index+4]&0xFF);
-	if ((commands[command] != command_data) | (save_mox != MOX)) {
+	if (commands[command] != command_data) {
 		commands[command] = command_data;
 		
-		if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 1:0;
+		if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 0x01:0x00;
 		
-		send_control(command);
+		push(command);
+		sem_post(&spi_msg);
 	}
 }
 
 void handleCommands(char* buffer) {
 	handleCommand(11, buffer);
 	handleCommand(523, buffer);
-	save_mox = MOX;
 }
 
 void processPacket(char* buffer)
 {	
-	MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
+	MOX = ((buffer[11] & 0x01)==0x01) ? 0x01:0x00;
 	
 	handleCommands(buffer);
 		
@@ -344,6 +348,17 @@ void sendPacket() {
 	}
 }
 
+void read_temperature_raspberryPi() {
+	FILE *thermal;
+	thermal = fopen("/sys/class/thermal/thermal_zone0/temp","r");
+	float systemp, millideg;
+	fscanf(thermal,"%f",&millideg);
+	systemp = millideg / 1000;
+	//fprintf(stderr, "CPU temperature is %f degrees C\n",systemp);
+	sys_temp = (int) (4096/3.26) * ((systemp/ 100) + 0.5);
+	fclose(thermal);
+}
+
 void fillPacketToSend() {
 		memset(hpsdrdata,0,1032);
 		memcpy(hpsdrdata, header_hpsdrdata, 4);
@@ -373,6 +388,15 @@ void fillPacketToSend() {
 					rb_sample+=6;						
 				}
 			}
+			// inform the SDR about the radioberry control status.
+			// https://github.com/softerhardware/Hermes-Lite2/wiki/Protocol
+			hpsdrdata[11 + coarse_pointer] = (rb_control & 0x07); 
+			if ( last_sequence_number % 500 == 0) {
+				hpsdrdata[11 + coarse_pointer] = 0x08 | (rb_control & 0x07); 
+				read_temperature_raspberryPi();			
+				hpsdrdata[12 + coarse_pointer] = ((sys_temp >> 8) & 0xFF);
+				hpsdrdata[13 + coarse_pointer] = (sys_temp & 0xFF);
+			}
 		}
 }
 
@@ -385,11 +409,41 @@ void send_control(unsigned char command) {
 	rb_info.command = command;
 	rb_info.command_data = command_data;
 	
-	fprintf(stderr, "RB-Command = %02X Command = %02X  command_data = %08X\n", rb_info.rb_command, command, command_data);
+	//fprintf(stderr, "RB-Command = %02X Command = %02X  command_data = %08X\n", rb_info.rb_command, command, command_data);
 	
 	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
 		fprintf(stderr, "Could not sent commando to radioberry device.");
 	}
+	
+	rb_control = rb_info.rb_command;
+}
+
+static void *rb_control_thread(void *arg) {
+	while(1) {
+		sem_wait(&spi_msg); 
+		if (empty())  send_control(MOX); else send_control(pop());
+	}
+	fprintf(stderr,"rb_control_thread: exiting\n");
+	return NULL;
+}
+
+void start_rb_control_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, rb_control_thread, NULL);
+}
+
+static void *timer_thread(void *arg) {
+	while(1) {
+		usleep(100000);
+		if (running) sem_post(&spi_msg); 
+	}
+	fprintf(stderr,"timer_thread: exiting\n");
+	return NULL;
+}
+
+void start_timer_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, timer_thread, NULL);
 }
 
 void *txWriter(void *arg) {

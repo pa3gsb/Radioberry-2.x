@@ -197,6 +197,7 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			_nrx = lnrx;
 			
 			// give feedback to firmware.
+			rb_info_ret.rb_command = data[0]; // return the radioberry status information.
 			rb_info_ret.major = data[4];
 			rb_info_ret.minor = data[5];
 			

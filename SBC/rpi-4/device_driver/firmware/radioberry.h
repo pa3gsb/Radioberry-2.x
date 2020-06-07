@@ -44,6 +44,23 @@ void printIntroScreen() {
 	fprintf(stderr, "====================================================================\n");
 }
 
+int sys_temp = 0;
+
+
+//ringbuffer for handling SPI commands.
+#define CAPACITY 64
+uint32_t spi_commands[CAPACITY] = {0};
+uint32_t p_read = 0;
+uint32_t p_write = 0;
+mask(val)  { return val & (CAPACITY - 1); }
+push(val)  { assert(!full()); spi_commands[mask(p_write++)] = val; }
+pop()      { assert(!empty()); return spi_commands[mask(p_read++)]; }
+empty()    { return p_read == p_write; }
+full()     { return size() == CAPACITY; }
+size()     { return p_write - p_read; }
+
+char rb_control = 0x00;
+
 int fd_rb;
 struct rb_info_arg_t rb_info;
 char rx_buffer[512];
@@ -92,12 +109,13 @@ int use_tx  = 0;
 int gateware_major_version = 0;
 int gateware_minor_version = 0;
 
-int CWX = 0;
-int MOX = 0;
+char CWX = 0;
+char MOX = 0;
 int save_mox = -1;
 sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
+sem_t spi_msg;
 
 int tx_count =0;
 void rx_reader(unsigned char iqdata[]);
