@@ -9,13 +9,19 @@ The daemon is place in /etc/init.d/radioberryd
 
 Now you have control to the radioberry by using systemctl functions.
 
+'''
 sudo systemctl enable radioberry
-sudo systemctl disable radioberry
-sudo systemctl start radioberry
-sudo systemctl stop radioberry
-sudo systemctl restart radioberry
-sudo systemctl status radioberry
 
+sudo systemctl disable radioberry
+
+sudo systemctl start radioberry
+
+sudo systemctl stop radioberry
+
+sudo systemctl restart radioberry
+
+sudo systemctl status radioberry
+'''
 
 Using:
 
