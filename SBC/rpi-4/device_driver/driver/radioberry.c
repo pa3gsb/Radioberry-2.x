@@ -324,7 +324,8 @@ static void __exit radioberry_exit(void) {
 	
 	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
 	
-	free_irq(irqNumber, &radioberry_driver);
+	free_irq(irqNumber, NULL);
+    gpio_unexport(gpioRxSamplesiPin); 
 	
 	platform_driver_unregister(&radioberry_driver);
 	
@@ -352,4 +353,4 @@ MODULE_AUTHOR("Johan Maas - pa3gsb@gmail.com");
 MODULE_DESCRIPTION("Radioberry SDR device driver. (rpi-4)");
 MODULE_SUPPORTED_DEVICE("Radioberry SDR");
 MODULE_LICENSE("GPL");
-MODULE_VERSION("0.4");
+MODULE_VERSION("0.5");
