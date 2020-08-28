@@ -15,10 +15,11 @@ if [[ $input == "CL025" ]]; then
 
 	install_dependency git
 	
-	git clone https://github.com/softerhardware/Hermes-Lite2
+	git clone  --depth=1 https://github.com/softerhardware/Hermes-Lite2
 	sudo cp ./Hermes-Lite2/gateware/variants/radioberry_cl025/build/radioberry.rbf /lib/firmware
 	rm -rf Hermes-Lite2
 	
+	echo ""
 	echo "Radioberry gateware Cyclone 10 CL025 installed."
 	
 elif [[ $input == "CL016" ]]; then
@@ -31,10 +32,11 @@ elif [[ $input == "CL016" ]]; then
 
 	install_dependency git
 	
-	git clone https://github.com/softerhardware/Hermes-Lite2
+	git clone  --depth=1 https://github.com/softerhardware/Hermes-Lite2
 	sudo cp ./Hermes-Lite2/gateware/variants/radioberry_cl016/build/radioberry.rbf /lib/firmware
 	rm -rf Hermes-Lite2
 	
+	echo ""
 	echo "Radioberry gateware Cyclone 10 CL016 installed."
 
 elif [[ $input == "driver" ]]; then
@@ -60,7 +62,7 @@ elif [[ $input == "driver" ]]; then
 		sudo mkdir /lib/modules/$(uname -r)/kernel/drivers/sdr
 	fi
 	
-	git clone https://github.com/pa3gsb/Radioberry-2.x
+	git clone  --depth=1 https://github.com/pa3gsb/Radioberry-2.x
 	cd Radioberry-2.x/SBC/rpi-4/device_driver/driver
 	make
 	sudo cp radioberry.ko /lib/modules/$(uname -r)/kernel/drivers/sdr
@@ -83,6 +85,7 @@ elif [[ $input == "driver" ]]; then
 	sudo systemctl enable radioberry
 	sudo systemctl start radioberry
 	
+	echo ""
 	echo "Radioberry driver installed."
 
 elif [[ $input == "firmware" ]]; then	
@@ -100,7 +103,7 @@ elif [[ $input == "firmware" ]]; then
 	sudo systemctl stop radioberry
 	sudo systemctl disable radioberry
 		
-	git clone https://github.com/pa3gsb/Radioberry-2.x
+	git clone  --depth=1 https://github.com/pa3gsb/Radioberry-2.x
 	cd Radioberry-2.x/SBC/rpi-4/device_driver/firmware
 	sudo make
 	sudo cp radioberry  /usr/local/bin
@@ -112,6 +115,7 @@ elif [[ $input == "firmware" ]]; then
 	sudo systemctl enable radioberry
 	sudo systemctl start radioberry
 	
+	echo ""
 	echo "Radioberry firmware installed."	
 
 elif [[ $input == "systemd" ]]; then	
@@ -129,7 +133,7 @@ elif [[ $input == "systemd" ]]; then
 	sudo systemctl stop radioberry
 	sudo systemctl disable radioberry
 		
-	git clone https://github.com/pa3gsb/Radioberry-2.x
+	git clone --depth=1 https://github.com/pa3gsb/Radioberry-2.x
 	cd Radioberry-2.x/SBC/rpi-4/device_driver/systemd
 	
 	sudo cp radioberry.service /etc/systemd/system/radioberry.service
@@ -142,7 +146,8 @@ elif [[ $input == "systemd" ]]; then
 	sudo systemctl enable radioberry
 	sudo systemctl start radioberry
 	
-	echo "Radioberry firmware running installed."
+	echo ""
+	echo "Automatic starting Radioberry installed."
 	
 elif [[ $input == "reboot" ]]; then	
 
