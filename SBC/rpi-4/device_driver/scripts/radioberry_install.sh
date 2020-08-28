@@ -8,16 +8,8 @@ read input
 if [[ $input == "CL025" ]]; then
 	echo "Installing Radioberry gateware Cyclone 10 CL025..."
 	
-	function install_dependency {
-		echo "--- Installing dependency: $1"
-		sudo apt-get -y install $1
-	}
-
-	install_dependency git
-	
-	git clone  --depth=1 https://github.com/softerhardware/Hermes-Lite2
-	sudo cp ./Hermes-Lite2/gateware/variants/radioberry_cl025/build/radioberry.rbf /lib/firmware
-	rm -rf Hermes-Lite2
+	wget https://github.com/softerhardware/Hermes-Lite2/blob/master/gateware/variants/radioberry_cl025/build/radioberry.rbf
+	sudo mv ./radioberry.rbf /lib/firmware
 	
 	echo ""
 	echo "Radioberry gateware Cyclone 10 CL025 installed."
@@ -25,16 +17,8 @@ if [[ $input == "CL025" ]]; then
 elif [[ $input == "CL016" ]]; then
 	echo "Installing Radioberry gateware Cyclone 10 CL016..."
 	
-	function install_dependency {
-		echo "--- Installing dependency: $1"
-		sudo apt-get -y install $1
-	}
-
-	install_dependency git
-	
-	git clone  --depth=1 https://github.com/softerhardware/Hermes-Lite2
-	sudo cp ./Hermes-Lite2/gateware/variants/radioberry_cl016/build/radioberry.rbf /lib/firmware
-	rm -rf Hermes-Lite2
+	wget https://github.com/softerhardware/Hermes-Lite2/blob/master/gateware/variants/radioberry_cl016/build/radioberry.rbf
+	sudo mv ./radioberry.rbf /lib/firmware
 	
 	echo ""
 	echo "Radioberry gateware Cyclone 10 CL016 installed."
