@@ -16,6 +16,7 @@ if [[ $input == "SoapySDR" ]]; then
 
 	install_dependency git
 	install_dependency cmake
+	install_dependency libusb-1.0-0-dev
 	
 	cd /tmp
 	git clone https://github.com/pothosware/SoapySDR.git
