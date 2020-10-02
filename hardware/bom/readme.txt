@@ -1,6 +1,10 @@
 KICAD
 
+
 schema editor -> generate bom  (use standaard bom2csv -> creates xml file)
+
+
+use of python2.7: to install modules: C:\Python27\python -m pip install <module>
 
 In the bom directory:
 

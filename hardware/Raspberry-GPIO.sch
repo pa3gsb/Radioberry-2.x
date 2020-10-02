@@ -1,16 +1,12 @@
-EESchema Schematic File Version 2
-LIBS:Radioberry
-LIBS:hermeslite
-LIBS:power
-LIBS:Radioberry-cache
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 3 4
 Title ""
-Date ""
-Rev "rev 2.0-beta1"
+Date "2020-10-01"
+Rev "beta4"
 Comp "AppMind"
 Comment1 "PA3GSB"
 Comment2 ""
@@ -18,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 59BD2E97
 P 6610 2030
 AR Path="/59BD2E97" Ref="R?"  Part="1" 
@@ -31,7 +27,7 @@ F 3 "" H 6610 2030 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 59BD2E9E
 P 6610 2230
 AR Path="/59BD2E9E" Ref="R?"  Part="1" 
@@ -60,7 +56,7 @@ Entry Wire Line
 Entry Wire Line
 	4400 2550 4500 2650
 $Comp
-L PINHEAD_PINHD-2X10 CN301
+L Radioberry:PINHEAD_PINHD-2X10 CN301
 U 1 1 59BE5672
 P 1900 6150
 F 0 "CN301" H 1650 6725 59  0000 L BNN
@@ -103,7 +99,7 @@ Entry Wire Line
 Text Label 2550 7375 0    118  ~ 0
 Input-Output
 $Comp
-L GND #PWR036
+L hermeslite:GND #PWR036
 U 1 1 59BE8319
 P 1525 6650
 F 0 "#PWR036" H 1525 6400 50  0001 C CNN
@@ -114,7 +110,7 @@ F 3 "" H 1525 6650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR037
+L hermeslite:GND #PWR037
 U 1 1 59BE8382
 P 2350 6650
 F 0 "#PWR037" H 2350 6400 50  0001 C CNN
@@ -149,7 +145,7 @@ Entry Wire Line
 Text Label 8750 2900 0    118  ~ 0
 FPGA-PROGRAMMING
 $Comp
-L GND #PWR038
+L hermeslite:GND #PWR038
 U 1 1 59BF4346
 P 3050 3675
 F 0 "#PWR038" H 3050 3425 50  0001 C CNN
@@ -160,7 +156,7 @@ F 3 "" H 3050 3675 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR039
+L hermeslite:GND #PWR039
 U 1 1 59BF4427
 P 8475 1625
 F 0 "#PWR039" H 8475 1375 50  0001 C CNN
@@ -171,7 +167,7 @@ F 3 "" H 8475 1625 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FPGA U1
+L Radioberry:FPGA U1
 U 3 1 59BF65A5
 P 4200 6900
 AR Path="/59BF65A5" Ref="U1"  Part="3" 
@@ -196,7 +192,7 @@ Entry Wire Line
 Text Label 8675 4125 0    118  ~ 0
 SPI-0
 $Comp
-L FPGA U1
+L Radioberry:FPGA U1
 U 2 1 59BF8246
 P 9225 3800
 AR Path="/59BF8246" Ref="U1"  Part="2" 
@@ -237,7 +233,7 @@ Entry Wire Line
 Entry Wire Line
 	3600 6950 3700 6850
 $Comp
-L FPGA U1
+L Radioberry:FPGA U1
 U 1 1 59C96E6B
 P 9275 2525
 AR Path="/59C96E6B" Ref="U1"  Part="1" 
@@ -324,7 +320,7 @@ CE0_SPI0
 Text Label 4075 2550 0    39   ~ 0
 CE1_SPI0
 $Comp
-L +3V3 #PWR040
+L hermeslite:+3V3 #PWR040
 U 1 1 59CA01AB
 P 7110 1930
 F 0 "#PWR040" H 7110 1780 50  0001 C CNN
@@ -351,7 +347,7 @@ DATA[0]
 Text Label 8775 1825 0    39   ~ 0
 NSTATUS
 $Comp
-L +3V3 #PWR041
+L hermeslite:+3V3 #PWR041
 U 1 1 59CA284E
 P 2475 5650
 F 0 "#PWR041" H 2475 5500 50  0001 C CNN
@@ -362,7 +358,7 @@ F 3 "" H 2475 5650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FPGA U1
+L Radioberry:FPGA U1
 U 4 1 59CA3DF2
 P 9000 6150
 AR Path="/59CA3DF2" Ref="U1"  Part="4" 
@@ -375,7 +371,7 @@ F 3 "" H 9000 6150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +5V #PWR307
+L Radioberry:+5V #PWR307
 U 1 1 59CDA96D
 P 4000 1300
 F 0 "#PWR307" H 4000 1200 60  0001 C CNN
@@ -386,7 +382,7 @@ F 3 "" H 4000 1300 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +5V #PWR301
+L Radioberry:+5V #PWR301
 U 1 1 59CFABA8
 P 1450 5675
 F 0 "#PWR301" H 1450 5575 60  0001 C CNN
@@ -397,7 +393,7 @@ F 3 "" H 1450 5675 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3Rpi #PWR042
+L Radioberry:+3V3Rpi #PWR042
 U 1 1 59CFC626
 P 2555 1350
 AR Path="/59CFC626" Ref="#PWR042"  Part="1" 
@@ -414,7 +410,7 @@ NoConn ~ 3375 1650
 NoConn ~ 3375 1750
 NoConn ~ 3375 2650
 $Comp
-L PINHEAD_PINHD-2X20 CN302
+L Radioberry:PINHEAD_PINHD-2X20 CN302
 U 1 1 59BE4EE2
 P 3075 2250
 F 0 "CN302" H 2825 3275 45  0000 L BNN
@@ -488,7 +484,7 @@ SCL
 Text GLabel 6200 5085 0    60   Input ~ 0
 IO-13
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 59D7BD3F
 P 6655 5085
 AR Path="/59D7BD3F" Ref="R?"  Part="1" 
@@ -503,7 +499,7 @@ F 5 "R 4K7" H 6655 5085 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 59D7BAFD
 P 6645 4850
 AR Path="/59D7BAFD" Ref="R?"  Part="1" 
@@ -534,7 +530,7 @@ Text Notes 2950 3550 0    60   ~ 0
 Text GLabel 8775 4900 0    39   Input ~ 0
 GPCLK2
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 59E4A415
 P 6625 5700
 AR Path="/59E4A415" Ref="R?"  Part="1" 
@@ -549,7 +545,7 @@ F 5 "R" H 6625 5700 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 59E4A48A
 P 6625 5950
 AR Path="/59E4A48A" Ref="R?"  Part="1" 
@@ -577,7 +573,7 @@ NoConn ~ 8850 4800
 NoConn ~ 8850 4700
 NoConn ~ 8850 4600
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 5A10530B
 P 6675 3425
 AR Path="/5A10530B" Ref="R?"  Part="1" 
@@ -598,7 +594,7 @@ IO-11
 Text GLabel 6400 3425 0    60   Input ~ 0
 IO-12
 $Comp
-L +3V3 #PWR043
+L hermeslite:+3V3 #PWR043
 U 1 1 5A116B28
 P 7125 3280
 F 0 "#PWR043" H 7125 3130 50  0001 C CNN
@@ -616,7 +612,7 @@ Text Notes 5465 4090 0    60   ~ 0
 Text Notes 6170 2475 0    60   ~ 0
 Programming pull-ups
 $Comp
-L +3V3 #PWR044
+L hermeslite:+3V3 #PWR044
 U 1 1 5A173804
 P 7220 4770
 F 0 "#PWR044" H 7220 4620 50  0001 C CNN
@@ -629,7 +625,7 @@ $EndComp
 Text Notes 6290 5075 0    60   ~ 0
 SDA
 $Comp
-L RCL_R-EU_R0805 R?
+L Radioberry:RCL_R-EU_R0805 R?
 U 1 1 5A105358
 P 6675 3675
 AR Path="/5A105358" Ref="R?"  Part="1" 
@@ -644,7 +640,7 @@ F 5 "R" H 6675 3675 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L PWR_FLAG #FLG045
+L power:PWR_FLAG #FLG045
 U 1 1 5A2114A8
 P 995 1045
 F 0 "#FLG045" H 995 1120 50  0001 C CNN
@@ -655,7 +651,7 @@ F 3 "" H 995 1045 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3Rpi #PWR046
+L Radioberry:+3V3Rpi #PWR046
 U 1 1 5A2114D8
 P 995 1095
 F 0 "#PWR046" H 970 870 60  0001 C CNN
@@ -666,13 +662,12 @@ F 3 "" H 995 1095 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	2425 1750 2425 3650
+	2425 1750 2425 2550
 Wire Wire Line
-	2425 3650 3725 3650
+	2425 3650 3050 3650
 Wire Wire Line
-	3725 3650 3725 1550
+	3725 3650 3725 2950
 Connection ~ 2425 2550
-Connection ~ 2425 1750
 Connection ~ 2425 3250
 Connection ~ 3725 2950
 Connection ~ 3725 2750
@@ -682,22 +677,14 @@ Wire Wire Line
 	7110 2230 6810 2230
 Wire Wire Line
 	6810 2030 7110 2030
-Connection ~ 6810 2030
 Connection ~ 7110 2030
-Connection ~ 6810 2230
 Wire Wire Line
 	3775 1450 3375 1450
 Wire Wire Line
-	3375 1350 4000 1350
+	3375 1350 3775 1350
 Wire Wire Line
 	3775 1350 3775 1450
 Connection ~ 3775 1350
-Wire Bus Line
-	1625 2350 1625 4275
-Wire Bus Line
-	4500 2550 4500 4275
-Wire Bus Line
-	6125 7075 1075 7075
 Wire Wire Line
 	1700 5950 1175 5950
 Wire Wire Line
@@ -712,10 +699,6 @@ Wire Wire Line
 	1700 6450 1175 6450
 Wire Wire Line
 	2200 5850 2725 5850
-Wire Bus Line
-	1075 7075 1075 5950
-Wire Bus Line
-	2825 5950 2825 7075
 Wire Wire Line
 	2200 5950 2725 5950
 Wire Wire Line
@@ -742,8 +725,6 @@ Wire Wire Line
 	1725 2450 2875 2450
 Wire Wire Line
 	2875 1950 1500 1950
-Wire Bus Line
-	1400 2050 1400 4625
 Wire Bus Line
 	1400 4625 5050 4625
 Wire Wire Line
@@ -781,18 +762,14 @@ Wire Wire Line
 Wire Wire Line
 	8675 2425 9125 2425
 Wire Bus Line
-	8575 1925 8575 2925
-Wire Bus Line
 	8575 2925 9700 2925
 Wire Wire Line
 	9125 1625 8475 1625
 Wire Wire Line
-	9125 1325 9125 1625
+	9125 1325 9125 1425
 Connection ~ 9125 1425
 Connection ~ 9125 1525
 Connection ~ 9125 1625
-Connection ~ 9125 1325
-Connection ~ 8475 1625
 Wire Wire Line
 	8675 3300 9125 3300
 Wire Wire Line
@@ -803,8 +780,6 @@ Wire Wire Line
 	8675 3600 9125 3600
 Wire Wire Line
 	8675 3700 9125 3700
-Wire Bus Line
-	8575 3400 8575 4175
 Wire Bus Line
 	8575 4175 9825 4175
 Wire Wire Line
@@ -833,14 +808,10 @@ Wire Wire Line
 	3700 6850 4100 6850
 Wire Wire Line
 	5600 6850 6025 6850
-Wire Bus Line
-	3600 6250 3600 7075
-Wire Bus Line
-	3600 7075 3575 7075
 Wire Wire Line
 	1175 5850 1700 5850
 Wire Wire Line
-	7110 1930 7110 2230
+	7110 1930 7110 2030
 Wire Wire Line
 	2875 3250 2425 3250
 Wire Wire Line
@@ -903,13 +874,9 @@ Wire Wire Line
 	8775 5100 8850 5100
 Wire Wire Line
 	8775 5000 8850 5000
-Connection ~ 6410 2030
-Connection ~ 6410 2230
 Wire Wire Line
 	3050 3675 3050 3650
 Connection ~ 3050 3650
-Wire Bus Line
-	6125 6450 6125 7075
 Wire Wire Line
 	1700 6550 1550 6550
 Wire Wire Line
@@ -922,8 +889,6 @@ Wire Wire Line
 	8775 4900 8850 4900
 Wire Wire Line
 	6425 5700 6200 5700
-Wire Wire Line
-	6200 5950 6425 5950
 Wire Wire Line
 	6825 5700 7075 5700
 Wire Wire Line
@@ -938,10 +903,6 @@ Wire Wire Line
 	6160 2030 6410 2030
 Wire Wire Line
 	6160 2230 6410 2230
-Connection ~ 6825 5950
-Connection ~ 6820 5695
-Connection ~ 6430 5705
-Connection ~ 6420 5950
 Wire Wire Line
 	6455 5085 6200 5085
 Wire Wire Line
@@ -949,22 +910,72 @@ Wire Wire Line
 Wire Wire Line
 	6845 4850 7220 4850
 Wire Wire Line
-	7220 4770 7220 5085
+	7220 4770 7220 4850
 Wire Wire Line
 	7220 5085 6855 5085
 Connection ~ 7220 4850
 Wire Wire Line
 	6875 3425 7125 3425
 Wire Wire Line
-	7125 3280 7125 3675
+	7125 3280 7125 3425
 Wire Wire Line
 	7125 3675 6875 3675
 Connection ~ 7125 3425
 Wire Wire Line
 	995  1045 995  1095
 Wire Wire Line
-	2415 1350 2875 1350
+	2415 1350 2555 1350
 Connection ~ 2555 1350
 Text GLabel 2415 1350 0    39   Input ~ 0
 3V3Rpi
+Wire Wire Line
+	2425 2550 2425 3250
+Wire Wire Line
+	2425 3250 2425 3650
+Wire Wire Line
+	3725 2950 3725 2750
+Wire Wire Line
+	3725 2750 3725 2250
+Wire Wire Line
+	3725 2250 3725 1950
+Wire Wire Line
+	3725 1950 3725 1550
+Wire Wire Line
+	7110 2030 7110 2230
+Wire Wire Line
+	3775 1350 4000 1350
+Wire Wire Line
+	9125 1425 9125 1525
+Wire Wire Line
+	9125 1525 9125 1625
+Wire Wire Line
+	3050 3650 3725 3650
+Wire Wire Line
+	7220 4850 7220 5085
+Wire Wire Line
+	7125 3425 7125 3675
+Wire Wire Line
+	2555 1350 2875 1350
+Wire Bus Line
+	1075 7075 6125 7075
+Wire Wire Line
+	6200 5950 6425 5950
+Wire Bus Line
+	4500 2550 4500 4275
+Wire Bus Line
+	1625 2350 1625 4275
+Wire Bus Line
+	1400 2050 1400 4625
+Wire Bus Line
+	8575 1925 8575 2925
+Wire Bus Line
+	8575 3400 8575 4175
+Wire Bus Line
+	1075 5950 1075 7075
+Wire Bus Line
+	2825 5950 2825 7075
+Wire Bus Line
+	6125 6450 6125 7075
+Wire Bus Line
+	3600 6250 3600 7075
 $EndSCHEMATC

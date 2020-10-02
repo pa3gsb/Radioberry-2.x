@@ -18,7 +18,7 @@
   & IC REG LINEAR 1.2V 800MA & \href{http://www.octopart.com/search?q=LD1117S12TR}{LD1117S12TR} & Y & IC204 & SOT223 & 4 & 1 \\ \hline
   & RF ADC DAC & \href{http://www.aliexpress.com/wholesale?SearchText=AD9866BCPZ}{AD9866BCPZ} & N & IC401 & 64-VFQFN EP & 64 & 1 \\ \hline
   & 330nH & \href{http://www.octopart.com/search?q=LQW2BASR33J00L}{LQW2BASR33J00L} & N & L401,L402 & 0805 & 2 & 2 \\ \hline
-18125 & 27K 0603$\leq$1\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-07120RL}{RC0603FR-07120RL} & Y & R201 & 0805 & 2 & 1 \\ \hline
+18125 & 120R 0603$\leq$1\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-07120RL}{RC0603FR-07120RL} & Y & R201 & 0805 & 2 & 1 \\ \hline
 26547 & 10K 0603$\leq$5\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-0710KL}{RC0603FR-0710KL} & Y & R301,R302 & 0603 & 2 & 2 \\ \hline
   & 1.6K 0603$\leq$5\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-071K6L}{RC0603FR-071K6L} & Y & R403 & 0603 & 2 & 1 \\ \hline
   & 1:1 RF Transformer & \href{http://www.aliexpress.com/wholesale?SearchText=MABAES0060}{MABAES0060} & N & T401 & SM-22-5 3.81x3.81mm & 5 & 1 \\ \hline

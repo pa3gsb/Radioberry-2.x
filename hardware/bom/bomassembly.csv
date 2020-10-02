@@ -12,7 +12,7 @@ C255,C256,C257,C258,
 C259,C401,C402,C409,
 C410,C411,C412,C414,
 C415,C416,C425,C426,
-C427,C428,C437", "0603", 2, 51, "=HYPERLINK("http://www.octopart.com/search?q=C0603C104M5RACTU")"
+C427,C428,C437,C438", "0603", 2, 52, "=HYPERLINK("http://www.octopart.com/search?q=C0603C104M5RACTU")"
 1940, "1nF 0603>=X5R>=50V<=20%", "C0603C102M5RACTU", Y, "C204,C205,C206,C217,
 C417,C418,C419,C420", "0603", 2, 8, "=HYPERLINK("http://www.octopart.com/search?q=C0603C102M5RACTU")"
 58143, "10nF 0603>=X5R>=50V<=20%", "C0603C103M5RACTU", Y, "C207,C208,C209,C218,
@@ -28,7 +28,7 @@ C434,C435,C436", "0603", 2, 11, "=HYPERLINK("http://www.octopart.com/search?q=GR
 14236, "10uF 1206>=X5R>=25V<=20%", "CL31A106KAHNNNE", Y, "C408", "1206", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=CL31A106KAHNNNE")"
  , "8.2pF 0805NP0>=25V<=5%", "CL21C8R2DBANNNC", Y, "C413", "0805", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=CL21C8R2DBANNNC")"
 16531, "1uF 0603>=X5R>=6.3V<=20%", "GRM188R61E105KA12D", Y, "C429,C430,C431,C432", "0603", 2, 4, "=HYPERLINK("http://www.octopart.com/search?q=GRM188R61E105KA12D")"
- , "GPIO Header for Raspberry Pi 3 - 2x20 Female Header", "ada product id 2222", Y, "CN302", "2x20", 40, 1, "=HYPERLINK("http://www.octopart.com/search?q=ada product id 2222")"
+ , "GPIO Header for Raspberry Pi 3 - 2x20 Female Header", "ADA product id 2222", Y, "CN302", "2x20", 40, 1, "=HYPERLINK("http://www.octopart.com/search?q=ADA product id 2222")"
  , "TVS Diode", "CDSOD323-T05LC", N, "D401", "SC-76, SOD-323", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=CDSOD323-T05LC")"
  , "FILTER LC(PI) 305NH/84PF SMD", "NFL21SP506X1C3D", Y, "F401,F402", "Custom", 4, 2, "=HYPERLINK("http://www.octopart.com/search?q=NFL21SP506X1C3D")"
  , "FB 0603 >=600R@100MHz <=200mOhm@DC 1A <=25%", "MPZ1608S601ATA00", Y, "FB201,FB202,FB203,
@@ -41,7 +41,7 @@ FB405,FB406", "0603", 2, 14, "=HYPERLINK("http://www.octopart.com/search?q=MPZ16
  , "IC REG LINEAR 1.2V 800MA", "LD1117S12TR", Y, "IC204", "SOT223", 4, 1, "=HYPERLINK("http://www.octopart.com/search?q=LD1117S12TR")"
  , "RF ADC DAC", "AD9866BCPZ", N, "IC401", "64-VFQFN EP", 64, 1, "=HYPERLINK("http://www.aliexpress.com/wholesale?SearchText=AD9866BCPZ")"
  , "330nH", "LQW2BASR33J00L", N, "L401,L402", "0805", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=LQW2BASR33J00L")"
-18125, "27K 0603<=1%>=1/10W", "RC0603FR-07120RL", Y, "R201", "0805", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-07120RL")"
+18125, "120R 0603<=1%>=1/10W", "RC0603FR-07120RL", Y, "R201", "0805", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-07120RL")"
 26547, "10K 0603<=5%>=1/10W", "RC0603FR-0710KL", Y, "R301,R302", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0710KL")"
  , "1.6K 0603<=5%>=1/10W", "RC0603FR-071K6L", Y, "R403", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-071K6L")"
  , "1:1 RF Transformer", "MABAES0060", N, "T401", "SM-22-5 3.81x3.81mm", 5, 1, "=HYPERLINK("http://www.aliexpress.com/wholesale?SearchText=MABAES0060")"
@@ -51,8 +51,8 @@ FB405,FB406", "0603", 2, 14, "=HYPERLINK("http://www.octopart.com/search?q=MPZ16
  , "CONN SMA JACK R/A 50 OHM PCB", "5-1814400-1", N, "X401,X402", "BU-SMA-H", 5, 2, "=HYPERLINK("http://www.octopart.com/search?q=5-1814400-1")"
 
 "Line Items SMT:", " ", 26, "Line Items TH:", " ", 2
-"Parts SMT:", " ", 126, "Parts TH:", " ", 3
-"Pins SMT:", " ", 476, "Pins TH:", " ", 50
+"Parts SMT:", " ", 127, "Parts TH:", " ", 3
+"Pins SMT:", " ", 478, "Pins TH:", " ", 50
 
 Do Not Assemble:
-"C4,C4,CN,R3,R3,R3,R3"
+"C4,C4,CN,R3,R3,R3,R3,R3,R3"

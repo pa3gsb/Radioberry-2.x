@@ -1,16 +1,12 @@
-EESchema Schematic File Version 2
-LIBS:Radioberry
-LIBS:hermeslite
-LIBS:power
-LIBS:Radioberry-cache
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 4 4
 Title ""
-Date ""
-Rev "rev 2.0-beta1"
+Date "2020-10-01"
+Rev "beta4"
 Comp "AppMind"
 Comment1 "PA3GSB"
 Comment2 ""
@@ -24,7 +20,7 @@ RF-IN
 Text Notes 3725 3850 0    100  ~ 0
 50 MHz LPF
 $Comp
-L MURATA-FILTER_NFM21C F402
+L Radioberry:MURATA-FILTER_NFM21C F402
 U 1 1 59BD5058
 P 4375 4150
 F 0 "F402" H 4225 4250 70  0000 L BNN
@@ -35,7 +31,7 @@ F 3 "" H 4375 4150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L RCL_R-EU_R0805 R403
+L Radioberry:RCL_R-EU_R0805 R403
 U 1 1 59BD509F
 P 10025 4150
 F 0 "R403" H 9875 4209 70  0000 L BNN
@@ -46,7 +42,7 @@ F 3 "" H 10025 4150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PA3GSB_T1-1TDIL T401
+L Radioberry:PA3GSB_T1-1TDIL T401
 U 1 1 59BD50B4
 P 5125 4350
 F 0 "T401" H 5000 4000 70  0000 L BNN
@@ -57,7 +53,7 @@ F 3 "" H 5125 4350 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CON-COAX_BU-SMA-H X402
+L Radioberry:CON-COAX_BU-SMA-H X402
 U 1 1 59BD50C2
 P 2525 4150
 F 0 "X402" H 2225 4380 70  0000 L BNN
@@ -68,7 +64,7 @@ F 3 "" H 2525 4150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FPGA U1
+L Radioberry:FPGA U1
 U 6 1 59C80E9B
 P 12000 7000
 AR Path="/59C80E9B" Ref="U1"  Part="6" 
@@ -81,7 +77,7 @@ F 3 "" H 12000 7000 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR047
+L hermeslite:GND #PWR047
 U 1 1 59CDDAE7
 P 5925 8425
 F 0 "#PWR047" H 5925 8175 50  0001 C CNN
@@ -97,7 +93,7 @@ NoConn ~ 6325 5350
 NoConn ~ 6325 5750
 NoConn ~ 6325 5650
 $Comp
-L C_Small C412
+L hermeslite:C_Small C412
 U 1 1 59CF0ABA
 P 10325 3800
 F 0 "C412" V 10275 3850 50  0000 L CNN
@@ -108,7 +104,7 @@ F 3 "" H 10325 3800 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C411
+L hermeslite:C_Small C411
 U 1 1 59CF0D61
 P 10325 3550
 F 0 "C411" V 10250 3625 50  0000 L CNN
@@ -119,7 +115,7 @@ F 3 "" H 10325 3550 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C409
+L hermeslite:C_Small C409
 U 1 1 59CF0DE8
 P 9925 4300
 F 0 "C409" H 9935 4370 50  0000 L CNN
@@ -130,7 +126,7 @@ F 3 "" H 9925 4300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C410
+L hermeslite:C_Small C410
 U 1 1 59CF0F12
 P 10100 3675
 F 0 "C410" H 10110 3745 50  0000 L CNN
@@ -141,7 +137,7 @@ F 3 "" H 10100 3675 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C408
+L hermeslite:C_Small C408
 U 1 1 59CF0FBB
 P 9875 3675
 F 0 "C408" H 9885 3745 50  0000 L CNN
@@ -152,7 +148,7 @@ F 3 "" H 9875 3675 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR048
+L hermeslite:GND #PWR048
 U 1 1 59CF101D
 P 10700 3975
 F 0 "#PWR048" H 10700 3725 50  0001 C CNN
@@ -163,7 +159,7 @@ F 3 "" H 10700 3975 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR049
+L hermeslite:GND #PWR049
 U 1 1 59CFF8CB
 P 4025 4675
 F 0 "#PWR049" H 4025 4425 50  0001 C CNN
@@ -175,7 +171,7 @@ F 3 "" H 4025 4675 50  0001 C CNN
 $EndComp
 NoConn ~ 6325 3850
 $Comp
-L TCXO X400
+L Radioberry:TCXO X400
 U 1 1 59D026EF
 P 12300 2300
 F 0 "X400" H 12300 2575 60  0000 C CNN
@@ -186,7 +182,7 @@ F 3 "" H 12300 2325 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FB FB406
+L hermeslite:FB FB406
 U 1 1 59D029F2
 P 13325 2150
 F 0 "FB406" H 13400 2100 39  0000 C CNN
@@ -197,7 +193,7 @@ F 3 "" H 13325 2150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C437
+L hermeslite:C_Small C437
 U 1 1 59D02A6B
 P 12925 2050
 F 0 "C437" H 12935 2120 50  0000 L CNN
@@ -208,7 +204,7 @@ F 3 "" H 12925 2050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 3V3B #PWR050
+L hermeslite:3V3B #PWR050
 U 1 1 59D02EA8
 P 13475 1950
 F 0 "#PWR050" H 13475 1800 60  0001 C CNN
@@ -219,7 +215,7 @@ F 3 "" H 13475 1950 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR051
+L hermeslite:GND #PWR051
 U 1 1 59D0300C
 P 11675 2525
 F 0 "#PWR051" H 11675 2275 50  0001 C CNN
@@ -230,7 +226,7 @@ F 3 "" H 11675 2525 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C420
+L hermeslite:C_Small C420
 U 1 1 59D0CED8
 P 9900 7250
 F 0 "C420" H 9910 7320 50  0000 L CNN
@@ -241,7 +237,7 @@ F 3 "" H 9900 7250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C424
+L hermeslite:C_Small C424
 U 1 1 59D0CF54
 P 10150 7250
 F 0 "C424" H 10160 7320 50  0000 L CNN
@@ -252,7 +248,7 @@ F 3 "" H 10150 7250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C428
+L hermeslite:C_Small C428
 U 1 1 59D0CFEC
 P 10400 7250
 F 0 "C428" H 10410 7320 50  0000 L CNN
@@ -263,7 +259,7 @@ F 3 "" H 10400 7250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C432
+L hermeslite:C_Small C432
 U 1 1 59D0D1F3
 P 10650 7250
 F 0 "C432" H 10660 7320 50  0000 L CNN
@@ -274,7 +270,7 @@ F 3 "" H 10650 7250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C436
+L hermeslite:C_Small C436
 U 1 1 59D0D3A8
 P 10875 7250
 F 0 "C436" H 10885 7320 50  0000 L CNN
@@ -285,7 +281,7 @@ F 3 "" H 10875 7250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FB FB405
+L hermeslite:FB FB405
 U 1 1 59D0D42A
 P 11175 7150
 F 0 "FB405" H 11250 7100 39  0000 C CNN
@@ -296,7 +292,7 @@ F 3 "" H 11175 7150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR052
+L hermeslite:GND #PWR052
 U 1 1 59D0DE5D
 P 10400 7425
 F 0 "#PWR052" H 10400 7175 50  0001 C CNN
@@ -307,7 +303,7 @@ F 3 "" H 10400 7425 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C419
+L hermeslite:C_Small C419
 U 1 1 59D0F4BD
 P 9875 7750
 F 0 "C419" H 9885 7820 50  0000 L CNN
@@ -318,7 +314,7 @@ F 3 "" H 9875 7750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C423
+L hermeslite:C_Small C423
 U 1 1 59D0F4C3
 P 10125 7750
 F 0 "C423" H 10135 7820 50  0000 L CNN
@@ -329,7 +325,7 @@ F 3 "" H 10125 7750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C427
+L hermeslite:C_Small C427
 U 1 1 59D0F4C9
 P 10375 7750
 F 0 "C427" H 10385 7820 50  0000 L CNN
@@ -340,7 +336,7 @@ F 3 "" H 10375 7750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C431
+L hermeslite:C_Small C431
 U 1 1 59D0F4CF
 P 10625 7750
 F 0 "C431" H 10635 7820 50  0000 L CNN
@@ -351,7 +347,7 @@ F 3 "" H 10625 7750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C435
+L hermeslite:C_Small C435
 U 1 1 59D0F4D5
 P 10850 7750
 F 0 "C435" H 10860 7820 50  0000 L CNN
@@ -362,7 +358,7 @@ F 3 "" H 10850 7750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FB FB404
+L hermeslite:FB FB404
 U 1 1 59D0F4DB
 P 11150 7650
 F 0 "FB404" H 11225 7600 39  0000 C CNN
@@ -373,7 +369,7 @@ F 3 "" H 11150 7650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR053
+L hermeslite:GND #PWR053
 U 1 1 59D0F4EA
 P 10375 7950
 F 0 "#PWR053" H 10375 7700 50  0001 C CNN
@@ -384,7 +380,7 @@ F 3 "" H 10375 7950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C417
+L hermeslite:C_Small C417
 U 1 1 59D0FC10
 P 9825 9050
 F 0 "C417" H 9835 9120 50  0000 L CNN
@@ -395,7 +391,7 @@ F 3 "" H 9825 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C421
+L hermeslite:C_Small C421
 U 1 1 59D0FC16
 P 10075 9050
 F 0 "C421" H 10085 9120 50  0000 L CNN
@@ -406,7 +402,7 @@ F 3 "" H 10075 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C425
+L hermeslite:C_Small C425
 U 1 1 59D0FC1C
 P 10325 9050
 F 0 "C425" H 10335 9120 50  0000 L CNN
@@ -417,7 +413,7 @@ F 3 "" H 10325 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C429
+L hermeslite:C_Small C429
 U 1 1 59D0FC22
 P 10575 9050
 F 0 "C429" H 10585 9120 50  0000 L CNN
@@ -428,7 +424,7 @@ F 3 "" H 10575 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C433
+L hermeslite:C_Small C433
 U 1 1 59D0FC28
 P 10800 9050
 F 0 "C433" H 10810 9120 50  0000 L CNN
@@ -439,7 +435,7 @@ F 3 "" H 10800 9050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FB FB402
+L hermeslite:FB FB402
 U 1 1 59D0FC2E
 P 11100 8950
 F 0 "FB402" H 11175 8900 39  0000 C CNN
@@ -450,7 +446,7 @@ F 3 "" H 11100 8950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR054
+L hermeslite:GND #PWR054
 U 1 1 59D0FC3D
 P 10325 9250
 F 0 "#PWR054" H 10325 9000 50  0001 C CNN
@@ -461,7 +457,7 @@ F 3 "" H 10325 9250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C418
+L hermeslite:C_Small C418
 U 1 1 59D11979
 P 9850 8400
 F 0 "C418" H 9860 8470 50  0000 L CNN
@@ -472,7 +468,7 @@ F 3 "" H 9850 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C422
+L hermeslite:C_Small C422
 U 1 1 59D1197F
 P 10100 8400
 F 0 "C422" H 10110 8470 50  0000 L CNN
@@ -483,7 +479,7 @@ F 3 "" H 10100 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C426
+L hermeslite:C_Small C426
 U 1 1 59D11985
 P 10350 8400
 F 0 "C426" H 10360 8470 50  0000 L CNN
@@ -494,7 +490,7 @@ F 3 "" H 10350 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C430
+L hermeslite:C_Small C430
 U 1 1 59D1198B
 P 10600 8400
 F 0 "C430" H 10610 8470 50  0000 L CNN
@@ -505,7 +501,7 @@ F 3 "" H 10600 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C434
+L hermeslite:C_Small C434
 U 1 1 59D11991
 P 10825 8400
 F 0 "C434" H 10835 8470 50  0000 L CNN
@@ -516,7 +512,7 @@ F 3 "" H 10825 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FB FB403
+L hermeslite:FB FB403
 U 1 1 59D11997
 P 11125 8300
 F 0 "FB403" H 11200 8250 39  0000 C CNN
@@ -527,7 +523,7 @@ F 3 "" H 11125 8300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR055
+L hermeslite:GND #PWR055
 U 1 1 59D119A6
 P 10350 8625
 F 0 "#PWR055" H 10350 8375 50  0001 C CNN
@@ -538,7 +534,7 @@ F 3 "" H 10350 8625 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 3V3B #PWR056
+L hermeslite:3V3B #PWR056
 U 1 1 59D160CA
 P 11850 8000
 F 0 "#PWR056" H 11850 7850 60  0001 C CNN
@@ -549,7 +545,7 @@ F 3 "" H 11850 8000 60  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C401
+L hermeslite:C_Small C401
 U 1 1 59D1DC23
 P 2925 5850
 F 0 "C401" V 2800 5775 50  0000 L CNN
@@ -560,7 +556,7 @@ F 3 "" H 2925 5850 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C403
+L hermeslite:C_Small C403
 U 1 1 59D1DD24
 P 3275 6275
 F 0 "C403" H 3285 6345 50  0000 L CNN
@@ -571,7 +567,7 @@ F 3 "" H 3275 6275 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C405
+L hermeslite:C_Small C405
 U 1 1 59D1DDEB
 P 3675 6275
 F 0 "C405" H 3685 6345 50  0000 L CNN
@@ -582,7 +578,7 @@ F 3 "" H 3675 6275 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C407
+L hermeslite:C_Small C407
 U 1 1 59D1DEAE
 P 4000 6275
 F 0 "C407" H 4010 6345 50  0000 L CNN
@@ -595,7 +591,7 @@ F 5 "C 10pF" H 4000 6275 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C404
+L hermeslite:C_Small C404
 U 1 1 59D1DF7A
 P 3450 5850
 F 0 "C404" V 3250 5800 50  0000 L CNN
@@ -608,7 +604,7 @@ F 5 "C10 pF" V 3450 5850 60  0001 C CNN "Key"
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C406
+L hermeslite:C_Small C406
 U 1 1 59D1E064
 P 3850 5850
 F 0 "C406" V 3675 5800 50  0000 L CNN
@@ -619,7 +615,7 @@ F 3 "" H 3850 5850 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L L_Small L401
+L hermeslite:L_Small L401
 U 1 1 59D1E0F8
 P 3450 6050
 F 0 "L401" V 3525 6000 50  0000 L CNN
@@ -630,7 +626,7 @@ F 3 "" H 3450 6050 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L L_Small L402
+L hermeslite:L_Small L402
 U 1 1 59D1E3C4
 P 3850 6050
 F 0 "L402" V 3925 6000 50  0000 L CNN
@@ -641,7 +637,7 @@ F 3 "" H 3850 6050 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L DIODESCH2 D401
+L hermeslite:DIODESCH2 D401
 U 1 1 59CA4081
 P 4400 6100
 F 0 "D401" H 4400 6300 40  0000 C CNN
@@ -652,7 +648,7 @@ F 3 "" H 4400 6175 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L CON-COAX_BU-SMA-H X401
+L Radioberry:CON-COAX_BU-SMA-H X401
 U 1 1 59CA5B2F
 P 2525 5850
 F 0 "X401" H 2225 5980 70  0000 L BNN
@@ -663,7 +659,7 @@ F 3 "" H 2525 5850 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PA3GSB_T1-1TDIL T402
+L Radioberry:PA3GSB_T1-1TDIL T402
 U 1 1 59CA6BE4
 P 4850 6150
 F 0 "T402" H 4751 5800 70  0000 L BNN
@@ -674,7 +670,7 @@ F 3 "" H 4850 6150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C413
+L hermeslite:C_Small C413
 U 1 1 59CA767D
 P 5300 6150
 F 0 "C413" H 5310 6220 50  0000 L CNN
@@ -686,7 +682,7 @@ F 4 "RXLPF" H 5300 6150 60  0001 C CNN "Option"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C415
+L hermeslite:C_Small C415
 U 1 1 59CA780E
 P 5500 5950
 F 0 "C415" V 5325 5925 50  0000 L CNN
@@ -697,7 +693,7 @@ F 3 "" H 5500 5950 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C416
+L hermeslite:C_Small C416
 U 1 1 59CA790B
 P 5500 6350
 F 0 "C416" V 5625 6325 50  0000 L CNN
@@ -711,7 +707,7 @@ NoConn ~ 5050 6150
 Text Notes 3100 6875 0    60   ~ 0
 35MHz anti alias filter
 $Comp
-L GND #PWR057
+L hermeslite:GND #PWR057
 U 1 1 59CB2384
 P 3675 6475
 F 0 "#PWR057" H 3675 6225 50  0001 C CNN
@@ -722,7 +718,7 @@ F 3 "" H 3675 6475 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L AD9866_AD9866 IC401
+L Radioberry:AD9866_AD9866 IC401
 U 1 1 59BD5091
 P 8125 5250
 AR Path="/59BD5091" Ref="IC401"  Part="1" 
@@ -735,7 +731,7 @@ F 3 "" H 8125 5250 60  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L C_Small C402
+L hermeslite:C_Small C402
 U 1 1 59CCDCA8
 P 2975 4150
 F 0 "C402" V 2825 4075 50  0000 L CNN
@@ -746,7 +742,7 @@ F 3 "" H 2975 4150 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L MURATA-FILTER_NFM21C F401
+L Radioberry:MURATA-FILTER_NFM21C F401
 U 1 1 59BD5051
 P 3800 4150
 F 0 "F401" H 3650 4250 70  0000 L BNN
@@ -757,7 +753,7 @@ F 3 "" H 3800 4150 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L FB FB401
+L hermeslite:FB FB401
 U 1 1 59CDE58F
 P 5400 3900
 F 0 "FB401" H 5475 3850 39  0000 C CNN
@@ -768,7 +764,7 @@ F 3 "" H 5400 3900 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C414
+L hermeslite:C_Small C414
 U 1 1 59CDEB8A
 P 5400 4750
 F 0 "C414" H 5410 4820 50  0000 L CNN
@@ -779,7 +775,7 @@ F 3 "" H 5400 4750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR058
+L hermeslite:GND #PWR058
 U 1 1 59CE0519
 P 5400 4900
 F 0 "#PWR058" H 5400 4650 50  0001 C CNN
@@ -794,7 +790,7 @@ CLK
 Text GLabel 6050 3625 0    60   Input ~ 0
 CLK
 $Comp
-L +3V3Rpi #PWR057
+L Radioberry:+3V3Rpi #PWR057
 U 1 1 59CFD2A8
 P 5400 3555
 AR Path="/59CFD2A8" Ref="#PWR057"  Part="1" 
@@ -894,18 +890,6 @@ Wire Wire Line
 	5925 6750 6325 6750
 Wire Wire Line
 	5925 7350 6325 7350
-Connection ~ 5925 8425
-Connection ~ 6325 6750
-Connection ~ 6325 6850
-Connection ~ 6325 6950
-Connection ~ 6325 7050
-Connection ~ 6325 7150
-Connection ~ 6325 7250
-Connection ~ 6325 7350
-Connection ~ 6325 7450
-Connection ~ 6325 7550
-Connection ~ 6325 7650
-Connection ~ 6325 7750
 Connection ~ 5925 7750
 Connection ~ 5925 7650
 Connection ~ 5925 7550
@@ -958,7 +942,7 @@ Wire Wire Line
 Wire Wire Line
 	5925 6650 6325 6650
 Wire Wire Line
-	5925 6475 5925 8425
+	5925 6475 5925 6550
 Wire Wire Line
 	6325 6550 5925 6550
 Connection ~ 5925 6650
@@ -968,7 +952,7 @@ Connection ~ 5925 6550
 Wire Wire Line
 	7475 8300 7475 8250
 Wire Wire Line
-	5925 8300 7475 8300
+	5925 8300 7100 8300
 Connection ~ 5925 8300
 Wire Wire Line
 	7100 8250 7100 8300
@@ -985,9 +969,6 @@ Connection ~ 7325 8300
 Wire Wire Line
 	7400 8250 7400 8300
 Connection ~ 7400 8300
-Connection ~ 6325 6475
-Connection ~ 6325 6550
-Connection ~ 6325 6650
 Wire Wire Line
 	9725 4650 11850 4650
 Wire Wire Line
@@ -997,7 +978,7 @@ Wire Wire Line
 Wire Wire Line
 	10550 4300 10025 4300
 Wire Wire Line
-	10550 3550 10550 4300
+	10550 3550 10550 3800
 Wire Wire Line
 	10225 4150 10550 4150
 Connection ~ 10550 4150
@@ -1005,9 +986,9 @@ Wire Wire Line
 	10425 3550 10550 3550
 Connection ~ 10550 3975
 Wire Wire Line
-	9725 3550 10225 3550
+	9725 3550 9875 3550
 Wire Wire Line
-	9725 3800 10225 3800
+	9725 3800 9875 3800
 Wire Wire Line
 	9875 3775 9875 3800
 Connection ~ 9875 3800
@@ -1033,7 +1014,7 @@ Wire Wire Line
 Wire Wire Line
 	11675 2450 11800 2450
 Wire Wire Line
-	11800 1950 11800 2625
+	11800 1950 11800 2150
 Connection ~ 11800 2300
 Wire Wire Line
 	11800 1950 12925 1950
@@ -1042,54 +1023,54 @@ Wire Wire Line
 	11800 2625 13240 2625
 Connection ~ 11800 2450
 Wire Wire Line
-	9725 7150 11025 7150
+	9725 7150 9900 7150
 Connection ~ 10150 7150
 Connection ~ 10400 7150
 Connection ~ 10650 7150
 Connection ~ 10875 7150
 Wire Wire Line
-	9900 7350 10875 7350
+	9900 7350 10150 7350
 Connection ~ 10150 7350
 Connection ~ 10650 7350
 Wire Wire Line
-	9725 7650 11000 7650
+	9725 7650 9875 7650
 Connection ~ 10125 7650
 Connection ~ 10375 7650
 Connection ~ 10625 7650
 Connection ~ 10850 7650
 Wire Wire Line
-	9875 7850 10850 7850
+	9875 7850 10125 7850
 Connection ~ 10125 7850
 Connection ~ 10375 7850
 Connection ~ 10625 7850
 Wire Wire Line
-	8475 8950 10950 8950
+	8475 8950 9825 8950
 Connection ~ 10075 8950
 Connection ~ 10325 8950
 Connection ~ 10575 8950
 Connection ~ 10800 8950
 Wire Wire Line
-	9825 9150 10800 9150
+	9825 9150 10075 9150
 Connection ~ 10075 9150
 Connection ~ 10325 9150
 Connection ~ 10575 9150
 Wire Wire Line
-	9150 8300 10975 8300
+	9150 8300 9275 8300
 Connection ~ 10100 8300
 Connection ~ 10350 8300
 Connection ~ 10600 8300
 Connection ~ 10825 8300
 Wire Wire Line
-	9850 8500 10825 8500
+	9850 8500 10100 8500
 Connection ~ 10100 8500
 Connection ~ 10350 8500
 Connection ~ 10600 8500
 Wire Wire Line
 	8225 8250 8225 8325
 Wire Wire Line
-	8225 8325 8475 8325
+	8225 8325 8350 8325
 Wire Wire Line
-	8475 8250 8475 8950
+	8475 8250 8475 8325
 Wire Wire Line
 	8350 8250 8350 8325
 Connection ~ 8350 8325
@@ -1106,7 +1087,7 @@ Connection ~ 9875 7650
 Wire Wire Line
 	11325 7150 11700 7150
 Wire Wire Line
-	11700 7150 11700 8950
+	11700 7150 11700 7650
 Wire Wire Line
 	11300 7650 11700 7650
 Connection ~ 11700 7650
@@ -1119,19 +1100,19 @@ Connection ~ 11700 8300
 Wire Wire Line
 	2625 5850 2825 5850
 Wire Wire Line
-	3025 5850 3350 5850
+	3025 5850 3275 5850
 Wire Wire Line
-	3275 5850 3275 6175
+	3275 5850 3275 6050
 Connection ~ 3275 5850
 Wire Wire Line
 	3350 6050 3275 6050
 Connection ~ 3275 6050
 Wire Wire Line
-	3550 5850 3750 5850
+	3550 5850 3675 5850
 Wire Wire Line
-	3550 6050 3750 6050
+	3550 6050 3675 6050
 Wire Wire Line
-	3675 5850 3675 6175
+	3675 5850 3675 6050
 Connection ~ 3675 5850
 Connection ~ 3675 6050
 Wire Wire Line
@@ -1140,7 +1121,7 @@ Connection ~ 4400 5850
 Wire Wire Line
 	3950 6050 4000 6050
 Wire Wire Line
-	4000 5850 4000 6175
+	4000 5850 4000 6050
 Wire Wire Line
 	4400 6425 4400 6300
 Wire Wire Line
@@ -1149,27 +1130,27 @@ Wire Wire Line
 	3275 6375 3275 6425
 Connection ~ 3275 6425
 Wire Wire Line
-	3675 6375 3675 6475
+	3675 6375 3675 6425
 Connection ~ 3675 6425
 Wire Wire Line
 	4000 6425 4000 6375
 Connection ~ 4000 6425
 Connection ~ 4400 6425
 Wire Wire Line
-	3950 5850 4650 5850
+	3950 5850 4000 5850
 Wire Wire Line
 	4650 5850 4650 5950
 Wire Wire Line
 	4650 6425 4650 6350
 Wire Wire Line
-	2625 6425 4650 6425
+	2625 6425 3275 6425
 Wire Wire Line
-	5050 5950 5400 5950
+	5050 5950 5300 5950
 Wire Wire Line
 	5300 6050 5300 5950
 Connection ~ 5300 5950
 Wire Wire Line
-	5050 6350 5400 6350
+	5050 6350 5300 6350
 Wire Wire Line
 	5300 6250 5300 6350
 Connection ~ 5300 6350
@@ -1188,7 +1169,7 @@ Wire Wire Line
 Wire Wire Line
 	4575 4150 4925 4150
 Wire Wire Line
-	2625 4550 4925 4550
+	2625 4550 3800 4550
 Wire Wire Line
 	4025 4675 4025 4550
 Connection ~ 4025 4550
@@ -1197,30 +1178,20 @@ Connection ~ 4375 4550
 Wire Wire Line
 	5325 4550 6325 4550
 Wire Wire Line
-	5400 4050 5400 4650
+	5400 4050 5400 4350
 Wire Wire Line
 	5325 4350 5400 4350
 Connection ~ 5400 4350
 Wire Wire Line
 	5400 4850 5400 4900
 Wire Wire Line
-	3800 4250 3800 4550
+	3800 4250 3800 4350
 Wire Wire Line
-	4375 4250 4375 4550
+	4375 4250 4375 4350
 Wire Wire Line
 	2625 4550 2625 4250
 Wire Wire Line
-	12800 2150 13175 2150
-Wire Wire Line
-	10575 3975 10700 3975
-Connection ~ 6325 3625
-Connection ~ 12800 2150
-Connection ~ 13475 1950
-Connection ~ 5400 4650
-Connection ~ 5325 4550
-Connection ~ 4925 4550
-Connection ~ 4925 4150
-Connection ~ 5325 4150
+	12800 2150 12925 2150
 Wire Wire Line
 	9725 5025 11850 5025
 Wire Wire Line
@@ -1237,30 +1208,19 @@ Wire Wire Line
 	10325 9150 10325 9250
 Wire Wire Line
 	10350 8500 10350 8625
-Wire Wire Line
-	10600 3975 10550 3975
-Connection ~ 10600 3975
 Connection ~ 10400 7350
 Wire Wire Line
 	10400 7425 10400 7350
-Connection ~ 10400 7425
-Connection ~ 10325 9250
-Connection ~ 10350 8625
-Connection ~ 10375 7950
 Wire Wire Line
 	11700 8000 11850 8000
 Wire Wire Line
 	12800 2300 13240 2300
 Wire Wire Line
 	13240 2300 13240 2625
-Connection ~ 11245 8950
-Connection ~ 11275 8295
-Connection ~ 11295 7650
-Connection ~ 11325 7150
 Wire Wire Line
 	5400 3555 5400 3750
 $Comp
-L C_Small C438
+L hermeslite:C_Small C438
 U 1 1 5BD90CBE
 P 6225 3625
 F 0 "C438" V 6075 3525 50  0000 L CNN
@@ -1272,5 +1232,189 @@ F 3 "" H 6225 3625 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6050 3625 6125 3625
-Connection ~ 6125 3625
+Wire Wire Line
+	5925 7750 5925 8300
+Wire Wire Line
+	5925 7650 5925 7750
+Wire Wire Line
+	5925 7550 5925 7650
+Wire Wire Line
+	5925 7450 5925 7550
+Wire Wire Line
+	5925 7350 5925 7450
+Wire Wire Line
+	5925 7250 5925 7350
+Wire Wire Line
+	5925 7150 5925 7250
+Wire Wire Line
+	5925 7050 5925 7150
+Wire Wire Line
+	5925 6950 5925 7050
+Wire Wire Line
+	5925 6850 5925 6950
+Wire Wire Line
+	5925 6750 5925 6850
+Wire Wire Line
+	5925 6650 5925 6750
+Wire Wire Line
+	5925 6550 5925 6650
+Wire Wire Line
+	5925 8300 5925 8425
+Wire Wire Line
+	7100 8300 7175 8300
+Wire Wire Line
+	7175 8300 7250 8300
+Wire Wire Line
+	7250 8300 7325 8300
+Wire Wire Line
+	7325 8300 7400 8300
+Wire Wire Line
+	7400 8300 7475 8300
+Wire Wire Line
+	10550 4150 10550 4300
+Wire Wire Line
+	10550 3975 10550 4150
+Wire Wire Line
+	9875 3800 10100 3800
+Wire Wire Line
+	10100 3800 10225 3800
+Wire Wire Line
+	10550 3800 10550 3975
+Wire Wire Line
+	10100 3550 10225 3550
+Wire Wire Line
+	9875 3550 10100 3550
+Wire Wire Line
+	12925 2150 13175 2150
+Wire Wire Line
+	11800 2300 11800 2450
+Wire Wire Line
+	11800 2150 11800 2300
+Wire Wire Line
+	11800 2450 11800 2625
+Wire Wire Line
+	10150 7150 10400 7150
+Wire Wire Line
+	10400 7150 10650 7150
+Wire Wire Line
+	10650 7150 10875 7150
+Wire Wire Line
+	10875 7150 11025 7150
+Wire Wire Line
+	10150 7350 10400 7350
+Wire Wire Line
+	10650 7350 10875 7350
+Wire Wire Line
+	10125 7650 10375 7650
+Wire Wire Line
+	10375 7650 10625 7650
+Wire Wire Line
+	10625 7650 10850 7650
+Wire Wire Line
+	10850 7650 11000 7650
+Wire Wire Line
+	10125 7850 10375 7850
+Wire Wire Line
+	10375 7850 10625 7850
+Wire Wire Line
+	10625 7850 10850 7850
+Wire Wire Line
+	10075 8950 10325 8950
+Wire Wire Line
+	10325 8950 10575 8950
+Wire Wire Line
+	10575 8950 10800 8950
+Wire Wire Line
+	10800 8950 10950 8950
+Wire Wire Line
+	10075 9150 10325 9150
+Wire Wire Line
+	10325 9150 10575 9150
+Wire Wire Line
+	10575 9150 10800 9150
+Wire Wire Line
+	10100 8300 10350 8300
+Wire Wire Line
+	10350 8300 10600 8300
+Wire Wire Line
+	10600 8300 10825 8300
+Wire Wire Line
+	10825 8300 10975 8300
+Wire Wire Line
+	10100 8500 10350 8500
+Wire Wire Line
+	10350 8500 10600 8500
+Wire Wire Line
+	10600 8500 10825 8500
+Wire Wire Line
+	8350 8325 8475 8325
+Wire Wire Line
+	9825 8950 10075 8950
+Wire Wire Line
+	8475 8325 8475 8950
+Wire Wire Line
+	9850 8300 10100 8300
+Wire Wire Line
+	9275 8300 9850 8300
+Wire Wire Line
+	9900 7150 10150 7150
+Wire Wire Line
+	9875 7650 10125 7650
+Wire Wire Line
+	11700 7650 11700 8000
+Wire Wire Line
+	11700 8000 11700 8300
+Wire Wire Line
+	11700 8300 11700 8950
+Wire Wire Line
+	3275 5850 3350 5850
+Wire Wire Line
+	3275 6050 3275 6175
+Wire Wire Line
+	3675 5850 3750 5850
+Wire Wire Line
+	3675 6050 3750 6050
+Wire Wire Line
+	3675 6050 3675 6175
+Wire Wire Line
+	4400 5850 4650 5850
+Wire Wire Line
+	3275 6425 3675 6425
+Wire Wire Line
+	3675 6425 3675 6475
+Wire Wire Line
+	3675 6425 4000 6425
+Wire Wire Line
+	4000 6425 4400 6425
+Wire Wire Line
+	4400 6425 4650 6425
+Wire Wire Line
+	5300 5950 5400 5950
+Wire Wire Line
+	5300 6350 5400 6350
+Wire Wire Line
+	4000 5850 4400 5850
+Wire Wire Line
+	4000 6050 4000 6175
+Wire Wire Line
+	4025 4550 4375 4550
+Wire Wire Line
+	3800 4550 4025 4550
+Wire Wire Line
+	4375 4550 4925 4550
+Wire Wire Line
+	5400 4350 5400 4650
+Wire Wire Line
+	3800 4350 3800 4550
+Wire Wire Line
+	4375 4350 4375 4550
+Wire Wire Line
+	10400 7350 10650 7350
+Wire Wire Line
+	10550 3975 10700 3975
+Wire Wire Line
+	11875 5650 11850 5650
+Wire Wire Line
+	11850 5650 11850 5550
+Connection ~ 11850 5650
 $EndSCHEMATC

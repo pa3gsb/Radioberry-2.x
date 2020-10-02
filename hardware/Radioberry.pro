@@ -1,4 +1,4 @@
-update=31-10-2018 19:26:34
+update=2-10-2020 16:44:36
 version=1
 last_client=kicad
 [pcbnew]
@@ -28,17 +28,13 @@ version=1
 [eeschema]
 version=1
 LibDir=
-[eeschema/libraries]
-LibName1=Radioberry
-LibName2=libs/hermeslite
-LibName3=power
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=release/beta3/scheme/
+PlotDirectoryName=release/beta4/scheme/
 SubpartIdSeparator=0
 SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
 LabSize=60
+ERC_TestSimilarLabels=1

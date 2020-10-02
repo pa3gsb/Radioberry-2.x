@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>C:/dev/git/Radioberry-2.x/hardware/Radioberry.sch</source>
-    <date>31-10-2018 19:46:55</date>
-    <tool>Eeschema 4.0.6</tool>
+    <source>C:\dev\git\Radioberry-2.x\hardware\Radioberry.sch</source>
+    <date>1-10-2020 21:41:33</date>
+    <tool>Eeschema (5.1.6)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>RadioBerry V2.0</title>
         <company>AppMind</company>
-        <rev>beta2</rev>
-        <date>2017-11-29</date>
+        <rev>beta4</rev>
+        <date>2020-10-01</date>
         <source>Radioberry.sch</source>
         <comment number="1" value="PA3GSB"/>
         <comment number="2" value=""/>
@@ -21,8 +21,8 @@
       <title_block>
         <title/>
         <company>AppMind</company>
-        <rev>rev 2.0-beta1</rev>
-        <date/>
+        <rev>beta4</rev>
+        <date>2020-10-01</date>
         <source>Radioberry-PWR.sch</source>
         <comment number="1" value="PA3GSB"/>
         <comment number="2" value=""/>
@@ -34,8 +34,8 @@
       <title_block>
         <title/>
         <company>AppMind</company>
-        <rev>rev 2.0-beta1</rev>
-        <date/>
+        <rev>beta4</rev>
+        <date>2020-10-01</date>
         <source>Raspberry-GPIO.sch</source>
         <comment number="1" value="PA3GSB"/>
         <comment number="2" value=""/>
@@ -47,8 +47,8 @@
       <title_block>
         <title/>
         <company>AppMind</company>
-        <rev>rev 2.0-beta1</rev>
-        <date/>
+        <rev>beta4</rev>
+        <date>2020-10-01</date>
         <source>Radioberry-Frontend.sch</source>
         <comment number="1" value="PA3GSB"/>
         <comment number="2" value=""/>
@@ -62,10 +62,10 @@
       <value>DNI</value>
       <footprint>hermeslite:m3</footprint>
       <fields>
-        <field name="Option">DUMMY</field>
         <field name="Key">NOBOM</field>
+        <field name="Option">DUMMY</field>
       </fields>
-      <libsource lib="hermeslite" part="TEST_1P"/>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>59CC9E7F</tstamp>
     </comp>
@@ -73,10 +73,10 @@
       <value>DNI</value>
       <footprint>hermeslite:m3</footprint>
       <fields>
-        <field name="Option">DUMMY</field>
         <field name="Key">NOBOM</field>
+        <field name="Option">DUMMY</field>
       </fields>
-      <libsource lib="hermeslite" part="TEST_1P"/>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>59CC9EF6</tstamp>
     </comp>
@@ -84,10 +84,10 @@
       <value>DNI</value>
       <footprint>hermeslite:m3</footprint>
       <fields>
-        <field name="Option">DUMMY</field>
         <field name="Key">NOBOM</field>
+        <field name="Option">DUMMY</field>
       </fields>
-      <libsource lib="hermeslite" part="TEST_1P"/>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>59CC9F32</tstamp>
     </comp>
@@ -95,535 +95,535 @@
       <value>DNI</value>
       <footprint>hermeslite:m3</footprint>
       <fields>
-        <field name="Option">DUMMY</field>
         <field name="Key">NOBOM</field>
+        <field name="Option">DUMMY</field>
       </fields>
-      <libsource lib="hermeslite" part="TEST_1P"/>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>59CC9F63</tstamp>
     </comp>
     <comp ref="IC202">
       <value>LD1117S33</value>
       <footprint>Radioberry:V-REG_SOT223</footprint>
-      <libsource lib="Radioberry" part="V-REG_LD117AS33TR"/>
+      <libsource lib="Radioberry" part="V-REG_LD117AS33TR" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59BC98C7</tstamp>
     </comp>
     <comp ref="IC201">
       <value>LD1117S25</value>
       <footprint>Radioberry:V-REG_SOT223</footprint>
-      <libsource lib="Radioberry" part="V-REG_LD117AS33TR"/>
+      <libsource lib="Radioberry" part="V-REG_LD117AS33TR" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59BC98D5</tstamp>
     </comp>
     <comp ref="IC204">
       <value>LD1117S12</value>
       <footprint>Radioberry:V-REG_SOT223</footprint>
-      <libsource lib="Radioberry" part="V-REG_LD117AS12TR"/>
+      <libsource lib="Radioberry" part="V-REG_LD117AS12TR" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59BC98DC</tstamp>
     </comp>
     <comp ref="R201">
       <value>120R</value>
       <footprint>hermeslite:SMD-0805</footprint>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59BC98FF</tstamp>
     </comp>
     <comp ref="C254">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C75E53</tstamp>
     </comp>
     <comp ref="C255">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C795D8</tstamp>
     </comp>
     <comp ref="C250">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7A00A</tstamp>
     </comp>
     <comp ref="C256">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7A0E9</tstamp>
     </comp>
     <comp ref="C251">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7A1FF</tstamp>
     </comp>
     <comp ref="C257">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7A2DC</tstamp>
     </comp>
     <comp ref="C252">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7AABA</tstamp>
     </comp>
     <comp ref="C253">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7C38B</tstamp>
     </comp>
     <comp ref="C248">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7C4B9</tstamp>
     </comp>
     <comp ref="C258">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7C66D</tstamp>
     </comp>
     <comp ref="C249">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7C793</tstamp>
     </comp>
     <comp ref="C259">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C7C888</tstamp>
     </comp>
     <comp ref="C241">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C94383</tstamp>
     </comp>
     <comp ref="C235">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C94576</tstamp>
     </comp>
     <comp ref="C229">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C94B15</tstamp>
     </comp>
     <comp ref="C224">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C94BED</tstamp>
     </comp>
     <comp ref="C242">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C94EF9</tstamp>
     </comp>
     <comp ref="C236">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C95021</tstamp>
     </comp>
     <comp ref="C230">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C95102</tstamp>
     </comp>
     <comp ref="C225">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C951DE</tstamp>
     </comp>
     <comp ref="C237">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C9562A</tstamp>
     </comp>
     <comp ref="C243">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C95964</tstamp>
     </comp>
     <comp ref="C231">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C95C4A</tstamp>
     </comp>
     <comp ref="C226">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C95DCA</tstamp>
     </comp>
     <comp ref="C221">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CA9611</tstamp>
     </comp>
     <comp ref="C223">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CA9F09</tstamp>
     </comp>
     <comp ref="C222">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CA9FE1</tstamp>
     </comp>
     <comp ref="C218">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CAA0BC</tstamp>
     </comp>
     <comp ref="C217">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CAF44C</tstamp>
     </comp>
     <comp ref="C219">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CB5709</tstamp>
     </comp>
     <comp ref="C220">
       <value>100uF</value>
       <footprint>hermeslite:SMD-1210</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CB6D37</tstamp>
     </comp>
     <comp ref="C208">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CBE599</tstamp>
     </comp>
     <comp ref="C205">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CBE59F</tstamp>
     </comp>
     <comp ref="C211">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CBE5A5</tstamp>
     </comp>
     <comp ref="C214">
       <value>100uF</value>
       <footprint>hermeslite:SMD-1210</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CBE5AB</tstamp>
     </comp>
     <comp ref="C216">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CC28F3</tstamp>
     </comp>
     <comp ref="C202">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CD45A3</tstamp>
     </comp>
     <comp ref="IC203">
       <value>LD1117S33</value>
       <footprint>Radioberry:V-REG_SOT223</footprint>
-      <libsource lib="Radioberry" part="V-REG_LD117AS33TR"/>
+      <libsource lib="Radioberry" part="V-REG_LD117AS33TR" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59BC98CE</tstamp>
     </comp>
     <comp ref="C207">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD2C9</tstamp>
     </comp>
     <comp ref="C204">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD2D0</tstamp>
     </comp>
     <comp ref="C210">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD2D7</tstamp>
     </comp>
     <comp ref="C213">
       <value>100uF</value>
       <footprint>hermeslite:SMD-1210</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD2DE</tstamp>
     </comp>
     <comp ref="C209">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD6E0</tstamp>
     </comp>
     <comp ref="C206">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD6E7</tstamp>
     </comp>
     <comp ref="C212">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD6EE</tstamp>
     </comp>
     <comp ref="C215">
       <value>100uF</value>
       <footprint>hermeslite:SMD-1210</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDD6F5</tstamp>
     </comp>
     <comp ref="C203">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CDF27E</tstamp>
     </comp>
     <comp ref="C201">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CE95F1</tstamp>
     </comp>
     <comp ref="C246">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF5020</tstamp>
     </comp>
     <comp ref="C240">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF50FF</tstamp>
     </comp>
     <comp ref="C234">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF51D0</tstamp>
     </comp>
     <comp ref="C227">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF52A1</tstamp>
     </comp>
     <comp ref="FB205">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF616D</tstamp>
     </comp>
     <comp ref="FB206">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF6358</tstamp>
     </comp>
     <comp ref="FB207">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF640D</tstamp>
     </comp>
     <comp ref="FB208">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59CF64C8</tstamp>
     </comp>
     <comp ref="C245">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D09255</tstamp>
     </comp>
     <comp ref="C239">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0933C</tstamp>
     </comp>
     <comp ref="C233">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D09461</tstamp>
     </comp>
     <comp ref="C228">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D09930</tstamp>
     </comp>
     <comp ref="C247">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0BC05</tstamp>
     </comp>
     <comp ref="C244">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0BC0C</tstamp>
     </comp>
     <comp ref="C238">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0BC13</tstamp>
     </comp>
     <comp ref="C232">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0BC1A</tstamp>
     </comp>
     <comp ref="FB201">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0BC79</tstamp>
     </comp>
     <comp ref="FB202">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0C018</tstamp>
     </comp>
     <comp ref="FB203">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0C0ED</tstamp>
     </comp>
     <comp ref="FB204">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59D0C1B8</tstamp>
     </comp>
     <comp ref="U1">
       <value>FPGA</value>
       <footprint>hermeslite:CYCLONE10LP</footprint>
-      <libsource lib="Radioberry" part="FPGA"/>
+      <libsource lib="Radioberry" part="FPGA" description=""/>
       <sheetpath names="/Power/" tstamps="/59BBC543/"/>
       <tstamp>59C9394E</tstamp>
     </comp>
     <comp ref="R301">
       <value>10K</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59BD2E97</tstamp>
     </comp>
     <comp ref="R302">
       <value>10K</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59BD2E9E</tstamp>
     </comp>
@@ -631,17 +631,17 @@
       <value>DNI</value>
       <footprint>Radioberry:PINHEAD_2X10</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">CN PINHEAD_PINHD-2X10</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="PINHEAD_PINHD-2X10"/>
+      <libsource lib="Radioberry" part="PINHEAD_PINHD-2X10" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59BE5672</tstamp>
     </comp>
     <comp ref="CN302">
       <value>PINHEAD_PINHD-2X20</value>
       <footprint>connector:PINHEAD_2X20_BSILK</footprint>
-      <libsource lib="Radioberry" part="PINHEAD_PINHD-2X20"/>
+      <libsource lib="Radioberry" part="PINHEAD_PINHD-2X20" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59BE4EE2</tstamp>
     </comp>
@@ -649,10 +649,10 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0603</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">R 4K7</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59D7BD3F</tstamp>
     </comp>
@@ -660,10 +660,10 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0603</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">R 4K7</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59D7BAFD</tstamp>
     </comp>
@@ -671,10 +671,10 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0603</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">R</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59E4A415</tstamp>
     </comp>
@@ -682,10 +682,10 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0603</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">R</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>59E4A48A</tstamp>
     </comp>
@@ -693,10 +693,10 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0603</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">R</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>5A10530B</tstamp>
     </comp>
@@ -704,283 +704,283 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0603</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">R</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/GPIO/" tstamps="/59BC3D9C/"/>
       <tstamp>5A105358</tstamp>
     </comp>
     <comp ref="F402">
       <value>50Mhz</value>
       <footprint>Radioberry:MURATA-FILTER_NFM21C</footprint>
-      <libsource lib="Radioberry" part="MURATA-FILTER_NFM21C"/>
+      <libsource lib="Radioberry" part="MURATA-FILTER_NFM21C" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59BD5058</tstamp>
     </comp>
     <comp ref="R403">
       <value>1K6</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="Radioberry" part="RCL_R-EU_R0805"/>
+      <libsource lib="Radioberry" part="RCL_R-EU_R0805" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59BD509F</tstamp>
     </comp>
     <comp ref="T401">
       <value>1:1</value>
       <footprint>hermeslite:TR1-1</footprint>
-      <libsource lib="Radioberry" part="PA3GSB_T1-1TDIL"/>
+      <libsource lib="Radioberry" part="PA3GSB_T1-1TDIL" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59BD50B4</tstamp>
     </comp>
     <comp ref="X402">
       <value>SMA</value>
       <footprint>Radioberry:CON-COAX_BU-SMA-H</footprint>
-      <libsource lib="Radioberry" part="CON-COAX_BU-SMA-H"/>
+      <libsource lib="Radioberry" part="CON-COAX_BU-SMA-H" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59BD50C2</tstamp>
     </comp>
     <comp ref="C412">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CF0ABA</tstamp>
     </comp>
     <comp ref="C411">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CF0D61</tstamp>
     </comp>
     <comp ref="C409">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CF0DE8</tstamp>
     </comp>
     <comp ref="C410">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CF0F12</tstamp>
     </comp>
     <comp ref="C408">
       <value>10uF</value>
       <footprint>hermeslite:SMD-1206</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CF0FBB</tstamp>
     </comp>
     <comp ref="X400">
       <value>TCXO</value>
       <footprint>hermeslite:TCXO</footprint>
-      <libsource lib="Radioberry" part="TCXO"/>
+      <libsource lib="Radioberry" part="TCXO" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D026EF</tstamp>
     </comp>
     <comp ref="FB406">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D029F2</tstamp>
     </comp>
     <comp ref="C437">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D02A6B</tstamp>
     </comp>
     <comp ref="C420">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0CED8</tstamp>
     </comp>
     <comp ref="C424">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0CF54</tstamp>
     </comp>
     <comp ref="C428">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0CFEC</tstamp>
     </comp>
     <comp ref="C432">
       <value>1uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0D1F3</tstamp>
     </comp>
     <comp ref="C436">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0D3A8</tstamp>
     </comp>
     <comp ref="FB405">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0D42A</tstamp>
     </comp>
     <comp ref="C419">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0F4BD</tstamp>
     </comp>
     <comp ref="C423">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0F4C3</tstamp>
     </comp>
     <comp ref="C427">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0F4C9</tstamp>
     </comp>
     <comp ref="C431">
       <value>1uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0F4CF</tstamp>
     </comp>
     <comp ref="C435">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0F4D5</tstamp>
     </comp>
     <comp ref="FB404">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0F4DB</tstamp>
     </comp>
     <comp ref="C417">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0FC10</tstamp>
     </comp>
     <comp ref="C421">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0FC16</tstamp>
     </comp>
     <comp ref="C425">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0FC1C</tstamp>
     </comp>
     <comp ref="C429">
       <value>1uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0FC22</tstamp>
     </comp>
     <comp ref="C433">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0FC28</tstamp>
     </comp>
     <comp ref="FB402">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D0FC2E</tstamp>
     </comp>
     <comp ref="C418">
       <value>1nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D11979</tstamp>
     </comp>
     <comp ref="C422">
       <value>10nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1197F</tstamp>
     </comp>
     <comp ref="C426">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D11985</tstamp>
     </comp>
     <comp ref="C430">
       <value>1uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1198B</tstamp>
     </comp>
     <comp ref="C434">
       <value>10uF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D11991</tstamp>
     </comp>
     <comp ref="FB403">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D11997</tstamp>
     </comp>
     <comp ref="C401">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1DC23</tstamp>
     </comp>
     <comp ref="C403">
       <value>100pF</value>
       <footprint>hermeslite:SMD-0805</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1DD24</tstamp>
     </comp>
     <comp ref="C405">
       <value>180pF</value>
       <footprint>hermeslite:SMD-0805</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1DDEB</tstamp>
     </comp>
@@ -988,10 +988,10 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0805</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">C 10pF</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1DEAE</tstamp>
     </comp>
@@ -999,52 +999,52 @@
       <value>DNI</value>
       <footprint>hermeslite:SMD-0805</footprint>
       <fields>
-        <field name="Option">GENERIC</field>
         <field name="Key">C10 pF</field>
+        <field name="Option">GENERIC</field>
       </fields>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1DF7A</tstamp>
     </comp>
     <comp ref="C406">
       <value>10pF</value>
       <footprint>hermeslite:SMD-0805</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1E064</tstamp>
     </comp>
     <comp ref="L401">
       <value>330nH</value>
       <footprint>hermeslite:SMD-0805</footprint>
-      <libsource lib="hermeslite" part="L_Small"/>
+      <libsource lib="hermeslite" part="L_Small" description="Inductor, small symbol"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1E0F8</tstamp>
     </comp>
     <comp ref="L402">
       <value>330nH</value>
       <footprint>hermeslite:SMD-0805</footprint>
-      <libsource lib="hermeslite" part="L_Small"/>
+      <libsource lib="hermeslite" part="L_Small" description="Inductor, small symbol"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59D1E3C4</tstamp>
     </comp>
     <comp ref="D401">
       <value>TVS</value>
       <footprint>hermeslite:SOD323</footprint>
-      <libsource lib="hermeslite" part="DIODESCH2"/>
+      <libsource lib="hermeslite" part="DIODESCH2" description="Diode schottky"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CA4081</tstamp>
     </comp>
     <comp ref="X401">
       <value>SMA</value>
       <footprint>Radioberry:CON-COAX_BU-SMA-H</footprint>
-      <libsource lib="Radioberry" part="CON-COAX_BU-SMA-H"/>
+      <libsource lib="Radioberry" part="CON-COAX_BU-SMA-H" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CA5B2F</tstamp>
     </comp>
     <comp ref="T402">
       <value>8:1</value>
       <footprint>hermeslite:TR1-1</footprint>
-      <libsource lib="Radioberry" part="PA3GSB_T1-1TDIL"/>
+      <libsource lib="Radioberry" part="PA3GSB_T1-1TDIL" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CA6BE4</tstamp>
     </comp>
@@ -1054,63 +1054,63 @@
       <fields>
         <field name="Option">RXLPF</field>
       </fields>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CA767D</tstamp>
     </comp>
     <comp ref="C415">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CA780E</tstamp>
     </comp>
     <comp ref="C416">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CA790B</tstamp>
     </comp>
     <comp ref="IC401">
       <value>AD9866</value>
       <footprint>hermeslite:AD9866</footprint>
-      <libsource lib="Radioberry" part="AD9866_AD9866"/>
+      <libsource lib="Radioberry" part="AD9866_AD9866" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59BD5091</tstamp>
     </comp>
     <comp ref="C402">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CCDCA8</tstamp>
     </comp>
     <comp ref="F401">
       <value>50Mhz</value>
       <footprint>Radioberry:MURATA-FILTER_NFM21C</footprint>
-      <libsource lib="Radioberry" part="MURATA-FILTER_NFM21C"/>
+      <libsource lib="Radioberry" part="MURATA-FILTER_NFM21C" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59BD5051</tstamp>
     </comp>
     <comp ref="FB401">
       <value>FB</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="FB"/>
+      <libsource lib="hermeslite" part="FB" description=""/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CDE58F</tstamp>
     </comp>
     <comp ref="C414">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>59CDEB8A</tstamp>
     </comp>
     <comp ref="C438">
       <value>100nF</value>
       <footprint>hermeslite:SMD-0603</footprint>
-      <libsource lib="hermeslite" part="C_Small"/>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
       <sheetpath names="/Frontend/" tstamps="/59BC4A83/"/>
       <tstamp>5BD90CBE</tstamp>
     </comp>
@@ -1210,45 +1210,6 @@
         <pin num="5" name="2" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="hermeslite" part="C_Small">
-      <description>Unpolarized capacitor</description>
-      <footprints>
-        <fp>C_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C_Small</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="hermeslite" part="DIODESCH2">
-      <description>Diode schottky</description>
-      <footprints>
-        <fp>D?</fp>
-        <fp>S*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">D</field>
-        <field name="Value">DIODESCH2</field>
-      </fields>
-      <pins>
-        <pin num="1" name="A" type="passive"/>
-        <pin num="2" name="K" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="hermeslite" part="FB">
-      <fields>
-        <field name="Reference">FB</field>
-        <field name="Value">FB</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="input"/>
-      </pins>
-    </libpart>
     <libpart lib="Radioberry" part="FPGA">
       <fields>
         <field name="Reference">U</field>
@@ -1258,7 +1219,7 @@
         <pin num="1" name="VCCD_PLL3" type="power_in"/>
         <pin num="2" name="GNDA" type="power_in"/>
         <pin num="3" name="VCCA3" type="power_in"/>
-        <pin num="4" name="GND" type="input"/>
+        <pin num="4" name="ADIO11" type="input"/>
         <pin num="5" name="VCCINT" type="power_in"/>
         <pin num="9" name="NSTATUS" type="input"/>
         <pin num="12" name="DCLK" type="input"/>
@@ -1266,39 +1227,40 @@
         <pin num="14" name="NCONFIG" type="input"/>
         <pin num="17" name="VCCIO1" type="power_in"/>
         <pin num="19" name="GND" type="power_in"/>
-        <pin num="21" name="NCE" type="input"/>
+        <pin num="21" name="TXCLK" type="input"/>
         <pin num="22" name="CLK0" type="power_in"/>
         <pin num="25" name="CLK3" type="power_in"/>
         <pin num="26" name="VCCIO2" type="power_in"/>
         <pin num="27" name="GND" type="power_in"/>
-        <pin num="28" name="IO" type="input"/>
+        <pin num="28" name="CLKOUT1" type="input"/>
         <pin num="29" name="VCCINT" type="power_in"/>
-        <pin num="30" name="GND" type="input"/>
+        <pin num="30" name="ADIO07" type="input"/>
         <pin num="31" name="GPIO22" type="power_in"/>
-        <pin num="32" name="GPIO29" type="input"/>
-        <pin num="33" name="GPIO12" type="input"/>
+        <pin num="32" name="ADIO11" type="input"/>
+        <pin num="33" name="RXEN" type="power_in"/>
         <pin num="34" name="VCCINT" type="power_in"/>
         <pin num="35" name="VCCA1" type="power_in"/>
-        <pin num="36" name="GNDA" type="power_in"/>
+        <pin num="36" name="RESET" type="input"/>
         <pin num="37" name="VCCD_PLL1" type="power_in"/>
         <pin num="38" name="VCCINT" type="power_in"/>
         <pin num="39" name="GPIO16" type="input"/>
         <pin num="40" name="VCCIO3" type="power_in"/>
         <pin num="41" name="GND" type="power_in"/>
-        <pin num="42" name="GPIO40" type="input"/>
+        <pin num="42" name="ADIO03" type="input"/>
         <pin num="43" name="GPIO38" type="input"/>
         <pin num="44" name="GPIO35" type="input"/>
         <pin num="45" name="VCCINT" type="power_in"/>
         <pin num="46" name="GPIO36" type="input"/>
         <pin num="47" name="VCCIO3" type="power_in"/>
         <pin num="48" name="GND" type="power_in"/>
-        <pin num="49" name="GPIO32" type="input"/>
+        <pin num="49" name="ADIO07" type="input"/>
         <pin num="50" name="spi_ce[1]" type="input"/>
         <pin num="51" name="spi_ce[0]" type="input"/>
+        <pin num="53" name="CLKOUT1" type="input"/>
         <pin num="54" name="GPCLK2" type="input"/>
         <pin num="55" name="GPCLK0" type="input"/>
         <pin num="56" name="VCCIO4" type="power_in"/>
-        <pin num="57" name="GND" type="input"/>
+        <pin num="57" name="ADIO03" type="input"/>
         <pin num="58" name="spi_sck" type="input"/>
         <pin num="59" name="spi_miso" type="output"/>
         <pin num="60" name="spi_mosi" type="input"/>
@@ -1310,7 +1272,12 @@
         <pin num="66" name="SCLK" type="input"/>
         <pin num="67" name="SDO" type="input"/>
         <pin num="68" name="SDIO" type="input"/>
-        <pin num="69" name="CLKOUT1" type="input"/>
+        <pin num="69" name="ClkOUT1" type="input"/>
+        <pin num="69-UA" name="ClkOUT1" type="input"/>
+        <pin num="69-UB" name="ClkOUT1" type="input"/>
+        <pin num="69-UC" name="ClkOUT1" type="input"/>
+        <pin num="69-UD" name="ClkOUT1" type="input"/>
+        <pin num="69-UE" name="ClkOUT1" type="input"/>
         <pin num="70" name="VCCINT" type="power_in"/>
         <pin num="71" name="RXCLK" type="input"/>
         <pin num="72" name="TXCLK" type="input"/>
@@ -1323,7 +1290,7 @@
         <pin num="79" name="GND" type="power_in"/>
         <pin num="80" name="ADIO00" type="input"/>
         <pin num="81" name="VCCIO5" type="power_in"/>
-        <pin num="82" name="GND" type="power_in"/>
+        <pin num="82" name="RXEN" type="power_in"/>
         <pin num="83" name="ADIO01" type="input"/>
         <pin num="84" name="VCCINT" type="power_in"/>
         <pin num="85" name="ADIO02" type="input"/>
@@ -1345,9 +1312,9 @@
         <pin num="105" name="ADIO10" type="input"/>
         <pin num="106" name="ADIO11" type="input"/>
         <pin num="107" name="VCAA2" type="power_in"/>
-        <pin num="108" name="GNDA" type="power_in"/>
+        <pin num="108" name="MODE" type="output"/>
         <pin num="109" name="VCCD_PLL2" type="power_in"/>
-        <pin num="110" name="GND" type="power_in"/>
+        <pin num="110" name="CLKOUT1" type="input"/>
         <pin num="111" name="MODE" type="output"/>
         <pin num="112" name="GPIO7" type="power_in"/>
         <pin num="113" name="GPIO11" type="input"/>
@@ -1379,23 +1346,6 @@
         <pin num="143" name="IO-02" type="BiDi"/>
         <pin num="144" name="IO-01" type="output"/>
         <pin num="145" name="PAD" type="power_in"/>
-      </pins>
-    </libpart>
-    <libpart lib="hermeslite" part="L_Small">
-      <description>Inductor, small symbol</description>
-      <footprints>
-        <fp>Choke_*</fp>
-        <fp>*Coil*</fp>
-        <fp>Inductor_*</fp>
-        <fp>L_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">L</field>
-        <field name="Value">L_Small</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Radioberry" part="MURATA-FILTER_NFM21C">
@@ -1545,16 +1495,6 @@
         <pin num="6" name="VDD" type="power_in"/>
       </pins>
     </libpart>
-    <libpart lib="hermeslite" part="TEST_1P">
-      <description>point</description>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">TEST_1P</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="Radioberry" part="V-REG_LD117AS">
       <aliases>
         <alias>V-REG_LD117AS12TR</alias>
@@ -1579,798 +1519,880 @@
         <pin num="4" name="OUT" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="hermeslite" part="C_Small">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="DIODESCH2">
+      <description>Diode schottky</description>
+      <footprints>
+        <fp>D?</fp>
+        <fp>S*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">DIODESCH2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="FB">
+      <fields>
+        <field name="Reference">FB</field>
+        <field name="Value">FB</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="L_Small">
+      <description>Inductor, small symbol</description>
+      <footprints>
+        <fp>Choke_*</fp>
+        <fp>*Coil*</fp>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="TEST_1P">
+      <description>point</description>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">TEST_1P</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
   </libparts>
   <libraries>
-    <library logical="hermeslite">
-      <uri>C:\dev\git\Radioberry-2.x\hardware\libs\hermeslite.lib</uri>
-    </library>
     <library logical="Radioberry">
-      <uri>C:\dev\git\Radioberry-2.x\hardware\Radioberry.lib</uri>
+      <uri>C:\dev\git\Radioberry-2.x\hardware/Radioberry.lib</uri>
+    </library>
+    <library logical="hermeslite">
+      <uri>C:\dev\git\Radioberry-2.x\hardware/libs/hermeslite.lib</uri>
     </library>
   </libraries>
   <nets>
     <net code="1" name="GND">
+      <node ref="U1" pin="4"/>
       <node ref="U1" pin="30"/>
       <node ref="U1" pin="41"/>
-      <node ref="U1" pin="82"/>
-      <node ref="U1" pin="63"/>
-      <node ref="U1" pin="64"/>
-      <node ref="U1" pin="74"/>
-      <node ref="C238" pin="2"/>
-      <node ref="U1" pin="2"/>
-      <node ref="C232" pin="2"/>
-      <node ref="CN302" pin="34"/>
-      <node ref="CN302" pin="14"/>
-      <node ref="CN302" pin="30"/>
-      <node ref="CN302" pin="20"/>
-      <node ref="CN302" pin="9"/>
-      <node ref="CN302" pin="6"/>
-      <node ref="CN302" pin="39"/>
-      <node ref="CN301" pin="20"/>
-      <node ref="U1" pin="4"/>
-      <node ref="U1" pin="97"/>
-      <node ref="U1" pin="96"/>
-      <node ref="U1" pin="94"/>
-      <node ref="U1" pin="21"/>
-      <node ref="CN301" pin="19"/>
-      <node ref="CN302" pin="25"/>
-      <node ref="C254" pin="2"/>
-      <node ref="C241" pin="2"/>
-      <node ref="C235" pin="2"/>
-      <node ref="C229" pin="2"/>
-      <node ref="C224" pin="2"/>
-      <node ref="C242" pin="2"/>
-      <node ref="U1" pin="123"/>
+      <node ref="U1" pin="36"/>
+      <node ref="U1" pin="57"/>
       <node ref="U1" pin="104"/>
-      <node ref="U1" pin="145"/>
-      <node ref="C257" pin="2"/>
-      <node ref="C205" pin="2"/>
-      <node ref="C211" pin="2"/>
-      <node ref="C214" pin="2"/>
-      <node ref="C216" pin="2"/>
-      <node ref="C202" pin="2"/>
-      <node ref="IC203" pin="1"/>
-      <node ref="C252" pin="2"/>
-      <node ref="C250" pin="2"/>
-      <node ref="C256" pin="2"/>
-      <node ref="C251" pin="2"/>
+      <node ref="U1" pin="108"/>
+      <node ref="U1" pin="110"/>
+      <node ref="U1" pin="123"/>
       <node ref="U1" pin="131"/>
-      <node ref="C255" pin="2"/>
-      <node ref="C253" pin="2"/>
-      <node ref="C248" pin="2"/>
-      <node ref="C258" pin="2"/>
-      <node ref="C249" pin="2"/>
-      <node ref="R201" pin="1"/>
-      <node ref="IC202" pin="1"/>
-      <node ref="IC201" pin="1"/>
-      <node ref="IC204" pin="1"/>
-      <node ref="C259" pin="2"/>
-      <node ref="C245" pin="1"/>
-      <node ref="C201" pin="2"/>
       <node ref="C239" pin="1"/>
       <node ref="C233" pin="1"/>
       <node ref="C228" pin="1"/>
       <node ref="C247" pin="2"/>
       <node ref="C244" pin="2"/>
-      <node ref="C234" pin="1"/>
-      <node ref="C246" pin="1"/>
-      <node ref="C240" pin="1"/>
-      <node ref="C227" pin="1"/>
-      <node ref="U1" pin="140"/>
-      <node ref="U1" pin="108"/>
-      <node ref="U1" pin="118"/>
-      <node ref="U1" pin="57"/>
-      <node ref="U1" pin="95"/>
-      <node ref="U1" pin="36"/>
-      <node ref="U1" pin="27"/>
-      <node ref="U1" pin="48"/>
-      <node ref="U1" pin="19"/>
+      <node ref="C238" pin="2"/>
+      <node ref="C232" pin="2"/>
+      <node ref="U1" pin="63"/>
+      <node ref="U1" pin="64"/>
+      <node ref="U1" pin="69-UE"/>
+      <node ref="U1" pin="74"/>
       <node ref="U1" pin="79"/>
-      <node ref="U1" pin="110"/>
-      <node ref="C421" pin="2"/>
-      <node ref="C418" pin="2"/>
+      <node ref="U1" pin="82"/>
+      <node ref="C245" pin="1"/>
+      <node ref="U1" pin="95"/>
+      <node ref="U1" pin="48"/>
+      <node ref="U1" pin="140"/>
+      <node ref="U1" pin="145"/>
+      <node ref="U1" pin="19"/>
+      <node ref="U1" pin="2"/>
+      <node ref="U1" pin="27"/>
+      <node ref="CN302" pin="30"/>
+      <node ref="CN301" pin="19"/>
+      <node ref="CN302" pin="6"/>
+      <node ref="CN302" pin="39"/>
+      <node ref="CN302" pin="34"/>
+      <node ref="CN301" pin="20"/>
+      <node ref="CN302" pin="25"/>
+      <node ref="CN302" pin="20"/>
+      <node ref="CN302" pin="9"/>
+      <node ref="CN302" pin="14"/>
+      <node ref="U1" pin="21"/>
+      <node ref="U1" pin="97"/>
+      <node ref="U1" pin="96"/>
+      <node ref="U1" pin="94"/>
+      <node ref="C237" pin="2"/>
+      <node ref="C254" pin="2"/>
+      <node ref="C255" pin="2"/>
+      <node ref="C250" pin="2"/>
+      <node ref="C241" pin="2"/>
+      <node ref="C235" pin="2"/>
+      <node ref="C229" pin="2"/>
+      <node ref="C224" pin="2"/>
+      <node ref="C242" pin="2"/>
+      <node ref="C236" pin="2"/>
+      <node ref="C230" pin="2"/>
+      <node ref="C225" pin="2"/>
+      <node ref="R201" pin="1"/>
+      <node ref="C243" pin="2"/>
+      <node ref="C231" pin="2"/>
+      <node ref="C253" pin="2"/>
+      <node ref="C209" pin="2"/>
+      <node ref="C206" pin="2"/>
+      <node ref="C226" pin="2"/>
+      <node ref="C212" pin="2"/>
+      <node ref="C215" pin="2"/>
+      <node ref="C203" pin="2"/>
+      <node ref="C201" pin="2"/>
+      <node ref="C258" pin="2"/>
+      <node ref="C251" pin="2"/>
+      <node ref="C257" pin="2"/>
+      <node ref="C252" pin="2"/>
+      <node ref="C248" pin="2"/>
+      <node ref="C256" pin="2"/>
+      <node ref="C249" pin="2"/>
+      <node ref="C259" pin="2"/>
+      <node ref="IC202" pin="1"/>
+      <node ref="IC201" pin="1"/>
+      <node ref="IC204" pin="1"/>
+      <node ref="F402" pin="2@1"/>
+      <node ref="C403" pin="2"/>
+      <node ref="C405" pin="2"/>
+      <node ref="C407" pin="2"/>
       <node ref="C422" pin="2"/>
+      <node ref="C433" pin="2"/>
+      <node ref="C418" pin="2"/>
       <node ref="C426" pin="2"/>
       <node ref="C430" pin="2"/>
       <node ref="C434" pin="2"/>
-      <node ref="C425" pin="2"/>
-      <node ref="C417" pin="2"/>
-      <node ref="C428" pin="2"/>
-      <node ref="X400" pin="5"/>
-      <node ref="C429" pin="2"/>
-      <node ref="C433" pin="2"/>
-      <node ref="F402" pin="2@1"/>
+      <node ref="C419" pin="2"/>
       <node ref="F402" pin="2@2"/>
       <node ref="R403" pin="2"/>
       <node ref="T401" pin="5"/>
       <node ref="X402" pin="2"/>
       <node ref="X402" pin="3"/>
       <node ref="X402" pin="4"/>
-      <node ref="C436" pin="2"/>
       <node ref="X402" pin="5"/>
-      <node ref="C419" pin="2"/>
-      <node ref="C432" pin="2"/>
-      <node ref="C423" pin="2"/>
+      <node ref="X400" pin="1"/>
+      <node ref="X400" pin="2"/>
       <node ref="C427" pin="2"/>
       <node ref="C431" pin="2"/>
       <node ref="C435" pin="2"/>
-      <node ref="C437" pin="1"/>
+      <node ref="X400" pin="3"/>
+      <node ref="C423" pin="2"/>
+      <node ref="C417" pin="2"/>
+      <node ref="C421" pin="2"/>
+      <node ref="C425" pin="2"/>
+      <node ref="C429" pin="2"/>
       <node ref="C420" pin="2"/>
       <node ref="C424" pin="2"/>
-      <node ref="X401" pin="3"/>
-      <node ref="IC401" pin="54"/>
-      <node ref="IC401" pin="59"/>
-      <node ref="IC401" pin="25"/>
-      <node ref="IC401" pin="55"/>
-      <node ref="IC401" pin="65"/>
-      <node ref="IC401" pin="26"/>
-      <node ref="F401" pin="2@1"/>
-      <node ref="F401" pin="2@2"/>
-      <node ref="C414" pin="2"/>
-      <node ref="X401" pin="2"/>
-      <node ref="IC401" pin="44"/>
-      <node ref="X401" pin="4"/>
-      <node ref="X401" pin="5"/>
-      <node ref="D401" pin="2"/>
-      <node ref="T402" pin="5"/>
-      <node ref="C403" pin="2"/>
-      <node ref="C405" pin="2"/>
-      <node ref="C407" pin="2"/>
-      <node ref="IC401" pin="31"/>
-      <node ref="IC401" pin="62"/>
-      <node ref="C409" pin="1"/>
-      <node ref="C411" pin="1"/>
-      <node ref="X400" pin="1"/>
-      <node ref="X400" pin="2"/>
-      <node ref="X400" pin="3"/>
-      <node ref="C412" pin="1"/>
-      <node ref="IC401" pin="28"/>
-      <node ref="IC401" pin="27"/>
+      <node ref="C428" pin="2"/>
+      <node ref="C432" pin="2"/>
+      <node ref="C436" pin="2"/>
       <node ref="IC401" pin="47"/>
       <node ref="IC401" pin="18"/>
-      <node ref="IC401" pin="36"/>
-      <node ref="IC401" pin="48"/>
-      <node ref="IC401" pin="29"/>
-      <node ref="IC401" pin="39"/>
-      <node ref="IC401" pin="63"/>
+      <node ref="D401" pin="2"/>
+      <node ref="X401" pin="2"/>
+      <node ref="X401" pin="3"/>
+      <node ref="X401" pin="4"/>
+      <node ref="X401" pin="5"/>
       <node ref="IC401" pin="24"/>
+      <node ref="T402" pin="5"/>
+      <node ref="IC401" pin="44"/>
+      <node ref="IC401" pin="48"/>
+      <node ref="IC401" pin="54"/>
+      <node ref="IC401" pin="55"/>
+      <node ref="IC401" pin="25"/>
+      <node ref="IC401" pin="26"/>
+      <node ref="IC401" pin="27"/>
+      <node ref="IC401" pin="28"/>
+      <node ref="IC401" pin="29"/>
+      <node ref="IC401" pin="31"/>
       <node ref="IC401" pin="34"/>
+      <node ref="IC401" pin="36"/>
+      <node ref="IC401" pin="39"/>
+      <node ref="IC401" pin="65"/>
+      <node ref="X400" pin="5"/>
+      <node ref="C437" pin="1"/>
+      <node ref="C412" pin="1"/>
+      <node ref="C411" pin="1"/>
+      <node ref="C409" pin="1"/>
+      <node ref="C414" pin="2"/>
+      <node ref="IC401" pin="59"/>
+      <node ref="IC401" pin="62"/>
+      <node ref="IC401" pin="63"/>
+      <node ref="F401" pin="2@1"/>
+      <node ref="F401" pin="2@2"/>
       <node ref="MH1" pin="1"/>
-      <node ref="C221" pin="2"/>
-      <node ref="C225" pin="2"/>
-      <node ref="C226" pin="2"/>
-      <node ref="C231" pin="2"/>
-      <node ref="C243" pin="2"/>
-      <node ref="C237" pin="2"/>
-      <node ref="C206" pin="2"/>
-      <node ref="C230" pin="2"/>
-      <node ref="C236" pin="2"/>
-      <node ref="C220" pin="2"/>
-      <node ref="C212" pin="2"/>
-      <node ref="C215" pin="2"/>
-      <node ref="C207" pin="2"/>
-      <node ref="C204" pin="2"/>
-      <node ref="MH2" pin="1"/>
-      <node ref="MH3" pin="1"/>
-      <node ref="MH4" pin="1"/>
-      <node ref="C210" pin="2"/>
       <node ref="C213" pin="2"/>
-      <node ref="C209" pin="2"/>
+      <node ref="C227" pin="1"/>
+      <node ref="MH4" pin="1"/>
+      <node ref="C240" pin="1"/>
+      <node ref="IC203" pin="1"/>
+      <node ref="C202" pin="2"/>
+      <node ref="C234" pin="1"/>
+      <node ref="C221" pin="2"/>
       <node ref="C223" pin="2"/>
-      <node ref="C203" pin="2"/>
-      <node ref="C218" pin="2"/>
       <node ref="C222" pin="2"/>
+      <node ref="C216" pin="2"/>
+      <node ref="C218" pin="2"/>
       <node ref="C217" pin="2"/>
+      <node ref="C246" pin="1"/>
+      <node ref="MH3" pin="1"/>
       <node ref="C219" pin="2"/>
+      <node ref="C207" pin="2"/>
       <node ref="C208" pin="2"/>
+      <node ref="C220" pin="2"/>
+      <node ref="C204" pin="2"/>
+      <node ref="C210" pin="2"/>
+      <node ref="MH2" pin="1"/>
+      <node ref="C214" pin="2"/>
+      <node ref="C211" pin="2"/>
+      <node ref="C205" pin="2"/>
     </net>
-    <net code="2" name="+3V3">
-      <node ref="C258" pin="1"/>
-      <node ref="C249" pin="1"/>
-      <node ref="C259" pin="1"/>
+    <net code="2" name="Net-(C246-Pad2)">
+      <node ref="FB205" pin="2"/>
+      <node ref="U1" pin="73"/>
+      <node ref="C246" pin="2"/>
+    </net>
+    <net code="3" name="Net-(C238-Pad1)">
+      <node ref="C239" pin="2"/>
+      <node ref="FB202" pin="2"/>
+      <node ref="C238" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="4" name="Net-(C232-Pad1)">
+      <node ref="FB201" pin="2"/>
+      <node ref="U1" pin="75"/>
+      <node ref="C232" pin="1"/>
+      <node ref="C245" pin="2"/>
+    </net>
+    <net code="5" name="Net-(C240-Pad2)">
+      <node ref="FB206" pin="2"/>
+      <node ref="C240" pin="2"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="6" name="Net-(C234-Pad2)">
+      <node ref="C234" pin="2"/>
+      <node ref="FB207" pin="2"/>
+      <node ref="U1" pin="109"/>
+    </net>
+    <net code="7" name="Net-(C227-Pad2)">
+      <node ref="FB208" pin="2"/>
+      <node ref="U1" pin="37"/>
+      <node ref="C227" pin="2"/>
+    </net>
+    <net code="8" name="Net-(C228-Pad2)">
+      <node ref="FB204" pin="2"/>
+      <node ref="U1" pin="35"/>
+      <node ref="C247" pin="1"/>
+      <node ref="C228" pin="2"/>
+    </net>
+    <net code="9" name="Net-(C233-Pad2)">
+      <node ref="U1" pin="107"/>
+      <node ref="C233" pin="2"/>
+      <node ref="FB203" pin="2"/>
+      <node ref="C244" pin="1"/>
+    </net>
+    <net code="10" name="+1V2">
+      <node ref="C220" pin="1"/>
+      <node ref="R201" pin="2"/>
+      <node ref="IC204" pin="4"/>
+      <node ref="C219" pin="1"/>
+      <node ref="FB208" pin="1"/>
+      <node ref="FB207" pin="1"/>
+      <node ref="FB206" pin="1"/>
+      <node ref="FB205" pin="1"/>
+      <node ref="U1" pin="34"/>
+      <node ref="C243" pin="1"/>
+      <node ref="U1" pin="38"/>
+      <node ref="U1" pin="78"/>
+      <node ref="C237" pin="1"/>
+      <node ref="U1" pin="45"/>
+      <node ref="C225" pin="1"/>
+      <node ref="C241" pin="1"/>
+      <node ref="C221" pin="1"/>
+      <node ref="C236" pin="1"/>
+      <node ref="U1" pin="124"/>
+      <node ref="C242" pin="1"/>
+      <node ref="U1" pin="138"/>
+      <node ref="U1" pin="134"/>
+      <node ref="U1" pin="84"/>
+      <node ref="C226" pin="1"/>
+      <node ref="C231" pin="1"/>
+      <node ref="U1" pin="29"/>
+      <node ref="U1" pin="61"/>
+      <node ref="U1" pin="116"/>
+      <node ref="U1" pin="5"/>
+      <node ref="C217" pin="1"/>
+      <node ref="C223" pin="1"/>
+      <node ref="C224" pin="1"/>
+      <node ref="C229" pin="1"/>
+      <node ref="C222" pin="1"/>
+      <node ref="C235" pin="1"/>
+      <node ref="U1" pin="70"/>
+      <node ref="C230" pin="1"/>
+      <node ref="C218" pin="1"/>
+      <node ref="U1" pin="102"/>
+    </net>
+    <net code="11" name="+2V5">
+      <node ref="FB202" pin="1"/>
+      <node ref="C213" pin="1"/>
+      <node ref="C204" pin="1"/>
+      <node ref="C210" pin="1"/>
+      <node ref="C207" pin="1"/>
+      <node ref="IC204" pin="3"/>
+      <node ref="IC201" pin="4"/>
+      <node ref="FB201" pin="1"/>
+      <node ref="FB204" pin="1"/>
+      <node ref="C216" pin="1"/>
+      <node ref="FB203" pin="1"/>
+    </net>
+    <net code="12" name="3V3B">
+      <node ref="FB406" pin="2"/>
+      <node ref="FB404" pin="2"/>
+      <node ref="FB405" pin="2"/>
+      <node ref="FB403" pin="2"/>
+      <node ref="C208" pin="1"/>
+      <node ref="IC202" pin="4"/>
+      <node ref="FB402" pin="2"/>
+      <node ref="C214" pin="1"/>
+      <node ref="C211" pin="1"/>
+      <node ref="C205" pin="1"/>
+    </net>
+    <net code="13" name="+3V3">
       <node ref="C209" pin="1"/>
-      <node ref="R308" pin="2"/>
       <node ref="R301" pin="2"/>
-      <node ref="R304" pin="2"/>
-      <node ref="C257" pin="1"/>
-      <node ref="C212" pin="1"/>
-      <node ref="C251" pin="1"/>
-      <node ref="R303" pin="2"/>
-      <node ref="C256" pin="1"/>
-      <node ref="C215" pin="1"/>
       <node ref="R302" pin="2"/>
       <node ref="CN301" pin="2"/>
       <node ref="C250" pin="1"/>
-      <node ref="IC203" pin="4"/>
-      <node ref="R307" pin="2"/>
-      <node ref="C252" pin="1"/>
-      <node ref="C253" pin="1"/>
-      <node ref="C248" pin="1"/>
-      <node ref="U1" pin="117"/>
-      <node ref="U1" pin="62"/>
-      <node ref="U1" pin="47"/>
-      <node ref="U1" pin="17"/>
-      <node ref="U1" pin="56"/>
-      <node ref="U1" pin="130"/>
-      <node ref="U1" pin="26"/>
-      <node ref="U1" pin="139"/>
-      <node ref="U1" pin="122"/>
-      <node ref="U1" pin="40"/>
       <node ref="C255" pin="1"/>
+      <node ref="U1" pin="122"/>
       <node ref="C254" pin="1"/>
+      <node ref="IC203" pin="4"/>
+      <node ref="U1" pin="117"/>
+      <node ref="U1" pin="130"/>
+      <node ref="U1" pin="62"/>
+      <node ref="C248" pin="1"/>
+      <node ref="C253" pin="1"/>
+      <node ref="U1" pin="56"/>
+      <node ref="C256" pin="1"/>
+      <node ref="C212" pin="1"/>
+      <node ref="C251" pin="1"/>
+      <node ref="C257" pin="1"/>
+      <node ref="C252" pin="1"/>
+      <node ref="C215" pin="1"/>
+      <node ref="U1" pin="40"/>
       <node ref="C206" pin="1"/>
+      <node ref="C258" pin="1"/>
+      <node ref="U1" pin="139"/>
+      <node ref="R307" pin="2"/>
+      <node ref="C249" pin="1"/>
       <node ref="U1" pin="81"/>
+      <node ref="U1" pin="47"/>
+      <node ref="C259" pin="1"/>
+      <node ref="U1" pin="26"/>
+      <node ref="U1" pin="17"/>
       <node ref="U1" pin="93"/>
+      <node ref="R304" pin="2"/>
+      <node ref="R308" pin="2"/>
+      <node ref="R303" pin="2"/>
     </net>
-    <net code="10" name="3V3B">
-      <node ref="FB405" pin="2"/>
-      <node ref="FB406" pin="2"/>
-      <node ref="C211" pin="1"/>
-      <node ref="FB402" pin="2"/>
-      <node ref="FB404" pin="2"/>
-      <node ref="FB403" pin="2"/>
-      <node ref="C205" pin="1"/>
-      <node ref="C208" pin="1"/>
-      <node ref="IC202" pin="4"/>
-      <node ref="C214" pin="1"/>
-    </net>
-    <net code="11" name="Net-(C227-Pad2)">
-      <node ref="FB208" pin="2"/>
-      <node ref="C227" pin="2"/>
-      <node ref="U1" pin="37"/>
-    </net>
-    <net code="12" name="Net-(C234-Pad2)">
-      <node ref="U1" pin="109"/>
-      <node ref="FB207" pin="2"/>
-      <node ref="C234" pin="2"/>
-    </net>
-    <net code="13" name="Net-(C240-Pad2)">
-      <node ref="U1" pin="1"/>
-      <node ref="C240" pin="2"/>
-      <node ref="FB206" pin="2"/>
-    </net>
-    <net code="14" name="Net-(C246-Pad2)">
-      <node ref="C246" pin="2"/>
-      <node ref="FB205" pin="2"/>
-      <node ref="U1" pin="73"/>
-    </net>
-    <net code="15" name="Net-(C228-Pad2)">
-      <node ref="U1" pin="35"/>
-      <node ref="C228" pin="2"/>
-      <node ref="C247" pin="1"/>
-      <node ref="FB204" pin="2"/>
-    </net>
-    <net code="16" name="Net-(C232-Pad1)">
-      <node ref="C245" pin="2"/>
-      <node ref="C232" pin="1"/>
-      <node ref="U1" pin="75"/>
-      <node ref="FB201" pin="2"/>
-    </net>
-    <net code="17" name="Net-(C238-Pad1)">
-      <node ref="U1" pin="3"/>
-      <node ref="C238" pin="1"/>
-      <node ref="FB202" pin="2"/>
-      <node ref="C239" pin="2"/>
-    </net>
-    <net code="18" name="Net-(C233-Pad2)">
-      <node ref="U1" pin="107"/>
-      <node ref="C233" pin="2"/>
-      <node ref="C244" pin="1"/>
-      <node ref="FB203" pin="2"/>
-    </net>
-    <net code="19" name="+5V">
-      <node ref="C203" pin="1"/>
-      <node ref="C202" pin="1"/>
-      <node ref="IC203" pin="3"/>
-      <node ref="IC201" pin="3"/>
-      <node ref="IC202" pin="3"/>
-      <node ref="CN302" pin="2"/>
-      <node ref="CN301" pin="1"/>
+    <net code="14" name="+5V">
       <node ref="CN302" pin="4"/>
       <node ref="C201" pin="1"/>
+      <node ref="IC201" pin="3"/>
+      <node ref="C202" pin="1"/>
+      <node ref="CN302" pin="2"/>
+      <node ref="CN301" pin="1"/>
+      <node ref="IC203" pin="3"/>
+      <node ref="C203" pin="1"/>
+      <node ref="IC202" pin="3"/>
     </net>
-    <net code="20" name="+2V5">
-      <node ref="IC204" pin="3"/>
-      <node ref="FB202" pin="1"/>
-      <node ref="FB201" pin="1"/>
-      <node ref="C210" pin="1"/>
-      <node ref="C204" pin="1"/>
-      <node ref="C216" pin="1"/>
-      <node ref="FB203" pin="1"/>
-      <node ref="C207" pin="1"/>
-      <node ref="C213" pin="1"/>
-      <node ref="IC201" pin="4"/>
-      <node ref="FB204" pin="1"/>
+    <net code="15" name="Net-(U1-Pad118)">
+      <node ref="U1" pin="118"/>
     </net>
-    <net code="21" name="+1V2">
-      <node ref="IC204" pin="4"/>
-      <node ref="U1" pin="61"/>
-      <node ref="U1" pin="70"/>
-      <node ref="C236" pin="1"/>
-      <node ref="U1" pin="34"/>
-      <node ref="U1" pin="84"/>
-      <node ref="C222" pin="1"/>
-      <node ref="U1" pin="29"/>
-      <node ref="U1" pin="78"/>
-      <node ref="C221" pin="1"/>
-      <node ref="U1" pin="38"/>
-      <node ref="C223" pin="1"/>
-      <node ref="C242" pin="1"/>
-      <node ref="U1" pin="138"/>
-      <node ref="C218" pin="1"/>
-      <node ref="C217" pin="1"/>
-      <node ref="U1" pin="116"/>
-      <node ref="C226" pin="1"/>
-      <node ref="U1" pin="134"/>
-      <node ref="U1" pin="124"/>
-      <node ref="C219" pin="1"/>
-      <node ref="U1" pin="102"/>
-      <node ref="C220" pin="1"/>
-      <node ref="C231" pin="1"/>
-      <node ref="C230" pin="1"/>
-      <node ref="C225" pin="1"/>
-      <node ref="C237" pin="1"/>
-      <node ref="C243" pin="1"/>
-      <node ref="FB207" pin="1"/>
-      <node ref="FB206" pin="1"/>
-      <node ref="R201" pin="2"/>
-      <node ref="FB205" pin="1"/>
-      <node ref="C241" pin="1"/>
-      <node ref="U1" pin="45"/>
-      <node ref="U1" pin="5"/>
-      <node ref="C235" pin="1"/>
-      <node ref="C229" pin="1"/>
-      <node ref="C224" pin="1"/>
-      <node ref="FB208" pin="1"/>
+    <net code="16" name="GPIO16">
+      <node ref="CN302" pin="16"/>
+      <node ref="U1" pin="39"/>
     </net>
-    <net code="22" name="SCL">
-      <node ref="CN301" pin="18"/>
-      <node ref="CN302" pin="5"/>
+    <net code="17" name="SDA">
+      <node ref="CN302" pin="3"/>
+      <node ref="CN301" pin="17"/>
     </net>
-    <net code="23" name="Net-(U1-Pad25)">
-      <node ref="U1" pin="25"/>
+    <net code="18" name="Net-(U1-Pad69-UD)">
+      <node ref="U1" pin="69-UD"/>
     </net>
-    <net code="24" name="Net-(U1-Pad22)">
-      <node ref="U1" pin="22"/>
-    </net>
-    <net code="25" name="Net-(U1-Pad28)">
+    <net code="19" name="Net-(U1-Pad28)">
       <node ref="U1" pin="28"/>
     </net>
-    <net code="26" name="IO-07">
-      <node ref="CN301" pin="9"/>
-      <node ref="R306" pin="2"/>
+    <net code="20" name="IO-07">
       <node ref="U1" pin="135"/>
+      <node ref="R306" pin="2"/>
+      <node ref="CN301" pin="9"/>
     </net>
-    <net code="27" name="IO-09">
+    <net code="21" name="IO-08">
+      <node ref="U1" pin="133"/>
+      <node ref="CN301" pin="10"/>
+      <node ref="R306" pin="1"/>
+    </net>
+    <net code="22" name="IO-09">
+      <node ref="U1" pin="132"/>
       <node ref="CN301" pin="11"/>
       <node ref="R305" pin="2"/>
-      <node ref="U1" pin="132"/>
     </net>
-    <net code="28" name="IO-10">
+    <net code="23" name="IO-10">
       <node ref="CN301" pin="12"/>
       <node ref="U1" pin="125"/>
       <node ref="R305" pin="1"/>
     </net>
-    <net code="29" name="GPCLK2">
-      <node ref="U1" pin="54"/>
+    <net code="24" name="GPCLK2">
       <node ref="CN302" pin="31"/>
+      <node ref="U1" pin="54"/>
     </net>
-    <net code="30" name="SDA">
-      <node ref="CN301" pin="17"/>
-      <node ref="CN302" pin="3"/>
+    <net code="25" name="SCL">
+      <node ref="CN301" pin="18"/>
+      <node ref="CN302" pin="5"/>
     </net>
-    <net code="31" name="IO-13">
-      <node ref="R304" pin="1"/>
-      <node ref="CN301" pin="15"/>
+    <net code="26" name="Net-(U1-Pad25)">
+      <node ref="U1" pin="25"/>
+    </net>
+    <net code="27" name="IO-13">
       <node ref="U1" pin="119"/>
+      <node ref="CN301" pin="15"/>
+      <node ref="R304" pin="1"/>
     </net>
-    <net code="32" name="/GPIO/NCONFIG">
+    <net code="28" name="NSTATUS">
+      <node ref="CN302" pin="37"/>
+      <node ref="R302" pin="1"/>
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="29" name="CONF_DONE">
+      <node ref="U1" pin="92"/>
+      <node ref="CN302" pin="15"/>
+      <node ref="R301" pin="1"/>
+    </net>
+    <net code="30" name="/GPIO/NCONFIG">
       <node ref="U1" pin="14"/>
       <node ref="CN302" pin="13"/>
     </net>
-    <net code="34" name="IO-14">
-      <node ref="CN301" pin="16"/>
-      <node ref="U1" pin="115"/>
-      <node ref="R303" pin="1"/>
-    </net>
-    <net code="35" name="Net-(U1-Pad112)">
-      <node ref="U1" pin="112"/>
-    </net>
-    <net code="36" name="IO-12">
-      <node ref="R308" pin="1"/>
-      <node ref="CN301" pin="14"/>
-      <node ref="U1" pin="120"/>
-    </net>
-    <net code="37" name="IO-11">
-      <node ref="CN301" pin="13"/>
-      <node ref="U1" pin="121"/>
-      <node ref="R307" pin="1"/>
-    </net>
-    <net code="38" name="GPIO16">
-      <node ref="U1" pin="39"/>
-      <node ref="CN302" pin="16"/>
-    </net>
-    <net code="39" name="NSTATUS">
-      <node ref="U1" pin="9"/>
-      <node ref="R302" pin="1"/>
-      <node ref="CN302" pin="37"/>
-    </net>
-    <net code="40" name="CONF_DONE">
-      <node ref="R301" pin="1"/>
-      <node ref="CN302" pin="15"/>
-      <node ref="U1" pin="92"/>
-    </net>
-    <net code="41" name="GPIO12">
-      <node ref="U1" pin="33"/>
-      <node ref="CN302" pin="12"/>
-    </net>
-    <net code="42" name="GPIO11">
-      <node ref="CN302" pin="11"/>
-      <node ref="U1" pin="113"/>
-    </net>
-    <net code="43" name="GPIO29">
-      <node ref="CN302" pin="29"/>
-      <node ref="U1" pin="32"/>
-    </net>
-    <net code="44" name="GPIO35">
-      <node ref="CN302" pin="35"/>
-      <node ref="U1" pin="44"/>
-    </net>
-    <net code="45" name="GPIO22">
-      <node ref="CN302" pin="22"/>
-      <node ref="U1" pin="31"/>
-    </net>
-    <net code="46" name="GPIO32">
-      <node ref="CN302" pin="32"/>
-      <node ref="U1" pin="49"/>
-    </net>
-    <net code="47" name="GPIO36">
-      <node ref="U1" pin="46"/>
-      <node ref="CN302" pin="36"/>
-    </net>
-    <net code="48" name="GPIO38">
-      <node ref="U1" pin="43"/>
-      <node ref="CN302" pin="38"/>
-    </net>
-    <net code="49" name="GPIO40">
-      <node ref="U1" pin="42"/>
-      <node ref="CN302" pin="40"/>
-    </net>
-    <net code="50" name="GPCLK0">
-      <node ref="CN302" pin="7"/>
-      <node ref="U1" pin="55"/>
-    </net>
-    <net code="51" name="IO-08">
-      <node ref="R306" pin="1"/>
-      <node ref="CN301" pin="10"/>
-      <node ref="U1" pin="133"/>
-    </net>
-    <net code="54" name="/GPIO/IO-06">
-      <node ref="CN301" pin="8"/>
-      <node ref="U1" pin="136"/>
-    </net>
-    <net code="55" name="/GPIO/IO-05">
-      <node ref="CN301" pin="7"/>
-      <node ref="U1" pin="137"/>
-    </net>
-    <net code="56" name="/GPIO/IO-04">
-      <node ref="U1" pin="141"/>
-      <node ref="CN301" pin="6"/>
-    </net>
-    <net code="57" name="/GPIO/IO-03">
-      <node ref="CN301" pin="5"/>
-      <node ref="U1" pin="142"/>
-    </net>
-    <net code="58" name="/GPIO/IO-02">
-      <node ref="CN301" pin="4"/>
-      <node ref="U1" pin="143"/>
-    </net>
-    <net code="59" name="/GPIO/IO-01">
-      <node ref="U1" pin="144"/>
-      <node ref="CN301" pin="3"/>
-    </net>
-    <net code="61" name="/GPIO/DCLK">
-      <node ref="U1" pin="12"/>
-      <node ref="CN302" pin="18"/>
-    </net>
-    <net code="62" name="/GPIO/DATA[0]">
-      <node ref="U1" pin="13"/>
-      <node ref="CN302" pin="33"/>
-    </net>
-    <net code="63" name="/GPIO/SCLK_SPI0">
-      <node ref="U1" pin="58"/>
-      <node ref="CN302" pin="23"/>
-    </net>
-    <net code="64" name="/GPIO/MISO_SPI0">
-      <node ref="CN302" pin="21"/>
-      <node ref="U1" pin="59"/>
-    </net>
-    <net code="65" name="/GPIO/MOSI_SPI0">
-      <node ref="U1" pin="60"/>
-      <node ref="CN302" pin="19"/>
-    </net>
-    <net code="68" name="Net-(CN302-Pad28)">
-      <node ref="CN302" pin="28"/>
-    </net>
-    <net code="69" name="Net-(CN302-Pad27)">
-      <node ref="CN302" pin="27"/>
-    </net>
-    <net code="70" name="Net-(CN302-Pad17)">
-      <node ref="CN302" pin="17"/>
-    </net>
-    <net code="71" name="/GPIO/CE0_SPI0">
-      <node ref="CN302" pin="24"/>
-      <node ref="U1" pin="51"/>
-    </net>
-    <net code="72" name="/GPIO/CE1_SPI0">
-      <node ref="U1" pin="50"/>
-      <node ref="CN302" pin="26"/>
-    </net>
-    <net code="73" name="Net-(CN302-Pad10)">
-      <node ref="CN302" pin="10"/>
-    </net>
-    <net code="74" name="Net-(CN302-Pad8)">
-      <node ref="CN302" pin="8"/>
-    </net>
-    <net code="75" name="3V3Rpi">
+    <net code="31" name="3V3Rpi">
       <node ref="FB401" pin="1"/>
       <node ref="CN302" pin="1"/>
     </net>
-    <net code="76" name="Net-(C409-Pad2)">
-      <node ref="IC401" pin="42"/>
-      <node ref="C409" pin="2"/>
+    <net code="32" name="IO-14">
+      <node ref="CN301" pin="16"/>
+      <node ref="R303" pin="1"/>
+      <node ref="U1" pin="115"/>
     </net>
-    <net code="77" name="Net-(IC401-Pad41)">
-      <node ref="IC401" pin="41"/>
-      <node ref="R403" pin="1"/>
+    <net code="33" name="Net-(U1-Pad112)">
+      <node ref="U1" pin="112"/>
     </net>
-    <net code="78" name="Net-(C408-Pad1)">
-      <node ref="C410" pin="1"/>
-      <node ref="C408" pin="1"/>
-      <node ref="C412" pin="2"/>
-      <node ref="IC401" pin="33"/>
+    <net code="34" name="IO-11">
+      <node ref="U1" pin="121"/>
+      <node ref="R307" pin="1"/>
+      <node ref="CN301" pin="13"/>
     </net>
-    <net code="79" name="CLK">
-      <node ref="X400" pin="4"/>
-      <node ref="C438" pin="2"/>
+    <net code="35" name="IO-12">
+      <node ref="R308" pin="1"/>
+      <node ref="U1" pin="120"/>
+      <node ref="CN301" pin="14"/>
     </net>
-    <net code="80" name="Net-(C408-Pad2)">
-      <node ref="C408" pin="2"/>
-      <node ref="IC401" pin="32"/>
-      <node ref="C411" pin="2"/>
-      <node ref="C410" pin="2"/>
+    <net code="36" name="/GPIO/CE1_SPI0">
+      <node ref="CN302" pin="26"/>
+      <node ref="U1" pin="50"/>
     </net>
-    <net code="81" name="/Frontend/SCLK">
-      <node ref="U1" pin="66"/>
-      <node ref="IC401" pin="22"/>
+    <net code="37" name="GPIO12">
+      <node ref="CN302" pin="12"/>
+      <node ref="U1" pin="33"/>
     </net>
-    <net code="82" name="/Frontend/SEN">
-      <node ref="U1" pin="65"/>
-      <node ref="IC401" pin="23"/>
+    <net code="38" name="GPIO11">
+      <node ref="U1" pin="113"/>
+      <node ref="CN302" pin="11"/>
     </net>
-    <net code="83" name="/Frontend/RESET">
-      <node ref="IC401" pin="30"/>
-      <node ref="U1" pin="114"/>
+    <net code="39" name="GPIO29">
+      <node ref="U1" pin="32"/>
+      <node ref="CN302" pin="29"/>
     </net>
-    <net code="84" name="/Frontend/MODE">
-      <node ref="IC401" pin="53"/>
-      <node ref="U1" pin="111"/>
+    <net code="40" name="GPIO35">
+      <node ref="CN302" pin="35"/>
+      <node ref="U1" pin="44"/>
     </net>
-    <net code="85" name="/Frontend/IOUT_N-">
-      <node ref="T401" pin="1"/>
-      <node ref="IC401" pin="46"/>
+    <net code="41" name="GPIO22">
+      <node ref="CN302" pin="22"/>
+      <node ref="U1" pin="31"/>
     </net>
-    <net code="86" name="/Frontend/IOUT_N+">
-      <node ref="T401" pin="3"/>
-      <node ref="IC401" pin="50"/>
+    <net code="42" name="GPIO32">
+      <node ref="U1" pin="49"/>
+      <node ref="CN302" pin="32"/>
     </net>
-    <net code="87" name="/Frontend/RX+">
-      <node ref="C415" pin="1"/>
-      <node ref="IC401" pin="38"/>
+    <net code="43" name="GPIO36">
+      <node ref="U1" pin="46"/>
+      <node ref="CN302" pin="36"/>
     </net>
-    <net code="88" name="/Frontend/RX-">
-      <node ref="IC401" pin="37"/>
-      <node ref="C416" pin="1"/>
+    <net code="44" name="GPIO38">
+      <node ref="CN302" pin="38"/>
+      <node ref="U1" pin="43"/>
     </net>
-    <net code="89" name="Net-(C402-Pad2)">
-      <node ref="C402" pin="2"/>
-      <node ref="X402" pin="1"/>
+    <net code="45" name="GPCLK0">
+      <node ref="CN302" pin="7"/>
+      <node ref="U1" pin="55"/>
     </net>
-    <net code="90" name="Net-(C414-Pad1)">
-      <node ref="C414" pin="1"/>
-      <node ref="FB401" pin="2"/>
-      <node ref="T401" pin="2"/>
+    <net code="46" name="GPIO40">
+      <node ref="U1" pin="42"/>
+      <node ref="CN302" pin="40"/>
     </net>
-    <net code="91" name="Net-(C413-Pad1)">
-      <node ref="T402" pin="3"/>
-      <node ref="C415" pin="2"/>
-      <node ref="C413" pin="1"/>
+    <net code="47" name="/GPIO/IO-06">
+      <node ref="U1" pin="136"/>
+      <node ref="CN301" pin="8"/>
     </net>
-    <net code="92" name="Net-(C413-Pad2)">
-      <node ref="T402" pin="1"/>
-      <node ref="C413" pin="2"/>
-      <node ref="C416" pin="2"/>
+    <net code="48" name="/GPIO/IO-05">
+      <node ref="CN301" pin="7"/>
+      <node ref="U1" pin="137"/>
     </net>
-    <net code="93" name="Net-(C402-Pad1)">
-      <node ref="C402" pin="1"/>
-      <node ref="F401" pin="1"/>
+    <net code="49" name="/GPIO/IO-04">
+      <node ref="CN301" pin="6"/>
+      <node ref="U1" pin="141"/>
     </net>
-    <net code="94" name="Net-(F401-Pad3)">
-      <node ref="F402" pin="1"/>
-      <node ref="F401" pin="3"/>
+    <net code="50" name="/GPIO/IO-03">
+      <node ref="CN301" pin="5"/>
+      <node ref="U1" pin="142"/>
     </net>
-    <net code="95" name="Net-(F402-Pad3)">
-      <node ref="T401" pin="4"/>
-      <node ref="F402" pin="3"/>
+    <net code="51" name="/GPIO/IO-02">
+      <node ref="U1" pin="143"/>
+      <node ref="CN301" pin="4"/>
     </net>
-    <net code="99" name="Net-(C438-Pad1)">
-      <node ref="IC401" pin="57"/>
-      <node ref="C438" pin="1"/>
+    <net code="52" name="/GPIO/IO-01">
+      <node ref="CN301" pin="3"/>
+      <node ref="U1" pin="144"/>
     </net>
-    <net code="100" name="Net-(C404-Pad1)">
-      <node ref="C406" pin="2"/>
-      <node ref="C404" pin="1"/>
-      <node ref="L401" pin="2"/>
-      <node ref="L402" pin="1"/>
-      <node ref="C405" pin="1"/>
+    <net code="53" name="Net-(U1-Pad69-UA)">
+      <node ref="U1" pin="69-UA"/>
     </net>
-    <net code="101" name="Net-(C406-Pad1)">
-      <node ref="C406" pin="1"/>
-      <node ref="T402" pin="4"/>
-      <node ref="C407" pin="1"/>
-      <node ref="L402" pin="2"/>
-      <node ref="D401" pin="1"/>
+    <net code="54" name="Net-(U1-Pad69-UB)">
+      <node ref="U1" pin="69-UB"/>
     </net>
-    <net code="102" name="Net-(C401-Pad1)">
-      <node ref="L401" pin="1"/>
-      <node ref="C403" pin="1"/>
-      <node ref="C404" pin="2"/>
-      <node ref="C401" pin="1"/>
+    <net code="56" name="Net-(U1-Pad69-UC)">
+      <node ref="U1" pin="69-UC"/>
     </net>
-    <net code="103" name="Net-(C401-Pad2)">
-      <node ref="C401" pin="2"/>
-      <node ref="X401" pin="1"/>
+    <net code="57" name="/GPIO/DATA[0]">
+      <node ref="U1" pin="13"/>
+      <node ref="CN302" pin="33"/>
     </net>
-    <net code="104" name="/Frontend/CLKVDD">
-      <node ref="FB404" pin="1"/>
-      <node ref="IC401" pin="58"/>
-      <node ref="C423" pin="1"/>
-      <node ref="C435" pin="1"/>
-      <node ref="C431" pin="1"/>
-      <node ref="C427" pin="1"/>
-      <node ref="C419" pin="1"/>
+    <net code="58" name="/GPIO/SCLK_SPI0">
+      <node ref="CN302" pin="23"/>
+      <node ref="U1" pin="58"/>
     </net>
-    <net code="105" name="Net-(C437-Pad2)">
-      <node ref="C437" pin="2"/>
-      <node ref="FB406" pin="1"/>
-      <node ref="X400" pin="6"/>
+    <net code="59" name="/GPIO/MISO_SPI0">
+      <node ref="U1" pin="59"/>
+      <node ref="CN302" pin="21"/>
     </net>
-    <net code="106" name="/Frontend/AVDD3">
+    <net code="60" name="/GPIO/MOSI_SPI0">
+      <node ref="CN302" pin="19"/>
+      <node ref="U1" pin="60"/>
+    </net>
+    <net code="63" name="Net-(CN302-Pad28)">
+      <node ref="CN302" pin="28"/>
+    </net>
+    <net code="64" name="Net-(CN302-Pad27)">
+      <node ref="CN302" pin="27"/>
+    </net>
+    <net code="65" name="/GPIO/DCLK">
+      <node ref="CN302" pin="18"/>
+      <node ref="U1" pin="12"/>
+    </net>
+    <net code="66" name="Net-(CN302-Pad17)">
+      <node ref="CN302" pin="17"/>
+    </net>
+    <net code="67" name="/GPIO/CE0_SPI0">
+      <node ref="CN302" pin="24"/>
+      <node ref="U1" pin="51"/>
+    </net>
+    <net code="68" name="Net-(CN302-Pad8)">
+      <node ref="CN302" pin="8"/>
+    </net>
+    <net code="69" name="Net-(U1-Pad22)">
+      <node ref="U1" pin="22"/>
+    </net>
+    <net code="70" name="Net-(CN302-Pad10)">
+      <node ref="CN302" pin="10"/>
+    </net>
+    <net code="71" name="/Frontend/AVDD3">
       <node ref="IC401" pin="43"/>
+      <node ref="FB405" pin="1"/>
+      <node ref="C432" pin="1"/>
       <node ref="C420" pin="1"/>
       <node ref="C424" pin="1"/>
       <node ref="C436" pin="1"/>
       <node ref="C428" pin="1"/>
-      <node ref="FB405" pin="1"/>
-      <node ref="C432" pin="1"/>
     </net>
-    <net code="107" name="/Frontend/AVDD">
-      <node ref="FB403" pin="1"/>
-      <node ref="IC401" pin="40"/>
-      <node ref="IC401" pin="35"/>
-      <node ref="C430" pin="1"/>
-      <node ref="C426" pin="1"/>
-      <node ref="C422" pin="1"/>
-      <node ref="C418" pin="1"/>
-      <node ref="C434" pin="1"/>
+    <net code="72" name="/Frontend/CLKVDD">
+      <node ref="C427" pin="1"/>
+      <node ref="C431" pin="1"/>
+      <node ref="C435" pin="1"/>
+      <node ref="FB404" pin="1"/>
+      <node ref="C419" pin="1"/>
+      <node ref="C423" pin="1"/>
+      <node ref="IC401" pin="58"/>
     </net>
-    <net code="108" name="/Frontend/DVDD">
-      <node ref="IC401" pin="60"/>
-      <node ref="IC401" pin="64"/>
-      <node ref="IC401" pin="17"/>
-      <node ref="FB402" pin="1"/>
-      <node ref="C433" pin="1"/>
-      <node ref="C429" pin="1"/>
-      <node ref="C425" pin="1"/>
-      <node ref="C421" pin="1"/>
-      <node ref="C417" pin="1"/>
+    <net code="73" name="Net-(C404-Pad1)">
+      <node ref="C405" pin="1"/>
+      <node ref="L402" pin="1"/>
+      <node ref="L401" pin="2"/>
+      <node ref="C406" pin="2"/>
+      <node ref="C404" pin="1"/>
     </net>
-    <net code="109" name="Net-(IC401-Pad56)">
+    <net code="74" name="Net-(C401-Pad2)">
+      <node ref="X401" pin="1"/>
+      <node ref="C401" pin="2"/>
+    </net>
+    <net code="75" name="Net-(C401-Pad1)">
+      <node ref="C403" pin="1"/>
+      <node ref="C401" pin="1"/>
+      <node ref="C404" pin="2"/>
+      <node ref="L401" pin="1"/>
+    </net>
+    <net code="76" name="Net-(C406-Pad1)">
+      <node ref="C407" pin="1"/>
+      <node ref="C406" pin="1"/>
+      <node ref="L402" pin="2"/>
+      <node ref="D401" pin="1"/>
+      <node ref="T402" pin="4"/>
+    </net>
+    <net code="77" name="Net-(C402-Pad2)">
+      <node ref="X402" pin="1"/>
+      <node ref="C402" pin="2"/>
+    </net>
+    <net code="78" name="Net-(C408-Pad1)">
+      <node ref="C408" pin="1"/>
+      <node ref="C410" pin="1"/>
+      <node ref="C412" pin="2"/>
+      <node ref="IC401" pin="33"/>
+    </net>
+    <net code="79" name="Net-(C408-Pad2)">
+      <node ref="C411" pin="2"/>
+      <node ref="C408" pin="2"/>
+      <node ref="C410" pin="2"/>
+      <node ref="IC401" pin="32"/>
+    </net>
+    <net code="80" name="CLK">
+      <node ref="X400" pin="4"/>
+      <node ref="C438" pin="2"/>
+    </net>
+    <net code="81" name="Net-(C437-Pad2)">
+      <node ref="X400" pin="6"/>
+      <node ref="FB406" pin="1"/>
+      <node ref="C437" pin="2"/>
+    </net>
+    <net code="82" name="Net-(C409-Pad2)">
+      <node ref="IC401" pin="42"/>
+      <node ref="C409" pin="2"/>
+    </net>
+    <net code="83" name="Net-(IC401-Pad41)">
+      <node ref="R403" pin="1"/>
+      <node ref="IC401" pin="41"/>
+    </net>
+    <net code="84" name="Net-(C413-Pad1)">
+      <node ref="T402" pin="3"/>
+      <node ref="C413" pin="1"/>
+      <node ref="C415" pin="2"/>
+    </net>
+    <net code="85" name="Net-(C413-Pad2)">
+      <node ref="C416" pin="2"/>
+      <node ref="T402" pin="1"/>
+      <node ref="C413" pin="2"/>
+    </net>
+    <net code="86" name="Net-(C414-Pad1)">
+      <node ref="C414" pin="1"/>
+      <node ref="FB401" pin="2"/>
+      <node ref="T401" pin="2"/>
+    </net>
+    <net code="87" name="Net-(C402-Pad1)">
+      <node ref="F401" pin="1"/>
+      <node ref="C402" pin="1"/>
+    </net>
+    <net code="88" name="Net-(F401-Pad3)">
+      <node ref="F401" pin="3"/>
+      <node ref="F402" pin="1"/>
+    </net>
+    <net code="89" name="Net-(F402-Pad3)">
+      <node ref="F402" pin="3"/>
+      <node ref="T401" pin="4"/>
+    </net>
+    <net code="90" name="Net-(C438-Pad1)">
+      <node ref="IC401" pin="57"/>
+      <node ref="C438" pin="1"/>
+    </net>
+    <net code="91" name="Net-(IC401-Pad56)">
       <node ref="IC401" pin="56"/>
     </net>
-    <net code="110" name="Net-(IC401-Pad52)">
+    <net code="92" name="Net-(IC401-Pad52)">
       <node ref="IC401" pin="52"/>
     </net>
-    <net code="111" name="Net-(IC401-Pad51)">
-      <node ref="IC401" pin="51"/>
-    </net>
-    <net code="112" name="Net-(IC401-Pad49)">
-      <node ref="IC401" pin="49"/>
-    </net>
-    <net code="113" name="Net-(IC401-Pad45)">
-      <node ref="IC401" pin="45"/>
-    </net>
-    <net code="114" name="Net-(IC401-Pad61)">
+    <net code="93" name="Net-(IC401-Pad61)">
       <node ref="IC401" pin="61"/>
     </net>
-    <net code="115" name="/Frontend/ADIO10">
-      <node ref="U1" pin="105"/>
-      <node ref="IC401" pin="2"/>
+    <net code="94" name="Net-(IC401-Pad45)">
+      <node ref="IC401" pin="45"/>
     </net>
-    <net code="116" name="/Frontend/ADIO2">
-      <node ref="U1" pin="85"/>
-      <node ref="IC401" pin="10"/>
+    <net code="95" name="Net-(IC401-Pad49)">
+      <node ref="IC401" pin="49"/>
     </net>
-    <net code="117" name="/Frontend/ADIO3">
-      <node ref="U1" pin="86"/>
-      <node ref="IC401" pin="9"/>
+    <net code="96" name="Net-(IC401-Pad51)">
+      <node ref="IC401" pin="51"/>
     </net>
-    <net code="118" name="/Frontend/ADIO4">
-      <node ref="U1" pin="87"/>
-      <node ref="IC401" pin="8"/>
-    </net>
-    <net code="119" name="/Frontend/ADIO5">
-      <node ref="IC401" pin="7"/>
-      <node ref="U1" pin="98"/>
-    </net>
-    <net code="120" name="/Frontend/ADIO6">
-      <node ref="IC401" pin="6"/>
-      <node ref="U1" pin="99"/>
-    </net>
-    <net code="121" name="/Frontend/ADIO7">
-      <node ref="IC401" pin="5"/>
-      <node ref="U1" pin="100"/>
-    </net>
-    <net code="122" name="/Frontend/ADIO8">
-      <node ref="IC401" pin="4"/>
-      <node ref="U1" pin="101"/>
-    </net>
-    <net code="123" name="/Frontend/ADIO9">
-      <node ref="IC401" pin="3"/>
-      <node ref="U1" pin="103"/>
-    </net>
-    <net code="124" name="/Frontend/ADIO1">
+    <net code="97" name="/Frontend/ADIO1">
       <node ref="U1" pin="83"/>
       <node ref="IC401" pin="11"/>
     </net>
-    <net code="125" name="/Frontend/ADIO11">
-      <node ref="IC401" pin="1"/>
-      <node ref="U1" pin="106"/>
-    </net>
-    <net code="126" name="/Frontend/CLKOUT1">
-      <node ref="IC401" pin="19"/>
-      <node ref="U1" pin="69"/>
-    </net>
-    <net code="127" name="/Frontend/RCLK">
-      <node ref="IC401" pin="16"/>
-      <node ref="U1" pin="71"/>
-    </net>
-    <net code="128" name="/Frontend/TXCLK">
-      <node ref="U1" pin="72"/>
-      <node ref="IC401" pin="15"/>
-    </net>
-    <net code="129" name="/Frontend/TXEN">
-      <node ref="IC401" pin="14"/>
-      <node ref="U1" pin="76"/>
-    </net>
-    <net code="130" name="RXEN">
-      <node ref="U1" pin="77"/>
-      <node ref="IC401" pin="13"/>
-    </net>
-    <net code="131" name="/Frontend/SDIO">
-      <node ref="IC401" pin="20"/>
-      <node ref="U1" pin="68"/>
-    </net>
-    <net code="132" name="/Frontend/ADIO0">
+    <net code="98" name="/Frontend/ADIO0">
       <node ref="U1" pin="80"/>
       <node ref="IC401" pin="12"/>
     </net>
-    <net code="133" name="Net-(T402-Pad2)">
-      <node ref="T402" pin="2"/>
+    <net code="99" name="/Frontend/ADIO2">
+      <node ref="IC401" pin="10"/>
+      <node ref="U1" pin="85"/>
     </net>
-    <net code="134" name="/Frontend/SDO">
-      <node ref="U1" pin="67"/>
+    <net code="100" name="/Frontend/ADIO3">
+      <node ref="IC401" pin="9"/>
+      <node ref="U1" pin="86"/>
+    </net>
+    <net code="101" name="/Frontend/ADIO4">
+      <node ref="U1" pin="87"/>
+      <node ref="IC401" pin="8"/>
+    </net>
+    <net code="102" name="/Frontend/ADIO5">
+      <node ref="U1" pin="98"/>
+      <node ref="IC401" pin="7"/>
+    </net>
+    <net code="103" name="/Frontend/ADIO6">
+      <node ref="U1" pin="99"/>
+      <node ref="IC401" pin="6"/>
+    </net>
+    <net code="104" name="/Frontend/ADIO7">
+      <node ref="IC401" pin="5"/>
+      <node ref="U1" pin="100"/>
+    </net>
+    <net code="105" name="/Frontend/ADIO8">
+      <node ref="IC401" pin="4"/>
+      <node ref="U1" pin="101"/>
+    </net>
+    <net code="106" name="/Frontend/ADIO9">
+      <node ref="U1" pin="103"/>
+      <node ref="IC401" pin="3"/>
+    </net>
+    <net code="107" name="/Frontend/ADIO10">
+      <node ref="IC401" pin="2"/>
+      <node ref="U1" pin="105"/>
+    </net>
+    <net code="108" name="/Frontend/RX+">
+      <node ref="IC401" pin="38"/>
+      <node ref="C415" pin="1"/>
+    </net>
+    <net code="109" name="/Frontend/RX-">
+      <node ref="C416" pin="1"/>
+      <node ref="IC401" pin="37"/>
+    </net>
+    <net code="110" name="/Frontend/IOUT_N+">
+      <node ref="T401" pin="3"/>
+      <node ref="IC401" pin="50"/>
+    </net>
+    <net code="111" name="/Frontend/SCLK">
+      <node ref="IC401" pin="22"/>
+      <node ref="U1" pin="66"/>
+    </net>
+    <net code="112" name="/Frontend/ADIO11">
+      <node ref="IC401" pin="1"/>
+      <node ref="U1" pin="106"/>
+    </net>
+    <net code="113" name="/Frontend/CLKOUT1">
+      <node ref="U1" pin="53"/>
+      <node ref="U1" pin="69"/>
+      <node ref="IC401" pin="19"/>
+    </net>
+    <net code="114" name="/Frontend/RCLK">
+      <node ref="IC401" pin="16"/>
+      <node ref="U1" pin="71"/>
+    </net>
+    <net code="115" name="/Frontend/TXCLK">
+      <node ref="IC401" pin="15"/>
+      <node ref="U1" pin="72"/>
+    </net>
+    <net code="116" name="/Frontend/TXEN">
+      <node ref="IC401" pin="14"/>
+      <node ref="U1" pin="76"/>
+    </net>
+    <net code="117" name="/Frontend/RXEN">
+      <node ref="U1" pin="77"/>
+      <node ref="IC401" pin="13"/>
+    </net>
+    <net code="118" name="/Frontend/SDIO">
+      <node ref="IC401" pin="20"/>
+      <node ref="U1" pin="68"/>
+    </net>
+    <net code="119" name="/Frontend/SDO">
       <node ref="IC401" pin="21"/>
+      <node ref="U1" pin="67"/>
+    </net>
+    <net code="120" name="/Frontend/SEN">
+      <node ref="U1" pin="65"/>
+      <node ref="IC401" pin="23"/>
+    </net>
+    <net code="121" name="/Frontend/RESET">
+      <node ref="IC401" pin="30"/>
+      <node ref="U1" pin="114"/>
+    </net>
+    <net code="122" name="/Frontend/MODE">
+      <node ref="U1" pin="111"/>
+      <node ref="IC401" pin="53"/>
+    </net>
+    <net code="123" name="/Frontend/AVDD">
+      <node ref="C422" pin="1"/>
+      <node ref="C426" pin="1"/>
+      <node ref="C430" pin="1"/>
+      <node ref="C434" pin="1"/>
+      <node ref="FB403" pin="1"/>
+      <node ref="IC401" pin="35"/>
+      <node ref="IC401" pin="40"/>
+      <node ref="C418" pin="1"/>
+    </net>
+    <net code="124" name="/Frontend/DVDD">
+      <node ref="C421" pin="1"/>
+      <node ref="C417" pin="1"/>
+      <node ref="IC401" pin="60"/>
+      <node ref="FB402" pin="1"/>
+      <node ref="IC401" pin="64"/>
+      <node ref="C433" pin="1"/>
+      <node ref="C429" pin="1"/>
+      <node ref="C425" pin="1"/>
+      <node ref="IC401" pin="17"/>
+    </net>
+    <net code="125" name="/Frontend/IOUT_N-">
+      <node ref="IC401" pin="46"/>
+      <node ref="T401" pin="1"/>
+    </net>
+    <net code="126" name="Net-(T402-Pad2)">
+      <node ref="T402" pin="2"/>
     </net>
   </nets>
 </export>

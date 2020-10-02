@@ -1,16 +1,12 @@
-EESchema Schematic File Version 2
-LIBS:Radioberry
-LIBS:hermeslite
-LIBS:power
-LIBS:Radioberry-cache
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 4
 Title "RadioBerry V2.0"
-Date "2017-11-29"
-Rev "beta2"
+Date "2020-10-01"
+Rev "beta4"
 Comp "AppMind"
 Comment1 "PA3GSB"
 Comment2 ""
@@ -36,7 +32,7 @@ F0 "Frontend" 118
 F1 "Radioberry-Frontend.sch" 118
 $EndSheet
 $Comp
-L TEST_1P MH1
+L hermeslite:TEST_1P MH1
 U 1 1 59CC9E7F
 P 6125 4750
 F 0 "MH1" H 6125 5020 50  0000 C CNN
@@ -49,7 +45,7 @@ F 5 "NOBOM" H 6125 4750 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L TEST_1P MH2
+L hermeslite:TEST_1P MH2
 U 1 1 59CC9EF6
 P 6300 4750
 F 0 "MH2" H 6300 5020 50  0000 C CNN
@@ -62,7 +58,7 @@ F 5 "NOBOM" H 6300 4750 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L TEST_1P MH3
+L hermeslite:TEST_1P MH3
 U 1 1 59CC9F32
 P 6475 4750
 F 0 "MH3" H 6475 5020 50  0000 C CNN
@@ -75,7 +71,7 @@ F 5 "NOBOM" H 6475 4750 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L TEST_1P MH4
+L hermeslite:TEST_1P MH4
 U 1 1 59CC9F63
 P 6650 4750
 F 0 "MH4" H 6650 5020 50  0000 C CNN
@@ -88,7 +84,7 @@ F 5 "NOBOM" H 6650 4750 60  0001 C CNN "Key"
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR01
+L hermeslite:GND #PWR01
 U 1 1 59CC9F91
 P 6375 5000
 F 0 "#PWR01" H 6375 4750 50  0001 C CNN
@@ -101,7 +97,7 @@ $EndComp
 Wire Wire Line
 	6125 4750 6125 4875
 Wire Wire Line
-	6125 4875 6650 4875
+	6125 4875 6300 4875
 Wire Wire Line
 	6300 4750 6300 4875
 Connection ~ 6300 4875
@@ -113,4 +109,10 @@ Wire Wire Line
 Connection ~ 6475 4875
 Wire Wire Line
 	6375 4875 6375 5000
+Wire Wire Line
+	6300 4875 6375 4875
+Wire Wire Line
+	6375 4875 6475 4875
+Wire Wire Line
+	6475 4875 6650 4875
 $EndSCHEMATC
