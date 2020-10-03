@@ -8,7 +8,7 @@ read input
 if [[ $input == "CL025" ]]; then
 	echo "Installing Radioberry gateware Cyclone 10 CL025..."
 	
-	wget https://github.com/softerhardware/Hermes-Lite2/blob/master/gateware/variants/radioberry_cl025/build/radioberry.rbf
+	wget https://raw.githubusercontent.com/softerhardware/Hermes-Lite2/master/gateware/variants/radioberry_cl025/build/radioberry.rbf
 	sudo mv ./radioberry.rbf /lib/firmware
 	
 	echo ""
@@ -17,7 +17,7 @@ if [[ $input == "CL025" ]]; then
 elif [[ $input == "CL016" ]]; then
 	echo "Installing Radioberry gateware Cyclone 10 CL016..."
 	
-	wget https://github.com/softerhardware/Hermes-Lite2/blob/master/gateware/variants/radioberry_cl016/build/radioberry.rbf
+	wget https://raw.githubusercontent.com/softerhardware/Hermes-Lite2/master/gateware/variants/radioberry_cl016/build/radioberry.rbf
 	sudo mv ./radioberry.rbf /lib/firmware
 	
 	echo ""
