@@ -78,7 +78,7 @@ void init_RPI_GPIO() {
 	initialize_gpio_for_input(gpio_port, 16);	// rx iq data
 	initialize_gpio_for_input(gpio_port, 25);	// available samples.
 	
-	initialize_gpio_for_input(gpio_port, 23);	// last
+	//initialize_gpio_for_input(gpio_port, 23);	// last
 	
 	//TX IO Init part 
 	initialize_gpio_for_output(gpio_port, RPI_TX_CLK);

@@ -244,6 +244,7 @@ void handlePacket(char* buffer){
 			running = 0;
 			while (active) usleep(1000);
 			last_sequence_number = 0;
+			spi_send_control(0);
 			if (sock_TCP_Client > -1)
 			{
 				close(sock_TCP_Client);
@@ -255,6 +256,7 @@ void handlePacket(char* buffer){
 		case 0x0304feef:
 			fprintf(stderr, "Start Port %d \n", ntohs(remaddr.sin_port));
 			running = 1;
+			spi_send_control(0);
 			if (sock_TCP_Client > -1)
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
 			else
@@ -370,10 +372,11 @@ void fillPacketToSend() {
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
 				//NR must be read from gateware.
-				for (int r=0; r < MIN(lnrx, NR); r++) {	
+				for (int r = MIN(lnrx, NR)-1; r >= 0; r--) {	
 					rx_reader(iqdata);
 					memcpy(hpsdrdata + index + (r * 6), iqdata, 6);
 				}
+				
 			}
 		}
 }
@@ -382,7 +385,6 @@ void rx_reader(unsigned char iqdata[]){
 	uint32_t value = 0;
 	
 	iqs++;
-	uint32_t lastid  =0;
 		
 	for (int i = 0; i < 6 ; i++) {
 		
@@ -394,7 +396,6 @@ void rx_reader(unsigned char iqdata[]){
 		iqdata[i] |=  (((value >> 20) & 1) << 5);
 		iqdata[i] |=  (((value >> 21) & 1) << 4);
 		
-		lastid |= (((value >> 23) & 1) << (5-i));
 		
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
@@ -403,22 +404,7 @@ void rx_reader(unsigned char iqdata[]){
 		iqdata[i] |=  (((value >> 19) & 1) << 2);
 		iqdata[i] |=  (((value >> 20) & 1) << 1);
 		iqdata[i] |=  (((value >> 21) & 1));			
-	}		
-	// sync with iq samples from gateware... 
-	
-	// After start or stop/start sequence the iq samples seems not in the right order.
-	// The gateware provides in a last indicator. 
-	// Assuming sequence I0Q0I1Q1 the Q1 is containing this last indicator.
-	// the given sequence must be kept!! But after a start or restart the sequence from the gateware is not quaranteed.
-	// in the gateware i need to sync the reading...
-	// if gateware is taking the control... one gpio/fpga pin comes free!
-	
-	if ( (iqs % lnrx== 0) && (lastid !=0x07)  ) {
-		*rpi_set_io_high = (1<<RPI_RX_CLK); 
-		*rpi_set_io_low = (1<<RPI_RX_CLK);
-		//fprintf(stderr, ".");
-	} 
-	
+	}			
 }
 
 void spi_send_control(unsigned char command) {

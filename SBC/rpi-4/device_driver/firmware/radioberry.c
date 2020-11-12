@@ -383,20 +383,17 @@ void fillPacketToSend() {
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
 				//NR must be read from gateware.
-				for (int r=0; r < MIN(lnrx, NR); r++) {	
+				for (int r = MIN(lnrx, NR)-1; r >= 0; r--) {	
 					memcpy(hpsdrdata + index + (r * 6), rx_buffer + rb_sample, 6);
 					rb_sample+=6;						
 				}
 			}
 			// inform the SDR about the radioberry control status.
-			// https://github.com/softerhardware/Hermes-Lite2/wiki/Protocol
-			hpsdrdata[11 + coarse_pointer] = (rb_control & 0x07); 
-			if ( last_sequence_number % 500 == 0) {
-				hpsdrdata[11 + coarse_pointer] = 0x08 | (rb_control & 0x07); 
-				read_temperature_raspberryPi();			
-				hpsdrdata[12 + coarse_pointer] = ((sys_temp >> 8) & 0xFF);
-				hpsdrdata[13 + coarse_pointer] = (sys_temp & 0xFF);
-			}
+			// https://github.com/softerhardware/Hermes-Lite2/wiki/Protocol		
+			hpsdrdata[11 + coarse_pointer] = 0x08 | (rb_control & 0x07); 
+			if ( last_sequence_number % 500 == 0) 	read_temperature_raspberryPi();			
+			hpsdrdata[12 + coarse_pointer] = ((sys_temp >> 8) & 0xFF);
+			hpsdrdata[13 + coarse_pointer] = (sys_temp & 0xFF);
 		}
 }
 

@@ -63,8 +63,6 @@ static int initialize_firmware() {
 	initialize_gpio_for_input(rpi_io, 16);	// rx iq data
 	initialize_gpio_for_input(rpi_io, 25);	// available samples.
 	
-	initialize_gpio_for_input(rpi_io, 23);	// last
-	
 	//TX IO Init part 
 	initialize_gpio_for_output(rpi_io, RPI_TX_CLK);
 	*rpi_set_io_low = (1<<RPI_TX_CLK); 	// init pi-tx_clk
@@ -152,7 +150,6 @@ int rxStream(int nrx, unsigned char stream[]){
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 	uint32_t value = 0;
 	
-	uint32_t lastid  =0;
 	int i = 0;	
 	for (i = 0; i < 6 ; i++) {
 		
@@ -164,8 +161,6 @@ void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 		iqdata[i] |=  (((value >> 20) & 1) << 5);
 		iqdata[i] |=  (((value >> 21) & 1) << 4);
 		
-		lastid |= (((value >> 23) & 1) << (5-i));
-		
 		*rpi_set_io_low = (1<<RPI_RX_CLK);
 		value = *rpi_read_io;
 	
@@ -174,20 +169,6 @@ void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 		iqdata[i] |=  (((value >> 20) & 1) << 1);
 		iqdata[i] |=  (((value >> 21) & 1));			
 	}		
-	// sync with iq samples from gateware... 
-	
-	// After start or stop/start sequence the iq samples seems not in the right order.
-	// The gateware provides in a last indicator. 
-	// Assuming sequence I0Q0I1Q1 the Q1 is containing this last indicator.
-	// the given sequence must be kept!! But after a start or restart the sequence from the gateware is not quaranteed.
-	// in the gateware i need to sync the reading...
-	// if gateware is taking the control... one gpio/fpga pin comes free!
-	
-	if ( (iqs % lnrx== 0) && (lastid !=0x07)  ) {
-		*rpi_set_io_high = (1<<RPI_RX_CLK); 
-		*rpi_set_io_low = (1<<RPI_RX_CLK);
-		//fprintf(stderr, ".");
-	} 
 }
 
 
