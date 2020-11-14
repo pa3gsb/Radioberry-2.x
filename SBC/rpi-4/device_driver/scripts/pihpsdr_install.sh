@@ -34,7 +34,18 @@ elif [[ $input == "pihpsdr" ]]; then
 	
 	echo ""
 	echo "Installing pihpsdr..."
-
+	echo ""
+	echo ""
+	localcw=0;
+	while true; do
+    read -p "Do you wish to install the local CW option: yes or no?" yn
+    case $yn in
+        [Yy]* ) localcw=1; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes (Y or y) or no (N or n).";;
+    esac
+	done
+	
 	function install_dependency {
 		echo "--- Installing dependency: $1"
 		sudo apt-get -y install $1
@@ -53,10 +64,13 @@ elif [[ $input == "pihpsdr" ]]; then
 	cd pihpsdr
 	
 	#makefile modification; when 'on' switch it 'off' (adding '#'). 
-	sed -i '/GPIO_INCLUDE=GPIO/c\#GPIO_INCLUDE=GPIO' ./Makefile
 	sed -i '/^PURESIGNAL_INCLUDE=PURESIGNAL/c\#PURESIGNAL_INCLUDE=PURESIGNAL' ./Makefile
-	sed -i '/^LOCALCW_INCLUDE=LOCALCW/c\#LOCALCW_INCLUDE=LOCALCW' Makefile
-	sed -i '/^MIDI_INCLUDE=MIDI/c\#MIDI_INCLUDE=MIDI' Makefile
+	sed -i '/^MIDI_INCLUDE=MIDI/c\#MIDI_INCLUDE=MIDI' ./Makefile
+		
+	if [ "$localcw" -eq "1" ]; then
+		sed -i '/^#GPIO_INCLUDE=GPIO/c\GPIO_INCLUDE=GPIO' ./Makefile;
+		sed -i '/^#LOCALCW_INCLUDE=LOCALCW/c\LOCALCW_INCLUDE=LOCALCW' ./Makefile;
+	fi
 	
 	make -j 4
 	sudo make install
