@@ -2,18 +2,16 @@ RadioBerry V2.0 - Ham radio cape for Raspberry PI
 =================================================
 
 
-New development is foccusing on the rpi-4.
+New development is focussing on the rpi-4.
 
 
-running :
+How to setup your raspberry PI to work with RadioBerry use the release:
 
--	gateware in FPGA by using the loadFPGA utility. 
--	radioberry firmware 
-
-- 	SDR program like pihpsdr, quisk, PSDR
+https://github.com/pa3gsb/Radioberry-2.x/releases
 
 
-The latest gateware can be found at https://github.com/softerhardware/Hermes-Lite2
+For more information about the gateware: look @ https://github.com/softerhardware/Hermes-Lite2
+
 
 
 

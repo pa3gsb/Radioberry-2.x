@@ -83,7 +83,6 @@ int initRadioberry() {
 		exit(-1);
 	}
 	
-	//rb_info.rb_command = 0x01; 
 	rb_info.command_data = 0x0;
 	
 	//required to retrieve gateware information.
@@ -270,7 +269,6 @@ void handlePacket(char* buffer){
 				}
 				fprintf(stderr, "sock_TCP_Client: %d connected to sock_TCP_Server: %d\n", sock_TCP_Client, sock_TCP_Server);
 				running = 1;
-				//send_control(0);
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
 			}	
 			break;
@@ -383,7 +381,7 @@ void fillPacketToSend() {
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
 				//NR must be read from gateware.
-				for (int r = MIN(lnrx, NR)-1; r >= 0; r--) {	
+				for (int r = 0; r < MIN(lnrx, NR); r++) {	
 					memcpy(hpsdrdata + index + (r * 6), rx_buffer + rb_sample, 6);
 					rb_sample+=6;						
 				}
