@@ -1,0 +1,80 @@
+Radioberry FT8-decoding.
+
+This solution is based on the work of Pavel done for the red-pitaya SDR.
+
+ft8 decoder: 
+https://github.com/pavel-demin/ft8d
+
+https://github.com/pavel-demin/red-pitaya-notes/tree/master/projects/sdr_transceiver_ft8/app
+
+Also i have used the modification done by Steve Haynal KF7O done in the HL-2 gateware; by making 
+receivers using a sample rate of 4000 Hz (see implemtation : receiver_4000.v)
+
+For the radioberry 2 variants are available:
+
+-radioberry_cl016_4000; radioberry using Cyclone CL016 (4 receivers)
+-radioberry_cl025_4000; radioberry using Cyclone CL016  (8 receivers)
+
+For details: https://github.com/softerhardware/Hermes-Lite2/tree/master/gateware/variants
+
+The low sample rate suits the radioberry perfectly.
+
+The following must be done to make the decoder work;
+
+Open a terminal:
+
+sudo systemctl stop radioberry
+sudo modprobe -r radioberry
+sudo cp radioberry.rbf /lib/firmware (get the required variant)
+sudo modprobe radioberry
+
+make the following directory/folder structure:
+
+/home/pi/decoders/ft8
+/home/pi/decoders/ft8/recordings
+/home/pi/decoders/ft8/decodes
+
+get the content from git :
+
+Change the content in the upload-ft8.sh file:
+
+
+# CALL and GRID should be specified to enable uploads
+CALL=
+GRID=
+
+# optional antenna description
+ANTENNA=""
+
+
+make all shell scripts (extension sh) executable:
+
+chmod +x radioberry-ft8.sh
+chmod +x decode-ft8.sh
+chmod +x upload-ft8.sh
+
+chmod +x ft8d
+
+Now build the recording-ft8 and upload-to-pskreporter.c by;
+running make command.
+
+The setup is done... Now the ft8 recording can start using your favourite radio.
+
+sudo ./recording-ft8
+
+To do all the decoding and uploading automatically:
+
+Modify the crontab:
+
+sudo crontab -e
+1-59 * * * * sudo /home/pi/decoders/ft8/radioberry-ft8.sh
+
+After the updated cron tab the cron service must be restarted:
+
+sudo service cron restart
+
+Have fun using the ft8 decoder.
+
+
+NOTE:
+The driver does now supports MAX 4 receivers; for the CL025 variant we can handle 8 channels in the future!
