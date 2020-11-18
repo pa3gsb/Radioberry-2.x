@@ -78,3 +78,7 @@ Have fun using the ft8 decoder.
 
 NOTE:
 The driver does now supports MAX 4 receivers; for the CL025 variant we can handle 8 channels in the future!
+
+TODO:
+Instead of writing to SD card... i think it is better to write to virtual file system!
+https://www.domoticz.com/wiki/Setting_up_a_RAM_drive_on_Raspberry_Pi
