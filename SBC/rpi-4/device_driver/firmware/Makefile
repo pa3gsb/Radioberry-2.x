@@ -1,9 +1,7 @@
 CC=gcc
 LINK=gcc
 
-GIT_VERSION := $(shell git describe --abbrev=0 --tags)
-
-OPTIONS=-g -O3 -D GIT_VERSION='"$(GIT_VERSION)"'
+OPTIONS=-g -O3 
 
 LIBS=-lrt -lm -lpthread 
 
