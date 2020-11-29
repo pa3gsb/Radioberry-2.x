@@ -1,22 +1,14 @@
 #!/bin/bash
 
-JOBS=4
+JOBS=1
 NICE=10
 
-DIR=`readlink -f $0`
-DIR=`dirname $DIR`
-
-RECORDER=$DIR/recordings
+RECORDER=./recordings
 
 DECODER=./ft8d
 
 date
 TIMESTAMP=`date --utc +'%y%m%d_%H%M'`
-
-echo "Recording ..."
-
-killall -q $RECORDER
-$RECORDER $CONFIG
 
 echo "Decoding ..."
 

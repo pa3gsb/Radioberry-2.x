@@ -1,6 +1,6 @@
 CFLAGS = -O3 -g
 
-LDFLAGS = -lm
+LDFLAGS = -lm -lzmq
 
 all:	recording-ft8 upload-to-pskreporter
 

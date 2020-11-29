@@ -353,4 +353,4 @@ MODULE_AUTHOR("Johan Maas - pa3gsb@gmail.com");
 MODULE_DESCRIPTION("Radioberry SDR device driver. (rpi-4)");
 MODULE_SUPPORTED_DEVICE("Radioberry SDR");
 MODULE_LICENSE("GPL");
-MODULE_VERSION("0.6");
+MODULE_VERSION("0.7");

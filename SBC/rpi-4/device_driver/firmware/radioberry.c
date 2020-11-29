@@ -120,6 +120,11 @@ int initRadioberry() {
 
 	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
 		perror("setsockopt failed\n");
+	
+	int optval = 7; // high priority.
+    if (setsockopt(fd, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
+        perror("fd socket: SO_PRIORITY");
+    }
 		
 	/* bind the socket to any valid IP address and a specific port */
 	memset((char *)&myaddr, 0, sizeof(myaddr));
@@ -146,6 +151,9 @@ int initRadioberry() {
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (void *)&timeout, sizeof(timeout)); //added
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (void *)&yes, sizeof(yes));
+	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
+        perror("sock_TCP_Server socket: SO_PRIORITY");
+    }
 
 	if (bind(sock_TCP_Server, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0)
 	{
@@ -368,6 +376,8 @@ void fillPacketToSend() {
 		
 		memcpy(hpsdrdata + 8, sync_hpsdrdata, 8);
 		memcpy(hpsdrdata + 520, sync_hpsdrdata, 8);
+		
+		if (lnrx != nrx) usleep(1000);
 
 		lnrx = nrx;
 

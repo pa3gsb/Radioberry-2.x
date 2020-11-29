@@ -7,10 +7,7 @@ GRID=
 # optional antenna description
 ANTENNA=""
 
-DIR=`readlink -f $0`
-DIR=`dirname $DIR`
-
-UPLOADER=$DIR/upload-to-pskreporter
+UPLOADER=./upload-to-pskreporter
 
 date
 TIMESTAMP=`date --utc +'%y%m%d_%H%M'`

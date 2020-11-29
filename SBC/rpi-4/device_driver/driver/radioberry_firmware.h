@@ -132,7 +132,7 @@ int rxStream(int nrx, unsigned char stream[]){
 	unsigned char iqdata[6];
 	int iqs = 1;
 	
-	int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
+	int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: (nrx ==4)? 76: (nrx ==5)? 75: (nrx ==6)? 78: (nrx ==7)? 77: 80;
 	
 	int s = 0;
 	for (s = 0; s < nr_samples; s++) {	

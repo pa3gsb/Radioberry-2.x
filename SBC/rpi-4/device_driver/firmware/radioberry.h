@@ -29,13 +29,12 @@ void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\tRadioberry V2.0\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\n");
-	fprintf(stderr,	"\t*** ==> !!!Device driver version!!!! <== ****\n");
-	fprintf(stderr,	"\t*** !!! Radioberry device driver available for RPI-4!!!! ****\n");
+	fprintf(stderr, "\t\t\tRadioberry V2.0  RPI-4 version\n");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter. \n");
+	fprintf(stderr,	"\n\n");
+	char version[]=GIT_VERSION;
+	fprintf(stderr,"Build version: %s", version);
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\t\t Have fune Johan PA3GSB\n");
 	fprintf(stderr, "\n\n");
