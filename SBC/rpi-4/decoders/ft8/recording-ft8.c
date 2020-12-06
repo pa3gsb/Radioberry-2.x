@@ -23,7 +23,7 @@
 
 #include "radioberry_ioctl.h"
 
-#define NRX 8			
+#define NRX 7			
 
 //u_int32_t freqArray[8] = {7075500, 3574500, 7075500, 3574500, 3574500,  3574500, 3574500,  21075500  };
 u_int32_t freqArray[8] = {1841500, 3574500, 5358500, 7075500, 10137500,  14075500, 18101500,  21075500  };
@@ -92,7 +92,7 @@ int initDecoder()
 
 	memset(commands,0,256); // initialise the commands.	
 
-	commands[0x00] = 0x00000004;        
+	commands[0x00] = 0x00000000;        
 	commands[0x02] = freqArray[7];		//tx
 	commands[0x04] = freqArray[0];		//f1
 	
@@ -104,7 +104,7 @@ int initDecoder()
 	usleep(100000);	
 	
 	if (NRX > 1) {
-		commands[0x00] = 0x0000000C;
+		commands[0x00] = 0x00000008;
 		commands[0x06] = freqArray[1];		//f2
 	
 		send_control(0x00);
@@ -261,7 +261,7 @@ void ft8_decode(void)
 			//iq_buffer[sample + (lnrx * 240000)] = CMPLXF( 100.0 * left_sample, -100.0 * right_sample) ;
 			iq_buffer[sample + (lnrx * 240000)] = CMPLXF( 100 * ((float)left_sample/8388607.0), -100 * ((float)right_sample/8388607.0) );
 				
-			if (lnrx==1) iqdata[iqdata_count] = CMPLXF( ((float)left_sample/8388607.0), ((float)right_sample/8388607.0) );
+			if (lnrx==0) iqdata[iqdata_count] = CMPLXF( ((float)left_sample/8388607.0), ((float)right_sample/8388607.0) );
 		}
 
 		iqdata_count ++;
@@ -287,7 +287,7 @@ void ft8_decode(void)
 			char name[32];
 			double  dialfreq;
 
-			int i = 2;
+			int i = 0;
 			for(i; i < NRX; i++)
 			{
 				dialfreq = freqArray[i] * 1.0; 

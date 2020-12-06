@@ -33,7 +33,7 @@ void printIntroScreen() {
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter.");
 	fprintf(stderr,	"\n\n");
-	fprintf(stderr,"\tBuild version: rpi-4-2020-11-29");
+	fprintf(stderr,"\tBuild version: rpi-4-2020-12-05");
 	fprintf(stderr,	"\n\n");
 	fprintf(stderr, "\tHave fune Johan PA3GSB\n");
 	fprintf(stderr, "\n");

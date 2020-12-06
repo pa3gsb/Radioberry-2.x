@@ -41,13 +41,13 @@ static int initialize_firmware(void);
 int rxStream(int nrx, unsigned char stream[]);
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]);
 int spiXfer(char *txBuf, char *rxBuf, unsigned cnt);
-void write_iq_sample(unsigned char tx_iqdata[]);
+int write_iq_sample(unsigned char tx_iqdata[]);
 
 static int initialize_firmware() {	
 
 	//SPI mode pins
 	setPinMode(RPI_SPI_CE0,  PI_ALT0);
-	setPinMode(RPI_SPI_CE1,  PI_ALT0);
+	//setPinMode(RPI_SPI_CE1,  PI_ALT0);
 
 	setPinMode(RPI_SPI_SCLK, PI_ALT0);
 	setPinMode(RPI_SPI_MISO, PI_ALT0);
@@ -70,6 +70,7 @@ static int initialize_firmware() {
 	initialize_gpio_for_output(rpi_io, 12);	// tx iq data
 	initialize_gpio_for_output(rpi_io, 17);	// tx iq data
 	initialize_gpio_for_output(rpi_io, 18);	// tx iq data
+	initialize_gpio_for_input(rpi_io, 7);	// check txbuffer.
 	
 	printk(KERN_INFO "GPIO ready for rx and tx streaming...\n");
 }
@@ -168,8 +169,9 @@ void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 }
 
 
-void write_iq_sample(unsigned char tx_iqdata[]){
+int write_iq_sample(unsigned char tx_iqdata[]){
 
+	uint32_t value = 0;
 	int i = 0;
 	for (i = 0; i < 4 ; i++) {
 		if (tx_iqdata[i] & 0x80) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
@@ -184,6 +186,14 @@ void write_iq_sample(unsigned char tx_iqdata[]){
 		if (tx_iqdata[i] & 0x01) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
 		*rpi_set_io_low = (1<<RPI_TX_CLK);
 	}
+	
+	// get the tx fifo state
+	// if tx fifo is full; than a 0 is returned otherwise 1.
+	// the sleep is in firmware... i think it should be long here... but delay in kernel mode
+	// is not working properly....
+	// to do... i like to solve it in the driver.
+	value = *rpi_read_io;
+	return ((value >> 7) & 1);
 }
 
 #endif

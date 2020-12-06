@@ -469,7 +469,11 @@ void *txWriter(void *arg) {
 
 		//first setup without EER
 		if (MOX || CWX) {
-			write(fd_rb , tx_iqdata , sizeof(tx_iqdata));
+			if (! write(fd_rb , tx_iqdata , sizeof(tx_iqdata))) {
+				// tx FIFO is almost full; we give 50 sample time...
+				// prefer to have this sleep in the driver...did not get it to work properly! 
+				usleep(1000); //50 samples sleep (1/48K about 20usec /sample * 50)
+			}
 		}	
 	
 		sem_post(&tx_empty); 

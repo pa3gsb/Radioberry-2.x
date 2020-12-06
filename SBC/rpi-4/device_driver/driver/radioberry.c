@@ -132,8 +132,7 @@ static int radioberry_write(struct file *flip, const char *buf, size_t count, lo
     if (copy_from_user(&tx_stream, buf, sizeof(tx_stream))) {
       return -EFAULT;
     }
-	write_iq_sample(tx_stream);
-    return count;
+	return write_iq_sample(tx_stream);
   }
   return 0;
 }
@@ -166,7 +165,7 @@ static int radioberry_release(struct inode *inode, struct file *filep) {
 
 static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
 	
-	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
+	//printk(KERN_INFO "inside %s function \n", __FUNCTION__);
 
 	unsigned char data[6];
 	int lnrx = _nrx;
@@ -353,4 +352,4 @@ MODULE_AUTHOR("Johan Maas - pa3gsb@gmail.com");
 MODULE_DESCRIPTION("Radioberry SDR device driver. (rpi-4)");
 MODULE_SUPPORTED_DEVICE("Radioberry SDR");
 MODULE_LICENSE("GPL");
-MODULE_VERSION("0.7");
+MODULE_VERSION("0.8");
