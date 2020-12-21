@@ -66,12 +66,14 @@ elif [[ $input == "pihpsdr" ]]; then
 	#makefile modification; when 'on' switch it 'off' (adding '#'). 
 	sed -i '/^PURESIGNAL_INCLUDE=PURESIGNAL/c\#PURESIGNAL_INCLUDE=PURESIGNAL' ./Makefile
 	sed -i '/^MIDI_INCLUDE=MIDI/c\#MIDI_INCLUDE=MIDI' ./Makefile
+	sed -i '/^GPIO_INCLUDE=GPIO/c\#GPIO_INCLUDE=GPIO' ./Makefile;
 		
 	if [ "$localcw" -eq "1" ]; then
 		sed -i '/^#GPIO_INCLUDE=GPIO/c\GPIO_INCLUDE=GPIO' ./Makefile;
 		sed -i '/^#LOCALCW_INCLUDE=LOCALCW/c\LOCALCW_INCLUDE=LOCALCW' ./Makefile;
 	fi
 	
+
 	make -j 4
 	sudo make install
 	if [ ! -d "/home/pi/.pihpsdr" ]; then
