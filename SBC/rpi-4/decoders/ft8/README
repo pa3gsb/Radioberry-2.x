@@ -1,5 +1,3 @@
-<<Under construction; please do not use>>
-
 Radioberry FT8-decoding.
 
 This solution is based on the work of Pavel done for the red-pitaya SDR.
@@ -9,12 +7,12 @@ https://github.com/pavel-demin/ft8d
 
 https://github.com/pavel-demin/red-pitaya-notes/tree/master/projects/sdr_transceiver_ft8/app
 
-Also i have used the modification done by Steve Haynal KF7O done in the HL-2 gateware; by making 
+Using the modification done by Steve Haynal KF7O done in the HL-2 gateware; by making 
 receivers using a sample rate of 4000 Hz (see implemtation : receiver_4000.v)
 
 For the radioberry 2 variants are available:
 
--radioberry_cl016_4000; radioberry using Cyclone CL016 (4 receivers)
+-radioberry_cl016_4000; radioberry using Cyclone CL016 (6 receivers)
 -radioberry_cl025_4000; radioberry using Cyclone CL016  (8 receivers)
 
 For details: https://github.com/softerhardware/Hermes-Lite2/tree/master/gateware/variants
@@ -77,10 +75,8 @@ sudo service cron restart
 
 Have fun using the ft8 decoder.
 
+Instead of writing to SD card i think it is better to write to virtual file system!
+Making such virtual file system look at: https://www.domoticz.com/wiki/Setting_up_a_RAM_drive_on_Raspberry_Pi
+Works great for me!
 
-NOTE:
-The driver does now supports MAX 4 receivers; for the CL025 variant we can handle 8 channels in the future!
 
-TODO:
-Instead of writing to SD card... i think it is better to write to virtual file system!
-https://www.domoticz.com/wiki/Setting_up_a_RAM_drive_on_Raspberry_Pi
