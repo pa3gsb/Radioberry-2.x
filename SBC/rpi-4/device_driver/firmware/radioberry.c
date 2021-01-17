@@ -55,6 +55,7 @@ For more information, please refer to <http://unlicense.org/>
 #include "radioberry_ioctl.h"
 #include "radioberry.h"
 #include "filters.h"
+#include "register.h"
 
 int main(int argc, char **argv)
 {	
@@ -94,6 +95,7 @@ int initRadioberry() {
 	gateware_minor_version = rb_info.minor;
 	fprintf(stderr, "Radioberry gateware version %d-%d.\n", rb_info.major, rb_info.minor);
 	
+
 
 	fprintf(stderr, "Radioberry firmware initialisation succesfully executed.\n");
 
@@ -163,6 +165,14 @@ int initRadioberry() {
 	listen(sock_TCP_Server, 1024);
 	int flags = fcntl(sock_TCP_Server, F_GETFL, 0);
     fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
+	
+	// the service waits till the network is active... but i need a sleep! 
+	sleep(20);
+	sprintf(gatewareversion,"%d.%d", rb_info.major, rb_info.minor);
+	sprintf(firmwareversion,"%s", FIRMWAREVERSION);
+	sprintf(driverversion,"%s", "-"); //TODO
+	sprintf(fpgatype,"%s", "-"); //TODO
+	registerRadioberry();
 }
 
 int closeRadioberry() {

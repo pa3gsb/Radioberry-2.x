@@ -10,13 +10,16 @@ COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 PROGRAM=radioberry
 
 SOURCES= \
+register.c \
 radioberry.c 
 
 HEADERS= \
 radioberry.h \
-radioberry_ioctl.h
+radioberry_ioctl.h \
+register.h 
 
 OBJS= \
+register.o \
 radioberry.o 
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 

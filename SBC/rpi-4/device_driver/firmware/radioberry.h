@@ -1,3 +1,7 @@
+#ifndef __RADIOBERRY_H__
+#define __RADIOBERRY_H__
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
@@ -21,29 +25,24 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 
+#define FIRMWAREVERSION "2021.01.17"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
-
 
 void printIntroScreen() {
 	fprintf(stderr,"\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
-	fprintf(stderr, "\t\t\tRadioberry V2.0  RPI-4 version\n");
-	fprintf(stderr,	"\n\n");
-	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter.");
-	fprintf(stderr,	"\n\n");
-	fprintf(stderr,"\tBuild version: rpi-4-2020-12-05");
-	fprintf(stderr,	"\n\n");
-	fprintf(stderr, "\tHave fune Johan PA3GSB\n");
-	fprintf(stderr, "\n");
-	fprintf(stderr, "\n\tReport bugs to <pa3gsb@gmail.com>.\n");
+	fprintf(stderr, "\t\t\tRadioberry V2.0\n\n\n");
+	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter.\n\n");
+	fprintf(stderr, "\tBuild version: %s\n\n", FIRMWAREVERSION);
+	fprintf(stderr, "\tHave fune Johan PA3GSB\n\n");
+	fprintf(stderr, "\tReport bugs to <pa3gsb@gmail.com>.\n");
 	fprintf(stderr, "====================================================================\n");
 	fprintf(stderr, "====================================================================\n");
 }
 
 int sys_temp = 0;
-
 
 //ringbuffer for handling SPI commands.
 #define CAPACITY 64
@@ -60,7 +59,7 @@ size()     { return p_write - p_read; }
 char rb_control = 0x00;
 
 int fd_rb;
-struct rb_info_arg_t rb_info;
+//struct rb_info_arg_t rb_info;
 char rx_buffer[512];
 int rb_sample = 0;
 
@@ -162,3 +161,4 @@ void handle_sigint(int sig)
 	if (running) fprintf(stderr, "  SDR program is still running; please stop SDR first.\n");
 	closerb = 1;
 }
+#endif
