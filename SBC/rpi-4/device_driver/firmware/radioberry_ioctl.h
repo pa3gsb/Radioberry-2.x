@@ -18,4 +18,6 @@ struct rb_info_arg_t
 	
 } ;
 
+struct rb_info_arg_t rb_info;
+
 #endif
