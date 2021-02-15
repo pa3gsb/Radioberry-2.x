@@ -25,7 +25,9 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 
-#define FIRMWAREVERSION "2021.01.17"
+
+//#define FIRMWAREVERSION "2021.01.29"
+#define FIRMWAREVERSION "development"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
@@ -42,7 +44,11 @@ void printIntroScreen() {
 	fprintf(stderr, "====================================================================\n");
 }
 
-int sys_temp = 0;
+int sys_temp = 0; //rpi-temperature.
+
+int pa_temp = 0;
+int pa_current = 0;
+int pa_temp_ok = 1;
 
 //ringbuffer for handling SPI commands.
 #define CAPACITY 64
@@ -105,6 +111,8 @@ int use_tx  = 0;
 
 int gateware_major_version = 0;
 int gateware_minor_version = 0;
+int gateware_fpga_type = 0;
+float driver_version = 0.0;
 
 char CWX = 0;
 char MOX = 0;
@@ -113,6 +121,7 @@ sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
 sem_t spi_msg;
+sem_t i2c_meas;
 
 int tx_count =0;
 void rx_reader(unsigned char iqdata[]);
@@ -128,12 +137,10 @@ int lnrx = 1;
 #define SYNC 0x7F
 uint32_t last_sequence_number = 0;
 uint32_t last_seqnum=0xffffffff, seqnum; 
-
-#define FIRMWARE_VERSION 0x45
 		
 unsigned char hpsdrdata[1032];
 uint8_t header_hpsdrdata[4] = { 0xef, 0xfe, 1, 6 };
-uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, FIRMWARE_VERSION};
+uint8_t sync_hpsdrdata[8] = { SYNC, SYNC, SYNC, 0, 0, 0, 0, 0};
 
 unsigned char broadcastReply[60];
 #define TIMEOUT_MS      100     

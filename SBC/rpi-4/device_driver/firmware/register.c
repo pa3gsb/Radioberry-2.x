@@ -138,6 +138,7 @@ void registerRadioberry() {
 	if (!getMacAddress()) return;
 	loadRadioberryProps();
 	postRadioberryConfiguration();
+	fprintf(stderr, "Your Radioberry is registered: http://www.pa3gsb.nl/radioberry/api/read.php\n");
 }
 
 //end of source

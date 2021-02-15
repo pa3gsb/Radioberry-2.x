@@ -56,6 +56,8 @@ For more information, please refer to <http://unlicense.org/>
 #include "radioberry.h"
 #include "filters.h"
 #include "register.h"
+#include "bias.h"
+#include "measure.h"
 
 int main(int argc, char **argv)
 {	
@@ -74,6 +76,7 @@ int initRadioberry() {
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0); 
 	sem_init(&spi_msg, 0, 0);
+	sem_init(&i2c_meas, 0, 0);
 
 	gettimeofday(&t20, 0);	
 
@@ -93,23 +96,27 @@ int initRadioberry() {
 	} 
 	gateware_major_version = rb_info.major;
 	gateware_minor_version = rb_info.minor;
+	
 	fprintf(stderr, "Radioberry gateware version %d-%d.\n", rb_info.major, rb_info.minor);
 	
-
-
-	fprintf(stderr, "Radioberry firmware initialisation succesfully executed.\n");
+	gateware_fpga_type = rb_info.fpga;
+	driver_version = rb_info.version;
 
 	//***********************************************
 	//       Filters switching initialization
 	//***********************************************
 	initFilters();
 	//***********************************************	
+	
+	init_I2C_bias();
+	openI2C_measure();
 
 	pthread_t pid1, pid2; 
 	pthread_create(&pid1, NULL, packetreader, NULL); 
 	pthread_create(&pid2, NULL, txWriter, NULL);
 	
 	start_rb_control_thread();
+	start_rb_measure_thread();
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -166,19 +173,15 @@ int initRadioberry() {
 	int flags = fcntl(sock_TCP_Server, F_GETFL, 0);
     fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
 	
-	// the service waits till the network is active... but i need a sleep! 
-	sleep(20);
-	sprintf(gatewareversion,"%d.%d", rb_info.major, rb_info.minor);
-	sprintf(firmwareversion,"%s", FIRMWAREVERSION);
-	sprintf(driverversion,"%s", "-"); //TODO
-	sprintf(fpgatype,"%s", "-"); //TODO
-	registerRadioberry();
+	start_rb_register_thread();
 }
 
 int closeRadioberry() {
 	if (fd_rb != 0) close(fd_rb);
 	if (sock_TCP_Client >= 0) close(sock_TCP_Client);
 	if (sock_TCP_Server >= 0) close(sock_TCP_Server);
+	close_I2C_bias();
+	close_I2C_measure();
 	return 0;
 }
 
@@ -301,6 +304,12 @@ void handlePacket(char* buffer){
 void handleCommand(int base_index, char* buffer) {
 	command = buffer[base_index];
 	command_data=((buffer[base_index+1]&0xFF)<<24)+((buffer[base_index+2]&0xFF)<<16)+((buffer[base_index+3]&0xFF)<<8)+(buffer[base_index+4]&0xFF);
+
+	// switch off the attached power amplifier if the current and temp could not be measured.
+	if (((command >> 1)&0x09) == 0x09 ) if (!i2c_measure_module_active) command_data = command_data & 0xFFF7FFFF;
+	// pa bias setting	
+	if (((command >> 1)&0x3D) == 0x3D) write_I2C_bias(((command_data>>8)&0xFF), command_data & 0xFF);
+
 	if (commands[command] != command_data) {
 		commands[command] = command_data;
 		
@@ -372,6 +381,7 @@ void read_temperature_raspberryPi() {
 	systemp = millideg / 1000;
 	//fprintf(stderr, "CPU temperature is %f degrees C\n",systemp);
 	sys_temp = (int) (4096/3.26) * ((systemp/ 100) + 0.5);
+	//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
 	fclose(thermal);
 }
 
@@ -407,11 +417,25 @@ void fillPacketToSend() {
 				}
 			}
 			// inform the SDR about the radioberry control status.
-			// https://github.com/softerhardware/Hermes-Lite2/wiki/Protocol		
-			hpsdrdata[11 + coarse_pointer] = 0x08 | (rb_control & 0x07); 
-			if ( last_sequence_number % 500 == 0) 	read_temperature_raspberryPi();			
-			hpsdrdata[12 + coarse_pointer] = ((sys_temp >> 8) & 0xFF);
-			hpsdrdata[13 + coarse_pointer] = (sys_temp & 0xFF);
+			// https://github.com/softerhardware/Hermes-Lite2/wiki/Protocol	
+										
+			if ( !i2c_measure_module_active & last_sequence_number % 500 == 0) read_temperature_raspberryPi();			
+
+			if ( last_sequence_number % 2 == 0) {
+				// if i2c_measure_module_active; the temperature of module is used, otherwise the RPI temp.	
+			 	hpsdrdata[11 + coarse_pointer] = 0x08 | (rb_control & 0x07);
+				if (i2c_measure_module_active) {
+					hpsdrdata[12 + coarse_pointer] = ((pa_temp >> 8) & 0xFF); 
+					hpsdrdata[13 + coarse_pointer] = (pa_temp & 0xFF); 
+				} else {
+					hpsdrdata[12 + coarse_pointer] = ((sys_temp >> 8) & 0xFF);
+					hpsdrdata[13 + coarse_pointer] = (sys_temp & 0xFF);
+				}
+			} else {
+				hpsdrdata[11 + coarse_pointer] = 0x10 | (rb_control & 0x07); 
+				hpsdrdata[14 + coarse_pointer] = ((pa_current >> 8) & 0xFF); 
+				hpsdrdata[15 + coarse_pointer] = (pa_current & 0xFF); 
+			}
 		}
 }
 
@@ -420,7 +444,10 @@ void send_control(unsigned char command) {
 	unsigned char data[6];
 	uint32_t command_data = commands[command];
 	
-	rb_info.rb_command = (((CWX << 1) & 0x02) | (running & 0x01));
+
+	// if temperature could not be measured the pa is disabled
+	 
+	rb_info.rb_command = ( (pa_temp_ok ? 0x04 : 0x00) |  ((CWX << 1) & 0x02) | (running & 0x01) );
 	rb_info.command = command;
 	rb_info.command_data = command_data;
 	
@@ -447,10 +474,53 @@ void start_rb_control_thread() {
 	pthread_create(&pid1, NULL, rb_control_thread, NULL);
 }
 
+static void *rb_measure_thread(void *arg) {
+	// temperature == (((T*.01)+.5)/3.26)*4096   if pa temperature > 50C (=1256) switch pa off! (pa_temp_ok)
+	int measured_temp_ok_count = 0;
+	while(1) {
+		sem_wait(&i2c_meas); 
+		if (i2c_measure_module_active) read_I2C_measure(&pa_current, &pa_temp);
+		if (pa_temp_ok && (pa_temp >= 1256)) {
+			fprintf(stderr, "ALERT: temperature of PA is higher than 50ºC; PA will be switched off! \n");
+			pa_temp_ok = 0;
+		}
+		// PA recovery after high temperature; switch PA on again if PA temp is in range for 10 seconds.
+		if (!pa_temp_ok && (pa_temp < 1256)) measured_temp_ok_count++;
+		if (measured_temp_ok_count == 100) { 
+			measured_temp_ok_count = 0; 
+			pa_temp_ok = 1; 
+			fprintf(stderr, "PA temperature is ok; PA can be used! \n");
+		}
+	}
+	fprintf(stderr,"rb_measure_thread: exiting\n");
+	return NULL;
+}
+
+void start_rb_measure_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, rb_measure_thread, NULL);
+}
+
+static void *rb_register_thread(void *arg) {
+	sleep(60); 
+	sprintf(gatewareversion,"%d.%d", gateware_major_version, gateware_minor_version);
+	sprintf(firmwareversion,"%s", FIRMWAREVERSION);
+	sprintf(driverversion,"%.1f", driver_version); 
+	gateware_fpga_type == 0 ? sprintf(fpgatype,"%s", "-") : gateware_fpga_type == 1 ? sprintf(fpgatype,"%s", "CL016") : sprintf(fpgatype,"%s", "CL025");
+	registerRadioberry();
+	return NULL;
+}
+
+void start_rb_register_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, rb_register_thread, NULL);
+}
+
 static void *timer_thread(void *arg) {
 	while(1) {
 		usleep(100000);
 		if (running) sem_post(&spi_msg); 
+		if (running) sem_post(&i2c_meas); 
 	}
 	fprintf(stderr,"timer_thread: exiting\n");
 	return NULL;

@@ -12,6 +12,10 @@ struct rb_info_arg_t
 {
     int major, minor;
 	
+	int fpga;
+	
+	float version;
+	
 	int rb_command;
 	int command;
 	int command_data;

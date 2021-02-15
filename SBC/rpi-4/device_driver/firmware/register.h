@@ -29,13 +29,14 @@ char driverversion[16];
 char firmwareversion[16]; 
 char fpgatype[16];
 
-
 int getMacAddress(void);
 void loadProperties(char* filename);
 char* getProperty(char* name);
 void loadRadioberryProps(void);
 ssize_t process_http(int sockfd, char *host, char *page, char *poststr);
 void postRadioberryConfiguration(void);
+
+
 extern void registerRadioberry(void);
 
 #endif

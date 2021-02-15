@@ -60,6 +60,8 @@ sudo cp radioberry.ko /lib/modules/$(uname -r)/kernel/drivers/sdr
 #include "radioberry_gateware.h"
 #include "radioberry_firmware.h"
 
+#define VERSION "0.9"
+
 static DEFINE_MUTEX(radioberry_mutex); 
 static wait_queue_head_t rx_sample_queue;
 
@@ -199,6 +201,9 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			rb_info_ret.rb_command = data[0]; // return the radioberry status information.
 			rb_info_ret.major = data[4];
 			rb_info_ret.minor = data[5];
+			
+			rb_info_ret.fpga = data[3] & 0x03; 
+			rb_info_ret.version = 0.9; 
 			
 			if (copy_to_user((struct rb_info_arg_t *)arg, &rb_info_ret, sizeof(struct rb_info_arg_t))) return -EACCES;
 	
@@ -352,4 +357,4 @@ MODULE_AUTHOR("Johan Maas - pa3gsb@gmail.com");
 MODULE_DESCRIPTION("Radioberry SDR device driver. (rpi-4)");
 MODULE_SUPPORTED_DEVICE("Radioberry SDR");
 MODULE_LICENSE("GPL");
-MODULE_VERSION("0.8");
+MODULE_VERSION(VERSION);
