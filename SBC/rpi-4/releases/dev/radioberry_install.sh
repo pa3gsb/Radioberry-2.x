@@ -124,8 +124,9 @@ cd ../../../../..
 echo "Radioberry service installed."
 
 #-----------------------------------------------------------------------------
-rm -rf Radioberry-2.x
+sudo rm -rf Radioberry-2.x
 
+sudo systemctl enable radioberry
 sudo systemctl start radioberry
 
 
