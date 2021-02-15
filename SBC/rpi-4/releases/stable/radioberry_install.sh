@@ -34,7 +34,7 @@ install_dependency git
 install_dependency device-tree-compiler
 install_dependency pigpio
 
-git clone  --depth=1 https://github.com/pa3gsb/Radioberry-2.x
+git clone https://github.com/pa3gsb/Radioberry-2.x
 cd Radioberry-2.x
 echo "checkout the stable git tag"
 git checkout c969108f80cf4fa0b79d34ebd35b48bf243f51b4
