@@ -35,10 +35,7 @@ install_dependency device-tree-compiler
 install_dependency pigpio
 
 git clone https://github.com/pa3gsb/Radioberry-2.x
-cd Radioberry-2.x
-echo "checkout the stable git tag"
-git checkout c969108f80cf4fa0b79d34ebd35b48bf243f51b4
-cd ..
+
 
 sudo systemctl stop radioberry
 sudo systemctl disable radioberry
@@ -68,6 +65,11 @@ echo ""
 echo "Radioberry gateware Cyclone 10 CL025 installed."
 	
 fi
+
+cd Radioberry-2.x
+echo "checkout the stable git tag"
+git checkout c969108f80cf4fa0b79d34ebd35b48bf243f51b4
+cd ..
 
 #-----------------------------------------------------------------------------
 echo "Installing Radioberry driver..."
