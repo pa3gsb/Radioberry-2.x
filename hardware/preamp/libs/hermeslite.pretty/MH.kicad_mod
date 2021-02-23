@@ -1,0 +1,9 @@
+(module MH (layer F.Cu) (tedit 5424E6F5)
+  (fp_text reference MH (at -4.1 -2) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  )
+  (fp_text value VAL** (at -4.5 1.6) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  )
+  (pad "" np_thru_hole circle (at 0 0) (size 6.35 6.35) (drill 3.175) (layers *.Cu *.Mask F.SilkS))
+)

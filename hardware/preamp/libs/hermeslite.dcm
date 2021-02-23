@@ -1,0 +1,171 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP +1V2
+K POWER, PWR
+$ENDCMP
+#
+$CMP +2V5
+K POWER, PWR
+$ENDCMP
+#
+$CMP +3V3
+K POWER, PWR
+$ENDCMP
+#
+$CMP 4558
+D Dual Op amp (general purpose)
+K ampliop
+F http://www.ti.com/lit/ds/symlink/rc4558.pdf
+$ENDCMP
+#
+$CMP CONN_01X02
+D Connector, single row, 01x02, pin header
+K connector
+$ENDCMP
+#
+$CMP C_Small
+D Unpolarized capacitor
+K capacitor cap
+$ENDCMP
+#
+$CMP Crystal_GND3_Small
+D Two pin crystal, one ground/package pins (pin3) small symbol
+K quartz ceramic resonator oscillator
+$ENDCMP
+#
+$CMP DIODESCH
+D Diode schottky
+K DEV DIODE
+$ENDCMP
+#
+$CMP DIODESCH2
+D Diode schottky
+K DEV DIODE
+$ENDCMP
+#
+$CMP DIODESCH3
+D Diode schottky
+K DEV DIODE
+$ENDCMP
+#
+$CMP GND
+K POWER, PWR
+$ENDCMP
+#
+$CMP JNC
+D Resistor
+K R DEV
+$ENDCMP
+#
+$CMP JNCS
+D Resistor
+K R DEV
+$ENDCMP
+#
+$CMP JNO
+D Resistor
+K R DEV
+$ENDCMP
+#
+$CMP LED_Small
+D LED, small symbol
+K led diode light-emitting-diode
+$ENDCMP
+#
+$CMP LM358
+D Dual Op amp (low power)
+K ampliop
+F ns/lm158.pdf
+$ENDCMP
+#
+$CMP LM358N
+D Dual Op amp (low power)
+K ampliop
+F ns/lm158.pdf
+$ENDCMP
+#
+$CMP LMC6062
+D Dual Op amp (low power)
+K ampliop
+F op_amps/lmc6062.pdf
+$ENDCMP
+#
+$CMP LMC6082
+D Dual Op amp (low power)
+K ampliop
+F op_amps/lmc6082.pdf
+$ENDCMP
+#
+$CMP LMV358
+D Dual Low-Voltage Rail-to-Rail Output Operational Amplifiers
+K ampliop
+F http://www.ti.com/lit/ds/symlink/lmv324.pdf
+$ENDCMP
+#
+$CMP L_Small
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+$ENDCMP
+#
+$CMP MCP602
+D Dual 2.7V to 6.0V Single Supply CMOS Operational Amplifier
+K CMOS Single-Supply OPAMP Ampliop
+F http://ww1.microchip.com/downloads/en/DeviceDoc/21314g.pdf
+$ENDCMP
+#
+$CMP NE5532
+D Dual Op amp (low noice)
+K ampliop
+F http://www.ti.com/lit/ds/symlink/ne5532.pdf
+$ENDCMP
+#
+$CMP Polyfuse
+D resettable fuse, polymeric positive temperature coefficient (PPTC)
+K resettable fuse PTC PPTC polyfuse polyswitch
+$ENDCMP
+#
+$CMP R
+D Resistor
+K r res resistor
+$ENDCMP
+#
+$CMP TEST_1P
+D point
+K point tp
+$ENDCMP
+#
+$CMP TL072
+D Dual Low-Noise JFET-Input Operational Amplifiers, Low Power
+K ampliop
+F http://www.ti.com/lit/ds/symlink/tl074.pdf
+$ENDCMP
+#
+$CMP TL082
+D JFET-Input Operational Amplifiers
+K ampliop
+F http://www.ti.com/lit/ds/symlink/tl082.pdf
+$ENDCMP
+#
+$CMP TLC272
+D Dual LinCMOS Precision Operational Amplifiers
+K Precision OPAMP ampliop
+F http://www.ti.com/lit/ds/symlink/tlc272.pdf
+$ENDCMP
+#
+$CMP TS912
+D Dual Rail-to-rail CMOS Operational Amplifier
+K ampliop
+F http://www.st.com/content/ccc/resource/technical/document/datasheet/3b/16/fd/19/b8/21/40/7f/CD00000501.pdf/files/CD00000501.pdf/jcr:content/translations/en.CD00000501.pdf
+$ENDCMP
+#
+$CMP TVSANTI
+D Diode schottky
+K DEV DIODE
+$ENDCMP
+#
+$CMP TVSPAR
+D Diode schottky
+K DEV DIODE
+$ENDCMP
+#
+#End Doc Library

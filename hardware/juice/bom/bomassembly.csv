@@ -1,0 +1,41 @@
+"Part ID", "Description", "Part Number", "Substitution
+Okay", "Designators", "Footprint", "Pins", "Quantity", "Part Reference Link"
+2131, "4.7uF 0805>=X5R>=25V<=20%", "GRM21BR61E475KA12L", Y, "C1,C5,C7,C9,C22,C24,
+C26,C28", "0805", 2, 8, "=HYPERLINK("http://www.octopart.com/search?q=GRM21BR61E475KA12L")"
+15331, "0.1uF 0603>=X5R>=50V<=20%", "C0603C104M5RACTU", Y, "C2,C4,C6,C8,C10,C12,
+C15,C18,C19,C20,C23,
+C25,C27,C29", "0603", 2, 14, "=HYPERLINK("http://www.octopart.com/search?q=C0603C104M5RACTU")"
+58143, "10nF 0603>=X5R>=50V<=20%", "C0603C103M5RACTU", Y, "C3,C16,C21", "0603", 2, 3, "=HYPERLINK("http://www.octopart.com/search?q=C0603C103M5RACTU")"
+2131, "3.3uF 0805>=X5R>=25V<=20%", "GRM21BR61E335KA12L", Y, "C11", "0805", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=GRM21BR61E335KA12L")"
+2131, "18pF 0603>=X5R>=25V<=20%", "C0603C180K5RACTU", Y, "C13,C14", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=C0603C180K5RACTU")"
+1940, "1nF 0603>=X5R>=50V<=20%", "C0603C102M5RACTU", Y, "C17", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=C0603C102M5RACTU")"
+ , "Power", "PJ-102AH", Y, "CN1", "Custom", 3, 1, "=HYPERLINK("http://www.aliexpress.com/wholesale?SearchText=DIKAVS DC005")"
+ , "TVS Diode", "SMBJ18CA", N, "D1", "DO-214AA (SMB)", 2, 1, "=HYPERLINK("http://www.aliexpress.com/wholesale?SearchText=SMBJ18CA")"
+ , "TVS Diode", "PGB1010603MR", N, "D2,D3", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=PGB1010603MR")"
+ , "LED RA", "LTST-S220KFKT", N, "D4,D5", "2.1x1.0mmRightAngle", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=LTST-S220KFKT")"
+ , "FUSE PTC 3.0A 24V", "MF-LSMF300/24X-2", N, "F1", "2920 7.36x5.12mm", 2, 1, "=HYPERLINK("http://www.aliexpress.com/wholesale?SearchText=MF-LSMF300/24X-2")"
+ , "FB 0603 >=600R@100MHz <=200mOhm@DC 1A <=25%", "MPZ1608S601ATA00", Y, "FB1,FB2,FB3", "0603", 2, 3, "=HYPERLINK("http://www.octopart.com/search?q=MPZ1608S601ATA00")"
+ , "USB-C ", "TYPE-C-31-M-12", Y, "J2", "Custom", 15, 1, "=HYPERLINK("http://www.aliexpress.com/wholesale?SearchText=TYPE-C-31-M-12")"
+ , "40 Positions Header Connector (2.54mm)", "67996-440HLF", Y, "J3", "2x20", 40, 1, "=HYPERLINK("http://www.octopart.com/search?q=67996-440HLF")"
+ , "Mosfet; P-ch; 20V; 3.7A", "IRLML6402GTRPBF", N, "Q1", "SOT-23-3", 3, 1, "=HYPERLINK("http://www.octopart.com/search?q=IRLML6402GTRPBF")"
+ , "MOSFET N-CH 50V 220MA SOT23-3", "BSS138", N, "Q2", "SOT-23-3", 3, 1, "=HYPERLINK("http://www.octopart.com/search?q=BSS138")"
+ , "BC847 NPN General Purpose Transistor", "BC847", N, "Q3", "SOT-23-3", 3, 1, "=HYPERLINK("http://www.octopart.com/search?q=BC847")"
+26547, "10K 0603<=5%>=1/10W", "RC0603FR-0710KL", Y, "R1,R10,R12,R13,R14", "0603", 2, 5, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0710KL")"
+23688, "100K 0603<=1%>=1/10W", "RC0603FR-07100KL", Y, "R2", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-07100KL")"
+23889, "4.7K 0603<=5%>=1/10W", "RC0603FR-074K7L", Y, "R3,R15,R16", "0603", 2, 3, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-074K7L")"
+23688, "5.1K 0603<=1%>=1/10W", "RC0603FR-075K1L", Y, "R4,R5", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-075K1L")"
+23688, "10R 0603<=1%>=1/10W", "RC0603FR-0710RL", Y, "R6,R7", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0710RL")"
+23688, "12K 0603<=1%>=1/10W", "RC0603FR-0712KL", Y, "R8", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0712KL")"
+23688, "27R 0603<=1%>=1/10W", "RC0603FR-0727RL", Y, "R9", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0727RL")"
+23688, "1M 0603<=1%>=1/10W", "RC0603FR-071ML", Y, "R11", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-071ML")"
+4597, "2.2K 0603<=5%>=1/10W", "RC0603FR-072K2L", Y, "R17", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-072K2L")"
+21904, "1K 0603<=5%>=1/10W", "RC0603FR-071KL", Y, "R18,R19", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-071KL")"
+ , "IC REG LINEAR 3.3V 800MA", "LD1117S33TR", Y, "U1,U4", "SOT223", 4, 2, "=HYPERLINK("http://www.octopart.com/search?q=LD1117S33TR")"
+ , "USB Hi-Speed Dual Channel", "FT2232HL", Y, "U2", "LQFP-64", 64, 1, "=HYPERLINK("http://www.octopart.com/search?q=FT2232HL")"
+ , "93LC56BT-I/OT", "93LC56B", Y, "U3", "SOT23-6", 6, 1, "=HYPERLINK("http://www.octopart.com/search?q=93LC56B")"
+ , "Crystal 12 MHz.", "ABM7-12.000MHZ-D2Y-T", Y, "Y1", "6.00mm x 3.50mm", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=ABM7-12.000MHZ-D2Y-T")"
+
+"Line Items SMT:", " ", 28, "Line Items TH:", " ", 3
+"Parts SMT:", " ", 65, "Parts TH:", " ", 3
+"Pins SMT:", " ", 203, "Pins TH:", " ", 58
+

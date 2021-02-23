@@ -1,0 +1,14 @@
+### Module positions - created on 12/20/20 16:19:52 ###
+### Printed by Pcbnew version kicad (5.1.8)-1
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val       Package                PosX       PosY       Rot  Side
+C305      22uF      SMD-0805           114.0000   -83.5000   90.0000  bottom
+C306      1uF       SMD-0805           132.9525   -82.5000    0.0000  bottom
+C314      0.1uF     SMD-0603           123.2380   -93.5000    0.0000  bottom
+C315      0.1uF     SMD-0603           123.2620   -90.5000    0.0000  bottom
+C316      0.1uF     SMD-0603           123.2380   -92.0000    0.0000  bottom
+C317      0.1uF     SMD-0603           123.2620   -82.5000    0.0000  bottom
+R305      1K        SMD-0805           117.0000   -86.5475   90.0000  bottom
+R308      1K        SMD-0805           130.0000   -86.4525  270.0000  bottom
+## End

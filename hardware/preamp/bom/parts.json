@@ -1,0 +1,1195 @@
+{
+
+"C 0.1uF 0603": {
+	"mpn":["C0603C104M5RACTU"],
+	"spec":"0.1uF 0603>=X5R>=50V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":15331,
+	"sub":1
+	},
+	
+"C 100nF 0603": {
+	"mpn":["C0603C104M5RACTU"],
+	"spec":"0.1uF 0603>=X5R>=50V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":15331,
+	"sub":1
+	},
+	
+"C 1nF 0603": {
+	"mpn":["C0603C102M5RACTU"],
+	"spec":"1nF 0603>=X5R>=50V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":1940,
+	"sub":1
+	},
+	
+"C 10nF 0603": {
+	"mpn":["C0603C103M5RACTU"],
+	"spec":"10nF 0603>=X5R>=50V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":58143,
+	"sub":1
+	},
+
+"C 1uF 0805 HV": {
+	"mpn":["CL21B105KAFNNNE"],
+	"spec":"1uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":29074,
+	"sub":1
+	},
+
+"C 1uF 0603": {
+	"mpn":["GRM188R61E105KA12D","GRM188R61C105KA93D"],
+	"spec":"1uF 0603>=X5R>=6.3V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":16531,
+	"sub":1
+	},
+
+"C 10uF 0603": {
+	"mpn":["GRM188R60J106KE47D","GRM188R60J106ME47D"],
+	"spec":"10uF 0603>=X5R>=6.3V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":20411,
+	"sub":1
+	},
+
+"C 10uF 0805": {
+	"mpn":["GRM21BR60J106ME19L"],
+	"spec":"10uF 0805>=X5R>=6.3V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":16532,
+	"sub":1
+	},
+	
+"C 10uF": {
+	"mpn":["CL31A106KAHNNNE"],
+	"spec":"10uF 1206>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":14236,
+	"sub":1
+	},
+
+"C 22uF 0805": {
+	"mpn":["GRM21BR60J226ME39L"],
+	"spec":"22uF 0805>=X5R>=6.3V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":46786,
+	"sub":1
+	},
+
+"C 22uF 0805": {
+	"mpn":["CL21A226MOCLRNC","GRM21BR61E226ME44L","GRT21BR61E226ME13L","CC0805MKX5R8BB226","GRM21BR61C226ME44L"],
+	"spec":"22uF 0805>=X5R>=16V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":46786,
+	"sub":1
+	},
+
+"C 10uF HV": {
+	"mpn":["CL31A106KAHNNNE"],
+	"spec":"10uF 1206>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":14236,
+	"sub":1
+	},
+
+"C 4.7uF 0805 HV": {
+	"mpn":["GRM21BR61E475KA12L"],
+	"spec":"4.7uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2131,
+	"sub":1
+	},
+
+"C 100uF": {
+	"mpn":["GRM31CR60J107ME39K"],
+	"spec":"100uF 1206>=X5R>=6.3V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":1
+	},
+
+"C 4.7nF 0603": {
+	"mpn":["CL10B472KB8NNNC"],
+	"spec":"4.7nF 0603>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":55004,
+	"sub":1
+	},
+
+"C 270pF 0805": {
+	"mpn":["CC0805JRNPO0BN271","GRM2195C2A271JA01D","CL21C271JCANNNC","C0805C271J1GACTU","251R15S271JV4E"],
+	"spec":"270pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":1
+	},
+
+"C 180pF 0805": {
+	"mpn":["CC0805JRNPO0BN181","GRM2195C2A181JA01D","CL21C181JCANNNC","C0805C181J1GACTU","251R15S181JV4E"],
+	"spec":"180pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},
+
+"C 160pF 0805": {
+	"mpn":["GRM2165C2A161JA01D","CL21C161JCANNNC","C0805C161J1GACTU","251R15S161JV4E"],
+	"spec":"160pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},
+
+"C 150pF 0805": {
+	"mpn":["CC0805JRNPO0BN151","GRM2195C2A151JA01D","CL21C151JCANNNC","C0805C151J1GACTU","251R15S151JV4E"],
+	"spec":"150pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},
+
+"C 100pF 0805": {
+	"mpn":["CC0805JRNPO0BN101","GRM2195C2A101JA01D","CL21C101JCANNNC","C0805C101J1GACTU","251R15S101JV4E"],
+	"spec":"100pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2142,
+	"sub":0
+	},
+
+"C 75pF 0805": {
+	"mpn":["C0805C750J1GACTU","251R15S750JV4E","08051A750JAT2A"],
+	"spec":"75pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},
+
+"C 15pF 0603": {
+	"mpn":["CC0603JRNPO9BN150"],
+	"spec":"15pF 0603NP0>=6.3V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":1996,
+	"sub":1
+	},
+
+"C 10pF 0805": {
+	"mpn":["CC0805JRNPO9BN100"],
+	"spec":"10pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2137,
+	"sub":1
+	},
+
+"C 8p2 0805": {
+	"mpn":["CL21C8R2DBANNNC"],
+	"spec":"8.2pF 0805NP0>=25V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":1
+	},
+
+"U KSZ9031RN": {
+	"mpn":["KSZ9031RNXCC","KSZ9031RNXCA"],
+	"spec":"Gigabit EthPhy",
+	"assembly":"SMT",
+	"pins":48,
+	"sub":0,
+	"aliexpress":"KSZ9031",
+	"package":"48-VFQFN EP"
+	},
+
+"U FPGA": {
+	"mpn":["10CL016YE144C8G"],
+	"spec":"FPGA",
+	"assembly":"SMT",
+	"pins":144,
+	"sub":0,
+	"package":"EQFP-144"
+	},
+
+"U EEPROM": {
+	"mpn":["W25Q16JVSNIQ","S25FL116K0XMFI043","S25FL116K0XMFI041"],
+	"spec":"EEPROM 2Mx8bit >40MHz",
+	"assembly":"SMT",
+	"pins":8,
+	"sub":0,
+	"aliexpress":"S25FL116K0XMFI041",
+	"package":"8-SOIC (3.90mm)"
+	},
+
+"U 5P49V5923": {
+	"mpn":["5P49V5923B000NLGI"],
+	"spec":"Clock Generator",
+	"assembly":"SMT",
+	"pins":24,
+	"sub":0,
+	"package":"24-VFQFN EP"
+	},
+
+"U MCP4716": {
+	"mpn":["MCP4716A0T-E/CH"],
+	"spec":"VCO DAC",
+	"assembly":"SMT",
+	"pins":6,
+	"sub":0,
+	"package":"SOT-23-6"
+	},
+
+"U AD9866BCPZ": {
+	"mpn":["AD9866BCPZ"],
+	"spec":"RF ADC DAC",
+	"assembly":"SMT",
+	"pins":64,
+	"sub":0,
+	"aliexpress":"AD9866BCPZ",
+	"package":"64-VFQFN EP"
+	},
+
+"U OPA2677": {
+	"mpn":["OPA2677IDDA"],
+	"spec":"RF Preamp OpAmp",
+	"assembly":"SMT",
+	"pins":8,
+	"sub":0,
+	"aliexpress":"OPA2677",
+	"package":"8-SOIC (3.90mm) EP"
+	},
+
+"U PE4259": {
+	"mpn":["4259-63","4239-52","PE42421SCAA"],
+	"spec":"RF Switch",
+	"assembly":"SMT",
+	"pins":6,
+	"sub":0,
+	"aliexpress":"pe4259",
+	"package":"SC70-6"
+	},
+
+"U LP2985": {
+	"mpn":["LP2985-10DBVR"],
+	"spec":"LDO 10V 150mA",
+	"assembly":"SMT",
+	"pins":5,
+	"sub":0,
+	"package":"SOT-23-5"
+	},
+
+"U MCP4662": {
+	"mpn":["MCP4662-502E/UN"],
+	"spec":"Digital Rheostat 5K",
+	"assembly":"SMT",
+	"pins":10,
+	"sub":0,
+	"package":"10-MSOP (3.00mm)"
+	},	
+
+"U ST1S10": {
+	"mpn":["ST1S10PHR"],
+	"spec":"Switching Regulator",
+	"assembly":"SMT",
+	"pins":8,
+	"sub":0,
+	"package":"8-SOIC (3.90mm) EP",
+	"aliexpress":"st1s10"
+	},
+
+"U MAX11613": {
+	"mpn":["MAX11613EUA"],
+	"spec":"Slow ADC",
+	"assembly":"SMT",
+	"pins":8,
+	"sub":0,
+	"package":"8-MSOP (3.00mm)"
+	},
+
+"U TPS730": {
+	"mpn":["TPS73025DBVR"],
+	"spec":"LDO Regulator",
+	"assembly":"SMT",
+	"pins":5,
+	"sub":0,
+	"package":"SOT-23-5",
+	"aliexpress":"TPS73025DBVR"
+	},
+
+"U LMV324": {
+	"mpn":["LMV324IDR"],
+	"spec":"OpAmp",
+	"assembly":"SMT",
+	"pins":14,
+	"sub":0,
+	"package":"14-SOIC (3.90mm)",
+	"aliexpress":"LMV324IDR"
+	},
+
+"U AP2204": {
+	"mpn":["AP2204MP-ADJTRG1"],
+	"spec":"LDO Regulator",
+	"assembly":"SMT",
+	"pins":8,
+	"sub":0,
+	"package":"8-SOIC (3.90mm) EP"
+	},	
+
+"U INA199A1DC": {
+	"mpn":["INA199A1DC"],
+	"spec":"Current Sense AMP",
+	"assembly":"SMT",
+	"pins":6,
+	"sub":0,
+	"package":"SC-70-6"
+	},	
+
+
+"D 1N5711": {
+	"mpn":["1N5711WS-7-F","SMS3924-079LF"],
+	"spec":"Schottky Barrier Diode",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"SC-76, SOD-323"
+	},
+
+"D TVS": {
+	"mpn":["CDSOD323-T05LC"],
+	"spec":"TVS Diode",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"SC-76, SOD-323"
+	},
+
+"D SM05": {
+	"mpn":["SM05.TCT","tpd2e009"],
+	"spec":"TVS Diode",
+	"assembly":"SMT",
+	"pins":3,
+	"sub":0,
+	"package":"SOT-23-3",
+	"aliexpress":"SM05.TCT"
+	},
+
+
+"D SMBJ18CA": {
+	"mpn":["SMBJ18CA"],
+	"spec":"TVS Diode",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"DO-214AA (SMB)",	
+	"aliexpress":"SMBJ18CA"
+	},
+
+
+
+"D Led_Small": {
+	"mpn":["LTST-S220KFKT"],
+	"spec":"LED RA",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"2.1x1.0mmRightAngle"
+	},
+
+"FB FB 0603": {
+	"mpn":["MPZ1608S601ATA00"],
+	"spec":"FB 0603 >=600R@100MHz <=200mOhm@DC 1A <=25%",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 220K 0603": {
+	"mpn":["RC0603FR-07220KL"],
+	"spec":"220K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23688
+	},
+
+"R 35.7K 0603": {
+	"mpn":["RC0603FR-0735K7L"],
+	"spec":"35.7K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 27K 0603": {
+	"mpn":["RC0603FR-0727KL"],
+	"spec":"27K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23694
+	},	
+
+"R 20K 0603": {
+	"mpn":["RC0603FR-0720KL"],
+	"spec":"20K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":4591
+	},
+
+"R 16.2K 0603": {
+	"mpn":["RC0603FR-0716K2L"],
+	"spec":"16.2K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 12.1K 0603": {
+	"mpn":["RC0603FR-0712K1L"],
+	"spec":"12.1K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 11.5K 0603": {
+	"mpn":["RC0603FR-0711K5L"],
+	"spec":"11.5K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 10K 0603": {
+	"mpn":["RC0603FR-0710KL"],
+	"spec":"10K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":26547
+	},
+	
+"R 10K 0805": {
+	"mpn":["??"],
+	"spec":"10K 0805<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 9.1K 0603": {
+	"mpn":["RC0603FR-079K1L"],
+	"spec":"9.1K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23987
+	},	
+
+"R 4.7K 0603": {
+	"mpn":["RC0603FR-074K7L"],
+	"spec":"4.7K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23889
+	},
+
+"R 3.3K 0603": {
+	"mpn":["RC0603FR-073K3L"],
+	"spec":"3.3K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23705
+	},
+
+"R 2.2K 0603": {
+	"mpn":["RC0603FR-072K2L"],
+	"spec":"2.2K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":4597
+	},
+
+"R 1.8K 0603": {
+	"mpn":["RC0603FR-071K8L"],
+	"spec":"1.8K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":4584
+	},
+
+"R 1.6K 0603": {
+	"mpn":["RC0603FR-071K6L"],
+	"spec":"1.6K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 1K 0603": {
+	"mpn":["RC0603FR-071KL"],
+	"spec":"1K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":21904
+	},
+
+"R 1K 0805": {
+	"mpn":["RC0805FR-071KL"],
+	"spec":"1K 0805<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":18201
+	},
+
+"R 120 0603": {
+	"mpn":["RC0603FR-07120RL"],
+	"spec":"120 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23514
+	},
+
+"R 270 0603": {
+	"mpn":["RC0603FR-07270RL"],
+	"spec":"270 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23693
+	},
+
+"R 270 0805": {
+	"mpn":["RC0805FR-07270RL"],
+	"spec":"270 0805<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 330 0603": {
+	"mpn":["RC0603FR-07330RL"],
+	"spec":"330 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23865
+	},
+
+"R 100 0603": {
+	"mpn":["RC0603FR-07100RL"],
+	"spec":"100 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23502
+	},
+
+"R 100 0805": {
+	"mpn":["RC0805FR-07100RL"],
+	"spec":"100 0805<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":18096
+	},
+
+"R 75 0603": {
+	"mpn":["RC0603FR-0775RL"],
+	"spec":"75 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":4682
+	},
+
+"R 33 0603": {
+	"mpn":["RC0603FR-0733RL"],
+	"spec":"33 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23867
+	},
+
+"R 22 0603": {
+	"mpn":["RC0603FR-0722RL"],
+	"spec":"22 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":24078
+	},
+
+"R 12 0805": {
+	"mpn":["RC0805FR-0712RL","ERJ-6ENF12R0V"],
+	"spec":"12 0805<=5%>=1/8W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 2.2 0603": {
+	"mpn":["RC0603FR-072R2L"],
+	"spec":"2.2 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23666
+	},
+
+"R 0.04": {
+	"mpn":["RL1206FR-070R04L","PE1206FRM070R04L"],
+	"spec":"0.04 1206<=1%>=1/4W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"J JNC 0603": {
+	"mpn":["RC0603JR-070RL"],
+	"spec":"0Ohm 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":21903
+	},
+
+"J JNC 0805": {
+	"mpn":["RC0805JR-070RL"],
+	"spec":"0Ohm 0805<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":18165
+	},
+
+"CN USBBlaster2": {
+	"mpn":["67997-410HLF"],
+	"spec":"2x5 M 0.1in",
+	"assembly":"TH",
+	"pins":10
+	},
+
+"CN PS": {
+	"mpn":["PJ-102AH"],
+	"spec":"Power",
+	"assembly":"TH",
+	"pins":3,
+	"aliexpress":"DIKAVS DC005"
+	},
+
+"CN MagJack": {
+	"mpn":["L829-1J1T-43"],
+	"spec":"Eth MagJack",
+	"assembly":"TH",
+	"pins":18,
+	"sub":0
+	},	
+
+"CN4S": {
+	"mpn":["61300411121","68016-404HLF","640457-4"],
+	"spec":"4x1 M 0.1in HDR S",
+	"assembly":"MTH",
+	"pins":4
+	},
+
+"CN2S": {
+	"mpn":["M20-9990245"],
+	"spec":"2x1 M 0.1in HDR S",
+	"assembly":"MTH",
+	"pins":2
+	},
+
+"CN2R": {
+	"mpn":["M20-9960245"],
+	"spec":"2x1 M 0.1in HDR RA",
+	"assembly":"MTH",
+	"pins":2
+	},	
+
+"CN8R": {
+	"mpn":["61300821021"],
+	"spec":"4x2 M 0.1in HDR RA",
+	"assembly":"TH",
+	"pins":8
+	},		
+
+"CL SMA": {
+	"mpn":["5-1814832-1"],
+	"spec":"SMA Straight",
+	"altsrc":[["www.ebay.com",1.00]],
+	"assembly":"MTH",
+	"pins":5	
+	},	
+
+"X 38.4MHz": {
+	"mpn":["ASTXR-12-38.400MHZ-514054-T"],
+	"altmpn":["520L15IA38M4000","TSX-3225 38.4000MF10Z-AS3"],
+	"spec":"38.4MHz Osc 3.3V<=10ppm",
+	"assembly":"SMT",
+	"sub":0,
+	"pins":4,
+	"package":"2.5x2mm"
+	},	
+
+"X 25MHz": {
+	"mpn":["NX3225SA-25.000M-STD-CSR-3"],
+	"spec":"25MHz XTAL",
+	"assembly":"SMT",
+	"pins":4,
+	"package":"3.2x2.5mm",
+	"aliexpress":"25mhz 3.2x2.5 passive"
+	},	
+
+"X 38.4MHz XTAL": {
+	"mpn":["TSX-3225 38.4000MF10Z-AS3"],
+	"spec":"38.4MHz <=10ppm",
+	"assembly":"SMT",
+	"pins":4
+	},		
+
+"L 270nH 0805": {
+	"mpn":["LQW2BASR27J00L"],
+	"spec":"270nH",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},		
+
+"L 240nH 0805": {
+	"mpn":["LQW2BASR24J00L"],
+	"spec":"240nH",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},		
+
+"L 330nH 0805": {
+	"mpn":["LQW2BASR33J00L"],
+	"spec":"330nH",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},	
+
+"L 2.2uH PS": {
+	"mpn":["SRN5020-2R2Y"],
+	"altmpn":["NRS6045T2R3NMGK"],
+	"spec":"2.2uH >=2.4A",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"5x5mm"
+	},		
+
+"L 3.3uH PS": {
+	"mpn":["SRN5020-3R3M"],
+	"spec":"3.3uH >=2.4A",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"5x5mm"
+	},		
+		
+"F 3A@20V": {
+	"mpn":["MF-LSMF300/24X-2"],
+	"spec":"FUSE PTC 3.0A 24V",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"2920 7.36x5.12mm",
+	"aliexpress":"MF-LSMF300/24X-2"
+	},		
+
+"Q DMP3099L": {
+	"mpn":["DMP3099L-7"],
+	"spec":"MOSFET P-CH 30V",
+	"assembly":"SMT",
+	"pins":3,
+	"sub":0,
+	"package":"SOT-23-3"
+	},	
+
+"Q 2N7002K": {
+	"mpn":["2N7002K-T1-E3"],
+	"spec":"MOSFET N-CH 60V 300mA",
+	"assembly":"SMT",
+	"pins":3,
+	"sub":0,
+	"package":"SOT-23-3",
+	"aliexpress":"2N7002K-T1-E3"	
+	},	
+
+"Q NUD3124": {
+	"mpn":["NUD3124LT1G"],
+	"spec":"Inductive Load Driver",
+	"assembly":"SMT",
+	"pins":3,
+	"sub":0,
+	"package":"SOT-23-3",
+	"aliexpress":"NUD3124LT1G"	
+	},	
+
+"Q MCP9700": {
+	"mpn":["MCP9700T-E/TT"],
+	"spec":"Thermal Sensor",
+	"assembly":"SMT",
+	"pins":3,
+	"sub":0,
+	"package":"SOT-23-3",
+	"aliexpress":"MCP9700T-E/TT"
+	},	
+
+"Q LDMOS": {
+	"mpn":["AFT05MS003NT1"],
+	"altmpn":["RD15HVF1","RD16HHF1","RD06HHF1","PD85004"],
+	"spec":"RF LDMOS",
+	"assembly":"SMT",
+	"pins":3	,
+	"sub":0,
+	"package":"SOT-89-3"
+	},	
+
+"BN43-202": {
+	"mpn":["BN43-202"],
+	"spec":"Binocular Core",
+	"assembly":"MTH",
+	"pins":4
+	},
+
+"BN43-2402": {
+	"mpn":["BN43-2402"],
+	"spec":"Binocular Core",
+	"assembly":"MTH",
+	"pins":4
+	},		
+
+"T 8:1 Z": {
+	"mpn":["MABA-010143-FLUX18","WBC8-1LB"],
+	"spec":"8:1 RF Transformer",
+	"assembly":"SMT",
+	"pins":5,
+	"sub":0,
+	"package":"SM-22-5 3.81x3.81mm"
+	},	
+
+"T 1:1 Z": {
+	"mpn":["MABAES0060","PWB1010-1LB","TC1-1TG2+"],
+	"spec":"1:1 RF Transformer",
+	"assembly":"SMT",
+	"pins":5,
+	"sub":0,
+	"package":"SM-22-5 3.81x3.81mm",
+	"aliexpress":"MABAES0060"
+	},	
+
+"T 4:1 Z": {
+	"mpn":["B62152A4X30"],
+	"spec":"4:1 RF Transformer",
+	"assembly":"MTH",
+	"pins":4
+	},
+
+"K NA3WK-K": {
+	"mpn":["EC2-3NU","NA-3W-K"],
+	"spec":"Relay",
+	"assembly":"TH",
+	"pins":10
+	},	
+
+"CASE": {
+	"mpn":["AK-C-C12"],
+	"spec":"55x106x100 raw aluminum",
+	"assembly":"MTH",
+	"pins":0
+	},	
+
+"PROG": {
+	"mpn":["PROG"],
+	"spec":"Programmer",
+	"assembly":"MTH",
+	"pins":0
+	},
+
+"PCB": {
+	"mpn":["PCB"],
+	"spec":"PCB",
+	"assembly":"MTH",
+	"pins":0
+	}, 
+"CN PINHEAD_PINHD-2X10": {
+	"mpn":["67996-420HLF"],
+	"spec":"20 Positions Header Connector (2.54mm)",
+	"assembly":"TH",
+	"pins":20,
+	"package": "2x10"
+	},
+"CN PINHEAD_PINHD-2X20": {
+	"mpn":["ADA product id 2222"],
+	"spec":"GPIO Header for Raspberry Pi 3 - 2x20 Female Header",
+	"assembly":"TH",
+	"pins":40,
+	"package": "2x20"
+	},
+"F 50Mhz": {
+	"mpn":["NFL21SP506X1C3D"],
+	"spec":"FILTER LC(PI) 305NH/84PF SMD",
+	"assembly":"SMT",
+	"pins":4
+	},
+"IC LD1117S25": {
+	"mpn":["LD1117S25TR"],
+	"spec":"IC REG LINEAR 2.5V 800MA",
+	"assembly":"SMT",
+	"pins":4,
+	"package": "SOT223"
+	},
+"IC LD1117S33": {
+	"mpn":["LD1117S33TR"],
+	"spec":"IC REG LINEAR 3.3V 800MA",
+	"assembly":"SMT",
+	"pins":4,
+	"package": "SOT223"
+	},
+"IC LD1117S12": {
+	"mpn":["LD1117S12TR"],
+	"spec":"IC REG LINEAR 1.2V 800MA",
+	"assembly":"SMT",
+	"pins":4,
+	"package": "SOT223"
+	},
+"IC AD9866": {
+	"mpn":["AD9866BCPZ"],
+	"spec":"RF ADC DAC",
+	"assembly":"SMT",
+	"pins":64,
+	"sub":0,
+	"aliexpress":"AD9866BCPZ",
+	"package":"64-VFQFN EP"
+	},
+"R 120R 0805": {
+	"mpn":["RC0603FR-07120RL"],
+	"spec":"120R 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":18125
+	},
+"R 1K6 0603": {
+	"mpn":["RC0603FR-071K6L"],
+	"spec":"1.6K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+"T 8:1": {
+	"mpn":["MABA-010143-FLUX18","WBC8-1LB"],
+	"spec":"8:1 RF Transformer",
+	"assembly":"SMT",
+	"pins":5,
+	"sub":0,
+	"package":"SM-22-5 3.81x3.81mm"
+	},	
+
+"T 1:1": {
+	"mpn":["MABAES0060","PWB1010-1LB","TC1-1TG2+"],
+	"spec":"1:1 RF Transformer",
+	"assembly":"SMT",
+	"pins":5,
+	"sub":0,
+	"package":"SM-22-5 3.81x3.81mm",
+	"aliexpress":"MABAES0060"
+	},
+"X TCXO": {
+	"mpn":["ASTXR-12-38.400MHZ-514054-T"],
+	"altmpn":["520L15IA38M4000","TSX-3225 38.4000MF10Z-AS3"],
+	"spec":"38.4MHz Osc 3.3V<=10ppm",
+	"assembly":"SMT",
+	"sub":0,
+	"pins":4,
+	"package":"2.5x2mm"
+	},
+"X SMA": {
+	"mpn":["5-1814400-1"],
+	"spec":"CONN SMA JACK R/A 50 OHM PCB",
+	"assembly":"TH",
+	"pins":5,
+	"sub":0,
+	"package":"BU-SMA-H"
+	},
+"B 0.1uF 0603": {
+	"mpn":["C0603C104M5RACTU","C1608X7R1E104K080AA"],
+	"spec":"0.1uF 0603>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":15331,
+	"sub":1
+	},
+"C 4.7uF 0805": {
+	"mpn":["GRM21BR61E475KA12L","TMK212BJ475KG-T"],
+	"spec":"4.7uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2131,
+	"sub":1
+	},
+"C 4n7 0603": {
+	"mpn":["GRM21BR61E475KA12L","TMK212BJ475KG-T"],
+	"spec":"4.7uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2131,
+	"sub":1
+	},
+"C 1uF 0805": {
+	"mpn":["CL21B105KAFNNNE","CL21B105KBFNFNE","CL21A105KACLNNC","GRM219R71E105KA88D"],
+	"spec":"1uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":29074,
+	"sub":1
+	},
+
+"C 10pF 0603": {
+	"mpn":["CC0805JRNPO9BN100"],
+	"spec":"10pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":1
+	},
+
+"C 100pF 0603": {
+	"mpn":["CC0603JRNPO0BN101","C0603C101J1GACTU"],
+	"spec":"100pF 0603NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0
+	},
+	
+"C 390pF 0805": {
+	"mpn":["CC0805JRNPO0BN391","CL21C391JBANNNC","CC0805JRNPO9BN391","C0805C391J5GACTU"],
+	"spec":"390pF 0805NP0>=50V<=5%",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":1
+	},
+
+"DB IO10": {
+	"mpn":["67997-410HLF"],
+	"spec":"2x5 M 0.1in",
+	"assembly":"TH",
+	"pins":10
+	},	
+	
+"DB RFD2b": {
+	"mpn":["CL21B105KAFNNNE","CL21B105KBFNFNE","CL21A105KACLNNC","GRM219R71E105KA88D"],
+	"spec":"1uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":9999,
+	"sub":1
+	},
+"F Polyfuse": {
+	"mpn":["CL21B105KAFNNNE","CL21B105KBFNFNE","CL21A105KACLNNC","GRM219R71E105KA88D"],
+	"spec":"1uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":9999,
+	"sub":1
+	},
+"IC LD1117S33": {
+	"mpn":["LD1117S33TR"],
+	"spec":"IC REG LINEAR 3.3V 800MA",
+	"assembly":"SMT",
+	"pins":4,
+	"package": "SOT223"
+	},
+"J CONN_01X02": {
+	"mpn":["LD1117S33TR"],
+	"spec":"IC REG LINEAR 3.3V 800MA",
+	"assembly":"SMT",
+	"pins":4,
+	"package": "SOT223"
+	},
+
+ 
+"JP PINHEAD_PINHD-2X10": {
+	"mpn":["67996-420HLF"],
+	"spec":"20 Positions Header Connector (2.54mm)",
+	"assembly":"TH",
+	"pins":20,
+	"package": "2x10"
+	},
+	
+"JP FEMALE_PINHEAD_PINHD-2X10": {
+	"mpn":["76342-310LF", "87606-310LF", "71609-310LF"],
+	"spec":"20 Positions Header Connector (2.54mm)",
+	"assembly":"TH",
+	"pins":20,
+	"package": "2x10"
+	},
+	
+"L 3.3uH": {
+	"mpn":["SRR4528A-3R3Y"],
+	"spec":"3.3uH >=2.4A",
+	"assembly":"SMT",
+	"pins":2,
+	"sub":0,
+	"package":"5x5mm"
+	},
+
+"R 16K2 0603": {
+	"mpn":["RC0603FR-0716K2L"],
+	"spec":"16.2K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+"R 12K1 0603": {
+	"mpn":["RC0603FR-0712K1L"],
+	"spec":"12.1K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+	
+"R 4k7 0603": {
+	"mpn":["RC0603FR-074K7L"],
+	"spec":"4.7K 0603<=5%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+	
+"R 1K8 0603": {
+	"mpn":["RC0603FR-071K8L"],
+	"spec":"1.8K 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2
+	},
+	
+"R 5.9 0805": {
+	"mpn":["RMCF0805FT5R90"],
+	"spec":"5.9 0805<=0.1%>=1/8W",
+	"assembly":"SMT",
+	"pins":2
+	},
+	
+"R 866 0805": {
+	"mpn":["RP73PF2A866RBTDF"],
+	"spec":"866 0805<=0.1%>=1/8W",
+	"assembly":"SMT",
+	"pins":2
+	},
+
+
+"RF SMA": {
+	"mpn":["5-1814832-1"],
+	"spec":"SMA Straight",
+	"altsrc":[["www.ebay.com",1.00]],
+	"assembly":"MTH",
+	"pins":5	
+	},
+	
+"W 21": {
+	"mpn":["400R0111-24-9"],
+	"altmpn":["400R0111-24-9","55A0111-24-9"],
+	"spec":"21cm PFTE silver plated 24to30AWG wire",
+	"assembly":"TH",
+	"pins":0,
+	"sub":0,
+	"aliexpress":"PFTE Teflon Silver Plated Wire 30AWG"
+	}
+	
+}

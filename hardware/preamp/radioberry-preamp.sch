@@ -1,0 +1,138 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 4
+Title "Radioberry - amplifier"
+Date "2020-12-18"
+Rev "beta 1"
+Comp "AppMind"
+Comment1 "PA3GSB Johan Maas"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Sheet
+S 5450 1525 2350 1050
+U 5FC8A8B5
+F0 "Amplifier" 50
+F1 "Amplifier.sch" 50
+$EndSheet
+$Sheet
+S 3675 3375 2625 1100
+U 5FCF3984
+F0 "Control" 50
+F1 "control.sch" 50
+$EndSheet
+$Sheet
+S 1725 1550 2350 1100
+U 5FD3DDB9
+F0 "Power" 50
+F1 "Power.sch" 50
+$EndSheet
+$Comp
+L hermeslite:TEST_1P MH1
+U 1 1 5FCED050
+P 2800 5650
+F 0 "MH1" H 2750 5875 50  0000 L CNN
+F 1 "DNI" H 2858 5677 50  0001 L CNN
+F 2 "HERMESLITE:m3" H 3000 5650 50  0001 C CNN
+F 3 "" H 3000 5650 50  0001 C CNN
+F 4 "DNI" H 2800 5650 50  0001 C CNN "Option"
+F 5 "NOBOM" H 2800 5650 50  0001 C CNN "Key"
+	1    2800 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:TEST_1P MH2
+U 1 1 5FCED376
+P 3100 5650
+F 0 "MH2" H 3050 5875 50  0000 L CNN
+F 1 "DNI" H 3158 5677 50  0001 L CNN
+F 2 "HERMESLITE:m3" H 3300 5650 50  0001 C CNN
+F 3 "" H 3300 5650 50  0001 C CNN
+F 4 "DNI" H 3100 5650 50  0001 C CNN "Option "
+F 5 "NOBOM" H 3100 5650 50  0001 C CNN "Key"
+	1    3100 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:TEST_1P MH3
+U 1 1 5FCED953
+P 3350 5650
+F 0 "MH3" H 3300 5875 50  0000 L CNN
+F 1 "DNI" H 3408 5677 50  0001 L CNN
+F 2 "HERMESLITE:m3" H 3550 5650 50  0001 C CNN
+F 3 "" H 3550 5650 50  0001 C CNN
+F 4 "DNI" H 3350 5650 50  0001 C CNN "Option "
+F 5 "NOBOM" H 3350 5650 50  0001 C CNN "Key"
+	1    3350 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:TEST_1P MH4
+U 1 1 5FCEDB7B
+P 3600 5650
+F 0 "MH4" H 3550 5875 50  0000 L CNN
+F 1 "DNI" H 3658 5677 50  0001 L CNN
+F 2 "HERMESLITE:m3" H 3800 5650 50  0001 C CNN
+F 3 "" H 3800 5650 50  0001 C CNN
+F 4 "DNI" H 3600 5650 50  0001 C CNN "Option"
+F 5 "NOBOM" H 3600 5650 50  0001 C CNN "Key"
+	1    3600 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:GND #PWR0114
+U 1 1 5FCEE49A
+P 3200 5925
+F 0 "#PWR0114" H 3200 5675 50  0001 C CNN
+F 1 "GND" H 3205 5752 50  0000 C CNN
+F 2 "" H 3200 5925 50  0001 C CNN
+F 3 "" H 3200 5925 50  0001 C CNN
+	1    3200 5925
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 5650 2800 5825
+Wire Wire Line
+	2800 5825 3100 5825
+Wire Wire Line
+	3600 5825 3600 5650
+Wire Wire Line
+	3350 5650 3350 5825
+Connection ~ 3350 5825
+Wire Wire Line
+	3350 5825 3600 5825
+Wire Wire Line
+	3100 5650 3100 5825
+Connection ~ 3100 5825
+Wire Wire Line
+	3100 5825 3200 5825
+Wire Wire Line
+	3200 5925 3200 5825
+Connection ~ 3200 5825
+Wire Wire Line
+	3200 5825 3350 5825
+$Comp
+L hermeslite:TEST_1P MH5
+U 1 1 5FD3ED08
+P 3875 5650
+F 0 "MH5" H 3825 5875 50  0000 L CNN
+F 1 "DNI" H 3933 5677 50  0001 L CNN
+F 2 "HERMESLITE:m3" H 4075 5650 50  0001 C CNN
+F 3 "" H 4075 5650 50  0001 C CNN
+F 4 "DNI" H 3875 5650 50  0001 C CNN "Option"
+F 5 "NOBOM" H 3875 5650 50  0001 C CNN "Key"
+	1    3875 5650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3600 5825 3875 5825
+Wire Wire Line
+	3875 5825 3875 5650
+Connection ~ 3600 5825
+Text Notes 850  7475 0    50   ~ 0
+Design based on work by Steve Haynal KF7O and Claudio IN3OTD
+$EndSCHEMATC
