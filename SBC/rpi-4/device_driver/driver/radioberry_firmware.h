@@ -73,6 +73,8 @@ static int initialize_firmware() {
 	initialize_gpio_for_input(rpi_io, 7);	// check txbuffer.
 	
 	printk(KERN_INFO "GPIO ready for rx and tx streaming...\n");
+	
+	return 0;
 }
 
 int spiXfer(char *txBuf, char *rxBuf, unsigned cnt){
@@ -127,6 +129,8 @@ int spiXfer(char *txBuf, char *rxBuf, unsigned cnt){
    while (!(spiReg[SPI_CS] & SPI_CS_DONE)) ;
 
    spiReg[SPI_CS] = spiDefaults; /* stop */
+   
+   return 0;
 }
 
 int rxStream(int nrx, unsigned char stream[]){

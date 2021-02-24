@@ -235,6 +235,7 @@ static int radioberry_probe(struct platform_device *pdev)
 static int radioberry_remove(struct platform_device *pdev)
 {
 	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
+	return 0;
 }
 
 static const struct of_device_id of_radioberry_match[] = {

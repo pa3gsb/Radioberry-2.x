@@ -30,6 +30,7 @@ function install_dependency {
 }
 
 install_dependency raspberrypi-kernel-headers
+install_dependency linux-headers-rpi
 install_dependency git
 install_dependency device-tree-compiler
 install_dependency pigpio
