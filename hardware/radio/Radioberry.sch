@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 4
 Title "RadioBerry V2.0"
-Date "2020-10-01"
-Rev "beta4"
+Date "2021-04-21"
+Rev "beta5"
 Comp "AppMind"
 Comment1 "PA3GSB"
 Comment2 ""

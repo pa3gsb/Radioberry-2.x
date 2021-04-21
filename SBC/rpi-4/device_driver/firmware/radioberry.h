@@ -26,7 +26,7 @@
 #include <netinet/tcp.h>
 
 
-#define FIRMWAREVERSION "2021.02.15"
+#define FIRMWAREVERSION "2021.03.27"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
@@ -38,7 +38,7 @@ void printIntroScreen() {
 	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter.\n\n");
 	fprintf(stderr, "\tBuild version: %s\n\n", FIRMWAREVERSION);
 	fprintf(stderr, "\tHave fune Johan PA3GSB\n\n");
-	fprintf(stderr, "\tReport bugs to <pa3gsb@gmail.com>.\n");
+	fprintf(stderr, "\tReport requests or bugs to <pa3gsb@gmail.com>.\n");
 	fprintf(stderr, "====================================================================\n");
 	fprintf(stderr, "====================================================================\n");
 }

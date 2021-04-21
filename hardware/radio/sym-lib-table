@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name Radioberry)(type Legacy)(uri ${KIPRJMOD}/Radioberry.lib)(options "")(descr ""))
+  (lib (name hermeslite)(type Legacy)(uri ${KIPRJMOD}/libs/hermeslite.lib)(options "")(descr ""))
+)

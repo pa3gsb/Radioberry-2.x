@@ -1,4 +1,5 @@
 (fp_lib_table
   (lib (name hermeslite)(type KiCad)(uri "$(KIPRJMOD)/libs/hermeslite.pretty")(options "")(descr ""))
   (lib (name mods)(type KiCad)(uri "$(KIPRJMOD)/mods")(options "")(descr ""))
+  (lib (name Radioberry)(type Eagle)(uri ${KIPRJMOD}/Radioberry.lbr)(options "")(descr ""))
 )

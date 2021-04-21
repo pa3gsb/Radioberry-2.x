@@ -104,7 +104,9 @@ ssize_t process_http(int sockfd, char *host, char *page, char *poststr)
 	return n;
 }
 
-void postRadioberryConfiguration() {
+int postRadioberryConfiguration() {
+	
+	int result = 0;
 	int sockfd;
 	struct sockaddr_in servaddr;
 
@@ -119,26 +121,25 @@ void postRadioberryConfiguration() {
 
 	char str[50];
 	struct hostent *hptr;
-	if ((hptr = gethostbyname(hname)) == NULL) {
-		return;
-	}
+	if ((hptr = gethostbyname(hname)) == NULL) return -1;
 	if (hptr->h_addrtype == AF_INET && (pptr = hptr->h_addr_list) != NULL) inet_ntop(hptr->h_addrtype, *pptr, str, sizeof(str));
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(80);
 	inet_pton(AF_INET, str, &servaddr.sin_addr);
-	connect(sockfd, (SA *) & servaddr, sizeof(servaddr));
-	process_http(sockfd, hname, page, post_message);
+	
+	if (connect(sockfd, (SA *) & servaddr, sizeof(servaddr)) >= 0) 	process_http(sockfd, hname, page, post_message); else result = -1;
 	
 	close(sockfd);
+	
+	return result;
 }
 
 void registerRadioberry() {
 	if (!getMacAddress()) return;
 	loadRadioberryProps();
-	postRadioberryConfiguration();
-	fprintf(stderr, "Your Radioberry is registered: http://www.pa3gsb.nl/radioberry/api/read.php\n");
+	if (postRadioberryConfiguration()) fprintf(stderr, "Registering your Radioberry not registered."); else fprintf(stderr, "Your Radioberry is registered: http://www.pa3gsb.nl/radioberry/api/read.php\n");
 }
 
 //end of source
