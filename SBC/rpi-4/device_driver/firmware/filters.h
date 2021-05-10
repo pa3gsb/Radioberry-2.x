@@ -318,7 +318,7 @@ void handleFilters(char* buffer, int cw) {
 	else if (i2c_filters_board) {
 		handleFiltersBoard(buffer,cw);
 	}
-	else if (i2c_n2adr_handler) {
+	else if (i2c_n2adr) {
 		handleN2ADRFilterBoard(buffer);
 	}
 
@@ -359,7 +359,7 @@ void initFilters() {
 	else if (i2c_filters_board) {
 		fprintf(stderr, "Generic filters board interface found and initialized \n");
 	}
-	else if (i2c_n2adr_handler) {
+	else if (i2c_n2adr) {
 		fprintf(stderr, "N2ADR filter board interface found and initialized \n");
 	}
 	else {
