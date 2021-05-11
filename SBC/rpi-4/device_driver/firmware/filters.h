@@ -31,6 +31,7 @@ int i2c_filters_board = 0;
 
 int alex_manual = 0;
 uint16_t i2c_alex_data = 0;
+uint16_t i2c_n2adr_data = 0;
 uint16_t i2c_data = 0;
 unsigned int i2c_bus = 1;
 int currentfreq = 4706000;
@@ -124,17 +125,17 @@ void initN2ADR() {
 //****************************************************************
 void handleN2ADRFilterBoard(char* buffer)
 {
-	if (i2c_filters_board & (buffer[523] & 0xFE) == 0x00) {
-		i2c_alex_data = ((buffer[526] & 0x20) << 1) | ((buffer[525] & 0xFE) >> 1);
+	if (i2c_n2adr & (buffer[523] & 0xFE) == 0x00) {
+		i2c_n2adr_data = ((buffer[526] & 0x20) << 1) | ((buffer[525] & 0xFE) >> 1);
 	}
-	if (i2c_filters_board) {
-		if (i2c_data != i2c_alex_data)
+	if (i2c_n2adr) {
+		if (i2c_data != i2c_n2adr_data)
 		{
-			i2c_data = i2c_alex_data;
+			i2c_data = i2c_n2adr_data;
 			
 			unsigned char ldata[2];
 			ldata[0] = 0x09;
-			ldata[1] = i2c_alex_data & 0xFF;
+			ldata[1] = i2c_n2adr_data & 0xFF;
 			fprintf(stderr, "Set N2ADR data = %x \n", ldata[1]);
 
 			write(fd_i2c_n2adr, ldata, 2);
