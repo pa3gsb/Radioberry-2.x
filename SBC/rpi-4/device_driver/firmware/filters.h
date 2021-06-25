@@ -128,6 +128,9 @@ void handleN2ADRFilterBoard(char* buffer)
 	if (i2c_n2adr & (buffer[523] & 0xFE) == 0x00) {
 		i2c_n2adr_data = ((buffer[526] & 0x20) << 1) | ((buffer[525] & 0xFE) >> 1);
 	}
+	if (i2c_n2adr & (buffer[11] & 0xFE) == 0x00) {
+		i2c_n2adr_data = ((buffer[14] & 0x20) << 1) | ((buffer[13] & 0xFE) >> 1);
+    }
 	if (i2c_n2adr) {
 		if (i2c_data != i2c_n2adr_data)
 		{

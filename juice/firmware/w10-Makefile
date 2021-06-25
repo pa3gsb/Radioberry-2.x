@@ -1,0 +1,16 @@
+CXX = x86_64-w64-mingw32-g++
+CXXFLAGS = -D_WIN32_WINNT=0x0A00  -DWINVER=0x0A00
+LDSTATIC =  -lwsock32 -L"C:\dev\git\Radioberry-2.x\juice\firmware" -lftd2xx64 -lpthread
+
+LINK = $(CXX)
+
+.SUFFIXES: .o .c
+%.o: %.c %.h
+	$(CXX)  $(CXXFLAGS) -c $<
+
+radioberry: radioberry.o gateware.o stream.o
+	$(LINK) radioberry.o gateware.o stream.o $(LDSTATIC) -o radioberry-juice.exe
+
+clean:
+	del *.o
+	del radioberry-juice.exe
