@@ -12,17 +12,20 @@ PROGRAM=radioberry-juice
 SOURCES= \
 radioberry.c \
 gateware.c \
-stream.c
+stream.c \
+register.c
 
 HEADERS= \
 radioberry.h \
 gateware.h \
-stream.h
+stream.h \
+register.h
 
 OBJS= \
 radioberry.o \
 gateware.o \
-stream.o
+stream.o \
+register.o
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 

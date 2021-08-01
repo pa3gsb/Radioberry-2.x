@@ -51,8 +51,13 @@ For more information, please refer to <http://unlicense.org/>
 #include "radioberry.h"
 #include "gateware.h"
 #include "stream.h"
+#include "register.h"
 
-#define FIRMWAREVERSION "Juice version"
+#ifdef _WIN32
+	#define FIRMWAREVERSION "W-J-2021-08-01"
+#else
+	#define FIRMWAREVERSION "L-J-2021-08-01"
+#endif
 
 void printIntroScreen() {
 	fprintf(stderr,"\n");
@@ -89,8 +94,23 @@ int load_radioberry_gateware() {
 	return ret;
 }
 
+static void *rb_register_thread(void *arg) {
+	sprintf(gatewareversion,"%d.%d", gateware_major_version, gateware_minor_version);
+	sprintf(firmwareversion,"%s", FIRMWAREVERSION);
+	//major-minor-build of ftdi driver
+	sprintf(driverversion,"%02x.%02x.%02x", ((driver_version >>16) & 0xFF), ((driver_version >>8) & 0xFF), (driver_version & 0xFF));
+	gateware_fpga_type == 0 ? sprintf(fpgatype,"%s", "-") : gateware_fpga_type == 1 ? sprintf(fpgatype,"%s", "CL016") : sprintf(fpgatype,"%s", "CL025");
+	registerRadioberry();
+	return NULL;
+}
+
+void start_rb_register_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, rb_register_thread, NULL);
+}
+
 void getStreamAndSendPacket() {
-	read_stream(hpsdrdata); // fetching 1032 bytes of ethernet packet.
+	if (read_stream(hpsdrdata) < 0) return; // fetching 1032 bytes of ethernet packet.
 	if (sock_TCP_Client >= 0) {
 		if (sendto(sock_TCP_Client, (const char*) hpsdrdata, sizeof(hpsdrdata), 0, NULL, 0) != 1032) fprintf(stderr, "TCP send error");
 	} else {
@@ -131,7 +151,7 @@ void *packetreader(void *arg) {
 				bytes_read += size;
 				bytes_left -= size;
 			}
-			if (bytes_read == 1032) handlePacket((unsigned char*) buffer); else fprintf(stderr, "tcp packet received; wrong length %d \n", bytes_read);
+			if (bytes_read == 1032) handlePacket((unsigned char*) buffer); //else fprintf(stderr, "tcp packet received; wrong length %d \n", bytes_read);
 		} 
 		else {
 			// handle UDP protocol.
@@ -229,15 +249,19 @@ void handlePacket(unsigned char* buffer){
 }
 
 int main(int argc, char **argv)
-{	 
+{	
 	printIntroScreen();
+
 	if (load_radioberry_gateware() < 0) {
 		fprintf(stderr,"Radioberry; loading radioberry  \n");
 		exit(-1);
 	}
 	
+	driver_version = getFirmwareVersion();
+	//fprintf(stderr, "%06x\n", driver_version);
+	
 	int ret;
-	if (ret = init_stream() < 0) { return ret; }
+	if (ret = init_stream() < 0) { return ret; }	
 	
 #ifdef _WIN32	
 	WSADATA wsa;
@@ -261,10 +285,15 @@ int main(int argc, char **argv)
 	struct timeval timeout;      
     timeout.tv_sec = 0;
     timeout.tv_usec = TIMEOUT_MS;
-	int wtimeout = TIMEOUT_MS;  //window time out // wellicht aanpassen for linux
+	int wtimeout = TIMEOUT_MS;  
 
-	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO,(char*)&wtimeout,sizeof(wtimeout)) < 0)
+#ifdef _WIN32
+	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char *)&wtimeout,sizeof (int)) < 0)
+		perror("setsockopt failed\n");	
+#else
+	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
 		perror("setsockopt failed\n");
+#endif
 	
 	/* bind the socket to any valid IP address and a specific port */
 	memset((char *)&myaddr, 0, sizeof(myaddr));
@@ -321,6 +350,8 @@ int main(int argc, char **argv)
 	int flags = fcntl(sock_TCP_Server, F_GETFL, 0);
     fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
 #endif
+
+	start_rb_register_thread();
 	
 	signal(SIGINT, handle_sigint);
 	

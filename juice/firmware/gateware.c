@@ -277,6 +277,15 @@ int deinit_gateware_ftdi() {
 	return 0;
 };
 
+unsigned long getFirmwareVersion() {
+	FT_STATUS ftStatus;
+	unsigned long dwDriverVer = 0;
+
+	ftStatus = FT_GetDriverVersion(ftHandle,&dwDriverVer);
+
+	return dwDriverVer;
+}
+
 int  load_gateware_image_into_fpga() {
 	
 		if (init_gateware_ftdi() < 0) return -1 ;

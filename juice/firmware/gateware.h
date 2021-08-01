@@ -4,7 +4,6 @@
 	The gateware is present in the radioberry.rbf file.
 	
 	This file will be read and will be transferred via the usb bus, ft2232 chip into the FPGA.
-	
 
 */
 #ifndef __RADIOBERRY_GATEWARE_LOADER_H__
@@ -16,7 +15,6 @@
 #include "ftd2xx.h"
 #include <sys/stat.h>
 #include <string.h>
-//#include <time.h>
 #include <errno.h>
 #include <stdbool.h>
 
@@ -42,5 +40,6 @@
 
 int load_gateware_image_into_fpga(void);
 
+unsigned long getFirmwareVersion(void);
 
 #endif

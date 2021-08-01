@@ -49,6 +49,13 @@
 #define HERMESLITE  0x06
 
 
+char macaddress[24];
+char* radiocall; 
+char* radiolocator;
+char gatewareversion[16];
+char driverversion[16];
+char firmwareversion[16]; 
+char fpgatype[16];
 
 int fd_rb;
 
@@ -66,6 +73,8 @@ int active = 0;
 static volatile int keepRunning = 1;
 unsigned char gateware_major_version = 73;
 unsigned char gateware_minor_version = 0;
+unsigned long driver_version = 0x00020406;
+int gateware_fpga_type = 2;
 unsigned char hpsdrdata[1032];
 unsigned char broadcastReply[60];
     

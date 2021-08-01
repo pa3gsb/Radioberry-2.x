@@ -1,6 +1,6 @@
-CXX = x86_64-w64-mingw32-g++
+CXX = x86_64-w64-mingw32-g++ -Wwrite-strings -fpermissive
 CXXFLAGS = -D_WIN32_WINNT=0x0A00  -DWINVER=0x0A00
-LDSTATIC =  -lwsock32 -L"C:\dev\git\Radioberry-2.x\juice\firmware" -lftd2xx64 -lpthread
+LDSTATIC =  -lwsock32 -lIphlpapi -lws2_32 -L"C:\dev\git\Radioberry-2.x\juice\firmware" -lftd2xx64 -lpthread
 
 LINK = $(CXX)
 
@@ -8,8 +8,8 @@ LINK = $(CXX)
 %.o: %.c %.h
 	$(CXX)  $(CXXFLAGS) -c $<
 
-radioberry: radioberry.o gateware.o stream.o
-	$(LINK) radioberry.o gateware.o stream.o $(LDSTATIC) -o radioberry-juice.exe
+radioberry: radioberry.o gateware.o stream.o register.o
+	$(LINK) radioberry.o gateware.o stream.o register.o $(LDSTATIC) -o radioberry-juice.exe
 
 clean:
 	del *.o
