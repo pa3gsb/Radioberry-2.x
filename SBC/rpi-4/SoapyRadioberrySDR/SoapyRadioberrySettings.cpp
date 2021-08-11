@@ -179,7 +179,7 @@ std::vector<std::string> SoapyRadioberry::listGains( const int direction, const 
 	return(options);
 }
 
-SoapySDR::Range SoapyRadioberry::getGainRange( const int direction, const size_t channel, const std::string &name ) const
+SoapySDR::Range SoapyRadioberry::getGainRange( const int direction, const size_t channel ) const
 {
 	SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::getGainRange called");
 	
