@@ -59,6 +59,7 @@ elif [[ $input == "pihpsdr" ]]; then
 	install_dependency libusb-1.0-0-dev
 	install_dependency libgpiod-dev
 	install_dependency gpiod
+	install_dependency libi2c-dev
 	
 	cd /tmp
 	git clone https://github.com/g0orx/pihpsdr.git
