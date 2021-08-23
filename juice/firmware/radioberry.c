@@ -293,6 +293,11 @@ int main(int argc, char **argv)
 #else
 	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
 		perror("setsockopt failed\n");
+		
+	int optval = 7; // high priority.
+	if (setsockopt(fd, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
+        perror("UDP socket: SO_PRIORITY");
+    }
 #endif
 	
 	/* bind the socket to any valid IP address and a specific port */
@@ -322,7 +327,7 @@ int main(int argc, char **argv)
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof(yes));
 	
 #ifndef _WIN32
-	int optval = 7; // high priority.
+	//int optval = 7; // high priority.
 	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
         perror("sock_TCP_Server socket: SO_PRIORITY");
     }
