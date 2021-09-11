@@ -405,6 +405,8 @@ int main(int argc, char **argv)
     timeout.tv_sec = 0;
     timeout.tv_usec = TIMEOUT_MS;
 	int wtimeout = TIMEOUT_MS;  
+	
+	int optval;
 
 #ifdef _WIN32
 	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char *)&wtimeout,sizeof (int)) < 0)
@@ -413,12 +415,20 @@ int main(int argc, char **argv)
 	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
 		perror("setsockopt failed\n");
 		
-	int optval = 7; // high priority.
+	optval = 7; // high priority.
 	if (setsockopt(fd, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
         perror("UDP socket: SO_PRIORITY");
     }
 #endif
-	
+
+	optval=65535; 
+    if (setsockopt(fd, SOL_SOCKET, SO_SNDBUF, (const char *)&optval, sizeof(optval))<0) {
+      perror("data_socket: SO_SNDBUF");
+    }
+    if (setsockopt(fd, SOL_SOCKET, SO_RCVBUF, (const char *)&optval, sizeof(optval))<0) {
+      perror("data_socket: SO_RCVBUF");
+    }
+
 	/* bind the socket to any valid IP address and a specific port */
 	memset((char *)&myaddr, 0, sizeof(myaddr));
 	myaddr.sin_family = AF_INET;
@@ -442,7 +452,13 @@ int main(int argc, char **argv)
 	int rcvbufsize = 65535;
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
-	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (const char *)&wtimeout, sizeof(wtimeout)); //added
+#ifdef _WIN32
+	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (const char *)&wtimeout, sizeof(wtimeout)) < 0)
+		perror("setsockopt failed\n");
+#else
+	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
+		perror("setsockopt failed\n");		
+#endif
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof(yes));
 	
 #ifndef _WIN32

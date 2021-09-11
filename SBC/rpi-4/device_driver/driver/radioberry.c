@@ -46,7 +46,7 @@ sudo cp radioberry.ko /lib/modules/$(uname -r)/kernel/drivers/sdr
 #include <linux/firmware.h>	
 #include <linux/circ_buf.h>
 #include <linux/wait.h>
-#include <linux/spinlock.h>
+#include <linux/mutex.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
 #include <linux/gpio/consumer.h>
@@ -55,12 +55,14 @@ sudo cp radioberry.ko /lib/modules/$(uname -r)/kernel/drivers/sdr
 #include <linux/property.h>
 #include <linux/interrupt.h>            
 
+static struct mutex spi_mutex;
+
 #include "radioberry_rpi.h"
 #include "radioberry_ioctl.h"
 #include "radioberry_gateware.h"
 #include "radioberry_firmware.h"
 
-#define VERSION "0.9"
+#define VERSION "0.91"
 
 static DEFINE_MUTEX(radioberry_mutex); 
 static wait_queue_head_t rx_sample_queue;
@@ -192,8 +194,9 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			//printk(KERN_INFO "Command kernel %2X - %2X - %2X - %2X - %2X - %2X \n", data[0], data[1], data[2], data[3], data[4], data[5]);
 			if ((data[1] & 0xFE)  == 0x00) lnrx = ((data[5] & 0x38) >> 3) + 1;
 	
-			// tell the gateware the command.
-			spiXfer(data, data, 6);
+			mutex_lock(&spi_mutex);
+			spiXfer(0, data, data, 6); //spi channel 0 // tell the gateware the command.
+			mutex_unlock(&spi_mutex);
 			
 			_nrx = lnrx;
 			
@@ -203,7 +206,7 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			rb_info_ret.minor = data[5];
 			
 			rb_info_ret.fpga = data[3] & 0x03; 
-			rb_info_ret.version = 0.9; 
+			rb_info_ret.version = 0.91; 
 			
 			if (copy_to_user((struct rb_info_arg_t *)arg, &rb_info_ret, sizeof(struct rb_info_arg_t))) return -EACCES;
 	
@@ -314,6 +317,8 @@ static int __init radioberry_init(void) {
 						NULL);                 
 
 	printk(KERN_INFO "Radioberry: The interrupt request result is: %d\n", result);	
+	
+	mutex_init(&spi_mutex);
 
 	initialize_rpi();
 	loading_radioberry_gateware(radioberryCharDevice);
@@ -340,6 +345,7 @@ static void __exit radioberry_exit(void) {
 	unregister_chrdev(majorNumber, DEVICE_NAME); 
 	
 	mutex_destroy(&radioberry_mutex); 
+	mutex_destroy(&spi_mutex);
 	
 	deinitialize_rpi();
 

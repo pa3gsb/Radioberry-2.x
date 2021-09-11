@@ -1,8 +1,6 @@
 #ifndef __RADIOBERRY_FIRMWARE_H__
 #define __RADIOBERRY_FIRMWARE_H__
 
-#include <linux/delay.h>
-
 #define PI_ALT0   4
 
 #define RPI_RX_CLK 6
@@ -40,14 +38,14 @@
 static int initialize_firmware(void);
 int rxStream(int nrx, unsigned char stream[]);
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]);
-int spiXfer(char *txBuf, char *rxBuf, unsigned cnt);
+int spiXfer(int spi_channel, char *txBuf, char *rxBuf, unsigned cnt);
 int write_iq_sample(unsigned char tx_iqdata[]);
 
 static int initialize_firmware() {	
 
 	//SPI mode pins
 	setPinMode(RPI_SPI_CE0,  PI_ALT0);
-	//setPinMode(RPI_SPI_CE1,  PI_ALT0);
+	setPinMode(RPI_SPI_CE1,  PI_ALT0);
 
 	setPinMode(RPI_SPI_SCLK, PI_ALT0);
 	setPinMode(RPI_SPI_MISO, PI_ALT0);
@@ -57,27 +55,22 @@ static int initialize_firmware() {
 	initialize_gpio_for_output(rpi_io, RPI_RX_CLK);
 	*rpi_set_io_low = (1<<RPI_RX_CLK); 	// init pi-rx_clk
 	
-	initialize_gpio_for_input(rpi_io, 21);	// rx iq data
+	initialize_gpio_for_input(rpi_io, 23);	// rx iq data
 	initialize_gpio_for_input(rpi_io, 20);	// rx iq data
 	initialize_gpio_for_input(rpi_io, 19);	// rx iq data
+	initialize_gpio_for_input(rpi_io, 18);	// rx iq data
 	initialize_gpio_for_input(rpi_io, 16);	// rx iq data
+	initialize_gpio_for_input(rpi_io, 13);	// rx iq data
+	initialize_gpio_for_input(rpi_io, 12);	// rx iq data
+	initialize_gpio_for_input(rpi_io,  5);	// rx iq data
 	initialize_gpio_for_input(rpi_io, 25);	// available samples.
-	
-	//TX IO Init part 
-	initialize_gpio_for_output(rpi_io, RPI_TX_CLK);
-	*rpi_set_io_low = (1<<RPI_TX_CLK); 	// init pi-tx_clk
-	initialize_gpio_for_output(rpi_io, 5);	// tx iq data
-	initialize_gpio_for_output(rpi_io, 12);	// tx iq data
-	initialize_gpio_for_output(rpi_io, 17);	// tx iq data
-	initialize_gpio_for_output(rpi_io, 18);	// tx iq data
-	initialize_gpio_for_input(rpi_io, 7);	// check txbuffer.
 	
 	printk(KERN_INFO "GPIO ready for rx and tx streaming...\n");
 	
 	return 0;
 }
 
-int spiXfer(char *txBuf, char *rxBuf, unsigned cnt){
+int spiXfer(int spi_channel, char *txBuf, char *rxBuf, unsigned cnt){
 
 	unsigned speed = 9000000; 
 	uint32_t flags = 49155;
@@ -88,7 +81,7 @@ int spiXfer(char *txBuf, char *rxBuf, unsigned cnt){
 	uint32_t spiDefaults;
 	unsigned mode, channel, cspol, cspols;
    
-   flags = flags | PI_SPI_FLAGS_CHANNEL(0); // SPI0
+   flags = flags | PI_SPI_FLAGS_CHANNEL(spi_channel); 
 
    channel = PI_SPI_FLAGS_GET_CHANNEL(flags);
    mode   =  PI_SPI_FLAGS_GET_MODE   (flags);
@@ -151,53 +144,38 @@ int rxStream(int nrx, unsigned char stream[]){
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 	uint32_t value = 0;
 	
+	int k = 3;
 	int i = 0;	
 	for (i = 0; i < 6 ; i++) {
 		
-		*rpi_set_io_high = (1<<RPI_RX_CLK);
-		value = *rpi_read_io;
-
-		iqdata[i] =  (((value >> 16) & 1) << 7);
-		iqdata[i] |=  (((value >> 19) & 1) << 6);
-		iqdata[i] |=  (((value >> 20) & 1) << 5);
-		iqdata[i] |=  (((value >> 21) & 1) << 4);
-		
-		*rpi_set_io_low = (1<<RPI_RX_CLK);
-		value = *rpi_read_io;
-	
-		iqdata[i] |=  (((value >> 16) & 1) << 3);
-		iqdata[i] |=  (((value >> 19) & 1) << 2);
-		iqdata[i] |=  (((value >> 20) & 1) << 1);
-		iqdata[i] |=  (((value >> 21) & 1));			
+		if (i % 2 == 0) {
+			*rpi_set_io_high = (1<<RPI_RX_CLK);
+			value = *rpi_read_io;
+		} else {		
+			*rpi_set_io_low = (1<<RPI_RX_CLK);
+			value = *rpi_read_io;
+		}
+		if (i==3) k=-3; // IQ swap.
+		iqdata[k+i] =  (((value >> 23) & 1) << 7);
+		iqdata[k+i] |=  (((value >> 20) & 1) << 6);
+		iqdata[k+i] |=  (((value >> 19) & 1) << 5);
+		iqdata[k+i] |=  (((value >> 18) & 1) << 4);
+		iqdata[k+i] |=  (((value >> 16) & 1) << 3);
+		iqdata[k+i] |=  (((value >> 13) & 1) << 2);
+		iqdata[k+i] |=  (((value >> 12) & 1) << 1);
+		iqdata[k+i] |=  (((value >> 5) & 1));						
 	}		
 }
 
+int write_iq_sample(unsigned char tx_iqdata[]) {
 
-int write_iq_sample(unsigned char tx_iqdata[]){
-
-	uint32_t value = 0;
-	int i = 0;
-	for (i = 0; i < 4 ; i++) {
-		if (tx_iqdata[i] & 0x80) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
-		if (tx_iqdata[i] & 0x40) *rpi_set_io_high = (1<<5);  else *rpi_set_io_low = (1<<5);
-		if (tx_iqdata[i] & 0x20) *rpi_set_io_high = (1<<18); else *rpi_set_io_low = (1<<18);
-		if (tx_iqdata[i] & 0x10) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
-		*rpi_set_io_high = (1<<RPI_TX_CLK);
-		
-		if (tx_iqdata[i] & 0x08) *rpi_set_io_high = (1<<17); else *rpi_set_io_low = (1<<17);
-		if (tx_iqdata[i] & 0x04) *rpi_set_io_high = (1<<5);  else *rpi_set_io_low = (1<<5);
-		if (tx_iqdata[i] & 0x02) *rpi_set_io_high = (1<<18); else *rpi_set_io_low = (1<<18);
-		if (tx_iqdata[i] & 0x01) *rpi_set_io_high = (1<<12); else *rpi_set_io_low = (1<<12);
-		*rpi_set_io_low = (1<<RPI_TX_CLK);
-	}
+	unsigned char data[4];
 	
-	// get the tx fifo state
-	// if tx fifo is full; than a 0 is returned otherwise 1.
-	// the sleep is in firmware... i think it should be long here... but delay in kernel mode
-	// is not working properly....
-	// to do... i like to solve it in the driver.
-	value = *rpi_read_io;
-	return ((value >> 7) & 1);
+	mutex_lock(&spi_mutex);
+	spiXfer(1, tx_iqdata, data, 4); //spi channel 1; write IQ sample (4bytes)
+	mutex_unlock(&spi_mutex);
+	
+	return 4;
 }
 
 #endif
