@@ -57,16 +57,19 @@ elif [[ $input == "pihpsdr" ]]; then
 	install_dependency libasound2-dev
 	install_dependency libcurl4-openssl-dev
 	install_dependency libusb-1.0-0-dev
-	install_dependency wiringpi
-
+	install_dependency libgpiod-dev
+	install_dependency gpiod
+	install_dependency libi2c-dev
+	
 	cd /tmp
 	git clone https://github.com/g0orx/pihpsdr.git
 	cd pihpsdr
 	
 	#makefile modification; when 'on' switch it 'off' (adding '#'). 
-	sed -i '/^PURESIGNAL_INCLUDE=PURESIGNAL/c\#PURESIGNAL_INCLUDE=PURESIGNAL' ./Makefile
-	sed -i '/^#MIDI_INCLUDE=MIDI/c\MIDI_INCLUDE=MIDI' ./Makefile
+	sed -i '/^PURESIGNAL_INCLUDE=PURESIGNAL/c\#PURESIGNAL_INCLUDE=PURESIGNAL' ./Makefile;
+	sed -i '/^#MIDI_INCLUDE=MIDI/c\MIDI_INCLUDE=MIDI' ./Makefile;
 	sed -i '/^GPIO_INCLUDE=GPIO/c\#GPIO_INCLUDE=GPIO' ./Makefile;
+	sed -i '/^LOCALCW_INCLUDE=LOCALCW/c\#LOCALCW_INCLUDE=LOCALCW' ./Makefile;
 		
 	if [ "$localcw" -eq "1" ]; then
 		sed -i '/^#GPIO_INCLUDE=GPIO/c\GPIO_INCLUDE=GPIO' ./Makefile;

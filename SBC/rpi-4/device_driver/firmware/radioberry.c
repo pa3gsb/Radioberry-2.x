@@ -407,6 +407,7 @@ void fillPacketToSend() {
 			
 			int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
 			read(fd_rb , rx_buffer , nr_samples);
+			
 			rb_sample = 0;
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
@@ -505,7 +506,7 @@ static void *rb_register_thread(void *arg) {
 	sleep(60); 
 	sprintf(gatewareversion,"%d.%d", gateware_major_version, gateware_minor_version);
 	sprintf(firmwareversion,"%s", FIRMWAREVERSION);
-	sprintf(driverversion,"%.1f", driver_version); 
+	sprintf(driverversion,"%.2f", driver_version); 
 	gateware_fpga_type == 0 ? sprintf(fpgatype,"%s", "-") : gateware_fpga_type == 1 ? sprintf(fpgatype,"%s", "CL016") : sprintf(fpgatype,"%s", "CL025");
 	registerRadioberry();
 	return NULL;
@@ -549,11 +550,8 @@ void *txWriter(void *arg) {
 
 		//first setup without EER
 		if (MOX || CWX) {
-			if (! write(fd_rb , tx_iqdata , sizeof(tx_iqdata))) {
-				// tx FIFO is almost full; we give 50 sample time...
-				// prefer to have this sleep in the driver...did not get it to work properly! 
-				usleep(1000); //50 samples sleep (1/48K about 20usec /sample * 50)
-			}
+			//fprintf(stderr, "I = %2X - %2X  Q=  %2X - %2X \n", tx_iqdata[0], tx_iqdata[1], tx_iqdata[2], tx_iqdata[3]);
+			write(fd_rb , tx_iqdata , sizeof(tx_iqdata));
 		}	
 	
 		sem_post(&tx_empty); 

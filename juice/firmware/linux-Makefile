@@ -19,13 +19,14 @@ HEADERS= \
 radioberry.h \
 gateware.h \
 stream.h \
-register.h
+register.h \
+sensors.h
 
 OBJS= \
 radioberry.o \
 gateware.o \
 stream.o \
-register.o
+register.o 
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 

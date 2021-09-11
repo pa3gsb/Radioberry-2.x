@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <stdbool.h>
+#include <sys/utsname.h>
 #endif
 
 #include <string.h>
@@ -43,11 +44,15 @@
 #include <pthread.h>
 
 
+
 #define TIMEOUT_MS      100
 #define SERVICE_PORT	1024
 #define NR 0x06
 #define HERMESLITE  0x06
 
+
+int sys_temp = 0; //rpi-temperature.
+int rpiLinux = 0;
 
 char macaddress[24];
 char* radiocall; 

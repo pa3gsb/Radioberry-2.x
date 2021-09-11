@@ -7,9 +7,9 @@ echo "Radioberry software installation."
 echo ""
 echo "You will install the following versions: "
 echo ""
-echo "	Gateware version 73.0"
-echo "	Driver version 0.9"
-echo "	Firmware version 2021.06.25"
+echo "	Gateware version 72.5"
+echo "	Driver version 0.8"
+echo "	Firmware version 2021.01.17"
 echo "============================================"
 echo ""
 echo ""
@@ -68,7 +68,7 @@ fi
 
 cd Radioberry-2.x
 echo "checkout the stable git tag"
-git checkout 6e2146fc837f4710546350ad727b3b38f48bcb2f
+git checkout c969108f80cf4fa0b79d34ebd35b48bf243f51b4
 cd ..
 
 #-----------------------------------------------------------------------------

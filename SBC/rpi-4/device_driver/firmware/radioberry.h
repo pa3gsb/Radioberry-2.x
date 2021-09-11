@@ -26,7 +26,7 @@
 #include <netinet/tcp.h>
 
 
-#define FIRMWAREVERSION "2021.06.25"
+#define FIRMWAREVERSION "2021.09.10"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
@@ -64,7 +64,6 @@ size()     { return p_write - p_read; }
 char rb_control = 0x00;
 
 int fd_rb;
-//struct rb_info_arg_t rb_info;
 char rx_buffer[512];
 int rb_sample = 0;
 

@@ -53,6 +53,10 @@ For more information, please refer to <http://unlicense.org/>
 #include "stream.h"
 #include "register.h"
 
+#ifndef _WIN32	
+#include "sensors.h"
+#endif
+
 #ifdef _WIN32
 	#define FIRMWAREVERSION "W-J-2021-08-01"
 #else
@@ -110,7 +114,41 @@ void start_rb_register_thread() {
 }
 
 void getStreamAndSendPacket() {
+	
 	if (read_stream(hpsdrdata) < 0) return; // fetching 1032 bytes of ethernet packet.
+	
+	// gateware if temp is not read because the preamp board is not installed 
+	// or no other i2c module module is in place.. the temp and current
+	// are filled with 0x0fff ; if so we will replace it here with other data.
+	
+	// i have an i2c temperature and current module (attach to i2c bus of RPI) todo: programming!!; 
+	// checking if firmware is running at RPI; 
+	//		if so than first search if i2c module
+	//				for reading temp is installed 
+	// if not running @RPI and/or no i2c temp module is installed use temperature of the cpu 
+	// same is valid for the current.
+	
+	//check temperature from gateware.
+	if ( (((hpsdrdata[11] & 0x08) == 0x08) | ((hpsdrdata[523] & 0x08) == 0x08)) && 
+		 (hpsdrdata[12] == 0x0F | hpsdrdata[524] == 0x0F) && 
+		 (hpsdrdata[13] == 0xFF | hpsdrdata[525] == 0xFF )){
+
+			hpsdrdata[12] =  ((sys_temp >> 8) & 0xFF); hpsdrdata[13] = (sys_temp & 0xFF); 
+			hpsdrdata[524] = ((sys_temp >> 8) & 0xFF); hpsdrdata[525] =(sys_temp & 0xFF);
+		
+		//hpsdrdata[12] = 0x04; hpsdrdata[13] = 0x00; // showing fixed 31.5C
+		//hpsdrdata[524] = 0x04; hpsdrdata[525] = 0x00; // showing fixed 31.5C
+	}
+	//check current from gateware. 
+	if ( (((hpsdrdata[11] & 0x10) == 0x10) | ((hpsdrdata[523] & 0x10) == 0x10)) && 
+		 (hpsdrdata[14] == 0x0F | hpsdrdata[526] == 0x0F) && 
+		 (hpsdrdata[15] == 0xFF | hpsdrdata[527] == 0xFF )){
+		// todo
+		// i2c module or 0.
+		hpsdrdata[14] = 0x00; hpsdrdata[15] = 0x00; 
+		hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00; 
+	}
+	
 	if (sock_TCP_Client >= 0) {
 		if (sendto(sock_TCP_Client, (const char*) hpsdrdata, sizeof(hpsdrdata), 0, NULL, 0) != 1032) fprintf(stderr, "TCP send error");
 	} else {
@@ -248,9 +286,90 @@ void handlePacket(unsigned char* buffer){
 	}
 }
 
+#ifndef _WIN32
+
+void read_temperature_raspberryPi() {
+	FILE *thermal;
+	thermal = fopen("/sys/class/thermal/thermal_zone0/temp","r");
+	float systemp, millideg;
+	fscanf(thermal,"%f",&millideg);
+	systemp = millideg / 1000;
+	//fprintf(stderr, "CPU temperature is %f degrees C\n",systemp);
+	sys_temp = (int) (4096/3.26) * ((systemp/ 100) + 0.5);
+	//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
+	fclose(thermal);
+}
+
+
+int read_temperature_linux() {
+	double value;
+	FILE *thermal;
+	thermal = fopen("/sys/class/hwmon/hwmon0/device/temp","r");
+	
+	 if (thermal) {
+		int res, err = 0;
+		errno = 0;
+		res = fscanf( thermal, "%lf", &value);
+		if ( res == EOF && errno == EIO)
+			err = -SENSORS_ERR_IO;
+		else if ( res != 1)
+			err = -SENSORS_ERR_ACCESS_R;
+		res = fclose( thermal);
+		if ( err)
+			return err;
+
+		if ( res == EOF) {
+			if ( errno == EIO)
+				return -SENSORS_ERR_IO;
+			else
+				return -SENSORS_ERR_ACCESS_R;
+		}
+		value /= get_type_scaling( SENSORS_SUBFEATURE_TEMP_INPUT);
+		sys_temp = (int) (4096/3.26) * ((value/ 100) + 0.5);
+		//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
+	 }
+	 
+	 return 0;
+}
+
+void isRPILinux(void)
+{
+	struct utsname buffer;
+	errno = 0;
+	if (uname(&buffer) < 0) {fprintf(stderr, "Could not find sys info\n"); return;}
+	if (!strncasecmp("Linux", buffer.sysname, 5) & !strncasecmp("raspberrypi", buffer.nodename, 11)) rpiLinux =1;
+}
+#endif
+
+static void *temperature_thread(void *arg) {
+	while(1) {
+		usleep(1000000);
+		//determine temp every 1 sec.
+
+#ifndef _WIN32			
+		if (rpiLinux) read_temperature_raspberryPi(); else read_temperature_linux();
+#else
+		//for windows the temp is set hard to 42 .... todo.
+		sys_temp = (int) (4096/3.26) * ((42/ 100) + 0.5);
+#endif
+	}
+	fprintf(stderr,"timer_thread: exiting\n");
+	return NULL;
+}
+
+void start_temperature_thread() {
+	pthread_t pid1; 
+	pthread_create(&pid1, NULL, temperature_thread, NULL);
+}
+
+
 int main(int argc, char **argv)
 {	
 	printIntroScreen();
+
+#ifndef _WIN32	
+	isRPILinux();
+#endif
 
 	if (load_radioberry_gateware() < 0) {
 		fprintf(stderr,"Radioberry; loading radioberry  \n");
@@ -286,6 +405,8 @@ int main(int argc, char **argv)
     timeout.tv_sec = 0;
     timeout.tv_usec = TIMEOUT_MS;
 	int wtimeout = TIMEOUT_MS;  
+	
+	int optval;
 
 #ifdef _WIN32
 	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char *)&wtimeout,sizeof (int)) < 0)
@@ -293,8 +414,21 @@ int main(int argc, char **argv)
 #else
 	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
 		perror("setsockopt failed\n");
+		
+	optval = 7; // high priority.
+	if (setsockopt(fd, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
+        perror("UDP socket: SO_PRIORITY");
+    }
 #endif
-	
+
+	optval=65535; 
+    if (setsockopt(fd, SOL_SOCKET, SO_SNDBUF, (const char *)&optval, sizeof(optval))<0) {
+      perror("data_socket: SO_SNDBUF");
+    }
+    if (setsockopt(fd, SOL_SOCKET, SO_RCVBUF, (const char *)&optval, sizeof(optval))<0) {
+      perror("data_socket: SO_RCVBUF");
+    }
+
 	/* bind the socket to any valid IP address and a specific port */
 	memset((char *)&myaddr, 0, sizeof(myaddr));
 	myaddr.sin_family = AF_INET;
@@ -318,11 +452,16 @@ int main(int argc, char **argv)
 	int rcvbufsize = 65535;
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVBUF, (const char *)&rcvbufsize, sizeof(int));
-	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (const char *)&wtimeout, sizeof(wtimeout)); //added
+#ifdef _WIN32
+	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO, (const char *)&wtimeout, sizeof(wtimeout)) < 0)
+		perror("setsockopt failed\n");
+#else
+	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_RCVTIMEO,(char*)&timeout,sizeof(timeout)) < 0)
+		perror("setsockopt failed\n");		
+#endif
 	setsockopt(sock_TCP_Server, SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof(yes));
 	
 #ifndef _WIN32
-	int optval = 7; // high priority.
 	if (setsockopt(sock_TCP_Server, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval))<0) {
         perror("sock_TCP_Server socket: SO_PRIORITY");
     }
@@ -352,6 +491,8 @@ int main(int argc, char **argv)
 #endif
 
 	start_rb_register_thread();
+	
+	start_temperature_thread();
 	
 	signal(SIGINT, handle_sigint);
 	
