@@ -414,7 +414,7 @@ void fillPacketToSend() {
 				//NR must be read from gateware.
 				for (int r = 0; r < MIN(lnrx, NR); r++) {	
 					memcpy(hpsdrdata + index + (r * 6), rx_buffer + rb_sample, 6);
-					rb_sample+=6;						
+					rb_sample+=6;
 				}
 			}
 			// inform the SDR about the radioberry control status.

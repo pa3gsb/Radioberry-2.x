@@ -143,8 +143,7 @@ int rxStream(int nrx, unsigned char stream[]){
 
 void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 	uint32_t value = 0;
-	
-	int k = 3;
+		
 	int i = 0;	
 	for (i = 0; i < 6 ; i++) {
 		
@@ -155,15 +154,14 @@ void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
 			*rpi_set_io_low = (1<<RPI_RX_CLK);
 			value = *rpi_read_io;
 		}
-		if (i==3) k=-3; // IQ swap.
-		iqdata[k+i] =  (((value >> 23) & 1) << 7);
-		iqdata[k+i] |=  (((value >> 20) & 1) << 6);
-		iqdata[k+i] |=  (((value >> 19) & 1) << 5);
-		iqdata[k+i] |=  (((value >> 18) & 1) << 4);
-		iqdata[k+i] |=  (((value >> 16) & 1) << 3);
-		iqdata[k+i] |=  (((value >> 13) & 1) << 2);
-		iqdata[k+i] |=  (((value >> 12) & 1) << 1);
-		iqdata[k+i] |=  (((value >> 5) & 1));						
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i] |=  (((value >> 5) & 1));						
 	}		
 }
 

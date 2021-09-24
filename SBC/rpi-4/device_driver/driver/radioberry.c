@@ -62,7 +62,7 @@ static struct mutex spi_mutex;
 #include "radioberry_gateware.h"
 #include "radioberry_firmware.h"
 
-#define VERSION "0.91"
+#define VERSION "0.92"
 
 static DEFINE_MUTEX(radioberry_mutex); 
 static wait_queue_head_t rx_sample_queue;
@@ -206,7 +206,7 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			rb_info_ret.minor = data[5];
 			
 			rb_info_ret.fpga = data[3] & 0x03; 
-			rb_info_ret.version = 0.91; 
+			rb_info_ret.version = 0.92; 
 			
 			if (copy_to_user((struct rb_info_arg_t *)arg, &rb_info_ret, sizeof(struct rb_info_arg_t))) return -EACCES;
 	
