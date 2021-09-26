@@ -14,7 +14,7 @@ struct rb_info_arg_t
 	
 	int fpga;
 	
-	float version;
+	int version;
 	
 	int rb_command;
 	int command;

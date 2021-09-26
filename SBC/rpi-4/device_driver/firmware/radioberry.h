@@ -26,7 +26,7 @@
 #include <netinet/tcp.h>
 
 
-#define FIRMWAREVERSION "2021.09.10"
+#define FIRMWAREVERSION "2021.09.26"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
@@ -110,7 +110,7 @@ int use_tx  = 0;
 int gateware_major_version = 0;
 int gateware_minor_version = 0;
 int gateware_fpga_type = 0;
-float driver_version = 0.0;
+int driver_version = 0.0;
 
 char CWX = 0;
 char MOX = 0;
