@@ -117,7 +117,7 @@ class SoapyRadioberry : public SoapySDR::Device{
 
 		void setGain( const int direction, const size_t channel, const double value );
 
-		SoapySDR::Range getGainRange( const int direction, const size_t channel, const std::string &name ) const;
+		SoapySDR::Range getGainRange( const int direction, const size_t channel) const;
 
 
 		void controlRadioberry(uint32_t command, uint32_t command_data);
