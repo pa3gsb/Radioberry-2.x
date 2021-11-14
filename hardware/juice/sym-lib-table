@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name hermeslite)(type Legacy)(uri ${KIPRJMOD}/libs/hermeslite.lib)(options "")(descr ""))
   (lib (name Radioberry)(type Legacy)(uri ${KIPRJMOD}/libs/Radioberry.lib)(options "")(descr ""))
+  (lib (name LMZ22005TZ_NOPB)(type Legacy)(uri ${KIPRJMOD}/libs/LMZ22005TZ_NOPB/LMZ22005TZ_NOPB.lib)(options "")(descr ""))
 )

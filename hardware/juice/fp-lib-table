@@ -3,4 +3,5 @@
   (lib (name rb-kicad)(type KiCad)(uri ${KIPRJMOD}/libs/rb-kicad.pretty)(options "")(descr ""))
   (lib (name USB-C-Power-tester)(type KiCad)(uri ${KIPRJMOD}/libs/USB-C-Power-tester.pretty)(options "")(descr ""))
   (lib (name SamacSys_Parts)(type KiCad)(uri ${KIPRJMOD}/libs/SamacSys_Parts.pretty)(options "")(descr ""))
+  (lib (name CONV_LMZ22005TZ)(type KiCad)(uri ${KIPRJMOD}/libs/LMZ22005TZ_NOPB/CONV_LMZ22005TZ)(options "")(descr ""))
 )
