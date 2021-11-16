@@ -18,6 +18,15 @@
 	"sub":1
 	},
 	
+"C 100nF 0805": {
+	"mpn":["C0805C104M5RACTU"],
+	"spec":"0.1uF 0805>=X5R>=50V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":15331,
+	"sub":1
+	},
+	
 "C 1nF 0603": {
 	"mpn":["C0603C102M5RACTU"],
 	"spec":"1nF 0603>=X5R>=50V<=20%",
@@ -55,8 +64,8 @@
 	},
 
 "C 10uF 0603": {
-	"mpn":["GRM188R60J106KE47D","GRM188R60J106ME47D"],
-	"spec":"10uF 0603>=X5R>=6.3V<=20%",
+	"mpn":["ZRB18AR61E106ME01L"],
+	"spec":"10uF 0603>=X5R>=25V<=20%",
 	"assembly":"SMT",
 	"pins":2,
 	"ecid":20411,
@@ -64,8 +73,8 @@
 	},
 
 "C 10uF 0805": {
-	"mpn":["GRM21BR60J106ME19L"],
-	"spec":"10uF 0805>=X5R>=6.3V<=20%",
+	"mpn":["GRT21BC71E106KE13L"],
+	"spec":"10uF 0805>=X5R>=25V<=20%",
 	"assembly":"SMT",
 	"pins":2,
 	"ecid":16532,
@@ -107,6 +116,24 @@
 	"ecid":14236,
 	"sub":1
 	},
+	
+"C 0.47uF 0805": {
+	"mpn":["GCM21BR71H474KA55K"],
+	"spec":"0.47uF 0805>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2131,
+	"sub":1
+	},
+	
+"C 47uF": {
+	"mpn":["T495X476K035ATE300"],
+	"spec":"47uF 7343>=X5R>=25V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2131,
+	"sub":1
+	},
 
 "C 4.7uF 0805 HV": {
 	"mpn":["GRM21BR61E475KA12L"],
@@ -122,6 +149,15 @@
 	"spec":"100uF 1206>=X5R>=6.3V<=20%",
 	"assembly":"SMT",
 	"pins":2,
+	"sub":1
+	},
+	
+"C 100uF 0805": {
+	"mpn":["GRM21BR71A106KA73K"],
+	"spec":"100uF 0805>=X5R>=10V<=20%",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":2131,
 	"sub":1
 	},
 
@@ -623,6 +659,14 @@
 	"pins":2,
 	"ecid":18201
 	},
+	
+"R 620 0603": {
+	"mpn":["RC0603FR-07620RL"],
+	"spec":"620 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23514
+	},
 
 "R 120 0603": {
 	"mpn":["RC0603FR-07120RL"],
@@ -677,6 +721,14 @@
 	"assembly":"SMT",
 	"pins":2,
 	"ecid":4682
+	},
+	
+"R 47 0603": {
+	"mpn":["RC0603FR-0747RL"],
+	"spec":"47 0603<=1%>=1/10W",
+	"assembly":"SMT",
+	"pins":2,
+	"ecid":23867
 	},
 
 "R 33 0603": {
@@ -1367,6 +1419,12 @@
 	"pins":2
 	},
 
+"LMZ22005TZ": {
+	"mpn":["LMZ22005TZ"],
+	"spec":"5A SIMPLE SWITCHER",
+	"assembly":"SMT",
+	"pins":8	
+	},
 
 "RF SMA": {
 	"mpn":["5-1814832-1"],

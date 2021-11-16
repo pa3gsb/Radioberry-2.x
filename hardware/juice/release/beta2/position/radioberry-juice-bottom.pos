@@ -1,0 +1,10 @@
+### Module positions - created on 11/16/21 20:33:27 ###
+### Printed by Pcbnew version kicad (5.1.8)-1
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val       Package                    PosX       PosY       Rot  Side
+C22       1nF       C_0603_HandSoldering   121.2500   -91.5500   90.0000  bottom
+C35       10uF      C_0805_HandSoldering    94.1500   -80.9000  180.0000  bottom
+J3        JNO       SMD-0603               111.5500  -118.6000  270.0000  bottom
+J4        JNO       SMD-0603               109.2500  -118.7000  270.0000  bottom
+## End

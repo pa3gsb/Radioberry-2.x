@@ -1,3 +1,6 @@
-\noindent \textbf{Line Items:} SMT:28 Assembled TH:3\\
-\textbf{Parts:} SMT:65 Assembled TH:3\\
-\textbf{Pins:} SMT:203 Assembled TH:58\\
+\noindent \textbf{Line Items:} SMT:34 Assembled TH:3\\
+\textbf{Parts:} SMT:74 Assembled TH:3\\
+\textbf{Pins:} SMT:225 Assembled TH:58\\
+\textbf{{Do Not Assemble:}}
+DB1 J1 J3 J4 R16 R17
+\\
