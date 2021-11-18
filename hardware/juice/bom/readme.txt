@@ -37,3 +37,5 @@ generateds dat files..
 C:\Python27\python mkstandardbom.py
 
 upload bom.tex and the dat files -> compile -> nice price bom pdf.
+
+C:\Python27\python mkassemblycsv.py
