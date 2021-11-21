@@ -19,7 +19,8 @@
   & 40 Positions Header Connector (2.54mm) & \href{http://www.octopart.com/search?q=67996-440HLF}{67996-440HLF} & Y & J5 & 2x20 & 40 & 1 \\ \hline
   & MOSFET P-CH 30V & \href{http://www.octopart.com/search?q=DMP3099L-7}{DMP3099L-7} & N & Q1 & SOT-23-3 & 3 & 1 \\ \hline
 23514 & 620 0603$\leq$1\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-07620RL}{RC0603FR-07620RL} & Y & R1 & 0603 & 2 & 1 \\ \hline
-21904 & 1K 0603$\leq$5\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-071KL}{RC0603FR-071KL} & Y & R2,R3,R20 & 0603 & 2 & 3 \\ \hline
+21904 & 1.5K 0603$\leq$5\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-071K5L}{RC0603FR-071K5L} & Y & R2 & 0603 & 2 & 1 \\ \hline
+21904 & 1K 0603$\leq$5\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-071KL}{RC0603FR-071KL} & Y & R3,R20 & 0603 & 2 & 2 \\ \hline
 23688 & 5.1K 0603$\leq$1\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-075K1L}{RC0603FR-075K1L} & Y & R4,R5 & 0603 & 2 & 2 \\ \hline
 23688 & 10R 0603$\leq$1\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-0710RL}{RC0603FR-0710RL} & Y & R6,R7 & 0603 & 2 & 2 \\ \hline
 23688 & 12K 0603$\leq$1\%$\geq$1/10W & \href{http://www.octopart.com/search?q=RC0603FR-0712KL}{RC0603FR-0712KL} & Y & R8 & 0603 & 2 & 1 \\ \hline

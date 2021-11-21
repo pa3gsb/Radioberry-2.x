@@ -72,7 +72,7 @@ Reference, Value, Footprint, Datasheet, Key, Option, MANUFACTURER, MAXIMUM_PACKA
 "J3","JNO","hermeslite:SMD-0603","","","DNI","","","",""
 "J4","JNO","hermeslite:SMD-0603","","","DNI","","","",""
 "VR1","LMZ22005TZ_NOPB","CONV_LMZ22005TZ:NOPB","","LMZ22005TZ","","Texas Instruments","4.67mm","J","Manufacturer recommendations"
-"R2","1K","Resistors_SMD:R_0603_HandSoldering","~"
+"R2","1.5K","Resistors_SMD:R_0603_HandSoldering","~"
 "R1","620","Resistors_SMD:R_0603_HandSoldering","~"
 "R21","3.3K","Resistors_SMD:R_0603_HandSoldering","~"
 "C2","100nF","Capacitors_SMD:C_0805_HandSoldering","~"

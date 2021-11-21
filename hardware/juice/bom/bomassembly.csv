@@ -27,7 +27,8 @@ C32,C34", "0603", 2, 12, "=HYPERLINK("http://www.octopart.com/search?q=C0603C104
  , "40 Positions Header Connector (2.54mm)", "67996-440HLF", Y, "J5", "2x20", 40, 1, "=HYPERLINK("http://www.octopart.com/search?q=67996-440HLF")"
  , "MOSFET P-CH 30V", "DMP3099L-7", N, "Q1", "SOT-23-3", 3, 1, "=HYPERLINK("http://www.octopart.com/search?q=DMP3099L-7")"
 23514, "620 0603<=1%>=1/10W", "RC0603FR-07620RL", Y, "R1", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-07620RL")"
-21904, "1K 0603<=5%>=1/10W", "RC0603FR-071KL", Y, "R2,R3,R20", "0603", 2, 3, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-071KL")"
+21904, "1.5K 0603<=5%>=1/10W", "RC0603FR-071K5L", Y, "R2", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-071K5L")"
+21904, "1K 0603<=5%>=1/10W", "RC0603FR-071KL", Y, "R3,R20", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-071KL")"
 23688, "5.1K 0603<=1%>=1/10W", "RC0603FR-075K1L", Y, "R4,R5", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-075K1L")"
 23688, "10R 0603<=1%>=1/10W", "RC0603FR-0710RL", Y, "R6,R7", "0603", 2, 2, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0710RL")"
 23688, "12K 0603<=1%>=1/10W", "RC0603FR-0712KL", Y, "R8", "0603", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=RC0603FR-0712KL")"
@@ -45,7 +46,7 @@ C32,C34", "0603", 2, 12, "=HYPERLINK("http://www.octopart.com/search?q=C0603C104
  , "5A SIMPLE SWITCHER", "LMZ22005TZ", Y, "VR1", "Custom", 8, 1, "=HYPERLINK("http://www.octopart.com/search?q=LMZ22005TZ")"
  , "Crystal 12 MHz.", "ABM7-12.000MHZ-D2Y-T", Y, "Y1", "6.00mm x 3.50mm", 2, 1, "=HYPERLINK("http://www.octopart.com/search?q=ABM7-12.000MHZ-D2Y-T")"
 
-"Line Items SMT:", " ", 36, "Line Items TH:", " ", 4
+"Line Items SMT:", " ", 37, "Line Items TH:", " ", 4
 "Parts SMT:", " ", 78, "Parts TH:", " ", 4
 "Pins SMT:", " ", 233, "Pins TH:", " ", 68
 

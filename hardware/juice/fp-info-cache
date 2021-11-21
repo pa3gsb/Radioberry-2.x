@@ -1,4 +1,4 @@
-375639289915716
+375676789096716
 Air_Coils_SML_NEOSID
 Neosid_Air-Coil_SML_1turn_HDM0131A
 
@@ -52832,20 +52832,22 @@ rb-kicad
 V-REG_SOT223
 <b>Small Outline Transistor 223</b><p>
 PLASTIC PACKAGE CASE 318E-04<br>
-0
-0
+Source: http://www.onsemi.co.jp .. LM137M-D.PDF
+
 0
 4
 4
 rb-kicad
 rb-bmp
-0
-0
+
+
 0
 0
 0
 rb-kicad
 rpi-logo
+
+
 0
 0
 0

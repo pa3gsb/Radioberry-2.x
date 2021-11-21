@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\dev\git\Radioberry-2.x\hardware\juice\radioberry-juice.sch)
-    (date "16-11-2021 19:47:05")
+    (date "21-11-2021 11:52:32")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -543,7 +543,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 616897A6))
     (comp (ref R2)
-      (value 1K)
+      (value 1.5K)
       (footprint Resistors_SMD:R_0603_HandSoldering)
       (datasheet ~)
       (libsource (lib Device) (part R_Small) (description "Resistor, small symbol"))
