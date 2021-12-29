@@ -1,6 +1,9 @@
 
 #include "bias.h"
 
+int fd_i2c_bias;
+int i2c_bias_handler;
+
 
 void init_I2C_bias() {
 	

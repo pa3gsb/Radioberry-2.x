@@ -1,6 +1,10 @@
 
 #include "measure.h"
 
+int i2c_measure_module_active;
+int fd_i2c_measure;
+int i2c_measure_handler;
+
 int config_I2C_measure(){
 	
 	uint8_t measure_config[1];

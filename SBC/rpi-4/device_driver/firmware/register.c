@@ -1,5 +1,12 @@
 #include "register.h"
 
+char macaddress[24];
+char* radiocall; 
+char* radiolocator;
+char gatewareversion[16];
+char driverversion[16];
+char firmwareversion[16]; 
+char fpgatype[16];
 
 #define SA      struct sockaddr
 #define MAXLINE 4096

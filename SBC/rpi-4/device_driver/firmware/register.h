@@ -21,13 +21,13 @@ struct _PROPERTY {
 	PROPERTY* next_property;
 };
 
-char macaddress[24];
-char* radiocall; 
-char* radiolocator;
-char gatewareversion[16];
-char driverversion[16];
-char firmwareversion[16]; 
-char fpgatype[16];
+extern char macaddress[24];
+extern char* radiocall; 
+extern char* radiolocator;
+extern char gatewareversion[16];
+extern char driverversion[16];
+extern char firmwareversion[16]; 
+extern char fpgatype[16];
 
 int getMacAddress(void);
 void loadProperties(char* filename);

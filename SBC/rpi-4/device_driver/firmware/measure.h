@@ -27,10 +27,10 @@
 #define ADDR_MEAS 0x34
 
 
-int i2c_measure_module_active;
+extern int i2c_measure_module_active;
 
-int fd_i2c_measure;
-int i2c_measure_handler;
+extern int fd_i2c_measure;
+extern int i2c_measure_handler;
 
 void openI2C_measure(void);
 void read_I2C_measure(int *current, int *temperature);
