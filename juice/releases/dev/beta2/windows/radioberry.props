@@ -1,0 +1,4 @@
+#Replace CALL by your call
+call=CALL
+#Replace LOC by your locator
+locator=LOC

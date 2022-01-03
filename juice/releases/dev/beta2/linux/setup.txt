@@ -1,0 +1,121 @@
+Improve the story for linux.
+
+setting up the ftdi driver.
+
+(not described : use the make file and build the firmware)
+
+
+pi@raspberrypi:~ $ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 0403:6010 Future Technology Devices International, Ltd FT2232C/D/H Dual UART/FIFO IC
+Bus 001 Device 003: ID 062a:0001 MosArt Semiconductor Corp. Notebook Optical Mouse
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+pi@raspberrypi:~ $ 
+
+lsmod |grep ftdi
+ftdi_sio               45056  0
+usbserial              36864  1 ftdi_sio
+
+
+pi@raspberrypi:/etc/udev/rules.d $ ls -altr
+total 16
+-rw-r--r-- 1 root root 1917 Oct 26 17:48 99-com.rules
+drwxr-xr-x 4 root root 4096 Feb 24 19:15 ..
+-rw-r--r-- 1 root root  134 Apr 26 09:16 99-ftdi-sio.rules
+drwxr-xr-x 2 root root 4096 Apr 26 09:16 .
+pi@raspberrypi:/etc/udev/rules.d $ 
+
+
+aanmaken 99-ftdisio.rules file met content:
+
+ACTION=="add", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666",  RUN+="/bin/sh -c 'rmmod ftdi_sio && rmmod usbserial'"
+
+
+this rule remove the ftdisio module  which is a must have on a rpi when using ft2dxx lib.
+
+
+when the ftdi_sio module is controlling an FTDI device it is not available to
+libftd2xx.  If the library attempts to access the device it will receive a
+message "FT_Open failed". 
+
+Details:  https://www.ftdichip.com/Drivers/D2XX/Linux/ReadMe.txt
+
+Installing the D2XX shared library and static library.
+------------------------------------------------------
+
+1.  tar xfvz libftd2xx-arm-v8-1.4.18.tgz
+
+This unpacks the archive, creating the following directory structure:
+
+    build
+        libftd2xx        (re-linkable objects)
+        libusb           (re-linkable objects)
+        libftd2xx.a      (static library)
+        libftd2xx.so.1.4.18   (dynamic library)
+        libftd2xx.txt    (platform-specific information)
+    examples
+    libusb               (source code)
+    ftd2xx.h
+    WinTypes.h
+
+2.  cd build
+
+3.  sudo -s 
+  or, if sudo is not available on your system: 
+    su
+
+Promotes you to super-user, with installation privileges.  If you're
+already root, then step 3 (and step 7) is not necessary.
+
+4.  cp libftd2xx.* /usr/local/lib
+
+Copies the libraries to a central location.
+
+5.  chmod 0755 /usr/local/lib/libftd2xx.so.1.4.18
+
+Allows non-root access to the shared object.
+
+6.  ln -sf /usr/local/lib/libftd2xx.so.1.4.18 /usr/local/lib/libftd2xx.so
+
+Creates a symbolic link to the 1.4.18 version of the shared object.
+
+7.  exit
+
+Ends your super-user session.
+
+
+
+
+
+
+
+
+
+
+https://stackoverflow.com/questions/3946813/how-can-i-bind-a-driver-with-a-usb-device/3947392#3947392
+
+
+ /etc/udev/rules.d
+ 
+SYSFS{idVendor}=="15c2", SYSFS{idProduct}=="0043", MODE="0666", PROGRAM="/bin/sh -c 'echo -n $id:1.0 >/sys/bus/usb/drivers/usbhid/unbind;\
+echo -n $id:1.1 >/sys/bus/usb/drivers/usbhid/unbind'"
+
+
+more details:
+
+https://lwn.net/Articles/143397/
+
+
+
+Volgende werkt:
+
+sudo tree /sys/bus/usb/drivers/ftdi_sio
+
+
+sudo -s
+
+
+echo -n "1-1.1:1.0" > /sys/bus/usb/drivers/ftdi_sio/unbind
+
+vervolgens mijn app starten en dan doet ie het....
