@@ -109,8 +109,6 @@ SoapySDR::Stream *SoapyRadioberry::setupStream(
 	{
 		SoapySDR_log(SOAPY_SDR_INFO, "Using format CS16.");
 		streamFormat = RADIOBERRY_SDR_CS16;
-		m_count = 0;
-		printf("sleep %d\n", m_sleep);
 	}
 	else
 	{
@@ -211,20 +209,6 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			tx.i16TxBuffer[0] = (int16_t)(target_buffer[iq++] * 16384.0f);
 			tx.i16TxBuffer[1] = (int16_t)(target_buffer[iq++] * 16384.0f);
 			ret = write(fd_rb, &tx, 4 * sizeof(uint8_t));
-			m_count++;
-			if (ret == 0)
-			{
-				auto now = std::chrono::high_resolution_clock::now();
-				std::chrono::duration<double> timePassed = now - startTime;
-				
-				printf("Time passed %4.2f radioberry buffer full count %d", timePassed.count(), m_count);
-				fflush(NULL);
-			}
-			if(m_count > m_highwater)
-			{
-				m_count =  m_lowwater;
-				usleep(m_sleep); 
-			}
 		}
 	}
 	if (streamFormat == RADIOBERRY_SDR_CS16)
@@ -243,20 +227,6 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 				
 			ret = write(fd_rb, &tx, sizeof(uint32_t));	
 			j += 2;
-			m_count++;
-			// Measure the time until a high watermark apears
-			if ((m_count > m_highwater) || (ret == 0))
-			{
-				auto now = std::chrono::high_resolution_clock::now();
-				//auto timePassed = std::chrono::duration_cast<std::chrono::microseconds>(now - startTime);
-				std::chrono::duration<double> timePassed = now - startTime;
-				//printf("Time passed %4.2f micro seconds\n", timePassed.count() * 1000000.0);
-				m_count =  m_lowwater;
-				startTime = std::chrono::high_resolution_clock::now();
-				// Time to sleep is 1/3 of buffer times 50 uSec
-				
-				usleep(m_sleep);   // (1/48K about 20usec /sample * difference between high and low water mark)
-			}
 		}
 	}
 	return numElems;
