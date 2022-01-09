@@ -152,11 +152,12 @@ void handleN2ADRFilterBoard(char* buffer)
 void handleALEX(char* buffer)
 {
 	
-	if (i2c_alex & (buffer[523] & 0xFE) == 0x12) {
+	if (i2c_alex & ((buffer[523] & 0xFE) == 0x12) || ((buffer[11] & 0xFE) == 0x12)) {
 
-		alex_manual = ((buffer[525] & 0x40) == 0x40) ? 1 : 0;
-		if (alex_manual) {
+		if (((buffer[525] & 0x40) == 0x40) ? 1 : 0) {
 			i2c_alex_data = ((buffer[526] & 0x8F) << 8) | (buffer[527] & 0xFF);
+		} else if ((((buffer[13] & 0x40) == 0x40) ? 1 : 0)) {
+			i2c_alex_data = ((buffer[14] & 0x8F) << 8) | (buffer[15] & 0xFF);
 		}
 		else {
 			//firmware does determine the filter.
@@ -205,13 +206,6 @@ void handleALEX(char* buffer)
 //************************************************************************************************************************************
 void handleFiltersBoard(char* buffer, int cw)
 {
-	if ((buffer[11] & 0xFE) == 0x04) {
-		currentfreq = determine_freq(11, buffer);
-	};
-	if ((buffer[523] & 0xFE) == 0x04) {
-		currentfreq = determine_freq(523, buffer);
-	};
-	
     //***********************************************
     //      Send Band Selected Alex board Style
     //***********************************************
@@ -316,6 +310,14 @@ int determine_freq(int base_index, char* buffer) {
 //  Determine which board to forward data - Alex or Generic
 //**********************************************************
 void handleFilters(char* buffer, int cw) {
+	
+	if ((buffer[11] & 0xFE) == 0x04) {
+		currentfreq = determine_freq(11, buffer);
+	};
+	if ((buffer[523] & 0xFE) == 0x04) {
+		currentfreq = determine_freq(523, buffer);
+	};
+	
 	if (i2c_alex) {
 		handleALEX(buffer);
 	}
