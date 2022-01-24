@@ -78,7 +78,7 @@ int initRadioberry() {
 	sem_init(&spi_msg, 0, 0);
 	sem_init(&i2c_meas, 0, 0);
 
-	gettimeofday(&t20, 0);	
+	gettimeofday(&t20, 0);
 
 	memset(commands,0,256); // initialise the commands.	
 	
@@ -87,13 +87,23 @@ int initRadioberry() {
 		exit(-1);
 	}
 	
-	rb_info.command_data = 0x0;
+	int init = 0;
+	do { 
 	
-	//required to retrieve gateware information.
-	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
-		fprintf(stderr, "RADIOBERRY_IOC_COMMAND Error.");
-		exit(-1);		
-	} 
+		rb_info.command_data = 0x0;
+	
+		//required to retrieve gateware information.
+		if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
+			fprintf(stderr, "RADIOBERRY_IOC_COMMAND Error.");
+			exit(-1);		
+		} 
+		
+		if (rb_info.major == 0) sleep(1);
+		
+		init++;
+		
+	}  while (rb_info.major == 0 && init < 10);
+		
 	gateware_major_version = rb_info.major;
 	gateware_minor_version = rb_info.minor;
 	
@@ -457,6 +467,8 @@ void send_control(unsigned char command) {
 	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_info) == -1) {
 		fprintf(stderr, "Could not sent commando to radioberry device.");
 	}
+	
+	//fprintf(stderr, "RB Gateware control = %02X \n", rb_info.rb_command);
 	
 	rb_control = rb_info.rb_command;
 }
