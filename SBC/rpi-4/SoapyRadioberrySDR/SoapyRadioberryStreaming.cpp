@@ -207,7 +207,7 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			int16_t		di, dq;
 		
 			tx.i16TxBuffer[0] = (int16_t)(target_buffer[iq++] * 16384.0f);
-			tx.i16TxBuffer[1] = (int16_t)(target_buffer[iq++] * 16384.0f);
+			tx.i16TxBuffer[1] = (int16_t)(target_buffer[iq++] * -16384.0f);
 			ret = write(fd_rb, &tx, 4 * sizeof(uint8_t));
 		}
 	}
