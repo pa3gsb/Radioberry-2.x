@@ -207,7 +207,7 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			int16_t		di, dq;
 		
 			tx.i16TxBuffer[0] = (int16_t)(target_buffer[iq++] * 16384.0f);
-			tx.i16TxBuffer[1] = (int16_t)(target_buffer[iq++] * 16384.0f);
+			tx.i16TxBuffer[1] = (int16_t)(target_buffer[iq++] * -16384.0f);
 			ret = write(fd_rb, &tx, 4 * sizeof(uint8_t));
 		}
 	}
@@ -222,8 +222,8 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			
 			tx.i8TxBuffer[0] = (unsigned char)((itarget_buffer[j] & 0xff00) >> 8);
 			tx.i8TxBuffer[1] = (unsigned char)(itarget_buffer[j] & 0xff);
-			tx.i8TxBuffer[2] = (unsigned char)((itarget_buffer[j + 1] & 0xff00) >> 8);
-			tx.i8TxBuffer[3] = (unsigned char)(itarget_buffer[j + 1] & 0xff); 
+			tx.i8TxBuffer[2] = (unsigned char)(((-1 * itarget_buffer[j + 1]) & 0xff00) >> 8);
+			tx.i8TxBuffer[3] = (unsigned char)(( -1 * itarget_buffer[j + 1]) & 0xff); 
 				
 			ret = write(fd_rb, &tx, sizeof(uint32_t));	
 			j += 2;
