@@ -130,8 +130,7 @@ void getStreamAndSendPacket() {
 	
 	//check temperature from gateware.
 	if ( (((hpsdrdata[11] & 0x08) == 0x08) | ((hpsdrdata[523] & 0x08) == 0x08)) && 
-		 (hpsdrdata[12] == 0x0F | hpsdrdata[524] == 0x0F) && 
-		 (hpsdrdata[13] == 0xFF | hpsdrdata[525] == 0xFF )){
+		 (hpsdrdata[12] == 0x0F | hpsdrdata[524] == 0x0F) ){
 
 			hpsdrdata[12] =  ((sys_temp >> 8) & 0xFF); hpsdrdata[13] = (sys_temp & 0xFF); 
 			hpsdrdata[524] = ((sys_temp >> 8) & 0xFF); hpsdrdata[525] =(sys_temp & 0xFF);
@@ -141,8 +140,7 @@ void getStreamAndSendPacket() {
 	}
 	//check current from gateware. 
 	if ( (((hpsdrdata[11] & 0x10) == 0x10) | ((hpsdrdata[523] & 0x10) == 0x10)) && 
-		 (hpsdrdata[14] == 0x0F | hpsdrdata[526] == 0x0F) && 
-		 (hpsdrdata[15] == 0xFF | hpsdrdata[527] == 0xFF )){
+		 (hpsdrdata[14] == 0x0F | hpsdrdata[526] == 0x0F) ){
 		// todo
 		// i2c module or 0.
 		hpsdrdata[14] = 0x00; hpsdrdata[15] = 0x00; 
@@ -295,7 +293,7 @@ void read_temperature_raspberryPi() {
 	fscanf(thermal,"%f",&millideg);
 	systemp = millideg / 1000;
 	//fprintf(stderr, "CPU temperature is %f degrees C\n",systemp);
-	sys_temp = (int) (4096/3.26) * ((systemp/ 100) + 0.5);
+	sys_temp = (int) (4096/3.26) * ((systemp/ 100.0) + 0.5);
 	//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
 	fclose(thermal);
 }
@@ -325,7 +323,7 @@ int read_temperature_linux() {
 				return -SENSORS_ERR_ACCESS_R;
 		}
 		value /= get_type_scaling( SENSORS_SUBFEATURE_TEMP_INPUT);
-		sys_temp = (int) (4096/3.26) * ((value/ 100) + 0.5);
+		sys_temp = (int) (4096/3.26) * ((value/ 100.0) + 0.5);
 		//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
 	 }
 	 
@@ -350,7 +348,8 @@ static void *temperature_thread(void *arg) {
 		if (rpiLinux) read_temperature_raspberryPi(); else read_temperature_linux();
 #else
 		//for windows the temp is set hard to 42 .... todo.
-		sys_temp = (int) (4096/3.26) * ((42/ 100) + 0.5);
+		sys_temp = (int) (4096.0/3.26) * ((42/ 100.0) + 0.5);
+		//fprintf(stderr, "Win CPU temperature in protocol has value %d\n",sys_temp);
 #endif
 	}
 	fprintf(stderr,"timer_thread: exiting\n");
