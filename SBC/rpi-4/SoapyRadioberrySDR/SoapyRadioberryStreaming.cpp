@@ -130,8 +130,6 @@ int SoapyRadioberry::readStream(
 {
 	int i;
 	int iq = 0;
-	int16_t left_sample;
-	int16_t right_sample;
 	int nr_samples;
 	 
 	void *buff_base = buffs[0];
@@ -145,33 +143,39 @@ int SoapyRadioberry::readStream(
 		//printf("nr_samples %d sample: %d %d %d %d %d %d\n",nr_samples, (int)rx_buffer[0],(int)rx_buffer[1],(int)rx_buffer[2],(int)rx_buffer[3],(int)rx_buffer[4],(int)rx_buffer[5]);
 		if(streamFormat == RADIOBERRY_SDR_CF32)
 		{
-			for (i = 0; i < nr_samples; i += 6) {
-				left_sample   = (int)((signed char) rx_buffer[i]) << 16;
-				left_sample  |= (int)((((unsigned char)rx_buffer[i + 1]) << 8) & 0xFF00);
-				left_sample  |= (int)((unsigned char)rx_buffer[i + 2] & 0xFF);
-				right_sample  = (int)((signed char)rx_buffer[i + 3]) << 16;
-				right_sample |= (int)((((unsigned char)rx_buffer[i + 4]) << 8) & 0xFF00);
-				right_sample |= (int)((unsigned char)rx_buffer[i + 5] & 0xFF);
-				right_sample =  right_sample * -1;
+			int32_t left_sample;
+			int32_t right_sample;
 			
-				target_buffer[iq++] = (float)left_sample / 2048.0;      // 12 bit sample
-				target_buffer[iq++] = (float)right_sample / 2048.0;      // 12 bit sample
-				//printf("nr_samples %d sample: %d %d \n", nr_samples, left_sample, right_sample);		
+			for (i = 0; i < nr_samples; i += 6) {
+				left_sample = (int32_t)((signed char) rx_buffer[i]) << 16;
+				left_sample |= (int32_t)((((unsigned char)rx_buffer[i + 1]) << 8) & 0xFF00);
+				left_sample |= (int32_t)((unsigned char)rx_buffer[i + 2] & 0xFF);
+				right_sample = (int32_t)((signed char)rx_buffer[i + 3]) << 16;
+				right_sample |= (int32_t)((((unsigned char)rx_buffer[i + 4]) << 8) & 0xFF00);
+				right_sample |= (int32_t)((unsigned char)rx_buffer[i + 5] & 0xFF);
+				right_sample =  right_sample * -1;
+
+				target_buffer[iq++] = (float)left_sample / 8388608.0;      // 24 bit sample
+				target_buffer[iq++] = (float)right_sample / 8388608.0;      // 24 bit sample
 			}
+			//printf("nr_samples %d sample: %d %d \n", nr_samples, left_sample, right_sample);
 		}
 		if (streamFormat == RADIOBERRY_SDR_CS16)
 		{
+			int32_t left_sample;
+			int32_t right_sample;
+			
 			for (i = 0; i < nr_samples; i += 6) {
-				left_sample   = (int16_t)((signed char) rx_buffer[i]) << 16;
-				left_sample  |= (int16_t)((((unsigned char)rx_buffer[i + 1]) << 8) & 0xFF00);
-				left_sample  |= (int16_t)((unsigned char)rx_buffer[i + 2] & 0xFF);
-				right_sample  = (int16_t)((signed char)rx_buffer[i + 3]) << 16;
-				right_sample |= (int16_t)((((unsigned char)rx_buffer[i + 4]) << 8) & 0xFF00);
-				right_sample |= (int16_t)((unsigned char)rx_buffer[i + 5] & 0xFF);
+				left_sample   = (int32_t)((signed char) rx_buffer[i]) << 16;
+				left_sample  |= (int32_t)((((unsigned char)rx_buffer[i + 1]) << 8) & 0xFF00);
+				left_sample  |= (int32_t)((unsigned char)rx_buffer[i + 2] & 0xFF);
+				right_sample  = (int32_t)((signed char)rx_buffer[i + 3]) << 16;
+				right_sample |= (int32_t)((((unsigned char)rx_buffer[i + 4]) << 8) & 0xFF00);
+				right_sample |= (int32_t)((unsigned char)rx_buffer[i + 5] & 0xFF);
 				right_sample =  right_sample * -1;
 			
-				itarget_buffer[iq++] = left_sample << 4;     // 12 bit sample
-				itarget_buffer[iq++] = right_sample << 4;    // 12 bit sample
+				itarget_buffer[iq++] = (int16_t)(left_sample >> 8);     // 16 bit sample
+				itarget_buffer[iq++] = (int16_t)(right_sample >> 8);    // 16 bit sample
 			}
 		}
 	}
@@ -223,7 +227,7 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			tx.i8TxBuffer[0] = (unsigned char)((itarget_buffer[j] & 0xff00) >> 8);
 			tx.i8TxBuffer[1] = (unsigned char)(itarget_buffer[j] & 0xff);
 			tx.i8TxBuffer[2] = (unsigned char)(((-1 * itarget_buffer[j + 1]) & 0xff00) >> 8);
-			tx.i8TxBuffer[3] = (unsigned char)(( -1 * itarget_buffer[j + 1]) & 0xff); 
+			tx.i8TxBuffer[3] = (unsigned char)((-1 * itarget_buffer[j + 1]) & 0xff); 
 				
 			ret = write(fd_rb, &tx, sizeof(uint32_t));	
 			j += 2;
