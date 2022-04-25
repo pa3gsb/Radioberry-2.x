@@ -7,7 +7,8 @@
  **********************************************************************/
  
 SoapyRadioberry::SoapyRadioberry( const SoapySDR::Kwargs &args ){
-	
+
+	SoapySDR_setLogLevel(SOAPY_SDR_ERROR);
 	SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::SoapyRadioberry  constructor called");
 	
 	no_channels = 1;
@@ -33,7 +34,7 @@ SoapyRadioberry::~SoapyRadioberry(void){
 
 void SoapyRadioberry::controlRadioberry(uint32_t command, uint32_t command_data) {
 	
-	SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::controlRadioberry called");
+	//SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::controlRadioberry called");
 	
 	uint32_t CWX =0;
 	uint32_t running = 1;
@@ -41,12 +42,12 @@ void SoapyRadioberry::controlRadioberry(uint32_t command, uint32_t command_data)
 	rb_control.rb_command = 0x04 | (((CWX << 1) & 0x02) | (running & 0x01));
 	rb_control.command = command;
 	rb_control.command_data = command_data;
-	
-	fprintf(stderr, "RB-Command = %02X Command = %02X  command_data = %08X\n", rb_control.rb_command, command, command_data);
+
+	//fprintf(stderr, "RB-Command = %02X Command = %02X  command_data = %08X Mox %d\n", rb_control.rb_command, command >> 1, command_data, command & 0x01);
 	
 	if (ioctl(fd_rb, RADIOBERRY_IOC_COMMAND, &rb_control) == -1) {
 		SoapySDR_log(SOAPY_SDR_INFO, "Could not sent command to radioberry device.");
-	} else SoapySDR_log(SOAPY_SDR_INFO, "Command sent succesfull to radioberry device.");
+	} //else SoapySDR_log(SOAPY_SDR_INFO, "Command sent succesfull to radioberry device.");
 }
 
 std::string SoapyRadioberry::getDriverKey( void ) const
@@ -256,7 +257,7 @@ void SoapyRadioberry::setFrequency( const int direction, const size_t channel,  
 	uint32_t command = 0;
 	
 	if(direction==SOAPY_SDR_RX)	command = 4;
-	if(direction==SOAPY_SDR_TX)	command = 2;
+	if(direction==SOAPY_SDR_TX)	command = 3;
 	
 	uint32_t command_data = (uint32_t) frequency;
 	

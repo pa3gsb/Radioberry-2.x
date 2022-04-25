@@ -5,32 +5,30 @@
 #include <cstdlib>
 #include <chrono>
 #include <iostream>
+#include <unistd.h>
 #include "SoapyRadioberry.hpp"
 
  void SoapyRadioberry::setSampleRate( const int direction, const size_t channel, const double rate ) {
-	SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::setSampleRate called");
+	//SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::setSampleRate called");
 	
 	int irate = floor(rate);
 	uint32_t	ucom =0x00000004;
 	uint32_t	command = 0;
 	 
 	 if (direction == SOAPY_SDR_TX)
-	 {
-		 command = 1;
-		 ucom = 0x00000004; 
-	 }
-	 else
-	 {
-		 if (rate < 48001.0)
-			 ucom = 0x00000004;
-		 if (rate > 48000.0 && rate < 96001.0)
-			 ucom = 0x01000004;
-		 if (rate > 96000.0 && rate < 192001.0)
-			 ucom = 0x02000004;
-		 if (rate > 192000.0)
-			 ucom = 0x03000004;		 
-	 }
-	
+		 command = 0x1;
+	 if (direction == SOAPY_SDR_RX)
+		 sample_rate = rate;
+
+	 // incase of transmit still the receive samplerate need to be send
+	 if (rate < 48001.0)
+		 ucom = 0x00000004;
+	 if (rate > 48000.0 && rate < 96001.0)
+		 ucom = 0x01000004;
+	 if (rate > 96000.0 && rate < 192001.0)
+		 ucom = 0x02000004;
+	 if (rate > 192000.0)
+		 ucom = 0x03000004;
 	 this->SoapyRadioberry::controlRadioberry(command, ucom);
 }
 
@@ -137,6 +135,7 @@ int SoapyRadioberry::readStream(
 	int16_t *itarget_buffer = (int16_t *) buff_base;
 	
 	char rx_buffer[512];
+	//setSampleRate(SOAPY_SDR_RX, 0, sample_rate);
 	for(int ii = 0 ; ii < npackages ; ii++)
 	{
 		nr_samples = read(fd_rb, rx_buffer, sizeof(rx_buffer));
@@ -202,7 +201,8 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 	
 	
 	uTxBuffer	tx;
-	
+
+	//setSampleRate(SOAPY_SDR_TX, 0, sample_rate);
 	if (streamFormat == RADIOBERRY_SDR_CF32)
 	{
 		for (int ii = 0; ii < numElems; ii++)
@@ -219,7 +219,7 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 	{
 		int j = 0;
 	
-		//printf("SoapySDR send %d elements count %d\n", numElems, m_count);
+		//printf("SoapySDR send %d elements \n", numElems);
 		for (int ii = 0; ii < numElems; ii++)
 		{
 			//printf("%x %x %x %x\n", (itarget_buffer[j] & 0xFF00) >> 8, (itarget_buffer[j] & 0x00FF), (itarget_buffer[j+1] & 0xFF00) >> 8, (itarget_buffer[j+1] & 0x00FF));
@@ -229,9 +229,10 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			tx.i8TxBuffer[2] = (unsigned char)(((-1 * itarget_buffer[j + 1]) & 0xff00) >> 8);
 			tx.i8TxBuffer[3] = (unsigned char)((-1 * itarget_buffer[j + 1]) & 0xff); 
 				
-			ret = write(fd_rb, &tx, sizeof(uint32_t));	
+			ret = write(fd_rb, &tx, sizeof(uint32_t));
 			j += 2;
 		}
+		
 	}
 	return numElems;
 }
