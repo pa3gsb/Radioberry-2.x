@@ -8,7 +8,8 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <memory>
-#include <string.h> 
+#include <string.h>
+#include <mutex>
 #include "radioberry_ioctl.h"
 #include "i2c.h"
 
@@ -137,12 +138,13 @@ class SoapyRadioberry : public SoapySDR::Device{
 	
 	private:
 	
-	int		fd_rb;	
-	int		sample_rate;
-	int		rx_frequency;
-	int		no_channels;	
+	int			fd_rb;	
+	double		sample_rate;
+	int			rx_frequency;
+	int			no_channels;	
 	struct rb_info_arg_t rb_control;
 	std::unique_ptr<rpihw::driver::i2c> i2c_ptr;
 	bool							i2c_available = false;
 	radioberrysdrStreamFormat		streamFormat;
+	std::mutex	send_command;
 };
