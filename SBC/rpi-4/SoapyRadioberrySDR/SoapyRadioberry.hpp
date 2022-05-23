@@ -10,6 +10,7 @@
 #include <memory>
 #include <string.h>
 #include <mutex>
+#include <cstring>
 #include "radioberry_ioctl.h"
 #include "i2c.h"
 
