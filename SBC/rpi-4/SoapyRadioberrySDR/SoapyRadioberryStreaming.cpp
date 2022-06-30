@@ -12,13 +12,21 @@
 	SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::setSampleRate called");
 	
 	int irate = floor(rate);
-	uint32_t	ucom =0x00000004;
+	uint32_t	ucom =0x4;
 	uint32_t	command = 0;
 
 	if (direction == SOAPY_SDR_TX)
+	{
 		command = 0x1;
+		if (!mox)
+			return;
+	}
 	if (direction == SOAPY_SDR_RX)
+	{
 		sample_rate = rate;
+		if (mox)
+			command = 1;
+	}
 
 	// incase of transmit still the receive samplerate need to be send
 	if (sample_rate < 48001.0)
@@ -99,14 +107,18 @@ SoapySDR::Stream *SoapyRadioberry::setupStream(
 	SoapySDR_log(SOAPY_SDR_INFO, "SoapyRadioberry::setupStream called");
 	startTime = std::chrono::high_resolution_clock::now();
 	//check the format
+	sdr_stream *ptr;
+	ptr = new sdr_stream(direction);
+
 	if (format == SOAPY_SDR_CF32) {
 		SoapySDR_log(SOAPY_SDR_INFO, "Using format CF32.");
-		streamFormat = RADIOBERRY_SDR_CF32;
+		ptr->set_stream_format(RADIOBERRY_SDR_CF32);
 	}
 	else if(format == SOAPY_SDR_CS16 && direction == SOAPY_SDR_TX)
 	{
 		SoapySDR_log(SOAPY_SDR_INFO, "Using format CS16.");
-		streamFormat = RADIOBERRY_SDR_CS16;
+		ptr->set_stream_format(RADIOBERRY_SDR_CS16);
+		mox = true;
 	}
 	else
 	{
@@ -114,8 +126,27 @@ SoapySDR::Stream *SoapyRadioberry::setupStream(
 			"setupStream invalid format '" + format + "' -- Only CF32 is supported by SoapyRadioberrySDR module.");
 	}
 
-	return (SoapySDR::Stream *) this;
+	streams.push_back(ptr);
+	return (SoapySDR::Stream *)ptr;
+}
 
+void SoapyRadioberry::closeStream(SoapySDR::Stream *stream)
+{
+	int i = 0;
+	for (auto con : streams)
+	{
+		if ((sdr_stream *)stream == con)
+		{
+			if (((sdr_stream *)stream)->get_direction() == SOAPY_SDR_TX)
+			{	// switch off TX stream
+				mox = false;
+				setSampleRate(SOAPY_SDR_RX, 0, sample_rate);	
+			}
+			delete ((sdr_stream *)stream);
+			streams.erase(streams.begin() + i);
+		}
+		i++;
+	}
 }
 
 int SoapyRadioberry::readStream(
@@ -133,14 +164,15 @@ int SoapyRadioberry::readStream(
 	int16_t *itarget_buffer = (int16_t *) buff_base;
 	int32_t left_sample;
 	int32_t right_sample;
-	
+	sdr_stream *ptr = (sdr_stream *)handle;
+
 	char rx_buffer[512];
 	for(int ii = 0 ; ii < npackages ; ii++)
 	{
 		no_bytes = read(fd_rb, rx_buffer, sizeof(rx_buffer));
 		nr_samples = no_bytes / 6;
 		//printf("nr_samples %d sample: %d %d %d %d %d %d\n",nr_samples, (int)rx_buffer[0],(int)rx_buffer[1],(int)rx_buffer[2],(int)rx_buffer[3],(int)rx_buffer[4],(int)rx_buffer[5]);
-		if(streamFormat == RADIOBERRY_SDR_CF32)
+		if (ptr->get_stream_format() == RADIOBERRY_SDR_CF32)
 		{
 			for (int i = 0; i < no_bytes; i += 6) {
 				left_sample = (int32_t)((signed char) rx_buffer[i]) << 16;
@@ -155,7 +187,7 @@ int SoapyRadioberry::readStream(
 				target_buffer[iq++] = (float)right_sample / 8388608.0;      // 24 bit sample
 			}
 		}
-		if (streamFormat == RADIOBERRY_SDR_CS16)
+		if (ptr->get_stream_format() == RADIOBERRY_SDR_CS16)
 		{
 			for (int i = 0; i < no_bytes; i += 6) {
 				left_sample   = (int32_t)((signed char) rx_buffer[i]) << 16;
@@ -181,8 +213,6 @@ union uTxBuffer
 	unsigned char i8TxBuffer[4];
 };
 
-uTxBuffer tx;
-
 int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *buffs, const size_t numElems, int &flags, const long long timeNs, const long timeoutUs)
 {
 	int iq = 0; 
@@ -192,8 +222,10 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 	void const		*buff_base = buffs[0];
 	float			*target_buffer = (float *) buff_base;
 	int16_t			*itarget_buffer = (int16_t *) buff_base;
+	uTxBuffer		tx;
+	sdr_stream *ptr = (sdr_stream *)stream;
 
-	if (streamFormat == RADIOBERRY_SDR_CF32)
+	if (ptr->get_stream_format() == RADIOBERRY_SDR_CF32)
 	{
 		for (int ii = 0; ii < numElems; ii++)
 		{
@@ -202,7 +234,7 @@ int SoapyRadioberry::writeStream(SoapySDR::Stream *stream, const void * const *b
 			ret = write(fd_rb, &tx, 4 * sizeof(uint8_t));
 		}
 	}
-	if (streamFormat == RADIOBERRY_SDR_CS16)
+	if (ptr->get_stream_format() == RADIOBERRY_SDR_CS16)
 	{
 		int j = 0;
 	

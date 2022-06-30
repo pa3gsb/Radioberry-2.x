@@ -23,119 +23,131 @@ typedef enum radioberrysdrStreamFormat {
 	RADIOBERRY_SDR_CS16
 } radioberrysdrStreamFormat;
 
-class SoapyRadioberry : public SoapySDR::Device{
+class sdr_stream
+{
+  public:
+	sdr_stream(int dir)
+	{
+		direction = dir;
+	}
+	int get_direction() { return direction; }
+	void set_stream_format(radioberrysdrStreamFormat sf) { streamFormat = sf; };
+	radioberrysdrStreamFormat get_stream_format() { return streamFormat; };
 
-	public:
-		
-		SoapyRadioberry( const SoapySDR::Kwargs & args );
-		~SoapyRadioberry();
+  private:
+	int direction;
+	radioberrysdrStreamFormat streamFormat;
+};
 
-		/*******************************************************************
+
+
+class SoapyRadioberry : public SoapySDR::Device
+{
+
+  public:
+	SoapyRadioberry(const SoapySDR::Kwargs &args);
+	~SoapyRadioberry();
+
+	/*******************************************************************
 		 * Identification API
 		 ******************************************************************/
 
-		std::string getDriverKey( void ) const;
+	std::string getDriverKey(void) const;
 
-		std::string getHardwareKey( void ) const;
-		
-		SoapySDR::Kwargs getHardwareInfo( void ) const;
-		
-		/*******************************************************************
+	std::string getHardwareKey(void) const;
+
+	SoapySDR::Kwargs getHardwareInfo(void) const;
+
+	/*******************************************************************
 		 * Channels API
 		 ******************************************************************/
 
-		size_t getNumChannels( const int direction ) const;
+	size_t getNumChannels(const int direction) const;
 
-		bool getFullDuplex( const int direction, const size_t channel ) const;
-		
-		/*******************************************************************
+	bool getFullDuplex(const int direction, const size_t channel) const;
+
+	/*******************************************************************
 		 * Stream API
 		 ******************************************************************/
-		SoapySDR::RangeList getSampleRateRange(const int direction, const size_t channel) const;
+	SoapySDR::RangeList getSampleRateRange(const int direction, const size_t channel) const;
 
-		std::vector<std::string> getStreamFormats(const int direction, const size_t channel) const;
+	std::vector<std::string> getStreamFormats(const int direction, const size_t channel) const;
 
-		std::string getNativeStreamFormat(const int direction, const size_t channel, double &fullScale) const;
+	std::string getNativeStreamFormat(const int direction, const size_t channel, double &fullScale) const;
 
-		SoapySDR::ArgInfoList getStreamArgsInfo(const int direction, const size_t channel) const;
+	SoapySDR::ArgInfoList getStreamArgsInfo(const int direction, const size_t channel) const;
 
+	void closeStream(SoapySDR::Stream *stream);
 
-		SoapySDR::Stream *setupStream(
-				const int direction,
-				const std::string &format,
-				const std::vector<size_t> &channels = std::vector<size_t>(),
-				const SoapySDR::Kwargs &args = SoapySDR::Kwargs() );
-				
-		int readStream(
-				SoapySDR::Stream *stream,
-				void * const *buffs,
-				const size_t numElems,
-				int &flags,
-				long long &timeNs,
-				const long timeoutUs = 100000 );				
-				
-		int writeStream(
-				SoapySDR::Stream *stream,
-				const void * const *buffs,
-				const size_t numElems,
-				int &flags,
-				const long long timeNs = 0,
-				const long timeoutUs = 100000);
+	SoapySDR::Stream *setupStream(
+		const int direction,
+		const std::string &format,
+		const std::vector<size_t> &channels = std::vector<size_t>(),
+		const SoapySDR::Kwargs &args = SoapySDR::Kwargs());
 
+	int readStream(
+		SoapySDR::Stream *stream,
+		void *const *buffs,
+		const size_t numElems,
+		int &flags,
+		long long &timeNs,
+		const long timeoutUs = 100000);
 
-		/*******************************************************************
+	int writeStream(
+		SoapySDR::Stream *stream,
+		const void *const *buffs,
+		const size_t numElems,
+		int &flags,
+		const long long timeNs = 0,
+		const long timeoutUs = 100000);
+
+	/*******************************************************************
 		 * Sample Rate API
 		 ******************************************************************/
 
-		void setSampleRate( const int direction, const size_t channel, const double rate );
+	void setSampleRate(const int direction, const size_t channel, const double rate);
 
-		double getBandwidth( const int direction, const size_t channel ) const;
+	double getBandwidth(const int direction, const size_t channel) const;
 
+	std::vector<double> listBandwidths(const int direction, const size_t channel) const;
+	std::vector<double> listSampleRates(const int direction, const size_t channel) const;
 
-		std::vector<double> listBandwidths( const int direction, const size_t channel ) const;
-		std::vector<double> listSampleRates( const int direction, const size_t channel ) const;
-		
-		
-		/*******************************************************************
+	/*******************************************************************
 		 * Frequency API
 		 ******************************************************************/
-		
-		void setFrequency(
-				const int direction,
-				const size_t channel,
-				const double frequency,
-				const SoapySDR::Kwargs &args = SoapySDR::Kwargs());
 
+	void setFrequency(
+		const int direction,
+		const size_t channel,
+		const double frequency,
+		const SoapySDR::Kwargs &args = SoapySDR::Kwargs());
 
-		SoapySDR::RangeList getFrequencyRange( const int direction, const size_t channel) const;
- 
+	SoapySDR::RangeList getFrequencyRange(const int direction, const size_t channel) const;
 
-		/*******************************************************************
+	/*******************************************************************
 		 * Antenna API
 		 ******************************************************************/
 
-		std::vector<std::string> listAntennas( const int direction, const size_t channel ) const;
+	std::vector<std::string> listAntennas(const int direction, const size_t channel) const;
 
-		
-		/*******************************************************************
+	/*******************************************************************
 		 * Gain API
 		 ******************************************************************/
 
-		std::vector<std::string> listGains( const int direction, const size_t channel ) const;
+	std::vector<std::string> listGains(const int direction, const size_t channel) const;
 
-		void setGain( const int direction, const size_t channel, const double value );
+	void setGain(const int direction, const size_t channel, const double value);
 
-		SoapySDR::Range getGainRange( const int direction, const size_t channel ) const;
+	SoapySDR::Range getGainRange(const int direction, const size_t channel) const;
 
+	void controlRadioberry(uint32_t command, uint32_t command_data);
 
-		void controlRadioberry(uint32_t command, uint32_t command_data);
-		
 	/*******************************************************************
 	 * I2C API
 	 ******************************************************************/
-	
-		std::string readI2C(const int addr, const size_t numBytes);
-		void writeI2C(const int addr, const std::string &data);
+
+	std::string readI2C(const int addr, const size_t numBytes);
+	void writeI2C(const int addr, const std::string &data);
 	
 	private:
 	
@@ -144,8 +156,9 @@ class SoapyRadioberry : public SoapySDR::Device{
 	int			rx_frequency;
 	int			no_channels;	
 	struct rb_info_arg_t rb_control;
-	std::unique_ptr<rpihw::driver::i2c> i2c_ptr;
-	bool							i2c_available = false;
-	radioberrysdrStreamFormat		streamFormat;
 	std::mutex	send_command;
+	std::vector<sdr_stream *> streams;
+	std::unique_ptr<rpihw::driver::i2c> i2c_ptr;
+	bool i2c_available;
+	bool mox;
 };
