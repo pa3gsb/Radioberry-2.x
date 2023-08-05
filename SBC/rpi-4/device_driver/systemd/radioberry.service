@@ -5,8 +5,8 @@ After=network-online.target
 
 [Service]
 Type=forking
-User=pi
-Group=pi
+User=root
+Group=root
 ExecStart=/etc/init.d/radioberryd start
 ExecStop=/etc/init.d/radioberryd stop
 Restart=always
