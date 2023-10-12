@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Installation wdsp or pihpsdr"
+echo "----------------------------"
+echo "NOTE. Before building and installing pihpsdr you should to install wdsp."
 echo ""
 
 echo "What do you like to install [wdsp/pihpsdr/reboot] ?"
