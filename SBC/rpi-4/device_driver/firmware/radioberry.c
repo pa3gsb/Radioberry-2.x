@@ -58,6 +58,9 @@ For more information, please refer to <http://unlicense.org/>
 #include "register.h"
 #include "bias.h"
 #include "measure.h"
+#include <pthread.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 int main(int argc, char **argv)
 {	
@@ -71,7 +74,12 @@ int main(int argc, char **argv)
 	closeRadioberry();
 }
 
-int initRadioberry() {
+static void start_rb_control_thread(void);
+static void start_rb_measure_thread(void);
+static void start_rb_register_thread(void);
+static void start_timer_thread(void);
+
+static int initRadioberry(void) {
 	sem_init(&mutex, 0, 1);	
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0); 
@@ -184,18 +192,18 @@ int initRadioberry() {
     fcntl(sock_TCP_Server, F_SETFL, flags | O_NONBLOCK);
 	
 	start_rb_register_thread();
+	return 0;
 }
 
-int closeRadioberry() {
+static void closeRadioberry(void) {
 	if (fd_rb != 0) close(fd_rb);
 	if (sock_TCP_Client >= 0) close(sock_TCP_Client);
 	if (sock_TCP_Server >= 0) close(sock_TCP_Server);
 	close_I2C_bias();
 	close_I2C_measure();
-	return 0;
 }
 
-void runRadioberry() {
+static void runRadioberry(void) {
 	fprintf(stderr, "Radioberry, Starting packet control part. \n");
 	start_timer_thread();
 	fprintf(stderr, "Radioberry, Starting packet tx part. \n");
@@ -207,7 +215,7 @@ void runRadioberry() {
 	}
 }
 
-void *packetreader(void *arg) {
+static void *packetreader(void *arg) {
 	
 	int size, bytes_read, bytes_left;
 	unsigned char buffer[2048];
@@ -245,7 +253,7 @@ void *packetreader(void *arg) {
 	}
 }
 
-void handlePacket(char* buffer){
+static void handlePacket(char* buffer){
 	uint32_t code;
 	memcpy(&code, buffer, 4);
 	switch (code)
@@ -311,7 +319,7 @@ void handlePacket(char* buffer){
 
 #define assign_change(a,b,c) if ((a) != b) { b = (a); fprintf(stderr, "%20s= %08lx (%10ld)\n", c, (long) b, (long) b ); }
 
-void handleCommand(int base_index, char* buffer) {
+static void handleCommand(int base_index, char* buffer) {
 	command = buffer[base_index];
 	command_data=((buffer[base_index+1]&0xFF)<<24)+((buffer[base_index+2]&0xFF)<<16)+((buffer[base_index+3]&0xFF)<<8)+(buffer[base_index+4]&0xFF);
 
@@ -330,12 +338,12 @@ void handleCommand(int base_index, char* buffer) {
 	}
 }
 
-void handleCommands(char* buffer) {
+static void handleCommands(char* buffer) {
 	handleCommand(11, buffer);
 	handleCommand(523, buffer);
 }
 
-void processPacket(char* buffer)
+static void processPacket(char* buffer)
 {	
 	MOX = ((buffer[11] & 0x01)==0x01) ? 0x01:0x00;
 	
@@ -374,7 +382,7 @@ void processPacket(char* buffer)
 	//**************************************************
 }
 
-void sendPacket() {
+static void sendPacket(void) {
 	fillPacketToSend();
 	if (sock_TCP_Client >= 0) {
 		if (sendto(sock_TCP_Client, hpsdrdata, sizeof(hpsdrdata), 0, NULL, 0) != 1032) fprintf(stderr, "TCP send error");
@@ -383,19 +391,20 @@ void sendPacket() {
 	}
 }
 
-void read_temperature_raspberryPi() {
+static void read_temperature_raspberryPi(void) {
 	FILE *thermal;
 	thermal = fopen("/sys/class/thermal/thermal_zone0/temp","r");
 	float systemp, millideg;
-	fscanf(thermal,"%f",&millideg);
-	systemp = millideg / 1000;
-	//fprintf(stderr, "CPU temperature is %f degrees C\n",systemp);
-	sys_temp = (int) (4096/3.26) * ((systemp/ 100) + 0.5);
-	//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
+	if (fscanf(thermal,"%f",&millideg) == 1) {
+		systemp = millideg / 1000;
+		//fprintf(stderr, "CPU temperature is %f degrees C\n",systemp);
+		sys_temp = (int) (4096/3.26) * ((systemp/ 100) + 0.5);
+		//fprintf(stderr, "CPU temperature in protocol has value %x\n",sys_temp);
+	}
 	fclose(thermal);
 }
 
-void fillPacketToSend() {
+static void fillPacketToSend(void) {
 		memset(hpsdrdata,0,1032);
 		memcpy(hpsdrdata, header_hpsdrdata, 4);
 		hpsdrdata[4] = ((last_sequence_number >> 24) & 0xFF);
@@ -416,8 +425,10 @@ void fillPacketToSend() {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 			
 			int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
-			read(fd_rb , rx_buffer , nr_samples);
-			
+			if (read(fd_rb , rx_buffer , nr_samples) < 0) {
+				fprintf(stderr, "Error %d reading frame from radioberry device\n", errno);
+				break;
+			}
 			rb_sample = 0;
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
@@ -450,7 +461,7 @@ void fillPacketToSend() {
 		}
 }
 
-void send_control(unsigned char command) {
+static void send_control(unsigned char command) {
 
 	unsigned char data[6];
 	uint32_t command_data = commands[command];
@@ -482,7 +493,7 @@ static void *rb_control_thread(void *arg) {
 	return NULL;
 }
 
-void start_rb_control_thread() {
+static void start_rb_control_thread(void) {
 	pthread_t pid1; 
 	pthread_create(&pid1, NULL, rb_control_thread, NULL);
 }
@@ -509,7 +520,7 @@ static void *rb_measure_thread(void *arg) {
 	return NULL;
 }
 
-void start_rb_measure_thread() {
+static void start_rb_measure_thread(void) {
 	pthread_t pid1; 
 	pthread_create(&pid1, NULL, rb_measure_thread, NULL);
 }
@@ -524,7 +535,7 @@ static void *rb_register_thread(void *arg) {
 	return NULL;
 }
 
-void start_rb_register_thread() {
+static void start_rb_register_thread(void) {
 	pthread_t pid1; 
 	pthread_create(&pid1, NULL, rb_register_thread, NULL);
 }
@@ -539,12 +550,12 @@ static void *timer_thread(void *arg) {
 	return NULL;
 }
 
-void start_timer_thread() {
+static void start_timer_thread(void ) {
 	pthread_t pid1; 
 	pthread_create(&pid1, NULL, timer_thread, NULL);
 }
 
-void *txWriter(void *arg) {
+static void *txWriter(void *arg) {
 	
 	gettimeofday(&t20, 0);
 	
@@ -563,7 +574,8 @@ void *txWriter(void *arg) {
 		//first setup without EER
 		if (MOX || CWX) {
 			//fprintf(stderr, "I = %2X - %2X  Q=  %2X - %2X \n", tx_iqdata[0], tx_iqdata[1], tx_iqdata[2], tx_iqdata[3]);
-			write(fd_rb , tx_iqdata , sizeof(tx_iqdata));
+			if (write(fd_rb , tx_iqdata , sizeof(tx_iqdata))<0)
+				fprintf(stderr, "Error %d writing to radioberry device\n", errno);
 		}	
 	
 		sem_post(&tx_empty); 
@@ -580,12 +592,12 @@ void *txWriter(void *arg) {
 	}
 }
 
-void put_tx_buffer(unsigned char  value) {
+static void put_tx_buffer(unsigned char  value) {
     tx_buffer[fill_tx] = value;    
     fill_tx = (fill_tx + 1) % TX_MAX_BUFFER; 
 }
 
-unsigned char get_tx_buffer() {
+static unsigned char get_tx_buffer() {
     unsigned char tmp = tx_buffer[use_tx];   
     use_tx = (use_tx + 1) % TX_MAX_BUFFER;  	
     return tmp;

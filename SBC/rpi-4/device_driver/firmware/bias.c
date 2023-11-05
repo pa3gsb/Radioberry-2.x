@@ -1,18 +1,19 @@
 
 #include "bias.h"
+#include <sys/ioctl.h>
 
-int fd_i2c_bias;
-int i2c_bias_handler;
+static int fd_i2c_bias;
+static int i2c_bias_handler;
 
 
-void init_I2C_bias() {
+void init_I2C_bias(void) {
 	
 	fd_i2c_bias = open("/dev/i2c-1", O_RDWR);
 
 	if (fd_i2c_bias < 0 ) {
 		fprintf(stderr, "Your SBC device is missing the following driver: '/dev/i2c-1' \n");
 		fprintf(stderr, "Change of Bias Setting is not possible\n");
-		return fd_i2c_bias;
+		return ;// fd_i2c_bias;
 	}
 	i2c_bias_handler = ioctl(fd_i2c_bias, I2C_SLAVE, ADDR_BIAS);
 
@@ -31,7 +32,7 @@ void write_I2C_bias(uint8_t control, uint8_t data) {
 	else fprintf(stderr, "Write I2C Bias command failed \n"); 
 }
 
-void close_I2C_bias() {
-	if (fd_i2c_bias != NULL) close(fd_i2c_bias);
+void close_I2C_bias(void) {
+	if (fd_i2c_bias >= 0) close(fd_i2c_bias);
 }
 //end of source

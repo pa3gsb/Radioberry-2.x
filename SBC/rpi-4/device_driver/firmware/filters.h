@@ -12,6 +12,8 @@
 
 
 #include <linux/i2c-dev.h>
+#include <sys/ioctl.h>
+#include <errno.h>
 
 int fd_i2c_alex;
 int fd_i2c_filter;
@@ -44,7 +46,7 @@ int previousCW = -1;
 //****************************************
 //   Initializing Alex Interface
 //****************************************
-void initALEX() {
+static inline void initALEX(void) {
 	int result = 0;
 	unsigned char data[3];
 
@@ -69,7 +71,7 @@ void initALEX() {
 //*********************************************
 //   Initializing Generic filters Interface
 //*********************************************
-void initGenericFilters() {
+static inline void initGenericFilters(void) {
 	int result = 0;
 	unsigned char data[3];
 
@@ -95,7 +97,7 @@ void initGenericFilters() {
 //****************************************
 //   Initializing Alex Interface
 //****************************************
-void initN2ADR() {
+static inline void initN2ADR(void) {
 	int result = 0;
 	unsigned char data[2];
 
@@ -123,7 +125,7 @@ void initN2ADR() {
 //
 //  Look for Filter Selection description.
 //****************************************************************
-void handleN2ADRFilterBoard(char* buffer)
+static inline void handleN2ADRFilterBoard(char* buffer)
 {
 	if (i2c_n2adr & (buffer[523] & 0xFE) == 0x00) {
 		i2c_n2adr_data = ((buffer[526] & 0x20) << 1) | ((buffer[525] & 0xFE) >> 1);
@@ -141,7 +143,8 @@ void handleN2ADRFilterBoard(char* buffer)
 			ldata[1] = i2c_n2adr_data & 0xFF;
 			fprintf(stderr, "Set N2ADR data = %x \n", ldata[1]);
 
-			write(fd_i2c_n2adr, ldata, 2);
+			if(write(fd_i2c_n2adr, ldata, 2) < 0)
+				fprintf(stderr, "Error %d setting N2ADR data\n", errno);
 		}
 	}
 }
@@ -149,7 +152,7 @@ void handleN2ADRFilterBoard(char* buffer)
 //*******************************************
 //   Handle data to Alex Interface Board
 //*******************************************
-void handleALEX(char* buffer)
+static inline void handleALEX(char* buffer)
 {
 	
 	if (i2c_alex & ((buffer[523] & 0xFE) == 0x12) || ((buffer[11] & 0xFE) == 0x12)) {
@@ -194,7 +197,8 @@ void handleALEX(char* buffer)
 			fprintf(stderr, "Set Alex data 0 = %x \n", ldata[0]);
 			fprintf(stderr, "Set Alex data 1 = %x \n", ldata[1]);
 			fprintf(stderr, "Set Alex data 2 = %x \n", ldata[2]);
-			write(fd_i2c_alex, ldata, 3);
+			if (write(fd_i2c_alex, ldata, 3) < 0)
+				fprintf(stderr, "Error %d writing Alex data\n", errno);
 		}
 	}
 }
@@ -204,7 +208,7 @@ void handleALEX(char* buffer)
 //    This allow easier integration for different lpf, bpf filter interface that didn't match Alex interface filters groups.
 //    This also allow easier integration for different countries band plan because the band plan is defined in the arduino firmware.
 //************************************************************************************************************************************
-void handleFiltersBoard(char* buffer, int cw)
+static inline void handleFiltersBoard(char* buffer, int cw)
 {
     //***********************************************
     //      Send Band Selected Alex board Style
@@ -245,7 +249,8 @@ void handleFiltersBoard(char* buffer, int cw)
             ldata[0] = 0x02;
             ldata[1] = ((i2c_alex_data >> 8) & 0xFF);
             ldata[2] = (i2c_alex_data & 0xFF);
-            write(fd_i2c_filter, ldata, 3);
+            if (write(fd_i2c_filter, ldata, 3) < 0)
+                fprintf(stderr, "Error %d writing Alex data\n", errno);
             fprintf(stderr, "Set Alex data 0 = %x \n", ldata[0]);
             fprintf(stderr, "Set Alex data 1 = %x \n", ldata[1]);
             fprintf(stderr, "Set Alex data 2 = %x \n", ldata[2]);
@@ -267,7 +272,8 @@ void handleFiltersBoard(char* buffer, int cw)
             ldata[0] = 0x03;
             ldata[1] = ((buffer[11] & 0x01) == 0x01) ? 1 : 0;
             ldata[2] = currentCW;
-            write(fd_i2c_filter, ldata, 3);
+            if (write(fd_i2c_filter, ldata, 3) < 0)
+                fprintf(stderr, "Error %d writing Alex data\n", errno);
             fprintf(stderr, "PTT data 0 = %x \n", ldata[0]);
             fprintf(stderr, "PTT data 1 = %x \n", ldata[1]);
             fprintf(stderr, "PTT data 2 = %x \n", ldata[2]);
@@ -293,8 +299,10 @@ void handleFiltersBoard(char* buffer, int cw)
             ldata[7] = (tempFreq / 10U) % 10;
             ldata[8] = (tempFreq / 1U) % 10;
 
-            write(fd_i2c_filter, ldata, 9);
-            fprintf(stderr, "Set Filters frequency to = %d \n", currentfreq);
+            if (write(fd_i2c_filter, ldata, 9) < 0)
+                fprintf(stderr, "Error %d setting frequency \n", errno);
+            else
+                fprintf(stderr, "Set Filters frequency to = %d \n", currentfreq);
 
         }
     }  
@@ -303,13 +311,13 @@ void handleFiltersBoard(char* buffer, int cw)
 //*******************************************
 //   Convert frequency value to integer
 //*******************************************
-int determine_freq(int base_index, char* buffer) {
+static inline int determine_freq(int base_index, char* buffer) {
 	return (((buffer[base_index + 1] & 0xFF) << 24) + ((buffer[base_index + 2] & 0xFF) << 16) + ((buffer[base_index + 3] & 0xFF) << 8) + (buffer[base_index + 4] & 0xFF));
 }
 //**********************************************************
 //  Determine which board to forward data - Alex or Generic
 //**********************************************************
-void handleFilters(char* buffer, int cw) {
+static inline void handleFilters(char* buffer, int cw) {
 	
 	if ((buffer[11] & 0xFE) == 0x04) {
 		currentfreq = determine_freq(11, buffer);
@@ -332,7 +340,7 @@ void handleFilters(char* buffer, int cw) {
 //********************************************************************
 //  Determine which filters interface is connected to the radioberry
 //********************************************************************
-void initFilters() {
+static inline void initFilters(void) {
 	
 	fd_i2c_alex = open("/dev/i2c-1", O_RDWR);
 	fd_i2c_filter = open("/dev/i2c-1", O_RDWR);

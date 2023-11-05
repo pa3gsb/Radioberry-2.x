@@ -21,9 +21,6 @@ struct _PROPERTY {
 	PROPERTY* next_property;
 };
 
-extern char macaddress[24];
-extern char* radiocall; 
-extern char* radiolocator;
 extern char gatewareversion[16];
 extern char driverversion[16];
 extern char firmwareversion[16]; 
