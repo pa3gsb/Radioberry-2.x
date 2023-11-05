@@ -9,3 +9,15 @@ incremental_db/
 output_files/
 output_files_cl_016/
 output_files_cl_025/
+
+.cproject
+.project
+.settings/
+stage/
+build/
+
+#Intermediate driver files
+.Module.symvers.cmd
+.modules.order.cmd
+Module.symvers
+modules.order
