@@ -1,5 +1,7 @@
 CC=gcc
 LINK=gcc
+INSTALL = install
+BLDDIR = $(BUILDDIR:%=%/)
 
 OPTIONS=-g -O3 
 
@@ -7,7 +9,7 @@ LIBS=-lrt -lm -lpthread
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
-PROGRAM=radioberry
+PROGRAM=$(BLDDIR)radioberry
 
 SOURCES= \
 measure.c \
@@ -28,22 +30,21 @@ bias.o \
 measure.o \
 radioberry.o 
 
-all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
+all: prebuild $(PROGRAM) | $(HEADERS) $(SOURCES) 
 
 prebuild:
 	rm -f version.o
 
-$(PROGRAM): $(OBJS) 
-	$(LINK) -o $(PROGRAM) $(OBJS) $(LIBS)
+$(PROGRAM): $(OBJS:%.o=$(BLDDIR)%.o) 
+	$(LINK) -o $(PROGRAM) $^ $(LIBS)
 
-.c.o:
+$(BLDDIR)%.o: %.c
 	$(COMPILE) -c -o $@ $<
 
-
 clean:
-	-rm -f *.o
+	-rm -f $(BLDDIR)*.o
 	-rm -f $(PROGRAM)
 	
 install: $(PROGRAM)
-	cp $(PROGRAM) /usr/local/bin
+	$(INSTALL) $(PROGRAM) $(DESTDIR)/usr/local/bin
 

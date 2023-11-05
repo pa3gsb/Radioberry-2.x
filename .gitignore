@@ -10,9 +10,11 @@ output_files/
 output_files_cl_016/
 output_files_cl_025/
 
+# Eclipse files
 .cproject
 .project
 .settings/
+# Build/stage directories
 stage/
 build/
 
