@@ -1,0 +1,8 @@
+[submodule "pihpsdr"]
+	path = pihpsdr
+	url = https://github.com/g0orx/pihpsdr.git
+	shallow = true
+[submodule "wdsp"]
+	path = wdsp
+	url = https://github.com/g0orx/wdsp
+	shallow = true
