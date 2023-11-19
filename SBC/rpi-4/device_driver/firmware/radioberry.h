@@ -54,12 +54,12 @@ int pa_temp_ok = 1;
 uint32_t spi_commands[CAPACITY] = {0};
 uint32_t p_read = 0;
 uint32_t p_write = 0;
-mask(val)  { return val & (CAPACITY - 1); }
-push(val)  { assert(!full()); spi_commands[mask(p_write++)] = val; }
-pop()      { assert(!empty()); return spi_commands[mask(p_read++)]; }
-empty()    { return p_read == p_write; }
-full()     { return size() == CAPACITY; }
-size()     { return p_write - p_read; }
+static inline int size(void)     { return p_write - p_read; }
+static inline int empty(void)    { return p_read == p_write; }
+static inline int full(void)     { return size() == CAPACITY; }
+static inline int mask(int val)  { return val & (CAPACITY - 1); }
+static inline int push(int val)  { assert(!full()); spi_commands[mask(p_write++)] = val; }
+static inline int pop(void)      { assert(!empty()); return spi_commands[mask(p_read++)]; }
 
 char rb_control = 0x00;
 
@@ -75,23 +75,23 @@ int closerb = 0;
 
 int rb_sleep = 100;
 
-int initRadioberry();
-void runRadioberry(void);
-int closeRadioberry();
+static int initRadioberry(void);
+static void runRadioberry(void);
+static void closeRadioberry(void);
 
-void sendPacket(void);
-void handlePacket(char* buffer);
-void processPacket(char* buffer);
-void fillPacketToSend(void);
+static void sendPacket(void);
+static void handlePacket(char* buffer);
+static void processPacket(char* buffer);
+static void fillPacketToSend(void);
 
-void *packetreader(void *arg);
-void *txWriter(void *arg);
+static void *packetreader(void *arg);
+static void *txWriter(void *arg);
 
-void send_control(unsigned char command);
-float timedifference_msec(struct timeval t0, struct timeval t1);
+static void send_control(unsigned char command);
+static float timedifference_msec(struct timeval t0, struct timeval t1);
 
-void put_tx_buffer(unsigned char  value);
-unsigned char get_tx_buffer(void);
+static void put_tx_buffer(unsigned char  value);
+static unsigned char get_tx_buffer(void);
 
 int sock_TCP_Server = -1;
 int sock_TCP_Client = -1;

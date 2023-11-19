@@ -1,11 +1,12 @@
 
 #include "measure.h"
+#include <sys/ioctl.h>
 
 int i2c_measure_module_active;
-int fd_i2c_measure;
-int i2c_measure_handler;
+static int fd_i2c_measure;
+static int i2c_measure_handler;
 
-int config_I2C_measure(){
+int config_I2C_measure(void){
 	
 	uint8_t measure_config[1];
 	measure_config[0] = 0x07;
@@ -18,7 +19,7 @@ int config_I2C_measure(){
 	return result;
 }; 
 
-void openI2C_measure() {
+void openI2C_measure(void) {
 	
 	i2c_measure_module_active = 0;
 	
@@ -27,7 +28,7 @@ void openI2C_measure() {
 	if (fd_i2c_measure < 0 ) {
 		fprintf(stderr, "Your SBC device is missing the following driver: '/dev/i2c-1' \n");
 		fprintf(stderr, "Measurement is not possible\n");
-		return fd_i2c_measure;
+		return;
 	}
 	i2c_measure_handler = ioctl(fd_i2c_measure, I2C_SLAVE, ADDR_MEAS);
 
@@ -44,7 +45,7 @@ void read_I2C_measure(int *current, int *temperature){
 	*current = (int)(((measure_data[4] & 0x0F) <<8) | measure_data[5]);
 };
 
-void close_I2C_measure() {
-	if (fd_i2c_measure != NULL) close(fd_i2c_measure);
+void close_I2C_measure(void) {
+	if (fd_i2c_measure >= 0) close(fd_i2c_measure);
 };
 //end of source

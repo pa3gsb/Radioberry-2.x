@@ -1,8 +1,12 @@
 #include "register.h"
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
 
-char macaddress[24];
-char* radiocall; 
-char* radiolocator;
+static char macaddress[24];
+static char* radiocall;
+static char* radiolocator;
 char gatewareversion[16];
 char driverversion[16];
 char firmwareversion[16]; 
@@ -95,14 +99,15 @@ ssize_t process_http(int sockfd, char *host, char *page, char *poststr)
 {
 	char sendline[MAXLINE + 1], recvline[MAXLINE + 1];
 	ssize_t n;
-	snprintf(sendline, MAXSUB,
+	n = snprintf(sendline, MAXSUB,
 		 "POST %s HTTP/1.0\r\n"
 		 "Host: %s\r\n"
 		 "Content-type: application/x-www-form-urlencoded\r\n"
-		 "Content-length: %d\r\n\r\n"
+		 "Content-length: %zu\r\n\r\n"
 		 "%s", page, host, strlen(poststr), poststr);
 
-	write(sockfd, sendline, strlen(sendline));
+	if(write(sockfd, sendline, n) < 0)
+	    return -errno;
 	//get response
 	while ((n = read(sockfd, recvline, MAXLINE)) > 0) {
 		recvline[n] = '\0';

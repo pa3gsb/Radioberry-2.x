@@ -29,11 +29,9 @@
 
 #define ADDR_BIAS 0x2C
 
-extern int fd_i2c_bias;
-extern int i2c_bias_handler;
-
 void openI2C_bias(void);
 void write_I2C_bias(uint8_t control, uint8_t data);
 void close_I2C_bias(void);
+void init_I2C_bias(void);
 
 #endif
