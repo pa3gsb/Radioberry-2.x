@@ -1,0 +1,3856 @@
+(export 
+  (version D) 
+  (design 
+    (source C:\dev\radioberry-preamp\radioberry-preamp\radioberry-preamp.sch) 
+    (date "20-12-2020 15:51:14") 
+    (tool "Eeschema (5.1.8)-1") 
+    (sheet 
+      (number 1) 
+      (name /) 
+      (tstamps /) 
+      (title_block 
+        (title "Radioberry - amplifier") 
+        (company AppMind) 
+        (rev "beta 1") 
+        (date 2020-12-18) 
+        (source hat.sch) 
+        (comment 
+          (number 1) 
+          (value "PA3GSB Johan Maas")) 
+        (comment 
+          (number 2) 
+          (value "")) 
+        (comment 
+          (number 3) 
+          (value "")) 
+        (comment 
+          (number 4) 
+          (value "")))) 
+    (sheet 
+      (number 2) 
+      (name /Amplifier/) 
+      (tstamps /5FC8A8B5/) 
+      (title_block 
+        (title "Radioberry - amplifier") 
+        (company AppMind) 
+        (rev "beta 1") 
+        (date 2020-12-18) 
+        (source Amplifier.sch) 
+        (comment 
+          (number 1) 
+          (value "PA3GSB Johan Maas")) 
+        (comment 
+          (number 2) 
+          (value "")) 
+        (comment 
+          (number 3) 
+          (value "")) 
+        (comment 
+          (number 4) 
+          (value "")))) 
+    (sheet 
+      (number 3) 
+      (name /Control/) 
+      (tstamps /5FCF3984/) 
+      (title_block 
+        (title "Radioberry - amplifier") 
+        (company AppMind) 
+        (rev "beta 1") 
+        (date 2020-12-18) 
+        (source control.sch) 
+        (comment 
+          (number 1) 
+          (value "PA3GSB Johan Maas")) 
+        (comment 
+          (number 2) 
+          (value "")) 
+        (comment 
+          (number 3) 
+          (value "")) 
+        (comment 
+          (number 4) 
+          (value "")))) 
+    (sheet 
+      (number 4) 
+      (name /Power/) 
+      (tstamps /5FD3DDB9/) 
+      (title_block 
+        (title "Radioberry - amplifier") 
+        (company AppMind) 
+        (rev "beta 1") 
+        (date 2020-12-18) 
+        (source Power.sch) 
+        (comment 
+          (number 1) 
+          (value "PA3GSB Johan Maas")) 
+        (comment 
+          (number 2) 
+          (value "")) 
+        (comment 
+          (number 3) 
+          (value "")) 
+        (comment 
+          (number 4) 
+          (value ""))))) 
+  (components 
+    (comp 
+      (ref MH1) 
+      (value DNI) 
+      (footprint HERMESLITE:m3) 
+      (fields 
+        (field 
+          (name Key) NOBOM) 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part TEST_1P) 
+        (description point)) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5FCED050)) 
+    (comp 
+      (ref MH2) 
+      (value DNI) 
+      (footprint HERMESLITE:m3) 
+      (fields 
+        (field 
+          (name Key) NOBOM) 
+        (field 
+          (name "Option ") DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part TEST_1P) 
+        (description point)) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5FCED376)) 
+    (comp 
+      (ref MH3) 
+      (value DNI) 
+      (footprint HERMESLITE:m3) 
+      (fields 
+        (field 
+          (name Key) NOBOM) 
+        (field 
+          (name "Option ") DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part TEST_1P) 
+        (description point)) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5FCED953)) 
+    (comp 
+      (ref MH4) 
+      (value DNI) 
+      (footprint HERMESLITE:m3) 
+      (fields 
+        (field 
+          (name Key) NOBOM) 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part TEST_1P) 
+        (description point)) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5FCEDB7B)) 
+    (comp 
+      (ref MH5) 
+      (value DNI) 
+      (footprint HERMESLITE:m3) 
+      (fields 
+        (field 
+          (name Key) NOBOM) 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part TEST_1P) 
+        (description point)) 
+      (sheetpath 
+        (names /) 
+        (tstamps /)) 
+      (tstamp 5FD3ED08)) 
+    (comp 
+      (ref C313) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84B5)) 
+    (comp 
+      (ref R306) 
+      (value 12) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84BB)) 
+    (comp 
+      (ref R304) 
+      (value 270) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84C1)) 
+    (comp 
+      (ref C311) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84C7)) 
+    (comp 
+      (ref Q301) 
+      (value LDMOS) 
+      (footprint HERMESLITE:COMBORFGND) 
+      (libsource 
+        (lib hermeslite) 
+        (part RD16HHF1) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84D4)) 
+    (comp 
+      (ref C306) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Ext) HV)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84E8)) 
+    (comp 
+      (ref C307) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Ext) HV)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84EF)) 
+    (comp 
+      (ref C308) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Ext) HV)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84F6)) 
+    (comp 
+      (ref C309) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Ext) HV)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC84FD)) 
+    (comp 
+      (ref R305) 
+      (value 1K) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8504)) 
+    (comp 
+      (ref R308) 
+      (value 1K) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC850B)) 
+    (comp 
+      (ref C315) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC851D)) 
+    (comp 
+      (ref C316) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8523)) 
+    (comp 
+      (ref C317) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8529)) 
+    (comp 
+      (ref C314) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC852F)) 
+    (comp 
+      (ref C322) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC853C)) 
+    (comp 
+      (ref R311) 
+      (value 270) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8542)) 
+    (comp 
+      (ref C321) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8548)) 
+    (comp 
+      (ref Q302) 
+      (value LDMOS) 
+      (footprint HERMESLITE:COMBORFGND) 
+      (libsource 
+        (lib hermeslite) 
+        (part RD16HHF1) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8555)) 
+    (comp 
+      (ref R312) 
+      (value 12) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC857B)) 
+    (comp 
+      (ref C319) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8581)) 
+    (comp 
+      (ref T301) 
+      (value "4:1 Z") 
+      (footprint HERMESLITE:BN202V) 
+      (libsource 
+        (lib hermeslite) 
+        (part TRANSF4CT) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8587)) 
+    (comp 
+      (ref RF302) 
+      (value SMA) 
+      (footprint HERMESLITE:SMAEDGE_THFULL_L) 
+      (libsource 
+        (lib hermeslite) 
+        (part BNC) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC85B7)) 
+    (comp 
+      (ref C310) 
+      (value 100pF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC85C9)) 
+    (comp 
+      (ref K301) 
+      (value NA3WK-K) 
+      (footprint HERMESLITE:DPDT_GND) 
+      (libsource 
+        (lib hermeslite) 
+        (part DPDTR_GND) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC85FF)) 
+    (comp 
+      (ref C312) 
+      (value 390pF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8613)) 
+    (comp 
+      (ref U301) 
+      (value INA199A1DC) 
+      (footprint HERMESLITE:PE4259) 
+      (libsource 
+        (lib hermeslite) 
+        (part INA199x1) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC86CE)) 
+    (comp 
+      (ref R303) 
+      (value 0.04) 
+      (footprint HERMESLITE:SMD-1206) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC86D4)) 
+    (comp 
+      (ref C303) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC86EF)) 
+    (comp 
+      (ref J301) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8709)) 
+    (comp 
+      (ref J302) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8710)) 
+    (comp 
+      (ref C323) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC8718)) 
+    (comp 
+      (ref C320) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC871F)) 
+    (comp 
+      (ref C305) 
+      (value 22uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC878B)) 
+    (comp 
+      (ref C318) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC87C5)) 
+    (comp 
+      (ref RF303) 
+      (value SMA) 
+      (footprint HERMESLITE:SMAEDGE_THFULL_L) 
+      (libsource 
+        (lib hermeslite) 
+        (part BNC) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC87D2)) 
+    (comp 
+      (ref W301) 
+      (value 21) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FCC883C)) 
+    (comp 
+      (ref C304) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FEE6652)) 
+    (comp 
+      (ref RF301) 
+      (value SMA) 
+      (footprint HERMESLITE:SMAEDGE_THFULL_L) 
+      (libsource 
+        (lib hermeslite) 
+        (part BNC) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FEE665F)) 
+    (comp 
+      (ref R307) 
+      (value 5.9) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FEB0070)) 
+    (comp 
+      (ref R309) 
+      (value 866) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FEB09FD)) 
+    (comp 
+      (ref R310) 
+      (value 866) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FEB1A8E)) 
+    (comp 
+      (ref C301) 
+      (value DNI) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FD52EB5)) 
+    (comp 
+      (ref C302) 
+      (value DNI) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FD54917)) 
+    (comp 
+      (ref R301) 
+      (value DNI) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FD54DB6)) 
+    (comp 
+      (ref R302) 
+      (value DNI) 
+      (footprint HERMESLITE:SMD-0805) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FD5552B)) 
+    (comp 
+      (ref T302) 
+      (value 1:1) 
+      (footprint HERMESLITE:TRANSFSMT) 
+      (libsource 
+        (lib hermeslite) 
+        (part TRANSF4CT) 
+        (description "")) 
+      (sheetpath 
+        (names /Amplifier/) 
+        (tstamps /5FC8A8B5/)) 
+      (tstamp 5FE45EDE)) 
+    (comp 
+      (ref U201) 
+      (value MAX11613) 
+      (footprint HERMESLITE:MAX11613) 
+      (datasheet DOCUMENTATION) 
+      (libsource 
+        (lib hermeslite) 
+        (part MAX11613) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02C72)) 
+    (comp 
+      (ref C206) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02C8C)) 
+    (comp 
+      (ref R203) 
+      (value 1K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CA0)) 
+    (comp 
+      (ref C201) 
+      (value 4.7nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CA7)) 
+    (comp 
+      (ref R205) 
+      (value 270) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CBC)) 
+    (comp 
+      (ref R206) 
+      (value 1K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CC2)) 
+    (comp 
+      (ref C203) 
+      (value 4.7nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CC8)) 
+    (comp 
+      (ref R208) 
+      (value 1K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CDE)) 
+    (comp 
+      (ref C207) 
+      (value 4.7nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CE4)) 
+    (comp 
+      (ref R209) 
+      (value 1K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02CF9)) 
+    (comp 
+      (ref C208) 
+      (value 4.7nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02D00)) 
+    (comp 
+      (ref FB201) 
+      (value FB) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part FB) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02D36)) 
+    (comp 
+      (ref J201) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02D41)) 
+    (comp 
+      (ref J202) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02D47)) 
+    (comp 
+      (ref J203) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD02D4D)) 
+    (comp 
+      (ref R201) 
+      (value 2.2K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD0AAE0)) 
+    (comp 
+      (ref R202) 
+      (value 2.2K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD0AAE6)) 
+    (comp 
+      (ref C205) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD0AAEC)) 
+    (comp 
+      (ref C204) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD0AAF2)) 
+    (comp 
+      (ref R204) 
+      (value 100) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD0AAF8)) 
+    (comp 
+      (ref R207) 
+      (value 100) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD0AAFE)) 
+    (comp 
+      (ref JP201) 
+      (value FEMALE_PINHEAD_PINHD-2X10) 
+      (footprint RB:PINHEAD_2X10) 
+      (libsource 
+        (lib Radioberry) 
+        (part PINHEAD_PINHD-2X10) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FF06366)) 
+    (comp 
+      (ref Q202) 
+      (value NUD3124) 
+      (footprint HERMESLITE:SOT23_3) 
+      (libsource 
+        (lib hermeslite) 
+        (part MOSFET_N) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD8FF7E)) 
+    (comp 
+      (ref Q203) 
+      (value NUD3124) 
+      (footprint HERMESLITE:SOT23_3) 
+      (libsource 
+        (lib hermeslite) 
+        (part MOSFET_N) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD8FF84)) 
+    (comp 
+      (ref R219) 
+      (value 4.7K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD8FF8A)) 
+    (comp 
+      (ref R216) 
+      (value 4.7K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD8FFA0)) 
+    (comp 
+      (ref Q201) 
+      (value MCP9700) 
+      (footprint HERMESLITE:SOT23_3) 
+      (libsource 
+        (lib hermeslite) 
+        (part MCP9700) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FDC13E2)) 
+    (comp 
+      (ref C202) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FDC13F4)) 
+    (comp 
+      (ref C209) 
+      (value 0.1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FA6E)) 
+    (comp 
+      (ref R211) 
+      (value 27K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FA7A)) 
+    (comp 
+      (ref R210) 
+      (value 27K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FA80)) 
+    (comp 
+      (ref U202) 
+      (value MCP4662) 
+      (footprint HERMESLITE:SOIC-10) 
+      (libsource 
+        (lib hermeslite) 
+        (part MCP4662) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FA89)) 
+    (comp 
+      (ref R212) 
+      (value 9.1K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FA95)) 
+    (comp 
+      (ref R213) 
+      (value 9.1K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FA9B)) 
+    (comp 
+      (ref R214) 
+      (value 10K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FABA)) 
+    (comp 
+      (ref R215) 
+      (value 10K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE7FAC1)) 
+    (comp 
+      (ref R217) 
+      (value 2.2K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FFCB653)) 
+    (comp 
+      (ref R218) 
+      (value 2.2K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FFCB659)) 
+    (comp 
+      (ref C211) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FFCB65F)) 
+    (comp 
+      (ref C210) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FFCB665)) 
+    (comp 
+      (ref R220) 
+      (value 100) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FFCB66B)) 
+    (comp 
+      (ref R221) 
+      (value 100) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FFCB671)) 
+    (comp 
+      (ref DB203) 
+      (value IO10) 
+      (footprint HERMESLITE:5x2) 
+      (libsource 
+        (lib hermeslite) 
+        (part IO10) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FD74F02)) 
+    (comp 
+      (ref J204) 
+      (value DNI) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE526D4)) 
+    (comp 
+      (ref J205) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE5311A)) 
+    (comp 
+      (ref J206) 
+      (value DNI) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE53DF4)) 
+    (comp 
+      (ref J207) 
+      (value JNC) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part JNC) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 5FE540A8)) 
+    (comp 
+      (ref DB201) 
+      (value RFD2b) 
+      (footprint HERMESLITE:2x1) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part RFD2b) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 6000A8B9)) 
+    (comp 
+      (ref DB202) 
+      (value RFD2b) 
+      (footprint HERMESLITE:2x1) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part RFD2b) 
+        (description "")) 
+      (sheetpath 
+        (names /Control/) 
+        (tstamps /5FCF3984/)) 
+      (tstamp 6000B9E2)) 
+    (comp 
+      (ref CN101) 
+      (value PS) 
+      (footprint HERMESLITE:PWRBARREL2) 
+      (libsource 
+        (lib hermeslite) 
+        (part CONN_01X02) 
+        (description "Connector, single row, 01x02, pin header")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950B5)) 
+    (comp 
+      (ref F101) 
+      (value 3A@20V) 
+      (footprint HERMESLITE:FUSE) 
+      (libsource 
+        (lib hermeslite) 
+        (part Polyfuse) 
+        (description "resettable fuse, polymeric positive temperature coefficient (PPTC)")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950BB)) 
+    (comp 
+      (ref Q101) 
+      (value DMP3099L) 
+      (footprint HERMESLITE:SOT23_3) 
+      (libsource 
+        (lib hermeslite) 
+        (part MOSFET_P) 
+        (description "")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950C1)) 
+    (comp 
+      (ref U102) 
+      (value LP2985) 
+      (footprint HERMESLITE:SOT23) 
+      (libsource 
+        (lib hermeslite) 
+        (part LP2985) 
+        (description "")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950C7)) 
+    (comp 
+      (ref C111) 
+      (value 1uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950CD)) 
+    (comp 
+      (ref FB102) 
+      (value FB) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part FB) 
+        (description "")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950D3)) 
+    (comp 
+      (ref D101) 
+      (value SMBJ18CA) 
+      (footprint HERMESLITE:smbj18ca) 
+      (libsource 
+        (lib hermeslite) 
+        (part TVSANTI) 
+        (description "Diode schottky")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950DF)) 
+    (comp 
+      (ref C101) 
+      (value 10uF) 
+      (footprint HERMESLITE:SMD-1206) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950F7)) 
+    (comp 
+      (ref FB101) 
+      (value FB) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part FB) 
+        (description "")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950FD)) 
+    (comp 
+      (ref C102) 
+      (value 10uF) 
+      (footprint HERMESLITE:SMD-1206) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95103)) 
+    (comp 
+      (ref C103) 
+      (value 4.7uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95109)) 
+    (comp 
+      (ref R102) 
+      (value 16K2) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF9510F)) 
+    (comp 
+      (ref R103) 
+      (value 1K8) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95115)) 
+    (comp 
+      (ref L101) 
+      (value 3.3uH) 
+      (footprint HERMESLITE:GENERICPSL) 
+      (libsource 
+        (lib hermeslite) 
+        (part L_Small) 
+        (description "Inductor, small symbol")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF9511B)) 
+    (comp 
+      (ref C106) 
+      (value 22uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95121)) 
+    (comp 
+      (ref C108) 
+      (value 22uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95127)) 
+    (comp 
+      (ref C109) 
+      (value 22uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF9512D)) 
+    (comp 
+      (ref C112) 
+      (value 100nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95133)) 
+    (comp 
+      (ref C104) 
+      (value 4.7nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95139)) 
+    (comp 
+      (ref C107) 
+      (value 22uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF9513F)) 
+    (comp 
+      (ref C105) 
+      (value 22uF) 
+      (footprint HERMESLITE:SMD-0805) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF95145)) 
+    (comp 
+      (ref C110) 
+      (value 10uF) 
+      (footprint HERMESLITE:SMD-1206) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF9514B)) 
+    (comp 
+      (ref R101) 
+      (value 10K) 
+      (footprint HERMESLITE:SMD-0603) 
+      (fields 
+        (field 
+          (name Option) DNI)) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF951B7)) 
+    (comp 
+      (ref R104) 
+      (value 4k7) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part R) 
+        (description Resistor)) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF951EA)) 
+    (comp 
+      (ref IC101) 
+      (value LD1117S33) 
+      (footprint RB:V-REG_SOT223) 
+      (libsource 
+        (lib Radioberry) 
+        (part V-REG_LD117AS33TR) 
+        (description "")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD35AC2)) 
+    (comp 
+      (ref C115) 
+      (value 1nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD367DA)) 
+    (comp 
+      (ref C116) 
+      (value 10nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD37242)) 
+    (comp 
+      (ref C117) 
+      (value 100nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD3758C)) 
+    (comp 
+      (ref C118) 
+      (value 100uF) 
+      (footprint HERMESLITE:SMD-1206) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD3792A)) 
+    (comp 
+      (ref C114) 
+      (value 100nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD37BEF)) 
+    (comp 
+      (ref C113) 
+      (value 10uF) 
+      (footprint HERMESLITE:SMD-1206) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FD661B5)) 
+    (comp 
+      (ref U101) 
+      (value ST1S10) 
+      (footprint HERMESLITE:ST1S10) 
+      (libsource 
+        (lib hermeslite) 
+        (part ST1S10) 
+        (description "")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FF950D9)) 
+    (comp 
+      (ref C120) 
+      (value 100pF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FDB978B)) 
+    (comp 
+      (ref C119) 
+      (value 10pF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FDC154D)) 
+    (comp 
+      (ref C122) 
+      (value 100pF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FDC1899)) 
+    (comp 
+      (ref C123) 
+      (value 1nF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FDC1D2B)) 
+    (comp 
+      (ref C121) 
+      (value 10pF) 
+      (footprint HERMESLITE:SMD-0603) 
+      (libsource 
+        (lib hermeslite) 
+        (part C_Small) 
+        (description "Unpolarized capacitor")) 
+      (sheetpath 
+        (names /Power/) 
+        (tstamps /5FD3DDB9/)) 
+      (tstamp 5FDC2E03))) 
+  (libparts 
+    (libpart 
+      (lib Radioberry) 
+      (part PINHEAD_PINHD-2X10) 
+      (footprints 
+        (fp *PINHEAD_2X10*) 
+        (fp *PINHEAD_2X10_90*)) 
+      (fields 
+        (field 
+          (name Reference) JP) 
+        (field 
+          (name Value) PINHEAD_PINHD-2X10) 
+        (field 
+          (name Footprint) PINHEAD_2X10)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name 1) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name 2) 
+          (type passive)) 
+        (pin 
+          (num 3) 
+          (name 3) 
+          (type passive)) 
+        (pin 
+          (num 4) 
+          (name 4) 
+          (type passive)) 
+        (pin 
+          (num 5) 
+          (name 5) 
+          (type passive)) 
+        (pin 
+          (num 6) 
+          (name 6) 
+          (type passive)) 
+        (pin 
+          (num 7) 
+          (name 7) 
+          (type passive)) 
+        (pin 
+          (num 8) 
+          (name 8) 
+          (type passive)) 
+        (pin 
+          (num 9) 
+          (name 9) 
+          (type passive)) 
+        (pin 
+          (num 10) 
+          (name 10) 
+          (type passive)) 
+        (pin 
+          (num 11) 
+          (name 11) 
+          (type passive)) 
+        (pin 
+          (num 12) 
+          (name 12) 
+          (type passive)) 
+        (pin 
+          (num 13) 
+          (name 13) 
+          (type passive)) 
+        (pin 
+          (num 14) 
+          (name 14) 
+          (type passive)) 
+        (pin 
+          (num 15) 
+          (name 15) 
+          (type passive)) 
+        (pin 
+          (num 16) 
+          (name 16) 
+          (type passive)) 
+        (pin 
+          (num 17) 
+          (name 17) 
+          (type passive)) 
+        (pin 
+          (num 18) 
+          (name 18) 
+          (type passive)) 
+        (pin 
+          (num 19) 
+          (name 19) 
+          (type passive)) 
+        (pin 
+          (num 20) 
+          (name 20) 
+          (type passive)))) 
+    (libpart 
+      (lib Radioberry) 
+      (part V-REG_LD117AS) 
+      (aliases 
+        (alias V-REG_LD117AS12TR) 
+        (alias V-REG_LD117AS18TR) 
+        (alias V-REG_LD117AS25TR) 
+        (alias V-REG_LD117AS28TR) 
+        (alias V-REG_LD117AS33TR) 
+        (alias V-REG_LD117AS50TR) 
+        (alias V-REG_LD117ASTR)) 
+      (footprints 
+        (fp *V-REG_SOT223*)) 
+      (fields 
+        (field 
+          (name Reference) IC) 
+        (field 
+          (name Value) V-REG_LD117AS) 
+        (field 
+          (name Footprint) V-REG_SOT223)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ADJ) 
+          (type input)) 
+        (pin 
+          (num 3) 
+          (name IN) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name OUT) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part BNC) 
+      (footprints 
+        (fp BNC_*) 
+        (fp bnc) 
+        (fp bnc-*)) 
+      (fields 
+        (field 
+          (name Reference) P) 
+        (field 
+          (name Value) BNC)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name In) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name Ext) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part CONN_01X02) 
+      (description "Connector, single row, 01x02, pin header") 
+      (footprints 
+        (fp Pin_Header_Straight_1X*) 
+        (fp Pin_Header_Angled_1X*) 
+        (fp Socket_Strip_Straight_1X*) 
+        (fp Socket_Strip_Angled_1X*)) 
+      (fields 
+        (field 
+          (name Reference) J) 
+        (field 
+          (name Value) CONN_01X02)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name P1) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name P2) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part C_Small) 
+      (description "Unpolarized capacitor") 
+      (footprints 
+        (fp C_*)) 
+      (fields 
+        (field 
+          (name Reference) C) 
+        (field 
+          (name Value) C_Small)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part DPDTR_GND) 
+      (fields 
+        (field 
+          (name Reference) K) 
+        (field 
+          (name Value) DPDTR_GND)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 3) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 5) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 7) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 8) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 9) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 10) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 11) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 12) 
+          (name ~) 
+          (type input)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part FB) 
+      (fields 
+        (field 
+          (name Reference) FB) 
+        (field 
+          (name Value) FB)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type input)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part INA199x1) 
+      (fields 
+        (field 
+          (name Reference) U) 
+        (field 
+          (name Value) INA199x1)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name REF) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name GND) 
+          (type input)) 
+        (pin 
+          (num 3) 
+          (name V+) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name IN+) 
+          (type input)) 
+        (pin 
+          (num 5) 
+          (name IN-) 
+          (type input)) 
+        (pin 
+          (num 6) 
+          (name OUT) 
+          (type input)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part IO10) 
+      (fields 
+        (field 
+          (name Reference) DB) 
+        (field 
+          (name Value) IO10)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 3) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 5) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 6) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 7) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 8) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 9) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 10) 
+          (name ~) 
+          (type input)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part JNC) 
+      (description Resistor) 
+      (footprints 
+        (fp R_*) 
+        (fp Resistor_*)) 
+      (fields 
+        (field 
+          (name Reference) J) 
+        (field 
+          (name Value) JNC)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part LP2985) 
+      (fields 
+        (field 
+          (name Reference) U) 
+        (field 
+          (name Value) LP2985)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name Vin) 
+          (type power_in)) 
+        (pin 
+          (num 2) 
+          (name GND) 
+          (type power_in)) 
+        (pin 
+          (num 3) 
+          (name EN) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name BYP) 
+          (type input)) 
+        (pin 
+          (num 5) 
+          (name Vout) 
+          (type power_out)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part L_Small) 
+      (description "Inductor, small symbol") 
+      (footprints 
+        (fp Choke_*) 
+        (fp *Coil*) 
+        (fp Inductor_*) 
+        (fp L_*)) 
+      (fields 
+        (field 
+          (name Reference) L) 
+        (field 
+          (name Value) L_Small)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part MAX11613) 
+      (fields 
+        (field 
+          (name Reference) U) 
+        (field 
+          (name Value) MAX11613) 
+        (field 
+          (name Footprint) MODULE) 
+        (field 
+          (name Datasheet) DOCUMENTATION)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name AIN0) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name AIN1) 
+          (type power_in)) 
+        (pin 
+          (num 3) 
+          (name AIN2) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name AIN3) 
+          (type power_in)) 
+        (pin 
+          (num 5) 
+          (name SCL) 
+          (type input)) 
+        (pin 
+          (num 6) 
+          (name SDA) 
+          (type input)) 
+        (pin 
+          (num 7) 
+          (name GND) 
+          (type input)) 
+        (pin 
+          (num 8) 
+          (name Vdd) 
+          (type power_out)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part MCP4662) 
+      (fields 
+        (field 
+          (name Reference) U) 
+        (field 
+          (name Value) MCP4662)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name A0) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name SCL) 
+          (type input)) 
+        (pin 
+          (num 3) 
+          (name SDA) 
+          (type BiDi)) 
+        (pin 
+          (num 4) 
+          (name Vss) 
+          (type power_in)) 
+        (pin 
+          (num 5) 
+          (name P1B) 
+          (type input)) 
+        (pin 
+          (num 6) 
+          (name P1W) 
+          (type input)) 
+        (pin 
+          (num 7) 
+          (name P0W) 
+          (type output)) 
+        (pin 
+          (num 8) 
+          (name P0B) 
+          (type input)) 
+        (pin 
+          (num 9) 
+          (name A1) 
+          (type input)) 
+        (pin 
+          (num 10) 
+          (name Vdd) 
+          (type power_in)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part MCP9700) 
+      (fields 
+        (field 
+          (name Reference) Q) 
+        (field 
+          (name Value) MCP9700)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 3) 
+          (name ~) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part MOSFET_P) 
+      (fields 
+        (field 
+          (name Reference) Q) 
+        (field 
+          (name Value) MOSFET_P)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name G) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name S) 
+          (type passive)) 
+        (pin 
+          (num 3) 
+          (name D) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part Polyfuse) 
+      (description "resettable fuse, polymeric positive temperature coefficient (PPTC)") 
+      (footprints 
+        (fp *polyfuse*) 
+        (fp *PTC*)) 
+      (fields 
+        (field 
+          (name Reference) F) 
+        (field 
+          (name Value) Polyfuse)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part R) 
+      (description Resistor) 
+      (footprints 
+        (fp R_*) 
+        (fp R_*)) 
+      (fields 
+        (field 
+          (name Reference) R) 
+        (field 
+          (name Value) R)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part RD16HHF1) 
+      (aliases 
+        (alias MOSFET_N)) 
+      (fields 
+        (field 
+          (name Reference) Q) 
+        (field 
+          (name Value) RD16HHF1)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name G) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name S) 
+          (type passive)) 
+        (pin 
+          (num 3) 
+          (name D) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part RFD2b) 
+      (fields 
+        (field 
+          (name Reference) DB) 
+        (field 
+          (name Value) RFD2b)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name ~) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name ~) 
+          (type input)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part ST1S10) 
+      (fields 
+        (field 
+          (name Reference) U) 
+        (field 
+          (name Value) ST1S10)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name Vina) 
+          (type input)) 
+        (pin 
+          (num 2) 
+          (name EN) 
+          (type input)) 
+        (pin 
+          (num 3) 
+          (name Vfb) 
+          (type input)) 
+        (pin 
+          (num 4) 
+          (name AGND) 
+          (type power_in)) 
+        (pin 
+          (num 5) 
+          (name SYNC) 
+          (type input)) 
+        (pin 
+          (num 6) 
+          (name Vinsw) 
+          (type power_in)) 
+        (pin 
+          (num 7) 
+          (name SW) 
+          (type power_out)) 
+        (pin 
+          (num 8) 
+          (name PGND) 
+          (type power_in)) 
+        (pin 
+          (num 9) 
+          (name epad) 
+          (type power_in)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part TEST_1P) 
+      (description point) 
+      (fields 
+        (field 
+          (name Reference) J) 
+        (field 
+          (name Value) TEST_1P)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name 1) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part TRANSF4CT) 
+      (fields 
+        (field 
+          (name Reference) T) 
+        (field 
+          (name Value) TRANSF4CT)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name PR1) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name PM) 
+          (type passive)) 
+        (pin 
+          (num 3) 
+          (name PR2) 
+          (type passive)) 
+        (pin 
+          (num 4) 
+          (name S2) 
+          (type passive)) 
+        (pin 
+          (num 5) 
+          (name S1) 
+          (type passive)))) 
+    (libpart 
+      (lib hermeslite) 
+      (part TVSANTI) 
+      (description "Diode schottky") 
+      (footprints 
+        (fp D?) 
+        (fp S*)) 
+      (fields 
+        (field 
+          (name Reference) D) 
+        (field 
+          (name Value) TVSANTI)) 
+      (pins 
+        (pin 
+          (num 1) 
+          (name A) 
+          (type passive)) 
+        (pin 
+          (num 2) 
+          (name K) 
+          (type passive))))) 
+  (libraries 
+    (library 
+      (logical Radioberry) 
+      (uri C:\dev\radioberry-preamp\radioberry-preamp/libs/Radioberry.lib)) 
+    (library 
+      (logical hermeslite) 
+      (uri C:\dev\radioberry-preamp\radioberry-preamp/libs/hermeslite.lib))) 
+  (nets 
+    (net 
+      (code 1) 
+      (name GND) 
+      (node 
+        (ref C201) 
+        (pin 2)) 
+      (node 
+        (ref R203) 
+        (pin 1)) 
+      (node 
+        (ref C206) 
+        (pin 2)) 
+      (node 
+        (ref DB203) 
+        (pin 1)) 
+      (node 
+        (ref DB203) 
+        (pin 9)) 
+      (node 
+        (ref DB203) 
+        (pin 7)) 
+      (node 
+        (ref DB203) 
+        (pin 5)) 
+      (node 
+        (ref DB203) 
+        (pin 3)) 
+      (node 
+        (ref C208) 
+        (pin 2)) 
+      (node 
+        (ref R209) 
+        (pin 1)) 
+      (node 
+        (ref R219) 
+        (pin 1)) 
+      (node 
+        (ref Q203) 
+        (pin 2)) 
+      (node 
+        (ref Q202) 
+        (pin 2)) 
+      (node 
+        (ref Q201) 
+        (pin 3)) 
+      (node 
+        (ref U201) 
+        (pin 7)) 
+      (node 
+        (ref C207) 
+        (pin 2)) 
+      (node 
+        (ref R208) 
+        (pin 1)) 
+      (node 
+        (ref C203) 
+        (pin 2)) 
+      (node 
+        (ref R206) 
+        (pin 1)) 
+      (node 
+        (ref C210) 
+        (pin 2)) 
+      (node 
+        (ref R215) 
+        (pin 1)) 
+      (node 
+        (ref R214) 
+        (pin 1)) 
+      (node 
+        (ref C211) 
+        (pin 2)) 
+      (node 
+        (ref U202) 
+        (pin 1)) 
+      (node 
+        (ref C209) 
+        (pin 2)) 
+      (node 
+        (ref U202) 
+        (pin 6)) 
+      (node 
+        (ref U202) 
+        (pin 4)) 
+      (node 
+        (ref U202) 
+        (pin 7)) 
+      (node 
+        (ref DB202) 
+        (pin 1)) 
+      (node 
+        (ref DB201) 
+        (pin 1)) 
+      (node 
+        (ref C202) 
+        (pin 2)) 
+      (node 
+        (ref R216) 
+        (pin 1)) 
+      (node 
+        (ref U202) 
+        (pin 9)) 
+      (node 
+        (ref CN101) 
+        (pin 2)) 
+      (node 
+        (ref C110) 
+        (pin 2)) 
+      (node 
+        (ref U102) 
+        (pin 2)) 
+      (node 
+        (ref D101) 
+        (pin 2)) 
+      (node 
+        (ref C111) 
+        (pin 2)) 
+      (node 
+        (ref Q101) 
+        (pin 1)) 
+      (node 
+        (ref C103) 
+        (pin 2)) 
+      (node 
+        (ref C102) 
+        (pin 2)) 
+      (node 
+        (ref C101) 
+        (pin 2)) 
+      (node 
+        (ref C112) 
+        (pin 2)) 
+      (node 
+        (ref U101) 
+        (pin 9)) 
+      (node 
+        (ref U101) 
+        (pin 8)) 
+      (node 
+        (ref U101) 
+        (pin 5)) 
+      (node 
+        (ref U101) 
+        (pin 4)) 
+      (node 
+        (ref C105) 
+        (pin 2)) 
+      (node 
+        (ref C107) 
+        (pin 2)) 
+      (node 
+        (ref C109) 
+        (pin 2)) 
+      (node 
+        (ref C108) 
+        (pin 2)) 
+      (node 
+        (ref C106) 
+        (pin 2)) 
+      (node 
+        (ref R103) 
+        (pin 2)) 
+      (node 
+        (ref R101) 
+        (pin 1)) 
+      (node 
+        (ref C114) 
+        (pin 2)) 
+      (node 
+        (ref C118) 
+        (pin 2)) 
+      (node 
+        (ref C117) 
+        (pin 2)) 
+      (node 
+        (ref C116) 
+        (pin 2)) 
+      (node 
+        (ref C115) 
+        (pin 2)) 
+      (node 
+        (ref JP201) 
+        (pin 19)) 
+      (node 
+        (ref R104) 
+        (pin 1)) 
+      (node 
+        (ref C204) 
+        (pin 2)) 
+      (node 
+        (ref C205) 
+        (pin 2)) 
+      (node 
+        (ref JP201) 
+        (pin 20)) 
+      (node 
+        (ref C113) 
+        (pin 2)) 
+      (node 
+        (ref C119) 
+        (pin 2)) 
+      (node 
+        (ref C120) 
+        (pin 2)) 
+      (node 
+        (ref IC101) 
+        (pin 1)) 
+      (node 
+        (ref MH1) 
+        (pin 1)) 
+      (node 
+        (ref C121) 
+        (pin 2)) 
+      (node 
+        (ref C123) 
+        (pin 2)) 
+      (node 
+        (ref C122) 
+        (pin 2)) 
+      (node 
+        (ref C323) 
+        (pin 1)) 
+      (node 
+        (ref C320) 
+        (pin 1)) 
+      (node 
+        (ref C316) 
+        (pin 1)) 
+      (node 
+        (ref MH4) 
+        (pin 1)) 
+      (node 
+        (ref C317) 
+        (pin 1)) 
+      (node 
+        (ref C303) 
+        (pin 2)) 
+      (node 
+        (ref RF303) 
+        (pin 2)) 
+      (node 
+        (ref U301) 
+        (pin 1)) 
+      (node 
+        (ref C315) 
+        (pin 1)) 
+      (node 
+        (ref MH3) 
+        (pin 1)) 
+      (node 
+        (ref C308) 
+        (pin 2)) 
+      (node 
+        (ref Q302) 
+        (pin 2)) 
+      (node 
+        (ref C314) 
+        (pin 1)) 
+      (node 
+        (ref C309) 
+        (pin 2)) 
+      (node 
+        (ref C307) 
+        (pin 2)) 
+      (node 
+        (ref C306) 
+        (pin 2)) 
+      (node 
+        (ref Q301) 
+        (pin 2)) 
+      (node 
+        (ref K301) 
+        (pin 7)) 
+      (node 
+        (ref K301) 
+        (pin 5)) 
+      (node 
+        (ref K301) 
+        (pin 4)) 
+      (node 
+        (ref K301) 
+        (pin 3)) 
+      (node 
+        (ref K301) 
+        (pin 11)) 
+      (node 
+        (ref R310) 
+        (pin 1)) 
+      (node 
+        (ref R309) 
+        (pin 1)) 
+      (node 
+        (ref T302) 
+        (pin 1)) 
+      (node 
+        (ref U301) 
+        (pin 2)) 
+      (node 
+        (ref C310) 
+        (pin 2)) 
+      (node 
+        (ref MH2) 
+        (pin 1)) 
+      (node 
+        (ref RF301) 
+        (pin 2)) 
+      (node 
+        (ref MH5) 
+        (pin 1)) 
+      (node 
+        (ref C305) 
+        (pin 2)) 
+      (node 
+        (ref C302) 
+        (pin 2)) 
+      (node 
+        (ref R302) 
+        (pin 1)) 
+      (node 
+        (ref T301) 
+        (pin 5)) 
+      (node 
+        (ref RF302) 
+        (pin 2))) 
+    (net 
+      (code 2) 
+      (name "Net-(W301-Pad1)") 
+      (node 
+        (ref W301) 
+        (pin 1))) 
+    (net 
+      (code 3) 
+      (name "Net-(W301-Pad2)") 
+      (node 
+        (ref W301) 
+        (pin 2))) 
+    (net 
+      (code 4) 
+      (name bias1) 
+      (node 
+        (ref R212) 
+        (pin 2)) 
+      (node 
+        (ref J301) 
+        (pin 2)) 
+      (node 
+        (ref R210) 
+        (pin 1)) 
+      (node 
+        (ref C320) 
+        (pin 2))) 
+    (net 
+      (code 5) 
+      (name +VPA) 
+      (node 
+        (ref C104) 
+        (pin 1)) 
+      (node 
+        (ref L101) 
+        (pin 1)) 
+      (node 
+        (ref C106) 
+        (pin 1)) 
+      (node 
+        (ref C109) 
+        (pin 1)) 
+      (node 
+        (ref C105) 
+        (pin 1)) 
+      (node 
+        (ref C107) 
+        (pin 1)) 
+      (node 
+        (ref R102) 
+        (pin 1)) 
+      (node 
+        (ref C108) 
+        (pin 1)) 
+      (node 
+        (ref C303) 
+        (pin 1)) 
+      (node 
+        (ref R303) 
+        (pin 1)) 
+      (node 
+        (ref U301) 
+        (pin 4)) 
+      (node 
+        (ref U301) 
+        (pin 3))) 
+    (net 
+      (code 6) 
+      (name bias0) 
+      (node 
+        (ref R211) 
+        (pin 1)) 
+      (node 
+        (ref C323) 
+        (pin 2)) 
+      (node 
+        (ref J302) 
+        (pin 2)) 
+      (node 
+        (ref R213) 
+        (pin 2))) 
+    (net 
+      (code 7) 
+      (name "Net-(C313-Pad2)") 
+      (node 
+        (ref C313) 
+        (pin 2)) 
+      (node 
+        (ref R306) 
+        (pin 1))) 
+    (net 
+      (code 8) 
+      (name "Net-(C318-Pad2)") 
+      (node 
+        (ref RF303) 
+        (pin 1)) 
+      (node 
+        (ref C318) 
+        (pin 2))) 
+    (net 
+      (code 9) 
+      (name INTTR) 
+      (node 
+        (ref K301) 
+        (pin 12)) 
+      (node 
+        (ref Q202) 
+        (pin 3)) 
+      (node 
+        (ref C310) 
+        (pin 1))) 
+    (net 
+      (code 10) 
+      (name +3V3) 
+      (node 
+        (ref C117) 
+        (pin 1)) 
+      (node 
+        (ref C115) 
+        (pin 1)) 
+      (node 
+        (ref FB201) 
+        (pin 1)) 
+      (node 
+        (ref C118) 
+        (pin 1)) 
+      (node 
+        (ref C116) 
+        (pin 1)) 
+      (node 
+        (ref IC101) 
+        (pin 4)) 
+      (node 
+        (ref R201) 
+        (pin 2)) 
+      (node 
+        (ref R202) 
+        (pin 2)) 
+      (node 
+        (ref U202) 
+        (pin 10)) 
+      (node 
+        (ref C202) 
+        (pin 1)) 
+      (node 
+        (ref Q201) 
+        (pin 1)) 
+      (node 
+        (ref C209) 
+        (pin 1)) 
+      (node 
+        (ref K301) 
+        (pin 1)) 
+      (node 
+        (ref R217) 
+        (pin 2)) 
+      (node 
+        (ref R218) 
+        (pin 2))) 
+    (net 
+      (code 11) 
+      (name "Net-(C301-Pad2)") 
+      (node 
+        (ref R301) 
+        (pin 2)) 
+      (node 
+        (ref C301) 
+        (pin 2)) 
+      (node 
+        (ref C302) 
+        (pin 1))) 
+    (net 
+      (code 12) 
+      (name "Net-(C319-Pad1)") 
+      (node 
+        (ref C319) 
+        (pin 1)) 
+      (node 
+        (ref K301) 
+        (pin 8))) 
+    (net 
+      (code 13) 
+      (name "Net-(C319-Pad2)") 
+      (node 
+        (ref T301) 
+        (pin 4)) 
+      (node 
+        (ref C319) 
+        (pin 2))) 
+    (net 
+      (code 14) 
+      (name "Net-(T302-Pad2)") 
+      (node 
+        (ref T302) 
+        (pin 2))) 
+    (net 
+      (code 15) 
+      (name /Amplifier/ant) 
+      (node 
+        (ref RF302) 
+        (pin 1)) 
+      (node 
+        (ref C301) 
+        (pin 1)) 
+      (node 
+        (ref K301) 
+        (pin 9))) 
+    (net 
+      (code 16) 
+      (name "Net-(C304-Pad1)") 
+      (node 
+        (ref R302) 
+        (pin 2)) 
+      (node 
+        (ref R301) 
+        (pin 1)) 
+      (node 
+        (ref C304) 
+        (pin 1)) 
+      (node 
+        (ref K301) 
+        (pin 10))) 
+    (net 
+      (code 17) 
+      (name "Net-(C304-Pad2)") 
+      (node 
+        (ref C304) 
+        (pin 2)) 
+      (node 
+        (ref RF301) 
+        (pin 1))) 
+    (net 
+      (code 18) 
+      (name "Net-(R307-Pad1)") 
+      (node 
+        (ref R307) 
+        (pin 1)) 
+      (node 
+        (ref R310) 
+        (pin 2)) 
+      (node 
+        (ref T302) 
+        (pin 3))) 
+    (net 
+      (code 19) 
+      (name "Net-(C318-Pad1)") 
+      (node 
+        (ref R309) 
+        (pin 2)) 
+      (node 
+        (ref C318) 
+        (pin 1)) 
+      (node 
+        (ref R307) 
+        (pin 2))) 
+    (net 
+      (code 20) 
+      (name "Net-(R312-Pad2)") 
+      (node 
+        (ref R312) 
+        (pin 2)) 
+      (node 
+        (ref T302) 
+        (pin 5))) 
+    (net 
+      (code 21) 
+      (name "Net-(R306-Pad2)") 
+      (node 
+        (ref T302) 
+        (pin 4)) 
+      (node 
+        (ref R306) 
+        (pin 2))) 
+    (net 
+      (code 22) 
+      (name "Net-(C322-Pad2)") 
+      (node 
+        (ref R312) 
+        (pin 1)) 
+      (node 
+        (ref C322) 
+        (pin 2))) 
+    (net 
+      (code 23) 
+      (name "Net-(C311-Pad2)") 
+      (node 
+        (ref C311) 
+        (pin 2)) 
+      (node 
+        (ref R304) 
+        (pin 1))) 
+    (net 
+      (code 24) 
+      (name "Net-(C313-Pad1)") 
+      (node 
+        (ref J301) 
+        (pin 1)) 
+      (node 
+        (ref Q301) 
+        (pin 1)) 
+      (node 
+        (ref R304) 
+        (pin 2)) 
+      (node 
+        (ref C313) 
+        (pin 1))) 
+    (net 
+      (code 25) 
+      (name "Net-(C311-Pad1)") 
+      (node 
+        (ref T301) 
+        (pin 1)) 
+      (node 
+        (ref Q301) 
+        (pin 3)) 
+      (node 
+        (ref C311) 
+        (pin 1)) 
+      (node 
+        (ref R305) 
+        (pin 2)) 
+      (node 
+        (ref C312) 
+        (pin 1))) 
+    (net 
+      (code 26) 
+      (name "Net-(C322-Pad1)") 
+      (node 
+        (ref R311) 
+        (pin 2)) 
+      (node 
+        (ref Q302) 
+        (pin 1)) 
+      (node 
+        (ref C322) 
+        (pin 1)) 
+      (node 
+        (ref J302) 
+        (pin 1))) 
+    (net 
+      (code 27) 
+      (name "Net-(C321-Pad2)") 
+      (node 
+        (ref R311) 
+        (pin 1)) 
+      (node 
+        (ref C321) 
+        (pin 2))) 
+    (net 
+      (code 28) 
+      (name "Net-(C305-Pad1)") 
+      (node 
+        (ref R303) 
+        (pin 2)) 
+      (node 
+        (ref U301) 
+        (pin 5)) 
+      (node 
+        (ref C314) 
+        (pin 2)) 
+      (node 
+        (ref C317) 
+        (pin 2)) 
+      (node 
+        (ref C309) 
+        (pin 1)) 
+      (node 
+        (ref C306) 
+        (pin 1)) 
+      (node 
+        (ref C307) 
+        (pin 1)) 
+      (node 
+        (ref C308) 
+        (pin 1)) 
+      (node 
+        (ref R305) 
+        (pin 1)) 
+      (node 
+        (ref T301) 
+        (pin 2)) 
+      (node 
+        (ref C305) 
+        (pin 1)) 
+      (node 
+        (ref R308) 
+        (pin 2)) 
+      (node 
+        (ref C315) 
+        (pin 2)) 
+      (node 
+        (ref C316) 
+        (pin 2))) 
+    (net 
+      (code 29) 
+      (name "Net-(C312-Pad2)") 
+      (node 
+        (ref T301) 
+        (pin 3)) 
+      (node 
+        (ref C321) 
+        (pin 1)) 
+      (node 
+        (ref Q302) 
+        (pin 3)) 
+      (node 
+        (ref R308) 
+        (pin 1)) 
+      (node 
+        (ref C312) 
+        (pin 2))) 
+    (net 
+      (code 30) 
+      (name Vipa) 
+      (node 
+        (ref R205) 
+        (pin 2)) 
+      (node 
+        (ref U301) 
+        (pin 6))) 
+    (net 
+      (code 31) 
+      (name "Net-(R212-Pad1)") 
+      (node 
+        (ref R212) 
+        (pin 1)) 
+      (node 
+        (ref U202) 
+        (pin 5)) 
+      (node 
+        (ref R214) 
+        (pin 2))) 
+    (net 
+      (code 32) 
+      (name "Net-(R213-Pad1)") 
+      (node 
+        (ref R213) 
+        (pin 1)) 
+      (node 
+        (ref R215) 
+        (pin 2)) 
+      (node 
+        (ref U202) 
+        (pin 8))) 
+    (net 
+      (code 33) 
+      (name +VBIAS) 
+      (node 
+        (ref R211) 
+        (pin 2)) 
+      (node 
+        (ref R210) 
+        (pin 2)) 
+      (node 
+        (ref U102) 
+        (pin 5)) 
+      (node 
+        (ref C110) 
+        (pin 1))) 
+    (net 
+      (code 34) 
+      (name rb_inttr) 
+      (node 
+        (ref R216) 
+        (pin 2)) 
+      (node 
+        (ref Q202) 
+        (pin 1)) 
+      (node 
+        (ref JP201) 
+        (pin 3))) 
+    (net 
+      (code 35) 
+      (name SDA) 
+      (node 
+        (ref U201) 
+        (pin 6)) 
+      (node 
+        (ref J205) 
+        (pin 1)) 
+      (node 
+        (ref J204) 
+        (pin 1)) 
+      (node 
+        (ref U202) 
+        (pin 3))) 
+    (net 
+      (code 36) 
+      (name SCL) 
+      (node 
+        (ref U201) 
+        (pin 5)) 
+      (node 
+        (ref J207) 
+        (pin 1)) 
+      (node 
+        (ref J206) 
+        (pin 1)) 
+      (node 
+        (ref U202) 
+        (pin 2))) 
+    (net 
+      (code 37) 
+      (name Vtemp) 
+      (node 
+        (ref Q201) 
+        (pin 2)) 
+      (node 
+        (ref J202) 
+        (pin 2))) 
+    (net 
+      (code 38) 
+      (name fpga_scl) 
+      (node 
+        (ref J206) 
+        (pin 2)) 
+      (node 
+        (ref JP201) 
+        (pin 15))) 
+    (net 
+      (code 39) 
+      (name fpga_sda) 
+      (node 
+        (ref J204) 
+        (pin 2)) 
+      (node 
+        (ref JP201) 
+        (pin 16))) 
+    (net 
+      (code 40) 
+      (name EXTPTT) 
+      (node 
+        (ref R220) 
+        (pin 2)) 
+      (node 
+        (ref DB203) 
+        (pin 8))) 
+    (net 
+      (code 41) 
+      (name EXTKEY) 
+      (node 
+        (ref R221) 
+        (pin 2)) 
+      (node 
+        (ref DB203) 
+        (pin 6))) 
+    (net 
+      (code 42) 
+      (name EXTDASH) 
+      (node 
+        (ref DB203) 
+        (pin 4)) 
+      (node 
+        (ref R207) 
+        (pin 2))) 
+    (net 
+      (code 43) 
+      (name EXTDOT) 
+      (node 
+        (ref R204) 
+        (pin 2)) 
+      (node 
+        (ref DB203) 
+        (pin 2))) 
+    (net 
+      (code 44) 
+      (name rpi_sda) 
+      (node 
+        (ref JP201) 
+        (pin 18)) 
+      (node 
+        (ref J205) 
+        (pin 2))) 
+    (net 
+      (code 45) 
+      (name rpi_scl) 
+      (node 
+        (ref J207) 
+        (pin 2)) 
+      (node 
+        (ref JP201) 
+        (pin 17))) 
+    (net 
+      (code 46) 
+      (name bias) 
+      (node 
+        (ref FB102) 
+        (pin 1)) 
+      (node 
+        (ref JP201) 
+        (pin 8))) 
+    (net 
+      (code 47) 
+      (name "Net-(JP201-Pad12)") 
+      (node 
+        (ref JP201) 
+        (pin 12))) 
+    (net 
+      (code 48) 
+      (name "Net-(JP201-Pad10)") 
+      (node 
+        (ref JP201) 
+        (pin 10))) 
+    (net 
+      (code 49) 
+      (name "Net-(JP201-Pad1)") 
+      (node 
+        (ref JP201) 
+        (pin 1))) 
+    (net 
+      (code 50) 
+      (name "Net-(JP201-Pad2)") 
+      (node 
+        (ref JP201) 
+        (pin 2))) 
+    (net 
+      (code 51) 
+      (name "Net-(JP201-Pad9)") 
+      (node 
+        (ref JP201) 
+        (pin 9))) 
+    (net 
+      (code 52) 
+      (name "Net-(JP201-Pad11)") 
+      (node 
+        (ref JP201) 
+        (pin 11))) 
+    (net 
+      (code 53) 
+      (name key) 
+      (node 
+        (ref JP201) 
+        (pin 13)) 
+      (node 
+        (ref R217) 
+        (pin 1)) 
+      (node 
+        (ref C210) 
+        (pin 1)) 
+      (node 
+        (ref R221) 
+        (pin 1))) 
+    (net 
+      (code 54) 
+      (name ptt) 
+      (node 
+        (ref JP201) 
+        (pin 14)) 
+      (node 
+        (ref R220) 
+        (pin 1)) 
+      (node 
+        (ref R218) 
+        (pin 1)) 
+      (node 
+        (ref C211) 
+        (pin 1))) 
+    (net 
+      (code 55) 
+      (name envpa) 
+      (node 
+        (ref JP201) 
+        (pin 7)) 
+      (node 
+        (ref FB101) 
+        (pin 1))) 
+    (net 
+      (code 56) 
+      (name EXTTR) 
+      (node 
+        (ref Q203) 
+        (pin 3)) 
+      (node 
+        (ref DB203) 
+        (pin 10))) 
+    (net 
+      (code 57) 
+      (name "Net-(C208-Pad1)") 
+      (node 
+        (ref U201) 
+        (pin 1)) 
+      (node 
+        (ref R209) 
+        (pin 2)) 
+      (node 
+        (ref C208) 
+        (pin 1)) 
+      (node 
+        (ref J203) 
+        (pin 1))) 
+    (net 
+      (code 58) 
+      (name "Net-(C207-Pad1)") 
+      (node 
+        (ref J202) 
+        (pin 1)) 
+      (node 
+        (ref R208) 
+        (pin 2)) 
+      (node 
+        (ref C207) 
+        (pin 1)) 
+      (node 
+        (ref U201) 
+        (pin 2))) 
+    (net 
+      (code 59) 
+      (name /Control/AIN1) 
+      (node 
+        (ref J203) 
+        (pin 2)) 
+      (node 
+        (ref DB202) 
+        (pin 2))) 
+    (net 
+      (code 60) 
+      (name /Control/AIN2) 
+      (node 
+        (ref J201) 
+        (pin 2)) 
+      (node 
+        (ref DB201) 
+        (pin 2))) 
+    (net 
+      (code 61) 
+      (name "Net-(C203-Pad1)") 
+      (node 
+        (ref C203) 
+        (pin 1)) 
+      (node 
+        (ref U201) 
+        (pin 3)) 
+      (node 
+        (ref R206) 
+        (pin 2)) 
+      (node 
+        (ref R205) 
+        (pin 1))) 
+    (net 
+      (code 62) 
+      (name "Net-(C201-Pad1)") 
+      (node 
+        (ref U201) 
+        (pin 4)) 
+      (node 
+        (ref C201) 
+        (pin 1)) 
+      (node 
+        (ref R203) 
+        (pin 2)) 
+      (node 
+        (ref J201) 
+        (pin 1))) 
+    (net 
+      (code 63) 
+      (name "Net-(C206-Pad1)") 
+      (node 
+        (ref FB201) 
+        (pin 2)) 
+      (node 
+        (ref C206) 
+        (pin 1)) 
+      (node 
+        (ref U201) 
+        (pin 8))) 
+    (net 
+      (code 64) 
+      (name rb_exttr) 
+      (node 
+        (ref Q203) 
+        (pin 1)) 
+      (node 
+        (ref JP201) 
+        (pin 4)) 
+      (node 
+        (ref R219) 
+        (pin 2))) 
+    (net 
+      (code 65) 
+      (name dash) 
+      (node 
+        (ref JP201) 
+        (pin 5)) 
+      (node 
+        (ref C204) 
+        (pin 1)) 
+      (node 
+        (ref R207) 
+        (pin 1)) 
+      (node 
+        (ref R201) 
+        (pin 1))) 
+    (net 
+      (code 66) 
+      (name dot) 
+      (node 
+        (ref R202) 
+        (pin 1)) 
+      (node 
+        (ref JP201) 
+        (pin 6)) 
+      (node 
+        (ref R204) 
+        (pin 1)) 
+      (node 
+        (ref C205) 
+        (pin 1))) 
+    (net 
+      (code 67) 
+      (name "Net-(FB102-Pad2)") 
+      (node 
+        (ref FB102) 
+        (pin 2)) 
+      (node 
+        (ref U102) 
+        (pin 3)) 
+      (node 
+        (ref R104) 
+        (pin 2))) 
+    (net 
+      (code 68) 
+      (name "Net-(FB101-Pad2)") 
+      (node 
+        (ref U101) 
+        (pin 2)) 
+      (node 
+        (ref R101) 
+        (pin 2)) 
+      (node 
+        (ref FB101) 
+        (pin 2))) 
+    (net 
+      (code 69) 
+      (name "Net-(C102-Pad1)") 
+      (node 
+        (ref C122) 
+        (pin 1)) 
+      (node 
+        (ref U101) 
+        (pin 1)) 
+      (node 
+        (ref U101) 
+        (pin 6)) 
+      (node 
+        (ref C121) 
+        (pin 1)) 
+      (node 
+        (ref C123) 
+        (pin 1)) 
+      (node 
+        (ref C113) 
+        (pin 1)) 
+      (node 
+        (ref C102) 
+        (pin 1)) 
+      (node 
+        (ref C103) 
+        (pin 1)) 
+      (node 
+        (ref Q101) 
+        (pin 2)) 
+      (node 
+        (ref U102) 
+        (pin 1)) 
+      (node 
+        (ref C114) 
+        (pin 1)) 
+      (node 
+        (ref C111) 
+        (pin 1)) 
+      (node 
+        (ref IC101) 
+        (pin 3))) 
+    (net 
+      (code 70) 
+      (name "Net-(C104-Pad2)") 
+      (node 
+        (ref R102) 
+        (pin 2)) 
+      (node 
+        (ref R103) 
+        (pin 1)) 
+      (node 
+        (ref U101) 
+        (pin 3)) 
+      (node 
+        (ref C104) 
+        (pin 2))) 
+    (net 
+      (code 71) 
+      (name "Net-(L101-Pad2)") 
+      (node 
+        (ref U101) 
+        (pin 7)) 
+      (node 
+        (ref L101) 
+        (pin 2))) 
+    (net 
+      (code 72) 
+      (name "Net-(C112-Pad1)") 
+      (node 
+        (ref U102) 
+        (pin 4)) 
+      (node 
+        (ref C112) 
+        (pin 1))) 
+    (net 
+      (code 73) 
+      (name "Net-(CN101-Pad1)") 
+      (node 
+        (ref D101) 
+        (pin 1)) 
+      (node 
+        (ref F101) 
+        (pin 2)) 
+      (node 
+        (ref CN101) 
+        (pin 1))) 
+    (net 
+      (code 74) 
+      (name "Net-(C101-Pad1)") 
+      (node 
+        (ref Q101) 
+        (pin 3)) 
+      (node 
+        (ref F101) 
+        (pin 1)) 
+      (node 
+        (ref C101) 
+        (pin 1)) 
+      (node 
+        (ref C120) 
+        (pin 1)) 
+      (node 
+        (ref C119) 
+        (pin 1)))))

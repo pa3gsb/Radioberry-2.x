@@ -1,0 +1,1698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\dev\onderzoek\hat\hat\hat.kicad_sch</source>
+    <date>12/25/2023 7:19:12 PM</date>
+    <tool>Eeschema 7.0.7</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Radioberry - amplifier</title>
+        <company>AppMind</company>
+        <rev>beta 1</rev>
+        <date>2020-12-18</date>
+        <source>hat.kicad_sch</source>
+        <comment number="1" value="PA3GSB Johan Maas"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/">
+      <title_block>
+        <title>Radioberry - amplifier</title>
+        <company>AppMind</company>
+        <rev>beta 1</rev>
+        <date>2020-12-18</date>
+        <source>Power.kicad_sch</source>
+        <comment number="1" value="PA3GSB Johan Maas"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/">
+      <title_block>
+        <title>Radioberry - amplifier</title>
+        <company>AppMind</company>
+        <rev>beta 1</rev>
+        <date>2023-12-13</date>
+        <source>control.kicad_sch</source>
+        <comment number="1" value="PA3GSB Johan Maas"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/">
+      <title_block>
+        <title>Radioberry - amplifier</title>
+        <company>AppMind</company>
+        <rev>beta 1</rev>
+        <date>2020-12-18</date>
+        <source>Amplifier.kicad_sch</source>
+        <comment number="1" value="PA3GSB Johan Maas"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="MH1">
+      <value>DNI</value>
+      <footprint>HERMESLITE:m3</footprint>
+      <fields>
+        <field name="Key">NOBOM</field>
+        <field name="Option">DNI</field>
+      </fields>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
+      <property name="Option" value="DNI"/>
+      <property name="Key" value="NOBOM"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="hat.kicad_sch"/>
+      <property name="ki_description" value="point"/>
+      <property name="ki_keywords" value="point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-00005fced050</tstamps>
+    </comp>
+    <comp ref="MH2">
+      <value>DNI</value>
+      <footprint>HERMESLITE:m3</footprint>
+      <fields>
+        <field name="Key">NOBOM</field>
+        <field name="Option ">DNI</field>
+      </fields>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
+      <property name="Option " value="DNI"/>
+      <property name="Key" value="NOBOM"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="hat.kicad_sch"/>
+      <property name="ki_description" value="point"/>
+      <property name="ki_keywords" value="point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-00005fced376</tstamps>
+    </comp>
+    <comp ref="MH3">
+      <value>DNI</value>
+      <footprint>HERMESLITE:m3</footprint>
+      <fields>
+        <field name="Key">NOBOM</field>
+        <field name="Option ">DNI</field>
+      </fields>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
+      <property name="Option " value="DNI"/>
+      <property name="Key" value="NOBOM"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="hat.kicad_sch"/>
+      <property name="ki_description" value="point"/>
+      <property name="ki_keywords" value="point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-00005fced953</tstamps>
+    </comp>
+    <comp ref="MH4">
+      <value>DNI</value>
+      <footprint>HERMESLITE:m3</footprint>
+      <fields>
+        <field name="Key">NOBOM</field>
+        <field name="Option">DNI</field>
+      </fields>
+      <libsource lib="hermeslite" part="TEST_1P" description="point"/>
+      <property name="Option" value="DNI"/>
+      <property name="Key" value="NOBOM"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="hat.kicad_sch"/>
+      <property name="ki_description" value="point"/>
+      <property name="ki_keywords" value="point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00000000-0000-0000-0000-00005fcedb7b</tstamps>
+    </comp>
+    <comp ref="C101">
+      <value>10pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Power"/>
+      <property name="Sheetfile" value="Power.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/"/>
+      <tstamps>00000000-0000-0000-0000-00005fdc154d</tstamps>
+    </comp>
+    <comp ref="C102">
+      <value>100pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Power"/>
+      <property name="Sheetfile" value="Power.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/"/>
+      <tstamps>00000000-0000-0000-0000-00005fdb978b</tstamps>
+    </comp>
+    <comp ref="C103">
+      <value>10uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Power"/>
+      <property name="Sheetfile" value="Power.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/"/>
+      <tstamps>00000000-0000-0000-0000-00005ff950f7</tstamps>
+    </comp>
+    <comp ref="CN101">
+      <value>PS</value>
+      <footprint>HERMESLITE:PWRBARREL2</footprint>
+      <libsource lib="hermeslite" part="CONN_01X02" description="Connector, single row, 01x02, pin header"/>
+      <property name="Sheetname" value="Power"/>
+      <property name="Sheetfile" value="Power.kicad_sch"/>
+      <property name="ki_description" value="Connector, single row, 01x02, pin header"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/"/>
+      <tstamps>00000000-0000-0000-0000-00005ff950b5</tstamps>
+    </comp>
+    <comp ref="D101">
+      <value>SMBJ18CA</value>
+      <footprint>HERMESLITE:smbj18ca</footprint>
+      <libsource lib="hermeslite" part="TVSANTI" description="Diode schottky"/>
+      <property name="Sheetname" value="Power"/>
+      <property name="Sheetfile" value="Power.kicad_sch"/>
+      <property name="ki_description" value="Diode schottky"/>
+      <property name="ki_keywords" value="DEV DIODE"/>
+      <sheetpath names="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/"/>
+      <tstamps>00000000-0000-0000-0000-00005ff950df</tstamps>
+    </comp>
+    <comp ref="F101">
+      <value>Polyfuse</value>
+      <footprint>HERMESLITE:SMD-1206</footprint>
+      <libsource lib="hermeslite" part="Polyfuse" description="resettable fuse, polymeric positive temperature coefficient (PPTC)"/>
+      <property name="Sheetname" value="Power"/>
+      <property name="Sheetfile" value="Power.kicad_sch"/>
+      <property name="ki_description" value="resettable fuse, polymeric positive temperature coefficient (PPTC)"/>
+      <property name="ki_keywords" value="resettable fuse PTC PPTC polyfuse polyswitch"/>
+      <sheetpath names="/Power/" tstamps="/00000000-0000-0000-0000-00005fd3ddb9/"/>
+      <tstamps>4b919e3f-c448-4ce0-bf87-8a099b6df1fc</tstamps>
+    </comp>
+    <comp ref="C201">
+      <value>1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd0aaf2</tstamps>
+    </comp>
+    <comp ref="C202">
+      <value>1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd0aaec</tstamps>
+    </comp>
+    <comp ref="C203">
+      <value>1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ffcb665</tstamps>
+    </comp>
+    <comp ref="C204">
+      <value>1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ffcb65f</tstamps>
+    </comp>
+    <comp ref="DB201">
+      <value>IO10</value>
+      <footprint>HERMESLITE:5x2</footprint>
+      <libsource lib="hermeslite" part="IO10" description=""/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd74f02</tstamps>
+    </comp>
+    <comp ref="JP201">
+      <value>FEMALE_PINHEAD_PINHD-2X10</value>
+      <footprint>RB:PINHEAD_2X10</footprint>
+      <libsource lib="Radioberry" part="PINHEAD_PINHD-2X10" description=""/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ff06366</tstamps>
+    </comp>
+    <comp ref="Q201">
+      <value>NUD3124</value>
+      <footprint>HERMESLITE:SOT23_3</footprint>
+      <libsource lib="hermeslite" part="MOSFET_N" description=""/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd8ff7e</tstamps>
+    </comp>
+    <comp ref="Q202">
+      <value>NUD3124</value>
+      <footprint>HERMESLITE:SOT23_3</footprint>
+      <libsource lib="hermeslite" part="MOSFET_N" description=""/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd8ff84</tstamps>
+    </comp>
+    <comp ref="R201">
+      <value>2.2K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd0aae0</tstamps>
+    </comp>
+    <comp ref="R202">
+      <value>2.2K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd0aae6</tstamps>
+    </comp>
+    <comp ref="R203">
+      <value>100</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd0aaf8</tstamps>
+    </comp>
+    <comp ref="R204">
+      <value>100</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd0aafe</tstamps>
+    </comp>
+    <comp ref="R205">
+      <value>2.2K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ffcb653</tstamps>
+    </comp>
+    <comp ref="R206">
+      <value>2.2K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ffcb659</tstamps>
+    </comp>
+    <comp ref="R207">
+      <value>100</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ffcb66b</tstamps>
+    </comp>
+    <comp ref="R208">
+      <value>100</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005ffcb671</tstamps>
+    </comp>
+    <comp ref="R209">
+      <value>4.7K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd8ffa0</tstamps>
+    </comp>
+    <comp ref="R210">
+      <value>4.7K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Control"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Control/" tstamps="/00000000-0000-0000-0000-00005fcf3984/"/>
+      <tstamps>00000000-0000-0000-0000-00005fd8ff8a</tstamps>
+    </comp>
+    <comp ref="C301">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>3bd9eb0d-9a33-4035-bf1a-723e750c7b53</tstamps>
+    </comp>
+    <comp ref="C302">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>ab4b75cb-8bd4-464f-9f1f-710ea305eae9</tstamps>
+    </comp>
+    <comp ref="C303">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>bdc3a4c2-0b06-406c-865e-8a7891d353f3</tstamps>
+    </comp>
+    <comp ref="C304">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>6b18bb74-ac2a-4169-ac32-4a6bdef451a3</tstamps>
+    </comp>
+    <comp ref="C305">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>d5e39a3a-c3e0-49c9-ac1f-5ac274c740c7</tstamps>
+    </comp>
+    <comp ref="C306">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>90179f55-bd9d-4fa1-86dd-99200830bf0e</tstamps>
+    </comp>
+    <comp ref="C307">
+      <value>5.6pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>945cb4de-72e3-43c3-8944-6c99f3fbaad9</tstamps>
+    </comp>
+    <comp ref="C308">
+      <value>30pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>4e849ca2-24bc-40f1-90d6-7788448b2dcd</tstamps>
+    </comp>
+    <comp ref="C309">
+      <value>20pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>f5ecaa59-15e0-4244-bb8b-325deaa41ed5</tstamps>
+    </comp>
+    <comp ref="C310">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005fcc87c5</tstamps>
+    </comp>
+    <comp ref="C311">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>24d69e4f-b7b5-4a0a-af32-470d60634b53</tstamps>
+    </comp>
+    <comp ref="C312">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005fcc8581</tstamps>
+    </comp>
+    <comp ref="C313">
+      <value>82pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>e54f8f80-6b05-4c5a-85ed-01d73a06b355</tstamps>
+    </comp>
+    <comp ref="C314">
+      <value>110pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>f49cb6ac-53e7-4c56-a864-c09d81c64cef</tstamps>
+    </comp>
+    <comp ref="C315">
+      <value>100pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>9f2f8afc-1f6d-4452-ac7f-39af18590a36</tstamps>
+    </comp>
+    <comp ref="C316">
+      <value>68pF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>35b1f179-bfc4-4b6f-b2e7-e596d2b185e8</tstamps>
+    </comp>
+    <comp ref="C317">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>0cb6076b-b06c-488d-9f1a-9329d0123d87</tstamps>
+    </comp>
+    <comp ref="C318">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>37e2657d-67c0-4295-8063-bb417767aeed</tstamps>
+    </comp>
+    <comp ref="C319">
+      <value>0.1uF</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="C_Small" description="Unpolarized capacitor"/>
+      <property name="Option" value=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>3e5dfbf9-f8dc-4bb3-8e23-42ae11a2b067</tstamps>
+    </comp>
+    <comp ref="D301">
+      <value>1N4148</value>
+      <footprint>HERMESLITE:SOD323</footprint>
+      <fields>
+        <field name="Sim.Device">D</field>
+        <field name="Sim.Pins">1=K 2=A</field>
+      </fields>
+      <libsource lib="Device" part="D_Small" description="Diode, small symbol"/>
+      <property name="Sim.Device" value="D"/>
+      <property name="Sim.Pins" value="1=K 2=A"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Diode, small symbol"/>
+      <property name="ki_keywords" value="diode"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>466997ba-7d61-49a5-8c0e-f33485911352</tstamps>
+    </comp>
+    <comp ref="D302">
+      <value>1N4148</value>
+      <footprint>HERMESLITE:SOD323</footprint>
+      <fields>
+        <field name="Sim.Device">D</field>
+        <field name="Sim.Pins">1=K 2=A</field>
+      </fields>
+      <libsource lib="Device" part="D_Small" description="Diode, small symbol"/>
+      <property name="Sim.Device" value="D"/>
+      <property name="Sim.Pins" value="1=K 2=A"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Diode, small symbol"/>
+      <property name="ki_keywords" value="diode"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>842914cc-a6e6-43a1-8d62-d7220536fb96</tstamps>
+    </comp>
+    <comp ref="D303">
+      <value>1N4148</value>
+      <footprint>HERMESLITE:SOD323</footprint>
+      <fields>
+        <field name="Sim.Device">D</field>
+        <field name="Sim.Pins">1=K 2=A</field>
+      </fields>
+      <libsource lib="Device" part="D_Small" description="Diode, small symbol"/>
+      <property name="Sim.Device" value="D"/>
+      <property name="Sim.Pins" value="1=K 2=A"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Diode, small symbol"/>
+      <property name="ki_keywords" value="diode"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>44acc0d2-4b32-494b-a63a-7de735436d05</tstamps>
+    </comp>
+    <comp ref="K301">
+      <value>G6K-2</value>
+      <footprint>Relay_SMD:Relay_DPDT_Omron_G6K-2F</footprint>
+      <datasheet>http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf</datasheet>
+      <libsource lib="Relay" part="G6K-2" description="Miniature 2-pole relay, Single-side Stable"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Miniature 2-pole relay, Single-side Stable"/>
+      <property name="ki_keywords" value="Miniature Relay Dual Pole DPDT Omron"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>c24338a1-599c-40f7-b6f5-a9a48b0d0073</tstamps>
+    </comp>
+    <comp ref="K302">
+      <value>G6K-2</value>
+      <footprint>Relay_SMD:Relay_DPDT_Omron_G6K-2F</footprint>
+      <datasheet>http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf</datasheet>
+      <libsource lib="Relay" part="G6K-2" description="Miniature 2-pole relay, Single-side Stable"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Miniature 2-pole relay, Single-side Stable"/>
+      <property name="ki_keywords" value="Miniature Relay Dual Pole DPDT Omron"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>ef002d07-b08a-427e-a0ff-2b88fbdfb974</tstamps>
+    </comp>
+    <comp ref="K303">
+      <value>G6K-2</value>
+      <footprint>Relay_SMD:Relay_DPDT_Omron_G6K-2F</footprint>
+      <datasheet>http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf</datasheet>
+      <libsource lib="Relay" part="G6K-2" description="Miniature 2-pole relay, Single-side Stable"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Miniature 2-pole relay, Single-side Stable"/>
+      <property name="ki_keywords" value="Miniature Relay Dual Pole DPDT Omron"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>3d8f4295-fd18-4d24-b35a-fcbc41b29963</tstamps>
+    </comp>
+    <comp ref="L301">
+      <value>L_Small</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="L_Small" description="Inductor, small symbol"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Inductor, small symbol"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>dfe73425-5b9f-4576-9bb3-f7e5dd677c99</tstamps>
+    </comp>
+    <comp ref="L302">
+      <value>160nH</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="L_Small" description="Inductor, small symbol"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Inductor, small symbol"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>cf3d35ea-460a-4337-a4c5-8846c83f1af3</tstamps>
+    </comp>
+    <comp ref="L303">
+      <value>130nH</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="L_Small" description="Inductor, small symbol"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Inductor, small symbol"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>7d4545cf-6024-4880-97b8-dce437d05016</tstamps>
+    </comp>
+    <comp ref="L304">
+      <value>130nH</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="L_Small" description="Inductor, small symbol"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Inductor, small symbol"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>28775e87-9599-4eb3-b9a2-79bcef3e5e1b</tstamps>
+    </comp>
+    <comp ref="R301">
+      <value>247.5</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>96d5f021-526f-4136-864e-de11e24cc984</tstamps>
+    </comp>
+    <comp ref="R302">
+      <value>61.11</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>dc06d49c-453c-46c2-a3a0-8465ad4e8fa5</tstamps>
+    </comp>
+    <comp ref="R303">
+      <value>61.11</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>fe7ae88a-d18b-4460-bef8-46093fe18204</tstamps>
+    </comp>
+    <comp ref="R304">
+      <value>470</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>f2981377-9e4e-47d8-8f36-769ca369f3d2</tstamps>
+    </comp>
+    <comp ref="R305">
+      <value>1K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>fd78ddb4-48a8-479b-a8ae-8a3ab786fac3</tstamps>
+    </comp>
+    <comp ref="R306">
+      <value>12</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>f474af2e-f402-4e6c-ab67-82f6bc2cd014</tstamps>
+    </comp>
+    <comp ref="R307">
+      <value>4R99</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>ace9b80e-b5bf-42d8-8a50-61a01ca8d85d</tstamps>
+    </comp>
+    <comp ref="R308">
+      <value>0</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005feb0070</tstamps>
+    </comp>
+    <comp ref="R309">
+      <value>50</value>
+      <footprint>HERMESLITE:SMD-1206</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>61177e4c-8d2a-48e0-9c88-dd21e487a84a</tstamps>
+    </comp>
+    <comp ref="R310">
+      <value>330</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>de6d394f-ec99-44e5-931f-57ad9cee5fcb</tstamps>
+    </comp>
+    <comp ref="R311">
+      <value>200</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>3abfa277-b565-4673-8de1-e98ce7179297</tstamps>
+    </comp>
+    <comp ref="R312">
+      <value>0</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <fields>
+        <field name="Option">DNI</field>
+      </fields>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Option" value="DNI"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005feb09fd</tstamps>
+    </comp>
+    <comp ref="R313">
+      <value>0</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <fields>
+        <field name="Option">DNI</field>
+      </fields>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Option" value="DNI"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005feb1a8e</tstamps>
+    </comp>
+    <comp ref="R314">
+      <value>12</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>2004675b-1a02-490c-9e2b-9d1b17c1d5da</tstamps>
+    </comp>
+    <comp ref="R315">
+      <value>4R99</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>0544fca9-c220-4e42-91a9-b07322a5bc5f</tstamps>
+    </comp>
+    <comp ref="R316">
+      <value>470</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>21993493-1514-4376-811b-17b4806cc4fc</tstamps>
+    </comp>
+    <comp ref="R317">
+      <value>1K</value>
+      <footprint>HERMESLITE:SMD-0805</footprint>
+      <libsource lib="hermeslite" part="R" description="Resistor"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="r res resistor"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>5d844c28-1277-4497-8b4c-7246acee3765</tstamps>
+    </comp>
+    <comp ref="RF301">
+      <value>SMA</value>
+      <footprint>HERMESLITE:SMAEDGE_THFULL_L</footprint>
+      <libsource lib="hermeslite" part="BNC" description=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>05437b6e-e088-4cdd-8f2a-9f143a5dacfc</tstamps>
+    </comp>
+    <comp ref="RF302">
+      <value>SMA</value>
+      <footprint>HERMESLITE:SMAEDGE_THFULL_L</footprint>
+      <libsource lib="hermeslite" part="BNC" description=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>5aceaa7f-800e-42bc-9d6f-ea8caf7fc9c7</tstamps>
+    </comp>
+    <comp ref="RF303">
+      <value>SMA</value>
+      <footprint>HERMESLITE:SMAEDGE_THFULL_L</footprint>
+      <libsource lib="hermeslite" part="BNC" description=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>9250e2c8-01fe-4cd3-b37a-5b2ea2f07d4f</tstamps>
+    </comp>
+    <comp ref="RF304">
+      <value>SMA</value>
+      <footprint>HERMESLITE:SMAEDGE_THFULL_L</footprint>
+      <libsource lib="hermeslite" part="BNC" description=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005fcc87d2</tstamps>
+    </comp>
+    <comp ref="T301">
+      <value>TC4-1T</value>
+      <footprint>HERMESLITE:TRANSFSMT</footprint>
+      <libsource lib="hermeslite" part="TRANSF4CT" description=""/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>00000000-0000-0000-0000-00005fe45ede</tstamps>
+    </comp>
+    <comp ref="T302">
+      <value>ADT1.5-1+</value>
+      <footprint>ADT1.5-1+:ADT151</footprint>
+      <datasheet>https://www.minicircuits.com/pdfs/ADT1.5-1.pdf</datasheet>
+      <fields>
+        <field name="Description">Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz</field>
+        <field name="Height">2.84</field>
+        <field name="Manufacturer_Name">Mini-Circuits</field>
+        <field name="Manufacturer_Part_Number">ADT1.5-1+</field>
+        <field name="Mouser Part Number">139-ADT1.5-1</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Mini-Circuits/ADT1.5-1%2b?qs=xZ%2FP%252Ba9zWqaiA7HsYCvAPA%3D%3D</field>
+      </fields>
+      <libsource lib="ADT1.5-1+" part="ADT1.5-1+" description="Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz"/>
+      <property name="Description" value="Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz"/>
+      <property name="Height" value="2.84"/>
+      <property name="Mouser Part Number" value="139-ADT1.5-1"/>
+      <property name="Mouser Price/Stock" value="https://www.mouser.co.uk/ProductDetail/Mini-Circuits/ADT1.5-1%2b?qs=xZ%2FP%252Ba9zWqaiA7HsYCvAPA%3D%3D"/>
+      <property name="Manufacturer_Name" value="Mini-Circuits"/>
+      <property name="Manufacturer_Part_Number" value="ADT1.5-1+"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>e38740bb-0747-43f5-945f-864ce00583c9</tstamps>
+    </comp>
+    <comp ref="U301">
+      <value>OPA2674</value>
+      <footprint>HERMESLITE:OPA2677</footprint>
+      <libsource lib="hermeslite" part="LM358" description="Dual Op amp (low power)"/>
+      <property name="Sheetname" value="Amplifier"/>
+      <property name="Sheetfile" value="Amplifier.kicad_sch"/>
+      <property name="ki_description" value="Dual Op amp (low power)"/>
+      <property name="ki_keywords" value="ampliop"/>
+      <sheetpath names="/Amplifier/" tstamps="/00000000-0000-0000-0000-00005fc8a8b5/"/>
+      <tstamps>72aeb1a3-1047-4805-a261-8e8fb3588b46 6a65b7a2-73bc-42b7-980c-dc576b0982c6</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="ADT1.5-1+" part="ADT1.5-1+">
+      <description>Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz</description>
+      <docs>https://www.minicircuits.com/pdfs/ADT1.5-1.pdf</docs>
+      <fields>
+        <field name="Reference">T</field>
+        <field name="Value">ADT1.5-1+</field>
+        <field name="Footprint">ADT151</field>
+        <field name="Datasheet">https://www.minicircuits.com/pdfs/ADT1.5-1.pdf</field>
+        <field name="Description">Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz</field>
+        <field name="Height">2.84</field>
+        <field name="Mouser Part Number">139-ADT1.5-1</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Mini-Circuits/ADT1.5-1%2b?qs=xZ%2FP%252Ba9zWqaiA7HsYCvAPA%3D%3D</field>
+        <field name="Manufacturer_Name">Mini-Circuits</field>
+        <field name="Manufacturer_Part_Number">ADT1.5-1+</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PRIMARY_DOT" type="passive"/>
+        <pin num="2" name="SECONARY_CT" type="passive"/>
+        <pin num="3" name="PRIMARY" type="passive"/>
+        <pin num="4" name="SECONDARY_DOT" type="passive"/>
+        <pin num="5" name="NOT_USED" type="passive"/>
+        <pin num="6" name="SECONDARY" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="D_Small">
+      <description>Diode, small symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Small</field>
+        <field name="Datasheet">~</field>
+        <field name="Sim.Device">D</field>
+        <field name="Sim.Pins">1=K 2=A</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Radioberry" part="PINHEAD_PINHD-2X10">
+      <footprints>
+        <fp>*PINHEAD_2X10*</fp>
+        <fp>*PINHEAD_2X10_90*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">JP</field>
+        <field name="Value">PINHEAD_PINHD-2X10</field>
+        <field name="Footprint">PINHEAD_2X10</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="6" name="6" type="passive"/>
+        <pin num="7" name="7" type="passive"/>
+        <pin num="8" name="8" type="passive"/>
+        <pin num="9" name="9" type="passive"/>
+        <pin num="10" name="10" type="passive"/>
+        <pin num="11" name="11" type="passive"/>
+        <pin num="12" name="12" type="passive"/>
+        <pin num="13" name="13" type="passive"/>
+        <pin num="14" name="14" type="passive"/>
+        <pin num="15" name="15" type="passive"/>
+        <pin num="16" name="16" type="passive"/>
+        <pin num="17" name="17" type="passive"/>
+        <pin num="18" name="18" type="passive"/>
+        <pin num="19" name="19" type="passive"/>
+        <pin num="20" name="20" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Relay" part="G6K-2">
+      <description>Miniature 2-pole relay, Single-side Stable</description>
+      <docs>http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf</docs>
+      <footprints>
+        <fp>Relay*DPDT*Omron*G6K?2*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">K</field>
+        <field name="Value">G6K-2</field>
+        <field name="Datasheet">http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+        <pin num="3" name="" type="passive"/>
+        <pin num="4" name="" type="passive"/>
+        <pin num="5" name="" type="passive"/>
+        <pin num="6" name="" type="passive"/>
+        <pin num="7" name="" type="passive"/>
+        <pin num="8" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="BNC">
+      <footprints>
+        <fp>BNC_*</fp>
+        <fp>bnc</fp>
+        <fp>bnc-*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">BNC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="In" type="passive"/>
+        <pin num="2" name="Ext" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="CONN_01X02">
+      <description>Connector, single row, 01x02, pin header</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X*</fp>
+        <fp>Pin_Header_Angled_1X*</fp>
+        <fp>Socket_Strip_Straight_1X*</fp>
+        <fp>Socket_Strip_Angled_1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="C_Small">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="IO10">
+      <fields>
+        <field name="Reference">DB</field>
+        <field name="Value">IO10</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="input"/>
+        <pin num="2" name="" type="input"/>
+        <pin num="3" name="" type="input"/>
+        <pin num="4" name="" type="input"/>
+        <pin num="5" name="" type="input"/>
+        <pin num="6" name="" type="input"/>
+        <pin num="7" name="" type="input"/>
+        <pin num="8" name="" type="input"/>
+        <pin num="9" name="" type="input"/>
+        <pin num="10" name="" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="LM358">
+      <description>Dual Op amp (low power)</description>
+      <docs>ns/lm158.pdf</docs>
+      <footprints>
+        <fp>SOIC*Pitch1.27mm*</fp>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>TSSOP*Pitch0.65mm*</fp>
+        <fp>TO-99*</fp>
+        <fp>DSBGA*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM358</field>
+        <field name="Datasheet">ns/lm158.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="L_Small">
+      <description>Inductor, small symbol</description>
+      <footprints>
+        <fp>Choke_*</fp>
+        <fp>*Coil*</fp>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="MOSFET_N">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">MOSFET_N</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="Polyfuse">
+      <description>resettable fuse, polymeric positive temperature coefficient (PPTC)</description>
+      <footprints>
+        <fp>*polyfuse*</fp>
+        <fp>*PTC*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">F</field>
+        <field name="Value">Polyfuse</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="TEST_1P">
+      <description>point</description>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">TEST_1P</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="TRANSF4CT">
+      <fields>
+        <field name="Reference">T</field>
+        <field name="Value">TRANSF4CT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PR1" type="passive"/>
+        <pin num="2" name="PM" type="passive"/>
+        <pin num="3" name="PR2" type="passive"/>
+        <pin num="4" name="S2" type="passive"/>
+        <pin num="5" name="S1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="TVSANTI">
+      <description>Diode schottky</description>
+      <footprints>
+        <fp>D?</fp>
+        <fp>S*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">TVSANTI</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="ADT1.5-1+">
+      <uri>C:\dev\onderzoek\hat\hat/libs/ADT1.5-1+/ADT1.5-1+.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Radioberry">
+      <uri>C:\dev\onderzoek\hat\hat/libs/Radioberry.lib</uri>
+    </library>
+    <library logical="Relay">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Relay.kicad_sym</uri>
+    </library>
+    <library logical="hermeslite">
+      <uri>C:\dev\onderzoek\hat\hat/libs/hermeslite.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3V3">
+      <node ref="JP201" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="R201" pin="2" pintype="passive"/>
+      <node ref="R202" pin="2" pintype="passive"/>
+      <node ref="R205" pin="2" pintype="passive"/>
+      <node ref="R206" pin="2" pintype="passive"/>
+    </net>
+    <net code="2" name="+12V">
+      <node ref="C101" pin="1" pintype="passive"/>
+      <node ref="C102" pin="1" pintype="passive"/>
+      <node ref="C103" pin="1" pintype="passive"/>
+      <node ref="C302" pin="1" pintype="passive"/>
+      <node ref="C303" pin="1" pintype="passive"/>
+      <node ref="D301" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D302" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D303" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="F101" pin="2" pintype="passive"/>
+      <node ref="K301" pin="1" pintype="passive"/>
+      <node ref="K302" pin="1" pintype="passive"/>
+      <node ref="K303" pin="1" pintype="passive"/>
+      <node ref="L301" pin="1" pintype="passive"/>
+    </net>
+    <net code="3" name="+12VA">
+      <node ref="C304" pin="1" pintype="passive"/>
+      <node ref="C305" pin="1" pintype="passive"/>
+      <node ref="L301" pin="2" pintype="passive"/>
+      <node ref="R305" pin="2" pintype="passive"/>
+      <node ref="U301" pin="8" pinfunction="V+" pintype="power_in"/>
+    </net>
+    <net code="4" name="EXTDASH">
+      <node ref="DB201" pin="4" pintype="input"/>
+      <node ref="R204" pin="2" pintype="passive"/>
+    </net>
+    <net code="5" name="EXTDOT">
+      <node ref="DB201" pin="2" pintype="input"/>
+      <node ref="R203" pin="2" pintype="passive"/>
+    </net>
+    <net code="6" name="EXTKEY">
+      <node ref="DB201" pin="6" pintype="input"/>
+      <node ref="R208" pin="2" pintype="passive"/>
+    </net>
+    <net code="7" name="EXTPTT">
+      <node ref="DB201" pin="8" pintype="input"/>
+      <node ref="R207" pin="2" pintype="passive"/>
+    </net>
+    <net code="8" name="EXTTR">
+      <node ref="DB201" pin="10" pintype="input"/>
+      <node ref="Q202" pin="3" pinfunction="D" pintype="passive"/>
+    </net>
+    <net code="9" name="GND">
+      <node ref="C101" pin="2" pintype="passive"/>
+      <node ref="C102" pin="2" pintype="passive"/>
+      <node ref="C103" pin="2" pintype="passive"/>
+      <node ref="C201" pin="2" pintype="passive"/>
+      <node ref="C202" pin="2" pintype="passive"/>
+      <node ref="C203" pin="2" pintype="passive"/>
+      <node ref="C204" pin="2" pintype="passive"/>
+      <node ref="C302" pin="2" pintype="passive"/>
+      <node ref="C303" pin="2" pintype="passive"/>
+      <node ref="C304" pin="2" pintype="passive"/>
+      <node ref="C305" pin="2" pintype="passive"/>
+      <node ref="C313" pin="2" pintype="passive"/>
+      <node ref="C314" pin="2" pintype="passive"/>
+      <node ref="C315" pin="2" pintype="passive"/>
+      <node ref="C316" pin="2" pintype="passive"/>
+      <node ref="C319" pin="2" pintype="passive"/>
+      <node ref="CN101" pin="2" pinfunction="P2" pintype="passive"/>
+      <node ref="D101" pin="2" pinfunction="K" pintype="passive"/>
+      <node ref="DB201" pin="1" pintype="input"/>
+      <node ref="DB201" pin="3" pintype="input"/>
+      <node ref="DB201" pin="5" pintype="input"/>
+      <node ref="DB201" pin="7" pintype="input"/>
+      <node ref="DB201" pin="9" pintype="input"/>
+      <node ref="JP201" pin="19" pinfunction="19" pintype="passive"/>
+      <node ref="JP201" pin="20" pinfunction="20" pintype="passive"/>
+      <node ref="K301" pin="2" pintype="passive"/>
+      <node ref="K301" pin="3" pintype="passive"/>
+      <node ref="MH1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="MH2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="MH3" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="MH4" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="Q201" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="Q202" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R209" pin="1" pintype="passive"/>
+      <node ref="R210" pin="1" pintype="passive"/>
+      <node ref="R302" pin="1" pintype="passive"/>
+      <node ref="R303" pin="1" pintype="passive"/>
+      <node ref="R309" pin="2" pintype="passive"/>
+      <node ref="R312" pin="1" pintype="passive"/>
+      <node ref="R313" pin="1" pintype="passive"/>
+      <node ref="R317" pin="1" pintype="passive"/>
+      <node ref="RF301" pin="2" pinfunction="Ext" pintype="passive"/>
+      <node ref="RF302" pin="2" pinfunction="Ext" pintype="passive"/>
+      <node ref="RF303" pin="2" pinfunction="Ext" pintype="passive"/>
+      <node ref="RF304" pin="2" pinfunction="Ext" pintype="passive"/>
+      <node ref="T301" pin="5" pinfunction="S1" pintype="passive"/>
+      <node ref="T302" pin="4" pinfunction="SECONDARY_DOT" pintype="passive"/>
+      <node ref="U301" pin="4" pinfunction="V-" pintype="power_in"/>
+    </net>
+    <net code="10" name="Net-(C301-Pad1)">
+      <node ref="C301" pin="1" pintype="passive"/>
+      <node ref="K301" pin="6" pintype="passive"/>
+    </net>
+    <net code="11" name="Net-(C306-Pad1)">
+      <node ref="C306" pin="1" pintype="passive"/>
+      <node ref="R307" pin="1" pintype="passive"/>
+    </net>
+    <net code="12" name="Net-(C306-Pad2)">
+      <node ref="C306" pin="2" pintype="passive"/>
+      <node ref="R304" pin="1" pintype="passive"/>
+      <node ref="U301" pin="1" pintype="output"/>
+    </net>
+    <net code="13" name="Net-(C307-Pad1)">
+      <node ref="C307" pin="1" pintype="passive"/>
+      <node ref="C310" pin="1" pintype="passive"/>
+      <node ref="C313" pin="1" pintype="passive"/>
+      <node ref="L302" pin="1" pintype="passive"/>
+    </net>
+    <net code="14" name="Net-(C307-Pad2)">
+      <node ref="C307" pin="2" pintype="passive"/>
+      <node ref="C308" pin="1" pintype="passive"/>
+      <node ref="C314" pin="1" pintype="passive"/>
+      <node ref="L302" pin="2" pintype="passive"/>
+      <node ref="L303" pin="1" pintype="passive"/>
+    </net>
+    <net code="15" name="Net-(C308-Pad2)">
+      <node ref="C308" pin="2" pintype="passive"/>
+      <node ref="C309" pin="1" pintype="passive"/>
+      <node ref="C315" pin="1" pintype="passive"/>
+      <node ref="L303" pin="2" pintype="passive"/>
+      <node ref="L304" pin="1" pintype="passive"/>
+    </net>
+    <net code="16" name="Net-(C309-Pad2)">
+      <node ref="C309" pin="2" pintype="passive"/>
+      <node ref="C311" pin="2" pintype="passive"/>
+      <node ref="C316" pin="1" pintype="passive"/>
+      <node ref="L304" pin="2" pintype="passive"/>
+    </net>
+    <net code="17" name="Net-(C311-Pad1)">
+      <node ref="C311" pin="1" pintype="passive"/>
+      <node ref="R308" pin="2" pintype="passive"/>
+      <node ref="R312" pin="2" pintype="passive"/>
+    </net>
+    <net code="18" name="Net-(C312-Pad1)">
+      <node ref="C312" pin="1" pintype="passive"/>
+      <node ref="K303" pin="3" pintype="passive"/>
+    </net>
+    <net code="19" name="Net-(C317-Pad1)">
+      <node ref="C317" pin="1" pintype="passive"/>
+      <node ref="R310" pin="2" pintype="passive"/>
+    </net>
+    <net code="20" name="Net-(C318-Pad1)">
+      <node ref="C318" pin="1" pintype="passive"/>
+      <node ref="R315" pin="2" pintype="passive"/>
+    </net>
+    <net code="21" name="Net-(C318-Pad2)">
+      <node ref="C318" pin="2" pintype="passive"/>
+      <node ref="R316" pin="1" pintype="passive"/>
+      <node ref="U301" pin="7" pintype="output"/>
+    </net>
+    <net code="22" name="Net-(CN101-P1)">
+      <node ref="CN101" pin="1" pinfunction="P1" pintype="passive"/>
+      <node ref="D101" pin="1" pinfunction="A" pintype="passive"/>
+      <node ref="F101" pin="1" pintype="passive"/>
+    </net>
+    <net code="23" name="Net-(K301-Pad4)">
+      <node ref="K301" pin="4" pintype="passive"/>
+      <node ref="K301" pin="7" pintype="passive"/>
+      <node ref="K302" pin="2" pintype="passive"/>
+    </net>
+    <net code="24" name="Net-(K301-Pad5)">
+      <node ref="K301" pin="5" pintype="passive"/>
+      <node ref="R301" pin="1" pintype="passive"/>
+      <node ref="R302" pin="2" pintype="passive"/>
+    </net>
+    <net code="25" name="Net-(K302-Pad4)">
+      <node ref="K302" pin="4" pintype="passive"/>
+      <node ref="K303" pin="4" pintype="passive"/>
+    </net>
+    <net code="26" name="Net-(K303-Pad2)">
+      <node ref="K303" pin="2" pintype="passive"/>
+      <node ref="R309" pin="1" pintype="passive"/>
+    </net>
+    <net code="27" name="Net-(RF301-In)">
+      <node ref="C301" pin="2" pintype="passive"/>
+      <node ref="RF301" pin="1" pinfunction="In" pintype="passive"/>
+    </net>
+    <net code="28" name="Net-(RF302-In)">
+      <node ref="R301" pin="2" pintype="passive"/>
+      <node ref="R303" pin="2" pintype="passive"/>
+      <node ref="RF302" pin="1" pinfunction="In" pintype="passive"/>
+    </net>
+    <net code="29" name="Net-(RF303-In)">
+      <node ref="K302" pin="3" pintype="passive"/>
+      <node ref="RF303" pin="1" pinfunction="In" pintype="passive"/>
+    </net>
+    <net code="30" name="Net-(RF304-In)">
+      <node ref="C310" pin="2" pintype="passive"/>
+      <node ref="RF304" pin="1" pinfunction="In" pintype="passive"/>
+    </net>
+    <net code="31" name="Net-(T301-PM)">
+      <node ref="C319" pin="1" pintype="passive"/>
+      <node ref="R305" pin="1" pintype="passive"/>
+      <node ref="R317" pin="2" pintype="passive"/>
+      <node ref="T301" pin="2" pinfunction="PM" pintype="passive"/>
+    </net>
+    <net code="32" name="Net-(T301-PR1)">
+      <node ref="R311" pin="2" pintype="passive"/>
+      <node ref="R314" pin="1" pintype="passive"/>
+      <node ref="T301" pin="1" pinfunction="PR1" pintype="passive"/>
+    </net>
+    <net code="33" name="Net-(T301-PR2)">
+      <node ref="R306" pin="2" pintype="passive"/>
+      <node ref="R311" pin="1" pintype="passive"/>
+      <node ref="T301" pin="3" pinfunction="PR2" pintype="passive"/>
+    </net>
+    <net code="34" name="Net-(T301-S2)">
+      <node ref="R308" pin="1" pintype="passive"/>
+      <node ref="R313" pin="2" pintype="passive"/>
+      <node ref="T301" pin="4" pinfunction="S2" pintype="passive"/>
+    </net>
+    <net code="35" name="Net-(T302-PRIMARY)">
+      <node ref="R315" pin="1" pintype="passive"/>
+      <node ref="T302" pin="3" pinfunction="PRIMARY" pintype="passive"/>
+    </net>
+    <net code="36" name="Net-(T302-PRIMARY_DOT)">
+      <node ref="R307" pin="2" pintype="passive"/>
+      <node ref="T302" pin="1" pinfunction="PRIMARY_DOT" pintype="passive"/>
+    </net>
+    <net code="37" name="Net-(T302-SECONDARY)">
+      <node ref="C312" pin="2" pintype="passive"/>
+      <node ref="T302" pin="6" pinfunction="SECONDARY" pintype="passive"/>
+    </net>
+    <net code="38" name="Net-(U301A-+)">
+      <node ref="R306" pin="1" pintype="passive"/>
+      <node ref="U301" pin="3" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="39" name="Net-(U301A--)">
+      <node ref="R304" pin="2" pintype="passive"/>
+      <node ref="R310" pin="1" pintype="passive"/>
+      <node ref="U301" pin="2" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="40" name="Net-(U301B-+)">
+      <node ref="R314" pin="2" pintype="passive"/>
+      <node ref="U301" pin="5" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="41" name="Net-(U301B--)">
+      <node ref="C317" pin="2" pintype="passive"/>
+      <node ref="R316" pin="2" pintype="passive"/>
+      <node ref="U301" pin="6" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="42" name="dash">
+      <node ref="C201" pin="1" pintype="passive"/>
+      <node ref="JP201" pin="5" pinfunction="5" pintype="passive"/>
+      <node ref="R201" pin="1" pintype="passive"/>
+      <node ref="R204" pin="1" pintype="passive"/>
+    </net>
+    <net code="43" name="dot">
+      <node ref="C202" pin="1" pintype="passive"/>
+      <node ref="JP201" pin="6" pinfunction="6" pintype="passive"/>
+      <node ref="R202" pin="1" pintype="passive"/>
+      <node ref="R203" pin="1" pintype="passive"/>
+    </net>
+    <net code="44" name="key">
+      <node ref="C203" pin="1" pintype="passive"/>
+      <node ref="JP201" pin="13" pinfunction="13" pintype="passive"/>
+      <node ref="R205" pin="1" pintype="passive"/>
+      <node ref="R208" pin="1" pintype="passive"/>
+    </net>
+    <net code="45" name="ptt">
+      <node ref="C204" pin="1" pintype="passive"/>
+      <node ref="JP201" pin="14" pinfunction="14" pintype="passive"/>
+      <node ref="R206" pin="1" pintype="passive"/>
+      <node ref="R207" pin="1" pintype="passive"/>
+    </net>
+    <net code="46" name="rb_exttr">
+      <node ref="JP201" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="Q202" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="R210" pin="2" pintype="passive"/>
+    </net>
+    <net code="47" name="rb_relais">
+      <node ref="JP201" pin="3" pinfunction="3" pintype="passive"/>
+      <node ref="Q201" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="R209" pin="2" pintype="passive"/>
+    </net>
+    <net code="48" name="relais">
+      <node ref="D301" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D302" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D303" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="K301" pin="8" pintype="passive"/>
+      <node ref="K302" pin="8" pintype="passive"/>
+      <node ref="K303" pin="8" pintype="passive"/>
+      <node ref="Q201" pin="3" pinfunction="D" pintype="passive"/>
+    </net>
+    <net code="49" name="unconnected-(JP201-Pad2)">
+      <node ref="JP201" pin="2" pinfunction="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="50" name="unconnected-(JP201-Pad7)">
+      <node ref="JP201" pin="7" pinfunction="7" pintype="passive+no_connect"/>
+    </net>
+    <net code="51" name="unconnected-(JP201-Pad8)">
+      <node ref="JP201" pin="8" pinfunction="8" pintype="passive+no_connect"/>
+    </net>
+    <net code="52" name="unconnected-(JP201-Pad9)">
+      <node ref="JP201" pin="9" pinfunction="9" pintype="passive+no_connect"/>
+    </net>
+    <net code="53" name="unconnected-(JP201-Pad10)">
+      <node ref="JP201" pin="10" pinfunction="10" pintype="passive+no_connect"/>
+    </net>
+    <net code="54" name="unconnected-(JP201-Pad11)">
+      <node ref="JP201" pin="11" pinfunction="11" pintype="passive+no_connect"/>
+    </net>
+    <net code="55" name="unconnected-(JP201-Pad12)">
+      <node ref="JP201" pin="12" pinfunction="12" pintype="passive+no_connect"/>
+    </net>
+    <net code="56" name="unconnected-(JP201-Pad15)">
+      <node ref="JP201" pin="15" pinfunction="15" pintype="passive+no_connect"/>
+    </net>
+    <net code="57" name="unconnected-(JP201-Pad16)">
+      <node ref="JP201" pin="16" pinfunction="16" pintype="passive+no_connect"/>
+    </net>
+    <net code="58" name="unconnected-(JP201-Pad17)">
+      <node ref="JP201" pin="17" pinfunction="17" pintype="passive+no_connect"/>
+    </net>
+    <net code="59" name="unconnected-(JP201-Pad18)">
+      <node ref="JP201" pin="18" pinfunction="18" pintype="passive+no_connect"/>
+    </net>
+    <net code="60" name="unconnected-(K302-Pad5)">
+      <node ref="K302" pin="5" pintype="passive+no_connect"/>
+    </net>
+    <net code="61" name="unconnected-(K302-Pad6)">
+      <node ref="K302" pin="6" pintype="passive+no_connect"/>
+    </net>
+    <net code="62" name="unconnected-(K302-Pad7)">
+      <node ref="K302" pin="7" pintype="passive+no_connect"/>
+    </net>
+    <net code="63" name="unconnected-(K303-Pad5)">
+      <node ref="K303" pin="5" pintype="passive+no_connect"/>
+    </net>
+    <net code="64" name="unconnected-(K303-Pad6)">
+      <node ref="K303" pin="6" pintype="passive+no_connect"/>
+    </net>
+    <net code="65" name="unconnected-(K303-Pad7)">
+      <node ref="K303" pin="7" pintype="passive+no_connect"/>
+    </net>
+    <net code="66" name="unconnected-(T302-NOT_USED-Pad5)">
+      <node ref="T302" pin="5" pinfunction="NOT_USED" pintype="passive+no_connect"/>
+    </net>
+    <net code="67" name="unconnected-(T302-SECONARY_CT-Pad2)">
+      <node ref="T302" pin="2" pinfunction="SECONARY_CT" pintype="passive+no_connect"/>
+    </net>
+  </nets>
+</export>

@@ -1,0 +1,8 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "hermeslite")(type "KiCad")(uri "${KIPRJMOD}/libs/hermeslite.kicad_sym")(options "")(descr ""))
+  (lib (name "Radioberry")(type "Legacy")(uri "${KIPRJMOD}/libs/Radioberry.lib")(options "")(descr ""))
+  (lib (name "radioberry-preamp-rescue")(type "KiCad")(uri "${KIPRJMOD}/radioberry-preamp-rescue.kicad_sym")(options "")(descr ""))
+  (lib (name "ADT1.5-1+")(type "Legacy")(uri "${KIPRJMOD}/libs/ADT1.5-1+/ADT1.5-1+.lib")(options "")(descr ""))
+  (lib (name "TC4-1T")(type "Legacy")(uri "${KIPRJMOD}/libs/tc4-1t/TC4-1T+.lib")(options "")(descr ""))
+)

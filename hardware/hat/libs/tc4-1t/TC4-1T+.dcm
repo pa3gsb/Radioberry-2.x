@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP TC4-1T+
+D 1:4 CORE & WIRE Transformer, 0.5 - 300 MHz, 50
+K
+F https://www.minicircuits.com/pdfs/TC4-1T+.pdf
+$ENDCMP
+#
+#End Doc Library

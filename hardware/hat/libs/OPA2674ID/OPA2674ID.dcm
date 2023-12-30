@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP OPA2674ID
+D Texas Instruments OPA2674ID, Dual Current Feedback Op Amp, 2080MHz, 5 V, 8-Pin SOIC
+K
+F https://www.ti.com/lit/ds/symlink/opa2674.pdf?ts=1606801748150&ref_url=https%253A%252F%252Fwww.ti.com%252Fstore%252Fti%252Fen%252Fp%252Fproduct%252F%253Fp%253DOPA2674ID%2526keyMatch%253DOPA2674ID%2526tisearch%253DSearch-EN-everything%2526usecase%253DOPN
+$ENDCMP
+#
+#End Doc Library

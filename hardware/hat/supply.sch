@@ -1,0 +1,608 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 5
+Title "Radioberry - amplifier"
+Date "2020-11-30"
+Rev "0.1"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L hermeslite:CONN_01X02 J?
+U 1 1 5FBFD786
+P 2075 1700
+F 0 "J?" H 1992 1965 50  0000 C CNN
+F 1 "CONN_01X02" H 1992 1874 50  0000 C CNN
+F 2 "" H 2075 1700 50  0001 C CNN
+F 3 "" H 2075 1700 50  0001 C CNN
+	1    2075 1700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L hermeslite:Polyfuse F?
+U 1 1 5FBFE0DC
+P 3200 1650
+F 0 "F?" V 2975 1650 50  0000 C CNN
+F 1 "Polyfuse" V 3066 1650 50  0000 C CNN
+F 2 "" H 3250 1450 50  0001 L CNN
+F 3 "" H 3200 1650 50  0001 C CNN
+	1    3200 1650
+	0    1    1    0   
+$EndComp
+$Comp
+L hermeslite:MOSFET_P Q?
+U 1 1 5FBFEB88
+P 3925 1750
+F 0 "Q?" V 4228 1750 60  0000 C CNN
+F 1 "MOSFET_P" V 4122 1750 60  0000 C CNN
+F 2 "" H 3925 1750 60  0000 C CNN
+F 3 "" H 3925 1750 60  0000 C CNN
+	1    3925 1750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L hermeslite:LP2985 U?
+U 1 1 5FBFFBD8
+P 5950 4050
+F 0 "U?" H 6150 4391 39  0000 C CNN
+F 1 "LP2985" H 6150 4316 39  0000 C CNN
+F 2 "" H 5950 4050 60  0000 C CNN
+F 3 "" H 5950 4050 60  0000 C CNN
+	1    5950 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC00C46
+P 5350 4150
+F 0 "C?" H 5442 4196 50  0000 L CNN
+F 1 "C_Small" H 5442 4105 50  0000 L CNN
+F 2 "" H 5350 4150 50  0001 C CNN
+F 3 "" H 5350 4150 50  0001 C CNN
+	1    5350 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:FB FB?
+U 1 1 5FC01153
+P 5650 3475
+F 0 "FB?" V 5650 3553 39  0000 L CNN
+F 1 "FB" H 5650 3575 60  0001 C CNN
+F 2 "" H 5650 3475 60  0000 C CNN
+F 3 "" H 5650 3475 60  0000 C CNN
+	1    5650 3475
+	0    1    1    0   
+$EndComp
+$Comp
+L hermeslite:ST1S10 U?
+U 1 1 5FC0178C
+P 6125 2475
+F 0 "U?" H 6075 3090 50  0000 C CNN
+F 1 "ST1S10" H 6075 2999 50  0000 C CNN
+F 2 "" H 6125 2475 50  0000 C CNN
+F 3 "" H 6125 2475 50  0000 C CNN
+	1    6125 2475
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:TVSANTI D?
+U 1 1 5FC026ED
+P 2800 1825
+F 0 "D?" V 2749 1903 40  0000 L CNN
+F 1 "TVSANTI" V 2825 1903 40  0000 L CNN
+F 2 "" H 3125 1875 60  0000 C CNN
+F 3 "" H 3125 1875 60  0000 C CNN
+	1    2800 1825
+	0    1    1    0   
+$EndComp
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC04EAA
+P 2375 1825
+F 0 "#PWR?" H 2375 1575 50  0001 C CNN
+F 1 "GND" H 2380 1652 50  0000 C CNN
+F 2 "" H 2375 1825 50  0001 C CNN
+F 3 "" H 2375 1825 50  0001 C CNN
+	1    2375 1825
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2275 1650 2800 1650
+Wire Wire Line
+	2275 1750 2375 1750
+Wire Wire Line
+	2375 1750 2375 1825
+Wire Wire Line
+	3050 1650 2800 1650
+Connection ~ 2800 1650
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC057FD
+P 2800 2025
+F 0 "#PWR?" H 2800 1775 50  0001 C CNN
+F 1 "GND" H 2805 1852 50  0000 C CNN
+F 2 "" H 2800 2025 50  0001 C CNN
+F 3 "" H 2800 2025 50  0001 C CNN
+	1    2800 2025
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 1975 2800 2025
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC07454
+P 3525 1825
+F 0 "C?" H 3617 1871 50  0000 L CNN
+F 1 "C_Small" H 3617 1780 50  0000 L CNN
+F 2 "" H 3525 1825 50  0001 C CNN
+F 3 "" H 3525 1825 50  0001 C CNN
+	1    3525 1825
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:FB FB?
+U 1 1 5FC0A89E
+P 5575 1500
+F 0 "FB?" V 5575 1578 39  0000 L CNN
+F 1 "FB" H 5575 1600 60  0001 C CNN
+F 2 "" H 5575 1500 60  0000 C CNN
+F 3 "" H 5575 1500 60  0000 C CNN
+	1    5575 1500
+	0    1    1    0   
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC0B956
+P 5075 2225
+F 0 "C?" H 5167 2271 50  0000 L CNN
+F 1 "C_Small" H 5167 2180 50  0000 L CNN
+F 2 "" H 5075 2225 50  0001 C CNN
+F 3 "" H 5075 2225 50  0001 C CNN
+	1    5075 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC0BE02
+P 5275 2225
+F 0 "C?" H 5367 2271 50  0000 L CNN
+F 1 "C_Small" H 5367 2180 50  0000 L CNN
+F 2 "" H 5275 2225 50  0001 C CNN
+F 3 "" H 5275 2225 50  0001 C CNN
+	1    5275 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:R R?
+U 1 1 5FC0C3AD
+P 7025 2275
+F 0 "R?" H 7095 2321 50  0000 L CNN
+F 1 "R" H 7095 2230 50  0000 L CNN
+F 2 "" V 6955 2275 50  0001 C CNN
+F 3 "" H 7025 2275 50  0001 C CNN
+	1    7025 2275
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:R R?
+U 1 1 5FC0CA18
+P 7025 2650
+F 0 "R?" H 7095 2696 50  0000 L CNN
+F 1 "R" H 7095 2605 50  0000 L CNN
+F 2 "" V 6955 2650 50  0001 C CNN
+F 3 "" H 7025 2650 50  0001 C CNN
+	1    7025 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:L_Small L?
+U 1 1 5FC0DFA6
+P 6775 2125
+F 0 "L?" V 6594 2125 50  0000 C CNN
+F 1 "L_Small" V 6685 2125 50  0000 C CNN
+F 2 "" H 6775 2125 50  0001 C CNN
+F 3 "" H 6775 2125 50  0001 C CNN
+	1    6775 2125
+	0    1    -1   0   
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC0F1AD
+P 7675 2225
+F 0 "C?" H 7767 2271 50  0000 L CNN
+F 1 "C_Small" H 7767 2180 50  0000 L CNN
+F 2 "" H 7675 2225 50  0001 C CNN
+F 3 "" H 7675 2225 50  0001 C CNN
+	1    7675 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC0FB19
+P 8025 2225
+F 0 "C?" H 8117 2271 50  0000 L CNN
+F 1 "C_Small" H 8117 2180 50  0000 L CNN
+F 2 "" H 8025 2225 50  0001 C CNN
+F 3 "" H 8025 2225 50  0001 C CNN
+	1    8025 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC0FD09
+P 8200 2225
+F 0 "C?" H 8292 2271 50  0000 L CNN
+F 1 "C_Small" H 8292 2180 50  0000 L CNN
+F 2 "" H 8200 2225 50  0001 C CNN
+F 3 "" H 8200 2225 50  0001 C CNN
+	1    8200 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC0FF62
+P 6675 4250
+F 0 "C?" H 6767 4296 50  0000 L CNN
+F 1 "C_Small" H 6767 4205 50  0000 L CNN
+F 2 "" H 6675 4250 50  0001 C CNN
+F 3 "" H 6675 4250 50  0001 C CNN
+	1    6675 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC10176
+P 7250 2225
+F 0 "C?" H 7342 2271 50  0000 L CNN
+F 1 "C_Small" H 7342 2180 50  0000 L CNN
+F 2 "" H 7250 2225 50  0001 C CNN
+F 3 "" H 7250 2225 50  0001 C CNN
+	1    7250 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC103E2
+P 7850 2225
+F 0 "C?" H 7942 2271 50  0000 L CNN
+F 1 "C_Small" H 7942 2180 50  0000 L CNN
+F 2 "" H 7850 2225 50  0001 C CNN
+F 3 "" H 7850 2225 50  0001 C CNN
+	1    7850 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC10870
+P 7500 2225
+F 0 "C?" H 7592 2271 50  0000 L CNN
+F 1 "C_Small" H 7592 2180 50  0000 L CNN
+F 2 "" H 7500 2225 50  0001 C CNN
+F 3 "" H 7500 2225 50  0001 C CNN
+	1    7500 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:C_Small C?
+U 1 1 5FC10B61
+P 7225 4050
+F 0 "C?" H 7317 4096 50  0000 L CNN
+F 1 "C_Small" H 7317 4005 50  0000 L CNN
+F 2 "" H 7225 4050 50  0001 C CNN
+F 3 "" H 7225 4050 50  0001 C CNN
+	1    7225 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC15D18
+P 7025 2875
+F 0 "#PWR?" H 7025 2625 50  0001 C CNN
+F 1 "GND" H 7030 2702 50  0000 C CNN
+F 2 "" H 7025 2875 50  0001 C CNN
+F 3 "" H 7025 2875 50  0001 C CNN
+	1    7025 2875
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7025 2875 7025 2850
+Connection ~ 7025 2850
+Wire Wire Line
+	7025 2850 7025 2800
+Wire Wire Line
+	7025 2500 7025 2475
+Connection ~ 7025 2475
+Wire Wire Line
+	7025 2475 7025 2425
+Wire Wire Line
+	6875 2125 7025 2125
+Wire Wire Line
+	7025 2125 7250 2125
+Connection ~ 7025 2125
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC18C8E
+P 7850 2475
+F 0 "#PWR?" H 7850 2225 50  0001 C CNN
+F 1 "GND" H 7855 2302 50  0000 C CNN
+F 2 "" H 7850 2475 50  0001 C CNN
+F 3 "" H 7850 2475 50  0001 C CNN
+	1    7850 2475
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7025 2475 7250 2475
+Wire Wire Line
+	7250 2475 7250 2325
+Wire Wire Line
+	8200 2325 8025 2325
+Wire Wire Line
+	8025 2325 7850 2325
+Connection ~ 8025 2325
+Wire Wire Line
+	7850 2325 7675 2325
+Connection ~ 7850 2325
+Wire Wire Line
+	7675 2325 7500 2325
+Connection ~ 7675 2325
+Wire Wire Line
+	7850 2475 7850 2325
+Wire Wire Line
+	8200 2125 8025 2125
+Wire Wire Line
+	8025 2125 7850 2125
+Connection ~ 8025 2125
+Wire Wire Line
+	7850 2125 7675 2125
+Connection ~ 7850 2125
+Wire Wire Line
+	7675 2125 7500 2125
+Connection ~ 7675 2125
+Wire Wire Line
+	7250 2125 7500 2125
+Connection ~ 7250 2125
+Connection ~ 7500 2125
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC1DC66
+P 5425 2600
+F 0 "#PWR?" H 5425 2350 50  0001 C CNN
+F 1 "GND" H 5430 2427 50  0000 C CNN
+F 2 "" H 5425 2600 50  0001 C CNN
+F 3 "" H 5425 2600 50  0001 C CNN
+	1    5425 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6575 2125 6675 2125
+Wire Wire Line
+	6575 2325 6775 2325
+Wire Wire Line
+	6775 2475 6775 2325
+Wire Wire Line
+	6775 2475 7025 2475
+Wire Wire Line
+	6575 2425 6675 2425
+Wire Wire Line
+	6675 2425 6675 2525
+Wire Wire Line
+	6675 2850 7025 2850
+Wire Wire Line
+	6575 2525 6675 2525
+Connection ~ 6675 2525
+Wire Wire Line
+	6675 2525 6675 2850
+Wire Wire Line
+	5575 2325 5475 2325
+Wire Wire Line
+	5475 2325 5475 2125
+Wire Wire Line
+	5475 2125 5575 2125
+Wire Wire Line
+	5475 2125 5275 2125
+Connection ~ 5475 2125
+Wire Wire Line
+	5275 2125 5075 2125
+Connection ~ 5275 2125
+Wire Wire Line
+	5075 2125 4750 2125
+Connection ~ 5075 2125
+Wire Wire Line
+	5575 2425 5425 2425
+Wire Wire Line
+	5425 2425 5425 2600
+Wire Wire Line
+	3350 1650 3525 1650
+Wire Wire Line
+	3525 1725 3525 1650
+Connection ~ 3525 1650
+Wire Wire Line
+	3525 1650 3725 1650
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC3133E
+P 3525 2025
+F 0 "#PWR?" H 3525 1775 50  0001 C CNN
+F 1 "GND" H 3530 1852 50  0000 C CNN
+F 2 "" H 3525 2025 50  0001 C CNN
+F 3 "" H 3525 2025 50  0001 C CNN
+	1    3525 2025
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3525 2025 3525 1925
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC3254D
+P 3925 2025
+F 0 "#PWR?" H 3925 1775 50  0001 C CNN
+F 1 "GND" H 3930 1852 50  0000 C CNN
+F 2 "" H 3925 2025 50  0001 C CNN
+F 3 "" H 3925 2025 50  0001 C CNN
+	1    3925 2025
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3925 2025 3925 1950
+Wire Wire Line
+	4125 1650 4750 1650
+$Comp
+L hermeslite:+VPA #PWR?
+U 1 1 5FC35BA9
+P 8525 2125
+F 0 "#PWR?" H 8525 1975 50  0001 C CNN
+F 1 "+VPA" H 8540 2290 39  0000 C CNN
+F 2 "" H 8525 2125 50  0000 C CNN
+F 3 "" H 8525 2125 50  0000 C CNN
+	1    8525 2125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8200 2125 8525 2125
+Connection ~ 8200 2125
+Wire Wire Line
+	5075 2325 5175 2325
+Wire Wire Line
+	5425 2425 5175 2425
+Wire Wire Line
+	5175 2425 5175 2325
+Connection ~ 5425 2425
+Connection ~ 5175 2325
+Wire Wire Line
+	5175 2325 5275 2325
+Wire Wire Line
+	4750 1650 4750 2125
+$Comp
+L hermeslite:R R?
+U 1 1 5FC3B893
+P 5800 1650
+F 0 "R?" V 5593 1650 50  0000 C CNN
+F 1 "R" V 5684 1650 50  0000 C CNN
+F 2 "" V 5730 1650 50  0001 C CNN
+F 3 "" H 5800 1650 50  0001 C CNN
+	1    5800 1650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5575 2225 5575 2125
+Connection ~ 5575 2125
+Wire Wire Line
+	5575 2125 5575 1650
+Wire Wire Line
+	5650 1650 5575 1650
+Connection ~ 5575 1650
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC3FE85
+P 6050 1650
+F 0 "#PWR?" H 6050 1400 50  0001 C CNN
+F 1 "GND" H 6055 1477 50  0000 C CNN
+F 2 "" H 6050 1650 50  0001 C CNN
+F 3 "" H 6050 1650 50  0001 C CNN
+	1    6050 1650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 1650 6050 1650
+$Comp
+L hermeslite:+VBIAS #PWR?
+U 1 1 5FC45E16
+P 7675 3950
+F 0 "#PWR?" H 7675 3800 50  0001 C CNN
+F 1 "+VBIAS" H 7690 4115 39  0000 C CNN
+F 2 "" H 7675 3950 50  0000 C CNN
+F 3 "" H 7675 3950 50  0000 C CNN
+	1    7675 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC46BFD
+P 6950 4425
+F 0 "#PWR?" H 6950 4175 50  0001 C CNN
+F 1 "GND" H 6955 4252 50  0000 C CNN
+F 2 "" H 6950 4425 50  0001 C CNN
+F 3 "" H 6950 4425 50  0001 C CNN
+	1    6950 4425
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6550 3950 7225 3950
+Wire Wire Line
+	7225 3950 7675 3950
+Connection ~ 7225 3950
+Wire Wire Line
+	6550 4150 6675 4150
+Wire Wire Line
+	6675 4350 6950 4350
+Wire Wire Line
+	7225 4350 7225 4150
+Wire Wire Line
+	6950 4425 6950 4350
+Connection ~ 6950 4350
+Wire Wire Line
+	6950 4350 7225 4350
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC4DC2F
+P 5575 4400
+F 0 "#PWR?" H 5575 4150 50  0001 C CNN
+F 1 "GND" H 5580 4227 50  0000 C CNN
+F 2 "" H 5575 4400 50  0001 C CNN
+F 3 "" H 5575 4400 50  0001 C CNN
+	1    5575 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 4050 5750 4050
+Wire Wire Line
+	5750 4150 5750 4250
+Wire Wire Line
+	5750 4250 5575 4250
+Wire Wire Line
+	5575 4400 5575 4250
+Connection ~ 5575 4250
+Wire Wire Line
+	5575 4250 5350 4250
+$Comp
+L hermeslite:R R?
+U 1 1 5FC53D49
+P 5925 3625
+F 0 "R?" V 5718 3625 50  0000 C CNN
+F 1 "R" V 5809 3625 50  0000 C CNN
+F 2 "" V 5855 3625 50  0001 C CNN
+F 3 "" H 5925 3625 50  0001 C CNN
+	1    5925 3625
+	0    1    1    0   
+$EndComp
+$Comp
+L hermeslite:GND #PWR?
+U 1 1 5FC543C1
+P 6100 3650
+F 0 "#PWR?" H 6100 3400 50  0001 C CNN
+F 1 "GND" H 6105 3477 50  0000 C CNN
+F 2 "" H 6100 3650 50  0001 C CNN
+F 3 "" H 6100 3650 50  0001 C CNN
+	1    6100 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5650 3625 5775 3625
+Wire Wire Line
+	5650 3625 5650 3950
+Wire Wire Line
+	5650 3950 5750 3950
+Connection ~ 5650 3625
+Wire Wire Line
+	4750 4050 5350 4050
+Connection ~ 5350 4050
+Wire Wire Line
+	4750 2125 4750 4050
+Connection ~ 4750 2125
+$EndSCHEMATC

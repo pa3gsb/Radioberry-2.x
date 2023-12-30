@@ -1,0 +1,27 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model ADT1.5-1+
+#/11968288/402057/2.50/6/4/Transformer
+DEF ADT1.5-1+ T 0 30 Y Y 1 F N
+F0 "T" 1750 300 50 H V L CNN
+F1 "ADT1.5-1+" 1750 200 50 H V L CNN
+F2 "ADT151" 1750 100 50 H I L CNN
+F3 "https://www.minicircuits.com/pdfs/ADT1.5-1.pdf" 1750 0 50 H I L CNN
+F4 "Audio Transformers / Signal Transformers RF XFMR / SURF MOUNT / RoHS 50 0.5 to 650 MHz" 1750 -100 50 H I L CNN "Description"
+F5 "2.84" 1750 -200 50 H I L CNN "Height"
+F6 "139-ADT1.5-1" 1750 -300 50 H I L CNN "Mouser Part Number"
+F7 "https://www.mouser.co.uk/ProductDetail/Mini-Circuits/ADT1.5-1%2b?qs=xZ%2FP%252Ba9zWqaiA7HsYCvAPA%3D%3D" 1750 -400 50 H I L CNN "Mouser Price/Stock"
+F8 "Mini-Circuits" 1750 -500 50 H I L CNN "Manufacturer_Name"
+F9 "ADT1.5-1+" 1750 -600 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+X PRIMARY_DOT 1 0 0 200 R 50 50 0 0 P
+X SECONARY_CT 2 0 -100 200 R 50 50 0 0 P
+X PRIMARY 3 0 -200 200 R 50 50 0 0 P
+X SECONDARY_DOT 4 1900 -200 200 L 50 50 0 0 P
+X NOT_USED 5 1900 -100 200 L 50 50 0 0 P
+X SECONDARY 6 1900 0 200 L 50 50 0 0 P
+P 5 0 1 6 200 100 1700 100 1700 -300 200 -300 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library
