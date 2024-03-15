@@ -230,6 +230,8 @@ static struct file_operations radioberry_fops = {
 
 static int radioberry_probe(struct platform_device *pdev)
 {
+	int result;
+	
 	printk(KERN_INFO "inside %s function \n", __FUNCTION__);	
 	if(!device_property_present(&pdev->dev, "rx-sample-gpio")) 
 		printk("radioberry - Error! Device property 'rx-sample-gpio' not found!\n");
@@ -254,7 +256,27 @@ static int radioberry_probe(struct platform_device *pdev)
         return irqNumber;
     }
 	printk(KERN_INFO "Radioberry: The rx samples pin is mapped to IRQ: %d\n", irqNumber);
-	return 0;
+	mutex_init(&radioberry_mutex);
+	init_waitqueue_head(&rx_sample_queue);
+	printk(KERN_INFO "Radioberry: The rx sample state is currently: %d\n", gpiod_get_value(gpio_desc));
+
+	// GPIO numbers and IRQ numbers are not the same! This function performs the mapping for us
+	// Get the IRQ number for the GPIO pin
+	// This next call requests an interrupt line
+	if (irqNumber > 0) {
+	result = request_irq(irqNumber,             
+						(irq_handler_t) radioberry_irq_handler, 
+						IRQF_TRIGGER_RISING,   // Interrupt on rising edge  RQF_TRIGGER_RISING
+						"radioberry_rx_irq",    // Used in /proc/interrupts to identify the owner
+					NULL);
+	}					
+
+	printk(KERN_INFO "Radioberry: The interrupt request result is: %d\n", result);	
+	mutex_init(&spi_mutex);
+	initialize_rpi();
+	loading_radioberry_gateware(radioberryCharDevice);
+	initialize_firmware();
+	return result;
 }
 
 static int radioberry_remove(struct platform_device *pdev)
@@ -312,37 +334,7 @@ static int __init radioberry_init(void) {
       printk(KERN_ALERT "Failed to create the device\n");
       return PTR_ERR(radioberryCharDevice);
    }
-   printk(KERN_INFO "Radioberry char: device class created correctly\n"); 
-
-	mutex_init(&radioberry_mutex);
-	init_waitqueue_head(&rx_sample_queue);
-	
-
-	printk(KERN_INFO "Radioberry: The rx sample state is currently: %d\n", gpiod_get_value(gpio_desc));
-
-	// GPIO numbers and IRQ numbers are not the same! This function performs the mapping for us
-	// Get the IRQ number for the GPIO pin
-
-	
-	printk(KERN_INFO "Radioberry: The rx samples pin is mapped to IRQ: %d\n", irqNumber);
-
-	// This next call requests an interrupt line
-	if (irqNumber > 0) {
-	result = request_irq(irqNumber,             
-						(irq_handler_t) radioberry_irq_handler, 
-						IRQF_TRIGGER_RISING,   // Interrupt on rising edge  RQF_TRIGGER_RISING
-						"radioberry_rx_irq",    // Used in /proc/interrupts to identify the owner
-					NULL);
-	}					
-
-	printk(KERN_INFO "Radioberry: The interrupt request result is: %d\n", result);	
-	
-	mutex_init(&spi_mutex);
-
-	initialize_rpi();
-	loading_radioberry_gateware(radioberryCharDevice);
-	initialize_firmware();
-	
+   printk(KERN_INFO "Radioberry char: device class created correctly\n"); 	
 	return result;
 }
 
