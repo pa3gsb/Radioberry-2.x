@@ -294,13 +294,11 @@ static int radioberry_probe(struct platform_device *pdev)
 	// GPIO numbers and IRQ numbers are not the same! This function performs the mapping for us
 	// Get the IRQ number for the GPIO pin
 	// This next call requests an interrupt line
-	if (irqNumber > 0) {
 	result = request_irq(irqNumber,             
 						(irq_handler_t) radioberry_irq_handler, 
 						IRQF_TRIGGER_RISING,   // Interrupt on rising edge  RQF_TRIGGER_RISING
 						"radioberry_rx_irq",    // Used in /proc/interrupts to identify the owner
 					NULL);
-	}					
 
 	printk(KERN_INFO "Radioberry: The interrupt request result is: %d\n", result);	
 	mutex_init(&spi_mutex);
