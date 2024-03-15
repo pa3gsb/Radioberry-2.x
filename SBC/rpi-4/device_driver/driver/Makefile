@@ -1,3 +1,5 @@
+CCFLAGS += -Wcast-function-type
+
 KERNEL_HEADERS=/lib/modules/$(shell uname -r)/build
 
 obj-m := radioberry.o

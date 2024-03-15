@@ -16,7 +16,6 @@
 
 #define TX_MAX 4800
 #define TX_MAX_BUFFER (TX_MAX * 8)
-const int npackages = 4;
 
 typedef enum radioberrysdrStreamFormat {
 	RADIOBERRY_SDR_CF32,
