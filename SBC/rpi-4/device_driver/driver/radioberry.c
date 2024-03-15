@@ -234,10 +234,41 @@ static int radioberry_probe(struct platform_device *pdev)
 	
 	printk(KERN_INFO "inside %s function \n", __FUNCTION__);	
 	if(!device_property_present(&pdev->dev, "rx-sample-gpio")) 
-		printk("radioberry - Error! Device property 'rx-sample-gpio' not found!\n");
+	{
+		printk("radioberry - Error! Device overlay property 'rx-sample-gpio' not found!\n");
+		return -1;
+	}
 	else
 		printk("radioberry - Device property 'rx-sample-gpio' found!\n");
 			
+	
+	// Dynamically allocate a major number for the device
+	majorNumber = register_chrdev(0, DEVICE_NAME, &radioberry_fops);
+	if (majorNumber<0){
+	  printk(KERN_ALERT "Radioberry driver failed to register a major number\n");
+	  return majorNumber;
+	}
+	printk(KERN_INFO "Radioberry: registered correctly with major number %d\n", majorNumber);
+
+	// Register the device class
+	radioberryCharClass = class_create(CLASS_NAME);
+	if (IS_ERR(radioberryCharClass)){                
+	  unregister_chrdev(majorNumber, DEVICE_NAME);
+	  printk(KERN_ALERT "Failed to register device class\n");
+	  return PTR_ERR(radioberryCharClass);         
+	}
+	printk(KERN_INFO "Radioberry: device class registered correctly\n");
+
+	// Register the device driver
+	radioberryCharDevice = device_create(radioberryCharClass, NULL, MKDEV(majorNumber, 0), NULL, DEVICE_NAME);
+	if (IS_ERR(radioberryCharDevice)){               
+	  class_destroy(radioberryCharClass);           
+	  unregister_chrdev(majorNumber, DEVICE_NAME);
+	  printk(KERN_ALERT "Failed to create the device\n");
+	  return PTR_ERR(radioberryCharDevice);
+	}
+	printk(KERN_INFO "Radioberry char: device class created correctly\n"); 
+		
 	gpio_desc = gpiod_get(&pdev->dev, "rx-sample", GPIOD_ASIS);
 	if(IS_ERR(gpio_desc)) {
 		printk("Failed to get GPIO rx-sample-gpio\n");
@@ -307,34 +338,7 @@ static int __init radioberry_init(void) {
 	printk(KERN_INFO "%s loading...\n", DRIVER_NAME);
 
 	int result = platform_driver_register(&radioberry_driver);
-	printk(KERN_INFO "platform driver registered %d \n", result);
-	
-	// Dynamically allocate a major number for the device
-	majorNumber = register_chrdev(0, DEVICE_NAME, &radioberry_fops);
-	if (majorNumber<0){
-	  printk(KERN_ALERT "Radioberry driver failed to register a major number\n");
-	  return majorNumber;
-	}
-	printk(KERN_INFO "Radioberry: registered correctly with major number %d\n", majorNumber);
-
-   // Register the device class
-   radioberryCharClass = class_create(CLASS_NAME);
-   if (IS_ERR(radioberryCharClass)){                
-      unregister_chrdev(majorNumber, DEVICE_NAME);
-      printk(KERN_ALERT "Failed to register device class\n");
-      return PTR_ERR(radioberryCharClass);         
-   }
-   printk(KERN_INFO "Radioberry: device class registered correctly\n");
-
-   // Register the device driver
-   radioberryCharDevice = device_create(radioberryCharClass, NULL, MKDEV(majorNumber, 0), NULL, DEVICE_NAME);
-   if (IS_ERR(radioberryCharDevice)){               
-      class_destroy(radioberryCharClass);           
-      unregister_chrdev(majorNumber, DEVICE_NAME);
-      printk(KERN_ALERT "Failed to create the device\n");
-      return PTR_ERR(radioberryCharDevice);
-   }
-   printk(KERN_INFO "Radioberry char: device class created correctly\n"); 	
+	printk(KERN_INFO "platform driver registered %d \n", result);	
 	return result;
 }
 
