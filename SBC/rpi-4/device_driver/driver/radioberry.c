@@ -271,8 +271,8 @@ static int radioberry_probe(struct platform_device *pdev)
 		
 	gpio_desc = gpiod_get(&pdev->dev, "rx-sample", GPIOD_ASIS);
 	if(IS_ERR(gpio_desc)) {
-		printk("Failed to get GPIO rx-sample-gpio\n");
-		return -1 * IS_ERR(gpio_desc);
+		printk(KERN_ALERT "Failed to get GPIO rx-sample-gpio\n");
+		return -1 ;//* IS_ERR(gpio_desc);
 	}
     printk("Got GPIO rx-sample-gpio\n");
 	
