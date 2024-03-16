@@ -62,29 +62,17 @@ static struct mutex spi_mutex;
 #include "radioberry_gateware.h"
 #include "radioberry_firmware.h"
 
-#define VERSION "94"
+#define VERSION "95"
 
 static DEFINE_MUTEX(radioberry_mutex); 
-static wait_queue_head_t rx_sample_queue;
-
 #define DEVICE_NAME "radioberry"   
 #define DRIVER_NAME "radioberry"
 #define CLASS_NAME  "radioberry"        
 
+static int _nrx = 1;
 static int majorNumber;                  	
 static struct class*  radioberryCharClass  = NULL; 
 static struct device* radioberryCharDevice = NULL; 
-
-#define SAMPLE_BYTES 512
-static int _nrx = 1;
-
-static unsigned int irqNumber; 
-static struct gpio_desc *gpio_desc = NULL;
-
-static irq_handler_t radioberry_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
-	wake_up_interruptible(&rx_sample_queue);
-    return (irq_handler_t) IRQ_HANDLED;      
-}
 
 static void firmware_load(const char *firmware, int size) {
 	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
@@ -120,13 +108,81 @@ static void loading_radioberry_gateware(struct device *dev) {
 	release_firmware(fw_entry);
 }
 
-ssize_t radioberry_read(struct file *flip, char *buf, size_t count, loff_t *pos) {
-	unsigned char rx_stream[SAMPLE_BYTES]={};	
-	wait_event_interruptible(rx_sample_queue, (((*rpi_read_io) >> 25) & 1) != 0);
-	count = rxStream(_nrx, rx_stream);  
-	if (copy_to_user((char *)buf, &rx_stream, count)) return -EFAULT;
-	return count;	
+ssize_t radioberry_read(struct file *flip, char *buf, size_t count, loff_t *pos){	
+	unsigned char iqdata[SAMPLE_BYTES]={};	
+	int nr_samples = (_nrx == 1)? 63 : (_nrx == 2)? 72: (_nrx ==3)? 75: (_nrx ==4)? 76: (_nrx ==5)? 75: (_nrx ==6)? 78: (_nrx ==7)? 77: 80;
+	uint32_t value = 0;
+	
+	int s = 0, i = 0;
+	while ((((*rpi_read_io) >> 25) & 1) == 0)
+		udelay(100);	
+	for (s = 0; s < nr_samples; s++) {	
+		value = 0;
+		*rpi_set_io_high = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i++] |=  (((value >> 5) & 1));							
+		*rpi_set_io_low = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i++] |=  (((value >> 5) & 1));							
+		*rpi_set_io_high = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i++] |=  (((value >> 5) & 1));							
+		*rpi_set_io_low = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i++] |=  (((value >> 5) & 1));							
+		*rpi_set_io_high = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i++] |=  (((value >> 5) & 1));							
+		*rpi_set_io_low = (1<<RPI_RX_CLK);
+		value = *rpi_read_io;
+		iqdata[i] =  (((value >> 23) & 1) << 7);
+		iqdata[i] |=  (((value >> 20) & 1) << 6);
+		iqdata[i] |=  (((value >> 19) & 1) << 5);
+		iqdata[i] |=  (((value >> 18) & 1) << 4);
+		iqdata[i] |=  (((value >> 16) & 1) << 3);
+		iqdata[i] |=  (((value >> 13) & 1) << 2);
+		iqdata[i] |=  (((value >> 12) & 1) << 1);
+		iqdata[i++] |=  (((value >> 5) & 1));
+	}
+	if (copy_to_user((char *)buf, &iqdata, nr_samples * 6)) return -EFAULT;
+	return nr_samples * 6;	
 }
+
 
 static ssize_t radioberry_write(struct file *flip, const char *buf, size_t count, loff_t *pos) {
  
@@ -195,7 +251,7 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			if ((data[1] & 0xFE)  == 0x00) lnrx = ((data[5] & 0x38) >> 3) + 1;
 	
 			mutex_lock(&spi_mutex);
-			spiXfer(0, data, data, 6); //spi channel 0 // tell the gateware the command.
+			spiXfer(0,data, data, 6); //spi channel 0 // tell the gateware the command.
 			mutex_unlock(&spi_mutex);
 			
 			_nrx = lnrx;
@@ -268,39 +324,6 @@ static int radioberry_probe(struct platform_device *pdev)
 	  return PTR_ERR(radioberryCharDevice);
 	}
 	printk(KERN_INFO "Radioberry char: device class created correctly\n"); 
-		
-	gpio_desc = gpiod_get(&pdev->dev, "rx-sample", GPIOD_ASIS);
-	if(IS_ERR(gpio_desc)) {
-		printk(KERN_ALERT "Failed to get GPIO rx-sample-gpio\n");
-		return -1 ;//* IS_ERR(gpio_desc);
-	}
-    printk("Got GPIO rx-sample-gpio\n");
-	
-	int retval = gpiod_direction_input(gpio_desc);
-	if (retval) {
-        printk("Failed to set GPIO pin direction\n");
-        return retval;
-    }
-	irqNumber = gpiod_to_irq(gpio_desc);
-    if (irqNumber < 0) {
-        printk("Failed to get IRQ number for GPIO pin\n");
-        return irqNumber;
-    }
-	printk(KERN_INFO "Radioberry: The rx samples pin is mapped to IRQ: %d\n", irqNumber);
-	mutex_init(&radioberry_mutex);
-	init_waitqueue_head(&rx_sample_queue);
-	printk(KERN_INFO "Radioberry: The rx sample state is currently: %d\n", gpiod_get_value(gpio_desc));
-
-	// GPIO numbers and IRQ numbers are not the same! This function performs the mapping for us
-	// Get the IRQ number for the GPIO pin
-	// This next call requests an interrupt line
-	result = request_irq(irqNumber,             
-						(irq_handler_t) radioberry_irq_handler, 
-						IRQF_TRIGGER_RISING,   // Interrupt on rising edge  RQF_TRIGGER_RISING
-						"radioberry_rx_irq",    // Used in /proc/interrupts to identify the owner
-					NULL);
-
-	printk(KERN_INFO "Radioberry: The interrupt request result is: %d\n", result);	
 	mutex_init(&spi_mutex);
 	initialize_rpi();
 	loading_radioberry_gateware(radioberryCharDevice);
@@ -343,14 +366,7 @@ static int __init radioberry_init(void) {
 static void __exit radioberry_exit(void) {
 	
 	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
-	
-	if (irqNumber > 0)
-		free_irq(irqNumber, NULL);
-    if (gpio_desc != NULL)
-		gpiod_put(gpio_desc);
-	
-	platform_driver_unregister(&radioberry_driver);
-	
+	platform_driver_unregister(&radioberry_driver);	
 	device_destroy(radioberryCharClass, MKDEV(majorNumber, 0));     
 	class_unregister(radioberryCharClass);                        
 	class_destroy(radioberryCharClass);                             

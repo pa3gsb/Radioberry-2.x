@@ -35,9 +35,8 @@
 #define SPI_LTOH 4
 #define SPI_DC   5
 
+#define SAMPLE_BYTES 512
 static int initialize_firmware(void);
-int rxStream(int nrx, unsigned char stream[]);
-void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]);
 int spiXfer(int spi_channel, char *txBuf, char *rxBuf, unsigned cnt);
 int write_iq_sample(unsigned char tx_iqdata[]);
 
@@ -124,45 +123,6 @@ int spiXfer(int spi_channel, char *txBuf, char *rxBuf, unsigned cnt){
    spiReg[SPI_CS] = spiDefaults; /* stop */
    
    return 0;
-}
-
-int rxStream(int nrx, unsigned char stream[]){
-	unsigned char iqdata[6];
-	int iqs = 1;
-	
-	int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: (nrx ==4)? 76: (nrx ==5)? 75: (nrx ==6)? 78: (nrx ==7)? 77: 80;
-	
-	int s = 0;
-	for (s = 0; s < nr_samples; s++) {	
-		read_iq_sample(nrx, iqs, iqdata);
-		memcpy(stream + (s * 6), iqdata, 6);
-		iqs++;
-	}
-	return nr_samples * 6;
-}
-
-void read_iq_sample(int lnrx, int iqs, unsigned char iqdata[]){
-	uint32_t value = 0;
-		
-	int i = 0;	
-	for (i = 0; i < 6 ; i++) {
-		
-		if (i % 2 == 0) {
-			*rpi_set_io_high = (1<<RPI_RX_CLK);
-			value = *rpi_read_io;
-		} else {		
-			*rpi_set_io_low = (1<<RPI_RX_CLK);
-			value = *rpi_read_io;
-		}
-		iqdata[i] =  (((value >> 23) & 1) << 7);
-		iqdata[i] |=  (((value >> 20) & 1) << 6);
-		iqdata[i] |=  (((value >> 19) & 1) << 5);
-		iqdata[i] |=  (((value >> 18) & 1) << 4);
-		iqdata[i] |=  (((value >> 16) & 1) << 3);
-		iqdata[i] |=  (((value >> 13) & 1) << 2);
-		iqdata[i] |=  (((value >> 12) & 1) << 1);
-		iqdata[i] |=  (((value >> 5) & 1));						
-	}		
 }
 
 int write_iq_sample(unsigned char tx_iqdata[]) {
