@@ -19,32 +19,17 @@
  *
  */
 
-
 /dts-v1/;
 /plugin/;
-
 /{
     compatible = "brcm,bcm2711";
-	
-	fragment@0 {
-		target = <&gpio>;  
-		__overlay__ {
-			radioberry_gpio: radioberry_gpio {
-				brcm,pins = <22 26 27 13 24>;		
-				brcm,function = <0x00 0x00 0x01 0x01 0x01>;  	//0 =input; 1=output
-				};
-			};
-	};
-
-	fragment@1 {
-		target-path = "/";
-		__overlay__ {
-				radio: radio {
-					pinctrl-names = "default";
-					pinctrl-0 = <&radioberry_gpio>;
-					compatible = "sdr,radioberry";
-					gateware-gpios = <&gpio 22 0>, <&gpio 26 0>, <&gpio 27 0>, <&gpio 13 0>, <&gpio 24 0>;
-				};
-			};
-	};
+        fragment@0 {
+                target-path = "/";
+                __overlay__ {
+                                radio {
+                                        compatible = "sdr,radioberry";
+                                        rx-sample-gpio = <&gpio 25 0>;
+                                };
+                        };
+        };
 };
