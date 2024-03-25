@@ -1,0 +1,76 @@
+/*
+ * Device tree overlay for radioberry
+ *
+ * Compile:
+ * dtc -@ -I dts -O dtb -o radioberry.dtbo radioberry.dts
+ * 
+ * for testing: sudo dtoverlay radioberry.dtbo 
+ *
+ * add following line in config.txt: dtoverlay=radioberry followed by reboot
+ *
+ *
+ *  dtc -I fs /proc/device-tree > devtree.txt (decompile the dt and find the definition for radioberry)
+ *
+ * 	using : dtc -v Version: DTC 1.4.7
+ *
+ */
+
+
+/dts-v1/;
+/plugin/;
+
+/{
+    compatible = "brcm,bcm2712";
+
+	fragment@0 {
+		target = <&spidev0>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+	
+	fragment@1 {
+		target = <&spidev1>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@2 {
+		target = <&spi0>;
+		__overlay__ {
+			status = "okay";
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			spi_device_1: radioberry_spi@0 {
+				compatible = "radioberry_ctrl_spi";
+				spi-max-frequency = <48000000>;
+				reg = <0x0>; 
+				spi-bits-per-word = <8>;
+				spi-mode = <3>; 
+				status = "okay";
+			};
+			
+			spi_device_2: radioberry_spi@1 {
+				compatible = "radioberry_tx_spi";
+				reg = <0x1>; 
+				spi-max-frequency = <125000000>;
+				spi-bits-per-word = <8>;
+				spi-mode = <3>; 
+				status = "okay";
+			};
+			
+		};
+	};
+		
+	fragment@3 {
+		target-path = "/";
+		__overlay__ {
+				radioberry {
+					compatible = "sdr,radioberry";
+				};
+			};
+	};
+	
+};
