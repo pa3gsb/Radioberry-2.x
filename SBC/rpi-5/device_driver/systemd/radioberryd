@@ -1,0 +1,48 @@
+#!/bin/sh
+
+RADIOBERRYD=radioberry
+RADIOBERRYD_EXEC=/usr/local/bin/$RADIOBERRYD
+
+case "$1" in
+
+  start)
+	echo -n "Start radioberry firmware daemon: "
+	sudo chmod 666 /dev/radioberry
+	start-stop-daemon --start --background --exec $RADIOBERRYD_EXEC
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ] ; then
+		echo "OK"
+	else
+		echo "FAIL TO START"
+	fi
+    date
+    ;;
+
+  stop)
+	echo -n "Stopping radioberry daemon: "
+	start-stop-daemon --stop --exec $RADIOBERRYD
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ] ; then
+		echo "OK"
+	else
+		echo "FAIL TO STOP"
+	fi
+    ;;
+
+  status)
+    if [ -n "`/bin/pidof $RADIOBERRYD`" ] ; then
+        echo "radioberry daemon is running."
+    else
+        echo "radioberry daemon is not running."
+    fi
+    ;;
+
+  restart)
+    $0 stop && sleep 1 && $0 start
+    ;;
+
+  *)
+    echo "Usage: /etc/init.d/radioberryd {start|stop|status|restart}"
+    exit 1
+
+esac
