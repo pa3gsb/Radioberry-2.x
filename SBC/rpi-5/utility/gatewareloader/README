@@ -1,0 +1,8 @@
+
+Gatewareloader.
+
+- make loadFPGA
+
+- copy your radioberry.rbf into the folder
+
+- sudo ./loadFPGA
