@@ -1,0 +1,9 @@
+#
+
+while :
+do
+  pinctrl set 13 op
+  pinctrl set 13 dl
+  pinctrl set 13 dh
+  pinctrl set 13 dl
+done

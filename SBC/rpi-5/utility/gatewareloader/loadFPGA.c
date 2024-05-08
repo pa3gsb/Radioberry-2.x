@@ -150,7 +150,7 @@ void processFileInput( )
 	finputid = fopen( "radioberry.rbf", "rb" );
 	if (finputid == NULL) {
         perror("Error opening file");
-        return 1;
+        return;
     }
 
 	/* Start configuration */
@@ -160,10 +160,10 @@ void processFileInput( )
 	
 	sleep(1);
 		
-	char byte; 
-    while (fread(&byte, sizeof(char), 1, finputid) == 1) {
+	unsigned char byte; 
+	while (fread(&byte, sizeof(unsigned char), 1, finputid) == 1) {
 		programByte( byte );
-    }	
+	}	
 	
 	//fprintf(stderr, "nstatus level = %d \n", read_pin(iPinNSTATUS));
 	//fprintf(stderr, "conf level = %d \n", read_pin(iPinCONF_DONE));
@@ -175,8 +175,8 @@ void processFileInput( )
 		fprintf( stderr, "Error: programming failed; nstatus is low\n" );
 		return;
 	} else if (read_pin(iPinCONF_DONE) == 0) {
-			fprintf( stderr, "Error: programming failed; conf done is low\n" );
-			return;
+		fprintf( stderr, "Error: programming failed; conf done is low\n" );
+		return;
 	}
 		
 	set_pin(oPinDCLK);
@@ -197,7 +197,7 @@ void processFileInput( )
 }
 
 
-void programByte( char one_byte )
+void programByte( unsigned char one_byte )
 {
 	char	bit = 0;
 	int i = 0;
@@ -209,9 +209,12 @@ void programByte( char one_byte )
 		bit = bit & 0x1;
 					
 		if (bit) set_pin(oPinDATA); else clr_pin(oPinDATA); 
-		fprintf(stderr, "");
+		// fprintf(stderr, "");
+		usleep(1);
 		set_pin(oPinDCLK);
+		usleep(1);
 		clr_pin(oPinDCLK);
+		usleep(1);
 	}
 }
 
@@ -226,13 +229,14 @@ int prepareLoading()
 	clr_pin(oPinNCONFIG);
 	clr_pin(oPinDATA);
 	clr_pin(oPinDCLK); 	
-	sleep(1);
+	usleep(1);
 	set_pin(oPinNCONFIG);
+	usleep(1);
 
 	int count = 0;
 	while (read_pin(iPinNSTATUS) == 0) {
 		count++;
-		sleep(10);
+		usleep(10);
 		if (count >= 255) {
 			fprintf( stderr, "Error: prepareLoading failed\n" );
 			return -1;
