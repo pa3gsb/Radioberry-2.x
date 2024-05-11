@@ -1,3 +1,3 @@
 void	processFileInput	(  );
 int 	prepareLoading		();
-void 	programByte			( char one_byte );
+void 	programByte		( unsigned char one_byte );
