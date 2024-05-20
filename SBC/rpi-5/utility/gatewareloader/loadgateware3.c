@@ -28,8 +28,8 @@
 #define CONSUMER	"Radioberry"
 #endif
 
-struct gpiod_line *pin22done, *pin26status;		// inputs
-struct gpiod_line *pin27config, *pin13data, *pin24dclk; // outputs
+struct gpiod_line_request *pin22done, *pin26status;		// inputs
+struct gpiod_line_request *pin27config, *pin13data, *pin24dclk; // outputs
 
 void processRBF();
 void programByte( unsigned char );
@@ -38,6 +38,9 @@ int prepareLoading();
 // by using libgpiod, the user account needs only be a member of the gpio group.
 // the default rpi user 'pi' is a member of group gpio
 // therefore: NO 'sudo' needed!
+
+// useful utility to run in a second shell (X is chip nr. 0 or 4):
+// gpionotify -c X --localtime 13 27 26 22 24
 
 int main (int argc, char **argv)
 {
@@ -54,61 +57,80 @@ int main (int argc, char **argv)
 		fprintf(stderr, "Unable to open %s\n", chippath);
 		goto end;
 	}
-	if ((pin22done = gpiod_chip_get_line( chip, iPinCONF_DONE )) == NULL) {
+
+	struct gpiod_request_config *grconf = gpiod_request_config_new();
+	const char *consumer = CONSUMER;
+
+	gpiod_request_config_set_consumer( grconf, consumer );
+
+	struct gpiod_line_config *glconf = gpiod_line_config_new();
+	struct gpiod_line_settings *glset = gpiod_line_settings_new();
+
+	gpiod_line_settings_set_direction( glset, GPIOD_LINE_DIRECTION_INPUT );
+	unsigned int *gloffset = (void *)&((unsigned int [1]) { iPinCONF_DONE });
+	gpiod_line_config_add_line_settings( glconf, gloffset, 1, glset );
+
+	if ((pin22done = gpiod_chip_request_lines( chip, grconf, glconf )) == NULL) {
 		fprintf(stderr, "Unable to get pin%d\n", iPinCONF_DONE);
 		goto close_chip;
 	}
-#ifdef NEWCODE
-	if ((pin26status = gpiod_chip_get_line( chip, iPinNSTATUS )) == NULL) {
+
+	gpiod_line_config_reset( glconf );
+	gloffset = (void *)&((unsigned int [1]) { iPinNSTATUS });
+	gpiod_line_config_add_line_settings( glconf, gloffset, 1, glset );
+
+	if ((pin26status = gpiod_chip_request_lines( chip, grconf, glconf )) == NULL) {
 		fprintf(stderr, "Unable to get pin%d\n", iPinNSTATUS);
 		goto close_chip;
 	}
-	if ((pin27config = gpiod_chip_get_line( chip, oPinNCONFIG )) == NULL) {
+
+	gpiod_line_config_reset( glconf );
+	gpiod_line_settings_set_direction( glset, GPIOD_LINE_DIRECTION_OUTPUT );
+	gloffset = (void *)&((unsigned int [1]) { oPinNCONFIG });
+	gpiod_line_config_add_line_settings( glconf, gloffset, 1, glset );
+	enum gpiod_line_value *glval = (void *)&((enum gpiod_line_value [1]) { GPIOD_LINE_VALUE_INACTIVE });
+	gpiod_line_config_set_output_values( glconf, glval, 1 ); // initial pin value = 0
+
+	if ((pin27config = gpiod_chip_request_lines( chip, grconf, glconf )) == NULL) {
 		fprintf(stderr, "Unable to get pin%d\n", oPinNCONFIG);
 		goto close_chip;
 	}
-	if ((pin13data = gpiod_chip_get_line( chip, oPinDATA )) == NULL) {
+
+	gpiod_line_config_reset( glconf );
+	gloffset = (void *)&((unsigned int [1]) { oPinDATA });
+	gpiod_line_config_add_line_settings( glconf, gloffset, 1, glset );
+	gpiod_line_config_set_output_values( glconf, glval, 1 ); // initial pin value = 0
+
+	if ((pin13data = gpiod_chip_request_lines( chip, grconf, glconf )) == NULL) {
 		fprintf(stderr, "Unable to get pin%d\n", oPinDATA);
 		goto close_chip;
 	}
-	if ((pin24dclk = gpiod_chip_get_line( chip, oPinDCLK )) == NULL) {
+
+	gpiod_line_config_reset( glconf );
+	gloffset = (void *)&((unsigned int [1]) { oPinDCLK });
+	gpiod_line_config_add_line_settings( glconf, gloffset, 1, glset );
+	gpiod_line_config_set_output_values( glconf, glval, 1 ); // initial pin value = 0
+
+	if ((pin24dclk = gpiod_chip_request_lines( chip, grconf, glconf )) == NULL) {
 		fprintf(stderr, "Unable to get pin%d\n", oPinDCLK);
 		goto close_chip;
 	}
 
-	if (gpiod_line_request_input( pin22done, CONSUMER ) < 0) {
-		gpiod_line_release( pin22done );
-		fprintf(stderr, "Request pin%d as input failed\n", iPinCONF_DONE);
-		goto close_chip;
-	}
-	if (gpiod_line_request_input( pin26status, CONSUMER ) < 0) {
-		gpiod_line_release( pin26status );
-		fprintf(stderr, "Request pin%d as input failed\n", iPinNSTATUS);
-		goto close_chip;
-	}
-
-	if (gpiod_line_request_output( pin27config, CONSUMER, 0 ) < 0) { // initial pin value = 0
-		gpiod_line_release( pin27config );
-		fprintf(stderr, "Request pin%d as output failed\n", oPinNCONFIG);
-		goto close_chip;
-	}
-	if (gpiod_line_request_output( pin13data, CONSUMER, 0 ) < 0) {
-		gpiod_line_release( pin13data );
-		fprintf(stderr, "Request pin%d as output failed\n", oPinDATA);
-		goto close_chip;
-	}
-	if (gpiod_line_request_output( pin24dclk, CONSUMER, 0 ) < 0) {
-		gpiod_line_release( pin24dclk );
-		fprintf(stderr, "Request pin%d as output failed\n", oPinDCLK);
-		goto close_chip;
-	}
-
-	fprintf(stderr, "Init %s success....\n", chipname);
+	fprintf(stderr, "Init %s success....\n", chippath);
 
 	// Processing and Programming
 	processRBF();
-#endif
+
+	gpiod_line_request_release( pin24dclk ); // upon release: alloc vanishes from gpioinfo -c X
+	gpiod_line_request_release( pin13data );
+	gpiod_line_request_release( pin27config );
+	gpiod_line_request_release( pin26status );
+	gpiod_line_request_release( pin22done );
+
 close_chip:
+	gpiod_line_settings_free( glset );
+	gpiod_line_config_free( glconf );
+	gpiod_request_config_free( grconf );
 	gpiod_chip_close( chip );
 end:
 	return 0;
@@ -149,35 +171,36 @@ void processRBF ()
 	fclose( finp ); // if we are here, finp != NULL
 
 	usleep(10);
-#ifdef NEWCODE
-	/* Check if loading succeeded*/
-	if (gpiod_line_get_value( pin26status ) == 0) {
-		fprintf(stderr, "Error: programming failed; pin26status != 1\n");
+
+	// Check if loading succeeded
+	// enum gpiod_line_value -- GPIOD_LINE_VALUE_ACTIVE and GPIOD_LINE_VALUE_INACTIVE
+	if (gpiod_line_request_get_value( pin26status, iPinNSTATUS ) == GPIOD_LINE_VALUE_INACTIVE) {
+		fprintf(stderr, "Error: programming failed; pin26status != Active\n");
 		return;
-	} else if (gpiod_line_get_value( pin22done ) == 0) {
-		fprintf(stderr, "Error: programming failed; pin22done != 1\n");
+	} else if (gpiod_line_request_get_value( pin22done, iPinCONF_DONE ) == GPIOD_LINE_VALUE_INACTIVE) {
+		fprintf(stderr, "Error: programming failed; pin22done != Active\n");
 		return;
 	}
 
 	// toggle DCLK three more times (should always check return value?)
-	gpiod_line_set_value( pin24dclk, 1 );
+	gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_ACTIVE );
 	usleep(1);
-	gpiod_line_set_value( pin24dclk, 0 );
+	gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_INACTIVE );
 	usleep(1);
-	gpiod_line_set_value( pin24dclk, 1 );
+	gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_ACTIVE );
 	usleep(1);
-	gpiod_line_set_value( pin24dclk, 0 );
+	gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_INACTIVE );
 	usleep(1);
-	gpiod_line_set_value( pin24dclk, 1 );
+	gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_ACTIVE );
 	usleep(1);
-	gpiod_line_set_value( pin24dclk, 0 );
+	gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_INACTIVE );
 
 	fprintf(stderr, "gateware load success....\n");
-#endif
 }
 
-//struct gpiod_line *pin22done, *pin26status;		// inputs
-//struct gpiod_line *pin27config, *pin13data, *pin24dclk; // outputs
+//struct gpiod_line_request *pin22done, *pin26status;		// inputs
+//struct gpiod_line_request *pin27config, *pin13data, *pin24dclk; // outputs
+
 void programByte( unsigned char one_byte )
 {
 	char bit = 0;
@@ -188,15 +211,15 @@ void programByte( unsigned char one_byte )
 	{
 		bit = one_byte >> i;
 		bit = bit & 0x1;
-#ifdef NEWCODE
-		gpiod_line_set_value( pin13data, bit );
+
+		gpiod_line_request_set_value( pin13data, oPinDATA,
+			(bit ? GPIOD_LINE_VALUE_ACTIVE : GPIOD_LINE_VALUE_INACTIVE) );
 //		usleep(1);
 
-		gpiod_line_set_value( pin24dclk, 1 );
+		gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_ACTIVE );
 		usleep(1);
-		gpiod_line_set_value( pin24dclk, 0 );
+		gpiod_line_request_set_value( pin24dclk, oPinDCLK, GPIOD_LINE_VALUE_INACTIVE );
 //		usleep(1);
-#endif
 	}
 }
 
@@ -205,31 +228,15 @@ int prepareLoading ()
 	fprintf(stdout, "Info: prepareLoading\n");
 
 	// pins 27, 13, and 24 initial values all = 0
-#ifdef DEBUG
-	// these pins were already initialized when output mode was set
-	if (gpiod_line_set_value( pin27config, 0 ) < 0) {
-		fprintf(stderr, "Did not set pin%d to 0\n", oPinNCONFIG);
-		return -1;
-	}
-	if (gpiod_line_set_value( pin13data, 0 ) < 0) {
-		fprintf(stderr, "Did not set pin%d to 0\n", oPinDATA);
-		return -1;
-	}
-	if (gpiod_line_set_value( pin24dclk, 0 ) < 0) {
-		fprintf(stderr, "Did not set pin%d to 0\n", oPinDCLK);
-		return -1;
-	}
-	usleep(1);
-#endif
-#ifdef NEWCODE
-	if (gpiod_line_set_value( pin27config, 1 ) < 0) {
-		fprintf(stderr, "Did not set pin%d to 1\n", oPinNCONFIG);
+
+	if (gpiod_line_request_set_value( pin27config, oPinNCONFIG, GPIOD_LINE_VALUE_ACTIVE ) < 0) {
+		fprintf(stderr, "Did not set pin%d to Active\n", oPinNCONFIG);
 		return -1;
 	}
 	usleep(1);
 
 	int count = 0;
-	while (gpiod_line_get_value( pin26status ) == 0) {
+	while (gpiod_line_request_get_value( pin26status, iPinNSTATUS ) == GPIOD_LINE_VALUE_INACTIVE) {
 		count++;
 		usleep(5);
 		if (count >= 255) {
@@ -239,6 +246,6 @@ int prepareLoading ()
 	}
 
 	fprintf(stdout, "Info: prepareLoading success\n");
-#endif
+
 	return 0;
 }
