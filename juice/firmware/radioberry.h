@@ -82,6 +82,7 @@ unsigned long driver_version = 0x00020406;
 int gateware_fpga_type = 2;
 unsigned char hpsdrdata[1032];
 unsigned char broadcastReply[60];
+void write_rb_stream(unsigned char* buffer);
     
 int running = 0;
 int fd;									/* our socket */

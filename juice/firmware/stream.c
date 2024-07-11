@@ -59,7 +59,7 @@ int write_stream(unsigned char stream[]){
 	DWORD RxBytes;
 	DWORD TxBytes;
 	DWORD numBytesSent;
-
+	
 
 	ftStatus = FT_Write(ftHandleA, stream, 1032, &numBytesSent);
 

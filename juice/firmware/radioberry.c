@@ -52,15 +52,16 @@ For more information, please refer to <http://unlicense.org/>
 #include "gateware.h"
 #include "stream.h"
 #include "register.h"
+#include "pa.h"
 
 #ifndef _WIN32	
 #include "sensors.h"
 #endif
 
 #ifdef _WIN32
-	#define FIRMWAREVERSION "W-J-2021-08-01"
+	#define FIRMWAREVERSION "W-J-07-11-2024"
 #else
-	#define FIRMWAREVERSION "L-J-2021-08-01"
+	#define FIRMWAREVERSION "L-J-07-11-2024"
 #endif
 
 void printIntroScreen() {
@@ -87,8 +88,10 @@ int load_radioberry_gateware() {
 	int ret = 0;
 	
 	time_t gstartTime = clock();
+	
+	ret = load_gateware_image_into_fpga();
 
-	if (ret = load_gateware_image_into_fpga() < 0) { return ret; };
+	if (ret < 0) { return ret; };
 
 	time_t gstopTime = clock();
 	double gsecondsElapsed = (double)(gstopTime - gstartTime) / CLOCKS_PER_SEC;
@@ -113,38 +116,76 @@ void start_rb_register_thread() {
 	pthread_create(&pid1, NULL, rb_register_thread, NULL);
 }
 
+static void *rb_pa_thread(void *arg) {
+	fprintf(stderr,"Try to connect to external Amplifier\n");
+	initAmplifier();
+	while(1) {
+		if (!isAmplifierConnected()) connectToAmplifier(); else exhangeAmplifierInfo();
+		if (!isAmplifierConnected()) usleep(1000000); else usleep(10000);
+		if (!running) setAmplifierInfo();
+	}
+	disconnectAmplifier();
+	return NULL;
+}
+
+void start_rb_pa_thread() {
+	pthread_t pid; 
+	pthread_create(&pid, NULL, rb_pa_thread, NULL);
+}
+
+uint16_t recalculateADCValue(uint16_t adc_in) {
+	// need to recalculate the AMP measurement for HL2 type of radio
+	float bridge_volt = 0.018139; float refvoltage = 3.3f; int adc_cal_offset = 0;
+	float volts = (float)((adc_in - adc_cal_offset) / 4095.0f * refvoltage);
+	if (volts < 0) volts = 0;
+	float watts = (float)(pow(volts, 2) / bridge_volt);
+	// having the power ; recalculate the adc value for hermes lite type SDR model.
+	bridge_volt = 1.8f;	refvoltage = 3.3f; adc_cal_offset = 3;
+	uint16_t pa_dac = (uint16_t)(sqrt(watts * bridge_volt) * 4095.0f / refvoltage) + adc_cal_offset;
+	return pa_dac;
+}
+
 void getStreamAndSendPacket() {
 	
 	if (read_stream(hpsdrdata) < 0) return; // fetching 1032 bytes of ethernet packet.
-	
-	// gateware if temp is not read because the preamp board is not installed 
-	// or no other i2c module module is in place.. the temp and current
-	// are filled with 0x0fff ; if so we will replace it here with other data.
-	
-	// i have an i2c temperature and current module (attach to i2c bus of RPI) todo: programming!!; 
-	// checking if firmware is running at RPI; 
-	//		if so than first search if i2c module
-	//				for reading temp is installed 
-	// if not running @RPI and/or no i2c temp module is installed use temperature of the cpu 
-	// same is valid for the current.
-	
-	//check temperature from gateware.
-	if ( (((hpsdrdata[11] & 0x08) == 0x08) | ((hpsdrdata[523] & 0x08) == 0x08)) && 
-		 (hpsdrdata[12] == 0x0F | hpsdrdata[524] == 0x0F) ){
-
-			hpsdrdata[12] =  ((sys_temp >> 8) & 0xFF); hpsdrdata[13] = (sys_temp & 0xFF); 
-			hpsdrdata[524] = ((sys_temp >> 8) & 0xFF); hpsdrdata[525] =(sys_temp & 0xFF);
-		
-		//hpsdrdata[12] = 0x04; hpsdrdata[13] = 0x00; // showing fixed 31.5C
-		//hpsdrdata[524] = 0x04; hpsdrdata[525] = 0x00; // showing fixed 31.5C
-	}
-	//check current from gateware. 
-	if ( (((hpsdrdata[11] & 0x10) == 0x10) | ((hpsdrdata[523] & 0x10) == 0x10)) && 
-		 (hpsdrdata[14] == 0x0F | hpsdrdata[526] == 0x0F) ){
-		// todo
-		// i2c module or 0.
-		hpsdrdata[14] = 0x00; hpsdrdata[15] = 0x00; 
-		hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00; 
+	// the sdr data coming from the radioberry need to be enhanced with adddional information.
+	if (isAmplifierConnected()) {
+		if (!pa_temp_ok && (((hpsdrdata[11] & 0x01) == 0x01) | ((hpsdrdata[523] & 0x01) == 0x01))) {
+			//radio in tx mode ; switch back to rx.
+			hpsdrdata[11] = hpsdrdata[11] & 0xFE; hpsdrdata[523] = hpsdrdata[523] & 0xFE;
+		} 
+		// AMP is connected; info of the AMP will be used to present to the operator.
+		if ((hpsdrdata[11] & 0xF8) == 0x08) {
+			uint16_t pa_dac = recalculateADCValue(pa_fwd_dac);
+			//fprintf(stderr,"pwr fwd dac %d recalc %d\n", pa_fwd_dac, pa_dac);
+			hpsdrdata[14] 	= ((pa_dac >> 8) & 0xFF); hpsdrdata[15] = (pa_dac & 0xFF); 
+			int protocol_temp = (int) (4096/3.26) * ((pa_temp/ 100.0) + 0.5);
+			hpsdrdata[12] =  ((protocol_temp >> 8) & 0xFF); hpsdrdata[13] = (protocol_temp & 0xFF);
+		} else if ((hpsdrdata[11] & 0xF8) == 0x10) {
+			uint16_t pa_dac = recalculateADCValue(pa_rev_dac);
+			//fprintf(stderr,"pwr rev dac %d recalc %d\n", pa_rev_dac, pa_dac);
+			hpsdrdata[12] = ((pa_dac >> 8) & 0xFF); hpsdrdata[13] = (pa_dac & 0xFF); 
+			//current
+			hpsdrdata[14] = 0x00; hpsdrdata[15] = 0x00; 
+		}
+		if ((hpsdrdata[523] & 0xF8) == 0x08) {
+			uint16_t pa_dac = recalculateADCValue(pa_fwd_dac);
+			hpsdrdata[526] 	= ((pa_dac >> 8) & 0xFF); hpsdrdata[527] = (pa_dac & 0xFF); 
+			int protocol_temp = (int) (4096/3.26) * ((pa_temp/ 100.0) + 0.5);
+			hpsdrdata[524] =  ((protocol_temp >> 8) & 0xFF); hpsdrdata[525] = (protocol_temp & 0xFF);
+		}  else if ((hpsdrdata[523] & 0xF8) == 0x10)  {
+			uint16_t pa_dac = recalculateADCValue(pa_rev_dac); 
+			hpsdrdata[524] = ((pa_dac >> 8) & 0xFF); hpsdrdata[525] = (pa_dac & 0xFF); 
+			//current
+			hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00;
+		}
+	} else {
+		//check temperature from gateware.
+		if ((hpsdrdata[11]  & 0xF8) == 0x08)  {hpsdrdata[12]  =  ((sys_temp >> 8) & 0xFF); hpsdrdata[13]  = (sys_temp & 0xFF);}
+		if ((hpsdrdata[523] & 0xF8) == 0x08)  {hpsdrdata[524] =  ((sys_temp >> 8) & 0xFF); hpsdrdata[525] = (sys_temp & 0xFF);}
+		//check current from gateware. 
+		if ((hpsdrdata[11]  & 0xF8) == 0x10)  {hpsdrdata[14]  = 0x00; hpsdrdata[15]  = 0x00;}
+		if ((hpsdrdata[523] & 0xF8) == 0x10)  {hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00;}
 	}
 	
 	if (sock_TCP_Client >= 0) {
@@ -244,7 +285,7 @@ void handlePacket(unsigned char* buffer){
 				fprintf(stderr, "SDR Program sends TCP Stop command \n");
 			} else fprintf(stderr, "SDR Program sends UDP Stop command \n"); 
 			}
-			write_stream(buffer);
+			write_rb_stream(buffer);
 			break;
 		case 0x0104feef:
 		case 0x0304feef:
@@ -256,7 +297,7 @@ void handlePacket(unsigned char* buffer){
 			else
 				fprintf(stderr, "SDR Program sends UDP Start command \n");
 			}
-			write_stream(buffer);
+			write_rb_stream(buffer);
 			break;
 		case 0x1104feef: 
 			{
@@ -274,15 +315,21 @@ void handlePacket(unsigned char* buffer){
 				fprintf(stderr, "SDR Program sends TCP Start command \n");
 			}	
 			}
-			write_stream(buffer);
+			write_rb_stream(buffer);
 			break;
 		case 0x0201feef:
 			{
-			write_stream(buffer);
+			write_rb_stream(buffer);
 			}
 			break;		
 	}
 }
+
+void write_rb_stream(unsigned char* buffer) {
+	setAmplifierInfoBuffer(buffer);  
+	write_stream(buffer);
+}
+
 
 #ifndef _WIN32
 
@@ -371,8 +418,8 @@ int main(int argc, char **argv)
 #endif
 
 	if (load_radioberry_gateware() < 0) {
-		fprintf(stderr,"Radioberry; loading radioberry  \n");
-		exit(-1);
+		fprintf(stderr,"Radioberry; loading radioberry gateware failed. \n");
+		return -1;
 	}
 	
 	driver_version = getFirmwareVersion();
@@ -492,6 +539,8 @@ int main(int argc, char **argv)
 	start_rb_register_thread();
 	
 	start_temperature_thread();
+	
+	start_rb_pa_thread();
 	
 	signal(SIGINT, handle_sigint);
 	
