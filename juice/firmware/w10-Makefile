@@ -8,8 +8,8 @@ LINK = $(CXX)
 %.o: %.c %.h
 	$(CXX)  $(CXXFLAGS) -c $<
 
-radioberry: radioberry.o gateware.o stream.o register.o
-	$(LINK) radioberry.o gateware.o stream.o register.o $(LDSTATIC) -o radioberry-juice.exe
+radioberry: radioberry.o gateware.o stream.o register.o pa.o
+	$(LINK) radioberry.o gateware.o stream.o register.o pa.o $(LDSTATIC) -o radioberry-juice.exe
 
 clean:
 	del *.o
