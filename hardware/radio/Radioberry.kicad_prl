@@ -2,17 +2,17 @@
   "board": {
     "active_layer": 0,
     "active_layer_preset": "",
-    "auto_track_width": false,
+    "auto_track_width": true,
     "hidden_netclasses": [],
     "hidden_nets": [],
     "high_contrast_mode": 0,
     "net_color_mode": 1,
     "opacity": {
-      "images": 0.5699999928474426,
+      "images": 0.6,
       "pads": 1.0,
       "tracks": 1.0,
       "vias": 1.0,
-      "zones": 1.0
+      "zones": 0.6
     },
     "selection_filter": {
       "dimensions": true,
@@ -34,17 +34,12 @@
       3,
       4,
       5,
-      6,
       7,
-      8,
       9,
-      10,
       11,
       12,
-      13,
       14,
       15,
-      16,
       17,
       18,
       19,
@@ -67,7 +62,7 @@
       39,
       40
     ],
-    "visible_layers": "003ffff_80000001",
+    "visible_layers": "000ffff_80000007",
     "zone_display_mode": 0
   },
   "git": {
@@ -77,7 +72,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "hat.kicad_prl",
+    "filename": "Radioberry.kicad_prl",
     "version": 3
   },
   "project": {
