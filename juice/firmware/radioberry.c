@@ -59,9 +59,9 @@ For more information, please refer to <http://unlicense.org/>
 #endif
 
 #ifdef _WIN32
-	#define FIRMWAREVERSION "W-J-07-11-2024"
+	#define FIRMWAREVERSION "W-J-09-16-2024"
 #else
-	#define FIRMWAREVERSION "L-J-07-11-2024"
+	#define FIRMWAREVERSION "L-J-09-16-2024"
 #endif
 
 void printIntroScreen() {
@@ -179,13 +179,24 @@ void getStreamAndSendPacket() {
 			//current
 			hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00;
 		}
-	} else {
-		//check temperature from gateware.
-		if ((hpsdrdata[11]  & 0xF8) == 0x08)  {hpsdrdata[12]  =  ((sys_temp >> 8) & 0xFF); hpsdrdata[13]  = (sys_temp & 0xFF);}
-		if ((hpsdrdata[523] & 0xF8) == 0x08)  {hpsdrdata[524] =  ((sys_temp >> 8) & 0xFF); hpsdrdata[525] = (sys_temp & 0xFF);}
-		//check current from gateware. 
-		if ((hpsdrdata[11]  & 0xF8) == 0x10)  {hpsdrdata[14]  = 0x00; hpsdrdata[15]  = 0x00;}
-		if ((hpsdrdata[523] & 0xF8) == 0x10)  {hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00;}
+	} else {		
+		//check temperature from gateware. if no i2c device data from gateware; applying computer temperature 	
+		if (((hpsdrdata[11] & 0x08) == 0x08) || ((hpsdrdata[523] & 0x08) == 0x08)) { 
+			if ( ((hpsdrdata[12] == 0x0F | hpsdrdata[524] == 0x0F)) && ((hpsdrdata[13] == 0xFF | hpsdrdata[525] == 0xFF)) ){
+				hpsdrdata[12]  =  ((sys_temp >> 8) & 0xFF); hpsdrdata[13]  = (sys_temp & 0xFF);
+				hpsdrdata[524] =  ((sys_temp >> 8) & 0xFF); hpsdrdata[525] = (sys_temp & 0xFF);
+			}				
+		}
+		
+		//check current from gateware. if no i2c device data from gateware is 0x0FFF; beter default data is 0 current. 	
+		if (((hpsdrdata[11] & 0x10) == 0x08) || ((hpsdrdata[523] & 0x10) == 0x08)) {
+			if ( ((hpsdrdata[12] == 0x0F | hpsdrdata[524] == 0x0F)) && ((hpsdrdata[13] == 0xFF | hpsdrdata[525] == 0xFF)) ){
+				hpsdrdata[14]  = 0x00; hpsdrdata[15]  = 0x00;
+				hpsdrdata[526] = 0x00; hpsdrdata[527] = 0x00;
+			}				
+		}
+		
+		
 	}
 	
 	if (sock_TCP_Client >= 0) {
