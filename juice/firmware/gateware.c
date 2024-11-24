@@ -162,7 +162,7 @@ int upload_gateware() {
 		}
 		
 		//not possible to send all data at once... so some bulk by bulk.
-		if (numBytesToSend > 3658764) {
+		if (numBytesToSend >= CHUNK_SIZE) {
 			//printf("Send first total bytes to send: %ld\n", numBytesToSend);
 		
 			if (FT_Write(ftHandle, pdata, numBytesToSend, &numBytesSent) != FT_OK) {
