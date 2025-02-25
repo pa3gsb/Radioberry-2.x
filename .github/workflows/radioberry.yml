@@ -20,11 +20,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y gcc-arm-linux-gnueabihf make bc bison flex libssl-dev
         
-    - name: Install Kernel Headers
+    - name: Install Raspberry Pi Kernel Headers
       run: |
+        sudo sh -c 'echo "deb http://archive.raspberrypi.org/debian/ buster main" >> /etc/apt/sources.list'
         sudo apt-get update
-        sudo apt-get install -y linux-headers-$(uname -r)
-
+        sudo apt-get install -y raspberrypi-kernel-headers
 
     - name: Build Kernel Driver
       run: |
