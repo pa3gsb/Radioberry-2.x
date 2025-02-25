@@ -1,0 +1,50 @@
+name: Radioberry Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-driver:
+    name: Build Radioberry Driver
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Cross-Compiler
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc-arm-linux-gnueabihf make bc bison flex libssl-dev
+
+    - name: Build Kernel Driver
+      run: |
+        cd SBC/rpi-4/device_driver/driver
+        make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+
+    - name: Upload Kernel Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: radioberry-driver
+        path: SBC/rpi-4/device_driver/driver/*.ko
+
+  build-firmware:
+    name: Build Firmware
+    runs-on: ubuntu-latest
+    needs: build-driver
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build Firmware
+      run: |
+        cd SBC/rpi-4/device_driver/firmware
+        make
+
+    - name: Upload Firmware Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: radioberry-firmware
+        path: SBC/rpi-4/device_driver/firmware/*
