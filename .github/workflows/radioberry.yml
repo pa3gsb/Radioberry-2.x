@@ -23,7 +23,7 @@ jobs:
     - name: Build Kernel Driver
       run: |
         cd SBC/rpi-4/device_driver/driver
-        make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+        make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CFLAGS_REMOVE="-mrecord-mcount"
 
     - name: Upload Kernel Artifact
       uses: actions/upload-artifact@v4
