@@ -45,7 +45,7 @@ jobs:
         make
 
     - name: Upload Firmware Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: radioberry-firmware
         path: SBC/rpi-4/device_driver/firmware/*
