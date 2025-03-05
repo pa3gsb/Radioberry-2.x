@@ -1,5 +1,28 @@
 #!/bin/bash
 
+echo ""
+echo ""
+echo "============================================"
+echo "Radioberry driver software installation."
+echo ""
+echo "============================================"
+echo ""
+
+if [ -f /lib/firmware/radioberry.rbf ]; then
+  echo "Radioberry gateware (radioberry.rbf) is present in /lib/firmware folder."
+else
+	echo "Radioberry card uses a FPGA chip. There are 2 variants available."
+	echo "During your own built or when buying this FPGA type is known."
+	while true; do
+	read -p "Install CL016 or CL025 radioberry version: 1 = CL016 or 2 = CL025? " type
+	case $type in
+		[1]* ) sudo wget https://raw.githubusercontent.com/pa3gsb/Radioberry-2.x/master/SBC/rpi-4/releases/dev/CL016/radioberry.rbf -O /lib/firmware/radioberry.rbf; break;;
+		[2]* ) sudo wget https://raw.githubusercontent.com/pa3gsb/Radioberry-2.x/master/SBC/rpi-4/releases/dev/CL025/radioberry.rbf -O /lib/firmware/radioberry.rbf; break;;
+		* ) echo "Please answer 1 or 2 for the FPGA used in your radioberry.";
+	esac
+	done
+fi
+
 
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
