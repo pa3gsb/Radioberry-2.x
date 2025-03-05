@@ -51,8 +51,8 @@ else
 fi
 
 # stop running services
-sudo systemctl stop radioberry 2>&1
-sudo systemctl disable radioberry 2>&1
+sudo systemctl stop radioberry > /dev/null 2>&1
+sudo systemctl disable radioberry > /dev/null 2>&1
 
 # remove radioberry driver. 
 sudo modprobe -r radioberry 2>&1
