@@ -3,10 +3,27 @@
 echo ""
 echo ""
 echo "============================================"
+echo ""
 echo "Radioberry driver software installation."
 echo ""
+echo ""
+echo "if you are facing issues or having ideas for improvement use the forum."
+echo "The forum can be found at https://groups.google.com/g/radioberry"
+echo ""
+echo "Have fun"
+echo "Johan, PA3GSB"
 echo "============================================"
 echo ""
+
+#[ $(id -u) = 0 ] ; echo "Please do not run this script as root" : exit 1
+
+if [ "$(getconf LONG_BIT)" -eq 64 ]; then
+    echo "Greate you are running at a 64-bit system. "
+else
+    echo "This is not a 64 bit system; Please make use of a 64 bit Linux variant."
+	exit 1
+fi
+
 
 if [ -f /lib/firmware/radioberry.rbf ]; then
   echo "Radioberry gateware (radioberry.rbf) is present in /lib/firmware folder."
@@ -26,7 +43,7 @@ fi
 
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
-    echo "Docker is not installedtalleerd."
+    echo "Docker is not installed."
 	echo "Installeer Docker and try again: . curl -sSL https://get.docker.com | sh"
     exit 1
 fi
@@ -38,7 +55,7 @@ sudo docker run --rm \
     -v /usr/src:/usr/src \
     -v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
     -v /lib:/lib \
-	-v /tmp/radioberry_kernel:/tmp/radioberry_kernel \
+	-v /tmp/radioberry_kernel_pi4:/tmp/radioberry_kernel_pi4
     pa3gsb/radioberry_kernel_pi4
 
 
@@ -90,12 +107,12 @@ sudo chmod 666 /dev/radioberry
 # Show radioberry module information.
 sudo modinfo radioberry
 
-echo ""
-echo "Radioberry driver installed."
-
 # start running services
 sudo systemctl enable radioberry > /dev/null 2>&1
 sudo systemctl start radioberry > /dev/null 2>&1
 
+
+echo ""
+echo "Radioberry driver installed."
 
 exit 0
