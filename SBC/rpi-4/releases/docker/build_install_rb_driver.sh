@@ -55,7 +55,7 @@ sudo docker run --rm \
     -v /usr/src:/usr/src \
     -v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
     -v /lib:/lib \
-	-v /tmp/radioberry_kernel_pi4:/tmp/radioberry_kernel_pi4
+	-v /tmp/radioberry_kernel_pi4:/tmp/radioberry_kernel_pi4 \
     pa3gsb/radioberry_kernel_pi4
 
 
