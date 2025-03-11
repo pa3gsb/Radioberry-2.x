@@ -1,3 +1,5 @@
+I recommend using the original software on https://github.com/pa3gsb/Radioberry-2.x.
+
 RadioBerry V2.0 - Ham radio cape for Raspberry PI
 ==============================================
 
