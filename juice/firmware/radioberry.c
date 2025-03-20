@@ -59,9 +59,9 @@ For more information, please refer to <http://unlicense.org/>
 #endif
 
 #ifdef _WIN32
-	#define FIRMWAREVERSION "W-J-09-16-2024"
+	#define FIRMWAREVERSION "W-J-03-20-2025"
 #else
-	#define FIRMWAREVERSION "L-J-09-16-2024"
+	#define FIRMWAREVERSION "L-J-03-20-2025"
 #endif
 
 void printIntroScreen() {
@@ -120,7 +120,7 @@ static void *rb_pa_thread(void *arg) {
 	fprintf(stderr,"Try to connect to external Amplifier\n");
 	initAmplifier();
 	while(1) {
-		if (!isAmplifierConnected()) connectToAmplifier(); else exhangeAmplifierInfo();
+		if (!isAmplifierConnected()) if (connectToAmplifier()< 0) break; else exhangeAmplifierInfo();
 		if (!isAmplifierConnected()) usleep(1000000); else usleep(10000);
 		if (!running) setAmplifierInfo();
 	}

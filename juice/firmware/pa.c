@@ -73,10 +73,9 @@ int connectToAmplifier() {
     struct sockaddr_in server_address;
     char server_ip[] = "169.254.19.101";
     int server_port = 4242;
-    int result = -1;
-	
-	if (client_connected == 2) return 0;
-	
+
+    if (client_connected == 2) return 0;
+
     pa_client_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (pa_client_socket < 0) {
         fprintf(stderr, "PA Client Socket creation failed\n");
@@ -88,27 +87,27 @@ int connectToAmplifier() {
     if (inet_pton(AF_INET, server_ip, &server_address.sin_addr) <= 0) {
         fprintf(stderr, "Invalid address / Address not supported\n");
 #ifdef _WIN32
-		closesocket(pa_client_socket);
+        closesocket(pa_client_socket);
 #else
-		close(pa_client_socket);
-#endif		
+        close(pa_client_socket);
+#endif
         return -1;
     }
-	
+
 #ifdef _WIN32
-	int wtimeout = 100 ;//TIMEOUT_MS; 
-	if (setsockopt(pa_client_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&wtimeout,sizeof (int)) < 0)
-		perror("setsockopt failed\n");	
-	if (setsockopt(pa_client_socket, SOL_SOCKET, SO_SNDTIMEO, (const char*)&wtimeout, sizeof(int)) < 0)
-		perror("setsockopt failed\n");
+    int wtimeout = 100;
+    if (setsockopt(pa_client_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&wtimeout, sizeof(int)) < 0)
+        perror("setsockopt failed\n");
+    if (setsockopt(pa_client_socket, SOL_SOCKET, SO_SNDTIMEO, (const char*)&wtimeout, sizeof(int)) < 0)
+        perror("setsockopt failed\n");
 #else
-	int optval;	
+    int optval;
     struct timeval timeout;
     timeout.tv_sec = 1;
     timeout.tv_usec = 0;
-	if (setsockopt(pa_client_socket, SOL_SOCKET, SO_RCVTIMEO, (const void*)&timeout, sizeof(timeout)) < 0) 
+    if (setsockopt(pa_client_socket, SOL_SOCKET, SO_RCVTIMEO, (const void*)&timeout, sizeof(timeout)) < 0)
         perror("setsockopt: SO_RCVTIMEO");
-    
+
     optval = 7; // high priority
     if (setsockopt(pa_client_socket, SOL_SOCKET, SO_PRIORITY, &optval, sizeof(optval)) < 0) {
         perror("setsockopt: SO_PRIORITY");
@@ -124,11 +123,9 @@ int connectToAmplifier() {
 #endif
 
     client_connected = connect(pa_client_socket, (struct sockaddr*)&server_address, sizeof(server_address));
-
     if (client_connected == -1) {
 #ifdef _WIN32
         if (WSAGetLastError() == WSAEWOULDBLOCK) {
-            // Connection is in progress
             WSAEVENT connectEvent = WSACreateEvent();
             WSAEventSelect(pa_client_socket, connectEvent, FD_CONNECT);
 
@@ -137,10 +134,16 @@ int connectToAmplifier() {
                 fprintf(stderr, "AMP Connection timed out\n");
             } else if (waitResult == WSA_WAIT_FAILED) {
                 perror("WSAWaitForMultipleEvents failed");
-            } else {
-                if (waitResult == WSA_WAIT_EVENT_0) {
+            } else if (waitResult == WSA_WAIT_EVENT_0) {
+                int error = 0;
+                int len = sizeof(error);
+                if (getsockopt(pa_client_socket, SOL_SOCKET, SO_ERROR, (char*)&error, &len) == 0 && error == 0) {
                     client_connected = 2; // Success
                     fprintf(stderr, "AMP Connected\n");
+                } else {
+                    fprintf(stderr, "AMP Connection failed: %d\n", error);
+					//Normally Network is unreachable.
+					client_connected = -1;
                 }
             }
             WSACloseEvent(connectEvent);
@@ -157,30 +160,43 @@ int connectToAmplifier() {
                 fprintf(stderr, "AMP Connection timed out\n");
             } else if (selectResult == -1) {
                 perror("select failed");
-            } else {
-                if (FD_ISSET(pa_client_socket, &writefds)) {
-                    int error = 0;
-                    socklen_t len = sizeof(error);
-                    if (getsockopt(pa_client_socket, SOL_SOCKET, SO_ERROR, &error, &len) == 0) {
-                        if (error == 0) {
-                            client_connected = 2; // Success
-                            fprintf(stderr, "AMP Connected\n");
-                        } else {
-                            fprintf(stderr, "AMP Connection failed: %s\n", strerror(error));
-                        }
+            } else if (FD_ISSET(pa_client_socket, &writefds)) {
+                int error = 0;
+                socklen_t len = sizeof(error);
+                if (getsockopt(pa_client_socket, SOL_SOCKET, SO_ERROR, &error, &len) == 0) {
+                    if (error == 0) {
+                        client_connected = 2; // Success
+                        fprintf(stderr, "AMP Connected\n");
                     } else {
-                        perror("getsockopt");
+                        fprintf(stderr, "AMP Connection failed: %s\n", strerror(error));
+						client_connected = -1;
                     }
+                } else {
+                    perror("getsockopt");
                 }
             }
         }
 #endif
     } else {
-		fprintf(stderr, "client_connected is not -1 direct connected? %d", client_connected);
-	}
-	
+        fprintf(stderr, "AMP Connection established immediately, checking status...\n");
+        int error = 0;
+        socklen_t len = sizeof(error);
+#ifdef _WIN32
+        if (getsockopt(pa_client_socket, SOL_SOCKET, SO_ERROR, (char*)&error, &len) == 0 && error == 0) {
+#else
+        if (getsockopt(pa_client_socket, SOL_SOCKET, SO_ERROR, &error, &len) == 0 && error == 0) {
+#endif
+            client_connected = 2; // Success
+            fprintf(stderr, "AMP Connected\n");
+        } else {
+            fprintf(stderr, "AMP Connection failed: %s\n", strerror(error));
+			client_connected = -1;
+        }
+    }
+
     return client_connected;
 }
+
 
 int isAmplifierConnected(){
 	if (client_connected >= 0) return 1;

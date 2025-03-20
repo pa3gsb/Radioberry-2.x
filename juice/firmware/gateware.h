@@ -22,7 +22,7 @@
 #include <sys/time.h>
 #endif
 
-#define CHUNK_SIZE 512 
+#define CHUNK_SIZE 240 
 
 //FPGA Program Pin Information
 #define DCLK        0x01 //Pin #1 (DCLK)
