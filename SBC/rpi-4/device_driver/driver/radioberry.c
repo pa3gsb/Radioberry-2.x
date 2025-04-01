@@ -63,8 +63,8 @@ static struct mutex spi_mutex;
 #include "radioberry_firmware.h"
 
 
-#define VERSION "4.01"
-#define VERSION_INT 401
+#define VERSION "4.02"
+#define VERSION_INT 402
 
 static DEFINE_MUTEX(radioberry_mutex); 
 static wait_queue_head_t rx_sample_queue;
@@ -310,12 +310,6 @@ static int radioberry_probe(struct platform_device *pdev)
 	return result;
 }
 
-static int radioberry_remove(struct platform_device *pdev)
-{
-	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
-	return 0;
-}
-
 static const struct of_device_id of_radioberry_match[] = {
 		{.compatible = "sdr,radioberry", },
 		{/*end of list */},
@@ -330,7 +324,6 @@ static struct platform_driver radioberry_driver = {
 				.of_match_table = of_match_ptr(of_radioberry_match),
 		},
 		.probe = radioberry_probe,
-		.remove = radioberry_remove,
 };
 
 static int __init radioberry_init(void) {
