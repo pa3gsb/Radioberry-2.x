@@ -24,6 +24,7 @@
 
 #include <cstdio>
 #include <cstdarg>
+#include <cstdint>
 #include <string>
 #include <unistd.h>
 #include <fcntl.h>
