@@ -32,7 +32,7 @@ i2c::i2c( const std::string &dev_path)
 	m_dev_fd = open( m_dev_path.c_str(), O_RDWR );
 
 	if ( m_dev_fd < 0 )
-		throw "(Fatal) `i2c`: can't open I2C device \n"  ;
+		throw std::runtime_error( "(Fatal) `i2c`: can't open I2C device \n" );
 
 }
 
@@ -41,7 +41,7 @@ void i2c::addr(uint8_t addr)
 		m_addr = addr;
 		// Select slave device
 		if(ioctl(m_dev_fd, I2C_SLAVE, addr) < 0)
-			throw "(Fatal) `i2c`: can't select slave device \n";
+			throw std::runtime_error( "(Fatal) `i2c`: can't select slave device \n" );
 	}
 	
 i2c::~i2c() {
@@ -54,7 +54,7 @@ void
 i2c::write( uint8_t *data, uint8_t size ) {
 
 	if ( ::write( m_dev_fd, data, size ) != size )
-		throw "(Fatal) `i2c`: failed to write to the bus\n";
+		throw std::runtime_error( "(Fatal) `i2c`: failed to write to the bus\n" );
 }
 
 void
