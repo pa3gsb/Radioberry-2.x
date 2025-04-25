@@ -21,9 +21,9 @@ SoapyRadioberry::SoapyRadioberry( const SoapySDR::Kwargs &args ){
 		i2c_ptr = std::make_unique<rpihw::driver::i2c>(rpihw::driver::i2c("/dev/i2c-1"));
 		i2c_available = true;
 	}
-	catch (std::string s)
+	catch (std::runtime_error e)
 	{
-		printf("I2c not found %s", s.c_str());
+		printf("I2c not found %s", e.what());
 		i2c_available = false;
 	}
 }
@@ -295,9 +295,9 @@ void SoapyRadioberry::writeI2C(const int addr, const std::string &data)
 	{
 		i2c_ptr->write((uint8_t *)data.c_str(), data.size());
 	}
-	catch (std::string s)
+	catch (std::runtime_error e)
 	{
-		printf("%s", s.c_str());
+		printf("%s", e.what());
 	}
 }
 
@@ -316,9 +316,9 @@ std::string SoapyRadioberry::readI2C(const int addr, const size_t numBytes)
 		i2c_ptr->read((uint8_t *)data.c_str(), numBytes);
 		data.resize(numBytes);
 	}
-	catch (std::string s)
+	catch (std::runtime_error e)
 	{
-		printf("%s", s.c_str());
+		printf("%s", e.what());
 	}
 	return data;
 }
