@@ -1,0 +1,57 @@
+/dts-v1/;
+/plugin/;
+
+/{
+    compatible = "brcm,bcm2712";
+
+	fragment@0 {
+		target = <&spidev0>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@1 {
+		target = <&spidev1>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@2 {
+		target = <&rp1_pio>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@3 {
+		target = <&spi0>;
+		__overlay__ {
+			status = "okay";
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			spi_device_1: radioberry_spi@0 {
+				compatible = "radioberry_ctrl_spi";
+				spi-max-frequency = <48000000>;
+				reg = <0x0>; 
+				spi-bits-per-word = <8>;
+				spi-mode = <3>; 
+				status = "okay";
+			};
+			
+		};
+	};
+
+	fragment@4 {
+		target-path = "/";
+		__overlay__ {
+			radioberry {
+				compatible = "sdr,radioberry";
+				pio = <&rp1_pio>;  
+				status = "okay";
+			};
+		};
+	};
+};

@@ -1,0 +1,25 @@
+Linux loadable kernel module for pi-5 and the radioberry hat.
+
+
+For pi-5 the IO handling by the broadcom main processor is now transferred to the RP1 controller.
+
+RP1 talks via PCIE with the main processor.
+
+RP1 IO does supports PIO mode.
+
+PIO mode together with DMA the work of getting the data from the radioberry is very efficient!
+
+
+Driver is responsible for:
+		- gateware loader 
+		- control the radio via SPI
+		- RX stream via PIO sm and DMA uses 6 IO pins.
+		- TX stream via PIO sm and DMA uses 3 IO pins.
+
+
+
+This driver uses the RP1-PIO driver.  
+
+
+I have done a small modification and posted a PR this is not yet accepted!
+
