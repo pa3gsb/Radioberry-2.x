@@ -94,11 +94,6 @@ static int spi_ctrl_probe(struct spi_device *spi)
     return 0;
 }
 
-static void spi_ctrl_remove(struct spi_device *spi)
-{
-	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
-}
-
 // Declare the SPI driver structure
 static struct spi_driver radioberry_spi_ctrl_driver = {
     .driver = {
@@ -106,7 +101,6 @@ static struct spi_driver radioberry_spi_ctrl_driver = {
         .owner = THIS_MODULE,
     },
     .probe = spi_ctrl_probe,
-	.remove = spi_ctrl_remove,
 };
 
 
@@ -289,12 +283,6 @@ static int radioberry_probe(struct platform_device *pdev)
 	return 0;
 }
 
-static int radioberry_remove(struct platform_device *pdev)
-{
-	printk(KERN_INFO "inside %s function \n", __FUNCTION__);
-	return 0;
-}
-
 static const struct of_device_id of_radioberry_match[] = {
 		{.compatible = "sdr,radioberry" },
 		{/*end of list */},
@@ -309,7 +297,6 @@ static struct platform_driver radioberry_driver = {
 				.of_match_table = of_match_ptr(of_radioberry_match),
 		},
 		.probe = radioberry_probe,
-		.remove = radioberry_remove,
 };
 
 static int __init radioberry_init(void) {
