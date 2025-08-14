@@ -263,10 +263,10 @@ void tx_dma_restart_work(struct work_struct *w)
 		return;
 	}
     for (size_t i = 0; i < (actual / sizeof(uint32_t)); i++) {
-          tx_words[i] =  ((iq_buf[i * 4 + 3] << 24) |
-						  (iq_buf[i * 4 + 2] << 16) |
-						  (iq_buf[i * 4 + 1] <<  8) |
-						  (iq_buf[i * 4 + 0] <<  0));
+          tx_words[i] =  ((iq_buf[i * 4 + 0] << 24) |
+						  (iq_buf[i * 4 + 1] << 16) |
+						  (iq_buf[i * 4 + 2] <<  8) |
+						  (iq_buf[i * 4 + 3] <<  0));
     }
     int ret = rp1_pio_sm_xfer_data(
         tx->client,
@@ -333,25 +333,25 @@ void radioberry_cleanup_tx_ctx(struct radioberry_client_ctx *ctx)
     }
 }
 
-const uint16_t tx_iq_sample_program_instructions[] = {
+ const uint16_t tx_iq_sample_program_instructions[] = {
             //     .wrap_target
-    0x0005, //  0: jmp    5                          
-    0x6201, //  1: out    pins, 1                [2] 
-    0xba42, //  2: nop                    side 1 [2] 
-    0xb242, //  3: nop                    side 0 [2] 
-    0x0041, //  4: jmp    x--, 1                     
-    0xe03f, //  5: set    x, 31                      
-    0x80a0, //  6: pull   block                      
-    0xba42, //  7: nop                    side 1 [2] 
-    0xb242, //  8: nop                    side 0 [2] 
-    0x00c1, //  9: jmp    pin, 1                     
+    0x1ac2, //  0: jmp    pin, 2          side 1 [2]
+    0x1200, //  1: jmp    0               side 0 [2]
+    0xb242, //  2: nop                    side 0 [2]
+    0xe03f, //  3: set    x, 31
+    0x80a0, //  4: pull   block
+    0x6001, //  5: out    pins, 1
+    0xba42, //  6: nop                    side 1 [2]
+    0x1245, //  7: jmp    x--, 5          side 0 [2]
+    0x0000, //  8: jmp    0
             //     .wrap
 };
 
 const struct pio_program tx_iq_sample_program = {
     .instructions = tx_iq_sample_program_instructions,
-    .length = 10,
+    .length = 9,
     .origin = -1,
 };
+
 
 //end of source
