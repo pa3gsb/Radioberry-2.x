@@ -97,7 +97,7 @@ if [ $? -eq 0 ]; then
 	#add driver to config.txt
 	sudo grep -Fxq "dtoverlay=radioberry" "$BOOT_PATH/config.txt" || sudo sed -i '$ a dtoverlay=radioberry' "$BOOT_PATH/config.txt"
 
-	cd ../../../../..
+	cd ../../../../../..
 		
 	sudo depmod	
 	#register radioberry driver
