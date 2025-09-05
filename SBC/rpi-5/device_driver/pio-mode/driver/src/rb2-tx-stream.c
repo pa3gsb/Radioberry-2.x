@@ -300,7 +300,8 @@ void radioberry_cleanup_tx_ctx(struct radioberry_client_ctx *ctx)
 {
     if (ctx->tx.client && ctx->tx.sm >= 0) {
         cancel_work_sync(&ctx->tx.dma_restart);
-		
+		atomic_set(&ctx->tx.dma_running, 0);
+
 		pr_info("radioberry: Releasing TX SM %d and removing program\n", ctx->tx.sm);
 
         struct rp1_pio_sm_set_enabled_args disable_args = {

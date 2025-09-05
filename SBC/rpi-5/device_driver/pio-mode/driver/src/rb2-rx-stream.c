@@ -65,6 +65,8 @@ int radioberry_init_ctx(struct radioberry_client_ctx *ctx)
 	complete(&ctx->rx.dma_done[0]); 
 	complete(&ctx->rx.dma_done[1]);
 	
+	atomic_set(&ctx->rx.dma_running, 0); 
+	
 	INIT_WORK(&ctx->rx.dma_restart, dma_restart_work);
 	
     return 0;
@@ -265,20 +267,42 @@ error_cleanup:
 
 void dma_restart_work(struct work_struct *w)
 {
-	struct radioberry_stream *rx = container_of(w, struct radioberry_stream, dma_restart);
+    struct radioberry_stream *rx = container_of(w, struct radioberry_stream, dma_restart);
 
-	int ret = rp1_pio_sm_xfer_data(
+	if (atomic_xchg(&rx->dma_running, 1)) {
+        return;
+    }
+
+    int proc_buf = rx->active_buffer;
+
+    void *dst = rp1_pio_sm_buffer_virt(
+        rx->client,
+        rx->sm,
+        PIO_DIR_FROM_SM,
+        proc_buf
+    );
+    if (!dst) {
+		atomic_set(&rx->dma_running, 0);
+        pr_err("radioberry: FROM_SM buffer_virt is NULL (buf=%d)\n", proc_buf);
+        return;
+    }
+
+    int ret = rp1_pio_sm_xfer_data(
         rx->client,
         rx->sm,
         PIO_DIR_FROM_SM,
         rx->dma_size,
-        NULL, 0,
+        dst,                  
+        0,
         rx_iq_data_dma_callback,
-		rx
+        rx
     );
-    if (ret < 0)
-        pr_err("radioberry: DMA-herstart mislukt: %d\n", ret);
+    if (ret < 0){
+		atomic_set(&rx->dma_running, 0);
+        pr_err("radioberry: DMA-restart failed: %d\n", ret);
+	}
 }
+
 
 void rx_iq_data_dma_callback(void *param)
 {
@@ -311,6 +335,7 @@ void rx_iq_data_dma_callback(void *param)
 
     wake_up_interruptible(&rx->queue);
     rx->active_buffer = (proc_buf + 1) & 1;
+	atomic_set(&rx->dma_running, 0);
 	schedule_work(&rx->dma_restart);
 }
 
@@ -320,6 +345,7 @@ void radioberry_cleanup_rx_ctx(struct radioberry_client_ctx *ctx)
 	if (ctx->rx.client && ctx->rx.sm >= 0) { 
 	
 		cancel_work_sync(&ctx->rx.dma_restart);
+		atomic_set(&ctx->rx.dma_running, 0);
 
 		pr_info("Radioberry: Releasing RX SM %d and removing program\n", ctx->rx.sm);
 
