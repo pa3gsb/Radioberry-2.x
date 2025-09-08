@@ -26,7 +26,7 @@
 #include <netinet/tcp.h>
 
 
-#define FIRMWAREVERSION "2024.04.16"
+#define FIRMWAREVERSION "2025.09.08"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 

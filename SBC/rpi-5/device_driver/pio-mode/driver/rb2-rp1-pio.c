@@ -24,7 +24,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <http://unlicense.org/>
 
-sudo cp radioberry.ko /lib/modules/$(uname -r)/kernel/drivers/sdr
 */
 	
 #include <linux/platform_device.h>  
@@ -43,8 +42,8 @@ sudo cp radioberry.ko /lib/modules/$(uname -r)/kernel/drivers/sdr
 
 #include "radioberry_ioctl.h"
 
-#define VERSION "5.50"
-#define VERSION_INT 550
+#define VERSION "5.51"
+#define VERSION_INT 551
 
 static DEFINE_MUTEX(radioberry_mutex); 
 
@@ -57,6 +56,50 @@ static struct class*  radioberryCharClass  = NULL;
 static struct device* radioberryCharDevice = NULL; 
 
 static int _nrx = 1;
+
+static struct radioberry_client_ctx *gctx;
+static bool gctx_ready;
+
+static int rb2_rp1_pio_init(struct device *dev)
+{
+    int ret;
+
+    if (gctx_ready) return 0;
+
+    gctx = kzalloc(sizeof(*gctx), GFP_KERNEL);
+    if (!gctx) return -ENOMEM;
+
+    ret = configure_rx_iq_sm(gctx);
+    if (ret) goto err_free;
+
+    ret = configure_tx_iq_sm(gctx);
+    if (ret) goto err_rx;
+
+    gctx_ready = true;
+	
+    pr_info("radioberry: RX SM %d and TX SM %d initialised.\n", gctx->rx.sm, gctx->tx.sm);
+    return 0;
+
+err_rx:
+    rp1_pio_close(gctx->rx.client);
+err_free:
+    kfree(gctx);
+    gctx = NULL;
+    return ret;
+}
+
+static void rb2_rp1_pio_deinit(void)
+{
+    if (!gctx) return;
+	
+    radioberry_cleanup_rx_ctx(gctx);
+    radioberry_cleanup_tx_ctx(gctx);
+
+    kfree(gctx);
+    gctx = NULL;
+    gctx_ready = false;
+}
+
 
 static int spi_ctrl_probe(struct spi_device *spi)
 {
@@ -128,65 +171,58 @@ ssize_t radioberry_write(struct file *file, const char __user *buf, size_t len, 
         kfree(tx_stream);
         return -EFAULT;
     }
+	long timeout_jiffies = msecs_to_jiffies(1000); 
+
+	if (wait_event_interruptible_timeout(ctx->tx.queue,
+										 kfifo_avail(&ctx->tx.dma_fifo) >= len,
+										 timeout_jiffies) == 0) {
+		pr_warn("radioberry_write: timeout waiting to write data\n");
+		return -EAGAIN; 
+	}
+	
     ssize_t written = rb2_tx_stream_write(tx, tx_stream, len);
     kfree(tx_stream);
     return written;
 }
 
-static int radioberry_open(struct inode *inode, struct file *filep) {
+static int radioberry_open(struct inode *inode, struct file *filep)
+{
     printk(KERN_INFO "inside %s function \n", __FUNCTION__);
 
     if (!mutex_trylock(&radioberry_mutex)) {
         printk(KERN_ALERT "Radioberry Char: Device in use by another process");
         return -EBUSY;
     }
-
-	struct radioberry_client_ctx *ctx = kzalloc(sizeof(*ctx), GFP_KERNEL);
-	if (!ctx) {
-		pr_err("Failed to allocate context\n");
-		mutex_unlock(&radioberry_mutex);
-		return -ENOMEM;
-	}
-
-	int ret = configure_rx_iq_sm(ctx);
-	if (ret) {
-		pr_err("radioberry: Failed to configure SM for RX IQ handling. \n");
-		rp1_pio_close(ctx->rx.client);
-		kfree(ctx);
+    if (!gctx_ready) {
         mutex_unlock(&radioberry_mutex);
-		return ret;
-	}
-	
-	ret = configure_tx_iq_sm(ctx);
-	if (ret) {
-		pr_err("radioberry: Failed to configure SM for TX IQ handling. \n");
-		rp1_pio_close(ctx->tx.client);
-		kfree(ctx);
-        mutex_unlock(&radioberry_mutex);
-		return ret;
-	}
+        return -ENODEV;
+    }
 
-    filep->private_data = ctx;
+    unsigned long flags;
+    spin_lock_irqsave(&gctx->rx.fifo_lock, flags);
+    kfifo_reset(&gctx->rx.dma_fifo);
+    spin_unlock_irqrestore(&gctx->rx.fifo_lock, flags);
+	spin_lock_irqsave(&gctx->tx.fifo_lock, flags);
+    kfifo_reset(&gctx->tx.dma_fifo);
+    spin_unlock_irqrestore(&gctx->tx.fifo_lock, flags);
 
-    pr_info("radioberry: RX SM %d and TX SM %d activated.\n", ctx->rx.sm, ctx->tx.sm);
-	
+    filep->private_data = gctx;
+
+    pr_info("radioberry: streaming enabled (RX SM %d, TX SM %d)\n", gctx->rx.sm, gctx->tx.sm);
     return 0;
 }
 
-static int radioberry_release(struct inode *inode, struct file *filep) {
+static int radioberry_release(struct inode *inode, struct file *filep)
+{
     printk(KERN_INFO "inside %s function \n", __FUNCTION__);
 
     struct radioberry_client_ctx *ctx = filep->private_data;
 
     if (ctx) {
-		radioberry_cleanup_rx_ctx(ctx);
-		radioberry_cleanup_tx_ctx(ctx);
-        kfree(ctx);
         filep->private_data = NULL;
     }
 
     mutex_unlock(&radioberry_mutex);
-	
     return 0;
 }
 
@@ -357,6 +393,12 @@ static int __init radioberry_init(void) {
 	loading_radioberry_gateware(radioberryCharDevice); 
 	rb2_trx_initialize();
 	
+    ret = rb2_rp1_pio_init(radioberryCharDevice);
+    if (ret) {
+		pr_err("radioberry: failed to claim PIO SMs: %d\n", ret);
+		return ret;
+    }
+	
 	return result;
 }
 
@@ -377,6 +419,8 @@ static void __exit radioberry_exit(void) {
     spi_unregister_driver(&radioberry_spi_ctrl_driver);
 	
 	deinitialize_rpi();
+	
+	rb2_rp1_pio_deinit();
 
 	printk(KERN_INFO "Radioberry: Module removed!\n");	
 }

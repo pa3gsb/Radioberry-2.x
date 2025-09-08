@@ -3,10 +3,10 @@
 #include <sys/ioctl.h>
 
 static int fd_i2c_bias;
-static int i2c_bias_handler;
-
 
 void init_I2C_bias(void) {
+	
+	int i2c_bias_handler;
 	
 	fd_i2c_bias = open("/dev/i2c-1", O_RDWR);
 
@@ -17,7 +17,7 @@ void init_I2C_bias(void) {
 	}
 	i2c_bias_handler = ioctl(fd_i2c_bias, I2C_SLAVE, ADDR_BIAS);
 
-	if (i2c_bias_handler < 0) close(i2c_bias_handler);	
+	if (i2c_bias_handler < 0) close(fd_i2c_bias);	
 }
 
 void write_I2C_bias(uint8_t control, uint8_t data) {
@@ -25,6 +25,9 @@ void write_I2C_bias(uint8_t control, uint8_t data) {
 	uint8_t bias_data[2];
 	bias_data[0] = control;
 	bias_data[1] = data;
+	
+	
+	if (fd_i2c_bias < 0 ) return;
 	
 	int result = write(fd_i2c_bias, bias_data, 2);
 	
