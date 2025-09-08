@@ -4,6 +4,13 @@
 
 static int fd_i2c_bias;
 
+
+static int mcp4662_present_probe(int fd) {
+    uint8_t in[2];
+    int n = read(fd, in, 2);
+    return n == 2 ? 0 : -1;
+}
+
 void init_I2C_bias(void) {
 	
 	int i2c_bias_handler;
@@ -17,7 +24,13 @@ void init_I2C_bias(void) {
 	}
 	i2c_bias_handler = ioctl(fd_i2c_bias, I2C_SLAVE, ADDR_BIAS);
 
-	if (i2c_bias_handler < 0) close(fd_i2c_bias);	
+	if (i2c_bias_handler < 0) {close(fd_i2c_bias);	fd_i2c_bias = -1; return;}
+	
+	if (mcp4662_present_probe(fd_i2c_bias) < 0) {
+        close(fd_i2c_bias);
+        fd_i2c_bias = -1;
+		fprintf(stderr, "MCP 4662 not present; Change of Bias Setting is not possible\n");
+    }
 }
 
 void write_I2C_bias(uint8_t control, uint8_t data) {
