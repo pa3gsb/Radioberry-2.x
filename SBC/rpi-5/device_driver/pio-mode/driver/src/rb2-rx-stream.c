@@ -214,7 +214,7 @@ int configure_rx_iq_sm(struct radioberry_client_ctx *ctx)
 	struct rp1_pio_sm_init_args config_args;
 	config_args.sm = ctx->rx.sm;
 	config_args.initial_pc = ctx->rx.prog_offset;
-	config_args.config.clkdiv 		= 0x00030000;
+	config_args.config.clkdiv 		= 0x00020000;
 	config_args.config.execctrl 	= 0x5901f680;
 	config_args.config.shiftctrl 	= 0x00000000;
 	config_args.config.pinctrl 		= 0x40091800;
@@ -385,18 +385,18 @@ const uint16_t rx_iq_sample_program_instructions[] = {
     0xa022, //  2: mov    x, y
             //     .wrap_target
     0x0013, //  3: jmp    19
-    0xba42, //  4: nop                    side 1 [2]
-    0x5204, //  5: in     pins, 4         side 0 [2]
-    0xba42, //  6: nop                    side 1 [2]
-    0x5204, //  7: in     pins, 4         side 0 [2]
-    0xba42, //  8: nop                    side 1 [2]
-    0x5204, //  9: in     pins, 4         side 0 [2]
-    0xba42, // 10: nop                    side 1 [2]
-    0x5204, // 11: in     pins, 4         side 0 [2]
-    0xba42, // 12: nop                    side 1 [2]
-    0x5204, // 13: in     pins, 4         side 0 [2]
-    0xba42, // 14: nop                    side 1 [2]
-    0x5204, // 15: in     pins, 4         side 0 [2]
+    0xbb42, //  4: nop                    side 1 [3]
+    0x5004, //  5: in     pins, 4         side 0
+    0xbb42, //  6: nop                    side 1 [3]
+    0x5004, //  7: in     pins, 4         side 0
+    0xbb42, //  8: nop                    side 1 [3]
+    0x5004, //  9: in     pins, 4         side 0
+    0xbb42, // 10: nop                    side 1 [3]
+    0x5004, // 11: in     pins, 4         side 0
+    0xbb42, // 12: nop                    side 1 [3]
+    0x5004, // 13: in     pins, 4         side 0
+    0xbb42, // 14: nop                    side 1 [3]
+    0x5004, // 15: in     pins, 4         side 0
     0x8020, // 16: push   block
     0x0044, // 17: jmp    x--, 4
     0xa022, // 18: mov    x, y
