@@ -464,7 +464,7 @@ static void fillPacketToSend(void) {
 static void send_control(unsigned char command) {
 
 	unsigned char data[6];
-	uint32_t command_data = commands[command];
+	uint32_t command_data = commands[command & 0xFE];
 	
 
 	// if temperature could not be measured the pa is disabled
