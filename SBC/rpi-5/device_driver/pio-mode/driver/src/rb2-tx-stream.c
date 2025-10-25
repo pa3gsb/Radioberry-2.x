@@ -22,7 +22,7 @@ Transmits TX IQ samples from a KFIFO buffer over the FPGA FIFO.
 #define NUM_TX_PINS 3
 static const unsigned int tx_pio_pins[NUM_TX_PINS] = {TX_SAMPLE_READY_PIN, TX_STREAM_IQ_DATA, TX_CLOCK_PIN};
 
-#define TX_SAMPLE_SIZE 			4096 		
+#define TX_SAMPLE_SIZE 			16384		
 
 const uint16_t tx_iq_sample_program_instructions[];
 const struct pio_program tx_iq_sample_program;
@@ -224,76 +224,74 @@ ssize_t rb2_tx_stream_write(struct radioberry_stream *tx, const uint8_t *data, s
     return written;
 }
 
-
-void tx_dma_restart_work(struct work_struct *w)
+static void tx_dma_kick_now(struct radioberry_stream *tx)
 {
-    struct radioberry_stream *tx = container_of(w, struct radioberry_stream, dma_restart);
-	
     size_t avail;
     unsigned long flags;
 
     spin_lock_irqsave(&tx->fifo_lock, flags);
-		avail = kfifo_len(&tx->dma_fifo);
+        avail = kfifo_len(&tx->dma_fifo);
     spin_unlock_irqrestore(&tx->fifo_lock, flags);
 
     if (avail < tx->dma_size) {
         atomic_set(&tx->dma_running, 0);
         return;
     }
-	if (atomic_xchg(&tx->dma_running, 1)) {
-		pr_info("tx_dma_restart_work: DMA already running, skip");
-		return;
-	}
+    if (atomic_xchg(&tx->dma_running, 1)) {
+        pr_info("tx_dma_kick_now: DMA already running, skip");
+        return;
+    }
+
     int proc_buf = tx->active_buffer;
     uint8_t *iq_buf = tx->irq_scratch;
 
     spin_lock_irqsave(&tx->fifo_lock, flags);
-		size_t actual = kfifo_out(&tx->dma_fifo, iq_buf, tx->dma_size);
+        size_t actual = kfifo_out(&tx->dma_fifo, iq_buf, tx->dma_size);
     spin_unlock_irqrestore(&tx->fifo_lock, flags);
 
-    uint32_t *tx_words = rp1_pio_sm_buffer_virt(
-        tx->client,
-        tx->sm,
-        PIO_DIR_TO_SM,
-        proc_buf
-    );
-	if (!tx_words) {
-		pr_err("radioberry: NULL pointer van rp1_pio_sm_buffer_virt in TX worker!\n");
-		atomic_set(&tx->dma_running, 0);
-		return;
-	}
-    for (size_t i = 0; i < (actual / sizeof(uint32_t)); i++) {
-          tx_words[i] =  ((iq_buf[i * 4 + 0] << 24) |
-						  (iq_buf[i * 4 + 1] << 16) |
-						  (iq_buf[i * 4 + 2] <<  8) |
-						  (iq_buf[i * 4 + 3] <<  0));
+    uint32_t *tx_words = rp1_pio_sm_buffer_virt(tx->client, tx->sm, PIO_DIR_TO_SM, proc_buf);
+    if (!tx_words) {
+        pr_err("radioberry: NULL buffer_virt in TX kick!\n");
+        atomic_set(&tx->dma_running, 0);
+        return;
     }
-    int ret = rp1_pio_sm_xfer_data(
-        tx->client,
-        tx->sm,
-        PIO_DIR_TO_SM,
-        actual,
-        tx_words, 0,
-        tx_iq_data_dma_callback,
-        tx
-    );
+    for (size_t i = 0; i < (actual / sizeof(uint32_t)); i++) {
+        tx_words[i] = ((iq_buf[i*4+0] << 24) |
+                       (iq_buf[i*4+1] << 16) |
+                       (iq_buf[i*4+2] <<  8) |
+                        iq_buf[i*4+3]);
+    }
+	
+    dma_wmb();
+    int ret = rp1_pio_sm_xfer_data(tx->client, tx->sm, PIO_DIR_TO_SM,
+                                   actual, tx_words, 0,
+                                   tx_iq_data_dma_callback, tx);
     if (ret < 0) {
-        pr_err("radioberry: TX DMA restart failed: %d\n", ret);
+        pr_err("radioberry: TX xfer start failed: %d\n", ret);
         atomic_set(&tx->dma_running, 0);
     }
 }
 
+void tx_dma_restart_work(struct work_struct *w)
+{
+    struct radioberry_stream *tx = container_of(w, struct radioberry_stream, dma_restart);
+    tx_dma_kick_now(tx);
+}
+
 void tx_iq_data_dma_callback(void *param)
 {
-	struct radioberry_stream *tx = param;
-	tx->active_buffer = (tx->active_buffer + 1) & 1;
-	atomic_set(&tx->dma_running, 0);
-	size_t avail;
-	unsigned long flags;
-	spin_lock_irqsave(&tx->fifo_lock, flags);
-		avail = kfifo_len(&tx->dma_fifo);
-	spin_unlock_irqrestore(&tx->fifo_lock, flags);
-	if (avail >= tx->dma_size) schedule_work(&tx->dma_restart);
+    struct radioberry_stream *tx = param;
+    size_t avail;
+    unsigned long flags;
+
+    tx->active_buffer = (tx->active_buffer + 1) & 1;
+    atomic_set(&tx->dma_running, 0);
+
+    spin_lock_irqsave(&tx->fifo_lock, flags);
+        avail = kfifo_len(&tx->dma_fifo);
+    spin_unlock_irqrestore(&tx->fifo_lock, flags);
+
+    if (avail >= tx->dma_size) tx_dma_kick_now(tx); else schedule_work(&tx->dma_restart);
 }
 
 void radioberry_cleanup_tx_ctx(struct radioberry_client_ctx *ctx)

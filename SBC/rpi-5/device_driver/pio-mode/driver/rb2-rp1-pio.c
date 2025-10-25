@@ -42,8 +42,8 @@ For more information, please refer to <http://unlicense.org/>
 
 #include "radioberry_ioctl.h"
 
-#define VERSION "5.51"
-#define VERSION_INT 551
+#define VERSION "5.52"
+#define VERSION_INT 552
 
 static DEFINE_MUTEX(radioberry_mutex); 
 
