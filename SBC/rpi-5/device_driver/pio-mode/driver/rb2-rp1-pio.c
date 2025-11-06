@@ -42,8 +42,8 @@ For more information, please refer to <http://unlicense.org/>
 
 #include "radioberry_ioctl.h"
 
-#define VERSION "5.52"
-#define VERSION_INT 552
+#define VERSION "5.53"
+#define VERSION_INT 553
 
 static DEFINE_MUTEX(radioberry_mutex); 
 
@@ -265,6 +265,8 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 			rb_info_ret.minor = data[5];
 			
 			rb_info_ret.fpga = data[3] & 0x03; 
+			rb_info_ret.nr   = ((data[3] & 0x3C) >> 2);
+			rb_info_ret.nt 	 = ((data[3] & 0xC0) >> 6);
 			rb_info_ret.version = VERSION_INT; 
 			
 			if (copy_to_user((struct rb_info_arg_t *)arg, &rb_info_ret, sizeof(struct rb_info_arg_t))) return -EACCES;

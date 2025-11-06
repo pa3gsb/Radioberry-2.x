@@ -10,12 +10,17 @@
 
 struct rb_info_arg_t
 {
-    int major, minor;
+	/* gateware info */
+    int major;					/* gateware major version */
+	int minor;  				/* gateware minor version */
+	int fpga;   				/* gateware fpga type used by radioberry board */
+	int nr; 					/* gateware number of implemented receivers */
+	int nt;						/* gateware number of implemented transmitters */
 	
-	int fpga;
+	/* driver info */
+	int version; 				/*driver version*/
 	
-	int version;
-	
+	/* protocol commands */
 	int rb_command;
 	int command;
 	int command_data;

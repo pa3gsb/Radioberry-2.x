@@ -49,7 +49,6 @@ For more information, please refer to <http://unlicense.org/>
 *
 */
 
-#define NR 0x04
 #define HERMESLITE  0x06
 
 #include "radioberry_ioctl.h"
@@ -116,6 +115,16 @@ static int initRadioberry(void) {
 	gateware_minor_version = rb_info.minor;
 	
 	fprintf(stderr, "Radioberry gateware version %d-%d.\n", rb_info.major, rb_info.minor);
+	
+	gateware_nr = rb_info.nr;
+	gateware_nt = rb_info.nt;
+	// avoiding to make also for the pi-5 gpio version a special firmware
+	// i added this as a initialisation.
+	if ((gateware_nr == 0) && (gateware_nt == 0)) {
+		gateware_nr = 4;
+		gateware_nt = 1;
+	}
+	fprintf(stderr,	"Supports %d receiver(s) and %d transmitter(s).\n", gateware_nr, gateware_nt);
 	
 	gateware_fpga_type = rb_info.fpga;
 	driver_version = rb_info.version;
@@ -266,7 +275,7 @@ static void handlePacket(char* buffer){
 			fprintf(stderr,"SDR Program IP-address %s  \n", inet_ntoa(remaddr.sin_addr)); 
 			fprintf(stderr, "Discovery Port %d \n", ntohs(remaddr.sin_port));
 			memset(broadcastReply, 0, 60);
-			unsigned char reply[22] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, gateware_major_version, HERMESLITE, 0, 0, 0, 0, 0, 0, 0, 0, NR, 0, gateware_minor_version };
+			unsigned char reply[22] = {0xEF, 0xFE, 0x02, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, gateware_major_version, HERMESLITE, 0, 0, 0, 0, 0, 0, 0, 0, gateware_nr, 0, gateware_minor_version };
 			memcpy(broadcastReply, reply, 22);
 			if (sock_TCP_Client > -1) {
 				send(sock_TCP_Client, broadcastReply, 60, 0);
@@ -432,8 +441,7 @@ static void fillPacketToSend(void) {
 			rb_sample = 0;
 			for (int i=0; i< (504 / (8 + factor)); i++) {
 				int index = 16 + coarse_pointer + (i * (8 + factor));
-				//NR must be read from gateware.
-				for (int r = 0; r < MIN(lnrx, NR); r++) {	
+				for (int r = 0; r < MIN(lnrx, gateware_nr); r++) {	
 					memcpy(hpsdrdata + index + (r * 6), rx_buffer + rb_sample, 6);
 					rb_sample+=6;
 				}

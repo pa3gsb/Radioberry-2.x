@@ -26,7 +26,7 @@
 #include <netinet/tcp.h>
 
 
-#define FIRMWAREVERSION "2025.10.25"
+#define FIRMWAREVERSION "5.0.1"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
@@ -35,7 +35,6 @@ void printIntroScreen() {
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr,	"====================================================================\n");
 	fprintf(stderr, "\t\t\tRadioberry V2.0\n\n\n");
-	fprintf(stderr,	"\tSupports 4 receivers and 1 transmitter.\n\n");
 	fprintf(stderr, "\tBuild version: %s\n\n", FIRMWAREVERSION);
 	fprintf(stderr, "\tHave fun Johan PA3GSB\n\n");
 	fprintf(stderr, "\tReport requests or bugs to <pa3gsb@gmail.com>.\n");
@@ -110,6 +109,8 @@ int use_tx  = 0;
 int gateware_major_version = 0;
 int gateware_minor_version = 0;
 int gateware_fpga_type = 0;
+int gateware_nr = 0;
+int gateware_nt = 0;
 int driver_version = 0.0;
 
 char CWX = 0;
