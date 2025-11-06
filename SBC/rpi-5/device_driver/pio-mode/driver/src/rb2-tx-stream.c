@@ -138,7 +138,17 @@ int configure_tx_iq_sm(struct radioberry_client_ctx *ctx)
         pr_err("radioberry: Failed to set TX SAMPLE_READY as output\n");
         goto error_cleanup;
     }
-	
+
+	struct rp1_gpio_set_pulls_args pulls = {
+		.gpio = TX_SAMPLE_READY_PIN,
+		.up = false,
+		.down = true,
+	};
+	ret = rp1_pio_gpio_set_pulls(ctx->tx.client, &pulls);
+	if (ret < 0) {
+		pr_warn("radioberry: Failed to enable pull-up on TX_SAMPLE_READY_PIN\n");
+	}
+
 	struct rp1_pio_sm_set_pindirs_args sample_data_args = {
 			.sm = ctx->tx.sm, .dirs = BIT(TX_STREAM_IQ_DATA), .mask = BIT(TX_STREAM_IQ_DATA),
     };
