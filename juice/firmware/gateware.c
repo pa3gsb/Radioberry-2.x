@@ -279,7 +279,7 @@ int deinit_gateware_ftdi() {
 
 unsigned long getFirmwareVersion() {
 	FT_STATUS ftStatus;
-	unsigned long dwDriverVer = 0;
+	DWORD dwDriverVer = 0;
 
 	ftStatus = FT_GetDriverVersion(ftHandle,&dwDriverVer);
 

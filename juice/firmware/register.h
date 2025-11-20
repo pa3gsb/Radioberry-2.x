@@ -22,6 +22,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <arpa/inet.h>
 #endif
 
 #include <string.h>
