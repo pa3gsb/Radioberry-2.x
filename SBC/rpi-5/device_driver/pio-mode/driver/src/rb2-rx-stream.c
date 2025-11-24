@@ -40,15 +40,14 @@ static const unsigned int data_pins[NUM_RX_DATA_PINS] = {RX_STREAM_IQ_D0, RX_STR
 #define RX_SAMPLE_READY_PIN RX_STREAM_IQ_RDY
 #define RX_CLOCK_PIN        RX_STREAM_IQ_CLK
 
-#define RX_SAMPLES 			159 	// [0-159] = 160 reads from FPGA FIFO => 80 IQ SAMPLES
+#define rx_iq_sample_wrap_target 0
+#define rx_iq_sample_wrap 17
 
 
 const uint16_t rx_iq_sample_program_instructions[];
 const struct pio_program rx_iq_sample_program;
 void dma_restart_work(struct work_struct *w);
 void rx_iq_data_dma_callback(void *param);
-
-
 
 int radioberry_init_ctx(struct radioberry_client_ctx *ctx)
 {
@@ -58,6 +57,9 @@ int radioberry_init_ctx(struct radioberry_client_ctx *ctx)
 
 	ctx->rx.dma_size = SAMPLE_SIZE;// 24576; 
 	ctx->rx.active_buffer = 0;
+	ctx->rx.nrx	          = 1;   
+	ctx->rx.meta_synced	= false;
+	ctx->rx.meta_expected = 0;
 
 	init_completion(&ctx->rx.dma_done[0]);
 	init_completion(&ctx->rx.dma_done[1]);
@@ -91,7 +93,6 @@ int configure_rx_iq_sm(struct radioberry_client_ctx *ctx)
 	}
 	pr_info("RP1 PIO client for RX opened\n");
 	
-	
 	int ret = radioberry_init_ctx(ctx);
 	if (ret) {
 		pr_err("Failed to initialize context: %d\n", ret);
@@ -118,7 +119,6 @@ int configure_rx_iq_sm(struct radioberry_client_ctx *ctx)
 	}
 	pr_info("radioberry: SM %d disabled for RX\n", ctx->rx.sm);
 	
-
 	ret = rp1_pio_sm_config_xfer(ctx->rx.client, ctx->rx.sm, PIO_DIR_FROM_SM, SAMPLE_SIZE, 2);
 	if (ret < 0) {
 		pr_err("radioberry: Failed to configure DMA %d\n", ret);
@@ -215,9 +215,15 @@ int configure_rx_iq_sm(struct radioberry_client_ctx *ctx)
 	config_args.sm = ctx->rx.sm;
 	config_args.initial_pc = ctx->rx.prog_offset;
 	config_args.config.clkdiv 		= 0x00020000;
-	config_args.config.execctrl 	= 0x5901f680;
-	config_args.config.shiftctrl 	= 0x00000000;
+	config_args.config.execctrl 	= 0x5901f600;
+	config_args.config.execctrl &= ~((0x1Fu << 12) | (0x1Fu << 7));
+	uint32_t wrap_bottom = ctx->rx.prog_offset + rx_iq_sample_wrap_target;
+	uint32_t wrap_top    = ctx->rx.prog_offset + rx_iq_sample_wrap;
+	config_args.config.execctrl |= (wrap_top    & 0x1F) << 12;
+	config_args.config.execctrl |= (wrap_bottom & 0x1F) << 7;
+	config_args.config.shiftctrl 	= 0x01c10000;
 	config_args.config.pinctrl 		= 0x40091800;
+	
 
 	ret = rp1_pio_sm_init(ctx->rx.client, &config_args);
 	if (ret) {
@@ -243,18 +249,7 @@ int configure_rx_iq_sm(struct radioberry_client_ctx *ctx)
 		goto error_cleanup;
 	}
 	pr_info("radioberry: RX SM %d enabled\n", ctx->rx.sm);
-	
-
-	struct rp1_pio_sm_put_args put_args = {
-			.sm = ctx->rx.sm, .blocking = true, .data = RX_SAMPLES
-	};
-	ret = rp1_pio_sm_put(ctx->rx.client, &put_args);
-	if (ret < 0) {
-		pr_err("radioberry: Failed to put data to sm %d\n", ctx->rx.sm);
-		goto error_cleanup;
-	}
-	pr_info("radioberry: Radioberry put #RX_SAMPLES in sm\n");	
-	
+		
 	// Start RX DMA transfer
     schedule_work(&ctx->rx.dma_restart); 
 
@@ -303,7 +298,6 @@ void dma_restart_work(struct work_struct *w)
 	}
 }
 
-
 void rx_iq_data_dma_callback(void *param)
 {
 	struct radioberry_stream *rx = param;
@@ -320,10 +314,25 @@ void rx_iq_data_dma_callback(void *param)
     );
 	
 	for (size_t i = 0; i < (rx->dma_size / sizeof(uint32_t)); i++) {
+		
+		uint8_t meta = (iq_words[i] >> 24) & 0x0F;
+
+        if (!rx->meta_synced) {
+            if (meta != 0) continue;       
+            rx->meta_synced   = true;
+            rx->meta_expected = 0;	
+        }
+		if (meta != rx->meta_expected) {
+                rx->meta_synced   = false;
+                continue;
+        }
+		iq_buf[iq_count++] = (iq_words[i] >> 24) & 0x0F;  
 		iq_buf[iq_count++] = (iq_words[i] >> 16) & 0xFF;   
-		iq_buf[iq_count++] = (iq_words[i] >> 8) & 0xFF;   
-		iq_buf[iq_count++] = iq_words[i] & 0xFF; 
-	}
+		iq_buf[iq_count++] = (iq_words[i] >>  8) & 0xFF;   
+		iq_buf[iq_count++] = (iq_words[i] >>  0) & 0xFF; 
+
+        if (++rx->meta_expected >= 2 * rx->nrx) rx->meta_expected = 0;  
+    }
 
 	unsigned long flags;
 	spin_lock_irqsave(&rx->fifo_lock, flags);
@@ -341,7 +350,6 @@ void rx_iq_data_dma_callback(void *param)
 
 void radioberry_cleanup_rx_ctx(struct radioberry_client_ctx *ctx)
 {
-	
 	if (ctx->rx.client && ctx->rx.sm >= 0) { 
 	
 		cancel_work_sync(&ctx->rx.dma_restart);
@@ -380,35 +388,31 @@ void radioberry_cleanup_rx_ctx(struct radioberry_client_ctx *ctx)
 }
 
 const uint16_t rx_iq_sample_program_instructions[] = {
-    0x80a0, //  0: pull   block
-    0xa047, //  1: mov    y, osr
-    0xa022, //  2: mov    x, y
             //     .wrap_target
-    0x0013, //  3: jmp    19
-    0xbb42, //  4: nop                    side 1 [3]
-    0x5004, //  5: in     pins, 4         side 0
-    0xbb42, //  6: nop                    side 1 [3]
-    0x5004, //  7: in     pins, 4         side 0
-    0xbb42, //  8: nop                    side 1 [3]
-    0x5004, //  9: in     pins, 4         side 0
-    0xbb42, // 10: nop                    side 1 [3]
-    0x5004, // 11: in     pins, 4         side 0
-    0xbb42, // 12: nop                    side 1 [3]
-    0x5004, // 13: in     pins, 4         side 0
-    0xbb42, // 14: nop                    side 1 [3]
-    0x5004, // 15: in     pins, 4         side 0
-    0x8020, // 16: push   block
-    0x0044, // 17: jmp    x--, 4
-    0xa022, // 18: mov    x, y
-    0xba42, // 19: nop                    side 1 [2]
-    0xb242, // 20: nop                    side 0 [2]
-    0x00c4, // 21: jmp    pin, 4
+    0x000f, //  0: jmp    15
+    0xbb42, //  1: nop                    side 1 [3]
+    0x5004, //  2: in     pins, 4         side 0
+    0xbb42, //  3: nop                    side 1 [3]
+    0x5004, //  4: in     pins, 4         side 0
+    0xbb42, //  5: nop                    side 1 [3]
+    0x5004, //  6: in     pins, 4         side 0
+    0xbb42, //  7: nop                    side 1 [3]
+    0x5004, //  8: in     pins, 4         side 0
+    0xbb42, //  9: nop                    side 1 [3]
+    0x5004, // 10: in     pins, 4         side 0
+    0xbb42, // 11: nop                    side 1 [3]
+    0x5004, // 12: in     pins, 4         side 0
+    0xbb42, // 13: nop                    side 1 [3]
+    0x5004, // 14: in     pins, 4         side 0
+    0xba42, // 15: nop                    side 1 [2]
+    0xb242, // 16: nop                    side 0 [2]
+    0x00c1, // 17: jmp    pin, 1
             //     .wrap
 };
 
 const struct pio_program rx_iq_sample_program = {
     .instructions = rx_iq_sample_program_instructions,
-    .length = 22,
+    .length = 18,
     .origin = -1,
 };
 

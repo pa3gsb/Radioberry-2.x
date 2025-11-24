@@ -433,7 +433,7 @@ static void fillPacketToSend(void) {
 		for (int frame = 0; frame < 2; frame++) {
 			int coarse_pointer = frame * 512; // 512 bytes total in each frame
 			
-			int nr_samples = (nrx == 1)? 63 : (nrx == 2)? 72: (nrx ==3)? 75: 76;
+			int nr_samples = (504 / (6 * nrx + 2)) * nrx;
 			if (read(fd_rb , rx_buffer , nr_samples) < 0) {
 				fprintf(stderr, "Error %d reading frame from radioberry device\n", errno);
 				break;

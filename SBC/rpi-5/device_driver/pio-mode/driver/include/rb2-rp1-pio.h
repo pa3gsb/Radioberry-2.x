@@ -34,6 +34,11 @@
 		wait_queue_head_t queue;
 		spinlock_t fifo_lock;
 		
+		//META
+		int nrx; 
+		u8 meta_expected;   
+		bool meta_synced;
+		
 		//one buffer.
 		uint8_t irq_scratch[SAMPLE_SIZE];
 	};

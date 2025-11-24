@@ -42,8 +42,8 @@ For more information, please refer to <http://unlicense.org/>
 
 #include "radioberry_ioctl.h"
 
-#define VERSION "5.53"
-#define VERSION_INT 553
+#define VERSION "5.54"
+#define VERSION_INT 554
 
 static DEFINE_MUTEX(radioberry_mutex); 
 
@@ -54,8 +54,6 @@ static DEFINE_MUTEX(radioberry_mutex);
 static int majorNumber;                  	
 static struct class*  radioberryCharClass  = NULL; 
 static struct device* radioberryCharDevice = NULL; 
-
-static int _nrx = 1;
 
 static struct radioberry_client_ctx *gctx;
 static bool gctx_ready;
@@ -124,15 +122,40 @@ static struct spi_driver radioberry_spi_ctrl_driver = {
     .probe = spi_ctrl_probe,
 };
 
+static void radioberry_align_fifo_on_meta0(struct radioberry_stream *rx)
+{
+    uint8_t tmp[4];
+    unsigned long flags;
+
+    for (;;) {
+        spin_lock_irqsave(&rx->fifo_lock, flags);
+        if (kfifo_len(&rx->dma_fifo) < 4) {
+            spin_unlock_irqrestore(&rx->fifo_lock, flags);
+            return;
+        }
+
+        kfifo_out_peek(&rx->dma_fifo, tmp, 4);
+        spin_unlock_irqrestore(&rx->fifo_lock, flags);
+
+        if ((tmp[0] & 0x0f) == 0) return;
+
+        spin_lock_irqsave(&rx->fifo_lock, flags);
+        kfifo_out(&rx->dma_fifo, tmp, 4);
+        spin_unlock_irqrestore(&rx->fifo_lock, flags);
+		pr_info("radioberry_read: not aligned word removed\n");
+    }
+}
+
 ssize_t radioberry_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 {
     struct radioberry_client_ctx *ctx = file->private_data;
+	struct radioberry_stream *rx = &ctx->rx;
     
 	unsigned int copied;
-	uint8_t read_buf[512]; 
+	uint8_t read_buf[1024]; 
 	
-	int nr_samples = (_nrx == 1)? 63 : (_nrx == 2)? 72: (_nrx ==3)? 75: (_nrx ==4)? 76: (_nrx ==5)? 75: (_nrx ==6)? 78: (_nrx ==7)? 77: 80;
-	count = nr_samples * 6;
+	int nr_samples = (504 / (6 * rx->nrx + 2)) * rx->nrx;
+	count = nr_samples * 8;
 	long timeout_jiffies = msecs_to_jiffies(1000); 
 
 	if (wait_event_interruptible_timeout(ctx->rx.queue,
@@ -142,16 +165,38 @@ ssize_t radioberry_read(struct file *file, char __user *buf, size_t count, loff_
 		return -EAGAIN; 
 	}
 	
+	radioberry_align_fifo_on_meta0(rx);
+	
 	unsigned long flags;
 	spin_lock_irqsave(&ctx->rx.fifo_lock, flags);
 		copied = kfifo_out(&ctx->rx.dma_fifo, read_buf, count);
 	spin_unlock_irqrestore(&ctx->rx.fifo_lock, flags);
 	
+	const size_t in_sample_size  = 4;  
+    const size_t out_sample_size = 3;  
+    size_t num_samples = copied / in_sample_size;
+
+    if (copied % in_sample_size != 0) {
+        pr_warn("radioberry_read: copied=%u not multiple of %zu, dropping tail\n",
+                copied, in_sample_size);
+        num_samples = copied / in_sample_size;  
+    }
+
+    for (size_t i = 0; i < num_samples; i++) {
+        size_t in_off  = i * in_sample_size;
+        size_t out_off = i * out_sample_size;
+
+        read_buf[out_off + 0] = read_buf[in_off + 1];
+        read_buf[out_off + 1] = read_buf[in_off + 2];
+        read_buf[out_off + 2] = read_buf[in_off + 3];
+    }
+    copied = num_samples * out_sample_size;
+
     if (copied == 0) {
         pr_err("radioberry_read: no data copied from fifo despite readiness (requested=%zu, available=%u)\n",
                count, kfifo_len(&ctx->rx.dma_fifo));
         return -EIO;
-    }		
+    }	
 
 	if (copy_to_user((char *)buf, &read_buf, copied)) return -EFAULT;
 
@@ -229,9 +274,11 @@ static int radioberry_release(struct inode *inode, struct file *filep)
 static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long arg){
 	
 	//printk(KERN_INFO "inside %s function \n", __FUNCTION__);
+	struct radioberry_client_ctx *ctx = fp->private_data;
+    struct radioberry_stream *rx = &ctx->rx;	
 
 	unsigned char data[6];
-	int lnrx = _nrx;
+	int lnrx = rx->nrx;
 	
 	int rc;
 	struct rb_info_arg_t *rb_info= kmalloc(sizeof(struct rb_info_arg_t), GFP_KERNEL );
@@ -255,7 +302,7 @@ static long radioberry_ioctl(struct file *fp, unsigned int cmd, unsigned long ar
 	
 			rb2_trx_control(data, data, 6); //spi channel 0 // tell the gateware the command.
 
-			_nrx = lnrx;
+			rx->nrx = lnrx;
 			
 			//printk(KERN_INFO "SDR info       %2X - %2X - %2X - %2X - %2X - %2X \n", data[0], data[1], data[2], data[3], data[4], data[5]);
 			
