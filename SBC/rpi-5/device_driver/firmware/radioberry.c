@@ -337,14 +337,12 @@ static void handleCommand(int base_index, char* buffer) {
 	// pa bias setting	
 	if (((command >> 1)&0x3D) == 0x3D) write_I2C_bias(((command_data>>8)&0xFF), command_data & 0xFF);
 
-	if (commands[command] != command_data) {
-		commands[command] = command_data;
-		
-		if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 0x01:0x00;
-		
-		push(command);
-		sem_post(&spi_msg);
-	}
+	commands[command] = command_data;
+	
+	if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 0x01:0x00;
+	
+	push(command);
+	sem_post(&spi_msg);
 }
 
 static void handleCommands(char* buffer) {
@@ -472,11 +470,9 @@ static void fillPacketToSend(void) {
 static void send_control(unsigned char command) {
 
 	unsigned char data[6];
-	uint32_t command_data = commands[command & 0xFE];
-	
+	uint32_t command_data = commands[command];
 
 	// if temperature could not be measured the pa is disabled
-	 
 	rb_info.rb_command = ( (pa_temp_ok ? 0x04 : 0x00) |  ((CWX << 1) & 0x02) | (running & 0x01) );
 	rb_info.command = command;
 	rb_info.command_data = command_data;
@@ -495,7 +491,7 @@ static void send_control(unsigned char command) {
 static void *rb_control_thread(void *arg) {
 	while(1) {
 		sem_wait(&spi_msg); 
-		if (empty())  send_control(MOX); else send_control(pop());
+		if (!empty()) send_control(pop());
 	}
 	fprintf(stderr,"rb_control_thread: exiting\n");
 	return NULL;
