@@ -473,6 +473,9 @@ static void send_control(unsigned char command) {
 
 	unsigned char data[6];
 	uint32_t command_data = commands[command];
+	
+	if ((command & 0xFE) == 0x14) command_data = commands[command & 0xFE]; 
+	else command_data = commands[command];
 
 	// if temperature could not be measured the pa is disabled
 	rb_info.rb_command = ( (pa_temp_ok ? 0x04 : 0x00) |  ((CWX << 1) & 0x02) | (running & 0x01) );
