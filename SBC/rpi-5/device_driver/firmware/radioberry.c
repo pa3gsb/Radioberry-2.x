@@ -337,12 +337,14 @@ static void handleCommand(int base_index, char* buffer) {
 	// pa bias setting	
 	if (((command >> 1)&0x3D) == 0x3D) write_I2C_bias(((command_data>>8)&0xFF), command_data & 0xFF);
 
-	commands[command] = command_data;
-	
-	if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 0x01:0x00;
-	
-	push(command);
-	sem_post(&spi_msg);
+	if (commands[command] != command_data) {
+		commands[command] = command_data;
+		
+		if ((command & 0x1E) == 0x1E) CWX = (command_data & 0x01000000) ? 0x01:0x00;
+		
+		push(command);
+		sem_post(&spi_msg);
+	}
 }
 
 static void handleCommands(char* buffer) {
