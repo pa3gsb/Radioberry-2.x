@@ -496,7 +496,7 @@ static void send_control(unsigned char command) {
 static void *rb_control_thread(void *arg) {
 	while(1) {
 		sem_wait(&spi_msg); 
-		if (!empty()) send_control(pop());
+		if (empty())  send_control(MOX); else send_control(pop());
 	}
 	fprintf(stderr,"rb_control_thread: exiting\n");
 	return NULL;
