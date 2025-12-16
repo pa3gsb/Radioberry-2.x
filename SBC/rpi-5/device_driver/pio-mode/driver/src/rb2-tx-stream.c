@@ -24,6 +24,9 @@ static const unsigned int tx_pio_pins[NUM_TX_PINS] = {TX_SAMPLE_READY_PIN, TX_ST
 
 #define TX_SAMPLE_SIZE 			16384		
 
+#define tx_iq_sample_wrap_target 0
+#define tx_iq_sample_wrap 8
+
 const uint16_t tx_iq_sample_program_instructions[];
 const struct pio_program tx_iq_sample_program;
 
@@ -183,6 +186,11 @@ int configure_tx_iq_sm(struct radioberry_client_ctx *ctx)
     config_args.initial_pc = ctx->tx.prog_offset;
     config_args.config.clkdiv 		= 0x00080000;        
     config_args.config.execctrl 	= 0x4c01fb80; 
+	config_args.config.execctrl &= ~((0x1Fu << 12) | (0x1Fu << 7));
+	uint32_t wrap_bottom = ctx->tx.prog_offset + tx_iq_sample_wrap_target;
+	uint32_t wrap_top    = ctx->tx.prog_offset + tx_iq_sample_wrap;
+	config_args.config.execctrl |= (wrap_top    & 0x1F) << 12;
+	config_args.config.execctrl |= (wrap_bottom & 0x1F) << 7;
     config_args.config.shiftctrl 	= 0x00000000;  
     config_args.config.pinctrl		= 0x40101005; 
 	
@@ -342,7 +350,7 @@ void radioberry_cleanup_tx_ctx(struct radioberry_client_ctx *ctx)
     }
 }
 
- const uint16_t tx_iq_sample_program_instructions[] = {
+const uint16_t tx_iq_sample_program_instructions[] = {
             //     .wrap_target
     0x1ac2, //  0: jmp    pin, 2          side 1 [2]
     0x1200, //  1: jmp    0               side 0 [2]
