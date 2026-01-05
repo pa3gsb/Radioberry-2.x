@@ -36,7 +36,9 @@ WIKI FOR MORE DETAILS:  https://github.com/pa3gsb/Radioberry-2.x/wiki
 	git submodule update --init --recursive --depth=1
 
 ### Build the software
-	make -j$(nproc)
+	sudo cp /tmp/Radioberry-2.x/wdsp/libwdsp.so /usr/local/lib/
+	sudo ldconfig
+	make CFLAGS="-g -Wno-deprecated-declarations -I../wdsp" LDFLAGS="-L../wdsp" -j$(nproc)
 
 ## Installation
 	sudo make install FPGATYPE=CL016
