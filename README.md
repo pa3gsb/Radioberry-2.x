@@ -27,7 +27,7 @@ WIKI FOR MORE DETAILS:  https://github.com/pa3gsb/Radioberry-2.x/wiki
 ### Install dependencies
 	sudo apt-get update
 	sudo apt-get install git libpulse-dev libgtk-3-dev libasound2-dev libcurl4-openssl-dev \
-		libi2c-dev libgpiod-dev libusb-1.0-0-dev device-tree-compiler
+		libi2c-dev libgpiod-dev libusb-1.0-0-dev device-tree-compiler libfftw3-dev
 
 ### Obtain the source codes
 	cd /tmp
