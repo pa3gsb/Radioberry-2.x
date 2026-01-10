@@ -33,7 +33,6 @@ install_dependency raspberrypi-kernel-headers
 install_dependency linux-headers-rpi
 install_dependency git
 install_dependency device-tree-compiler
-install_dependency pigpio
 
 if [ -d "Radioberry-2.x" ]; then
     DO_CLEANUP=false
